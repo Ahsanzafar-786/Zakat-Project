@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 using Focus.Business.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Focus.Business;
-
+using Focus.Business.Claims.Command.UpdateClaims;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 
@@ -165,57 +165,17 @@ namespace Noble.Api.Controllers
 
                 if (result.Succeeded)
                 {
-                    var expiration = "";
-                    var isPayment = false;
-                    var isNotPayment = false;
 
-                   
+                    var token = await GenerateJwtToken(user);
 
-                 
-
-                   
-
-                 
-
-
-                    var dayStart = false;
-                    bool isExpenseDay = false;
-                    string dayStartTime = "";
-
-                   
-
-
-                    var nobleRole = new { Id = Guid.Empty, Name = "" };
-                   
-
-                    //BankDetail
-                    //CanStartDay
-                    Guid? userCounterId = null;
-
-                   
                     var role = await _userComponent.GetRoleByUser(user.Id);
 
 
-                  
-                   
-
-
-               
-
-          
-                  
-
                     return Ok(new LoginModel()
                     {
-                     
-                        DayStartTime = dayStartTime,
-                        Expiration = expiration,
-                        IsPayment = isPayment,
-                        IsNotPayment = isNotPayment,
 
-                        CounterId = userCounterId ?? Guid.Empty,
 
-                      
+                        Token = token,
 
                         CompanyId = user.CompanyId,
                         FullName = user.FirstName,
@@ -227,9 +187,6 @@ namespace Noble.Api.Controllers
                         EmployeeId = user.EmployeeId,
                         EmailConfirmed = user.EmailConfirmed,
                         PhoneNo = user.PhoneNumber,
-                        UserRoleName = nobleRole.Name,
-                        IsDayStart = dayStart,
-                        IsExpenseDay = isExpenseDay,
                       
                     });
                 }
@@ -243,12 +200,27 @@ namespace Noble.Api.Controllers
             return Ok(null);
         }
 
-      
+
+        private async Task<object> GenerateJwtToken(ApplicationUser user)
+        {
+            if (HttpContext.User.Identity is ClaimsIdentity identity)
+            {
+                identity.AddClaim(new Claim("UserId", user.Id));
+                identity.AddClaim(new Claim("CompanyId", user.CompanyId.ToString()));
+            }
+
+            var token = await Mediator.Send(new UpdateClaimsCommand
+            {
+                User = user.Id,
+                ApplicationUser = user,
+
+            });
+            return token;
+        }
 
 
 
-      
-       
+
         [Route("api/account/DuplicateEmail")]
         [HttpGet("DuplicateEmail")]
         public async Task<IActionResult> DuplicateEmail(string email)
