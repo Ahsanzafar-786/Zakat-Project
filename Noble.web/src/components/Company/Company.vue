@@ -28,6 +28,9 @@
             </div>
         </div>
 
+        <hr class="hr-dashed hr-menu mt-0" />
+
+
         <div class="card">
             <div class="card-header">
                 <div class="input-group">
