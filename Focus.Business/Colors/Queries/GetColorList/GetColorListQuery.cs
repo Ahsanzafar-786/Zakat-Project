@@ -7,10 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Focus.Business.Common;
 using Focus.Domain.Entities;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using Focus.Business.Common;
 
 namespace Focus.Business.Colors.Queries.GetColorList
 {

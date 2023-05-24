@@ -334,7 +334,6 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Company/EditCompany")]
         [HttpGet("EditCompany")]
-        [Roles("User", "Noble Admin")]
         public async Task<IActionResult> EditCompanyAsync(Guid Id)
         {
             var company = _companyComponent.GetCompanyById(Id);
@@ -809,7 +808,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/Company/GetModuleWiseClaims")]
         [HttpGet("GetModuleWiseClaims")]
-        [Roles("GetModuleWiseClaims")]
         public async Task<IActionResult> GetModuleWiseClaims()
         {
             var permissionList = await Mediator.Send(new GetModuleWiseClaims

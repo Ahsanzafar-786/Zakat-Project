@@ -1,8 +1,4 @@
 ﻿using FluentValidation;
-using Focus.Business.Departments.Commands.AddUpdateDepartment;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Focus.Business.AdditionalCompany.Commands.AddUpdateAdditionalCompany
 {
