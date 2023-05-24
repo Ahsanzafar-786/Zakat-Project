@@ -19,28 +19,13 @@ using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using Focus.Business.Claims.Command.UpdateClaims;
 using Focus.Business.Extensions;
-using Focus.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Focus.Business;
-using Microsoft.AspNetCore.Authentication;
-using Focus.Business.DayStarts.Queries.IsDayStart;
-using Focus.Business.PrintSettings.Queries.GetPrintSettingsDetails;
+
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
-using Focus.Business.NobleUserRole.Commands.AddUpdateNobleUserRole;
-using Focus.Business.RolePermission.Queries.RemoveUserRole;
-using Dapper;
-using Focus.Business.LoginHistories.Commands.AddUpdateLoginHistory;
-using Focus.Business.LoginHistories.Queries.GetLoginHistoryList;
-using Focus.Business.DayStarts.WholeSaleQueries;
-using Focus.Business.Permission.Commands.AddUpdateNoblePermission;
-using Focus.Business.DefaultSettingInvoice.DefaultSattingCommand;
-using Focus.Business.Exceptions;
-using System.Runtime.InteropServices;
-using Focus.Domain.Enum;
+
 using System.Net.NetworkInformation;
-using System.Net;
-using Focus.Business;
-using DocumentFormat.OpenXml.Spreadsheet;
+
 
 namespace Noble.Api.Controllers
 {
@@ -175,8 +160,7 @@ namespace Noble.Api.Controllers
                         return Ok(new LoginModel());
                     }
                 }
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: false
+             
                 if (result.RequiresTwoFactor)
                 {
                     return Ok(true);
@@ -189,96 +173,11 @@ namespace Noble.Api.Controllers
                     var isPayment = false;
                     var isNotPayment = false;
 
-                    //var paymentLimits = await _context.PaymentLimits.Select(x=>new
-                    //{
-                    //    x.IsActive,
-                    //    x.ToDate,
-                    //}).LastOrDefaultAsync();
+                   
 
-                    //if (user.Email.ToLower() != "noble@gmail.com")
-                    //{
-                    //    if (paymentLimits is { IsActive: true })
-                    //    {
-                    //        if (paymentLimits.ToDate >= DateTime.UtcNow)
-                    //        {
-                    //            expiration = "Your License Expire on " + paymentLimits.ToDate.ToString("d");
-                    //            isPayment = true;
-                    //        }
-                    //        else
-                    //        {
-                    //            return Ok(new LoginModel()
-                    //            {
-                    //                Token = token,
-                    //                CompanyId = user.CompanyId,
-                    //                Expiration = "You do not pay your payment",
-                    //                IsNotPayment = true
-                    //            });
-                    //        }
-                    //    }
-                    //}
+                 
 
-                    var companyLicence = await _context.CompanyLicences
-                        .Select(x => new
-                        {
-                            x.GracePeriod,
-                            x.IsActive,
-                            x.IsBlock,
-                            x.LicenseType,
-                            x.ToDate,
-                            x.FromDate,
-                        }).OrderBy(x => x.ToDate).LastOrDefaultAsync();
-
-                    if (user.Email.ToLower() != "noble@gmail.com")
-                    {
-                        if (companyLicence == null)
-                        {
-                            return Ok(new LoginModel()
-                            {
-                                Token = token,
-                                CompanyId = user.CompanyId,
-                                Expiration = "You do not have purchase any License. Please contact to support to purchase and activate your license"
-                            });
-                        }
-
-                        if (!companyLicence.IsActive && !companyLicence.GracePeriod)
-                            return Ok(new LoginModel()
-                            {
-                                Token = token,
-                                CompanyId = user.CompanyId,
-                                Expiration = "Your Company License has been expired. Please contact to support and activate your license"
-                            });
-
-                        if (companyLicence.IsBlock)
-                            return Ok(new LoginModel()
-                            {
-                                Token = token,
-                                CompanyId = user.CompanyId,
-                                Expiration = "Your Company License has been blocked. Please contact to support and activate your license"
-                            });
-
-                        if (companyLicence.LicenseType != "Unlimited")
-                        {
-                            if (!(companyLicence.FromDate.Date <= DateTime.UtcNow.Date &&
-                                  companyLicence.ToDate.Date >= DateTime.UtcNow.Date))
-                                return Ok(new LoginModel()
-                                {
-                                    Token = token,
-                                    CompanyId = user.CompanyId,
-                                    Expiration = "Your Company License has been expired. Please contact to support and activate your license"
-                                });
-                        }
-                        else if (companyLicence.GracePeriod)
-                        {
-                            if (!(companyLicence.FromDate.Date <= DateTime.UtcNow.Date &&
-                                  companyLicence.ToDate.Date >= DateTime.UtcNow.Date))
-                                return Ok(new LoginModel()
-                                {
-                                    Token = token,
-                                    CompanyId = user.CompanyId,
-                                    Expiration = "Your Company License has been expired. Please contact to support and activate your license"
-                                });
-                        }
-                    }
+                   
 
                     var company = await _context.Companies
                         .Select(x => new
@@ -293,288 +192,37 @@ namespace Noble.Api.Controllers
                             x.TermsCondition,
                         }).FirstOrDefaultAsync(x => x.Id == user.CompanyId);
 
-                    var companyPermission = await _context.CompanyPermissions.Select(x => new { x.Value }).ToListAsync();
 
                     var dayStart = false;
                     bool isExpenseDay = false;
                     string dayStartTime = "";
 
-                    var loginPermissions = await _context.LoginPermissions.AsNoTracking()
-                        .Select(x => new
-                        {
-                            x.UserId,
-                            x.IsOverAllAccess,
-                            x.TerminalUserType,
-                            x.IsTouchInvoice,
-                            x.StartDay,
-                            x.TouchScreen,
-                            x.IsExpenseAccount,
-                            x.CloseDay,
-                            x.IsSupervisor,
-                            x.TransferCounter,
-                            x.AllowAll,
-                        }).FirstOrDefaultAsync(x => x.UserId == Guid.Parse(user.Id));
+                   
 
 
-                    var nobleUserRole = await _context.NobleUserRoles.Select(x => new { x.UserId, x.RoleId }).FirstOrDefaultAsync(x => x.UserId == user.Id);
                     var nobleRole = new { Id = Guid.Empty, Name = "" };
-                    if (nobleUserRole != null)
-                    {
-                        nobleRole = await _context.NobleRoles
-                            .Select(x => new { x.Id, x.Name })
-                            .FirstOrDefaultAsync(x => x.Id == nobleUserRole.RoleId);
-                    }
+                   
 
                     //BankDetail
                     //CanStartDay
                     Guid? userCounterId = null;
-                    bool canDayStart = companyPermission.Any(x => x.Value == "CanStartDay");
-                    bool bankDetail = companyPermission.Any(x => x.Value == "BankDetail");
 
-                    if (canDayStart && bankDetail)
-                    {
-                        var isDayStart = await Mediator.Send(new IsWholeSaleDayStart()
-                        {
-                            UserId = Guid.Parse(user.Id),
-                            EmployeeId = user.EmployeeId,
-                            IsLogin = true,
-                            Email = user.Email,
-                            CompanyId = user.CompanyId,
-                            IsSupervisor = loginPermissions.IsSupervisor,
-                        });
-                        if (isDayStart.IsDayStart)
-                        {
-                            //token = isDayStart.Token;
-                            dayStart = isDayStart.IsDayStart;
-                            dayStartTime = isDayStart.FromTime;
-                            userCounterId = isDayStart.CounterId;
-
-                        }
-                    }
-                    else if (canDayStart)
-                    {
-                        var isDayStart = await Mediator.Send(new IsDayStartQuery
-                        {
-                            UserId = Guid.Parse(user.Id),
-                            EmployeeId = user.EmployeeId,
-                            IsLogin = true,
-                            Email = user.Email,
-                            CompanyId = user.CompanyId,
-                            IsSupervisor = loginPermissions.IsSupervisor,
-
-                        });
-                        if (isDayStart.IsDayStart)
-                        {
-                            //token = isDayStart.Token;
-                            dayStart = isDayStart.IsDayStart;
-                            isExpenseDay = isDayStart.IsExpenseDay;
-                            dayStartTime = isDayStart.FromTime?.ToString("hh:mm tt");
-                        }
-                        userCounterId = _context.DayStarts.FirstOrDefault(x => x.StartTerminalFor == user.UserName && x.IsActive && !x.IsDayStart)?.CounterId;
-
-                    }
-
+                   
                     var role = await _userComponent.GetRoleByUser(user.Id);
-                    var warehouseId = _context.Warehouses.Select(x => new { x.Id, x.StoreID }).FirstOrDefault(x => x.StoreID == "S001")?.Id;
-                    var companyOptions = await _context.CompanyOptions.AsNoTracking().Where(x => x.LocationId == user.CompanyId).ToListAsync();
 
 
-                    string businessLogo = null;
-                    bool overWrite = false;
-                    string businessNameArabic = null;
-                    string businessNameEnglish = null;
-                    string businessTypeArabic = null;
-                    string businessTypeEnglish = null;
-                    string companyNameArabic = null;
-                    string companyNameEnglish = null;
-                    Terminal terminal = null;
-
-                    // Fetch System Mac Address
-                    if (role != "Noble Admin")
-                    {
-                        NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
-                        String sMacAddress = string.Empty;
-
-                        foreach (NetworkInterface adapter in nics)
-                        {
-                            if (sMacAddress == String.Empty)
-                            {
-                                sMacAddress = adapter.GetPhysicalAddress().ToString();
-                                break;
-                            }
-                        }
-                        var isNormalPrefix = await _context.CompanyPermissions.AnyAsync(x => x.Value == "NormalPrefix");
-
-                        if (!isNormalPrefix)
-                        {
-                            if (loginPermissions.TerminalUserType == TerminalUserType.Offline)
-                            {
-                                if (nobleRole.Name != "Admin")
-                                {
-                                    terminal = await _context.Terminals.AsNoTracking().FirstOrDefaultAsync(x => x.MACAddress == sMacAddress && x.Id == user.TerminalId.Value);
-                                    if (terminal != null)
-                                    {
-                                        user.TerminalId = terminal.Id;
-
-                                    }
-                                    if (terminal == null)
-                                    {
-
-                                        return Ok(new LoginModel()
-                                        {
-                                            Token = token,
-                                            IsUseMachine = true,
-                                            CompanyId = user.CompanyId,
-                                            Expiration = "Please assign terminal to this system"
-                                        });
-                                    }
-                                }
-                                else
-                                {
-                                    terminal = await _context.Terminals.AsNoTracking().FirstOrDefaultAsync(x => x.Id == user.TerminalId.Value);
-
-                                }
-                            }
-                            else if (loginPermissions.TerminalUserType == TerminalUserType.Online)
-                            {
-                                if (nobleRole.Name != "Admin")
-                                {
-                                    terminal = await _context.Terminals.AsNoTracking().FirstOrDefaultAsync(x => x.MACAddress == sMacAddress && x.Id == user.OnlineTerminalId.Value);
-                                    if (terminal != null)
-                                    {
-                                        user.TerminalId = terminal.Id;
-
-                                    }
-                                    if (terminal == null)
-                                    {
-
-                                        return Ok(new LoginModel()
-                                        {
-                                            Token = token,
-                                            IsUseMachine = true,
-                                            CompanyId = user.CompanyId,
-                                            Expiration = "Please assign terminal to this system"
-                                        });
-                                    }
-                                }
-                                else
-                                {
-                                    terminal = await _context.Terminals.AsNoTracking().FirstOrDefaultAsync(x => x.Id == user.OnlineTerminalId.Value);
-
-                                }
-                            }
-                            else
-                            {
-                                if (nobleRole.Name != "Admin")
-                                {
-                                    if (user.TerminalId == null && user.OnlineTerminalId == null)
-                                    {
-                                        return Ok(new LoginModel()
-                                        {
-                                            Token = token,
-                                            IsUseMachine = true,
-                                            CompanyId = user.CompanyId,
-                                            Expiration = "Please assign terminal to this system"
-                                        });
-                                    }
-                                }
-
-                                var localTerminal = await _context.Terminals.AsNoTracking().FirstOrDefaultAsync(x => x.MACAddress == sMacAddress && x.Id == user.TerminalId);
-                                if (localTerminal == null)
-                                {
-                                    var onlineTerminal = await _context.Terminals.AsNoTracking().FirstOrDefaultAsync(x => x.MACAddress == sMacAddress && x.Id == user.OnlineTerminalId);
-                                    if (onlineTerminal == null && nobleRole.Name != "Admin")
-                                    {
-                                        return Ok(new LoginModel()
-                                        {
-                                            Token = token,
-                                            IsUseMachine = true,
-                                            CompanyId = user.CompanyId,
-                                            Expiration = "You do not have access to use this machine"
-                                        });
-                                    }
-                                }
-                                else
-                                {
-                                    terminal = localTerminal;
-                                }
-                            }
-                        }
-                        //else if (user.TerminalId != null || user.OnlineTerminalId != null)
-                        //{
-                        //    var localTerminal = await _context.Terminals.AsNoTracking().FirstOrDefaultAsync(x => x.Id == user.TerminalId);
-                        //    var onlineTerminal = await _context.Terminals.AsNoTracking().FirstOrDefaultAsync(x => x.Id == user.OnlineTerminalId);
-                        //    if (loginPermissions != null)
-                        //    {
-                        //        if (localTerminal?.MACAddress == sMacAddress)
-                        //        {
-                        //            if (nobleRole.Name != "Admin")
-                        //            {
-                        //                return Ok(new LoginModel()
-                        //                {
-                        //                    Token = token,
-                        //                    IsUseMachine = true,
-                        //                    CompanyId = user.CompanyId,
-                        //                    Expiration = "You do not have access to use this machine"
-                        //                });
-                        //            }
-                        //        }
-
-                        //        terminal = loginPermissions.TerminalUserType == TerminalUserType.Both ? (localTerminal?.MACAddress != sMacAddress ? onlineTerminal : localTerminal) : loginPermissions.TerminalUserType == TerminalUserType.Online ? onlineTerminal : localTerminal;
-                        //    }
-                        //}
-                        else if (!isNormalPrefix && role != "Noble Admin" && nobleRole.Name != "Admin")
-                        {
-                            return Ok(new LoginModel()
-                            {
-                                Token = token,
-                                IsUseMachine = true,
-                                CompanyId = user.CompanyId,
-                                Expiration = "You do not have access to use this machine"
-                            });
-                        }
-
-                    }
+                  
                    
 
 
-                    businessNameArabic = terminal?.BusinessNameArabic;
-                    businessNameEnglish = terminal?.BusinessNameEnglish;
-                    businessTypeArabic = terminal?.BusinessTypeArabic;
-                    businessTypeEnglish = terminal?.BusinessTypeEnglish;
-                    companyNameArabic = terminal?.CompanyNameArabic;
-                    companyNameEnglish = terminal?.CompanyNameEnglish;
-                    businessLogo = terminal?.BusinessLogo;
-                    overWrite = terminal?.OverWrite ?? false;
-                    var onPageLoadItem = terminal?.OnPageLoadItem ?? false;
+               
 
-                    var printSetting = await Mediator.Send(new GetPrintSettingDetailQuery());
-                    var defaultSetting = await _context.DefaultSettings.AsNoTracking().FirstOrDefaultAsync();
-                    var defaultSettingModel = new DefaultSettingModel();
-                    if (defaultSetting != null)
-                    {
-                        defaultSettingModel.IsCustomerPayCredit = defaultSetting.IsCustomerPayCredit;
-                        defaultSettingModel.IsSupplierPayCredit = defaultSetting.IsSupplierPayCredit;
-                        defaultSettingModel.IsCustomeCredit = defaultSetting.IsCustomeCredit;
-                        defaultSettingModel.IsSupplierCredit = defaultSetting.IsSupplierCredit;
-                        defaultSettingModel.IsSaleCredit = defaultSetting.IsSaleCredit;
-                        defaultSettingModel.IsPurchaseCredit = defaultSetting.IsPurchaseCredit;
-                        defaultSettingModel.IsCashCustomer = defaultSetting.IsCashCustomer;
-                    }
-
+          
+                  
 
                     return Ok(new LoginModel()
                     {
-                        BusinessLogo = businessLogo,
-                        OverWrite = overWrite,
-                        BusinessNameArabic = businessNameArabic,
-                        BusinessNameEnglish = businessNameEnglish,
-                        BusinessTypeArabic = businessTypeArabic,
-                        BusinessTypeEnglish = businessTypeEnglish,
-                        CompanyNameArabic = companyNameArabic,
-                        CompanyNameEnglish = companyNameEnglish,
-                        CompanyOptions = companyOptions,
-                        OnPageLoadItem = onPageLoadItem,
+                     
                         DayStartTime = dayStartTime,
                         Expiration = expiration,
                         IsPayment = isPayment,
@@ -602,36 +250,9 @@ namespace Noble.Api.Controllers
                         EmailConfirmed = user.EmailConfirmed,
                         PhoneNo = user.PhoneNumber,
                         UserRoleName = nobleRole.Name,
-                        IsTouchInvoice = loginPermissions?.IsTouchInvoice,
-                        TouchScreen = loginPermissions?.TouchScreen,
-                        IsExpenseAccount = loginPermissions?.IsExpenseAccount ?? false,
-                        AllowAll = loginPermissions?.AllowAll,
                         IsDayStart = dayStart,
                         IsExpenseDay = isExpenseDay,
-                        InvoicePrint = printSetting?.InvoicePrint,
-                        PrintSizeA4 = printSetting?.PrintSize,
-                        TermsInAr = printSetting?.TermsInAr,
-                        TermsInEng = printSetting?.TermsInEng,
-                        ReturnDays = printSetting?.ReturnDays,
-                        CashAccountId = printSetting?.CashAccountId,
-                        BankAccountId = printSetting?.BankAccountId,
-                        PrinterName = terminal == null ? (printSetting?.IsBlindPrint == true ? printSetting?.PrinterName : "") : terminal.PrinterName,
-                        IsHeaderFooter = printSetting?.IsHeaderFooter ?? false,
-                        IsBlindPrint = printSetting?.IsBlindPrint ?? false,
-                        AutoPaymentVoucher = printSetting?.AutoPaymentVoucher ?? false,
-                        IsDeliveryNote = printSetting?.IsDeliveryNote ?? false,
-                        TermAndConditionLength = printSetting?.TermAndConditionLength ?? false,
-                        PrintTemplate = printSetting?.PrintTemplate,
-                        //IsForMedical = company.IsForMedical,
-                        WarehouseId = warehouseId,
-                        IsSupervisor = loginPermissions?.IsSupervisor ?? false,
-                        IsPermissionToStartDay = loginPermissions?.StartDay ?? false,
-                        IsPermissionToCloseDay = loginPermissions?.CloseDay ?? false,
-                        TransferCounter = loginPermissions?.TransferCounter ?? false,
-                        NobleRole = String.IsNullOrEmpty(nobleRole.Name) ? "" : nobleRole.Name,
-                        DefaultSettingModel = defaultSettingModel,
-                        TerminalUserType = loginPermissions?.TerminalUserType.ToString(),
-                        TerminalId = terminal?.Id ?? Guid.Empty,
+                      
                     });
                 }
                 else
@@ -644,104 +265,12 @@ namespace Noble.Api.Controllers
             return Ok(null);
         }
 
-        [Route("api/account/GetWhiteLabeling")]
-        [HttpGet("GetWhiteLabeling")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetWhiteLabeling()
-        {
-            var labelData = await _context.WhiteLabelings.FirstOrDefaultAsync();
-            var lang = _configuration.GetSection("Portuguese").Value == "True" ? true : false;
-            if (labelData == null)
-            {
-                var label = new WhiteLabelLookUp()
-                {
-                    Heading = "ERP FOR SMALL & MEDIUM ENTERPRISE",
-                    Description = "Handle All your Needs & Automate Business Process",
-                    CompanyName = "TechoQode (Pvt) Ltd.",
-                    ApplicationName = "NOBLEPOS",
-                    Portuguese = lang
-                };
-                return Ok(label);
-            }
-            else
-            {
-                var lookUp = new WhiteLabelLookUp()
-                {
-                    Heading = labelData.Heading,
-                    Description = labelData.Description,
-                    CompanyName = labelData.CompanyName,
-                    ApplicationName = labelData.ApplicationName,
-                    AddressLine1 = labelData.AddressLine1,
-                    AddressLine2 = labelData.AddressLine2,
-                    AddressLine3 = labelData.AddressLine3,
-                    Email = labelData.Email,
-                    FavName = labelData.FavName,
-                    Portuguese = lang
-                };
-                return Ok(lookUp);
-            }
-
-        }
+      
 
 
 
-        [Route("api/account/ImpersonateUser")]
-        [HttpGet("ImpersonateUser")]
-        [Authorize(Roles = "Noble Admin")]
-        public async Task<IActionResult> ImpersonateUser(String userId)
-        {
-            var currentUserId = User.Identity.UserId();
-
-            var impersonatedUser = await _userManager.FindByIdAsync(userId);
-
-            var userPrincipal = await _signInManager.CreateUserPrincipalAsync(impersonatedUser);
-
-            userPrincipal.Identities.First().AddClaim(new Claim("OriginalUserId", currentUserId));
-            userPrincipal.Identities.First().AddClaim(new Claim("IsImpersonating", "true"));
-
-
-            // sign out the current user
-            await _signInManager.SignOutAsync();
-
-            await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, userPrincipal);
-
-            return Ok(true);
-        }
-        [Route("api/account/ImpersonateUser")]
-        [HttpGet("ImpersonateUser")]
-        [Authorize(Roles = "Noble Admin")]
-        public async Task<IActionResult> GetComapnyUser(String userId)
-        {
-            var currentUserId = User.Identity.UserId();
-
-            var impersonatedUser = await _userManager.FindByIdAsync(userId);
-
-            var userPrincipal = await _signInManager.CreateUserPrincipalAsync(impersonatedUser);
-
-            userPrincipal.Identities.First().AddClaim(new Claim("OriginalUserId", currentUserId));
-            userPrincipal.Identities.First().AddClaim(new Claim("IsImpersonating", "true"));
-
-
-            // sign out the current user
-            await _signInManager.SignOutAsync();
-
-            await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, userPrincipal);
-
-            return Ok(true);
-        }
-        [Route("api/account/GetCompanySetupAccount")]
-        [HttpGet("GetCompanySetupAccount")]
-        public async Task<IActionResult> GetCompanySetupAccount()
-        {
-            Currency currencyId = null;
-            var companyAccount = await _context.CompanyAccountSetups.FirstOrDefaultAsync();
-            if (companyAccount != null) currencyId = await _context.Currencies.FirstOrDefaultAsync(x => x.Name == companyAccount.CurrencyId);
-            if (currencyId == null)
-            {
-                return Ok(null);
-            }
-            return Ok(new { Currency = currencyId.Sign, companyAccount.TaxMethod, companyAccount.TaxRateId });
-        }
+      
+       
         [Route("api/account/DuplicateEmail")]
         [HttpGet("DuplicateEmail")]
         public async Task<IActionResult> DuplicateEmail(string email)
@@ -754,64 +283,7 @@ namespace Noble.Api.Controllers
             return Ok(true);
         }
 
-        [Route("api/account/GetUserPermission")]
-        [HttpGet("GetUserPermission")]
-        public IActionResult GetUserPermission(string id)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(id) || id == "null")
-                {
-                    return Ok(null);
-                }
-
-                var permission = _context.LoginPermissions
-                    .AsNoTracking()
-                    .FirstOrDefault(x => x.UserId == Guid.Parse(id));
-
-                if (permission == null)
-                {
-                    return Ok(null);
-                }
-
-                return Ok(new
-                {
-                    permission.UserId,
-                    permission.ChangePriceDuringSale,
-                    permission.GiveDicountDuringSale,
-                    permission.ViewCounterDetails,
-                    permission.TransferCounter,
-                    permission.CloseCounter,
-                    permission.HoldCounter,
-                    permission.CloseDay,
-                    permission.StartDay,
-                    permission.ProcessSaleReturn,
-                    permission.DailyExpenseList,
-                    permission.InvoiceWoInventory,
-                    permission.IsTouchInvoice,
-                    permission.AllowAll,
-                    permission.PermissionToStartExpenseDay,
-                    permission.IsSupervisor,
-                    permission.IsInquiryHandler,
-                    permission.TouchScreen,
-                    permission.TemporaryCashReceiver,
-                    permission.TemporaryCashIssuer,
-                    permission.TemporaryCashRequester,
-                    permission.IsExpenseAccount,
-                    permission.AllowViewAllData,
-                    permission.Days,
-                    permission.Limit,
-                    permission.TerminalUserType,
-                    permission.IsOverAllAccess,
-                });
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-        }
+       
         [Route("api/account/AuthenticatorCode")]
         [HttpGet("AuthenticatorCode")]
         [AllowAnonymous]
@@ -889,24 +361,7 @@ namespace Noble.Api.Controllers
             }
 
         }
-        [Route("api/account/Allow2Factor")]
-        [HttpGet("Allow2Factor")]
-        [Roles("User", "Super Admin", "Admin", "Noble Admin", "Mobile Customer")]
-        public async Task<IActionResult> Allow2Factor(string id)
-        {
-            var applicationUser = await _userManager.FindByIdAsync(id);
-            if (applicationUser == null)
-            {
-                return Ok(false);
-            }
-            var disable2FaResult = await _userManager.SetTwoFactorEnabledAsync(applicationUser, false);
-            if (disable2FaResult.Succeeded)
-            {
-                return Ok(true);
-            }
-            return Ok(false);
-
-        }
+      
 
         [Route("api/account/ResetAuthenticator")]
         [HttpGet("ResetAuthenticator")]
@@ -1124,64 +579,28 @@ namespace Noble.Api.Controllers
         {
             try
             {
-                var listUsers = _context.LoginPermissions.FirstOrDefault(x => x.UserId == id);
                 var user = await _userManager.FindByIdAsync(id.ToString());
                 var nobleUserRoles = _context.NobleUserRoles.AsNoTracking().FirstOrDefault(x => x.UserId == user.Id);
-                if (listUsers != null)
                 {
 
 
                     var loginUser = new LoginVm
                     {
-                        Id = listUsers == null ? user.Id : listUsers.Id.ToString(),
                         UserId = Guid.Parse(user.Id),
                         FirstName = user.FirstName,
                         IsActive = user.IsActive,
-                        IsSupervisor = listUsers.IsSupervisor,
                         LastName = user.LastName,
                         RoleId = nobleUserRoles?.RoleId,
                         Email = user.Email,
                         UserName = user.UserName,
-                        ChangePriceDuringSale = listUsers.ChangePriceDuringSale,
-                        IsExpenseAccount = listUsers.IsExpenseAccount,
-                        CloseCounter = listUsers.CloseCounter,
-                        CloseDay = listUsers.CloseDay,
-                        StartDay = listUsers.StartDay,
-                        GiveDicountDuringSale = listUsers.GiveDicountDuringSale,
-                        TransferCounter = listUsers.TransferCounter,
-                        HoldCounter = listUsers.HoldCounter,
-                        DailyExpenseList = listUsers.DailyExpenseList,
-                        ProcessSaleReturn = listUsers.ProcessSaleReturn,
-                        ViewCounterDetails = listUsers.ViewCounterDetails,
-                        InvoiceWoInventory = listUsers.InvoiceWoInventory,
-                        IsTouchInvoice = listUsers.IsTouchInvoice,
-                        TouchScreen = listUsers.TouchScreen,
-                        AllowAll = listUsers.AllowAll,
-                        PermissionToStartExpenseDay = listUsers.PermissionToStartExpenseDay,
+                      
                         TerminalId = user.TerminalId,
                         OnlineTerminalId = user.OnlineTerminalId,
-                        TemporaryCashReceiver = listUsers.TemporaryCashReceiver,
-                        TemporaryCashIssuer = listUsers.TemporaryCashIssuer,
-                        TemporaryCashRequester = listUsers.TemporaryCashRequester,
-                        Days = listUsers.Days,
-                        Limit = listUsers.Limit,
-                        AllowViewAllData = listUsers.AllowViewAllData,
-                        TerminalUserType = listUsers.TerminalUserType.ToString(),
-                        IsOverAllAccess = listUsers.IsOverAllAccess,
+                       
                     };
                     return Ok(loginUser);
                 }
-                var users = new LoginVm
-                {
-                    Id = listUsers == null ? user.Id : listUsers.Id.ToString(),
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    UserName = user.UserName,
-                    OnlineTerminalId = user.OnlineTerminalId,
-                    UserId = Guid.Parse(user.Id)
-                };
-                return Ok(users);
+               
 
             }
             catch (Exception e)
@@ -1330,38 +749,10 @@ namespace Noble.Api.Controllers
 
 
 
-                    var permissions = new LoginPermissions
-                    {
-                        UserId = Guid.Parse(user.Id),
-                        IsExpenseAccount = loginVm.IsExpenseAccount,
-                        ChangePriceDuringSale = loginVm.ChangePriceDuringSale,
-                        GiveDicountDuringSale = loginVm.GiveDicountDuringSale,
-                        ViewCounterDetails = loginVm.ViewCounterDetails,
-                        TransferCounter = loginVm.TransferCounter,
-                        CloseCounter = loginVm.CloseCounter,
-                        HoldCounter = loginVm.HoldCounter,
-                        StartDay = loginVm.StartDay,
-                        CloseDay = loginVm.CloseDay,
-                        ProcessSaleReturn = loginVm.ProcessSaleReturn,
-                        DailyExpenseList = loginVm.DailyExpenseList,
-                        InvoiceWoInventory = loginVm.InvoiceWoInventory,
-                        IsTouchInvoice = loginVm.IsTouchInvoice,
-                        TouchScreen = loginVm.TouchScreen,
-                        AllowAll = loginVm.AllowAll,
-                        PermissionToStartExpenseDay = loginVm.PermissionToStartExpenseDay,
-                        TemporaryCashReceiver = loginVm.TemporaryCashReceiver,
-                        TemporaryCashIssuer = loginVm.TemporaryCashIssuer,
-                        TemporaryCashRequester = loginVm.TemporaryCashRequester,
-                        Days = loginVm.Days,
-                        Limit = loginVm.Limit,
-                        AllowViewAllData = loginVm.AllowViewAllData,
-                        TerminalUserType = (TerminalUserType)Enum.Parse(typeof(TerminalUserType), loginVm.TerminalUserType),
-                        IsOverAllAccess = loginVm.IsOverAllAccess
-                    };
+                   
 
                     var result = await _userManager.CreateAsync(user, register.Password);
 
-                    await _context.LoginPermissions.AddAsync(permissions);
                     await _context.SaveChangesAsync();
 
                     if (result.Succeeded)
@@ -1390,12 +781,7 @@ namespace Noble.Api.Controllers
                             new Claim("PermissionToStartExpenseDay",loginVm.PermissionToStartExpenseDay.ToString(), ClaimValueTypes.Boolean),
                         };
                         await _userManager.AddClaimsAsync(user, claims);
-                        await Mediator.Send(new AddUpdateNobleUserRoleCommand
-                        {
-                            UserId = user.Id,
-                            RoleId = loginVm.RoleId.Value,
-                            IsActive = true
-                        });
+                      
                         await _context.SaveChangesAsync();
                         return Ok(new { value = true, check = "Add" });
                     }
@@ -1403,21 +789,11 @@ namespace Noble.Api.Controllers
             }
             else
             {
-                var loginPermissions = _context.LoginPermissions.FirstOrDefault(x => x.Id == Guid.Parse(loginVm.Id));
 
                 var currentUser = await _userManager.FindByIdAsync(loginVm.UserId.ToString());
 
-                await Mediator.Send(new RemoveUserRoleQuery
-                {
-                    UserId = currentUser.Id
-
-                });
-                await Mediator.Send(new AddUpdateNobleUserRoleCommand
-                {
-                    UserId = currentUser.Id,
-                    RoleId = loginVm.RoleId.Value,
-                    IsActive = true
-                });
+              
+               
                 currentUser.UserName = loginVm.UserName;
                 currentUser.FirstName = loginVm.UserName;
                 currentUser.NormalizedUserName = loginVm.UserName.ToUpper();
@@ -1426,128 +802,12 @@ namespace Noble.Api.Controllers
                 currentUser.OnlineTerminalId = loginVm.OnlineTerminalId;
                 await _userManager.UpdateAsync(currentUser);
 
-                if ((currentUser.EmployeeId == Guid.Empty || currentUser.EmployeeId == null) && !_context.Accounts.Any(x => x.Name == loginVm.FirstName))
-                {
-                    var accounts = await _context.Accounts
-                          .AsNoTracking()
-                          .Include(x => x.CostCenter)
-                          .Where(x => x.CostCenter.Code == "126000" ||
-                                      x.CostCenter.Code == "603001").ToListAsync();
-                    var accEmp = accounts.OrderBy(x => x.CostCenter.Code == "126000").LastOrDefault();
-                    var accPay = accounts.OrderBy(x => x.CostCenter.Code == "603001").LastOrDefault();
+               
 
-                    if (accEmp == null || accPay == null)
-                        throw new ApplicationException("COA is not created yet.");
-
-                    var accountList = new List<Account>()
-                            {
-                                new Account()
-                                {
-                                    IsActive = true,
-                                    Name = loginVm.FirstName,
-                                    Code = (Convert.ToInt64(accEmp.Code) + 1).ToString(),
-                                    CostCenterId = accEmp.CostCenterId,
-                                },
-
-                                new Account()
-                                {
-                                    IsActive = true,
-                                    Name = loginVm.FirstName,
-                                    Code = (Convert.ToInt64(accPay.Code) + 1).ToString(),
-                                    CostCenterId = accPay.CostCenterId,
-                                }
-                            };
-
-                    await _context.Accounts.AddRangeAsync(accountList);
-                }
-
-
-                if (loginPermissions == null)
-                {
-                    var permissions = new LoginPermissions
-                    {
-                        UserId = Guid.Parse(loginVm.Id),
-                        ChangePriceDuringSale = loginVm.ChangePriceDuringSale,
-                        IsExpenseAccount = loginVm.IsExpenseAccount,
-                        GiveDicountDuringSale = loginVm.GiveDicountDuringSale,
-                        ViewCounterDetails = loginVm.ViewCounterDetails,
-                        TransferCounter = loginVm.TransferCounter,
-                        CloseCounter = loginVm.CloseCounter,
-                        HoldCounter = loginVm.HoldCounter,
-                        StartDay = loginVm.StartDay,
-                        CloseDay = loginVm.CloseDay,
-                        ProcessSaleReturn = loginVm.ProcessSaleReturn,
-                        DailyExpenseList = loginVm.DailyExpenseList,
-                        InvoiceWoInventory = loginVm.InvoiceWoInventory,
-                        IsTouchInvoice = loginVm.IsTouchInvoice,
-                        TouchScreen = loginVm.TouchScreen,
-                        AllowAll = loginVm.AllowAll,
-                        IsSupervisor = loginVm.IsSupervisor,
-                        PermissionToStartExpenseDay = loginVm.PermissionToStartExpenseDay,
-                        TemporaryCashReceiver = loginVm.TemporaryCashReceiver,
-                        TemporaryCashIssuer = loginVm.TemporaryCashIssuer,
-                        TemporaryCashRequester = loginVm.TemporaryCashRequester,
-                        Days = loginVm.Days,
-                        Limit = loginVm.Limit,
-                        AllowViewAllData = loginVm.AllowViewAllData,
-                        TerminalUserType = (TerminalUserType)Enum.Parse(typeof(TerminalUserType), loginVm.TerminalUserType),
-                        IsOverAllAccess = loginVm.IsOverAllAccess
-                    };
-                    await _context.LoginPermissions.AddAsync(permissions);
-                    var user = await _userManager.FindByIdAsync(loginVm.UserId.ToString());
-                    var claims = new List<Claim>
-                        {
-                            new Claim("ChangePriceDuringSale",loginVm.ChangePriceDuringSale.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("IsExpenseAccount",loginVm.IsExpenseAccount.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("GiveDicountDuringSale",loginVm.GiveDicountDuringSale.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("ViewCounterDetails",loginVm.ViewCounterDetails.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("TransferCounter",loginVm.TransferCounter.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("CloseCounter",loginVm.CloseCounter.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("IsSupervisor",loginVm.IsSupervisor.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("HoldCounter",loginVm.HoldCounter.ToString(), ClaimValueTypes.Boolean),
-                                    new Claim("StartDay",loginVm.StartDay.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("CloseDay",loginVm.CloseDay.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("ProcessSaleReturn",loginVm.ProcessSaleReturn.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("DailyExpenseList",loginVm.DailyExpenseList.ToString(), ClaimValueTypes.Boolean),
-                                    new Claim("InvoiceWoInventory",loginVm.InvoiceWoInventory.ToString(), ClaimValueTypes.Boolean),
-                                    new Claim("IsTouchInvoice",loginVm.IsTouchInvoice.ToString(), ClaimValueTypes.Boolean),
-                                    //new Claim("TouchScreen",loginVm.TouchScreen),
-                                    new Claim("AllowAll",loginVm.AllowAll.ToString(), ClaimValueTypes.Boolean),
-                                    new Claim("PermissionToStartExpenseDay",loginVm.PermissionToStartExpenseDay.ToString(), ClaimValueTypes.Boolean),
-
-                        };
-                    await _userManager.AddClaimsAsync(user, claims);
-
-                }
-                else
                 {
 
                     var user = await _userManager.FindByIdAsync(User.Identity.UserId());
-                    loginPermissions.ChangePriceDuringSale = loginVm.ChangePriceDuringSale;
-                    loginPermissions.IsExpenseAccount = loginVm.IsExpenseAccount;
-                    loginPermissions.GiveDicountDuringSale = loginVm.GiveDicountDuringSale;
-                    loginPermissions.ViewCounterDetails = loginVm.ViewCounterDetails;
-                    loginPermissions.TransferCounter = loginVm.TransferCounter;
-                    loginPermissions.CloseCounter = loginVm.CloseCounter;
-                    loginPermissions.HoldCounter = loginVm.HoldCounter;
-                    loginPermissions.CloseDay = loginVm.CloseDay;
-                    loginPermissions.StartDay = loginVm.StartDay;
-                    loginPermissions.ProcessSaleReturn = loginVm.ProcessSaleReturn;
-                    loginPermissions.DailyExpenseList = loginVm.DailyExpenseList;
-                    loginPermissions.InvoiceWoInventory = loginVm.InvoiceWoInventory;
-                    loginPermissions.IsTouchInvoice = loginVm.IsTouchInvoice;
-                    loginPermissions.TouchScreen = loginVm.TouchScreen;
-                    loginPermissions.IsSupervisor = loginVm.IsSupervisor;
-                    loginPermissions.AllowAll = loginVm.AllowAll;
-                    loginPermissions.PermissionToStartExpenseDay = loginVm.PermissionToStartExpenseDay;
-                    loginPermissions.TemporaryCashReceiver = loginVm.TemporaryCashReceiver;
-                    loginPermissions.TemporaryCashIssuer = loginVm.TemporaryCashIssuer;
-                    loginPermissions.TemporaryCashRequester = loginVm.TemporaryCashRequester;
-                    loginPermissions.Days = loginVm.Days;
-                    loginPermissions.Limit = loginVm.Limit;
-                    loginPermissions.AllowViewAllData = loginVm.AllowViewAllData;
-                    loginPermissions.TerminalUserType = loginVm.TerminalUserType == "" ? TerminalUserType.Both : (TerminalUserType)Enum.Parse(typeof(TerminalUserType), loginVm.TerminalUserType);
-                    loginPermissions.IsOverAllAccess = loginVm.IsOverAllAccess;
+                  
                     await _userManager.RemoveClaimAsync(user, new Claim("ChangePriceDuringSale", loginVm.ChangePriceDuringSale.ToString(), ClaimValueTypes.Boolean));
                     await _userManager.RemoveClaimAsync(user, new Claim("IsExpenseAccount", loginVm.IsExpenseAccount.ToString(), ClaimValueTypes.Boolean));
                     await _userManager.RemoveClaimAsync(user, new Claim("GiveDicountDuringSale", loginVm.GiveDicountDuringSale.ToString(), ClaimValueTypes.Boolean));
@@ -1629,70 +889,11 @@ namespace Noble.Api.Controllers
         #endregion
 
 
-        #region For Setup Update
-        [Route("api/account/SetupUpdateInCompany")]
-        [HttpPost("SetupUpdateInCompany")]
-        public IActionResult SetupUpdateInCompany([FromBody] StepsVm stepsVm)
-        {
-            var dbCompany = _context.Companies.FirstOrDefault(x => x.Id == stepsVm.CompanyId);
-            if (stepsVm.Step1 != false)
-            {
-                dbCompany.Step1 = stepsVm.Step1;
-            }
-            if (stepsVm.Step2 != false)
-            {
-                dbCompany.Step2 = stepsVm.Step2;
-            }
-            if (stepsVm.Step3 != false)
-            {
-                dbCompany.Step3 = stepsVm.Step3;
-            }
-            if (stepsVm.Step3 != false)
-            {
-                dbCompany.Step4 = stepsVm.Step4;
-            }
-            if (stepsVm.Step5 != false)
-            {
-                dbCompany.Step5 = stepsVm.Step5;
-            }
-            _context.SaveChanges();
-            return Ok(true);
-        }
-        #endregion
-
-        #region For Login History
-
-        [Route("api/account/LoginHistory")]
-        [HttpPost("LoginHistory")]
-        [AllowAnonymous]
-        public async Task<IActionResult> LoginHistory([FromBody] LoginHistoryVm loginHistoryVm)
-        {
-            var message = await Mediator.Send(new AddUpdateLoginHistoryCommand()
-            {
-                OperatingSystem = loginHistoryVm.OperatingSystem,
-                IsLogin = loginHistoryVm.IsLogin,
-                UserId = loginHistoryVm.UserId,
-                CompanyId = loginHistoryVm.CompanyId
-            });
-            return Ok(message);
-        }
-
-        [Route("api/account/LoginHistoryList")]
-        [HttpGet("LoginHistoryList")]
-        [AllowAnonymous]
-        public async Task<IActionResult> LoginHistoryList(Guid userId, DateTime fromDate, DateTime toDate)
-        {
+     
 
 
-            var message = await Mediator.Send(new GetLoginHistoryListQuery()
-            {
-                UserId = userId,
-                FromDate = fromDate,
-                ToDate = toDate
-            });
-            return Ok(message);
-        }
 
-        #endregion
+       
+
     }
 }

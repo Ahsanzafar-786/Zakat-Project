@@ -33,9 +33,7 @@ namespace Focus.Domain.Entities
         public Guid ParentId { get; set; }
         public Guid? ClientParentId { get; set; }
         public Guid? BusinessParentId { get; set; }
-        public virtual CompanyInformation CompanyInformation { get; set; }
-        public virtual ICollection<CompanyLicence> CompanyLicences { get; set; }
-        public virtual ICollection<CompanyAttachment> CompanyAttachments { get; set; }
+     
         public bool IsMultiUnit { get; set; }
         public bool IsProduction { get; set; }
         public bool InvoiceWoInventory { get; set; }
