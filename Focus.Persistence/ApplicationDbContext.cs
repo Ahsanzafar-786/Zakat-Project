@@ -11,7 +11,6 @@ using Focus.Persistence.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ModelBuilder = Microsoft.EntityFrameworkCore.ModelBuilder;
-using Size = Focus.Domain.Entities.Size;
 
 namespace Focus.Persistence
 {
@@ -24,7 +23,7 @@ namespace Focus.Persistence
             _httpContextProvider = httpContext;
         }
        
-        public virtual DbSet<ApprovalSystemEmployees> ApprovalSystemEmployees { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
