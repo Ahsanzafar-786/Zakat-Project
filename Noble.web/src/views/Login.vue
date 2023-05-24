@@ -215,8 +215,12 @@ export default {
                 debugger;
                  if (response.data != null) {
                     root.$session.start();
-                    localStorage.setItem('CompanyID', response.data.companyId)
+                    localStorage.setItem('CompanyID', response.data.companyId);
                     localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('RoleName', response.data.roleName);
+                    localStorage.setItem('UserId', response.data.userId);
+                    localStorage.setItem('UserName', response.data.userName);
+                    localStorage.setItem('Email', response.data.emailConfirmed);
                     root.$router.push('/dashboard');
                 }
             }).catch(error => {
