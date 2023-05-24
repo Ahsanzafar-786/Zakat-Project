@@ -277,13 +277,11 @@
             {
                 nameEnglish:
                 {
-                    required,
                     maxLength: maxLength(50)
                 },
 
                 vatRegistrationNo:
                 {
-                    required,
                     maxLength: maxLength(50)
                 },
                 comercialRegNo:
@@ -302,7 +300,6 @@
 
                 phoneNo:
                 {
-                    required,
 
 
                     maxLength: maxLength(20)
@@ -310,7 +307,6 @@
 
                 companyEmail:
                 {
-                    required,
                     email
 
                 },
@@ -401,14 +397,13 @@
             },
             getImage: function (value) { this.company.logoPath = value; },
             SaveCompany: function () {
+                debugger;
                 
                 this.loading = true;
                 var root = this;
 
                 var token = '';
-                if (this.$session.exists()) {
-                    token = localStorage.getItem('token');
-                }
+                token = localStorage.getItem('token');
                 root.$https
                     .post('/Company/SaveCompany', root.company, { headers: { "Authorization": `Bearer ${token}` } })
                     .then(response => {
