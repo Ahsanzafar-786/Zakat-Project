@@ -9,14 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Noble.Api.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Focus.Business.AdditionalCompany.Commands.AddUpdateAdditionalCompany;
-using Focus.Business.AdditionalCompany.Queries.GetAdditionalCompanyList;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Linq;
@@ -25,10 +21,6 @@ using System.Text.RegularExpressions;
 using Dapper;
 using Microsoft.AspNetCore.Hosting;
 
-using Focus.Business.AdditionalCompany.Queries.GetCompanyAttachments;
-using Focus.Business.AdditionalCompany.Commands.AddUpdateCompanyAttachment;
-using Focus.Business.Attachments.Commands;
-using Focus.Business.Attachments.Queries;
 
 using Focus.Business.Claims.Command.ModuleWiseClaim;
 
@@ -736,47 +728,11 @@ namespace Noble.Api.Controllers
         }
 
         
-        [Route("api/Company/SaveCompanyAttachment")]
-        [HttpPost("SaveCompanyAttachment")]
-        [Authorize(Roles = "User, Admin, Super Admin")]
-        public async Task<IActionResult> SaveCompanyAttachment([FromBody] CompanyAttachmentLookupModel companyAttachment)
-        {
-            var id = Guid.Empty;
-            if (companyAttachment.CompanyId != Guid.Empty)
-            {
-                id = await Mediator.Send(new AddUpdateCompanyAttachmentCommand
-                {
-                    Attachment = companyAttachment
-                });
-            }
+     
 
-            return Ok(new { IsSuccess = true, Id = id });
-        }
+      
 
-        [Route("api/Company/GetCompanyInformation")]
-        [HttpGet("GetCompanyInformation")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetCompanyInformation()
-        {
-            Guid companyId = _principal.Identity.CompanyId();
-            var companyListModel = await Mediator.Send(new GetCompanyInformationListQuery { CompanyId = companyId });
-            return Ok(companyListModel);
-        }
-
-        [Route("api/Company/GetCompanyAttachments")]
-        [HttpGet("GetCompanyAttachments")]
-        [Authorize(Roles = "User, Admin, Super Admin")]
-        public async Task<IActionResult> GetCompanyAttachments(string searchTerm, int? pageNumber)
-        {
-            var companyId = _principal.Identity.CompanyId();
-            var companyListModel = await Mediator.Send(
-                new GetCompanyAttachmentsQuery
-                {
-                    CompanyId = companyId,
-                    SearchTerm = searchTerm,
-                });
-            return Ok(companyListModel);
-        }
+      
         
         #endregion
        
@@ -868,28 +824,7 @@ namespace Noble.Api.Controllers
    
 
 
-        [Route("api/Company/SaveAttachment")]
-        [HttpPost("SaveAttachment")]
-        public async Task<IActionResult> SaveAttachment([FromBody] List<AttachmentLookUpModel> attachment)
-        {
-            var message = await Mediator.Send(new AddAttachmentCommand()
-            {
-                Attachment = attachment
-            });
-
-            return Ok(new { IsSuccess = true, Message = message });
-        }
-        [Route("api/Company/AttachmentList")]
-        [HttpGet("AttachmentList")]
-        public async Task<IActionResult> AttachmentList(Guid id)
-        {
-            var result = await Mediator.Send(new AttachmentListQuery()
-            {
-                Id = id
-            });
-
-            return Ok(result);
-        }
+     
 
 
 

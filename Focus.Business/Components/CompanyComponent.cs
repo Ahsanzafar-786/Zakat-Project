@@ -48,7 +48,7 @@ namespace Focus.Business.Components
 
             {
                 companies = _context.Companies.Where(x => x.ParentId == companyInfo.Id && x.ClientParentId == null)
-                    .Include(x => x.CompanyLicences).ToList();
+                    .ToList();
             }
             else if ((companyInfo?.ParentId != Guid.Empty || companyInfo?.ParentId != null)
                     && companyInfo.ClientParentId == null && companyInfo.BusinessParentId == null)
@@ -64,9 +64,7 @@ namespace Focus.Business.Components
             _context.DisableTenantFilter = true;
             foreach (var company in companies)
             {
-                var companyLincence = company.CompanyLicences.LastOrDefault();
                 
-                var companyPermissionType = _context.NobleGroups.OrderBy(x => EF.Property<Guid>(x, "CompanyId") == company.Id).LastOrDefault();
                 
                 var companyDto = new CompanyDto
                 {
@@ -92,9 +90,6 @@ namespace Focus.Business.Components
                     ParentId = company?.ParentId,
                     BusinessId = company?.BusinessParentId,
                     ClientParentId = company?.ClientParentId,
-                    CompanyType = companyLincence?.CompanyType.ToString(),
-                    FromDate = companyLincence?.FromDate,
-                    ToDate = companyLincence?.ToDate,
                     IsMultiUnit = company.IsMultiUnit,
                     IsProduction = company.IsProduction,
                     InvoiceWoInventory = company.InvoiceWoInventory,
@@ -126,20 +121,7 @@ namespace Focus.Business.Components
                     SimplifyTaxInvoiceLabelAr = string.IsNullOrEmpty(company.SimplifyTaxInvoiceLabel) ? "فاتورة ضريبية مبسطة" : company.SimplifyTaxInvoiceLabelAr,
                     //IsActive = companyLincence?.IsActive,
                     //IsBlock = companyLincence?.IsBlock,
-                    CompanyLicenceId = companyLincence?.Id ?? Guid.Empty,
-                    CompanyPermissionType = companyPermissionType != null? companyPermissionType.GroupName + "-" + Enum.GetName(typeof(GroupType), companyPermissionType.GroupType):"",
-                    CompanyLicences = company.CompanyLicences.Select( x => new CompanyLicenceDto()
-                    {
-                        Id = x.Id,
-                        CompanyId = x.CompanyId,
-                        CompanyType = x.CompanyType,
-                        FromDate = x.FromDate,
-                        ToDate = x.ToDate,
-                        NumberOfUsers = x.NumberOfUsers,
-                        NumberOfTransactions = (int)x.NoOfTransactionsAllow,
-                        IsActive = x.IsActive,
-                        IsBlock = x.IsBlock
-                    }).ToList()
+                 
 
                 };
                

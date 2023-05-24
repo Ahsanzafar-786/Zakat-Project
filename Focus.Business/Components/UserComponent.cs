@@ -106,8 +106,6 @@ namespace Focus.Business.Components
         {
 
             var users = _userManager.Users.ToList();
-            var nobleRoles = _context.NobleUserRoles.AsNoTracking().Include(x => x.Roles).ToList();
-            var loginPermissions = _context.LoginPermissions.AsNoTracking().AsQueryable();
 
             var userList = new List<UserDetailDto>();
 
@@ -128,13 +126,6 @@ namespace Focus.Business.Components
                             ImagePath = user.ImagePath,
                             EmployeeId = user.EmployeeId,
                             IsActive = user.IsActive,
-                            RoleName = nobleRoles.Where(x => x.UserId == user.Id).Select(x => x.Roles?.Name).FirstOrDefault(),
-                            EmployeeNo = user.EmployeeId != null ? _context.EmployeeRegistrations.FirstOrDefault(x => x.Id == user.EmployeeId)?.Code : "",
-                            TemporaryCashReceiver = loginPermissions.FirstOrDefault(x => x.UserId.ToString()  == user.Id)?.TemporaryCashReceiver ?? false,
-                            TemporaryCashIssuer = loginPermissions.FirstOrDefault(x => x.UserId.ToString() == user.Id)?.TemporaryCashIssuer ?? false,
-                            TemporaryCashRequester = loginPermissions.FirstOrDefault(x => x.UserId.ToString() == user.Id)?.TemporaryCashRequester ?? false,
-                            Days = loginPermissions.FirstOrDefault(x => x.UserId.ToString() == user.Id)?.Days ?? 0,
-                            Limit = loginPermissions.FirstOrDefault(x => x.UserId.ToString() == user.Id)?.Limit ?? 0,
                         };
                         userList.Add(userDto);
                     }
@@ -145,97 +136,15 @@ namespace Focus.Business.Components
         }
         public List<UserDetailDto> ForRoleUsersList(bool isHistory, bool istransferTerminal, bool isSupervisorTerminal)
         {
-            var nobleRoles = _context.NobleUserRoles.Select(x => x.UserId).ToList();
 
             var users = _userManager.Users.Where(x => x.CompanyId == _principal.Identity.CompanyId()).ToList();
 
             var userList = new List<UserDetailDto>();
             if (isSupervisorTerminal)
             {
-                var superVisorList = _context.LoginPermissions.AsNoTracking().Where(x => x.IsSupervisor)
-                    .Select(x => x.UserId).ToList();
-                var superVisers = users.Where(x => superVisorList.Contains(Guid.Parse(x.Id))).ToList();
-                foreach (var user in superVisers)
-                {
-                    var userDetail = _context.NobleUserRoles.FirstOrDefault(x => x.UserId == user.Id);
-                    if (userDetail != null )
-                    {
-                        var userDto = new UserDetailDto
-                        {
-                            Id = user.Id,
-                            //FullName = user.FirstName + " " + user.LastName,
-                            FullName = user.UserName,
-                            Email = user.Email,
-                            PhoneNumber = user.PhoneNumber,
-                            CompanyName = _context.Companies.FirstOrDefault(x => x.Id == user.CompanyId)?.NameEnglish,
-                            ImagePath = user.ImagePath,
-                            EmployeeId = user.EmployeeId,
-                            IsActive = user.IsActive
-                        };
-                        userList.Add(userDto);
-                    }
-                }
-            }
-            else if (istransferTerminal)
-            {
-                var dayStartList = _context.DayStarts.AsNoTracking().Where(x => x.IsActive && !x.IsDayStart)
-                    .Select(x => x.StartTerminalFor).ToList();
-                
-                var nonActiveUser = users.Where(x => !dayStartList.Contains(x.UserName)).ToList();
-                foreach (var user in nonActiveUser)
-                {
-                    var userDetail = _context.NobleUserRoles.FirstOrDefault(x => x.UserId == user.Id);
-                    if (userDetail != null && userDetail.Roles.Name == "Sales Man")
-                    {
-                        var userDto = new UserDetailDto
-                        {
-                            Id = user.Id,
-                            //FullName = user.FirstName + " " + user.LastName,
-                            FullName = user.UserName,
-                            Email = user.Email,
-                            PhoneNumber = user.PhoneNumber,
-                            CompanyName = _context.Companies.FirstOrDefault(x => x.Id == user.CompanyId)?.NameEnglish,
-                            ImagePath = user.ImagePath,
-                            EmployeeId = user.EmployeeId,
-                            IsActive = user.IsActive
-                        };
-                        userList.Add(userDto);
-                    }
-                    
-                    
-                }
+             
             }
 
-            else if (!isHistory)
-            {
-
-                foreach (var user in users)
-                {
-
-                    if (!nobleRoles.Contains(user.Id))
-                    {
-                        if (user.CompanyId == _principal.Identity.CompanyId())
-                        {
-                            var userDto = new UserDetailDto
-                            {
-                                Id = user.Id,
-                                //FullName = user.FirstName + " " + user.LastName,
-                                FullName = user.UserName,
-                                Email = user.Email,
-                                PhoneNumber = user.PhoneNumber,
-                                CompanyName = _context.Companies.FirstOrDefault(x => x.Id == user.CompanyId)?.NameEnglish,
-                                ImagePath = user.ImagePath,
-                                EmployeeId = user.EmployeeId,
-                                IsActive = user.IsActive
-                            };
-                            userList.Add(userDto);
-
-                        }
-
-                    }
-
-                }
-            }
             else
             {
                 foreach (var user in users)

@@ -65,23 +65,7 @@ namespace Focus.Business.Claims.Command.UpdateClaims
                             x.IsProceed,
                         }).FirstOrDefaultAsync(x => x.Id == request.ApplicationUser.CompanyId, cancellationToken: cancellationToken);
 
-                    var dayStart = await Context.DayStarts
-                        .Select(x => new
-                        {
-                            x.Id,
-                            x.IsActive,
-                            x.IsDayStart,
-                        }).FirstOrDefaultAsync(x => x.IsActive && x.IsDayStart, cancellationToken: cancellationToken);
-                    
-                    var userCounter = await Context.DayStarts
-                        .Select(x => new
-                        {
-                            x.IsDayStart,
-                            x.IsActive,
-                            x.StartTerminalFor,
-                            x.CounterId,
-                        }).FirstOrDefaultAsync(x => !x.IsDayStart && x.IsActive && x.StartTerminalFor == request.ApplicationUser.UserName, cancellationToken: cancellationToken);
-
+                 
 
                     var claims = new List<Claim>
                             {
@@ -99,8 +83,6 @@ namespace Focus.Business.Claims.Command.UpdateClaims
                                 new Claim("ClientParentId", userCompany.ClientParentId.ToString()),
                                 new Claim("EmployeeId", request.ApplicationUser.EmployeeId.ToString()),
                                 new Claim("IsProceed", userCompany.IsProceed.ToString(), ClaimValueTypes.Boolean),
-                                new Claim("CounterId", userCounter!=null?userCounter.CounterId.ToString(): request.ApplicationUser.TerminalId== null? Guid.Empty.ToString():request.ApplicationUser.TerminalId.ToString()),
-                                new Claim("DayId", dayStart!=null?dayStart.Id.ToString():Guid.Empty.ToString()),
 
                             };
                     var allClaims = claims.Concat(claimsList);
