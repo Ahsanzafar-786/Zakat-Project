@@ -85,15 +85,14 @@
 
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
-
                                 <i class="fas fa-globe"></i>
                                 Language
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a v-if="english=='true'" @click="setLocale('en')" class="dropdown-item" href="javascript:void(0)">
+                                <a  @click="setLocale('en')" class="dropdown-item" href="javascript:void(0)">
                                     English
                                 </a>
-                                <a v-if="arabic=='true'" @click="setLocale('ar')" class="dropdown-item" href="javascript:void(0)">
+                                <a  @click="setLocale('ar')" class="dropdown-item" href="javascript:void(0)">
                                     Arabic
                                 </a>
                             </div>
