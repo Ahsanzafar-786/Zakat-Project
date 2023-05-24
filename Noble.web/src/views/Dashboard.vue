@@ -220,24 +220,7 @@ export default {
         }
     },
     methods: {
-        SaleValueChange: function (value) {
-            if (this.AllSale)
-            {
-                if(value==true )
-            {
-                localStorage.removeItem('IsSimpleInvoice');
-                localStorage.setItem('IsSimpleInvoice', true);
-            }
-            else
-            {
-                localStorage.removeItem('IsSimpleInvoice');
-                localStorage.setItem('IsSimpleInvoice', false);
-            }
-
-            }
-           
-            
-        },
+     
        
         GoTo: function (link, token, fromDashboard, formName, fromService) {
             
@@ -249,7 +232,6 @@ export default {
                     token_name: token,
                     fromDashboard: fromDashboard,
                     formName: formName,
-                    fromService: fromService,
                 }
             });
         },
@@ -325,41 +307,12 @@ export default {
 
         this.companyId = localStorage.getItem('CompanyID')
 
-        if (this.$session.exists()) {
-
-            this.IsExpenseAccount = localStorage.getItem('IsExpenseAccount') == 'true' ? true : false;
-            this.createDocument = localStorage.getItem('CreateDocument') == 'true' ? true : false;
-
-            this.invoiveItem = localStorage.getItem('invoiveItem') == "true" ? true : false;
-            this.invoiveBarCode = localStorage.getItem('invoiveBarCode') == "true" ? true : false;
-            this.invoiveBarCodeItem = localStorage.getItem('invoiveBarCodeItem') == "true" ? true : false;
-            this.saleOrderPerm = localStorage.getItem('saleOrderPerm') == "true" ? true : false;
-            this.dayStart = localStorage.getItem('DayStart') == "true" ? true : false;
-            this.isMasterProduct = localStorage.getItem('IsMasterProductPermission') == 'true' ? true : false;
-            this.IsDailyExpense = localStorage.getItem('IsDailyExpense') == 'true' ? true : false;
-            this.expenseBill = localStorage.getItem('expenseBill') == 'true' ? true : false;
-            this.importExportSale = localStorage.getItem('ImportExportSale') == 'true' ? true : false;
-
-            this.WholeSale = localStorage.getItem('BankDetail');
-
-            this.DisplayUserName = localStorage.getItem('UserName');
-            this.purchaseOrder = localStorage.getItem('PurchaseOrder') == 'true' ? true : false;
-            this.role = localStorage.getItem('RoleName');
-            this.isAccount = localStorage.getItem('isAccount');
-            this.dashboard = this.$router.options.routes;
-
-            this.isDayStart = localStorage.getItem('DayStart');
-            this.nobleRole = localStorage.getItem('NobleRole');
-
-        }
+       
         if (!this.$session.exists()) {
             this.$router.push('/')
         }
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
-        this.IsSimpleInvoice = localStorage.getItem('IsSimpleInvoice') == 'true' ? true : false;
-        this.AllSale = localStorage.getItem('AllSale') == 'true' ? true : false;
-    },
-
+    }
 }
 </script>
