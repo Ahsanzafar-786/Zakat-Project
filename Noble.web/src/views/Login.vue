@@ -215,8 +215,9 @@ export default {
             var url = '/account/login';
             debugger;
             this.$https.post(url, this.login).then(function (response) {
-                 if (response.data == true) {
-                    root.$router.push('/Welcome');
+                debugger;
+                 if (response.data != null) {
+                    root.$router.push('/dashboard');
                 }
             }).catch(error => {
                 root.customError = JSON.stringify(error.response.data.error);

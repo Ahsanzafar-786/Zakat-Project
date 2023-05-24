@@ -1,6 +1,5 @@
 <template>
     <div class="row" v-if="isValid('CanViewBrand')">       
-
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-sm-12">
