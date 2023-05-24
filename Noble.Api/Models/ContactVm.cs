@@ -1,8 +1,4 @@
-﻿using Focus.Business.Attachments.Commands;
-using Focus.Business.Contacts;
-using Focus.Domain.Entities;
-using Focus.Domain.Enum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Noble.Api.Models
@@ -65,14 +61,7 @@ namespace Noble.Api.Models
         public string CreditLimit { get; set; }
         public string CreditPeriod { get; set; }
 
-        public List<AttachmentLookUpModel> AttachmentList { get; set; }
-        public List<ContactPerson> ContactPersonList { get; set; }
-        public List<ContactBankAccount> ContactBankAccountList { get; set; }
-        public List<AddressLookUpModel> DeliveryAddressList { get; set; }
-        //End
-
-        
-        public SupplierType? SupplierType { get; set; }
+      
         public DateTime? ExpiryDate { get; set; }
         public bool IsExpire { get; set; }
         public bool Status { get; set; }

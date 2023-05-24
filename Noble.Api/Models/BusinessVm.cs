@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Focus.Business.Attachments.Commands;
+
 
 namespace Noble.Api.Models
 {
@@ -37,7 +35,6 @@ namespace Noble.Api.Models
         public string CompanyNameArabic { get; set; }
         public Guid ClientParentId { get; set; }
         public Guid BusinessParentId { get; set; }
-        public List<AttachmentLookUpModel> AttachmentList { get; set; }
 
     }
 }

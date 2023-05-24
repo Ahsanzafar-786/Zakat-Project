@@ -1,6 +1,4 @@
-﻿using Focus.Business.DefaultSettingInvoice.DefaultSattingCommand;
-using Focus.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Noble.Api.Models
@@ -80,7 +78,6 @@ namespace Noble.Api.Models
         public bool SuperAdminDayStart { get; set; }
         public bool BankDetail { get; set; }
         public bool OnPageLoadItem { get; set; }
-        public List<CompanyOption> CompanyOptions { get; set; }
         public string TaxInvoiceLabel { get;  set; }
         public string BusinessLogo { get;  set; }
         public string BusinessNameArabic { get;  set; }
@@ -100,6 +97,5 @@ namespace Noble.Api.Models
         public bool IsUseMachine { get;  set; }
         public bool IsNotPayment { get;  set; }
         public bool TermAndConditionLength { get;  set; }
-        public DefaultSettingModel DefaultSettingModel { get;  set; }
     }
 }

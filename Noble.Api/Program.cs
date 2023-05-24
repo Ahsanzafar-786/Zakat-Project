@@ -15,7 +15,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using ScheduledTasks;
 using Noble.Api.Middlewares;
 using Focus.Business.Infrastructure.AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -84,7 +83,6 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile).GetTypeInfo().Assembly)
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
 //builder.Services.AddInfrastructure();
-builder.Services.AddScheduledTasks();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()

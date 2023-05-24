@@ -1,9 +1,6 @@
-﻿using Focus.Business.Attachments.Commands;
-using System;
+﻿
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Noble.Api.Models
 {
@@ -53,6 +50,5 @@ namespace Noble.Api.Models
         public string PhoneNumber { get; set; }
   
         public string ClientNo { get; set; }
-        public List<AttachmentLookUpModel> AttachmentList { get; set; }
     }
 }
