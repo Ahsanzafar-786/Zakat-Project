@@ -11,6 +11,5 @@ namespace Focus.Domain.Entities
         public string NameArabic { get; set; }
         public string NormalizedName { get; set; }
         public bool IsActive { get; set; }
-        public virtual ICollection<NobleUserRoles> NobleUserRoles { get; set; }
     }
 }

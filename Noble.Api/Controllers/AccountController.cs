@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Noble.Api.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -17,14 +16,12 @@ using Focus.Business.Models;
 using System.Security.Principal;
 using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
-using Focus.Business.Claims.Command.UpdateClaims;
 using Focus.Business.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Focus.Business;
 
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
-using System.Net.NetworkInformation;
 
 
 namespace Noble.Api.Controllers
@@ -168,7 +165,6 @@ namespace Noble.Api.Controllers
 
                 if (result.Succeeded)
                 {
-                    var token = await GenerateJwtToken(user);
                     var expiration = "";
                     var isPayment = false;
                     var isNotPayment = false;
@@ -179,18 +175,7 @@ namespace Noble.Api.Controllers
 
                    
 
-                    var company = await _context.Companies
-                        .Select(x => new
-                        {
-                            x.Id,
-                            x.IsProceed,
-                            x.Step1,
-                            x.Step2,
-                            x.Step3,
-                            x.Step4,
-                            x.Step5,
-                            x.TermsCondition,
-                        }).FirstOrDefaultAsync(x => x.Id == user.CompanyId);
+                 
 
 
                     var dayStart = false;
@@ -230,18 +215,11 @@ namespace Noble.Api.Controllers
 
                         CounterId = userCounterId ?? Guid.Empty,
 
-                        IsProceed = company.IsProceed,
-                        Step1 = company.Step1,
-                        Step2 = company.Step2,
-                        Step3 = company.Step3,
-                        Step4 = company.Step4,
-                        Step5 = company.Step5,
-                        TermsCondition = company.TermsCondition,
+                      
 
                         CompanyId = user.CompanyId,
                         FullName = user.FirstName,
                         RoleName = role,
-                        Token = token,
                         ImagePath = user.ImagePath,
                         UserId = user.Id,
                         UserName = user.Email,
@@ -335,7 +313,6 @@ namespace Noble.Api.Controllers
             {
                 var user = await _userManager.FindByEmailAsync(email);
                 var appUser = _userManager.Users.SingleOrDefault(r => r.Email == user.Email);
-                var token = await GenerateJwtToken(appUser);
                 var userCompany = _companyComponent.GetCompanyById(user.CompanyId);
                 var role = await _userComponent.GetRoleByUser(user.Id);
 
@@ -344,7 +321,6 @@ namespace Noble.Api.Controllers
                     CompanyId = userCompany.Id,
                     FullName = user.FirstName,
                     RoleName = role,
-                    Token = token,
                     ImagePath = user.ImagePath,
                     UserId = user.Id,
                     UserName = user.Email,
@@ -498,22 +474,7 @@ namespace Noble.Api.Controllers
             }
         }
 
-        private async Task<object> GenerateJwtToken(ApplicationUser user)
-        {
-            if (HttpContext.User.Identity is ClaimsIdentity identity)
-            {
-                identity.AddClaim(new Claim("UserId", user.Id));
-                identity.AddClaim(new Claim("CompanyId", user.CompanyId.ToString()));
-            }
-
-            var token = await Mediator.Send(new UpdateClaimsCommand
-            {
-                User = user.Id,
-                ApplicationUser = user,
-
-            });
-            return token;
-        }
+       
         [Route("api/account/logout")]
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()

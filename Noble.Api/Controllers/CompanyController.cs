@@ -22,7 +22,6 @@ using Dapper;
 using Microsoft.AspNetCore.Hosting;
 
 
-using Focus.Business.Claims.Command.ModuleWiseClaim;
 
 using Microsoft.EntityFrameworkCore;
 using Focus.Business.Exceptions;
@@ -760,57 +759,7 @@ namespace Noble.Api.Controllers
 
 
 
-       
-
-        [Route("api/Company/GetModuleWiseClaims")]
-        [HttpGet("GetModuleWiseClaims")]
-        public async Task<IActionResult> GetModuleWiseClaims()
-        {
-            var permissionList = await Mediator.Send(new GetModuleWiseClaims
-            {
-                User = User.Identity.UserId()
-            });
-            var current = HttpContext;
-            permissionList.Add(new ModuleWiseClaimsLookupModel
-            {
-                Token = "ServerAddress",
-                TokenName = current.Request.Scheme + "://" + current.Request.Host + "/api",
-                CompanyId = User.Identity.CompanyId()
-
-            });
-            try
-            {
-                var reportPath = _configuration.GetSection("ReportServer:Path").Value;
-
-                using var ping = new Ping();
-                try
-                {
-                    using var httpClient = new HttpClient();
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(permissionList), Encoding.UTF8, "application/json");
-
-                    using var response = await httpClient.PostAsync(reportPath, content);
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        // Handle the error response
-                        string errorResponse = await response.Content.ReadAsStringAsync();
-                        return Ok(permissionList);
-                    }
-
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    // Do something with the response
-                    return Ok(permissionList);
-                }
-                catch (Exception ex)
-                {
-                    return Ok(permissionList);
-                }
-            }
-            catch (HttpRequestException ex)
-            {
-                // Handle the exception here.
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
+      
 
        
         #endregion
