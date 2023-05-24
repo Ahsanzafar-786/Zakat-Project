@@ -12,6 +12,10 @@ import ResetPassword from '../views/ResetPassword.vue'
 import company from '../components/Company/Company.vue'
 import addcompany from '../components/Company/AddCompany.vue'
 
+//User Setup
+import signup from '../components/UserSetup/SignUp.vue'
+import addsignup from '../components/UserSetup/AddSignUp.vue'
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -57,6 +61,16 @@ const routes = [
                             path:'/addcompany',
                             name:'addcompany',
                             component:addcompany,
+                        },
+                        {
+                            path:'/signup',
+                            name:'signup',
+                            component:signup,
+                        },
+                        {
+                            path:'/addsignup',
+                            name:'addsignup',
+                            component:addsignup,
                         },
                     ]
                 }

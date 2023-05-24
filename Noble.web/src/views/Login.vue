@@ -40,7 +40,7 @@
                                                             class="form-control" @keyup.enter="userlogin"
                                                             :placeholder="$t('login.EnteryourPassword')">
                                                         <div style=" position: absolute; top: 24%; " @click="showPassword"
-                                                            v-bind:style="($i18n.locale == 'en' || $i18n.locale == 'pt' || isLeftToRight()) ? 'left: 94%' : 'left: 11px'">
+                                                            v-bind:style="($i18n.locale == 'en' || $i18n.locale == 'ar' ) ? 'left: 94%' : 'left: 11px'">
                                                             <i class="fas fa-eye" v-if="eyeValue == false"></i>
                                                             <i class="fas fa-eye-slash" v-if="eyeValue == true"></i>
                                                         </div>
@@ -171,10 +171,7 @@ export default {
             }
         }
     },
-    mounted() {
-
-        this.getOs();
-    },
+   
     methods: {
 
         
@@ -231,7 +228,9 @@ export default {
     },
     created: function () {
         
-    }
+    },
+    mounted() {
+    },
 }
 </script>
 

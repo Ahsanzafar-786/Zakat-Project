@@ -170,7 +170,6 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Company/SaveCompany")]
         [HttpPost("SaveCompany")]
-        [Authorize(Roles = "Noble Admin")]
         public async Task<IActionResult> SaveCompany([FromBody] CompanyAndUserVm companyUser)
         {
 
@@ -236,13 +235,7 @@ namespace Noble.Api.Controllers
                         };
                         //await _sendEmail.SendEmailAsync(sendEmailDto, user.UserName, user.Id);
                         await _userManager.AddToRoleAsync(user, register.RoleName = "Admin");
-                        var companyNobleRole = new NobleRoles()
-                        {
-                            Name = "Admin",
-                            NormalizedName = "ADMIN",
-                            IsActive = true
-                        };
-                        await _Context.AddAsync(companyNobleRole);
+                       
                         var claims = new List<Claim>
                         {
                             new Claim("Email",user.Email),
@@ -255,7 +248,6 @@ namespace Noble.Api.Controllers
                         await _Context.SaveChangesAsync();
                         if (company.Id != Guid.Empty)
                         {
-                            _Context.SetModified(companyNobleRole, "CompanyId", company.Id);
                             _Context.SaveChangesAfter();
                         }
                         return Ok(new { value = true, check = "Add" });
@@ -318,7 +310,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/Company/List")]
         [HttpGet("List")]
-        [Authorize(Roles = "Noble Admin")]
         public IActionResult CompanyList(Guid id)
         {
             return Ok(_companyComponent.GetCompaniesList(id));

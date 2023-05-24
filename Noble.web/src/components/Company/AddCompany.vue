@@ -8,7 +8,7 @@
                             <h4 class="page-title">Setup Company</h4>
 
                         </div>
-                        <div class="col-auto align-self-center">
+                        <!-- <div class="col-auto align-self-center">
 
                             <a v-on:click="syncSetup()" href="javascript:void(0);"
                                class="btn btn-sm btn-outline-primary mx-1">
@@ -17,7 +17,7 @@
                             </a>
 
 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -390,7 +390,7 @@
             },
             GoToCompany: function () {
 
-                this.$router.push('/clientManagement');
+                this.$router.push('/company');
             },
             makeActive: function (tab) {
                 this.active = tab;
@@ -401,12 +401,14 @@
                 
                 this.loading = true;
                 var root = this;
-
                 var token = '';
-                token = localStorage.getItem('token');
+                if (this.$session.exists()) {
+                    token = localStorage.getItem('token');
+                }
                 root.$https
                     .post('/Company/SaveCompany', root.company, { headers: { "Authorization": `Bearer ${token}` } })
                     .then(response => {
+                        debugger;
                         this.loading = false
                         this.info = response.data.bpi
                         this.$swal.fire({
@@ -417,10 +419,9 @@
                             timerProgressBar: true,
 
                         });
-                        this.$router.push('/clientManagement');
+                        this.$router.push('/company');
                     })
                     .catch(error => {
-
                         this.$swal.fire(
                             {
                                 icon: 'error',
@@ -429,7 +430,6 @@
                                 showConfirmButton: false,
                                 timer: 1000,
                                 timerProgressBar: true,
-
                             });
 
                         this.loading = false

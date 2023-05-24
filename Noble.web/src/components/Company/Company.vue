@@ -17,7 +17,7 @@
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('Add New') }}
                                 </a>
-                                <a v-on:click="GotoPage('/StartScreen')" href="javascript:void(0);"
+                                <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
                                     {{ $t('Close') }}
                                 </a>
@@ -50,15 +50,10 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name </th>
-                                <th>Reg No</th>
+                                <th>CR No</th>
                                 <th>VAT No</th>
-                                <th>Client Code</th>
-                                <th>Land Line</th>
-                                <th>From Date</th>
-                                <th>To Date</th>
-                                <th>Type</th>
-                                <!--<th>Action</th>-->
-                                <th>Permissions</th>
+                                <th>Address</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -74,97 +69,12 @@
                                 </td>
                                 <td>{{ company.companyRegNo }}</td>
                                 <td>{{ company.vatRegistrationNo }}</td>
-                                <td>{{ company.clientNo }}</td>
-                                <td>{{ company.landLine }}</td>
-                                <td>
-                                    <span v-if="company.fromDate == null">
-
-                                    </span>
-                                    <span v-else>
-                                        {{ company.fromDate | formatDate }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span v-if="company.toDate == null">
-
-                                    </span>
-                                    <span v-else>
-                                        {{ company.toDate | formatDate }}
-                                    </span>
-                                </td>
-                                <td>{{ company.companyType }}</td>
-                                <td>
-                                    <strong>
-                                        <button type="button" class="btn btn-primary  "
-                                            v-on:click="AddLicence(company.id, company.nameEnglish, company.companyLicenceId, company.companyLicences)">
-                                            <span
-                                                v-if="company.companyType == null || company.companyType == '' || company.companyType == undefined">
-                                                Add Licence
-                                            </span>
-                                            <span v-else>
-                                                Update Licence
-                                            </span>
-                                        </button>
-                                    </strong>
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-icon "
-                                        v-on:click="showLicenceHistory(company.nameEnglish, company.companyLicences)"
-                                        title="Show Licence History"><i class=" fa fa-history"></i></a>
-
-                                    <!--<a href="javascript:void(0)" class="btn btn-danger btn-sm btn-icon " v-on:click="RemoveCompany(company.id)"><i class=" fa fa-trash"></i></a>-->
-                                </td>
-                                <td>
-                                    <strong>
-                                        <button type="button" class="btn btn-primary  "
-                                            v-on:click="AddBusiness(company.id)">
-                                            <span>
-                                                Bus
-                                            </span>
-                                        </button>
-                                    </strong>
-                                </td>
+                                <td>{{ company.addressEnglish }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <hr />
-                <div class="float-start">
-                    <span v-if="currentPage === 1 && rowCount === 0"> {{ $t('Pagination.ShowingEntries') }}</span>
-                    <span v-else-if="currentPage === 1 && rowCount < 10">
-                        {{ $t('Pagination.Showing') }}
-                        {{ currentPage }} {{ $t('Pagination.to') }} {{ rowCount }} {{ $t('Pagination.of') }}
-                        {{ rowCount }} {{ $t('Pagination.entries') }}
-                    </span>
-                    <span v-else-if="currentPage === 1 && rowCount >= 11">
-                        {{ $t('Pagination.Showing') }}
-                        {{ currentPage }} {{ $t('Pagination.to') }} {{ currentPage * 10 }} {{ $t('Pagination.of') }}
-                        {{ rowCount }} {{ $t('Pagination.entries') }}
-                    </span>
-                    <span v-else-if="currentPage === 1">
-                        {{ $t('Pagination.Showing') }} {{ currentPage }} {{
-                            $t('Pagination.to')
-                        }} {{ currentPage * 10 }} of {{ rowCount }} {{ $t('Pagination.entries') }}
-                    </span>
-                    <span v-else-if="currentPage !== 1 && currentPage !== pageCount">
-                        {{ $t('Pagination.Showing') }}
-                        {{ (currentPage * 10) - 9 }} {{ $t('Pagination.to') }} {{ currentPage * 10 }} {{
-                            $t('Pagination.of')
-                        }} {{ rowCount }} {{ $t('Pagination.entries') }}
-                    </span>
-                    <span v-else-if="currentPage === pageCount">
-                        {{ $t('Pagination.Showing') }}
-                        {{ (currentPage * 10) - 9 }} {{ $t('Pagination.to') }} {{ rowCount }} {{
-                            $t('Pagination.of')
-                        }}
-                        {{ rowCount }} {{ $t('Pagination.entries') }}
-                    </span>
-                </div>
-                <div class="float-end">
-                    <div class="" v-on:click="GetCompanyData()">
-                        <b-pagination pills size="sm" v-model="currentPage" :total-rows="rowCount" :per-page="10"
-                            :first-text="$t('Table.First')" :prev-text="$t('Table.Previous')" :next-text="$t('Table.Next')"
-                            :last-text="$t('Table.Last')"></b-pagination>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -188,7 +98,11 @@ export default {
             roleDetailsForPermissions: [],
             typePermissions: '',
             showPermissions: false,
-            updatePermissions: false
+            updatePermissions: false,
+
+            currentPage: 1,
+                pageCount: '',
+                rowCount: '',
 
         }
     },
@@ -211,9 +125,9 @@ export default {
         }
     },
     methods: {
-        StartScreen: function () {
-            this.$router.push('/StartScreen')
-        },
+        GotoPage: function (link) {
+                this.$router.push({ path: link });
+            },
         AddBusiness: function (companyId) {
             this.$router.push({
                 path: '/addbusiness',
