@@ -517,10 +517,6 @@ namespace Noble.Api.Controllers
                         LastName = user.LastName,
                         Email = user.Email,
                         UserName = user.UserName,
-                      
-                        TerminalId = user.TerminalId,
-                        OnlineTerminalId = user.OnlineTerminalId,
-                       
                     };
                     return Ok(loginUser);
                 }
@@ -712,8 +708,8 @@ namespace Noble.Api.Controllers
             }
             else
             {
-
-                var currentUser = await _userManager.FindByIdAsync(loginVm.UserId.ToString());
+                
+                var currentUser = await _userManager.FindByIdAsync(loginVm.Id.ToString());
 
               
                
