@@ -8,7 +8,9 @@ import Dashboard from '../views/Dashboard.vue'
 import NewPassword from '../views/NewPassword.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 
+//Company
 import company from '../components/Company/Company.vue'
+import addcompany from '../components/Company/AddCompany.vue'
 
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
@@ -49,6 +51,11 @@ const routes = [
                             path:'/company',
                             name:'company',
                             component:company,
+                        },
+                        {
+                            path:'/addcompany',
+                            name:'addcompany',
+                            component:addcompany,
                         },
                     ]
                 }
