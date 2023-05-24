@@ -114,7 +114,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/Company/PasswordVerify")]
         [HttpPost("PasswordVerify")]
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> PasswordVerifyAsync([FromBody] PasswordVerifyVm passwordVerify)
         {
             var user = "";
@@ -679,7 +678,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/Company/UpdateUser")]
         [HttpPost("UpdateUser")]
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> UpdateUser([FromBody] RegisterVm model)
         {
             var applicationUser = await _userManager.FindByIdAsync(model.Id);
@@ -695,7 +693,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/Company/ImageSearch")]
         [HttpGet("ImageSearch")]
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> ImageSearch(string id)
         {
             var applicationUser = await _userManager.FindByIdAsync(id);

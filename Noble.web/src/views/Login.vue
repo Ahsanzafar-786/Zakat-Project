@@ -215,7 +215,8 @@ export default {
                 debugger;
                  if (response.data != null) {
                     root.$session.start();
-                    localStorage.setItem('CompanyID', response.data.companyId)
+                    localStorage.setItem('CompanyID', response.data.companyId);
+                    localStorage.setItem('UserID', response.data.userId);
                     localStorage.setItem('token', response.data.token);
                     root.$router.push('/dashboard');
                 }

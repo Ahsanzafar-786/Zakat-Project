@@ -21,7 +21,7 @@
                                 $t('Dashboard.Dashboard') }}</span>
                         </a>
                     </li>
-                    
+
                     <li>
                         <a href="javascript:void(0);">
                             <i data-feather="grid" class="align-self-center menu-icon"></i><span>
@@ -84,15 +84,16 @@
                         </li>
 
                         <li class="dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown"
+                                href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
                                 <i class="fas fa-globe"></i>
                                 Language
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a  @click="setLocale('en')" class="dropdown-item" href="javascript:void(0)">
+                                <a @click="setLocale('en')" class="dropdown-item" href="javascript:void(0)">
                                     English
                                 </a>
-                                <a  @click="setLocale('ar')" class="dropdown-item" href="javascript:void(0)">
+                                <a @click="setLocale('ar')" class="dropdown-item" href="javascript:void(0)">
                                     Arabic
                                 </a>
                             </div>
@@ -107,7 +108,7 @@
                                     class="rounded-circle thumb-xs" />
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="javascript:void(0)">
+                                <a v-on:click="UserProfile" class="dropdown-item" href="javascript:void(0)">
                                     <i data-feather="user" class="align-self-center icon-xs icon-dual me-1"></i> {{
                                         $t('Dashboard.MyProfile')
                                     }}
@@ -246,16 +247,16 @@ export default {
         },
         setLocale(locale) {
 
-        this.$i18n.locale = locale;
-        if (locale == 'en') {
-            language.use(en)
-        } 
-         else {
-            language.use(ar)
-        }
+            this.$i18n.locale = locale;
+            if (locale == 'en') {
+                language.use(en)
+            }
+            else {
+                language.use(ar)
+            }
 
-        localStorage.setItem('locales', locale);
-        this.$router.go(this.$router.currentRoute.fullPath)
+            localStorage.setItem('locales', locale);
+            this.$router.go(this.$router.currentRoute.fullPath)
         },
 
         UserProfile: function () {

@@ -8,6 +8,9 @@ import Dashboard from '../views/Dashboard.vue'
 import NewPassword from '../views/NewPassword.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 
+//Profile
+import RegisterUser from '../components/RegisterUser.vue'
+
 //Company
 import company from '../components/Company/Company.vue'
 import addcompany from '../components/Company/AddCompany.vue'
@@ -71,6 +74,11 @@ const routes = [
                             path:'/addsignup',
                             name:'addsignup',
                             component:addsignup,
+                        },
+                        {
+                            path: '/registeruser',
+                            name: 'RegisterUser',
+                            component: RegisterUser
                         },
                     ]
                 }

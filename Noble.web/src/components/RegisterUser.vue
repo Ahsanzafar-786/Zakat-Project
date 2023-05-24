@@ -26,9 +26,6 @@
                             <li class="nav-item">
                                 <a class="nav-link text-center" data-bs-toggle="tab" href="#Profile_Portfolio" role="tab" aria-selected="false"><i class="fa fa-eye d-block" aria-hidden="true"></i>{{ $t('RegisterUser.ChangePassword') }}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-center" data-bs-toggle="tab" href="#Profile_Settings" role="tab" aria-selected="false"><i class="fas fa-history d-block"></i>{{$t('RegisterUser.LoginHistory')}}</a>
-                            </li>
                         </ul>
                     </div>
 
@@ -177,98 +174,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade " id="Profile_Settings" role="tabpanel" aria-labelledby="settings_detail_tab">
-                            <div class="col-lg-10 col-xl-10 mx-auto">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <h4 class="card-title">{{$t('RegisterUser.LoginHistory')}}</h4>
-                                            </div><!--end col-->
-                                        </div>  <!--end row-->
-                                    </div><!--end card-header-->
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group row" v-if="role=='Admin'">
-                                                    <div class="col-md-4">
-                                                        <label>{{$t('RegisterUser.SelectUser')}}</label>
-                                                        <usersDropdown :isloginhistory="isloginhistory" v-on:input="getUser"></usersDropdown>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>{{ $t('RegisterUser.FromDate') }}</label>
-                                                        <datepicker v-model="fromDate" :key="randerDate" />
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>{{ $t('RegisterUser.ToDate') }}</label>
-                                                        <datepicker v-model="toDate" :key="randerDate" />
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="col-lg-12">
-                                                            <div>
-                                                                <div class="table-responsive">
-                                                                    <table class="table mb-0">
-                                                                        <thead class="thead-light table-hover">
-                                                                            <tr>
-                                                                                <th>#</th>
-                                                                                <th v-if="role=='Admin'">
-                                                                                    {{$t('RegisterUser.RegisterUser_UserName')}}
-                                                                                </th>
-                                                                                <th>
-                                                                                    {{$t('RegisterUser.LoginDate')}}
-                                                                                </th>
-                                                                                <th>
-                                                                                    {{$t('RegisterUser.LoginTime')}}
-                                                                                </th>
-                                                                                <th>
-                                                                                    {{$t('RegisterUser.LogoutDate')}}
-                                                                                </th>
-                                                                                <th>
-                                                                                    {{$t('RegisterUser.LogoutTime')}}
-                                                                                </th>
-
-
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr v-for="(history,index) in loginHistoryList" :key="index">
-                                                                                <td>
-                                                                                    {{index+1}}
-                                                                                </td>
-
-                                                                                <td v-if="role=='Admin'">
-                                                                                    <strong>
-                                                                                        {{fullName}}
-                                                                                    </strong>
-                                                                                </td>
-
-                                                                                <td>
-                                                                                    {{history.loginDate}}
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{history.loginTime}}
-                                                                                </td>
-                                                                                <td>{{history.logoutDate}}</td>
-                                                                                <td>{{history.logoutTime}}</td>
-
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!--end tab-pane-->
+                        
                         <div v-if="active == 'TwoFactor'">
                             <div>
                                 <div class="row" v-if="isMainScreen">
@@ -830,6 +736,7 @@
                             root.ImagePath = response.data.imagePath;
                             root.user.firstName = response.data.firstName;
                             root.user.lastName = response.data.lastName;
+                            root.user.email = response.data.email;
                             root.isMainScreen = response.data.twoFactorEnabled;
                             root.getBase64Image(root.ImagePath);
 
@@ -905,11 +812,6 @@
             this.user.email = this.UserName;
             this.randerDate++
             this.GetImage();
-
-
-
-
-
         }
     })
 </script>
