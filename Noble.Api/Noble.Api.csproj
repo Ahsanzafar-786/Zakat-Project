@@ -151,7 +151,6 @@
     <ProjectReference Include="..\Focus.Business\Focus.Business.csproj" />
     <ProjectReference Include="..\Focus.External\Focus.External.csproj" />
     <ProjectReference Include="..\Focus.Persistence\Focus.Persistence.csproj" />
-    <ProjectReference Include="..\ScheduledTasks\ScheduledTasks.csproj" />
   </ItemGroup>
 
   <ItemGroup>
