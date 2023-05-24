@@ -217,6 +217,9 @@ export default {
             this.$https.post(url, this.login).then(function (response) {
                 debugger;
                  if (response.data != null) {
+                    root.$session.start();
+                    localStorage.setItem('CompanyID', response.data.companyId)
+                    localStorage.setItem('token', response.data.token);
                     root.$router.push('/dashboard');
                 }
             }).catch(error => {
