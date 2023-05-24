@@ -1,2 +1,1 @@
-# Zakat-Project
-.Net Core
+# Focus

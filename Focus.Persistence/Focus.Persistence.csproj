@@ -1,0 +1,107 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210715062128_NullableCompanyAccount.cs" />
+    <Compile Remove="Migrations\20210715062128_NullableCompanyAccount.Designer.cs" />
+    <Compile Remove="Migrations\20211111075019_addTransferHistory.cs" />
+    <Compile Remove="Migrations\20211111075019_addTransferHistory.Designer.cs" />
+    <Compile Remove="Migrations\20211129112736_quotaion-in-saleinvoice-check.cs" />
+    <Compile Remove="Migrations\20211129112736_quotaion-in-saleinvoice-check.Designer.cs" />
+    <Compile Remove="Migrations\20211129115437_quotaion-in-saleinvoice-check-relation.cs" />
+    <Compile Remove="Migrations\20211129115437_quotaion-in-saleinvoice-check-relation.Designer.cs" />
+    <Compile Remove="Migrations\20211201111727_guarantee-serial-in-purchaseInvoice.cs" />
+    <Compile Remove="Migrations\20211201111727_guarantee-serial-in-purchaseInvoice.Designer.cs" />
+    <Compile Remove="Migrations\20211201115552_guarantee-serial-in-purchaseInvoice.cs" />
+    <Compile Remove="Migrations\20211201115552_guarantee-serial-in-purchaseInvoice.Designer.cs" />
+    <Compile Remove="Migrations\20211201134158_company-process-db.cs" />
+    <Compile Remove="Migrations\20211201134158_company-process-db.Designer.cs" />
+    <Compile Remove="Migrations\20211201134614_company-process-db.cs" />
+    <Compile Remove="Migrations\20211201134614_company-process-db.Designer.cs" />
+    <Compile Remove="Migrations\20211223080520_RecevingInDayStart.cs" />
+    <Compile Remove="Migrations\20211223080520_RecevingInDayStart.Designer.cs" />
+    <Compile Remove="Migrations\20220302090035_OverWriteFieldinTerminals.cs" />
+    <Compile Remove="Migrations\20220302090035_OverWriteFieldinTerminals.Designer.cs" />
+    <Compile Remove="Migrations\20220316114248_ondeleteInNobleRolePermission.cs" />
+    <Compile Remove="Migrations\20220316114248_ondeleteInNobleRolePermission.Designer.cs" />
+    <Compile Remove="Migrations\20220408063449_IsService-Category-Db.cs" />
+    <Compile Remove="Migrations\20220408063449_IsService-Category-Db.Designer.cs" />
+    <Compile Remove="Migrations\20220414073913_isFree-Item-in-Saervice-Invoice.cs" />
+    <Compile Remove="Migrations\20220414073913_isFree-Item-in-Saervice-Invoice.Designer.cs" />
+    <Compile Remove="Migrations\20220415075945_warrantyType-PurchasePostItem.cs" />
+    <Compile Remove="Migrations\20220415075945_warrantyType-PurchasePostItem.Designer.cs" />
+    <Compile Remove="Migrations\20220209080020_FifoUpdate.cs" />
+    <Compile Remove="Migrations\20220209080020_FifoUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20220210055732_ChangingInFifo.cs" />
+    <Compile Remove="Migrations\20220210055732_ChangingInFifo.Designer.cs" />
+    <Compile Remove="Migrations\20220517124005_saleorder-saleinvoice-atachment-db.cs" />
+    <Compile Remove="Migrations\20220517124005_saleorder-saleinvoice-atachment-db.Designer.cs" />
+    <Compile Remove="Migrations\20220524084618_TemporaryCashAllocation-Db.cs" />
+    <Compile Remove="Migrations\20220524084618_TemporaryCashAllocation-Db.Designer.cs" />
+    <Compile Remove="Migrations\20220527101335_CashRequestUser-Db.cs" />
+    <Compile Remove="Migrations\20220527101335_CashRequestUser-Db.Designer.cs" />
+    <Compile Remove="Migrations\20220528061750_TemporaryCashIssue-Db.cs" />
+    <Compile Remove="Migrations\20220528061750_TemporaryCashIssue-Db.Designer.cs" />
+    <Compile Remove="Migrations\20220528065243_TemporaryCashIssue-Db.cs" />
+    <Compile Remove="Migrations\20220528065243_TemporaryCashIssue-Db.Designer.cs" />
+    <Compile Remove="Migrations\20220530073524_Inquiry.cs" />
+    <Compile Remove="Migrations\20220530073524_Inquiry.Designer.cs" />
+    <Compile Remove="Migrations\20220530074207_Inquiry.cs" />
+    <Compile Remove="Migrations\20220530074207_Inquiry.Designer.cs" />
+    <Compile Remove="Migrations\20220531073924_InquiryProcess.cs" />
+    <Compile Remove="Migrations\20220531073924_InquiryProcess.Designer.cs" />
+    <Compile Remove="Migrations\20220531081101_InquiryProcess.cs" />
+    <Compile Remove="Migrations\20220531081101_InquiryProcess.Designer.cs" />
+    <Compile Remove="Migrations\20220531110108_InquiryModule.cs" />
+    <Compile Remove="Migrations\20220531110108_InquiryModule.Designer.cs" />
+    <Compile Remove="Migrations\20220627062302_SaleOrder-Quotation-Version.cs" />
+    <Compile Remove="Migrations\20220627062302_SaleOrder-Quotation-Version.Designer.cs" />
+    <Compile Remove="Migrations\20220704120728_UserLog-Db.cs" />
+    <Compile Remove="Migrations\20220704120728_UserLog-Db.Designer.cs" />
+    <Compile Remove="Migrations\20220330124117_ProductionBatch2.1.cs" />
+    <Compile Remove="Migrations\20220330124117_ProductionBatch2.1.Designer.cs" />
+    <Compile Remove="Migrations\20220404094332_ProcessContractorRelatiion.cs" />
+    <Compile Remove="Migrations\20220404094332_ProcessContractorRelatiion.Designer.cs" />
+    <Compile Remove="Migrations\20220707090952_SaleSizeAssortment-Db.cs" />
+    <Compile Remove="Migrations\20220707090952_SaleSizeAssortment-Db.Designer.cs" />
+    <Compile Remove="Migrations\20220721063346_CurrentQuantityInStock.cs" />
+    <Compile Remove="Migrations\20220721063346_CurrentQuantityInStock.Designer.cs" />
+    <Compile Remove="Migrations\20220728130105_TaxRateId-In-Sales.cs" />
+    <Compile Remove="Migrations\20220728130105_TaxRateId-In-Sales.Designer.cs" />
+    <Compile Remove="Migrations\20220803073917_ReaparingOrder1.2.cs" />
+    <Compile Remove="Migrations\20220803073917_ReaparingOrder1.2.Designer.cs" />
+    <Compile Remove="Migrations\20220809082017_WhiteLabeling.cs" />
+    <Compile Remove="Migrations\20220809082017_WhiteLabeling.Designer.cs" />
+    <Compile Remove="Migrations\20220803063406_saletaxid-in-sale.cs" />
+    <Compile Remove="Migrations\20220803063406_saletaxid-in-sale.Designer.cs" />
+    <Compile Remove="Migrations\20220913055431_descriptionInSalePayment.cs" />
+    <Compile Remove="Migrations\20220913055431_descriptionInSalePayment.Designer.cs" />
+    <Compile Remove="Migrations\20220921111307_ColorChangeInWhiteLabeling.cs" />
+    <Compile Remove="Migrations\20220921111307_ColorChangeInWhiteLabeling.Designer.cs" />
+    <Compile Remove="Migrations\20221101125304_Contact-Db-Change.cs" />
+    <Compile Remove="Migrations\20221101125304_Contact-Db-Change.Designer.cs" />
+    <Compile Remove="Migrations\20221101132237_Contact-Db-Change.cs" />
+    <Compile Remove="Migrations\20221101132237_Contact-Db-Change.Designer.cs" />
+    <Compile Remove="Migrations\20221101132718_Contact-Db-Change.cs" />
+    <Compile Remove="Migrations\20221101132718_Contact-Db-Change.Designer.cs" />
+    <Compile Remove="Migrations\20221110074411_ProformaInvoice.cs" />
+    <Compile Remove="Migrations\20221110074411_ProformaInvoice.Designer.cs" />
+    <Compile Remove="Migrations\20221111081400_SoftDeleteInTransaction.cs" />
+    <Compile Remove="Migrations\20221111081400_SoftDeleteInTransaction.Designer.cs" />
+  </ItemGroup>
+
+ <ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Focus.Business\Focus.Business.csproj" />
+    <ProjectReference Include="..\Focus.Domain\Focus.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
