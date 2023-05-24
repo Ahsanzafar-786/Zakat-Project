@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import VueSession from 'vue-session'
 
 
 import Login from '../views/Login.vue'
@@ -15,6 +15,7 @@ import addcompany from '../components/Company/AddCompany.vue'
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
+Vue.use(VueSession);
 Vue.use(VueRouter);
 
 const routes = [
