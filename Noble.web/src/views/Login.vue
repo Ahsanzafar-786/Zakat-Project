@@ -173,7 +173,6 @@ export default {
     },
     mounted() {
 
-        this.getOs();
     },
     methods: {
 
