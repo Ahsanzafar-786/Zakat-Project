@@ -1,0 +1,2 @@
+# Zakat-Project
+.Net Core
