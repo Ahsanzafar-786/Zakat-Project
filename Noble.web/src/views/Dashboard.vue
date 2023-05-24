@@ -31,9 +31,25 @@
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a href="javascript:void(0);">
+                                <a v-on:click="GoTo('/company')" href="javascript:void(0);">
                                     Company
                                     Attachments
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i data-feather="grid" class="align-self-center menu-icon"></i><span>
+                                {{
+                                    $t('Company')
+                                }}
+                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a  v-on:click="GoTo('/company')" href="javascript:void(0);">
+                                    Company
                                 </a>
                             </li>
                         </ul>
@@ -221,19 +237,10 @@ export default {
         }
     },
     methods: {
-
-
-        GoTo: function (link, token, fromDashboard, formName, fromService) {
-
-            localStorage.setItem('IsService', fromService);
-
+        GoTo: function (link) {
+            debugger;
             this.$router.push({
                 path: link,
-                query: {
-                    token_name: token,
-                    fromDashboard: fromDashboard,
-                    formName: formName,
-                }
             });
         },
 

@@ -1,5 +1,37 @@
 ﻿<template>
-    <div class="ListData">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">{{ $t('Company') }}</h4>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a></li>
+                                    <li class="breadcrumb-item active">Company</li>
+                                </ol>
+                            </div>
+                            <div class="col-auto align-self-center">
+                                <a v-if="isValid('CanAddBrand')" v-on:click="openmodel"
+                                   href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1">
+                                    <i class="align-self-center icon-xs ti-plus"></i>
+                                    {{ $t('SubCategory.AddNew') }}
+                                </a>
+                                <a v-on:click="GotoPage('/StartScreen')" href="javascript:void(0);"
+                                   class="btn btn-sm btn-outline-danger">
+                                    {{ $t('SubCategory.Close') }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <div class="row">
             <div class="col-lg-12 col-sm-12 ml-auto mr-auto">
                 <div class="card ">
@@ -109,33 +141,7 @@
                 </div>
             </div>
         </div>
-        <licence-model :show="show"
-                       :companyId="companyId"
-                       :companyName="companyName"
-                       :companyLicenceId="companyLicenceId"
-                       :companyLicenceList="companyLicenceList"
-                       v-if="show"
-                       @close="closeModal"
-                       :type="type" />
-
-        <licence-history-model :show="showHistory"
-                               :companyName="companyName"
-                               :companyLicenceList="companyLicenceList"
-                               v-if="showHistory"
-                               @close="showHistory = false" />
-                               
-                     
-        <assignPermissionsToRoleForAdd :roleDetails="roleDetailsForPermissions"
-                     :show="showPermissions"
-                     v-if="showPermissions"
-                     @close="showPermissions = false"
-                     :type="typePermissions" />
-
-        <updatePermissionsToRole :roleDetails="roleDetailsForPermissions"
-                     :show="updatePermissions"
-                     v-if="updatePermissions"
-                     @close="updatePermissions = false"
-                     :type="typePermissions" />
+      
     </div>
 </template>
 <script>
