@@ -13,6 +13,5 @@ namespace Focus.Business.Models
         public int NumberOfUsers { get; set; }
         public int NumberOfTransactions { get; set; }
         public Guid CompanyId { get; set; }
-        public CompanyType CompanyType { get; set; }
     }
 }

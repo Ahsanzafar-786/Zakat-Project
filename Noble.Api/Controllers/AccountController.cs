@@ -365,7 +365,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/account/ResetAuthenticator")]
         [HttpGet("ResetAuthenticator")]
-        [Roles("User", "Super Admin", "Admin", "Noble Admin", "Mobile Customer")]
         public async Task<IActionResult> ResetAuthenticator(string id)
         {
             var applicationUser = await _userManager.FindByIdAsync(id);
@@ -382,7 +381,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/account/Disable2Fa")]
         [HttpGet("Disable2Fa")]
-        [Roles("User", "Super Admin", "Admin", "Noble Admin", "Mobile Customer")]
 
         public async Task<IActionResult> Disable2Fa(string id)
         {
@@ -401,7 +399,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/account/LoadSharedKeyAndQrCodeUriAsync")]
         [HttpGet("LoadSharedKeyAndQrCodeUriAsync")]
-        [Roles("User", "Super Admin", "Admin", "Noble Admin", "Mobile Customer")]
 
         public async Task<IActionResult> LoadSharedKeyAndQrCodeUriAsync(string id)
         {
@@ -446,7 +443,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/account/OnPostAsync")]
         [HttpGet("OnPostAsync")]
-        [Roles("User", "Super Admin", "Admin", "Noble Admin", "Mobile Customer")]
 
         public async Task<IActionResult> OnPostAsync(string id, string code)
         {
@@ -529,7 +525,6 @@ namespace Noble.Api.Controllers
 
         [Route("api/account/UserList")]
         [HttpGet("UserList")]
-        [Roles("User", "Noble Admin")]
         public IActionResult UserList()
         {
             try
@@ -546,7 +541,6 @@ namespace Noble.Api.Controllers
         }
         [Route("api/account/ForRoleUsersList")]
         [HttpGet("ForRoleUsersList")]
-        [Roles("User", "Noble Admin")]
 
         public IActionResult ForRoleUsersList(bool isHistory, bool istransferTerminal, bool isSupervisorTerminal, bool alluser)
         {
@@ -573,14 +567,12 @@ namespace Noble.Api.Controllers
         }
         [Route("api/account/UserDetail")]
         [HttpGet("UserDetail")]
-        [Roles("CanAddSignUpUser", "CanEditSignUpUser")]
 
         public async Task<IActionResult> UserDetail(Guid id)
         {
             try
             {
                 var user = await _userManager.FindByIdAsync(id.ToString());
-                var nobleUserRoles = _context.NobleUserRoles.AsNoTracking().FirstOrDefault(x => x.UserId == user.Id);
                 {
 
 
@@ -590,7 +582,6 @@ namespace Noble.Api.Controllers
                         FirstName = user.FirstName,
                         IsActive = user.IsActive,
                         LastName = user.LastName,
-                        RoleId = nobleUserRoles?.RoleId,
                         Email = user.Email,
                         UserName = user.UserName,
                       
@@ -687,7 +678,6 @@ namespace Noble.Api.Controllers
         [Route("api/account/SaveUser")]
         [HttpPost("SaveUser")]
         //[Authorize(Roles = "User")]
-        [Roles("CanEditSignUpUser", "CanAddSignUpUser")]
 
         public async Task<IActionResult> SaveUser([FromBody] LoginVm loginVm)
         {

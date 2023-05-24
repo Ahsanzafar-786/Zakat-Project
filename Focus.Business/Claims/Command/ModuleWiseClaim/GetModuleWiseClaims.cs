@@ -6,8 +6,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
-using Focus.Business.Claims.Command.UpdateClaims;
 using Focus.Business.Interface;
 using Focus.Business.Users;
 using MediatR;
@@ -59,37 +57,11 @@ namespace Focus.Business.Claims.Command.ModuleWiseClaim
                 try
                 {
 
-                    var nobleRoleUser =await Context.NobleUserRoles.AsNoTracking().Where(x => x.UserId == request.User).Select(x => x.RoleId).ToListAsync(cancellationToken: cancellationToken);
                     
-                    var rolesPermissions =await Context.NobleRolePermissions
-                        .AsNoTracking()
-                        .Include(x => x.CompanyPermissions)
-                        .Where(x => nobleRoleUser.Contains(x.RoleId))
-                        .ToListAsync(cancellationToken: cancellationToken);
+               
 
-                    var modules =await Context.NobleModules.AsNoTracking().ToListAsync(cancellationToken: cancellationToken);
 
                     var moduleWiseClaims = new List<ModuleWiseClaims>();
-                    foreach (var module in modules)
-                    {
-                        var climsList = new List<Claim>();
-                        var permissionList =
-                            rolesPermissions.Where(x => x.CompanyPermissions.NobleModuleId == module.Id);
-                        foreach (var rol in permissionList)
-                        {
-                            climsList.Add(new Claim(ClaimTypes.Role, rol.CompanyPermissions == null ? "null" : rol.CompanyPermissions.Value));
-                            
-                        }
-
-                        if (climsList.Count > 0)
-                        {
-                            moduleWiseClaims.Add(new ModuleWiseClaims()
-                            {
-                                Claims = climsList,
-                                ModuleName = module.ModuleName
-                            });
-                        }
-                    }
 
                     var role = await _userComponent.GetRoleByUser(request.User);
                     
@@ -97,8 +69,6 @@ namespace Focus.Business.Claims.Command.ModuleWiseClaim
 
                     var userCompany = _companyComponent.GetCompanyById(user.CompanyId);
                     
-                    var dayStart = await Context.DayStarts.FirstOrDefaultAsync(x => x.IsActive && x.IsDayStart, cancellationToken: cancellationToken);
-                    var userCounter = await Context.DayStarts.FirstOrDefaultAsync(x => !x.IsDayStart && x.IsActive && x.StartTerminalFor == user.UserName, cancellationToken: cancellationToken);
                     
                     var claims = new List<Claim>
                     {
@@ -115,8 +85,6 @@ namespace Focus.Business.Claims.Command.ModuleWiseClaim
                         new Claim("BusinessId", userCompany?.BusinessId.ToString()),
                         new Claim("ClientParentId", userCompany?.ClientParentId.ToString()),
                         new Claim("EmployeeId", user.EmployeeId.ToString()),
-                        new Claim("CounterId", userCounter!=null?userCounter.CounterId.ToString(): user.TerminalId== null? Guid.Empty.ToString():user.TerminalId.ToString()),
-                        new Claim("DayId", dayStart!=null?dayStart.Id.ToString():Guid.Empty.ToString()),
                         new Claim("IsProceed", userCompany.IsProceed.ToString(), ClaimValueTypes.Boolean),
 
                     };
