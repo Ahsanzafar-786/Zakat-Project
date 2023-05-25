@@ -788,7 +788,8 @@ namespace Noble.Api.Controllers
         }
         [Route("api/account/UpdatePassword")]
         [HttpPost("UpdatePassword")]
-        [AllowAnonymous]
+
+
         public async Task<IActionResult> UpdatePassword([FromBody] PasswordVerifyVm passwordVerify)
         {
             bool result = await _userComponent.UpdatePassword(passwordVerify.UserId, passwordVerify.Password);
