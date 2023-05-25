@@ -19,6 +19,9 @@ import addcompany from '../components/Company/AddCompany.vue'
 import signup from '../components/UserSetup/SignUp.vue'
 import addsignup from '../components/UserSetup/AddSignUp.vue'
 
+//Benificary
+import benificaries from '../components/Benificary/Benificaries.vue';
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -79,6 +82,11 @@ const routes = [
                             path: '/registeruser',
                             name: 'RegisterUser',
                             component: RegisterUser
+                        },
+                        {
+                            path: '/benificaries',
+                            name: 'benificaries',
+                            component: benificaries
                         },
                     ]
                 }

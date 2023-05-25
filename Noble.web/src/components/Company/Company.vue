@@ -180,13 +180,13 @@ export default {
             this.typePermissions = "Add";
         },
         GetCompanyData: function () {
-
+            var id = localStorage.getItem('CompanyID');
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            this.$https.get('/Company/List', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            this.$https.get('/Company/List?id=' + id, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
 
                     root.$store.state.companyList.push(response.data)

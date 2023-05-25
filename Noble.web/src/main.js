@@ -87,6 +87,9 @@ Vue.use(moment);
 Vue.config.productionTip = false;
 
 //Vue.component('productgroupdropdown', require('./components/General/ProductGroupDropdown.vue').default);
+Vue.component('modal', require('./components/modalcomponent.vue').default);
+// Benificary
+Vue.component('benificary-mod', require('./components/Benificary/AddBenificary.vue').default);
 
 
 

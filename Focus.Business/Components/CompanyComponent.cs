@@ -40,26 +40,29 @@ namespace Focus.Business.Components
         }
         public List<CompanyDto> GetCompaniesList(Guid id)
         {
-            var companies = new List<Company>();
+            //var companies = new List<Company>();
 
-            var companyId = id == Guid.Empty ? _principal.Identity.CompanyId() : id;
-            var companyInfo = _context.Companies.Find(companyId);
-            if (companyInfo.NameEnglish == "noble@gmail.com")
+            //var companyId = id == Guid.Empty ? _principal.Identity.CompanyId() : id;
+            //var companyInfo = _context.Companies.Find(companyId);
+            //if (companyInfo.NameEnglish == "noble@gmail.com")
 
-            {
-                companies = _context.Companies.Where(x => x.ParentId == companyInfo.Id && x.ClientParentId == null)
-                    .ToList();
-            }
-            else if ((companyInfo?.ParentId != Guid.Empty || companyInfo?.ParentId != null)
-                    && companyInfo.ClientParentId == null && companyInfo.BusinessParentId == null)
-            {
-                companies = _context.Companies.Where(x => x.ParentId == companyInfo.ParentId && x.ClientParentId == companyInfo.Id).ToList();
-            }
-            else if ((companyInfo?.ParentId != Guid.Empty || companyInfo?.ParentId != null)
-                     && companyInfo.ClientParentId != null && companyInfo.BusinessParentId == null)
-            {
-                companies = _context.Companies.Where(x => x.ClientParentId == companyInfo.ClientParentId && x.BusinessParentId == companyInfo.Id).ToList();
-            }
+            //{
+            //    companies = _context.Companies.Where(x => x.ParentId == companyInfo.Id && x.ClientParentId == null)
+            //        .ToList();
+            //}
+            //else if ((companyInfo?.ParentId != Guid.Empty || companyInfo?.ParentId != null)
+            //        && companyInfo.ClientParentId == null && companyInfo.BusinessParentId == null)
+            //{
+            //    companies = _context.Companies.Where(x => x.ParentId == companyInfo.ParentId && x.ClientParentId == companyInfo.Id).ToList();
+            //}
+            //else if ((companyInfo?.ParentId != Guid.Empty || companyInfo?.ParentId != null)
+            //         && companyInfo.ClientParentId != null && companyInfo.BusinessParentId == null)
+            //{
+            //    companies = _context.Companies.Where(x => x.ClientParentId == companyInfo.ClientParentId && x.BusinessParentId == companyInfo.Id).ToList();
+            //}
+
+            var companies = _context.Companies.Where(x => x.ParentId == id).ToList();
+
             var companyList = new List<CompanyDto>();
             _context.DisableTenantFilter = true;
             foreach (var company in companies)

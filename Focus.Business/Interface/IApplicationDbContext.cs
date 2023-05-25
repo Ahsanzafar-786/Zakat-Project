@@ -11,6 +11,7 @@ namespace Focus.Business.Interface
        
         DbSet<Company> Companies { get; set; }
         DbSet<Color> Colors { get; set; }
+        DbSet<Beneficiaries> Beneficiaries { get; set; }
 
         bool DisableTenantFilter { get; set; }
         int SaveChanges();
