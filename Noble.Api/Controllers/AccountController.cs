@@ -36,27 +36,20 @@ namespace Noble.Api.Controllers
         private readonly IUserComponent _userComponent;
         private readonly ICompanyComponent _companyComponent;
         private readonly ISendEmail _sendEmail;
-        private readonly UrlEncoder _utEncoder;
-        private readonly IConfiguration _configuration;
         private readonly IPrincipal _principal;
         private readonly IApplicationDbContext _context;
 
-        public string SharedKey { get; private set; }
-        public string[] RecoveryCodes { get; private set; }
 
-        private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager,
             IApplicationDbContext context, UrlEncoder utEncoder, IUserComponent userComponent, ISendEmail sendEmail, IConfiguration configuration,
             IPrincipal principal, ICompanyComponent companyComponent)
         {
             _signInManager = signInManager;
-            _utEncoder = utEncoder;
             _context = context;
             _userManager = userManager;
             _sendEmail = sendEmail;
             _userComponent = userComponent;
-            _configuration = configuration;
             _principal = principal;
             _companyComponent = companyComponent;
         }
@@ -338,24 +331,7 @@ namespace Noble.Api.Controllers
 
 
 
-        [Route("api/account/LoadSharedKeyAndQrCodeUriAsync")]
-        [HttpGet("LoadSharedKeyAndQrCodeUriAsync")]
-
-        public async Task<IActionResult> LoadSharedKeyAndQrCodeUriAsync(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            // Load the authenticator key & QR code URI to display on the form
-            var unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
-            if (string.IsNullOrEmpty(unformattedKey))
-            {
-                await _userManager.ResetAuthenticatorKeyAsync(user);
-                unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
-            }
-            SharedKey = FormatKey(unformattedKey);
-            var email = await _userManager.GetEmailAsync(user);
-            var carAuthenticatorUri = GenerateQrCodeUri(email, unformattedKey);
-            return Ok(carAuthenticatorUri);
-        }
+     
         private string FormatKey(string unformattedKey)
         {
             var result = new StringBuilder();
@@ -371,73 +347,7 @@ namespace Noble.Api.Controllers
             }
             return result.ToString().ToLowerInvariant();
         }
-        private string GenerateQrCodeUri(string email, string unformattedKey)
-        {
-            return string.Format(
-                AuthenticatorUriFormat,
-                _utEncoder.Encode("Noble"),
-                _utEncoder.Encode(email),
-                unformattedKey);
-
-        }
-
-
-        [Route("api/account/OnPostAsync")]
-        [HttpGet("OnPostAsync")]
-
-        public async Task<IActionResult> OnPostAsync(string id, string code)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-            if (!ModelState.IsValid)
-            {
-                return Ok(null);
-            }
-            // Strip spaces and hypens
-            var verificationCode = code.Replace(" ", string.Empty).Replace("-", string.Empty);
-            var is2faTokenValid = await _userManager.VerifyTwoFactorTokenAsync(
-                user, _userManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
-            if (!is2faTokenValid)
-            {
-                ModelState.AddModelError("Input.Code", "Verification code is invalid.");
-                return Ok(false);
-            }
-            await _userManager.SetTwoFactorEnabledAsync(user, true);
-            var userId = await _userManager.GetUserIdAsync(user);
-            var a = _userManager.CountRecoveryCodesAsync(user);
-            if (await _userManager.CountRecoveryCodesAsync(user) == 0)
-            {
-                var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
-                RecoveryCodes = recoveryCodes.ToArray();
-                return Ok(RecoveryCodes);
-            }
-
-            else
-            {
-                var userData = await _userManager.FindByIdAsync(id);
-                if (userData == null)
-                {
-                    return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-                }
-
-                var isTwoFactorEnabled = await _userManager.GetTwoFactorEnabledAsync(userData);
-                var userIdSearch = await _userManager.GetUserIdAsync(userData);
-                if (!isTwoFactorEnabled)
-                {
-                    throw new InvalidOperationException($"Cannot generate recovery codes for user with ID '{userIdSearch}' as they do not have 2FA enabled.");
-                }
-
-                var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
-                RecoveryCodes = recoveryCodes.ToArray();
-
-                return Ok(RecoveryCodes);
-
-            }
-        }
+    
 
        
         [Route("api/account/logout")]
@@ -676,21 +586,6 @@ namespace Noble.Api.Controllers
                             new Claim("Organization",_principal.Identity.Organization()),
                             new Claim("CompanyId",_principal.Identity.CompanyId().ToString()),
                             new Claim("NobleCompanyId",_principal.Identity.CompanyId().ToString()),
-                            new Claim("ChangePriceDuringSale",loginVm.ChangePriceDuringSale.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("IsExpenseAccount",loginVm.IsExpenseAccount.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("GiveDicountDuringSale",loginVm.GiveDicountDuringSale.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("ViewCounterDetails",loginVm.ViewCounterDetails.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("TransferCounter",loginVm.TransferCounter.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("CloseCounter",loginVm.CloseCounter.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("HoldCounter",loginVm.HoldCounter.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("CloseDay",loginVm.CloseDay.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("ProcessSaleReturn",loginVm.ProcessSaleReturn.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("DailyExpenseList",loginVm.DailyExpenseList.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("InvoiceWoInventory",loginVm.InvoiceWoInventory.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("IsTouchInvoice",loginVm.IsTouchInvoice.ToString(), ClaimValueTypes.Boolean),
-                            //new Claim("TouchScreen",loginVm.TouchScreen),
-                            new Claim("AllowAll",loginVm.AllowAll.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("PermissionToStartExpenseDay",loginVm.PermissionToStartExpenseDay.ToString(), ClaimValueTypes.Boolean),
                         };
                         await _userManager.AddClaimsAsync(user, claims);
                       
@@ -720,41 +615,10 @@ namespace Noble.Api.Controllers
 
                     var user = await _userManager.FindByIdAsync(User.Identity.UserId());
                   
-                    await _userManager.RemoveClaimAsync(user, new Claim("ChangePriceDuringSale", loginVm.ChangePriceDuringSale.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("IsExpenseAccount", loginVm.IsExpenseAccount.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("GiveDicountDuringSale", loginVm.GiveDicountDuringSale.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("ViewCounterDetails", loginVm.ViewCounterDetails.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("TransferCounter", loginVm.TransferCounter.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("CloseCounter", loginVm.CloseCounter.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("HoldCounter", loginVm.HoldCounter.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("CloseDay", loginVm.CloseDay.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("StartDay", loginVm.StartDay.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("ProcessSaleReturn", loginVm.ProcessSaleReturn.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("DailyExpenseList", loginVm.DailyExpenseList.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("InvoiceWoInventory", loginVm.InvoiceWoInventory.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("IsTouchInvoice", loginVm.IsTouchInvoice.ToString(), ClaimValueTypes.Boolean));
-                    //await _userManager.RemoveClaimAsync(user, new Claim("TouchScreen", loginVm.TouchScreen));
-                    await _userManager.RemoveClaimAsync(user, new Claim("AllowAll", loginVm.AllowAll.ToString(), ClaimValueTypes.Boolean));
                     await _userManager.RemoveClaimAsync(user, new Claim("IsSupervisor", loginVm.IsSupervisor.ToString(), ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("PermissionToStartExpenseDay", loginVm.PermissionToStartExpenseDay.ToString(), ClaimValueTypes.Boolean));
                     var claims = new List<Claim>
                         {
-                            new Claim("ChangePriceDuringSale",loginVm.ChangePriceDuringSale.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("IsExpenseAccount",loginVm.IsExpenseAccount.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("GiveDicountDuringSale",loginVm.GiveDicountDuringSale.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("ViewCounterDetails",loginVm.ViewCounterDetails.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("TransferCounter",loginVm.TransferCounter.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("CloseCounter",loginVm.CloseCounter.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("HoldCounter",loginVm.HoldCounter.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("CloseDay",loginVm.CloseDay.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("StartDay",loginVm.StartDay.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("ProcessSaleReturn",loginVm.ProcessSaleReturn.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("DailyExpenseList",loginVm.DailyExpenseList.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("InvoiceWoInventory",loginVm.InvoiceWoInventory.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("IsTouchInvoice",loginVm.IsTouchInvoice.ToString(), ClaimValueTypes.Boolean),
-                            //new Claim("TouchScreen",loginVm.TouchScreen),
-                            new Claim("AllowAll",loginVm.AllowAll.ToString(), ClaimValueTypes.Boolean),
-                            new Claim("IsSupervisor",loginVm.IsSupervisor.ToString(), ClaimValueTypes.Boolean),
+                          
                             new Claim("PermissionToStartExpenseDay",loginVm.PermissionToStartExpenseDay.ToString(), ClaimValueTypes.Boolean),
                         };
                     await _userManager.AddClaimsAsync(user, claims);
