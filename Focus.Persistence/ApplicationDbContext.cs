@@ -26,6 +26,7 @@ namespace Focus.Persistence
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<Beneficiaries> Beneficiaries { get; set; }
+        public virtual DbSet<AuthorizedPerson> AuthorizedPersons { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

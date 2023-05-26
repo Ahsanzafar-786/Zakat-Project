@@ -1,49 +1,41 @@
-﻿using Focus.Business.Benificary.Models;
+﻿using Focus.Business.AuthorizPersons.Model;
 using Focus.Business.Exceptions;
 using Focus.Business.Interface;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Focus.Business.Benificary.Queries
+namespace Focus.Business.AuthorizPersons.Queries
 {
-    public class GetBenificariesDetailsQuery : IRequest<BenificariesLookupModel>
+    public class GetAuthorizedPersonDetailsQuery : IRequest<AuthorizedPersonsLookupModel>
     {
         public Guid Id { get; set; }
 
-        public class Handler : IRequestHandler<GetBenificariesDetailsQuery, BenificariesLookupModel>
+        public class Handler : IRequestHandler<GetAuthorizedPersonDetailsQuery, AuthorizedPersonsLookupModel>
         {
             public readonly IApplicationDbContext Context;
             private readonly ILogger _logger;
 
-            public Handler(IApplicationDbContext context, ILogger<GetBenificariesDetailsQuery> logger)
+            public Handler(IApplicationDbContext context, ILogger<GetAuthorizedPersonDetailsQuery> logger)
             {
                 Context = context;
                 _logger = logger;
             }
-            public async Task<BenificariesLookupModel> Handle(GetBenificariesDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<AuthorizedPersonsLookupModel> Handle(GetAuthorizedPersonDetailsQuery request, CancellationToken cancellationToken)
             {
                 try
                 {
-                    var query = await Context.Beneficiaries.Select(x => new BenificariesLookupModel
+                    var query = await Context.AuthorizedPersons.Select(x => new AuthorizedPersonsLookupModel
                     {
                         Id = x.Id,
                         Name = x.Name,
-                        BeneficiaryId = x.BeneficiaryId,
-                        PaymentIntervalMonth = x.PaymentIntervalMonth,
-                        AmountPerMonth = x.AmountPerMonth,
-                        UgamaNo = x.UgamaNo,
+                        AuthorizedPersonCode= x.AuthorizedPersonCode,
                         PhoneNo = x.PhoneNo,
-                        Note = x.Note,
-                        IsActive = x.IsActive,
-                        IsRegister = x.IsRegister,
-                        AuthorizedPersonId = x.AuthorizedPersonId,
+                        Address = x.Address
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                     if (query == null)
@@ -51,7 +43,6 @@ namespace Focus.Business.Benificary.Queries
 
 
                     return query;
-
                 }
                 catch (Exception exception)
                 {

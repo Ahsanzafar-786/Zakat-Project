@@ -1,20 +1,13 @@
-﻿using Focus.Business.Interface;
-using Focus.Business.Users;
-using Focus.Business;
-using Focus.Domain.Interface;
-using Focus.Persistence;
-using Microsoft.AspNetCore.Identity;
+﻿using Focus.Persistence;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Principal;
-using Focus.Business.Components;
-using Microsoft.AspNet.Identity;
-using Noble.Api.Models;
 using System.Threading.Tasks;
 using Focus.Business.Benificary.Models;
-using DocumentFormat.OpenXml.Bibliography;
 using Focus.Business.Benificary.Commands;
 using Focus.Business.Benificary.Queries;
 using System;
+using Focus.Business.AuthorizPersons.Model;
+using Focus.Business.AuthorizPersons.Commands;
+using Focus.Business.AuthorizPersons.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -63,6 +56,43 @@ namespace Noble.Api.Controllers
                 Id = id
             });
             return Ok(benificary);
+        }
+
+        #endregion
+
+        #region AuthorizedPersons
+        [Route("api/Benificary/SaveAuthorizedPersons")]
+        [HttpPost("SaveAuthorizedPersons")]
+        public async Task<IActionResult> SaveAuthorizedPersons([FromBody] AuthorizedPersonsLookupModel authorized)
+        {
+            var message = await Mediator.Send(new AuthorizedPersonsAddUpdateCommand
+            {
+                authorziedPersons = authorized
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetAuthorizedPersonsList")]
+        [HttpGet("GetAuthorizedPersonsList")]
+        public async Task<IActionResult> GetAuthorizedPersonsList(string searchTerm, int? pageNumber, bool isDropDown)
+        {
+            var authorziedPersons = await Mediator.Send(new GetAuthorizedPersonListQuery
+            {
+                SearchTerm = searchTerm,
+                IsDropDown = isDropDown,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(authorziedPersons);
+        }
+
+        [Route("api/Benificary/GetAuthorizedPersonsDetail")]
+        [HttpGet("GetAuthorizedPersonsDetail")]
+        public async Task<IActionResult> GetAuthorizedPersonsDetail(Guid id)
+        {
+            var authorziedPersons = await Mediator.Send(new GetAuthorizedPersonDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(authorziedPersons);
         }
 
         #endregion

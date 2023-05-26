@@ -1,4 +1,4 @@
-﻿using Focus.Business.Benificary.Models;
+﻿using Focus.Business.AuthorizPersons.Model;
 using Focus.Business.Common;
 using Focus.Business.Interface;
 using MediatR;
@@ -10,63 +10,54 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Focus.Business.Benificary.Queries
+namespace Focus.Business.AuthorizPersons.Queries
 {
-    public class GetBenificariesListQuery : PagedRequest, IRequest<PagedResult<List<BenificariesLookupModel>>>
+    public class GetAuthorizedPersonListQuery : PagedRequest, IRequest<PagedResult<List<AuthorizedPersonsLookupModel>>>
     {
-        public string SearchTerm { get; set; }
         public bool IsDropDown { get; set; }
+        public string SearchTerm { get; set; }
 
-        public class Handler : IRequestHandler<GetBenificariesListQuery, PagedResult<List<BenificariesLookupModel>>>
+        public class Handler : IRequestHandler<GetAuthorizedPersonListQuery, PagedResult<List<AuthorizedPersonsLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
             private readonly ILogger _logger;
 
-            public Handler(IApplicationDbContext context, ILogger<GetBenificariesListQuery> logger)
+            public Handler(IApplicationDbContext context, ILogger<GetAuthorizedPersonListQuery> logger)
             {
                 Context = context;
                 _logger = logger;
             }
-            public async Task<PagedResult<List<BenificariesLookupModel>>> Handle(GetBenificariesListQuery request, CancellationToken cancellationToken)
+            public async Task<PagedResult<List<AuthorizedPersonsLookupModel>>> Handle(GetAuthorizedPersonListQuery request, CancellationToken cancellationToken)
             {
                 try
                 {
-                    if(request.IsDropDown)
+                    if (request.IsDropDown)
                     {
-                        var query = await Context.Beneficiaries.AsNoTracking().Select(x => new BenificariesLookupModel
+                        var query = await Context.AuthorizedPersons.AsNoTracking().Select(x => new AuthorizedPersonsLookupModel
                         {
-                            Id= x.Id,
+                            Id = x.Id,
                             Name = x.Name,
                         }).ToListAsync();
 
-                        return new PagedResult<List<BenificariesLookupModel>>
+                        return new PagedResult<List<AuthorizedPersonsLookupModel>>
                         {
                             Results = query
                         };
                     }
                     else
                     {
-                        var query = Context.Beneficiaries.AsNoTracking().Include(x => x.AuthorizedPersons).Select(x => new BenificariesLookupModel
+                        var query = Context.AuthorizedPersons.AsNoTracking().Select(x => new AuthorizedPersonsLookupModel
                         {
-                            Id= x.Id,
+                            Id = x.Id,
                             Name = x.Name,
-                            BeneficiaryId = x.BeneficiaryId,
-                            PaymentIntervalMonth = x.PaymentIntervalMonth,
-                            AmountPerMonth = x.AmountPerMonth,
-                            UgamaNo = x.UgamaNo,
-                            PhoneNo= x.PhoneNo,
-                            IsActive = x.IsActive,
-                            IsRegister = x.IsRegister,
-                            AuthorizationPersonName = x.AuthorizedPersons.Name,
+                            AuthorizedPersonCode = x.AuthorizedPersonCode,
                         }).AsQueryable();
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
                         {
                             var searchTerm = request.SearchTerm.ToLower();
-                            query = query.Where(x => x.Name.ToLower().Contains(searchTerm) 
-                                                  || x.PhoneNo.Contains(searchTerm) 
-                                                  || x.UgamaNo.Contains(searchTerm)
-                                                  || x.BeneficiaryId.ToString().Contains(searchTerm));
+                            query = query.Where(x => x.Name.ToLower().Contains(searchTerm)
+                                                  || x.AuthorizedPersonCode.ToString().Contains(searchTerm));
                         }
 
                         var count = await query.CountAsync();
@@ -74,7 +65,7 @@ namespace Focus.Business.Benificary.Queries
 
                         var queryList = await query.ToListAsync();
 
-                        return new PagedResult<List<BenificariesLookupModel>>
+                        return new PagedResult<List<AuthorizedPersonsLookupModel>>
                         {
                             Results = queryList,
                             RowCount = count,
@@ -82,7 +73,6 @@ namespace Focus.Business.Benificary.Queries
                             CurrentPage = request.PageNumber,
                             PageCount = queryList.Count / request.PageSize
                         };
-
                     }
                 }
                 catch (Exception exception)
