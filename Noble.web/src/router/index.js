@@ -25,6 +25,9 @@ import benificaries from '../components/Benificary/Benificaries.vue';
 //Authorized Persons
 import authorizedpersons from '../components/AuthorizedPersons/AuthorizedPersons.vue'
 
+//Benificary Note
+import benificarynote from '../components/BenificaryNote/BenificaryNote.vue'
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -95,6 +98,11 @@ const routes = [
                             path: '/authorizedpersons',
                             name: 'authorizedpersons',
                             component: authorizedpersons
+                        },
+                        {
+                            path: '/benificarynote',
+                            name: 'benificarynote',
+                            component: benificarynote
                         },
                     ]
                 }

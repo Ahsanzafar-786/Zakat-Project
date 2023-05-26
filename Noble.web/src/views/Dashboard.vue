@@ -65,6 +65,10 @@
                                 <a v-on:click="GoTo('/benificaries')" href="javascript:void(0);"> {{ $t('Benificary')
                                 }}</a>
                             </li>
+                            <li>
+                                <a v-on:click="GoTo('/benificarynote')" href="javascript:void(0);"> {{ $t('Benificary Note')
+                                }}</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -81,6 +85,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                 </ul>
             </div>
         </div>

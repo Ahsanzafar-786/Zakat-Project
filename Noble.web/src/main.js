@@ -90,12 +90,14 @@ Vue.component('modal', require('./components/modalcomponent.vue').default);
 
 // Benificary
 Vue.component('benificary-mod', require('./components/Benificary/AddBenificary.vue').default);
+Vue.component('benificary', require('./components/General/BenificaryDropdown.vue').default);
+
+//Authorized Person
 Vue.component('authorizedPerson-mod', require('./components/AuthorizedPersons/AddAuthorizedPersons.vue').default);
 Vue.component('authorizedperson', require('./components/General/AuthorizedPersonDropdown.vue').default);
 
-//Authorized Person
-
-
+//Benificary Note
+Vue.component('benificarynote-mod', require('./components/BenificaryNote/AddBenificaryNote.vue').default);
 
 Vue.prototype.$https = axios;
 axios.defaults.baseURL = json.ServerIP;

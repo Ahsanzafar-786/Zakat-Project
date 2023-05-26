@@ -8,6 +8,9 @@ using System;
 using Focus.Business.AuthorizPersons.Model;
 using Focus.Business.AuthorizPersons.Commands;
 using Focus.Business.AuthorizPersons.Queries;
+using Focus.Business.BenificiariesNotes.Model;
+using Focus.Business.BenificiariesNotes.Commands;
+using Focus.Business.BenificiariesNotes.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -93,6 +96,43 @@ namespace Noble.Api.Controllers
                 Id = id
             });
             return Ok(authorziedPersons);
+        }
+
+        #endregion
+
+        #region BenificaryNote
+        [Route("api/Benificary/SaveBenificaryNote")]
+        [HttpPost("SaveBenificaryNote")]
+        public async Task<IActionResult> SaveBenificaryNote([FromBody] BenificaryNoteLookupModel benificary)
+        {
+            var message = await Mediator.Send(new BenificaryNoteAddUpdateCommand
+            {
+                benificaryNote = benificary
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetBenificaryNoteList")]
+        [HttpGet("GetBenificaryNoteList")]
+        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown)
+        {
+            var benificary = await Mediator.Send(new GetBenificaryNoteListQuery
+            {
+                SearchTerm = searchTerm,
+                IsDropDown = isDropDown,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(benificary);
+        }
+
+        [Route("api/Benificary/GetBenificaryNoteDetail")]
+        [HttpGet("GetBenificaryNoteDetail")]
+        public async Task<IActionResult> GetBenificaryNoteDetail(Guid id)
+        {
+            var benificary = await Mediator.Send(new GetBenificaryNoteDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(benificary);
         }
 
         #endregion
