@@ -9,6 +9,11 @@ namespace Focus.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Beneficiaries> builder)
         {
             builder.Property(x => x.AmountPerMonth).HasColumnType("decimal(18,4)");
+            builder.Property(x => x.RecurringAmount).HasColumnType("decimal(18,4)");
+
+            builder.HasOne(x => x.AuthorizedPersons)
+                   .WithMany(x => x.Beneficiaries)
+                   .HasForeignKey(x => x.AuthorizedPersonId);
         }
     }
 }

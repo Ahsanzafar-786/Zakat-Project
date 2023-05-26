@@ -14,6 +14,7 @@ namespace Focus.Domain.Entities
         public string Name { get; set; }
         public int PaymentIntervalMonth { get; set; }
         public decimal AmountPerMonth { get; set; }
+        public decimal RecurringAmount { get; set; }
         public string UgamaNo { get; set; }
         public string PhoneNo { get; set; }
 
@@ -22,6 +23,8 @@ namespace Focus.Domain.Entities
        
         public bool IsActive { get; set; }
         public bool IsRegister { get; set; }
+        public Guid? AuthorizedPersonId { get; set; }
+        public virtual AuthorizedPerson AuthorizedPersons { get; set; }
 
     }
 }

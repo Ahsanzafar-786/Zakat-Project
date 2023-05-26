@@ -22,6 +22,9 @@ import addsignup from '../components/UserSetup/AddSignUp.vue'
 //Benificary
 import benificaries from '../components/Benificary/Benificaries.vue';
 
+//Authorized Persons
+import authorizedpersons from '../components/AuthorizedPersons/AuthorizedPersons.vue'
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -87,6 +90,11 @@ const routes = [
                             path: '/benificaries',
                             name: 'benificaries',
                             component: benificaries
+                        },
+                        {
+                            path: '/authorizedpersons',
+                            name: 'authorizedpersons',
+                            component: authorizedpersons
                         },
                     ]
                 }
