@@ -1,5 +1,4 @@
-﻿using Focus.Business.AuthorizPersons.Commands;
-using Focus.Business.BenificiariesNotes.Model;
+﻿using Focus.Business.BenificiariesNotes.Model;
 using Focus.Business.Common;
 using Focus.Business.Interface;
 using MediatR;

@@ -28,6 +28,7 @@ namespace Focus.Persistence
         public virtual DbSet<Beneficiaries> Beneficiaries { get; set; }
         public virtual DbSet<AuthorizedPerson> AuthorizedPersons { get; set; }
         public virtual DbSet<BenificaryNote> BenificaryNotes { get; set; }
+        public virtual DbSet<CharityResources> CharityResources { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
