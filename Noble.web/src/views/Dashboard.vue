@@ -22,7 +22,7 @@
                         </a>
                     </li>
 
-                    <li>
+                    <li v-if="roleName=='Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="grid" class="align-self-center menu-icon"></i><span>
                                 {{
@@ -153,9 +153,9 @@
             <!--Page Content-->
             <div class="page-content">
                 <router-view></router-view>
-                <div v-if="dashboard == '/dashboard'">
+                <!-- <div >
                     <dashboard></dashboard>
-                </div>
+                </div> -->
 
                 <footer class="footer text-center text-sm-start">
                     <span>
@@ -169,7 +169,6 @@
                 </footer>
             </div>
         </div>
-        <supervisor-login-model @close="onCloseEvent" :show="show" :isFlushData="true" :isReset="true" v-if="show" />
         <loading :active.sync="loading" :can-cancel="true" :is-full-page="true"></loading>
     </body>
 </template>
@@ -192,57 +191,12 @@ export default {
         return {
             loading: false,
             companyId: '',
-            langs: ['en', 'ar'],
-            invoiveItem: false,
-            invoiveBarCode: false,
-            invoiveBarCodeItem: false,
-            saleOrderPerm: false,
-            WholeSale: '',
-            purchaseOrder: false,
-            isMouseover: false,
-            expenseBill: false,
-            IsExpenseAccount: false,
+            roleName: '',
             DisplayUserName: '',
-            role: '',
-            dashboard: '',
-            ur: '',
-            isAccount: '',
-            isDayStart: '',
-            arabic: '',
-            english: '',
-            isMasterProduct: false,
-            nobleRole: '',
-            show: false,
-            loginHistory: {
-                userId: '',
-                isLogin: false,
-                companyId: ''
-            },
-            dayStart: '',
-            propValvue: '',
-            saleMenu: false,
-            inventoryMenu: false,
-            wareHouseMenu: false,
-            startOperationMenu: false,
-            startOpSetupMenu: false,
-            accountMenu: false,
-            purchaseMenu: false,
-            settingMenu: false,
-            humanMenu: false,
-            financialMenu: false,
-            contractMenu: false,
-            logisticMenu: false,
-            importExportMenu: false,
-            systemMenu: false,
-            productionMenu: false,
-            inquiryMenu: false,
-            portugues: false,
-            leftToRight: false,
+            langs: ['en', 'ar'],
+            
 
-            importExportSale: false,
-            IsSimpleInvoice: false,
-            AllSale: false,
-            applicationName: '',
+       
         }
     },
     methods: {
@@ -315,6 +269,7 @@ export default {
         if (this.$session.exists()) {
 
             this.companyId = localStorage.getItem('CompanyID');
+            this.roleName = localStorage.getItem('RoleName');
 
         }
 

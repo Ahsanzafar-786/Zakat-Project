@@ -307,8 +307,8 @@ namespace Noble.Api.Controllers
             return Ok(new { value = true, check = "Update" });
         }
 
-        [Route("api/Company/List")]
-        [HttpGet("List")]
+        [Route("api/Company/CompanyList")]
+        [HttpGet("CompanyList")]
         public IActionResult CompanyList(Guid id)
         {
             return Ok(_companyComponent.GetCompaniesList(id));

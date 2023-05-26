@@ -40,28 +40,28 @@ namespace Focus.Business.Components
         }
         public List<CompanyDto> GetCompaniesList(Guid id)
         {
-            //var companies = new List<Company>();
+            var companies = new List<Company>();
 
-            //var companyId = id == Guid.Empty ? _principal.Identity.CompanyId() : id;
-            //var companyInfo = _context.Companies.Find(companyId);
-            //if (companyInfo.NameEnglish == "noble@gmail.com")
+            var companyId = id == Guid.Empty ? _principal.Identity.CompanyId() : id;
+            var companyInfo = _context.Companies.AsNoTracking().FirstOrDefault(x=>x.Id==companyId);
+            if (companyInfo.NameEnglish == "noble@gmail.com")
 
-            //{
-            //    companies = _context.Companies.Where(x => x.ParentId == companyInfo.Id && x.ClientParentId == null)
-            //        .ToList();
-            //}
-            //else if ((companyInfo?.ParentId != Guid.Empty || companyInfo?.ParentId != null)
-            //        && companyInfo.ClientParentId == null && companyInfo.BusinessParentId == null)
-            //{
-            //    companies = _context.Companies.Where(x => x.ParentId == companyInfo.ParentId && x.ClientParentId == companyInfo.Id).ToList();
-            //}
-            //else if ((companyInfo?.ParentId != Guid.Empty || companyInfo?.ParentId != null)
-            //         && companyInfo.ClientParentId != null && companyInfo.BusinessParentId == null)
-            //{
-            //    companies = _context.Companies.Where(x => x.ClientParentId == companyInfo.ClientParentId && x.BusinessParentId == companyInfo.Id).ToList();
-            //}
+            {
+                companies = _context.Companies.AsNoTracking().Where(x => x.ParentId == companyInfo.Id && x.ClientParentId == null)
+                    .ToList();
+            }
+            else if ((companyInfo?.ParentId != Guid.Empty || companyInfo?.ParentId != null)
+                    && companyInfo.ClientParentId == null && companyInfo.BusinessParentId == null)
+            {
+                companies = _context.Companies.AsNoTracking().Where(x => x.ParentId == companyInfo.ParentId && x.ClientParentId == companyInfo.Id).ToList();
+            }
+            else if ((companyInfo?.ParentId != Guid.Empty || companyInfo?.ParentId != null)
+                     && companyInfo.ClientParentId != null && companyInfo.BusinessParentId == null)
+            {
+                companies = _context.Companies.AsNoTracking().Where(x => x.ClientParentId == companyInfo.ClientParentId && x.BusinessParentId == companyInfo.Id).ToList();
+            }
 
-            var companies = _context.Companies.Where(x => x.ParentId == id).ToList();
+            //var companies = _context.Companies.Where(x => x.ParentId == id).ToList();
 
             var companyList = new List<CompanyDto>();
             _context.DisableTenantFilter = true;
@@ -111,19 +111,6 @@ namespace Focus.Business.Components
                     SoInventoryReserve = company.SoInventoryReserve,
                     PurchaseOrder = company.PurchaseOrder,
                     InternationalPurchase = company.InternationalPurchase,
-                    PartiallyPurchase = company.PartiallyPurchase,
-                    VersionAllow = company.VersionAllow,
-                    ExpenseToGst = company.ExpenseToGst,
-                    AutoPurchaseVoucher = company.AutoPurchaseVoucher,
-                    IsForMedical = company.IsForMedical,
-                    SuperAdminDayStart = company.SuperAdminDayStart,
-                    BankDetail = company.BankDetail,
-                    TaxInvoiceLabel = string.IsNullOrEmpty(company.TaxInvoiceLabel) ? "Tax Invoice": company.TaxInvoiceLabel,
-                    TaxInvoiceLabelAr = string.IsNullOrEmpty(company.TaxInvoiceLabelAr) ? "فاتورة ضريبية" : company.TaxInvoiceLabelAr,
-                    SimplifyTaxInvoiceLabel = string.IsNullOrEmpty(company.SimplifyTaxInvoiceLabel) ? "Simplified Tax Invoice" : company.SimplifyTaxInvoiceLabel,
-                    SimplifyTaxInvoiceLabelAr = string.IsNullOrEmpty(company.SimplifyTaxInvoiceLabel) ? "فاتورة ضريبية مبسطة" : company.SimplifyTaxInvoiceLabelAr,
-                    //IsActive = companyLincence?.IsActive,
-                    //IsBlock = companyLincence?.IsBlock,
                  
 
                 };
@@ -204,171 +191,7 @@ namespace Focus.Business.Components
             var dbCompany = _context.Companies.FirstOrDefault(x => x.Id == company.Id);
             if (dbCompany == null) return new CompanyDto();
             //Check if user is changing VAT Registration number
-            if (company.VatRegistrationNo != dbCompany.VatRegistrationNo)
-            {
-                //TODO: Check that we are not updating VAT Number same as any other company's'
-            }
-
-            if (company.IsInternationalPurchase)
-            {
-                if (!company.PurchaseOrder)
-                {
-                    dbCompany.PurchaseOrder = company.PurchaseOrder;
-                    dbCompany.InternationalPurchase = false;
-                    dbCompany.PartiallyPurchase = false;
-                    dbCompany.VersionAllow = false;
-                    dbCompany.ExpenseToGst = false;
-                    dbCompany.AutoPurchaseVoucher = false;
-                }
-                else if(company.PurchaseOrder && !company.InternationalPurchase)
-                {
-                    dbCompany.PurchaseOrder = company.PurchaseOrder;
-                    dbCompany.InternationalPurchase = false;
-                    dbCompany.PartiallyPurchase = company.PartiallyPurchase;
-                    dbCompany.VersionAllow = company.VersionAllow;
-                    dbCompany.ExpenseToGst = false;
-                    dbCompany.AutoPurchaseVoucher = false;
-                }
-                else if (company.PurchaseOrder && company.InternationalPurchase)
-                {
-                    dbCompany.PurchaseOrder = company.PurchaseOrder;
-                    dbCompany.InternationalPurchase = company.InternationalPurchase;
-                    dbCompany.PartiallyPurchase = company.PartiallyPurchase;
-                    dbCompany.VersionAllow = company.VersionAllow;
-                    dbCompany.ExpenseToGst = company.ExpenseToGst;
-                    dbCompany.AutoPurchaseVoucher = company.AutoPurchaseVoucher;
-                }
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-
-            if (company.IsMulti)
-            {
-                dbCompany.IsMultiUnit = company.IsMultiUnit;
-                dbCompany.IsProduction = company.IsProduction;
-                dbCompany.InvoiceWoInventory = company.InvoiceWoInventory;
-                dbCompany.IsArea = company.IsArea;
-                dbCompany.English = company.English;
-                dbCompany.Arabic = company.Arabic;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-
-            if (company.IsDayStart)
-            {
-
-                dbCompany.DayStart = company.DayStart;
-                dbCompany.Terminal = company.Terminal;
-                if (dbCompany.DayStart == false)
-                {
-                    dbCompany.IsOpenDay = false;
-                    dbCompany.IsTransferAllow = false;
-                }
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-
-            if (company.IsCashVoucher)
-            {
-                dbCompany.CashVoucher = company.CashVoucher;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-            if (company.IsMasterProduct)
-            {
-                dbCompany.MasterProduct = company.MasterProduct;
-                dbCompany.SuperAdminDayStart = company.SuperAdminDayStart;
-                dbCompany.BankDetail = company.BankDetail;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            } 
-
-            if (company.OpenDay)
-            {
-                dbCompany.IsOpenDay = company.IsOpenDay;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            } 
-            if (company.DailyExpense)
-            {
-                dbCompany.ExpenseAccount = company.IsDailyExpense;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-            if (company.IsForMedical)
-            {
-                dbCompany.IsForMedical = company.IsForMedical;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-            if (company.IsTaxLabel)
-            {
-                dbCompany.TaxInvoiceLabel = company.TaxInvoiceLabel;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-            if (company.IsTaxInvoiceLabelAr)
-            {
-                dbCompany.TaxInvoiceLabelAr = company.TaxInvoiceLabelAr;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-            if (company.IsSimplifyTaxInvoiceLabel)
-            {
-                dbCompany.SimplifyTaxInvoiceLabel = company.SimplifyTaxInvoiceLabel;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-            if (company.IsSimplifyTaxInvoiceLabelAr)
-            {
-                dbCompany.SimplifyTaxInvoiceLabelAr = company.SimplifyTaxInvoiceLabelAr;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-      
-       
-            if (company.TransferAllow)
-            {
-                dbCompany.IsTransferAllow = company.IsTransferAllow;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
-
-            if (company.IsSaleOrder)
-            {
-                dbCompany.SaleOrder = company.SaleOrder;
-                dbCompany.SimpleInvoice = company.SimpleInvoice;
-                dbCompany.SoInventoryReserve = company.SoInventoryReserve;
-
-                _context.Companies.Update(dbCompany);
-                _context.SaveChanges();
-                return company;
-            }
+           
 
             dbCompany.VatRegistrationNo = company.VatRegistrationNo;
             dbCompany.NameEnglish = company.NameEnglish;
@@ -482,35 +305,6 @@ namespace Focus.Business.Components
             };
         }
 
-        //public CompanyDto GetCompanySetupAccount()
-        //{
-        //    try
-        //    {
-
-
-
-        //        var companyDb = _context.CompanyAccountSetups.FirstOrDefault();
-
-        //        if (companyDb != null)
-        //        {
-        //            return new CompanyDto
-        //            {
-        //                Currency = companyDb.CurrencyId
-        //            };
-        //        }
-        //        else
-        //        {
-        //            return new CompanyDto();
-        //        }
-
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new ApplicationException("Account ");
-        //        _ = e.Message;
-        //    }
-
-        //}
+      
     }
 }
