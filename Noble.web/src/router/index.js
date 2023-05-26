@@ -25,6 +25,10 @@ import benificaries from '../components/Benificary/Benificaries.vue';
 //Authorized Persons
 import authorizedpersons from '../components/AuthorizedPersons/AuthorizedPersons.vue'
 
+//Authorized Persons
+import chartDashboard from '../components/Dashboard/Dashboard.vue'
+
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -96,6 +100,11 @@ const routes = [
                             name: 'authorizedpersons',
                             component: authorizedpersons
                         },
+                        {
+                            path: '/ChartDashboard',
+                            name: 'ChartDashboard',
+                            component: chartDashboard
+                        },
                     ]
                 }
             ]
@@ -121,8 +130,8 @@ router.beforeEach((to, from, next) => {
 
     if (to.query.fromDashboard === 'true')
     {
-        localStorage.setItem('token', localStorage.getItem(to.query.token_name))
+        console.log(from.name);
+
     }
-    console.log(from.name);
     next();
 });

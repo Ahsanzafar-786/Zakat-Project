@@ -1,251 +1,543 @@
 ﻿<template>
     <div class="container-fluid">
-        <!-- Page-Title -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link " data-bs-toggle="tab" href="#Dashboard" role="tab" aria-selected="true" v-bind:class="{active:active == 'Dashboard'}" v-on:click="makeActive('Dashboard')">{{ $t('Dashboard.Dashboard') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#Account" role="tab" aria-selected="false" v-bind:class="{active:active == 'Account'}" v-on:click="makeActive('Account')">{{ $t('Dashboard.Account') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#Inventory" role="tab" aria-selected="false" v-bind:class="{active:active == 'Inventory'}" v-on:click="makeActive('Inventory')">{{ $t('Dashboard.Inventory') }}</a>
-            </li>
-           
-        </ul>
-        <div class="col-12">
-            <div v-if="active == 'Dashboard'">
-                <div class="row mt-2">
-                    <div class="col-lg-6 col-md-6 col-sm-6 pb-2">
-                        <span class="card-title ">{{ $t('Dashboard.Overview') }} </span>
-
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 pb-2 text-end" v-bind:key="randerDropdown">
-
-                        <div class="col">
-
-                        </div>
-
-
-                        <div class="col-auto">
-                            <div class="col-auto">
-                                <div class="dropdown">
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{overView}}<i class="las la-angle-down ms-1"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" v-on:click="OverViewFilterFunction('Today')" href="javascript:void(0);">{{ $t('Dashboard.Today') }} </a>
-                                        <a class="dropdown-item" v-on:click="OverViewFilterFunction('Weekly')" href="javascript:void(0);">{{ $t('Dashboard.Weekly') }}</a>
-                                        <a class="dropdown-item" v-on:click="OverViewFilterFunction('Monthly')" href="javascript:void(0);">{{ $t('Dashboard.Monthly') }}</a>
-                                        <a class="dropdown-item" v-on:click="OverViewFilterFunction('6 Monthly')" href="javascript:void(0);">{{ $t('Dashboard.HalfYear') }}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
+                    <!-- Page-Title -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-title-box">
+                                <div class="row">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Dashboard.Sales') }}</p>
-                                        <h3 class="m-0">{{(parseFloat(income)).toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")}}</h3>
-                                    </div>
+                                        <h4 class="page-title">Analytics</h4>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="javascript:void(0);">Dastone</a></li>
+                                            <li class="breadcrumb-item active">Dashboard</li>
+                                        </ol>
+                                    </div><!--end col-->
                                     <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="tag" class="align-self-center text-muted icon-sm"></i>
+                                        <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
+                                            <span class="ay-name" id="Day_Name">Today:</span>&nbsp;
+                                            <span class="" id="Select_date">Jan 11</span>
+                                            <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-outline-primary">
+                                            <i data-feather="download" class="align-self-center icon-xs"></i>
+                                        </a>
+                                    </div><!--end col-->  
+                                </div><!--end row-->                                                              
+                            </div><!--end page-title-box-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+                    <!-- end page title end breadcrumb -->
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card report-card">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col">
+                                                    <p class="text-dark mb-0 fw-semibold">Sessions</p>
+                                                    <h3 class="m-0">24k</h3>
+                                                    <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-trending-up"></i>8.5%</span> New Sessions Today</p>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="users" class="align-self-center text-muted icon-sm"></i>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--end card-body--> 
+                                    </div><!--end card--> 
+                                </div> <!--end col--> 
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card report-card">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">                                                
+                                                <div class="col">
+                                                    <p class="text-dark mb-0 fw-semibold">Avg.Sessions</p>
+                                                    <h3 class="m-0">00:18</h3>
+                                                    <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="clock" class="align-self-center text-muted icon-sm"></i>  
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div><!--end card-body--> 
+                                    </div><!--end card--> 
+                                </div> <!--end col--> 
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card report-card">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">                                                
+                                                <div class="col">
+                                                    <p class="text-dark mb-0 fw-semibold">Bounce Rate</p>
+                                                    <h3 class="m-0">$2400</h3>
+                                                    <p class="mb-0 text-truncate text-muted"><span class="text-danger"><i class="mdi mdi-trending-down"></i>35%</span> Bounce Rate Weekly</p>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="activity" class="align-self-center text-muted icon-sm"></i>  
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div><!--end card-body--> 
+                                    </div><!--end card--> 
+                                </div> <!--end col--> 
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card report-card">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col">  
+                                                    <p class="text-dark mb-0 fw-semibold">Goal Completions</p>                                         
+                                                    <h3 class="m-0">85000</h3>
+                                                    <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-trending-up"></i>10.5%</span> Completions Weekly</p>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="briefcase" class="align-self-center text-muted icon-sm"></i>  
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div><!--end card-body--> 
+                                    </div><!--end card--> 
+                                </div> <!--end col-->                               
+                            </div><!--end row-->
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Audience Overview</h4>                      
+                                        </div><!--end col-->
+                                        <div class="col-auto"> 
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                   This Year<i class="las la-angle-down ms-1"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#">Today</a>
+                                                    <a class="dropdown-item" href="#">Last Week</a>
+                                                    <a class="dropdown-item" href="#">Last Month</a>
+                                                    <a class="dropdown-item" href="#">This Year</a>
+                                                </div>
+                                            </div>               
+                                        </div><!--end col-->
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->
+                                <div class="card-body">
+                                    <div class="">
+                                        <div id="ana_dash_1" class="apex-charts"></div>
+                                    </div> 
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div><!--end col-->
+                        <div class="col-lg-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Sessions Device</h4>                      
+                                        </div><!--end col-->
+                                        <div class="col-auto"> 
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                   All<i class="las la-angle-down ms-1"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#">Purchases</a>
+                                                    <a class="dropdown-item" href="#">Emails</a>
+                                                </div>
+                                            </div>         
+                                        </div><!--end col-->
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <div id="ana_device" class="apex-charts"></div>
+                                        <h6 class="bg-light-alt py-3 px-2 mb-0">
+                                            <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
+                                            01 January 2020 to 31 December 2020
+                                        </h6>
+                                    </div>  
+                                    <div class="table-responsive mt-2">
+                                        <table class="table border-dashed mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th>Device</th>
+                                                <th class="text-end">Sassions</th>
+                                                <th class="text-end">Day</th>
+                                                <th class="text-end">Week</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>Dasktops</td>
+                                                <td class="text-end">1843</td>
+                                                <td class="text-end">-3</td>
+                                                <td class="text-end">-12</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tablets</td>
+                                                <td class="text-end">2543</td>
+                                                <td class="text-end">-5</td>
+                                                <td class="text-end">-2</td>                                                 
+                                            </tr>
+                                            <tr>
+                                                <td>Mobiles</td>
+                                                <td class="text-end">3654</td>
+                                                <td class="text-end">-5</td>
+                                                <td class="text-end">-6</td>
+                                            </tr>
+                                            
+                                            </tbody>
+                                        </table><!--end /table-->
+                                    </div><!--end /div-->                                 
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div> <!--end col--> 
+                    </div><!--end row-->
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Pages View by Users</h4>                      
+                                        </div><!--end col-->
+                                        <div class="col-auto"> 
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                   Today<i class="las la-angle-down ms-1"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#">Today</a>
+                                                    <a class="dropdown-item" href="#">Yesterday</a>
+                                                    <a class="dropdown-item" href="#">Last Week</a>
+                                                </div>
+                                            </div>               
+                                        </div><!--end col-->
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->                                
+                                <div class="card-body">
+                                    <ul class="list-group custom-list-group mb-n3">
+                                        <li class="list-group-item align-items-center d-flex justify-content-between pt-0">
+                                            <div class="media">
+                                                <img src="assets/images/small/rgb.svg" height="30" class="me-3 align-self-center rounded" alt="...">
+                                                <div class="media-body align-self-center"> 
+                                                    <h6 class="m-0">Dastone - Admin Dashboard</h6>
+                                                    <p class="mb-0 text-muted">analytic-index.html</p>                                                                                           
+                                                </div><!--end media body-->
+                                            </div>
+                                            <div class="align-self-center">
+                                                <a href="" class="btn btn-sm btn-soft-primary">4.3k <i class="las la-external-link-alt font-15"></i></a>  
+                                            </div>                                            
+                                        </li>
+                                        <li class="list-group-item align-items-center d-flex justify-content-between">
+                                            <div class="media">
+                                                <img src="assets/images/small/cobweb.svg" height="30" class="me-3 align-self-center rounded" alt="...">
+                                                <div class="media-body align-self-center"> 
+                                                    <h6 class="m-0">Metrica Simple- Admin Dashboard</h6>
+                                                    <p class="mb-0 text-muted">sales-index.html</p>                                                                                             
+                                                </div><!--end media body-->
+                                            </div>
+                                            <div class="align-self-center">
+                                                <a href="" class="btn btn-sm btn-soft-primary">3.7k <i class="las la-external-link-alt font-15"></i></a>  
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item align-items-center d-flex justify-content-between">
+                                            <div class="media">
+                                                <img src="assets/images/small/blocks.svg" height="30" class="me-3 align-self-center rounded" alt="...">
+                                                <div class="media-body align-self-center"> 
+                                                    <h6 class="m-0">Crovex - Admin Dashboard</h6>
+                                                    <p class="mb-0 text-muted">helpdesk-index.html</p>                                                                                          
+                                                </div><!--end media body-->
+                                            </div>
+                                            <div class="align-self-center">
+                                                <a href="" class="btn btn-sm btn-soft-primary">2.9k <i class="las la-external-link-alt font-15"></i></a>  
+                                            </div>   
+                                        </li>
+                                        <li class="list-group-item align-items-center d-flex justify-content-between">
+                                            <div class="media">
+                                                <img src="assets/images/small/atom.svg" height="30" class="me-3 align-self-center rounded" alt="...">
+                                                <div class="media-body align-self-center"> 
+                                                    <h6 class="m-0">Annex - Admin Dashboard</h6>
+                                                    <p class="mb-0 text-muted">calendar.html</p>                                                                                           
+                                                </div><!--end media body-->
+                                            </div>
+                                            <div class="align-self-center">
+                                                <a href="" class="btn btn-sm btn-soft-primary">1.6k <i class="las la-external-link-alt font-15"></i></a>                                                                                               
+                                            </div>   
+                                        </li>
+                                    </ul>                                
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <h2 class="m-0 align-self-center">80</h2>
+                                        <div class="d-block ms-2 align-self-center">
+                                            <span class="text-warning">Right now</span>
+                                            <h5 class="my-1">Traffic Sources</h5>
+                                            <p class="mb-0 text-muted">It is a long established fact that a reader will 
+                                                be of a page when looking at its layout.
+                                                <a href="" class="text-primary">Read More <i class="las la-arrow-right"></i></a>
+                                            </p>
                                         </div>
                                     </div>
-                                </div>
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div> <!--end col--> 
+                        <div class="col-lg-4"> 
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Sessions By Channel</h4>                      
+                                        </div><!--end col-->                                        
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->  
+                                <div class="card-body">                                    
+                                    <div id="barchart" class="apex-charts ms-n4"></div>                                                               
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div><!--end col-->
+                        
+                        
+                        <div class="col-lg-4">
+                            <div class="card">   
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Activity</h4>                      
+                                        </div><!--end col-->
+                                        <div class="col-auto"> 
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    All<i class="las la-angle-down ms-1"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#">Purchases</a>
+                                                    <a class="dropdown-item" href="#">Emails</a>
+                                                </div>
+                                            </div>          
+                                        </div><!--end col-->
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->                                              
+                                <div class="card-body"> 
+                                    <div class="analytic-dash-activity" data-simplebar>
+                                        <div class="activity">
+                                            <div class="activity-info">
+                                                <div class="icon-info-activity">
+                                                    <i class="las la-user-clock bg-soft-primary"></i>
+                                                </div>
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class="text-muted mb-0 font-13 w-75"><span>Donald</span> 
+                                                            updated the status of <a href="">Refund #1234</a> to awaiting customer response
+                                                        </p>
+                                                        <small class="text-muted">10 Min ago</small>
+                                                    </div>    
+                                                </div>
+                                            </div>   
 
+                                            <div class="activity-info">
+                                                <div class="icon-info-activity">
+                                                    <i class="mdi mdi-timer-off bg-soft-primary"></i>
+                                                </div>
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class="text-muted mb-0 font-13 w-75"><span>Lucy Peterson</span> 
+                                                            was added to the group, group name is <a href="">Overtake</a>
+                                                        </p>
+                                                        <small class="text-muted">50 Min ago</small>
+                                                    </div>    
+                                                </div>
+                                            </div>   
 
-                            </div>
-                        </div>
+                                            <div class="activity-info">
+                                                <div class="icon-info-activity">
+                                                    <img src="assets/images/users/user-5.jpg" alt="" class="rounded-circle thumb-sm">
+                                                </div>
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class="text-muted mb-0 font-13 w-75"><span>Joseph Rust</span> 
+                                                            opened new showcase <a href="">Mannat #112233</a> with theme market
+                                                        </p>
+                                                        <small class="text-muted">10 hours ago</small>
+                                                    </div>    
+                                                </div>
+                                            </div>   
+
+                                            <div class="activity-info">
+                                                <div class="icon-info-activity">
+                                                    <i class="mdi mdi-clock-outline bg-soft-primary"></i>
+                                                </div>
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class="text-muted mb-0 font-13 w-75"><span>Donald</span> 
+                                                            updated the status of <a href="">Refund #1234</a> to awaiting customer response
+                                                        </p>
+                                                        <small class="text-muted">Yesterday</small>
+                                                    </div>    
+                                                </div>
+                                            </div>   
+                                            <div class="activity-info">
+                                                <div class="icon-info-activity">
+                                                    <i class="mdi mdi-alert-outline bg-soft-primary"></i>
+                                                </div>
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class="text-muted mb-0 font-13 w-75"><span>Lucy Peterson</span> 
+                                                            was added to the group, group name is <a href="">Overtake</a>
+                                                        </p>
+                                                        <small class="text-muted">14 Nov 2019</small>
+                                                    </div>    
+                                                </div>
+                                            </div> 
+                                            <div class="activity-info">
+                                                <div class="icon-info-activity">
+                                                    <img src="assets/images/users/user-4.jpg" alt="" class="rounded-circle thumb-sm">
+                                                </div>
+                                                <div class="activity-info-text">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p class="text-muted mb-0 font-13 w-75"><span>Joseph Rust</span> 
+                                                            opened new showcase <a href="">Mannat #112233</a> with theme market
+                                                        </p>
+                                                        <small class="text-muted">15 Nov 2019</small>
+                                                    </div>    
+                                                </div>
+                                            </div>                                                                                                                                      
+                                        </div><!--end activity-->
+                                    </div><!--end analytics-dash-activity-->
+                                </div>  <!--end card-body-->                                     
+                            </div><!--end card--> 
+                        </div><!--end col--> 
+                       
+                    </div><!--end row-->
+                    <div class="row">                        
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Browser Used & Traffic Reports</h4>                      
+                                        </div><!--end col-->                                        
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->
+                                <div class="card-body">
+                                    <div class="table-responsive browser_users">
+                                        <table class="table mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="border-top-0">Channel</th>
+                                                    <th class="border-top-0">Sessions</th>
+                                                    <th class="border-top-0">Prev.Period</th>
+                                                    <th class="border-top-0">% Change</th>
+                                                </tr><!--end tr-->
+                                            </thead>
+                                            <tbody>
+                                                <tr>                                                        
+                                                    <td><a href="" class="text-primary">Organic search</a></td>
+                                                    <td>10853<small class="text-muted">(52%)</small></td>
+                                                    <td>566<small class="text-muted">(92%)</small></td>
+                                                    <td> 52.80% <i class="fas fa-caret-up text-success font-16"></i></td>
+                                                </tr><!--end tr-->     
+                                                <tr>                                                        
+                                                    <td><a href="" class="text-primary">Direct</a></td>
+                                                    <td>2545<small class="text-muted">(47%)</small></td>
+                                                    <td>498<small class="text-muted">(81%)</small></td>
+                                                    <td> -17.20% <i class="fas fa-caret-down text-danger font-16"></i></td>
+                                                    
+                                                </tr><!--end tr-->    
+                                                <tr>                                                        
+                                                    <td><a href="" class="text-primary">Referal</a></td>
+                                                    <td>1836<small class="text-muted">(38%)</small></td> 
+                                                    <td>455<small class="text-muted">(74%)</small></td>
+                                                    <td> 41.12% <i class="fas fa-caret-up text-success font-16"></i></td>
+                                                    
+                                                </tr><!--end tr-->    
+                                                <tr>                                                        
+                                                    <td><a href="" class="text-primary">Email</a></td>
+                                                    <td>1958<small class="text-muted">(31%)</small></td> 
+                                                    <td>361<small class="text-muted">(61%)</small></td>
+                                                    <td> -8.24% <i class="fas fa-caret-down text-danger font-16"></i></td>
+                                                </tr><!--end tr-->    
+                                                <tr>                                                        
+                                                    <td><a href="" class="text-primary">Social</a></td>
+                                                    <td>1566<small class="text-muted">(26%)</small></td> 
+                                                    <td>299<small class="text-muted">(49%)</small></td>
+                                                    <td> 29.33% <i class="fas fa-caret-up text-success"></i></td>
+                                                </tr><!--end tr-->                            
+                                            </tbody>
+                                        </table> <!--end table-->                                               
+                                    </div><!--end /div-->
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div> <!--end col-->   
+                        
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">                      
+                                            <h4 class="card-title">Browser Used & Traffic Reports</h4>                      
+                                        </div><!--end col-->                                        
+                                    </div>  <!--end row-->                                  
+                                </div><!--end card-header-->
+                                <div class="card-body">
+                                    <div class="table-responsive browser_users">
+                                        <table class="table mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="border-top-0">Browser</th>
+                                                    <th class="border-top-0">Sessions</th>
+                                                    <th class="border-top-0">Bounce Rate</th>
+                                                    <th class="border-top-0">Transactions</th>
+                                                </tr><!--end tr-->
+                                            </thead>
+                                            <tbody>
+                                                <tr>                                                        
+                                                    <td><img src="assets/images/browser_logo/chrome.png" alt="" height="16" class="me-2">Chrome</td>
+                                                    <td>10853<small class="text-muted">(52%)</small></td>                                   
+                                                    <td> 52.80%</td>
+                                                    <td>566<small class="text-muted">(92%)</small></td>
+                                                </tr><!--end tr-->     
+                                                <tr>                                                        
+                                                    <td><img src="assets/images/browser_logo/micro-edge.png" alt="" height="16" class="me-2">Microsoft Edge</td>
+                                                    <td>2545<small class="text-muted">(47%)</small></td>                                   
+                                                    <td> 47.54%</td>
+                                                    <td>498<small class="text-muted">(81%)</small></td>
+                                                </tr><!--end tr-->    
+                                                <tr>                                                        
+                                                    <td><img src="assets/images/browser_logo/in-explorer.png" alt="" height="16" class="me-2">Internet-Explorer</td>
+                                                    <td>1836<small class="text-muted">(38%)</small></td>                                   
+                                                    <td> 41.12%</td>
+                                                    <td>455<small class="text-muted">(74%)</small></td>
+                                                </tr><!--end tr-->    
+                                                <tr>                                                        
+                                                    <td><img src="assets/images/browser_logo/opera.png" alt="" height="16" class="me-2">Opera</td>
+                                                    <td>1958<small class="text-muted">(31%)</small></td>                                   
+                                                    <td> 36.82%</td>
+                                                    <td>361<small class="text-muted">(61%)</small></td>
+                                                </tr><!--end tr-->    
+                                                <tr>                                                        
+                                                    <td><img src="assets/images/browser_logo/chrome.png" alt="" height="16" class="me-2">Chrome</td>
+                                                    <td>10853<small class="text-muted">(52%)</small></td>                                   
+                                                    <td> 52.80%</td>
+                                                    <td>566<small class="text-muted">(92%)</small></td>
+                                                </tr><!--end tr-->                             
+                                            </tbody>
+                                        </table> <!--end table-->                                               
+                                    </div><!--end /div--> 
+                                </div><!--end card-body--> 
+                            </div><!--end card--> 
+                        </div> <!--end col-->
                     </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Dashboard.Expense') }}</p>
-                                        <h3 class="m-0">{{(parseFloat(expense)).toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="zap" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Dashboard.Credit') }}</p>
-                                        <h3 class="m-0">{{(parseFloat(creditAmount)).toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="activity" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Dashboard.Purchase') }}</p>
-                                        <h3 class="m-0">{{(parseFloat(purchase)).toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="calendar" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div><!--end row-->
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">{{ $t('Dashboard.Earning') }}</h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="bar" height="350" v-bind:key="randerChart" :options="earningChartOption" :series="earningSeries"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">
-                                            {{ $t('Dashboard.Sale/PurchaseOverview') }}
-                                        </h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="area" height="350" v-bind:key="randerChart" :options="chartOptionsPurchase" :series="seriesPurchase"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">
-                                            {{ $t('Dashboard.InvoiceOverview') }}
-                                        </h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="donut" width="340" height="330" :options="chartOptions" :series="series9"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">
-                                            {{ $t('Dashboard.Paid/Un-PaidInvoices') }}
-                                        </h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="pie" width="330" height="330" :options="chartOptionsPaidInvoices" :series="paidInvoicesSeries"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">
-                                            {{ $t('Dashboard.Sale/Purchase') }}
-                                        </h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="donut" width="310" height="330" :options="salesOptions" :series="purchaseSeries"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div>
+                    <!--end row-->
+                    
 
                 </div>
-            </div>
-            <div v-if="active == 'Account'">
-
-                <AccountDashboard :active="'Account'"></AccountDashboard>
-
-            </div>
-            <div v-if="active == 'Inventory'">
-
-                <InventoryDashboard :active="'Inventory'"></InventoryDashboard>
-            </div>
-            <div v-if="active == 'CashAndBank'">
-
-                <CashAndBankDashboard :active="'CashAndBank'"></CashAndBankDashboard>
-            </div>
-            <div v-if="active == 'HR'">
-
-                <HRDashboard :active="'Account'"></HRDashboard>
-            </div>
-        </div>
-
-
-
-    </div>
-
-
 
 
     
@@ -269,126 +561,6 @@
                 randerChart: 0,
                 income: 0,
                 randerDropdown: 0,
-                totalBank: 0,
-                totalInvoices: 0,
-                totalReturn: 0,
-                expense: 0,
-                purchase: 0,
-                creditAmount: 0,
-                earningSeries: [{
-                    name: this.$t('Dashboard.Earning'),
-                    data: []
-                }],
-                earningChartOption: {
-                    chart: {
-                        height: 350,
-                        type: 'area'
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    stroke: {
-                        curve: 'smooth'
-                    },
-                    xaxis: {
-                        type: 'datetime',
-                        categories: []
-                    },
-                    tooltip: {
-                        x: {
-                            format: 'dd/MM/yy HH:mm'
-                        },
-                    },
-                },
-
-                chartOptions: {
-                    labels: [this.$t('Dashboard.CreditInvoices'), this.$t('Dashboard.CashInvoices')]
-                },
-                salesOptions: {
-                    labels: [this.$t('Dashboard.Sales'), this.$t('Dashboard.Purchase')]
-                },
-                chartOptionsPaidInvoices: {
-                    labels: [this.$t('Dashboard.UnPaid'), this.$t('Dashboard.PartiallyPaid'), this.$t('Dashboard.FullyPaid')]
-                },
-                series9: [],
-                purchaseSeries: [],
-                paidInvoicesSeries: [],
-                creditInvoicesSeries: [],
-                chartOptionsCreditInvoices: {
-                    chart: {
-                        width: 380,
-                        type: 'donut',
-                    },
-                    plotOptions: {
-                        pie: {
-                            startAngle: -90,
-                            endAngle: 270
-                        }
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    fill: {
-                        type: 'gradient',
-                    },
-                    legend: {
-                        formatter: function (val, opts) {
-                            return val + " - " + opts.w.globals.creditInvoicesSeries[opts.seriesIndex]
-                        }
-                    },
-                    title: {
-
-                    },
-                    responsive: [{
-                        breakpoint: 480,
-                        options: {
-                            chart: {
-                                width: 200
-                            },
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }]
-                },
-
-                seriesPurchase: [{
-                    name: this.$t('Dashboard.Purchase'),
-                    data: []
-                }, {
-                    name: this.$t('Dashboard.Sales'),
-                    data: []
-                }],
-                chartOptionsPurchase: {
-                    chart: {
-                        height: 350,
-                        type: 'area'
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    stroke: {
-                        curve: 'smooth'
-                    },
-                    xaxis: {
-                        type: 'datetime',
-                        categories: []
-                    },
-                    tooltip: {
-                        x: {
-                            format: 'dd/MM/yy HH:mm'
-                        },
-                    },
-                },
-
-
-                loading: true,
-
-                search: '',
-
-                userID: 0,
-                employeeId: 0,
-                isChartLoad: false,
                 fromDate: moment().format("DD MMM YYYY"),
                 toDate: Date()
             }
@@ -401,84 +573,21 @@
 
                 this.active = item;
             },
-            OverViewFilterFunction: function (x) {
+            OverViewFilterFunction: function () {
 
 
-                this.overView = x;
-                this.GetCashTransaction();
             },
-            DetailOfProduct: function (x) {
-
-                this.$router.push({
-                    path: '/ProductDetailDashboard',
-                    query: { date: this.search, productId: x }
-                })
-            },
+           
             getDate: function (date) {
                 return moment(date).format('l');
             },
 
-            GetCashTransaction: function () {
-
-                var root = this;
-                var token = '';
-                if (this.$session.exists()) {
-                    token = localStorage.getItem('token');
-                }
-
-                this.$https.get('/Company/GetTransaction?currentDate=' + root.search + '&overViewFilter=' + this.overView + '&activeTab=' + this.active, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
-
-                    if (response.data != null) {
-
-                        root.series9 = [];
-                        root.purchaseSeries = [];
-                        root.paidInvoicesSeries = [];
-                        root.earningSeries[0].data = [];
-                        root.earningChartOption.xaxis.categories = [];
-                        root.seriesPurchase[0].data = [];
-                        root.seriesPurchase[1].data = [];
-                        root.chartOptionsPurchase.xaxis.categories = [];
-                        root.income = response.data.income;
-                        root.creditAmount = response.data.creditAmount;
-                        root.totalInvoices = response.data.totalInvoices;
-                        root.totalReturn = response.data.totalReturn;
-                        root.purchase = response.data.purchase;
-                        root.expense = response.data.expense;
-                        root.totalCreditInvoices = response.data.totalCreditInvoices;
-                        response.data.earningList.forEach(function (result) {
-                            root.earningSeries[0].data.push((parseFloat(result.amount)).toFixed(0));
-                            root.earningChartOption.xaxis.categories.push(result.date);
-                        });
-                        response.data.salePurchaseLookUpModel.forEach(function (result) {
-                            root.seriesPurchase[0].data.push((parseFloat(result.purchaseAmount)).toFixed(0));
-                            root.seriesPurchase[1].data.push(parseFloat(result.saleAmount).toFixed(0));
-                            root.chartOptionsPurchase.xaxis.categories.push(result.date);
-                        });
-
-                        var creditInvoices = parseInt((response.data.totalCreditInvoices / response.data.totalInvoices) * 100);
-                        var cashInvoices = parseInt((response.data.totalCashInvoices / response.data.totalInvoices) * 100);
-                        root.series9.push(creditInvoices);
-                        root.series9.push(cashInvoices);
-                        root.purchaseSeries.push(root.income);
-                        root.purchaseSeries.push(root.purchase);
-                        var unPaidInvoices = parseInt((response.data.unPaidInvoices / response.data.totalInvoices) * 100);
-                        var partially = parseInt((response.data.partiallyInvoices / response.data.totalInvoices) * 100);
-                        var fullyInvoices = parseInt((response.data.fullyInvoices / response.data.totalInvoices) * 100);
-                        root.paidInvoicesSeries.push(unPaidInvoices);
-                        root.paidInvoicesSeries.push(partially);
-                        root.paidInvoicesSeries.push(fullyInvoices);
-                        root.randerChart++;
-
-
-                    }
-                });
-            },
+           
 
 
         },
         created: function () {
 
-            this.$emit('input', this.$route.name);
         },
         mounted: function () {
 
@@ -491,19 +600,14 @@
                 this.userID = localStorage.getItem('UserID');
                 this.employeeId = localStorage.getItem('EmployeeId');
                 this.fromDate = moment().startOf('month').format("DD MMM YYYY");
-                //this.isDayStart();
-
-                // this.getDataSaleIncome();
+          
             }
 
-            this.GetCashTransaction();
             this.search = moment().format("DD MMM YYYY");
 
             this.chartbymonth = moment().format("DD MMM YYYY");
-            this.rander++;
-            this.randerDropdown++;
+        
 
-            //this.GetInventory(this.search, 1);
 
         },
     }
