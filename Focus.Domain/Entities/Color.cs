@@ -1,5 +1,4 @@
 ﻿using Focus.Domain.Interface;
-using System.Collections.Generic;
 
 namespace Focus.Domain.Entities
 {
