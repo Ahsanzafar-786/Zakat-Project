@@ -235,6 +235,7 @@ export default {
         },
 
         UserProfile: function () {
+            this.dashboard='';
             this.$router.push('/RegisterUser');
         },
 
