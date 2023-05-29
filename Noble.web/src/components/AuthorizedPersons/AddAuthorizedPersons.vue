@@ -20,6 +20,39 @@
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
+                            Name Arabic:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="$v.brand.nameAr.$model" type="text" />
+                    </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <label class="text  font-weight-bolder">
+                            Gender:<span class="text-danger"> *</span>
+                        </label>
+                        <select v-model="brand.gender" class="form-select" aria-label="Default select example">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <label class="text  font-weight-bolder">
+                            Nationality:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="brand.nationality" type="text" />
+                    </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <label class="text  font-weight-bolder">
+                            ID(Iqama):<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="brand.iqamaNo" type="text" />
+                    </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <label class="text  font-weight-bolder">
+                            Passport Number:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="brand.passportNo" type="text" />
+                    </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <label class="text  font-weight-bolder">
                             Phone No:
                         </label>
                         <input class="form-control" v-model="brand.phoneNo" type="number" />
@@ -52,7 +85,7 @@
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
-import { required } from "vuelidate/lib/validators"
+import { requiredIf } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
@@ -72,7 +105,14 @@ export default {
     validations: {
         brand: {
             name: {
-                required
+
+            },
+            nameAr: {
+                required: requiredIf((x) => {
+                    if (x.name == '' || x.name == null)
+                        return true;
+                    return false;
+                }),
             },
         }
     },

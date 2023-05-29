@@ -43,8 +43,13 @@ namespace Focus.Business.AuthorizPersons.Commands
                         {
                             AuthorizedPersonCode = authorizeNo,
                             Name = request.authorziedPersons.Name,
+                            NameAr = request.authorziedPersons.NameAr,
                             PhoneNo = request.authorziedPersons.PhoneNo,
                             Address = request.authorziedPersons.Address,
+                            Nationality = request.authorziedPersons.Nationality,
+                            Gender = request.authorziedPersons.Gender,
+                            IqamaNo = request.authorziedPersons.IqamaNo,
+                            PassportNo = request.authorziedPersons.PassportNo,
                         };
 
                         await Context.AuthorizedPersons.AddAsync(auth);
@@ -65,8 +70,13 @@ namespace Focus.Business.AuthorizPersons.Commands
 
                         authorziedPersonDetail.AuthorizedPersonCode = request.authorziedPersons.AuthorizedPersonCode;
                         authorziedPersonDetail.Name = request.authorziedPersons.Name;
+                        authorziedPersonDetail.NameAr = request.authorziedPersons.NameAr;
                         authorziedPersonDetail.PhoneNo = request.authorziedPersons.PhoneNo;
                         authorziedPersonDetail.Address = request.authorziedPersons.Address;
+                        authorziedPersonDetail.Nationality = request.authorziedPersons.Nationality;
+                        authorziedPersonDetail.Gender = request.authorziedPersons.Gender;
+                        authorziedPersonDetail.IqamaNo = request.authorziedPersons.IqamaNo;
+                        authorziedPersonDetail.PassportNo = request.authorziedPersons.PassportNo;
 
                         await Context.SaveChangesAsync();
 

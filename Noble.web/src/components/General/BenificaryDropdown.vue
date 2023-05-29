@@ -39,7 +39,7 @@ export default {
                     response.data.results.forEach(function (cat) {
                         root.options.push({
                             id: cat.id,
-                            name: cat.name
+                            name: cat.name == '' ? cat.nameAr : cat.name,
                         })
                     })
                 }

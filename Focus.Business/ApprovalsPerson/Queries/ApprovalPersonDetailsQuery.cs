@@ -1,4 +1,4 @@
-﻿using Focus.Business.AuthorizPersons.Model;
+﻿using Focus.Business.ApprovalsPerson.Model;
 using Focus.Business.Exceptions;
 using Focus.Business.Interface;
 using MediatR;
@@ -9,38 +9,34 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Focus.Business.AuthorizPersons.Queries
+namespace Focus.Business.ApprovalsPerson.Queries
 {
-    public class GetAuthorizedPersonDetailsQuery : IRequest<AuthorizedPersonsLookupModel>
+    public class ApprovalPersonDetailsQuery : IRequest<ApprovalPersonLookupModel>
     {
         public Guid Id { get; set; }
 
-        public class Handler : IRequestHandler<GetAuthorizedPersonDetailsQuery, AuthorizedPersonsLookupModel>
+        public class Handler : IRequestHandler<ApprovalPersonDetailsQuery, ApprovalPersonLookupModel>
         {
             public readonly IApplicationDbContext Context;
             private readonly ILogger _logger;
 
-            public Handler(IApplicationDbContext context, ILogger<GetAuthorizedPersonDetailsQuery> logger)
+            public Handler(IApplicationDbContext context, ILogger<ApprovalPersonDetailsQuery> logger)
             {
                 Context = context;
                 _logger = logger;
             }
-            public async Task<AuthorizedPersonsLookupModel> Handle(GetAuthorizedPersonDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<ApprovalPersonLookupModel> Handle(ApprovalPersonDetailsQuery request, CancellationToken cancellationToken)
             {
                 try
                 {
-                    var query = await Context.AuthorizedPersons.Select(x => new AuthorizedPersonsLookupModel
+                    var query = await Context.ApprovalPersons.Select(x => new ApprovalPersonLookupModel
                     {
                         Id = x.Id,
                         Name = x.Name,
-                        NameAr = x.NameAr,
-                        AuthorizedPersonCode= x.AuthorizedPersonCode,
+                        AprovalPersonId = x.AprovalPersonId,
                         PhoneNo = x.PhoneNo,
-                        Address = x.Address,
-                        Nationality = x.Nationality,
-                        PassportNo = x.PassportNo,
-                        Gender= x.Gender,
-                        IqamaNo = x.IqamaNo,
+                        Email = x.Email,
+                        NameAr = x.NameAr,
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                     if (query == null)

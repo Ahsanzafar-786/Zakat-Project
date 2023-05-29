@@ -47,10 +47,22 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
-                                        Authorized Person Id
+                                        ID
                                     </th>
                                     <th class="text-center">
                                         Name
+                                    </th>
+                                    <th class="text-center">
+                                        Gender
+                                    </th>
+                                    <th class="text-center">
+                                        ID(Iqama)
+                                    </th>
+                                    <th class="text-center">
+                                        Nationality
+                                    </th>
+                                    <th class="text-center">
+                                        Passport Number
                                     </th>
                                 </tr>
                             </thead>
@@ -72,6 +84,18 @@
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditauthorizedPerson(brand.id)"> {{ brand.name }}</a>
                                         </strong>
+                                    </td>
+                                    <td class="text-center">
+                                        {{ brand.gender }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ brand.iqamaNo }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ brand.nationality }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ brand.passportNo }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -137,9 +161,14 @@ export default {
             newauthorizedPerson: {
                 id: '',
                 name: '',
+                nameAr: '',
                 authorizedPersonCode: 0,
-                phoneNo: 0,
-                Address: '', 
+                phoneNo: '',
+                address: '', 
+                passportNo: '',
+                nationality: '',
+                gender: '',
+                iqamaNo: ''
             },
             type: '',
             search: '',
@@ -173,9 +202,14 @@ export default {
             this.newauthorizedPerson = {
                 id: '00000000-0000-0000-0000-000000000000',
                 name: '',
+                nameAr: '',
                 authorizedPersonCode: 0,
-                phoneNo: 0,
-                Address: '', 
+                phoneNo: '',
+                address: '', 
+                passportNo: '',
+                nationality: '',
+                gender: 'Male',
+                iqamaNo: '' 
             }
             this.show = !this.show;
             this.type = "Add";

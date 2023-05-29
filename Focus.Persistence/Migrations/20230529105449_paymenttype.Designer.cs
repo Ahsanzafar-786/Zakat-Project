@@ -4,6 +4,7 @@ using Focus.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Focus.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230529105449_paymenttype")]
+    partial class paymenttype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,12 +215,6 @@ namespace Focus.Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GetUtcDate()");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IqamaNo")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ModifiedById")
                         .HasColumnType("nvarchar(max)");
 
@@ -231,12 +227,6 @@ namespace Focus.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nationality")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PassportNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNo")
@@ -254,9 +244,6 @@ namespace Focus.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("AmountPerMonth")
                         .HasColumnType("decimal(18,4)");
@@ -302,9 +289,6 @@ namespace Focus.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nationality")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Note")
@@ -631,7 +615,7 @@ namespace Focus.Persistence.Migrations
                             Blocked = false,
                             CashVoucher = false,
                             CompanyRegNo = "56ty60",
-                            CreatedDate = new DateTime(2023, 5, 29, 12, 39, 7, 182, DateTimeKind.Utc).AddTicks(3880),
+                            CreatedDate = new DateTime(2023, 5, 29, 10, 54, 48, 363, DateTimeKind.Utc).AddTicks(8905),
                             DayStart = false,
                             English = false,
                             ExpenseAccount = false,

@@ -98,6 +98,34 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
+                                {{ $t('Approval Person') }}
+                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                        </a>
+
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/approvalpersons')" href="javascript:void(0);"> {{ $t('Approvals Person')
+                                }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
+                                {{ $t('Payment Type') }}
+                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                        </a>
+
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/paymenttype')" href="javascript:void(0);"> {{ $t('Payment Type')
+                                }}</a>
+                            </li>
+                        </ul>
+                    </li>
                     
                 </ul>
             </div>

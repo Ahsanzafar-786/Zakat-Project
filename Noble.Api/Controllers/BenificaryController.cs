@@ -14,6 +14,12 @@ using Focus.Business.BenificiariesNotes.Queries;
 using Focus.Business.CharityResource.Model;
 using Focus.Business.CharityResource.Commands;
 using Focus.Business.CharityResource.Queries;
+using Focus.Business.ApprovalsPerson.Model;
+using Focus.Business.ApprovalsPerson.Command;
+using Focus.Business.ApprovalsPerson.Queries;
+using Focus.Business.PaymentsType.Commands;
+using Focus.Business.PaymentsType.Model;
+using Focus.Business.PaymentsType.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -173,6 +179,80 @@ namespace Noble.Api.Controllers
                 Id = id
             });
             return Ok(charity);
+        }
+
+        #endregion
+
+        #region ApprovalPersons
+        [Route("api/Benificary/SaveApprovalPersons")]
+        [HttpPost("SaveApprovalPersons")]
+        public async Task<IActionResult> SaveApprovalPersons([FromBody] ApprovalPersonLookupModel approvalsPerson)
+        {
+            var message = await Mediator.Send(new ApprovalSystemAddUpdateCommand
+            {
+                ApprovalsPerson = approvalsPerson
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetApprovalPersonsList")]
+        [HttpGet("GetApprovalPersonsList")]
+        public async Task<IActionResult> GetApprovalPersonsList(string searchTerm, int? pageNumber, bool isDropDown)
+        {
+            var approvalPersons = await Mediator.Send(new ApprovalPersonListQuery
+            {
+                SearchTerm = searchTerm,
+                IsDropDown = isDropDown,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(approvalPersons);
+        }
+
+        [Route("api/Benificary/GetApprovalPersonsDetail")]
+        [HttpGet("GetApprovalPersonsDetail")]
+        public async Task<IActionResult> GetApprovalPersonsDetail(Guid id)
+        {
+            var approvalPersons = await Mediator.Send(new ApprovalPersonDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(approvalPersons);
+        }
+
+        #endregion
+
+        #region PaymentTypes
+        [Route("api/Benificary/SavePaymentType")]
+        [HttpPost("SavePaymentType")]
+        public async Task<IActionResult> SavePaymentType([FromBody] PaymentTypeLookupModel payment)
+        {
+            var message = await Mediator.Send(new PaymentTypeAddUpdateCommand
+            {
+                Payments = payment
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetPaymentTypeList")]
+        [HttpGet("GetPaymentTypeList")]
+        public async Task<IActionResult> GetPaymentTypeList(string searchTerm, int? pageNumber, bool isDropDown)
+        {
+            var payment = await Mediator.Send(new PayementTypeListQuery
+            {
+                SearchTerm = searchTerm,
+                IsDropDown = isDropDown,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(payment);
+        }
+
+        [Route("api/Benificary/GetPaymentTypeDetail")]
+        [HttpGet("GetPaymentTypeDetail")]
+        public async Task<IActionResult> GetPaymentTypeDetail(Guid id)
+        {
+            var payment = await Mediator.Send(new PaymentTypeDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(payment);
         }
 
         #endregion

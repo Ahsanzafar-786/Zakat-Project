@@ -37,6 +37,7 @@ namespace Focus.Business.Benificary.Queries
                         {
                             Id= x.Id,
                             Name = x.Name,
+                            NameAr =x.NameAr,
                         }).ToListAsync();
 
                         return new PagedResult<List<BenificariesLookupModel>>
@@ -58,6 +59,15 @@ namespace Focus.Business.Benificary.Queries
                             IsActive = x.IsActive,
                             IsRegister = x.IsRegister,
                             AuthorizationPersonName = x.AuthorizedPersons.Name,
+                            AuthorizedPersonId = x.AuthorizedPersonId,
+                            Address = x.Address,
+                            ApprovalPersonId = x.ApprovalPersonId,
+                            Nationality = x.Nationality,
+                            Gender = x.Gender,
+                            NameAr = x.NameAr,
+                            PassportNo = x.PassportNo,
+                            PaymentTypeId = x.PaymentTypeId,
+                            RecurringAmount = x.RecurringAmount,
                         }).AsQueryable();
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))

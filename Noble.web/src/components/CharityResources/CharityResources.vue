@@ -52,9 +52,9 @@
                                     <th class="text-center">
                                         Name
                                     </th>
-                                    <th class="text-center">
+                                    <!-- <th class="text-center">
                                         Contact Person
-                                    </th>
+                                    </th> -->
                                     <th class="text-center">
                                        Status
                                     </th>
@@ -82,9 +82,9 @@
                                             <a href="javascript:void(0)" v-on:click="EditCharityResources(brand.id)"> {{ brand.name }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         {{ brand.contactPerson }}
-                                    </td>
+                                    </td> -->
                                     <td class="text-center">
                                         <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
                                             {{

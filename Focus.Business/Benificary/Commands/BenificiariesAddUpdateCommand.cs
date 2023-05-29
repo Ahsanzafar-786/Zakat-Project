@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Focus.Business.Benificary.Models;
 using Focus.Business.Common;
 using Focus.Business.Exceptions;
@@ -6,6 +7,7 @@ using Focus.Business.Interface;
 using Focus.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +60,14 @@ namespace Focus.Business.Benificary.Commands
                                 PhoneNo = request.benificiaries.PhoneNo,
                                 Note = request.benificiaries.Note,
                                 IsActive = request.benificiaries.IsActive,
+                                ApprovalPersonId= request.benificiaries.ApprovalPersonId,
+                                Address= request.benificiaries.Address,
+                                AuthorizedPersonId= request.benificiaries.AuthorizedPersonId,
+                                PaymentTypeId = request.benificiaries.PaymentTypeId,
+                                NameAr = request.benificiaries.NameAr,
+                                Nationality = request.benificiaries.Nationality,
+                                Gender = request.benificiaries.Gender,
+                                PassportNo = request.benificiaries.PassportNo,
                                 IsRegister = false,
                             };
 
@@ -80,11 +90,18 @@ namespace Focus.Business.Benificary.Commands
                                 PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
                                 AmountPerMonth = Convert.ToDecimal(request.benificiaries.AmountPerMonth),
                                 RecurringAmount = Convert.ToDecimal(request.benificiaries.RecurringAmount),
-                                AuthorizedPersonId= request.benificiaries.AuthorizedPersonId,
                                 UgamaNo = request.benificiaries.UgamaNo,
                                 PhoneNo = request.benificiaries.PhoneNo,
                                 Note = request.benificiaries.Note,
                                 IsActive = request.benificiaries.IsActive,
+                                ApprovalPersonId = request.benificiaries.ApprovalPersonId,
+                                Address = request.benificiaries.Address,
+                                AuthorizedPersonId = request.benificiaries.AuthorizedPersonId,
+                                PaymentTypeId = request.benificiaries.PaymentTypeId,
+                                NameAr = request.benificiaries.NameAr,
+                                Nationality = request.benificiaries.Nationality,
+                                Gender = request.benificiaries.Gender,
+                                PassportNo = request.benificiaries.PassportNo,
                                 IsRegister = true,
                             };
 
@@ -118,6 +135,13 @@ namespace Focus.Business.Benificary.Commands
                             benifiaryDetail.PhoneNo = request.benificiaries.PhoneNo;
                             benifiaryDetail.Note = request.benificiaries.Note;
                             benifiaryDetail.IsActive = request.benificiaries.IsActive;
+                            benifiaryDetail.ApprovalPersonId = request.benificiaries.ApprovalPersonId;
+                            benifiaryDetail.Address = request.benificiaries.Address;
+                            benifiaryDetail.PaymentTypeId = request.benificiaries.PaymentTypeId;
+                            benifiaryDetail.NameAr = request.benificiaries.NameAr;
+                            benifiaryDetail.Nationality = request.benificiaries.Nationality;
+                            benifiaryDetail.Gender = request.benificiaries.Gender;
+                            benifiaryDetail.PassportNo = request.benificiaries.PassportNo;
                             benifiaryDetail.IsRegister = false;
 
                             //Save changes to database
@@ -138,10 +162,17 @@ namespace Focus.Business.Benificary.Commands
                             benifiaryDetail.AmountPerMonth = Convert.ToDecimal(request.benificiaries.AmountPerMonth);
                             benifiaryDetail.RecurringAmount = Convert.ToDecimal(request.benificiaries.RecurringAmount);
                             benifiaryDetail.UgamaNo = request.benificiaries.UgamaNo;
+                            benifiaryDetail.AuthorizedPersonId = request.benificiaries.AuthorizedPersonId;
                             benifiaryDetail.PhoneNo = request.benificiaries.PhoneNo;
                             benifiaryDetail.Note = request.benificiaries.Note;
                             benifiaryDetail.IsActive = request.benificiaries.IsActive;
-                            benifiaryDetail.AuthorizedPersonId = request.benificiaries.AuthorizedPersonId;
+                            benifiaryDetail.ApprovalPersonId = request.benificiaries.ApprovalPersonId;
+                            benifiaryDetail.Address = request.benificiaries.Address;
+                            benifiaryDetail.PaymentTypeId = request.benificiaries.PaymentTypeId;
+                            benifiaryDetail.NameAr = request.benificiaries.NameAr;
+                            benifiaryDetail.Nationality = request.benificiaries.Nationality;
+                            benifiaryDetail.Gender = request.benificiaries.Gender;
+                            benifiaryDetail.PassportNo = request.benificiaries.PassportNo;
                             benifiaryDetail.IsRegister = true;
 
                             //Save changes to database
