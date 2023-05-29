@@ -188,7 +188,7 @@
 <script>
 
 
-    import { required, maxLength, email, requiredIf, sameAs } from 'vuelidate/lib/validators';
+    import { required, maxLength, email, sameAs } from 'vuelidate/lib/validators';
     import Loading from 'vue-loading-overlay';
     import 'vue-loading-overlay/dist/vue-loading.css';
     import Vue from 'vue';
@@ -274,26 +274,14 @@
 
                 firstName:
                 {
-                    required: requiredIf(function (model) {
-
-                        if (model.id == '') {
-                            return true;
-                        }
-                        return false;
-                    }),
+                    required,
                     maxLength: maxLength(30)
                 },
 
 
                 email:
                 {
-                    required: requiredIf(function (model) {
-
-                        if (model.id == '') {
-                            return true;
-                        }
-                        return false;
-                    }),
+                    required,
                     email,
 
 
