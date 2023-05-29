@@ -37,7 +37,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li v-if="roleName=='Admin'">
                     <a href="javascript:void(0);">
                         <i data-feather="user" class="align-self-center menu-icon"></i><span>
                             {{ $t('Dashboard.UserSetup') }}
@@ -70,7 +70,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li v-if="roleName!='Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Authorized Persons') }}
@@ -84,7 +84,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li v-if="roleName!='Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Charity') }}
@@ -98,7 +98,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li v-if="roleName!='Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Approval Person') }}
@@ -112,7 +112,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li v-if="roleName!='Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Payment Type') }}
