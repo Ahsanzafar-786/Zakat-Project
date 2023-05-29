@@ -29,7 +29,6 @@
                             Gender:<span class="text-danger"> *</span>
                         </label>
                         <select v-model="brand.gender" class="form-select" aria-label="Default select example">
-                            <option selected>Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>

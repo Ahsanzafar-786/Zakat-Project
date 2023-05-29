@@ -208,7 +208,7 @@ export default {
                 address: '', 
                 passportNo: '',
                 nationality: '',
-                gender: '',
+                gender: 'Male',
                 iqamaNo: '' 
             }
             this.show = !this.show;
