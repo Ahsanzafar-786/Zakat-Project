@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Phone No:
+                            Contact No:
                         </label>
                         <input class="form-control" v-model="brand.phoneNo" type="number" />
                     </div>

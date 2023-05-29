@@ -62,7 +62,7 @@
                                        Ugama No
                                     </th>
                                     <th class="text-center">
-                                       Phone No
+                                        Contact No
                                     </th>
                                     <th class="text-center">
                                       Authorize Person Name

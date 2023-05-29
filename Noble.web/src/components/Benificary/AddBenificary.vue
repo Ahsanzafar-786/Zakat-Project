@@ -36,7 +36,7 @@
 
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                Phone No:<span class="text-danger"> *</span>
+                                Contact No:<span class="text-danger"> *</span>
                             </label>
                             <input class="form-control" v-model="$v.brand.phoneNo.$model" type="number" />
                         </div>
