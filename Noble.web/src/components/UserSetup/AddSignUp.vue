@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label>Role Id :<span class="text-danger"> *</span></label>
-                            <roledropdown v-model="loginDetails.roleName" :values="loginDetails.roleName"></roledropdown>
+                            <roledropdown v-model="loginDetails.roleName" :values="loginDetails.roleName" :isDisable="loginDetails.isProceed"></roledropdown>
                            
                         </div>
                         <div class="col-sm-6">
@@ -399,12 +399,14 @@
                     this.loginDetails.email = this.$route.query.data.email;
                     this.loginDetails.userName = this.$route.query.data.userName;
                     this.loginDetails.roleName = this.$route.query.data.roleName;
+                    this.loginDetails.isProceed = this.$route.query.data.isProceed;
                     this.rander++;
                 }
             }
         },
         created: function () {
-            this.$emit('input', this.$route.name);
+            this.getUserWiseRecords();
+
             
         },
         mounted: function () {
@@ -412,7 +414,6 @@
             this.arabic = localStorage.getItem('Arabic');
             this.isOpenDay = localStorage.getItem('IsOpenDay') == 'true' ? true : false;
             this.language = this.$i18n.locale;
-            this.getUserWiseRecords();
         }
     })
 </script>

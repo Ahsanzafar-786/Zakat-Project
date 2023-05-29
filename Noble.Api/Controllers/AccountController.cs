@@ -426,6 +426,7 @@ namespace Noble.Api.Controllers
                         LastName = user.LastName,
                         Email = user.Email,
                         UserName = user.UserName,
+                        IsProceed = user.IsProceed,
                         RoleName= roleName
                     };
                     return Ok(loginUser);
@@ -543,8 +544,6 @@ namespace Noble.Api.Controllers
                         UserId = loginVm.UserName,
                         PhoneNumber = loginVm.PhoneNumber,
                         IsActive = loginVm.IsActive,
-                        TerminalId = loginVm.TerminalId,
-                        OnlineTerminalId = loginVm.OnlineTerminalId,
                         Code = code,
                     };
 
@@ -552,13 +551,11 @@ namespace Noble.Api.Controllers
                     {
                         UserName = register.UserId,
                         Email = register.Email,
-                        TerminalId = register.TerminalId,
                         FirstName = register.FirstName,
                         LastName = register.LastName,
                         EmployeeId = loginVm.EmployeeId,
                         CompanyId = User.Identity.CompanyId(),
                         IsActive = register.IsActive,
-                        OnlineTerminalId = register.OnlineTerminalId,
                         Code = register.Code
 
                     };
@@ -573,7 +570,7 @@ namespace Noble.Api.Controllers
 
                     if (result.Succeeded)
                     {
-                        await _userManager.AddToRoleAsync(user, register.RoleName);
+                        await _userManager.AddToRoleAsync(user, loginVm.RoleName);
                         var claims = new List<Claim>
                         {   new Claim("Email",user.Email),
                             new Claim("FullName",$"{user.FirstName}{user.LastName}"),
@@ -599,8 +596,6 @@ namespace Noble.Api.Controllers
                 currentUser.FirstName = loginVm.UserName;
                 currentUser.NormalizedUserName = loginVm.UserName.ToUpper();
                 currentUser.IsActive = loginVm.IsActive;
-                currentUser.TerminalId = loginVm.TerminalId;
-                currentUser.OnlineTerminalId = loginVm.OnlineTerminalId;
                 await _userManager.UpdateAsync(currentUser);
 
                 var role = await _userManager.GetRolesAsync(currentUser);
@@ -633,7 +628,6 @@ namespace Noble.Api.Controllers
                     var user = await _userManager.FindByIdAsync(User.Identity.UserId());
                   
                     await _userManager.RemoveClaimAsync(user, new Claim("Email", user.Email, ClaimValueTypes.Boolean));
-                    await _userManager.RemoveClaimAsync(user, new Claim("FullName", loginVm.FirstName, ClaimValueTypes.Boolean));
                     var claims = new List<Claim>
                     {   new Claim("Email",user.Email),
                         new Claim("FullName",$"{user.FirstName}{user.LastName}"),

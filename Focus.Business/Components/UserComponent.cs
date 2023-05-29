@@ -135,14 +135,13 @@ namespace Focus.Business.Components
                         var userDto = new UserDetailDto
                         {
                             Id = user.Id,
-                            //FullName = user.FirstName + " " + user.LastName,
                             FullName = user.UserName,
                             Email = user.Email,
                             PhoneNumber = user.PhoneNumber,
-                            CompanyName = _context.Companies.FirstOrDefault(x => x.Id == user.CompanyId)?.NameEnglish,
                             ImagePath = user.ImagePath,
                             EmployeeId = user.EmployeeId,
                             IsActive = user.IsActive,
+                            IsProceed = user.IsProceed
                         };
                         userList.Add(userDto);
                     }

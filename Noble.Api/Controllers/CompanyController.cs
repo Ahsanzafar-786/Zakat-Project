@@ -23,11 +23,9 @@ using Microsoft.AspNetCore.Hosting;
 
 using Microsoft.EntityFrameworkCore;
 
-using Focus.Domain.Interface;
 using Microsoft.Extensions.Configuration;
 
 
-using Focus.Business;
 
 namespace Noble.Api.Controllers
 {
@@ -205,6 +203,7 @@ namespace Noble.Api.Controllers
                         FirstName = register.FirstName,
                         LastName = register.LastName,
                         CompanyId = company.Id,
+                        IsProceed = true,
 
                     };
 

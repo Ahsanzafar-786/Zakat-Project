@@ -74,7 +74,6 @@
    
 </template>
 <script>
-    import moment from 'moment';
     import clickMixin from '@/Mixins/clickMixin'
     export default {
         mixins: [clickMixin],
@@ -128,45 +127,7 @@
                     }
                 });
             },
-            GetEmployeeCode: function (user) {
-                debugger
-                var root = this;
-                var token = '';
-                if (root.$session.exists()) {
-                    token = localStorage.getItem('token');
-                }
-                root.$https
-                    .get('/EmployeeRegistration/EmployeeCode', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
-                        if (response.data != null) {
-
-                            var employee = {
-                                id: '00000000-0000-0000-0000-000000000000',
-                                code: response.data,
-                                registrationDate: moment().format('llll'),
-                                englishName: user.fullName,
-                                gender: '',
-                                idNumber: '',
-                                arabicName: '',
-                                martialStatus: '',
-                                employeeType: '',
-                                nationality: '',
-                                dateOfBirth: '',
-                                mobileNo: '',
-                                isSignup: true,
-                                email: user.email,
-
-                            };
-                            root.$router.push({
-                                path: '/addEmployeeRegistration',
-                                query: {
-                                    data: employee
-                                }
-                            })
-
-                        }
-                    });
-            },
-
+           
             EditInfo: function (id) {
                 
                 var root = this;
@@ -209,42 +170,10 @@
                 });
             },
 
-            EditEmployeeStatus: function (Id, isActive) {
-
-                var root = this;
-                var token = '';
-                if (this.$session.exists()) {
-                    token = localStorage.getItem('token');
-                }
-                
-                this.user.id = Id;
-                this.user.isActive = !isActive;
-
-                root.$https.post('/EmployeeRegistration/SaveEmployeeStatus', root.user, { headers: { "Authorization": `Bearer ${token}` } })
-                    .then(function (response) {
-                        if (response.data != '00000000-0000-0000-0000-000000000000') {
-                            root.GetData();
-                            root.$swal.fire({
-                                icon: 'success',
-                                title: 'Employee Status Change',
-                                showConfirmButton: false,
-                                timer: 1800,
-                                timerProgressBar: true,
-
-                            });
-                        }
-                    },
-                        function (error) {
-                            root.loading = false;
-                            console.log(error);
-                        });
-
-            }
+           
 
         },
-        created: function () {
-            this.$emit('input', this.$route.name);
-        },
+       
         mounted: function () {
             this.GetData();
         }

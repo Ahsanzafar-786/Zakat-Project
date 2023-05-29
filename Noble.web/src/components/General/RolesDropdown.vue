@@ -1,6 +1,6 @@
 <template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options" :multiple="false"  :placeholder="$t('RolesDropdown.SelectUser')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" :preselect-first="true">
+        <multiselect v-bind:disabled="isDisable" v-model="DisplayValue" :options="options" :multiple="false"  :placeholder="$t('RolesDropdown.SelectUser')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" :preselect-first="true">
         </multiselect>
     </div>
 </template>
@@ -12,7 +12,7 @@
         mixins: [clickMixin],
 
         name: 'userRolesdropdown',
-        props: ["values"],
+        props: ["values","isDisable"],
         components: {
             Multiselect
         },

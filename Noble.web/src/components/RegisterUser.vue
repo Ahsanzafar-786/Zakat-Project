@@ -373,7 +373,6 @@
                 verificationCode: '',
                 recoveryCode: '',
                 randerImage: 0,
-                loginHistoryList: [],
                 userIdForHistory: '00000000-0000-0000-0000-000000000000',
                 randerDate: 0
             }
@@ -426,10 +425,8 @@
         watch: {
             toDate: function () {
 
-                this.LoginHistoryList();
             },
             fromDate: function () {
-                this.LoginHistoryList();
             }
         },
         methods: {
@@ -438,31 +435,8 @@
 
                 this.fullName = value.name;
                 this.userIdForHistory = value.id;
-                this.LoginHistoryList()
             },
-            LoginHistoryList: function () {
-                var root = this;
-                var token = '';
-                if (root.$session.exists()) {
-                    token = localStorage.getItem('token');
-                }
-
-                if (this.role == 'Admin' && this.userIdForHistory != '') {
-
-                    root.$https.get('account/LoginHistoryList?userId=' + this.userIdForHistory + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate, { headers: { "Authorization": `Bearer ${token}` } }).then(function (responce) {
-
-                        root.loginHistoryList = responce.data
-                        root.role = responce.data[0].userRole
-                    });
-                }
-                else {
-                    root.$https.get('account/LoginHistoryList?userId=' + this.UserID, { headers: { "Authorization": `Bearer ${token}` } }).then(function (responce) {
-
-                        root.loginHistoryList = responce.data
-                        root.role = responce.data[0].userRole
-                    });
-                }
-            },
+            
             MainScreen: function () {
                 this.isMainScreen = true;
                 this.disable2FaButton = false;
@@ -801,7 +775,6 @@
             }
         },
         mounted: function () {
-            this.LoginHistoryList();
 
             this.fullName = localStorage.getItem('FullName');
             this.UserName = localStorage.getItem('UserName');
