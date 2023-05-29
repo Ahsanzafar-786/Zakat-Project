@@ -21,6 +21,7 @@ namespace Focus.Business.Interface
         Task UpdateProfilePictureAsync(ProfileDto dto);
         UserDetailDto GetAllUserRoles();
         List<UserDetailDto> ListingUsers();
+        List<RolesDto> GetAllRoles();
         List<UserDetailDto> ForRoleUsersList(bool isHistory, bool istransferTerminal, bool isSupervisorTerminal);
         //ManageUserDto EditUserRole(string id);
         //Task UpdateRoleAsync(ManageUserDto dto);

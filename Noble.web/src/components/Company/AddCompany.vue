@@ -45,25 +45,6 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label>Commercial Registration No :</label>
-                            <div v-bind:class="{'has-danger' : $v.company.comercialRegNo.$error}">
-                                <input class="form-control" v-model="$v.company.comercialRegNo.$model" />
-                                <span v-if="$v.company.comercialRegNo.$error" class="error text-danger">
-                                    <span v-if="!$v.company.comercialRegNo.maxLength"> Comercial RegNo  maximum length 50</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="company.TaxRegisterNo">VAT / NTN /TAX No  : <span class="text-danger"> *</span></label>
-                            <div v-bind:class="{'has-danger' : $v.company.vatRegistrationNo.$error}">
-                                <input class="form-control" v-model="$v.company.vatRegistrationNo.$model" />
-                                <span v-if="$v.company.vatRegistrationNo.$error" class="error text-danger">
-                                    <span v-if="!$v.company.vatRegistrationNo.required">Vat No is Required</span>
-                                    <span v-if="!$v.company.vatRegistrationNo.maxLength">Vat No Maximum length 50</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
                             <label for="company.email">Company Email : <span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.company.companyEmail.$error,'has-blue':($v.company.companyEmail.required && $v.company.companyEmail.email)}">
                                 <input class="form-control" v-model="$v.company.companyEmail.$model" />
@@ -76,6 +57,18 @@
 
                         </div>
                         <div class="col-sm-4">
+                            <label>Commercial Registration No :</label>
+                          
+                                <input class="form-control" v-model="company.comercialRegNo" />
+                              
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="company.TaxRegisterNo">VAT / NTN /TAX No  : </label>
+                            <input class="form-control" v-model="company.vatRegistrationNo" />
+                          
+                        </div>
+                       
+                        <div class="col-sm-4">
                             <label>Website: </label>
                             <div>
                                 <input class="form-control" v-model="company.website" />
@@ -83,52 +76,28 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label>Mobile Number: <span class="text-danger"> *</span></label>
-                            <div v-bind:class="{'has-danger' : $v.company.phoneNo.$error}">
-                                <input class="form-control" v-model="$v.company.phoneNo.$model" type="number" />
-                                <span v-if="$v.company.phoneNo.$error" class="error text-danger">
-                                    <span v-if="!$v.company.phoneNo.required">Phone No is Required  </span>
-                                    <span v-if="!$v.company.phoneNo.maxLength">Phone No Maximum length is 20</span>
-                                </span>
-                            </div>
+                            <label>Mobile Number: </label>
+                            <input class="form-control" v-model="company.phoneNo" type="number" />
                         </div>
                         <div class="col-sm-4">
                             <label>Landline Number: </label>
-                            <div v-bind:class="{'has-danger' : $v.company.landLine.$error}">
-                                <input class="form-control" type="number" v-model="$v.company.landLine.$model" />
-                                <span v-if="$v.company.landLine.$error" class="error text-danger">
-                                    <span v-if="!$v.company.landLine.maxLength">LandLine Maximum length is 20</span>
-                                </span>
-                            </div>
+                            <input class="form-control" type="number" v-model="company.landLine" />
+
                         </div>
 
                         <div class="col-sm-4">
                             <label for="company.country">Country: </label>
-                            <div v-bind:class="{'has-danger' : $v.company.countryEnglish.$error}">
-                                <country-select class="form-control" v-model="company.countryEnglish" :country="country" topCountry="SA" />
-                                <span v-if="$v.company.countryEnglish.$error" class="error text-danger">
-                                    <span v-if="!$v.company.countryEnglish.maxLength">Country Maximum length is 50</span>
-                                </span>
-                            </div>
+                            <country-select class="form-control" v-model="company.countryEnglish" :country="country" topCountry="SA" />
+
                         </div>
                         <div class="col-sm-4">
                             <label for="company.city">City: </label>
-                            <div v-bind:class="{'has-danger' : $v.company.cityEnglish.$error}">
-                                <input class="form-control" v-model="$v.company.cityEnglish.$model" />
-                                <span v-if="$v.company.cityEnglish.$error" class="error text-danger">
-                                    <span v-if="!$v.company.cityEnglish.maxLength">City Maximum length is 50</span>
-                                </span>
-                            </div>
+                            <input class="form-control" v-model="company.cityEnglish" />
+
                         </div>
                         <div class="col-sm-8">
-                            <label for="company.address">Address: <span class="text-danger"> *</span></label>
-                            <div v-bind:class="{'has-danger' : $v.company.addressEnglish.$error}">
-                                <textarea class="form-control" v-model="$v.company.addressEnglish.$model" />
-                                <span v-if="$v.company.addressEnglish.$error" class="error text-danger">
-                                    <span v-if="!$v.company.addressEnglish.required">Address  is Required  </span>
-                                    <span v-if="!$v.company.addressEnglish.maxLength">Address Maximum length is 200</span>
-                                </span>
-                            </div>
+                            <label for="company.address">Address: </label>
+                            <textarea class="form-control" v-model="company.addressEnglish" />
                         </div>
                         <div v-if="$route.query.data!=undefined" class="card-footer col-md-12 text-right">
                             <a href="javascript:void(0)" class="btn btn-outline-primary  mr-2" v-on:click="SaveCompany" v-bind:disabled="$v.company.$invalid"><i class="fa fa-save"></i> Update</a>
@@ -277,36 +246,16 @@
             {
                 nameEnglish:
                 {
+                    required,
                     maxLength: maxLength(50)
                 },
 
-                vatRegistrationNo:
-                {
-                    maxLength: maxLength(50)
-                },
-                comercialRegNo:
-                {
-                    maxLength: maxLength(50)
-                },
-                cityEnglish:
-                {
-                    maxLength: maxLength(50)
-                },
+             
 
-                countryEnglish:
-                {
-                    maxLength: maxLength(50)
-                },
-
-                phoneNo:
-                {
-
-
-                    maxLength: maxLength(20)
-                },
 
                 companyEmail:
                 {
+                    required,
                     email
 
                 },
@@ -321,11 +270,7 @@
                     required,
                     sameAsPassword: sameAs('password')
                 },
-                addressEnglish:
-                {
-                    required,
-                    maxLength: maxLength(200)
-                },
+                
 
                 firstName:
                 {

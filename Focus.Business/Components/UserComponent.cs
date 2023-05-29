@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Focus.Business.Extensions;
 using Focus.Business.Interface;
 using Focus.Business.Models;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 
 namespace Focus.Business.Components
@@ -33,7 +32,16 @@ namespace Focus.Business.Components
             _userManager = userManager;
             _roleManager = roleManager;
         }
+        public List<RolesDto> GetAllRoles()
+        {
+            var roles = _roleManager.Roles.Where(x=>x.Name!= "Noble Admin" && x.Name!= "Super Admin").Select(x=>new RolesDto
+            {
+                Id=x.Id,
+                Name = x.Name
 
+            }).ToList();
+            return roles;
+        }
 
         public Task DeleteUser(string id)
         {
@@ -77,9 +85,21 @@ namespace Focus.Business.Components
             throw new NotImplementedException();
         }
 
-        public ProfileDto GetProfile(string email)
+     
+
+        public ProfileDto GetProfile(string id)
         {
             throw new NotImplementedException();
+
+
+
+        }
+         public ProfileDto GetAllUserRoles()
+        {
+            throw new NotImplementedException();
+
+
+
         }
 
         public ProfileDto GetProfile(string id, string email)
@@ -97,10 +117,7 @@ namespace Focus.Business.Components
             throw new NotImplementedException();
         }
 
-        public UserDetailDto GetAllUserRoles()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public List<UserDetailDto> ListingUsers()
         {
@@ -302,5 +319,7 @@ namespace Focus.Business.Components
                 return false;
             }
         }
+
+       
     }
 }

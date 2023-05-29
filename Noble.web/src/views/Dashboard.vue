@@ -288,7 +288,6 @@ export default {
 
     },
     created() {
-        debugger;
 
     },
     mounted: function () {

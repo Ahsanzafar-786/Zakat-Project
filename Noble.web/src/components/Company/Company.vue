@@ -50,7 +50,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name </th>
-                                <th>CR No</th>
+                                <th>Email</th>
                                 <th>VAT No</th>
                                 <th>Address</th>
                                 
@@ -67,7 +67,7 @@
                                             company.nameEnglish }}</a>
                                     </strong>
                                 </td>
-                                <td>{{ company.companyRegNo }}</td>
+                                <td>{{ company.companyEmail }}</td>
                                 <td>{{ company.vatRegistrationNo }}</td>
                                 <td>{{ company.addressEnglish }}</td>
                             </tr>

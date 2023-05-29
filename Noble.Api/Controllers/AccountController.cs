@@ -42,7 +42,7 @@ namespace Noble.Api.Controllers
 
 
         public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager,
-            IApplicationDbContext context, UrlEncoder utEncoder, IUserComponent userComponent, ISendEmail sendEmail, IConfiguration configuration,
+            IApplicationDbContext context, IUserComponent userComponent, ISendEmail sendEmail,
             IPrincipal principal, ICompanyComponent companyComponent)
         {
             _signInManager = signInManager;
@@ -482,29 +482,16 @@ namespace Noble.Api.Controllers
 
             return Ok(new { value = false, check = "Already Exists" });
         }
-        //[Route("api/account/UserDelete")]
-        //[HttpGet("UserDelete")]
-        //[Roles("Can Delete  Sign up User", "Noble Admin")]
 
-        //public async Task<IActionResult> UserDelete(Guid id)
-        //{
-        //    try
-        //    {
-        //        var listUsers = _context.LoginPermissions.FirstOrDefault(x => x.UserId == id);
-        //        if (listUsers != null)
-        //        {
-        //            _context.LoginPermissions.Remove(listUsers);
-        //            await _context.SaveChangesAsync();
+        [Route("api/account/RolesList")]
+        [HttpGet("RolesList")]
+        public  IActionResult RolesList()
+        {
+            var role =  _userComponent.GetAllRoles();
 
-        //            return Ok(listUsers);
-        //        }
-        //        return Ok(listUsers);
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw new ApplicationException("List Error");
-        //    }
-        //}
+
+            return Ok(role);
+        }
 
 
         [Route("api/account/SaveUser")]

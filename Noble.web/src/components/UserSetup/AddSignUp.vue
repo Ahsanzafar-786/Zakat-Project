@@ -41,6 +41,11 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <label>Role Id :<span class="text-danger"> *</span></label>
+                            <roledropdown v-model="loginDetails.roleId"></roledropdown>
+                           
+                        </div>
                         <div class="col-sm-6" v-if="loginDetails.id=='00000000-0000-0000-0000-000000000000'">
                             <label> {{ $t('AddSignUp.Password') }} :<span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.loginDetails.password.$error}">
@@ -132,18 +137,7 @@
                     userName: '',
                     password: '',
                     confirmPassword: '',
-                    isExpenseAccount: false,
-                    changePriceDuringSale: false,
-                    giveDicountDuringSale: false,
-                    viewCounterDetails: false,
-                    transferCounter: false,
-                    closeCounter: false,
-                    holdCounter: false,
-                    closeDay: false,
-                    processSaleReturn: false,
-                    dailyExpenseList: false,
-                    shiftStartTime: false,
-                    shiftEndTime: false,
+                 
                     terminalUserType:'',
                     invoiceWoInventory: false,
                     terminalId: '',
@@ -181,6 +175,10 @@
                 {
                     required,
                     email
+                },
+                roleId:
+                {
+                    required,
                 },
             }
         },

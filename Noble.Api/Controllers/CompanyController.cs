@@ -16,26 +16,18 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text.RegularExpressions;
-using Dapper;
 using Microsoft.AspNetCore.Hosting;
 
 
 
 using Microsoft.EntityFrameworkCore;
-using Focus.Business.Exceptions;
 
-using Focus.Domain.Enum;
 using Focus.Domain.Interface;
 using Microsoft.Extensions.Configuration;
 
-using System.Net.NetworkInformation;
-using System.Net;
 
 using Focus.Business;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace Noble.Api.Controllers
 {
@@ -47,10 +39,8 @@ namespace Noble.Api.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ICompanyComponent _companyComponent;
         private readonly IPrincipal _principal;
-        private readonly ISendEmail _sendEmail;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IUserHttpContextProvider _contextProvider;
 
         public readonly IConfiguration _configuration;
 
@@ -59,9 +49,7 @@ namespace Noble.Api.Controllers
             SignInManager<ApplicationUser> signInManager,
             ICompanyComponent companyComponent,
             IPrincipal principal,
-            ISendEmail sendEmail,
             IHostingEnvironment hostingEnvironment,
-            IUserHttpContextProvider contextProvider,
             IConfiguration configuration
            )
         {
@@ -70,9 +58,7 @@ namespace Noble.Api.Controllers
             _Context = context;
             _companyComponent = companyComponent;
             _principal = principal;
-            _sendEmail = sendEmail;
             _hostingEnvironment = hostingEnvironment;
-            _contextProvider = contextProvider;
             _configuration = configuration;
         }
 
@@ -227,11 +213,11 @@ namespace Noble.Api.Controllers
                     var result = await _userManager.CreateAsync(user, register.Password);
                     if (result.Succeeded)
                     {
-                        var sendEmailDto = new SendEmailDto()
-                        {
-                            EmailTo = user.Email,
-                            Subject = "Create Password"
-                        };
+                        //var sendEmailDto = new SendEmailDto()
+                        //{
+                        //    EmailTo = user.Email,
+                        //    Subject = "Create Password"
+                        //};
                         //await _sendEmail.SendEmailAsync(sendEmailDto, user.UserName, user.Id);
                         await _userManager.AddToRoleAsync(user, register.RoleName = "Admin");
                        
@@ -245,10 +231,10 @@ namespace Noble.Api.Controllers
                         };
                         await _userManager.AddClaimsAsync(user, claims);
                         await _Context.SaveChangesAsync();
-                        if (company.Id != Guid.Empty)
-                        {
-                            _Context.SaveChangesAfter();
-                        }
+                        //if (company.Id != Guid.Empty)
+                        //{
+                        //    _Context.SaveChangesAfter();
+                        //}
                         return Ok(new { value = true, check = "Add" });
                     }
                     else
@@ -511,7 +497,7 @@ namespace Noble.Api.Controllers
                 return Ok(new { value = true, check = "Update" });
             }
         }
-
+      
         [Route("api/Company/SaveLocation")]
         [HttpPost("SaveLocation")]
         [Authorize(Roles = "Admin, Admin,User, Noble Admin")]

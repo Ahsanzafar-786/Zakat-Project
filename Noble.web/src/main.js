@@ -88,6 +88,7 @@ Vue.config.productionTip = false;
 
 Vue.component('dashboard', require('./components/Dashboard/Dashboard.vue').default);
 Vue.component('modal', require('./components/modalcomponent.vue').default);
+Vue.component('roledropdown', require('./components/General/RolesDropdown.vue').default);
 
 // Benificary
 Vue.component('benificary-mod', require('./components/Benificary/AddBenificary.vue').default);
