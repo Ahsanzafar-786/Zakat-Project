@@ -32,6 +32,10 @@ import chartDashboard from '../components/Dashboard/Dashboard.vue'
 //Benificary Note
 import benificarynote from '../components/BenificaryNote/BenificaryNote.vue'
 
+//Charity Resources
+
+import charityresource from '../components/CharityResources/CharityResources.vue'
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -112,6 +116,11 @@ const routes = [
                             path: '/benificarynote',
                             name: 'benificarynote',
                             component: benificarynote
+                        },
+                        {
+                            path: '/charityresource',
+                            name: 'charityresource',
+                            component: charityresource
                         },
                     ]
                 }
