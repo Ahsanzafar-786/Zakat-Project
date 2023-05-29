@@ -40,6 +40,15 @@
                             </label>
                             <input class="form-control" v-model="$v.brand.phoneNo.$model" type="number" />
                         </div>
+                        <h3>
+                            Other Detail
+                        </h3>
+                        <div class="form-group has-label col-sm-12 ">
+                            <label class="text  font-weight-bolder">
+                                Payment Type
+                            </label>
+                            <paymenttype v-model="brand.paymentTypeId" :values="brand.paymentTypeId" />
+                        </div>
 
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
@@ -47,12 +56,7 @@
                             </label>
                             <authorizedperson v-model="brand.authorizedPersonId" :values="brand.authorizedPersonId" />
                         </div>
-                        <div class="form-group has-label col-sm-12 ">
-                            <label class="text  font-weight-bolder">
-                                Payment Type
-                            </label>
-                            <paymenttype v-model="brand.paymentTypeId" :values="brand.paymentTypeId" />
-                        </div>
+                        
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
                                 Payment Interval Months:
@@ -97,6 +101,9 @@
                                 Address:
                             </label>
                             <input class="form-control" v-model="brand.address" type="text" />
+                        </div>
+                        <div class="form-group has-label col-sm-12 ">
+                            &nbsp;
                         </div>
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
