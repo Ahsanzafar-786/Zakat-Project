@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Gender:<span class="text-danger"> *</span>
+                            Gender:
                         </label>
                         <select v-model="brand.gender" class="form-select" aria-label="Default select example">
                             <option value="Male">Male</option>
@@ -35,19 +35,19 @@
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Nationality:<span class="text-danger"> *</span>
+                            Nationality:
                         </label>
                         <input class="form-control" v-model="brand.nationality" type="text" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            ID:<span class="text-danger"> *</span>
+                            ID:
                         </label>
                         <input class="form-control" v-model="brand.iqamaNo" type="text" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Passport Number:<span class="text-danger"> *</span>
+                            Passport Number:
                         </label>
                         <input class="form-control" v-model="brand.passportNo" type="text" />
                     </div>
