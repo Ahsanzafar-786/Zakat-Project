@@ -461,13 +461,6 @@ namespace Noble.Api.Controllers
                     if (result.Succeeded)
                     {
                         await _userManager.AddToRoleAsync(user, register.RoleName = "Admin");
-                        var companyNobleRole = new NobleRoles()
-                        {
-                            Name = "Admin",
-                            NormalizedName = "ADMIN",
-                            IsActive = true
-                        };
-                        await _Context.AddAsync(companyNobleRole);
 
                         var claims = new List<Claim>
                         {
@@ -483,11 +476,7 @@ namespace Noble.Api.Controllers
                         await _Context.SaveChangesAsync();
                         await _userManager.AddClaimsAsync(user, claims);
                         await _Context.SaveChangesAsync();
-                        if (company.Id != Guid.Empty)
-                        {
-                            _Context.SetModified(companyNobleRole, "CompanyId", company.Id);
-                            _Context.SaveChangesAfter();
-                        }
+                       
                         return Ok(new { value = true, check = "Add" });
                     }
                     else
@@ -599,13 +588,7 @@ namespace Noble.Api.Controllers
                     if (result.Succeeded)
                     {
                         await _userManager.AddToRoleAsync(user, register.RoleName = "User");
-                        var companyNobleRole = new NobleRoles()
-                        {
-                            Name = "Admin",
-                            NormalizedName = "ADMIN",
-                            IsActive = true
-                        };
-                        await _Context.AddAsync(companyNobleRole);
+                       
                         var claims = new List<Claim>
                         {
                             new Claim("Email",user.Email),
@@ -619,11 +602,7 @@ namespace Noble.Api.Controllers
                         await _userManager.AddClaimsAsync(user, claims);
 
                         await _Context.SaveChangesAsync();
-                        if (company.Id != Guid.Empty)
-                        {
-                            _Context.SetModified(companyNobleRole, "CompanyId", company.Id);
-                            _Context.SaveChangesAfter();
-                        }
+                       
 
 
 

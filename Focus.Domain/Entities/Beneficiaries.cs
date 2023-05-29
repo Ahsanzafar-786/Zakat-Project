@@ -1,14 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Focus.Domain.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Focus.Domain.Entities
 {
-    public class Beneficiaries : BaseEntity
+    public class Beneficiaries : BaseEntity, ITenant, IAuditedEntityBase, ITenantFilterableEntity
     {
         public int BeneficiaryId { get; set; }
         public string Name { get; set; }

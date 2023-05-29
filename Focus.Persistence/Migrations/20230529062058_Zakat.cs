@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Focus.Persistence.Migrations
 {
-    public partial class AllInOne : Migration
+    public partial class Zakat : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -241,15 +241,14 @@ namespace Focus.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Colors",
+                name: "AuthorizedPersons",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AuthorizedPersonCode = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NameArabic = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    isActive = table.Column<bool>(type: "bit", nullable: false),
+                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedById = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GetUtcDate()"),
@@ -258,13 +257,134 @@ namespace Focus.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Colors", x => x.Id);
+                    table.PrimaryKey("PK_AuthorizedPersons", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Colors_Companies_CompanyId",
+                        name: "FK_AuthorizedPersons_Companies_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CharityResources",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ChartiyId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Business = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    ContactPerson = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedById = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GetUtcDate()"),
+                    ModifiedById = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GetUtcDate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CharityResources", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CharityResources_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transactions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    HijriDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedByUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ChequeNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransactionType = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    DocumentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DocumentNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Year = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Debit = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Credit = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedById = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GetUtcDate()"),
+                    ModifiedById = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GetUtcDate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Beneficiaries",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BeneficiaryId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentIntervalMonth = table.Column<int>(type: "int", nullable: false),
+                    AmountPerMonth = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    RecurringAmount = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    UgamaNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Note = table.Column<string>(type: "ntext", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsRegister = table.Column<bool>(type: "bit", nullable: false),
+                    AuthorizedPersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedById = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GetUtcDate()"),
+                    ModifiedById = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GetUtcDate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Beneficiaries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Beneficiaries_AuthorizedPersons_AuthorizedPersonId",
+                        column: x => x.AuthorizedPersonId,
+                        principalTable: "AuthorizedPersons",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Beneficiaries_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BenificaryNotes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Note = table.Column<string>(type: "ntext", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BenificaryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BenificaryNotes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BenificaryNotes_Beneficiaries_BenificaryId",
+                        column: x => x.BenificaryId,
+                        principalTable: "Beneficiaries",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -275,7 +395,8 @@ namespace Focus.Persistence.Migrations
                     { "52E0A954-7039-483B-9224-99990743636D", "0590a33c-cd2d-4c93-9e17-fce12bc2bd9d", "Super Admin", "SUPER ADMIN" },
                     { "C1448F88-49B4-476C-B07D-33514A0F9C1E", "0590a33c-cd2d-4c93-9e17-fce19bc2bd9d", "Noble Admin", "NOBLE ADMIN" },
                     { "CEA36602-E3BD-4CF6-B186-5D8A3E558A04", "0590a33c-cd2d-4d93-9e17-fce19bc2bd9d", "Admin", "ADMIN" },
-                    { "E5480E8E-A150-4C80-82AB-62B5A8EBFD1B", "1590a33c-cd2d-4c93-9e17-fce19bc2bd9d", "User", "USER" }
+                    { "E5480E8E-A150-4C80-82AB-62B5A8EBFD1B", "1590a33c-cd2d-4c93-9e17-fce19bc2bd9d", "User", "USER" },
+                    { "f9d3868c-b58c-4c55-be2b-48d564bea081", "1590a33c-cd2d-4c93-9e17-fce19bc2bd9d", "Cashier", "Cashier" }
                 });
 
             migrationBuilder.InsertData(
@@ -286,7 +407,7 @@ namespace Focus.Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "Id", "AddressArabic", "AddressEnglish", "Arabic", "AutoPurchaseVoucher", "BankDetail", "Blocked", "BusinessParentId", "CashVoucher", "CategoryInArabic", "CategoryInEnglish", "CityArabic", "CityEnglish", "ClientNo", "ClientParentId", "CompanyEmail", "CompanyNameArabic", "CompanyNameEnglish", "CompanyRegNo", "CountryArabic", "CountryEnglish", "CreatedDate", "DayStart", "English", "ExpenseAccount", "ExpenseToGst", "HouseNumber", "InternationalPurchase", "InvoiceWoInventory", "IsArea", "IsForMedical", "IsMultiUnit", "IsOpenDay", "IsProceed", "IsProduction", "IsTransferAllow", "Landline", "LogoPath", "MasterProduct", "NameArabic", "NameEnglish", "ParentId", "PartiallyPurchase", "PhoneNo", "Postcode", "PurchaseOrder", "SaleOrder", "SimpleInvoice", "SimplifyTaxInvoiceLabel", "SimplifyTaxInvoiceLabelAr", "SoInventoryReserve", "Step1", "Step2", "Step3", "Step4", "Step5", "SuperAdminDayStart", "TaxInvoiceLabel", "TaxInvoiceLabelAr", "Terminal", "TermsCondition", "Town", "VatRegistrationNo", "VersionAllow", "Website" },
-                values: new object[] { new Guid("5f8d5614-2c7e-4ec0-868c-d254e6516b4d"), null, null, false, false, false, false, null, false, null, null, null, null, null, null, null, null, null, "56ty60", null, null, new DateTime(2023, 5, 24, 8, 5, 42, 200, DateTimeKind.Utc).AddTicks(7602), false, false, false, false, null, false, false, false, false, false, false, false, false, false, null, null, false, null, "noble@gmail.com", new Guid("00000000-0000-0000-0000-000000000000"), false, null, null, false, null, false, null, null, false, false, false, false, false, false, false, null, null, false, false, null, null, false, null });
+                values: new object[] { new Guid("5f8d5614-2c7e-4ec0-868c-d254e6516b4d"), null, null, false, false, false, false, null, false, null, null, null, null, null, null, null, null, null, "56ty60", null, null, new DateTime(2023, 5, 29, 6, 20, 57, 674, DateTimeKind.Utc).AddTicks(9241), false, false, false, false, null, false, false, false, false, false, false, false, false, false, null, null, false, null, "noble@gmail.com", new Guid("00000000-0000-0000-0000-000000000000"), false, null, null, false, null, false, null, null, false, false, false, false, false, false, false, null, null, false, false, null, null, false, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserClaims",
@@ -344,8 +465,33 @@ namespace Focus.Persistence.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Colors_CompanyId",
-                table: "Colors",
+                name: "IX_AuthorizedPersons_CompanyId",
+                table: "AuthorizedPersons",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Beneficiaries_AuthorizedPersonId",
+                table: "Beneficiaries",
+                column: "AuthorizedPersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Beneficiaries_CompanyId",
+                table: "Beneficiaries",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BenificaryNotes_BenificaryId",
+                table: "BenificaryNotes",
+                column: "BenificaryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CharityResources_CompanyId",
+                table: "CharityResources",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_CompanyId",
+                table: "Transactions",
                 column: "CompanyId");
         }
 
@@ -367,13 +513,25 @@ namespace Focus.Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Colors");
+                name: "BenificaryNotes");
+
+            migrationBuilder.DropTable(
+                name: "CharityResources");
+
+            migrationBuilder.DropTable(
+                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Beneficiaries");
+
+            migrationBuilder.DropTable(
+                name: "AuthorizedPersons");
 
             migrationBuilder.DropTable(
                 name: "Companies");

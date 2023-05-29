@@ -10,7 +10,7 @@ namespace Focus.Business.Interface
     {
        
         DbSet<Company> Companies { get; set; }
-        DbSet<Color> Colors { get; set; }
+        DbSet<Transaction> Transactions { get; set; }
         DbSet<Beneficiaries> Beneficiaries { get; set; }
         DbSet<AuthorizedPerson> AuthorizedPersons { get; set; }
         DbSet<BenificaryNote> BenificaryNotes { get; set; }

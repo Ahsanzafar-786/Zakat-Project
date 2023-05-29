@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Focus.Domain.Interface;
+using System;
 
 namespace Focus.Domain.Entities
 {
-    public class CharityResources : BaseEntity
+    public class CharityResources : BaseEntity, ITenant, IAuditedEntityBase, ITenantFilterableEntity
     {
         public int ChartiyId { get;set; }
         public string Name { get; set; }
