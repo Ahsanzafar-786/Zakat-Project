@@ -42,12 +42,12 @@
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                     </div>
 
-                    <div class="form-group has-label col-sm-12 " v-if="brand.business == 'true'">
+                    <!-- <div class="form-group has-label col-sm-12 " v-if="brand.business == 'true'">
                         <label class="text  font-weight-bolder">
                             Contact Person:
                         </label>
                         <input class="form-control" v-model="brand.contactPerson" type="text" />
-                    </div>
+                    </div> -->
 
                     <div class="form-group has-label col-sm-12 " v-if="brand.business == 'true'">
                         <label class="text  font-weight-bolder">
