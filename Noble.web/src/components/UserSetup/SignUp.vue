@@ -167,7 +167,7 @@
                     });
             },
 
-            EditInfo: function (id, isPermission) {
+            EditInfo: function (id) {
                 
                 var root = this;
                 var token = '';
@@ -176,17 +176,8 @@
                 }
                 root.$https.get('/account/UserDetail?Id=' + id, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                     if (response.data != null) {
-                        if (isPermission) {
-                            if (root.loginList != "" && root.loginList != null && root.loginList != undefined) {
-                                var getRole = root.loginList.find(x => x.id == id).roleName;
-                            }                          
-                            root.$router.push({
-                                path: '/AddLoginPermission',
-                                query: { data: response.data, rolename: getRole }
-                            })
-                           
-                        }
-                        else {
+                      
+                         {
                             root.$router.push({
                                 path: '/AddSignUp',
                                 query: { data: response.data }

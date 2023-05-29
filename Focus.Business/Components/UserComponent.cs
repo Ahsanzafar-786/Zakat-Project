@@ -94,7 +94,7 @@ namespace Focus.Business.Components
 
 
         }
-         public ProfileDto GetAllUserRoles()
+         public UserDetailDto GetAllUserRoles()
         {
             throw new NotImplementedException();
 

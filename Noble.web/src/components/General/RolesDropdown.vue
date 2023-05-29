@@ -47,7 +47,7 @@
                     }
                 }).then(function () {
                     root.value = root.options.find(function (x) {
-                        return x.id == root.values;
+                        return x.name == root.values;
                     })
                    
                 });
@@ -64,7 +64,7 @@
                 },
                 set: function (value) {
                     this.value = value;
-                    this.$emit('input', value);
+                    this.$emit('input', value.name);
                 }
             }
         },

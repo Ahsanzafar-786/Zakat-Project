@@ -410,7 +410,13 @@ namespace Noble.Api.Controllers
             {
                 var user = await _userManager.FindByIdAsync(id.ToString());
                 {
+                    var role = await _userManager.GetRolesAsync(user);
 
+                    string roleName="";
+                    if (role.Count > 0)
+                    {
+                        roleName= role[0].ToString();
+                    }
 
                     var loginUser = new LoginVm
                     {
@@ -420,6 +426,7 @@ namespace Noble.Api.Controllers
                         LastName = user.LastName,
                         Email = user.Email,
                         UserName = user.UserName,
+                        RoleName= roleName
                     };
                     return Ok(loginUser);
                 }
@@ -566,7 +573,7 @@ namespace Noble.Api.Controllers
 
                     if (result.Succeeded)
                     {
-                        await _userManager.AddToRoleAsync(user, register.RoleName = "User");
+                        await _userManager.AddToRoleAsync(user, register.RoleName);
                         var claims = new List<Claim>
                         {   new Claim("Email",user.Email),
                             new Claim("FullName",$"{user.FirstName}{user.LastName}"),
@@ -596,18 +603,44 @@ namespace Noble.Api.Controllers
                 currentUser.OnlineTerminalId = loginVm.OnlineTerminalId;
                 await _userManager.UpdateAsync(currentUser);
 
+                var role = await _userManager.GetRolesAsync(currentUser);
+
+                string roleName = "";
+                if (role.Count > 0)
+                {
+                    roleName = role[0];
+                    IdentityResult result = await _userManager.RemoveFromRoleAsync(currentUser, roleName);
+
+
+                    await _userManager.AddToRoleAsync(currentUser, loginVm.RoleName);
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(loginVm.RoleName))
+                    {
+                        await _userManager.AddToRoleAsync(currentUser, loginVm.RoleName);
+
+                    }
+                }
                
+              
+
+
+
 
                 {
 
                     var user = await _userManager.FindByIdAsync(User.Identity.UserId());
                   
-                    await _userManager.RemoveClaimAsync(user, new Claim("IsSupervisor", loginVm.IsSupervisor.ToString(), ClaimValueTypes.Boolean));
+                    await _userManager.RemoveClaimAsync(user, new Claim("Email", user.Email, ClaimValueTypes.Boolean));
+                    await _userManager.RemoveClaimAsync(user, new Claim("FullName", loginVm.FirstName, ClaimValueTypes.Boolean));
                     var claims = new List<Claim>
-                        {
-                          
-                            new Claim("PermissionToStartExpenseDay",loginVm.PermissionToStartExpenseDay.ToString(), ClaimValueTypes.Boolean),
-                        };
+                    {   new Claim("Email",user.Email),
+                        new Claim("FullName",$"{user.FirstName}{user.LastName}"),
+                        new Claim("Organization",_principal.Identity.Organization()),
+                        new Claim("CompanyId",_principal.Identity.CompanyId().ToString()),
+                        new Claim("NobleCompanyId",_principal.Identity.CompanyId().ToString()),
+                    };
                     await _userManager.AddClaimsAsync(user, claims);
                 }
 

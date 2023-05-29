@@ -43,8 +43,10 @@
                         </div>
                         <div class="col-sm-6">
                             <label>Role Id :<span class="text-danger"> *</span></label>
-                            <roledropdown v-model="loginDetails.roleId"></roledropdown>
+                            <roledropdown v-model="loginDetails.roleName" :values="loginDetails.roleName"></roledropdown>
                            
+                        </div>
+                        <div class="col-sm-6">
                         </div>
                         <div class="col-sm-6" v-if="loginDetails.id=='00000000-0000-0000-0000-000000000000'">
                             <label> {{ $t('AddSignUp.Password') }} :<span class="text-danger"> *</span></label>
@@ -149,7 +151,7 @@
                     temporaryCashReceiver: false,
                     temporaryCashIssuer: false,
                     temporaryCashRequester: false,
-                    roleId: '',
+                    roleName: '',
                     days: 0,
                     limit: 0,
                     touchScreen: ''
@@ -176,7 +178,7 @@
                     required,
                     email
                 },
-                roleId:
+                roleName:
                 {
                     required,
                 },
@@ -396,6 +398,7 @@
                     this.userId = this.$route.query.data.userId;
                     this.loginDetails.email = this.$route.query.data.email;
                     this.loginDetails.userName = this.$route.query.data.userName;
+                    this.loginDetails.roleName = this.$route.query.data.roleName;
                     this.rander++;
                 }
             }
