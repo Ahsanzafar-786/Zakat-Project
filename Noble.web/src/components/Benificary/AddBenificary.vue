@@ -19,12 +19,28 @@
                             </label>
                             <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                         </div>
+
+                        <div class="form-group has-label col-sm-12 ">
+                            <label class="text  font-weight-bolder">
+                                ID(Iqama):<span class="text-danger"> *</span>
+                            </label>
+                            <input class="form-control" v-model="$v.brand.ugamaNo.$model" type="text" />
+                        </div>
+
+                        <div class="form-group has-label col-sm-12 ">
+                            <label class="text  font-weight-bolder">
+                                Nationality:<span class="text-danger"> *</span>
+                            </label>
+                            <input class="form-control" v-model="brand.nationality" type="text" />
+                        </div>
+
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
                                 Phone No:<span class="text-danger"> *</span>
                             </label>
                             <input class="form-control" v-model="$v.brand.phoneNo.$model" type="number" />
                         </div>
+
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
                                 Authorized Person
@@ -33,12 +49,16 @@
                         </div>
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
+                                Payment Type
+                            </label>
+                            <paymenttype v-model="brand.paymentTypeId" :values="brand.paymentTypeId" />
+                        </div>
+                        <div class="form-group has-label col-sm-12 ">
+                            <label class="text  font-weight-bolder">
                                 Payment Interval Months:<span class="text-danger"> *</span>
                             </label>
                             <input class="form-control" v-model="$v.brand.paymentIntervalMonth.$model" type="number" />
                         </div>
-
-                       
                         <div class="form-group col-sm-12">
                             <label></label>
                             <div class="checkbox form-check-inline mx-2">
@@ -47,7 +67,44 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="col-md-6">
+                        <div class="form-group has-label col-sm-12 ">
+                            <label class="text  font-weight-bolder">
+                                Name Arabic:<span class="text-danger"> *</span>
+                            </label>
+                            <input class="form-control" v-model="$v.brand.nameAr.$model" type="text" />
+                        </div>
+
+                        <div class="form-group has-label col-sm-12 ">
+                            <label class="text  font-weight-bolder">
+                                Passport No:<span class="text-danger"> *</span>
+                            </label>
+                            <input class="form-control" v-model="brand.passportNo" type="text" />
+                        </div>
+                         <div class="form-group has-label col-sm-12 ">
+                            <label class="text  font-weight-bolder">
+                               Gender:<span class="text-danger"> *</span>
+                            </label>
+                            <select v-model="brand.gender" class="form-select" aria-label="Default select example">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group has-label col-sm-12 ">
+                            <label class="text  font-weight-bolder">
+                                Address:<span class="text-danger"> *</span>
+                            </label>
+                            <input class="form-control" v-model="brand.address" type="text" />
+                        </div>
+                        <div class="form-group has-label col-sm-12 ">
+                            <label class="text  font-weight-bolder">
+                                Approval Persons
+                            </label>
+                            <approvalperson v-model="brand.approvalPersonId" :values="brand.approvalPersonId" />
+                        </div>
+                        
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
                                 Recurring Amount:<span class="text-danger"> *</span>
@@ -60,12 +117,6 @@
                             </label>
                             <input class="form-control" v-model="$v.brand.amountPerMonth.$model" type="number" />
                         </div>
-                        <div class="form-group has-label col-sm-12 ">
-                            <label class="text  font-weight-bolder">
-                                Iqama No:<span class="text-danger"> *</span>
-                            </label>
-                            <input class="form-control" v-model="$v.brand.ugamaNo.$model" type="text" />
-                        </div>
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
@@ -73,9 +124,6 @@
                         </label>
                         <VueEditor v-model="brand.note" />
                     </div>
-
-
-
                 </div>
             </div>
             <div class="modal-footer">
@@ -98,7 +146,7 @@
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
-import { required } from "vuelidate/lib/validators"
+import { required, requiredIf } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { VueEditor } from "vue2-editor";
@@ -120,7 +168,14 @@ export default {
     validations: {
         brand: {
             name: {
-                required
+                
+            },
+            nameAr: {
+                required: requiredIf((x) => {
+                    if (x.name == '' || x.name == null)
+                        return true;
+                    return false;
+                }),
             },
             paymentIntervalMonth: {
                 required

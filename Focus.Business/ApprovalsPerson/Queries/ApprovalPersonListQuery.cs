@@ -1,71 +1,70 @@
-﻿using Focus.Business.AuthorizPersons.Model;
+﻿using Focus.Business.ApprovalsPerson.Model;
+using Focus.Business.AuthorizPersons.Model;
 using Focus.Business.Common;
 using Focus.Business.Interface;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
-namespace Focus.Business.AuthorizPersons.Queries
+namespace Focus.Business.ApprovalsPerson.Queries
 {
-    public class GetAuthorizedPersonListQuery : PagedRequest, IRequest<PagedResult<List<AuthorizedPersonsLookupModel>>>
+    public class ApprovalPersonListQuery :  PagedRequest, IRequest<PagedResult<List<ApprovalPersonLookupModel>>>
     {
         public bool IsDropDown { get; set; }
         public string SearchTerm { get; set; }
 
-        public class Handler : IRequestHandler<GetAuthorizedPersonListQuery, PagedResult<List<AuthorizedPersonsLookupModel>>>
+        public class Handler : IRequestHandler<ApprovalPersonListQuery, PagedResult<List<ApprovalPersonLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
             private readonly ILogger _logger;
 
-            public Handler(IApplicationDbContext context, ILogger<GetAuthorizedPersonListQuery> logger)
+            public Handler(IApplicationDbContext context, ILogger<ApprovalPersonListQuery> logger)
             {
                 Context = context;
                 _logger = logger;
             }
-            public async Task<PagedResult<List<AuthorizedPersonsLookupModel>>> Handle(GetAuthorizedPersonListQuery request, CancellationToken cancellationToken)
+            public async Task<PagedResult<List<ApprovalPersonLookupModel>>> Handle(ApprovalPersonListQuery request, CancellationToken cancellationToken)
             {
                 try
                 {
                     if (request.IsDropDown)
                     {
-                        var query = await Context.AuthorizedPersons.AsNoTracking().Select(x => new AuthorizedPersonsLookupModel
+                        var query = await Context.ApprovalPersons.AsNoTracking().Select(x => new ApprovalPersonLookupModel
                         {
                             Id = x.Id,
                             Name = x.Name,
-                            NameAr = x.NameAr,
+                            NameAr = x.NameAr
                         }).ToListAsync();
 
-                        return new PagedResult<List<AuthorizedPersonsLookupModel>>
+                        return new PagedResult<List<ApprovalPersonLookupModel>>
                         {
                             Results = query
                         };
                     }
                     else
                     {
-                        var query = Context.AuthorizedPersons.AsNoTracking().Select(x => new AuthorizedPersonsLookupModel
+                        var query = Context.ApprovalPersons.AsNoTracking().Select(x => new ApprovalPersonLookupModel
                         {
                             Id = x.Id,
                             Name = x.Name,
                             NameAr = x.NameAr,
-                            AuthorizedPersonCode = x.AuthorizedPersonCode,
+                            AprovalPersonId = x.AprovalPersonId,
+                            Email = x.Email,
                             PhoneNo = x.PhoneNo,
-                            Address = x.Address,
-                            Nationality = x.Nationality,
-                            PassportNo = x.PassportNo,
-                            Gender = x.Gender,
-                            IqamaNo = x.IqamaNo,
                         }).AsQueryable();
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
                         {
                             var searchTerm = request.SearchTerm.ToLower();
                             query = query.Where(x => x.Name.ToLower().Contains(searchTerm)
-                                                  || x.AuthorizedPersonCode.ToString().Contains(searchTerm));
+                                                  || x.AprovalPersonId.ToString().Contains(searchTerm)
+                                                  || x.NameAr.ToLower().Contains(searchTerm)
+                                                  );
                         }
 
                         var count = await query.CountAsync();
@@ -73,7 +72,7 @@ namespace Focus.Business.AuthorizPersons.Queries
 
                         var queryList = await query.ToListAsync();
 
-                        return new PagedResult<List<AuthorizedPersonsLookupModel>>
+                        return new PagedResult<List<ApprovalPersonLookupModel>>
                         {
                             Results = queryList,
                             RowCount = count,

@@ -97,11 +97,21 @@ Vue.component('benificary', require('./components/General/BenificaryDropdown.vue
 Vue.component('authorizedPerson-mod', require('./components/AuthorizedPersons/AddAuthorizedPersons.vue').default);
 Vue.component('authorizedperson', require('./components/General/AuthorizedPersonDropdown.vue').default);
 
+
 //Benificary Note
 Vue.component('benificarynote-mod', require('./components/BenificaryNote/AddBenificaryNote.vue').default);
 
 // Charity Resources
 Vue.component('charityresources-mod', require('./components/CharityResources/AddCharityResources.vue').default);
+
+// Approval Person
+Vue.component('approvalperson-mod', require('./components/ApprovalPersons/AddApprovalPersons.vue').default);
+Vue.component('approvalperson', require('./components/General/ApprovalPersonDropdown.vue').default);
+
+//Payment Type
+Vue.component('paymenttype-mod', require('./components/PaymentType/AddPaymentType.vue').default);
+Vue.component('paymenttype', require('./components/General/PaymentType.vue').default);
+
 
 Vue.prototype.$https = axios;
 axios.defaults.baseURL = json.ServerIP;

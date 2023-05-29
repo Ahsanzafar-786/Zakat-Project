@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    Update Authorized Person
+                    Update Approval Person
                 </h6>
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
-                    Add Authorized Person
+                    Add Approval Person
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -18,6 +18,7 @@
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                     </div>
+
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
                             Name Arabic:<span class="text-danger"> *</span>
@@ -26,31 +27,9 @@
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Gender:<span class="text-danger"> *</span>
+                            Email:
                         </label>
-                        <select v-model="brand.gender" class="form-select" aria-label="Default select example">
-                            <option selected>Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group has-label col-sm-12 ">
-                        <label class="text  font-weight-bolder">
-                            Nationality:<span class="text-danger"> *</span>
-                        </label>
-                        <input class="form-control" v-model="brand.nationality" type="text" />
-                    </div>
-                    <div class="form-group has-label col-sm-12 ">
-                        <label class="text  font-weight-bolder">
-                            ID(Iqama):<span class="text-danger"> *</span>
-                        </label>
-                        <input class="form-control" v-model="brand.iqamaNo" type="text" />
-                    </div>
-                    <div class="form-group has-label col-sm-12 ">
-                        <label class="text  font-weight-bolder">
-                            Passport Number:<span class="text-danger"> *</span>
-                        </label>
-                        <input class="form-control" v-model="brand.passportNo" type="text" />
+                        <input class="form-control" v-model="brand.email" type="text" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
@@ -58,20 +37,14 @@
                         </label>
                         <input class="form-control" v-model="brand.phoneNo" type="number" />
                     </div>
-                    <div class="form-group has-label col-sm-12 ">
-                        <label class="text  font-weight-bolder">
-                            Address:
-                        </label>
-                        <textarea class="form-control" v-model="brand.address" rows="3"></textarea>
-                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveAuthorizedPerson"
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveApprovalPerson"
                     v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
                     Save
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveAuthorizedPerson"
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveApprovalPerson"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
                     Update
                 </button>
@@ -86,7 +59,7 @@
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
-import { requiredIf } from "vuelidate/lib/validators"
+import {requiredIf } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
@@ -106,7 +79,7 @@ export default {
     validations: {
         brand: {
             name: {
-
+                
             },
             nameAr: {
                 required: requiredIf((x) => {
@@ -121,18 +94,18 @@ export default {
         close: function () {
             this.$emit('close');
         },
-        SaveAuthorizedPerson: function () {
+        SaveApprovalPerson: function () {
             debugger;
             var root = this;
-            var aa = this.brand.authorizedPersonCode;
-            this.brand.authorizedPersonCode = aa;
+            var aa = this.brand.aprovalPersonId;
+            this.brand.aprovalPersonId = aa;
             this.loading = true;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
             debugger;
-            this.$https.post('/Benificary/SaveAuthorizedPersons', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
+            this.$https.post('/Benificary/SaveApprovalPersons', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {

@@ -9,6 +9,11 @@ namespace Focus.Domain.Entities
     {
         public int BeneficiaryId { get; set; }
         public string Name { get; set; }
+        public string NameAr { get; set; }
+        public string PassportNo { get; set; }
+        public string Nationality { get; set; }
+        public string Gender { get; set; }
+        public string Address { get; set; }
         public int PaymentIntervalMonth { get; set; }
         public decimal AmountPerMonth { get; set; }
         public decimal RecurringAmount { get; set; }
@@ -21,8 +26,12 @@ namespace Focus.Domain.Entities
         public bool IsActive { get; set; }
         public bool IsRegister { get; set; }
         public Guid? AuthorizedPersonId { get; set; }
-        public virtual AuthorizedPerson AuthorizedPersons { get; set; }
+        public virtual AuthorizedPerson AuthorizedPersons { get; set; }  
+        public Guid? ApprovalPersonId { get; set; }
+        public virtual ApprovalPerson ApprovalPersons { get; set; }
         public virtual ICollection<BenificaryNote> BenificaryNotes { get; set; }
+        public Guid? PaymentTypeId { get; set; }
+        public virtual PaymentType PaymentTypes { get; set; }
 
     }
 }

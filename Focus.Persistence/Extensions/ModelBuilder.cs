@@ -229,12 +229,9 @@ namespace Focus.Persistence.Extensions
                 ClaimValue = "Noble App"
 
             }
-            );
-           
 
-           
-           
-           
+
+            );
         }
     }
 }

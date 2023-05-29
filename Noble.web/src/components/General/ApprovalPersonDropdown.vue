@@ -34,7 +34,7 @@ export default {
                 token = localStorage.getItem('token');
             }
             root.options = [];
-            this.$https.get('/Benificary/GetAuthorizedPersonsList?isDropDown=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            this.$https.get('/Benificary/GetApprovalPersonsList?isDropDown=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     response.data.results.forEach(function (cat) {
                         root.options.push({

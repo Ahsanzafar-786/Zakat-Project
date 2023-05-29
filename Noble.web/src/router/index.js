@@ -25,6 +25,9 @@ import benificaries from '../components/Benificary/Benificaries.vue';
 //Authorized Persons
 import authorizedpersons from '../components/AuthorizedPersons/AuthorizedPersons.vue'
 
+//Approval Persons
+import approvalpersons from '../components/ApprovalPersons/ApprovalPersons.vue'
+
 //Authorized Persons
 import chartDashboard from '../components/Dashboard/Dashboard.vue'
 
@@ -33,8 +36,10 @@ import chartDashboard from '../components/Dashboard/Dashboard.vue'
 import benificarynote from '../components/BenificaryNote/BenificaryNote.vue'
 
 //Charity Resources
-
 import charityresource from '../components/CharityResources/CharityResources.vue'
+
+//Payment Type
+import paymenttype from '../components/PaymentType/PaymentType.vue'
 
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
@@ -121,6 +126,16 @@ const routes = [
                             path: '/charityresource',
                             name: 'charityresource',
                             component: charityresource
+                        },
+                        {
+                            path: '/approvalpersons',
+                            name: 'approvalpersons',
+                            component: approvalpersons
+                        },
+                        {
+                            path: '/paymenttype',
+                            name: 'paymenttype',
+                            component: paymenttype
                         },
                     ]
                 }
