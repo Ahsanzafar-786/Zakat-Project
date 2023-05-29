@@ -59,7 +59,7 @@
                                        Status
                                     </th>
                                     <th class="text-center">
-                                       Charity Type
+                                        Funds Source
                                     </th>
                                 </tr>
                             </thead>

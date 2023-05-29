@@ -15,13 +15,13 @@
                     <fieldset class="form-group">
                         <div class="row">
                             <div class="col-form-label col-sm-3 pt-0 text-start">
-                                <span id="ember694" class="text font-weight-bolder ">Charity Type:</span>
+                                <span id="ember694" class="text font-weight-bolder ">Funds Source:</span>
                             </div>
                             <div class="col-sm-9">
                                 <div class="form-check form-check-inline">
                                     <input v-model="brand.business" name="contact-sub-type" id="a49946497"
                                         class=" form-check-input" type="radio" value="true">
-                                    <label class="form-check-label pl-0" for="a49946497">Business</label>
+                                    <label class="form-check-label pl-0" for="a49946497">Entity</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input v-model="brand.business" name="contact-sub-type" id="a9ff8eb35"
@@ -34,7 +34,7 @@
 
                     <div class="form-group has-label col-sm-12 ">
                         <label v-if="brand.business == 'true'" class="text  font-weight-bolder">
-                            Business Name:<span class="text-danger"> *</span>
+                            Entity Name:<span class="text-danger"> *</span>
                         </label>
                         <label v-else class="text  font-weight-bolder">
                             Person Name:<span class="text-danger"> *</span>
@@ -58,7 +58,7 @@
 
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Phone No:
+                            Contact No:
                         </label>
                         <input class="form-control" v-model="brand.phone" type="number" />
                     </div>
