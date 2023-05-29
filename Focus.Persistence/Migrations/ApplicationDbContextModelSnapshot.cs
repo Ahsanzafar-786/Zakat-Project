@@ -155,6 +155,25 @@ namespace Focus.Persistence.Migrations
                     b.Property<int>("AuthorizedPersonCode")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetUtcDate()");
+
+                    b.Property<string>("ModifiedById")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetUtcDate()");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -162,6 +181,8 @@ namespace Focus.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("AuthorizedPersons");
                 });
@@ -181,11 +202,30 @@ namespace Focus.Persistence.Migrations
                     b.Property<int>("BeneficiaryId")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetUtcDate()");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsRegister")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedById")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetUtcDate()");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -208,6 +248,8 @@ namespace Focus.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorizedPersonId");
+
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("Beneficiaries");
                 });
@@ -249,33 +291,10 @@ namespace Focus.Persistence.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ContactPerson")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CharityResources");
-                });
-
-            modelBuilder.Entity("Focus.Domain.Entities.Color", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ContactPerson")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedById")
@@ -286,8 +305,8 @@ namespace Focus.Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GetUtcDate()");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedById")
                         .HasColumnType("nvarchar(max)");
@@ -300,17 +319,14 @@ namespace Focus.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NameArabic")
+                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Colors");
+                    b.ToTable("CharityResources");
                 });
 
             modelBuilder.Entity("Focus.Domain.Entities.Company", b =>
@@ -525,7 +541,7 @@ namespace Focus.Persistence.Migrations
                             Blocked = false,
                             CashVoucher = false,
                             CompanyRegNo = "56ty60",
-                            CreatedDate = new DateTime(2023, 5, 26, 13, 8, 11, 21, DateTimeKind.Utc).AddTicks(2219),
+                            CreatedDate = new DateTime(2023, 5, 29, 6, 20, 57, 674, DateTimeKind.Utc).AddTicks(9241),
                             DayStart = false,
                             English = false,
                             ExpenseAccount = false,
@@ -556,6 +572,77 @@ namespace Focus.Persistence.Migrations
                             TermsCondition = false,
                             VersionAllow = false
                         });
+                });
+
+            modelBuilder.Entity("Focus.Domain.Entities.Transaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<string>("ChequeNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedById")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedByUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetUtcDate()");
+
+                    b.Property<decimal>("Credit")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Debit")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DocumentNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HijriDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedById")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetUtcDate()");
+
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Year")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -612,6 +699,13 @@ namespace Focus.Persistence.Migrations
                             ConcurrencyStamp = "1590a33c-cd2d-4c93-9e17-fce19bc2bd9d",
                             Name = "User",
                             NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "f9d3868c-b58c-4c55-be2b-48d564bea081",
+                            ConcurrencyStamp = "1590a33c-cd2d-4c93-9e17-fce19bc2bd9d",
+                            Name = "Cashier",
+                            NormalizedName = "Cashier"
                         });
                 });
 
@@ -758,11 +852,26 @@ namespace Focus.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Focus.Domain.Entities.AuthorizedPerson", b =>
+                {
+                    b.HasOne("Focus.Domain.Entities.Company", null)
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Focus.Domain.Entities.Beneficiaries", b =>
                 {
                     b.HasOne("Focus.Domain.Entities.AuthorizedPerson", "AuthorizedPersons")
                         .WithMany("Beneficiaries")
                         .HasForeignKey("AuthorizedPersonId");
+
+                    b.HasOne("Focus.Domain.Entities.Company", null)
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("AuthorizedPersons");
                 });
@@ -776,7 +885,16 @@ namespace Focus.Persistence.Migrations
                     b.Navigation("Beneficiaries");
                 });
 
-            modelBuilder.Entity("Focus.Domain.Entities.Color", b =>
+            modelBuilder.Entity("Focus.Domain.Entities.CharityResources", b =>
+                {
+                    b.HasOne("Focus.Domain.Entities.Company", null)
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Focus.Domain.Entities.Transaction", b =>
                 {
                     b.HasOne("Focus.Domain.Entities.Company", null)
                         .WithMany()

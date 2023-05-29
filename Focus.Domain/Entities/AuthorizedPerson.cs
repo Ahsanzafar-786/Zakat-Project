@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Focus.Domain.Interface;
+using System.Collections.Generic;
 
 namespace Focus.Domain.Entities
 {
-    public class AuthorizedPerson : BaseEntity
+    public class AuthorizedPerson : BaseEntity, ITenant, IAuditedEntityBase, ITenantFilterableEntity
     {
         public int AuthorizedPersonCode { get; set; }
         public string Name { get; set; }

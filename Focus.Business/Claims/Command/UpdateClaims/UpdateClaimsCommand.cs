@@ -55,7 +55,7 @@ namespace Focus.Business.Claims.Command.UpdateClaims
 
                     var role = await _userComponent.GetRoleByUser(request.User);
 
-                    var userCompany = await Context.Companies
+                    var userCompany = await Context.Companies.AsNoTracking()
                         .Select(x => new
                         {
                             x.Id,

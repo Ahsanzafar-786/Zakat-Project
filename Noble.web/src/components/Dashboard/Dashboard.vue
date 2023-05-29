@@ -1,510 +1,416 @@
 ﻿<template>
-    <div class="container-fluid">
-        <!-- Page-Title -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link " data-bs-toggle="tab" href="#Dashboard" role="tab" aria-selected="true" v-bind:class="{active:active == 'Dashboard'}" v-on:click="makeActive('Dashboard')">{{ $t('Dashboard.Dashboard') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#Account" role="tab" aria-selected="false" v-bind:class="{active:active == 'Account'}" v-on:click="makeActive('Account')">{{ $t('Dashboard.Account') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#Inventory" role="tab" aria-selected="false" v-bind:class="{active:active == 'Inventory'}" v-on:click="makeActive('Inventory')">{{ $t('Dashboard.Inventory') }}</a>
-            </li>
-           
-        </ul>
-        <div class="col-12">
-            <div v-if="active == 'Dashboard'">
-                <div class="row mt-2">
-                    <div class="col-lg-6 col-md-6 col-sm-6 pb-2">
-                        <span class="card-title ">{{ $t('Dashboard.Overview') }} </span>
-
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 pb-2 text-end" v-bind:key="randerDropdown">
-
-                        <div class="col">
-
-                        </div>
-
-
-                        <div class="col-auto">
-                            <div class="col-auto">
-                                <div class="dropdown">
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{overView}}<i class="las la-angle-down ms-1"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" v-on:click="OverViewFilterFunction('Today')" href="javascript:void(0);">{{ $t('Dashboard.Today') }} </a>
-                                        <a class="dropdown-item" v-on:click="OverViewFilterFunction('Weekly')" href="javascript:void(0);">{{ $t('Dashboard.Weekly') }}</a>
-                                        <a class="dropdown-item" v-on:click="OverViewFilterFunction('Monthly')" href="javascript:void(0);">{{ $t('Dashboard.Monthly') }}</a>
-                                        <a class="dropdown-item" v-on:click="OverViewFilterFunction('6 Monthly')" href="javascript:void(0);">{{ $t('Dashboard.HalfYear') }}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Dashboard.Sales') }}</p>
-                                        <h3 class="m-0">{{(parseFloat(income)).toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="tag" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Dashboard.Expense') }}</p>
-                                        <h3 class="m-0">{{(parseFloat(expense)).toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="zap" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Dashboard.Credit') }}</p>
-                                        <h3 class="m-0">{{(parseFloat(creditAmount)).toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="activity" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Dashboard.Purchase') }}</p>
-                                        <h3 class="m-0">{{(parseFloat(purchase)).toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")}}</h3>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="calendar" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div><!--end row-->
-
+<div class="container-fluid">
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">{{ $t('Dashboard.Earning') }}</h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="bar" height="350" v-bind:key="randerChart" :options="earningChartOption" :series="earningSeries"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
+                    <div class="col">
+                        <h4 class="page-title">Analytics</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">
-                                            {{ $t('Dashboard.Sale/PurchaseOverview') }}
-                                        </h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="area" height="350" v-bind:key="randerChart" :options="chartOptionsPurchase" :series="seriesPurchase"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
+                    <!--end col-->
+                    <div class="col-auto align-self-center">
+                        <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
+                            <span class="ay-name" id="Day_Name">Today:</span>&nbsp;
+                            <span class="" id="Select_date">Jan 11</span>
+                            <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">
+                            <i data-feather="download" class="align-self-center icon-xs"></i>
+                        </a>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">
-                                            {{ $t('Dashboard.InvoiceOverview') }}
-                                        </h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="donut" width="340" height="330" :options="chartOptions" :series="series9"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">
-                                            {{ $t('Dashboard.Paid/Un-PaidInvoices') }}
-                                        </h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="pie" width="330" height="330" :options="chartOptionsPaidInvoices" :series="paidInvoicesSeries"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">
-                                            {{ $t('Dashboard.Sale/Purchase') }}
-                                        </h4>
-                                    </div><!--end col-->
-
-                                </div>  <!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body">
-                                <div class="">
-                                    <apexchart type="donut" width="310" height="330" :options="salesOptions" :series="purchaseSeries"></apexchart>
-                                </div>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div>
-
+                    <!--end col-->
                 </div>
+                <!--end row-->
             </div>
-            <div v-if="active == 'Account'">
-
-                <AccountDashboard :active="'Account'"></AccountDashboard>
-
-            </div>
-            <div v-if="active == 'Inventory'">
-
-                <InventoryDashboard :active="'Inventory'"></InventoryDashboard>
-            </div>
-            <div v-if="active == 'CashAndBank'">
-
-                <CashAndBankDashboard :active="'CashAndBank'"></CashAndBankDashboard>
-            </div>
-            <div v-if="active == 'HR'">
-
-                <HRDashboard :active="'Account'"></HRDashboard>
-            </div>
+            <!--end page-title-box-->
         </div>
-
-
-
+        <!--end col-->
     </div>
+    <!--end row-->
+    <!-- end page title end breadcrumb -->
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+                                    <p class="text-dark mb-0 fw-semibold">Users</p>
+                                    <h3 class="m-0">5</h3>
+                                    <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-trending-up"></i>8.5%</span> New Sessions Today</p>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <div class="report-main-icon bg-light-alt">
+                                        <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end card-body-->
+                    </div>
+                    <!--end card-->
+                </div>
+                <!--end col-->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+                                    <p class="text-dark mb-0 fw-semibold">Benificary</p>
+                                    <h3 class="m-0">10</h3>
+                                    <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <div class="report-main-icon bg-light-alt">
+                                        <i data-feather="clock" class="align-self-center text-muted icon-sm"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end card-body-->
+                    </div>
+                    <!--end card-->
+                </div>
+                <!--end col-->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+                                    <p class="text-dark mb-0 fw-semibold">Authorize Person</p>
+                                    <h3 class="m-0">56</h3>
+                                    <p class="mb-0 text-truncate text-muted"><span class="text-danger"><i class="mdi mdi-trending-down"></i>35%</span> Bounce Rate Weekly</p>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <div class="report-main-icon bg-light-alt">
+                                        <i data-feather="activity" class="align-self-center text-muted icon-sm"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end card-body-->
+                    </div>
+                    <!--end card-->
+                </div>
+                <!--end col-->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col">
+                                    <p class="text-dark mb-0 fw-semibold">Resource</p>
+                                    <h3 class="m-0">5000</h3>
+                                    <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-trending-up"></i>10.5%</span> Completions Weekly</p>
+                                </div>
+                                <div class="col-auto align-self-center">
+                                    <div class="report-main-icon bg-light-alt">
+                                        <i data-feather="briefcase" class="align-self-center text-muted icon-sm"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end card-body-->
+                    </div>
+                    <!--end card-->
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="card-title">Benificary Type</h4>
+                        </div>
+                        <!--end col-->
+                        <div class="col-auto">
+                            <div class="dropdown">
+                                <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    All<i class="las la-angle-down ms-1"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#">Purchases</a>
+                                    <a class="dropdown-item" href="#">Emails</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end card-header-->
+                <div class="card-body">
+                    <div class="text-center">
+                        <apexchart type="line" height="350" :options="chartOptions3" :series="series3"></apexchart>                        <h6 class="bg-light-alt py-3 px-2 mb-0">
+                            <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
+                            01 January 2020 to 31 December 2020
+                        </h6>
+                    </div>
 
+                    <!--end /div-->
+                </div>
+                <!--end card-body-->
+            </div>
+            
+            <!--end card-->
+        </div>
+        <!--end col-->
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="card-title">Benificary Type</h4>
+                        </div>
+                        <!--end col-->
+                        <div class="col-auto">
+                            <div class="dropdown">
+                                <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    All<i class="las la-angle-down ms-1"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#">Purchases</a>
+                                    <a class="dropdown-item" href="#">Emails</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end card-header-->
+                <div class="card-body">
+                    <div class="text-center">
+                        <apexchart type="polarArea" width="280" :options="chartOptions2" :series="series2"></apexchart>
+                        <h6 class="bg-light-alt py-3 px-2 mb-0">
+                            <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
+                            01 January 2020 to 31 December 2020
+                        </h6>
+                    </div>
 
+                    <!--end /div-->
+                </div>
+                <!--end card-body-->
+            </div>
+            <!--end card-->
+        </div>
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="card-title">Audience Overview</h4>
+                        </div>
+                        <!--end col-->
+                        <div class="col-auto">
+                            <div class="dropdown">
+                                <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    This Year<i class="las la-angle-down ms-1"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="#">Today</a>
+                                    <a class="dropdown-item" href="#">Last Week</a>
+                                    <a class="dropdown-item" href="#">Last Month</a>
+                                    <a class="dropdown-item" href="#">This Year</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <!--end card-header-->
+                <div class="card-body">
+                    <div class="">
+                        <apexchart type="line" height="350" :options="chartOptions" :series="series"></apexchart>
+                    </div>
+                </div>
+                <!--end card-body-->
+            </div>
+            <!--end card-->
+        </div>
+        <!--end col-->
+    </div>
+    <!--end row-->
 
-
-    
+</div>
 </template>
+
 <script>
+import clickMixin from '@/Mixins/clickMixin'
+import moment from "moment";
 
-    import clickMixin from '@/Mixins/clickMixin'
-    import moment from "moment";
+export default {
 
-    export default {
+    mixins: [clickMixin],
 
+    data: function () {
 
-        mixins: [clickMixin],
-
-        data: function () {
-
-            return {
-                active: 'Dashboard',
-                overView: 'Monthly',
-                currency: '',
-                randerChart: 0,
-                income: 0,
-                randerDropdown: 0,
-                totalBank: 0,
-                totalInvoices: 0,
-                totalReturn: 0,
-                expense: 0,
-                purchase: 0,
-                creditAmount: 0,
-                earningSeries: [{
-                    name: this.$t('Dashboard.Earning'),
-                    data: []
-                }],
-                earningChartOption: {
-                    chart: {
-                        height: 350,
-                        type: 'area'
-                    },
-                    dataLabels: {
+        return {
+            active: 'Dashboard',
+            overView: 'Monthly',
+            currency: '',
+            randerChart: 0,
+            income: 0,
+            randerDropdown: 0,
+            fromDate: moment().format("DD MMM YYYY"),
+            toDate: Date(),
+            series: [{
+                name: "Desktops",
+                data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+            }],
+            chartOptions: {
+                chart: {
+                    height: 350,
+                    type: 'line',
+                    zoom: {
                         enabled: false
-                    },
-                    stroke: {
-                        curve: 'smooth'
-                    },
-                    xaxis: {
-                        type: 'datetime',
-                        categories: []
-                    },
-                    tooltip: {
-                        x: {
-                            format: 'dd/MM/yy HH:mm'
-                        },
-                    },
-                },
-
-                chartOptions: {
-                    labels: [this.$t('Dashboard.CreditInvoices'), this.$t('Dashboard.CashInvoices')]
-                },
-                salesOptions: {
-                    labels: [this.$t('Dashboard.Sales'), this.$t('Dashboard.Purchase')]
-                },
-                chartOptionsPaidInvoices: {
-                    labels: [this.$t('Dashboard.UnPaid'), this.$t('Dashboard.PartiallyPaid'), this.$t('Dashboard.FullyPaid')]
-                },
-                series9: [],
-                purchaseSeries: [],
-                paidInvoicesSeries: [],
-                creditInvoicesSeries: [],
-                chartOptionsCreditInvoices: {
-                    chart: {
-                        width: 380,
-                        type: 'donut',
-                    },
-                    plotOptions: {
-                        pie: {
-                            startAngle: -90,
-                            endAngle: 270
-                        }
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    fill: {
-                        type: 'gradient',
-                    },
-                    legend: {
-                        formatter: function (val, opts) {
-                            return val + " - " + opts.w.globals.creditInvoicesSeries[opts.seriesIndex]
-                        }
-                    },
-                    title: {
-
-                    },
-                    responsive: [{
-                        breakpoint: 480,
-                        options: {
-                            chart: {
-                                width: 200
-                            },
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }]
-                },
-
-                seriesPurchase: [{
-                    name: this.$t('Dashboard.Purchase'),
-                    data: []
-                }, {
-                    name: this.$t('Dashboard.Sales'),
-                    data: []
-                }],
-                chartOptionsPurchase: {
-                    chart: {
-                        height: 350,
-                        type: 'area'
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    stroke: {
-                        curve: 'smooth'
-                    },
-                    xaxis: {
-                        type: 'datetime',
-                        categories: []
-                    },
-                    tooltip: {
-                        x: {
-                            format: 'dd/MM/yy HH:mm'
-                        },
-                    },
-                },
-
-
-                loading: true,
-
-                search: '',
-
-                userID: 0,
-                employeeId: 0,
-                isChartLoad: false,
-                fromDate: moment().format("DD MMM YYYY"),
-                toDate: Date()
-            }
-        },
-        watch: {
-
-        },
-        methods: {
-            makeActive: function (item) {
-
-                this.active = item;
-            },
-            OverViewFilterFunction: function (x) {
-
-
-                this.overView = x;
-                this.GetCashTransaction();
-            },
-            DetailOfProduct: function (x) {
-
-                this.$router.push({
-                    path: '/ProductDetailDashboard',
-                    query: { date: this.search, productId: x }
-                })
-            },
-            getDate: function (date) {
-                return moment(date).format('l');
-            },
-
-            GetCashTransaction: function () {
-
-                var root = this;
-                var token = '';
-                if (this.$session.exists()) {
-                    token = localStorage.getItem('token');
-                }
-
-                this.$https.get('/Company/GetTransaction?currentDate=' + root.search + '&overViewFilter=' + this.overView + '&activeTab=' + this.active, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
-
-                    if (response.data != null) {
-
-                        root.series9 = [];
-                        root.purchaseSeries = [];
-                        root.paidInvoicesSeries = [];
-                        root.earningSeries[0].data = [];
-                        root.earningChartOption.xaxis.categories = [];
-                        root.seriesPurchase[0].data = [];
-                        root.seriesPurchase[1].data = [];
-                        root.chartOptionsPurchase.xaxis.categories = [];
-                        root.income = response.data.income;
-                        root.creditAmount = response.data.creditAmount;
-                        root.totalInvoices = response.data.totalInvoices;
-                        root.totalReturn = response.data.totalReturn;
-                        root.purchase = response.data.purchase;
-                        root.expense = response.data.expense;
-                        root.totalCreditInvoices = response.data.totalCreditInvoices;
-                        response.data.earningList.forEach(function (result) {
-                            root.earningSeries[0].data.push((parseFloat(result.amount)).toFixed(0));
-                            root.earningChartOption.xaxis.categories.push(result.date);
-                        });
-                        response.data.salePurchaseLookUpModel.forEach(function (result) {
-                            root.seriesPurchase[0].data.push((parseFloat(result.purchaseAmount)).toFixed(0));
-                            root.seriesPurchase[1].data.push(parseFloat(result.saleAmount).toFixed(0));
-                            root.chartOptionsPurchase.xaxis.categories.push(result.date);
-                        });
-
-                        var creditInvoices = parseInt((response.data.totalCreditInvoices / response.data.totalInvoices) * 100);
-                        var cashInvoices = parseInt((response.data.totalCashInvoices / response.data.totalInvoices) * 100);
-                        root.series9.push(creditInvoices);
-                        root.series9.push(cashInvoices);
-                        root.purchaseSeries.push(root.income);
-                        root.purchaseSeries.push(root.purchase);
-                        var unPaidInvoices = parseInt((response.data.unPaidInvoices / response.data.totalInvoices) * 100);
-                        var partially = parseInt((response.data.partiallyInvoices / response.data.totalInvoices) * 100);
-                        var fullyInvoices = parseInt((response.data.fullyInvoices / response.data.totalInvoices) * 100);
-                        root.paidInvoicesSeries.push(unPaidInvoices);
-                        root.paidInvoicesSeries.push(partially);
-                        root.paidInvoicesSeries.push(fullyInvoices);
-                        root.randerChart++;
-
-
                     }
-                });
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'straight'
+                },
+                title: {
+                    text: 'Charity by Month',
+                    align: 'left'
+                },
+                grid: {
+                    row: {
+                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                        opacity: 0.5
+                    },
+                },
+                xaxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                }
+            },
+            series2: [42, 47, 52, 58, 65],
+            chartOptions2: {
+                chart: {
+                    width: 380,
+                    type: 'polarArea'
+                },
+                labels: ['Cultural', 'Religion', 'Children', 'Disaster', 'Environmental'],
+                fill: {
+                    opacity: 1
+                },
+                stroke: {
+                    width: 1,
+                    colors: undefined
+                },
+                yaxis: {
+                    show: false
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                plotOptions: {
+                    polarArea: {
+                        rings: {
+                            strokeWidth: 0
+                        },
+                        spokes: {
+                            strokeWidth: 0
+                        },
+                    }
+                },
+                theme: {
+                    monochrome: {
+                        enabled: true,
+                        shadeTo: 'light',
+                        shadeIntensity: 0.6
+                    }
+                }
+            },
+            series3: [{
+                name: 'Website Blog',
+                type: 'column',
+                data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+            }, {
+                name: 'Social Media',
+                type: 'line',
+                data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+            }],
+            chartOptions3: {
+                chart: {
+                    height: 350,
+                    type: 'line',
+                },
+                stroke: {
+                    width: [0, 4]
+                },
+                title: {
+                    text: 'Traffic Sources'
+                },
+                dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1]
+                },
+                labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+                xaxis: {
+                    type: 'datetime'
+                },
+                yaxis: [{
+                    title: {
+                        text: 'Website Blog',
+                    },
+
+                }, {
+                    opposite: true,
+                    title: {
+                        text: 'Social Media'
+                    }
+                }]
             },
 
+        }
+    },
+    watch: {
+
+    },
+    methods: {
+        makeActive: function (item) {
+
+            this.active = item;
+        },
+        OverViewFilterFunction: function () {
 
         },
-        created: function () {
 
-            this.$emit('input', this.$route.name);
+        getDate: function (date) {
+            return moment(date).format('l');
         },
-        mounted: function () {
 
+    },
+    created: function () {
 
-            this.currency = localStorage.getItem('currency');
+    },
+    mounted: function () {
 
+        this.currency = localStorage.getItem('currency');
+
+        this.fromDate = moment().startOf('month').format("DD MMM YYYY");
+
+        if (this.$session.exists()) {
+            this.userID = localStorage.getItem('UserID');
+            this.employeeId = localStorage.getItem('EmployeeId');
             this.fromDate = moment().startOf('month').format("DD MMM YYYY");
 
-            if (this.$session.exists()) {
-                this.userID = localStorage.getItem('UserID');
-                this.employeeId = localStorage.getItem('EmployeeId');
-                this.fromDate = moment().startOf('month').format("DD MMM YYYY");
-                //this.isDayStart();
+        }
 
-                // this.getDataSaleIncome();
-            }
+        this.search = moment().format("DD MMM YYYY");
 
-            this.GetCashTransaction();
-            this.search = moment().format("DD MMM YYYY");
+        this.chartbymonth = moment().format("DD MMM YYYY");
 
-            this.chartbymonth = moment().format("DD MMM YYYY");
-            this.rander++;
-            this.randerDropdown++;
-
-            //this.GetInventory(this.search, 1);
-
-        },
-    }
+    },
+}
 </script>

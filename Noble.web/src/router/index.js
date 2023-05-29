@@ -25,6 +25,10 @@ import benificaries from '../components/Benificary/Benificaries.vue';
 //Authorized Persons
 import authorizedpersons from '../components/AuthorizedPersons/AuthorizedPersons.vue'
 
+//Authorized Persons
+import chartDashboard from '../components/Dashboard/Dashboard.vue'
+
+
 //Benificary Note
 import benificarynote from '../components/BenificaryNote/BenificaryNote.vue'
 
@@ -104,6 +108,11 @@ const routes = [
                             component: authorizedpersons
                         },
                         {
+                            path: '/ChartDashboard',
+                            name: 'ChartDashboard',
+                            component: chartDashboard
+                        },
+                        {
                             path: '/benificarynote',
                             name: 'benificarynote',
                             component: benificarynote
@@ -138,8 +147,8 @@ router.beforeEach((to, from, next) => {
 
     if (to.query.fromDashboard === 'true')
     {
-        localStorage.setItem('token', localStorage.getItem(to.query.token_name))
+        console.log(from.name);
+
     }
-    console.log(from.name);
     next();
 });

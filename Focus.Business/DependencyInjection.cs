@@ -1,10 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Focus.Business.Components;
 using Focus.Business.Interface;
-using AutoMapper;
 using System.Reflection;
 using MediatR;
 using Focus.Business.Common.Behaviours;

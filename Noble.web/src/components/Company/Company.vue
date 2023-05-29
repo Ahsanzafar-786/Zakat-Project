@@ -88,21 +88,8 @@ export default {
         return {
             companylist: [],
             searchQuery: '',
-            show: false,
-            type: '',
             companyId: null,
-            companyName: '',
-            companyLicenceId: '',
-            companyLicenceList: [],
-            showHistory: false,
-            roleDetailsForPermissions: [],
-            typePermissions: '',
-            showPermissions: false,
-            updatePermissions: false,
-
-            currentPage: 1,
-                pageCount: '',
-                rowCount: '',
+           
 
         }
     },
@@ -134,51 +121,7 @@ export default {
                 query: { data: companyId }
             })
         },
-        closeModal: function () {
-            this.show = false;
-            this.GetCompanyData();
-        },
-        AddLicence: function (id, name, companyLicenceId, licenceList) {
-            this.companyLicenceList = [];
-            this.companyName = name;
-            this.companyId = id;
-            this.companyLicenceId = companyLicenceId;
-            this.show = !this.show;
-            this.companyLicenceList = licenceList;
-            this.type = "Add";
-        },
-        showLicenceHistory: function (name, licenceList) {
-            this.companyLicenceList = [];
-            this.companyName = name;
-            this.showHistory = !this.showHistory;
-            this.companyLicenceList = licenceList;
-        },
-        AddPermissions: function (id) {
-            this.roleDetailsForPermissions = {
-                roleId: '00000000-0000-0000-0000-000000000000',
-                name: '',
-                allowAll: false,
-                removeAll: false,
-                moduleId: '',
-                companyId: id,
-                id: '00000000-0000-0000-0000-000000000000'
-            }
-            this.showPermissions = !this.showPermissions;
-            this.typePermissions = "Add";
-        },
-        UpdatePermissions: function (id) {
-            this.roleDetailsForPermissions = {
-                roleId: '00000000-0000-0000-0000-000000000000',
-                name: '',
-                allowAll: false,
-                removeAll: false,
-                moduleId: '',
-                companyId: id,
-                id: '00000000-0000-0000-0000-000000000000'
-            }
-            this.updatePermissions = !this.updatePermissions;
-            this.typePermissions = "Add";
-        },
+      
         GetCompanyData: function () {
             var id = localStorage.getItem('CompanyID');
             var root = this;
@@ -186,10 +129,8 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            this.$https.get('/Company/List?id=' + id, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            this.$https.get('/Company/CompanyList?id=' + id, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
-
-                    root.$store.state.companyList.push(response.data)
                     root.companylist = response.data;
                 }
             });
@@ -263,6 +204,7 @@ export default {
         },
     },
     mounted: function () {
+
         this.GetCompanyData();
     }
 }

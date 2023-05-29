@@ -1,121 +1,123 @@
-﻿﻿
-<template>
-    <body class="account-body accountbg">
+﻿﻿<template>
+<body class="account-body accountbg">
 
-        <!-- Log In page -->
-        <div class="container">
-            <div class="row vh-100 d-flex justify-content-center">
-                <div class="col-12 align-self-center">
-                    <div class="row">
-                        <div class="col-lg-5 mx-auto">
-                            <div class="card">
-                                <div class="card-body p-0 auth-header-box bg-white">
-                                    <div class="text-center p-3">
-                                        <a href="javascript:void(0);" class="logo logo-admin">
-                                            <img src="Smartdigitalerpsol.png" height="50" alt="logo" class="auth-logo">
-                                        </a>
-                                        <h4 class="mt-3 mb-1 fw-semibold font-18" style="color: #0C213A;">Smart Digital-ERP</h4>
-                                        <p class="text-muted  mb-0">{{ $t('login.WelcomePleaselogintoyouraccount') }}</p>
-                                    </div>
+    <!-- Log In page -->
+    <div class="container">
+        <div class="row vh-100 d-flex justify-content-center">
+            <div class="col-12 align-self-center">
+                <div class="row">
+                    <div class="col-lg-5 mx-auto">
+                        <div class="card">
+                            <div class="card-body p-0 auth-header-box bg-white">
+                                <div class="text-center p-3">
+                                    <a href="javascript:void(0);" class="logo logo-admin">
+                                        <img src="Smartdigitalerpsol.png" height="50" alt="logo" class="auth-logo">
+                                    </a>
+                                    <h4 class="mt-3 mb-1 fw-semibold font-18" style="color: #0C213A;">Smart Digital-ERP</h4>
+                                    <p class="text-muted  mb-0">{{ $t('login.WelcomePleaselogintoyouraccount') }}</p>
                                 </div>
-                                <div class="card-body p-0">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active p-3" id="LogIn_Tab" role="tabpanel">
-                                            <div class="form-horizontal auth-form">
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="tab-content">
+                                    <div class="tab-pane active p-3" id="LogIn_Tab" role="tabpanel">
+                                        <div class="form-horizontal auth-form">
 
-                                                <div class="form-group mb-2">
-                                                    <label class="form-label">{{ $t('login.UsernameorEmail') }}</label>
-                                                    <div class="input-group">
-                                                        <input v-model="$v.login.email.$model" type="text"
-                                                            class="form-control" @keyup.enter="userlogin"
-                                                            :placeholder="$t('login.Enteryourusernameoremail')">
-                                                    </div>
-                                                </div><!--end form-group-->
+                                            <div class="form-group mb-2">
+                                                <label class="form-label">{{ $t('login.UsernameorEmail') }}</label>
+                                                <div class="input-group">
+                                                    <input v-model="$v.login.email.$model" type="text" class="form-control" @keyup.enter="userlogin" :placeholder="$t('login.Enteryourusernameoremail')">
+                                                </div>
+                                            </div>
+                                            <!--end form-group-->
 
-                                                <div class="form-group mb-2">
-                                                    <label class="form-label">{{ $t('login.RegisterUser_Password')
+                                            <div class="form-group mb-2">
+                                                <label class="form-label">{{ $t('login.RegisterUser_Password')
                                                     }}</label>
-                                                    <div class="input-group ">
-                                                        <input v-model="$v.login.password.$model" :type="password"
-                                                            class="form-control" @keyup.enter="userlogin"
-                                                            :placeholder="$t('login.EnteryourPassword')">
-                                                        <div style=" position: absolute; top: 24%; " @click="showPassword"
-                                                            v-bind:style="($i18n.locale == 'en' || $i18n.locale == 'ar' ) ? 'left: 94%' : 'left: 11px'">
-                                                            <i class="fas fa-eye" v-if="eyeValue == false"></i>
-                                                            <i class="fas fa-eye-slash" v-if="eyeValue == true"></i>
-                                                        </div>
+                                                <div class="input-group ">
+                                                    <input v-model="$v.login.password.$model" :type="password" class="form-control" @keyup.enter="userlogin" :placeholder="$t('login.EnteryourPassword')">
+                                                    <div style=" position: absolute; top: 24%; " @click="showPassword" v-bind:style="($i18n.locale == 'en' || $i18n.locale == 'ar' ) ? 'left: 94%' : 'left: 11px'">
+                                                        <i class="fas fa-eye" v-if="eyeValue == false"></i>
+                                                        <i class="fas fa-eye-slash" v-if="eyeValue == true"></i>
                                                     </div>
+                                                </div>
 
-                                                </div><!--end form-group-->
+                                            </div>
+                                            <!--end form-group-->
 
-                                                <div class="form-group row my-3">
-                                                    <div class="col-sm-6">
-                                                        <div class="custom-control custom-switch switch-success">
-                                                            <input v-model="login.rememberMe" type="checkbox"
-                                                                class="custom-control-input" id="customSwitchSuccess">
-                                                            <label class="form-label text-muted mx-1"
-                                                                for="customSwitchSuccess">{{ $t('login.Rememberme')
+                                            <div class="form-group row my-3">
+                                                <div class="col-sm-6">
+                                                    <div class="custom-control custom-switch switch-success">
+                                                        <input v-model="login.rememberMe" type="checkbox" class="custom-control-input" id="customSwitchSuccess">
+                                                        <label class="form-label text-muted mx-1" for="customSwitchSuccess">{{ $t('login.Rememberme')
                                                                 }}</label>
-                                                        </div>
-                                                    </div><!--end col-->
-                                                    <div class="col-sm-6 text-end">
-                                                        <a href="javascript:void(0)" v-on:click="openmodel"
-                                                            class="text-muted font-13"><i class="dripicons-lock"></i> {{
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                                <div class="col-sm-6 text-end">
+                                                    <a href="javascript:void(0)" v-on:click="openmodel" class="text-muted font-13"><i class="dripicons-lock"></i> {{
                                                                 $t('login.ForgotPassword?') }}</a>
-                                                    </div><!--end col-->
-                                                </div><!--end form-group-->
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end form-group-->
 
-                                                <div class="form-group mb-0 row">
-                                                    <div class="col-12">
-                                                        <small class="text-danger">{{ customError }}</small>
-                                                        <button v-on:click="userlogin"
-                                                            class="btn btn-primary w-100 waves-effect waves-light"
-                                                            type="button">
-                                                            <i v-if="loading"
-                                                                class="la la-refresh text-secondary la-spin progress-icon-spin"
-                                                                style="font-size:.8125rem;"></i>
-                                                            <span v-else>{{ $t('login.Login1') }} <i
-                                                                    class="fas fa-sign-in-alt ms-1"></i></span>
-                                                        </button>
-                                                    </div><!--end col-->
-                                                </div> <!--end form-group-->
-                                            </div><!--end form-->
+                                            <div class="form-group mb-0 row">
+                                                <div class="col-12">
+                                                    <small class="text-danger">{{ customError }}</small>
+                                                    <button v-on:click="userlogin" class="btn btn-primary w-100 waves-effect waves-light" type="button">
+                                                        <i v-if="loading" class="la la-refresh text-secondary la-spin progress-icon-spin" style="font-size:.8125rem;"></i>
+                                                        <span v-else>{{ $t('login.Login1') }} <i class="fas fa-sign-in-alt ms-1"></i></span>
+                                                    </button>
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end form-group-->
+                                        </div>
+                                        <!--end form-->
                                         <!--<div class="m-3 text-center text-muted">
                                                 <p class="mb-0">Don't have an account ?  <a href="auth-register.html" class="text-primary ms-2">Free Resister</a></p>
                                                 </div>-->
-                                            <div class="account-social">
-                                                <h6 class="mb-3 " style="color:transparent;">-</h6>
-                                            </div>
-                                            <div class="btn-group w-100">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary">Support</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Contact
-                                                    Us</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Visit
-                                                    Us</button>
-                                            </div>
+                                        <div class="account-social">
+                                            <h6 class="mb-3 " style="color:transparent;">-</h6>
+                                        </div>
+                                        <div class="btn-group w-100">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Support</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Contact
+                                                Us</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Visit
+                                                Us</button>
                                         </div>
                                     </div>
-                                </div><!--end card-body-->
-                                <div class="card-body bg-light-alt text-center">
-                                    <span class="text-muted d-none d-sm-inline-block">
-                                        <small>Version 1.2.9.5 Last Updated May 10, 2023. Smart Digital (Pvt) Ltd.</small> 
-                                    </span>
                                 </div>
-                            </div><!--end card-->
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div><!--end col-->
-            </div><!--end row-->
-        </div><!--end container-->
-        <!-- End Log In page -->
+                            </div>
+                            <!--end card-body-->
+                            <div class="card-body bg-light-alt text-center">
+                                <span class="text-muted d-none d-sm-inline-block">
+                                    <small>Version 1.2.9.5 Last Updated May 10, 2023. Smart Digital (Pvt) Ltd.</small>
+                                </span>
+                            </div>
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end col-->
+        </div>
+        <!--end row-->
+    </div>
+    <!--end container-->
+    <!-- End Log In page -->
 
-        <forgotPassword :show="show" v-if="show" @close="show = false" />
-    </body>
+    <forgotPassword :show="show" v-if="show" @close="show = false" />
+</body>
 </template>
-<script>
 
-import { required } from 'vuelidate/lib/validators';
+<script>
+import {
+    required
+} from 'vuelidate/lib/validators';
 
 export default {
 
@@ -159,28 +161,23 @@ export default {
         }
     },
     validations: {
-        login:
-        {
-            email:
-            {
+        login: {
+            email: {
                 required
             },
-            password:
-            {
+            password: {
                 required
             }
         }
     },
-   
+
     methods: {
 
-        
         showPassword() {
             if (this.password === "password") {
                 this.password = "text";
                 this.eyeValue = true;
-            }
-            else {
+            } else {
                 this.password = "password"
                 this.eyeValue = false;
             }
@@ -196,15 +193,10 @@ export default {
             localStorage.setItem('locales', locale);
         },
 
-        gotoWebSite: function () {
-            window.location.href = this.website;
-        },
-
         openmodel: function () {
             this.show = !this.show;
         },
 
-        
         userlogin: function () {
             var root = this;
             root.customError = '';
@@ -213,7 +205,13 @@ export default {
             debugger;
             this.$https.post(url, this.login).then(function (response) {
                 debugger;
-                 if (response.data != null) {
+                if (response.data.companyId == "00000000-0000-0000-0000-000000000000") {
+
+                    root.loading = false;
+                    root.customError = 'Invalid Login Attempt.';
+                   
+                }
+                else if (response.data != null) {
                     root.$session.start();
                     localStorage.setItem('CompanyID', response.data.companyId);
                     localStorage.setItem('token', response.data.token);
@@ -231,10 +229,8 @@ export default {
 
     },
     created: function () {
-        
+
     },
-    mounted() {
-    },
+    mounted() {},
 }
 </script>
-

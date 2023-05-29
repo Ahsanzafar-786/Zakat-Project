@@ -24,7 +24,7 @@ namespace Focus.Persistence
         }
        
         public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Color> Colors { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<Beneficiaries> Beneficiaries { get; set; }
         public virtual DbSet<AuthorizedPerson> AuthorizedPersons { get; set; }
         public virtual DbSet<BenificaryNote> BenificaryNotes { get; set; }

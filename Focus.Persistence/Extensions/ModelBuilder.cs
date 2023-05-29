@@ -184,6 +184,15 @@ namespace Focus.Persistence.Extensions
                 ConcurrencyStamp = "1590a33c-cd2d-4c93-9e17-fce19bc2bd9d",
 
             });
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+
+            {
+                Id = "f9d3868c-b58c-4c55-be2b-48d564bea081",
+                Name = "Cashier",
+                NormalizedName = "Cashier",
+                ConcurrencyStamp = "1590a33c-cd2d-4c93-9e17-fce19bc2bd9d",
+
+            });
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = "C1448F88-49B4-476C-B07D-33514A0F9C1E",
