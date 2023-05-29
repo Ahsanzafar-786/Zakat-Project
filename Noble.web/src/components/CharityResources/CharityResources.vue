@@ -151,7 +151,7 @@
                 </div>
             </div>
 
-            <benificary-mod :brand="newCharityResources" :show="show" v-if="show" @close="IsSave" :type="type" />
+            <charityresources-mod :brand="newCharityResources" :show="show" v-if="show" @close="IsSave" :type="type" />
         </div>
 
     </div>
@@ -174,7 +174,7 @@ export default {
                 city: '',
                 contactPerson:'',
                 isActive: true,
-                business: true,
+                business: '',
             },
             type: '',
             search: '',
@@ -213,7 +213,7 @@ export default {
                 city: '',
                 contactPerson:'',
                 isActive: true,
-                business: true,
+                business: 'true',
             }
             this.show = !this.show;
             this.type = "Add";

@@ -12,23 +12,63 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <div class="col-form-label col-sm-3 pt-0 text-start">
+                                <span id="ember694" class="text font-weight-bolder ">Charity Type:</span>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-check form-check-inline">
+                                    <input v-model="brand.business" name="contact-sub-type" id="a49946497"
+                                        class=" form-check-input" type="radio" value="true">
+                                    <label class="form-check-label pl-0" for="a49946497">Business</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input v-model="brand.business" name="contact-sub-type" id="a9ff8eb35"
+                                        class=" form-check-input" type="radio" value="false">
+                                    <label class="form-check-label pl-0" for="a9ff8eb35">Individual</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
                     <div class="form-group has-label col-sm-12 ">
-                        <label class="text  font-weight-bolder">
-                            Name:<span class="text-danger"> *</span>
+                        <label v-if="brand.business == 'true'" class="text  font-weight-bolder">
+                            Business Name:<span class="text-danger"> *</span>
+                        </label>
+                        <label v-else class="text  font-weight-bolder">
+                            Person Name:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                     </div>
+
+                    <div class="form-group has-label col-sm-12 " v-if="brand.business == 'true'">
+                        <label class="text  font-weight-bolder">
+                            Contact Person:
+                        </label>
+                        <input class="form-control" v-model="brand.contactPerson" type="text" />
+                    </div>
+
+                    <div class="form-group has-label col-sm-12 " v-if="brand.business == 'true'">
+                        <label class="text  font-weight-bolder">
+                            City:
+                        </label>
+                        <input class="form-control" v-model="brand.city" type="text" />
+                    </div>
+
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
                             Phone No:
                         </label>
-                        <input class="form-control" v-model="brand.phoneNo" type="number" />
+                        <input class="form-control" v-model="brand.phone" type="number" />
                     </div>
-                    <div class="form-group has-label col-sm-12 ">
-                        <label class="text  font-weight-bolder">
-                            Address:
-                        </label>
-                        <textarea class="form-control" v-model="brand.address" rows="3"></textarea>
+
+                    <div class="form-group col-sm-12">
+                        <label></label>
+                        <div class="checkbox form-check-inline mx-2">
+                            <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
+                            <label for="inlineCheckbox1"> Active </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,6 +125,14 @@ export default {
             var root = this;
             var aa = this.brand.chartiyId;
             this.brand.chartiyId = aa;
+            if(this.brand.business == 'true')
+            {
+                this.brand.business = true
+            }
+            else
+            {
+                this.brand.business = false
+            }
             this.loading = true;
             var token = '';
             if (this.$session.exists()) {

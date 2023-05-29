@@ -99,6 +99,9 @@ Vue.component('authorizedperson', require('./components/General/AuthorizedPerson
 //Benificary Note
 Vue.component('benificarynote-mod', require('./components/BenificaryNote/AddBenificaryNote.vue').default);
 
+// Charity Resources
+Vue.component('charityresources-mod', require('./components/CharityResources/AddCharityResources.vue').default);
+
 Vue.prototype.$https = axios;
 axios.defaults.baseURL = json.ServerIP;
 Vue.prototype.$ServerIp = json.ServerIP;
