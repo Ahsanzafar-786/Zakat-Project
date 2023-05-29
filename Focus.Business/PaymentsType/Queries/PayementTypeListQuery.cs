@@ -41,21 +41,18 @@ namespace Focus.Business.PaymentsType.Queries
 
                             payment.Add(new PaymentType
                             {
-                                Id = Guid.Parse("FE1F0539-5328-4D01-B57D-F082F4446223"),
                                 Name = "One Time",
                                 NameAr = "مره واحده",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
-                                Id = Guid.Parse("1D6F5737-548A-4BAA-BB18-5ADE3B33E5AA"),
                                 Name = "Monthly",
                                 NameAr = "شهريا",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
-                                Id = Guid.Parse("80F76B2C-ABE2-416C-8550-84333C9056CA"),
                                 Name = "2 Month",
                                 NameAr = "2 شهر",
                                 IsActive = true,
@@ -86,21 +83,18 @@ namespace Focus.Business.PaymentsType.Queries
 
                             payment.Add(new PaymentType
                             {
-                                Id = Guid.Parse("FE1F0539-5328-4D01-B57D-F082F4446223"),
                                 Name = "One Time",
                                 NameAr = "مره واحده",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
-                                Id = Guid.Parse("1D6F5737-548A-4BAA-BB18-5ADE3B33E5AA"),
                                 Name = "Monthly",
                                 NameAr = "شهريا",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
-                                Id = Guid.Parse("80F76B2C-ABE2-416C-8550-84333C9056CA"),
                                 Name = "2 Month",
                                 NameAr = "2 شهر",
                                 IsActive = true,

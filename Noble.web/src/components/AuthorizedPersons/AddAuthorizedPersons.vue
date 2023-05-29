@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            ID(Iqama):<span class="text-danger"> *</span>
+                            ID:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="brand.iqamaNo" type="text" />
                     </div>

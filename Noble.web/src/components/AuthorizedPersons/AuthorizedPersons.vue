@@ -46,9 +46,9 @@
                             <thead class="thead-light table-hover">
                                 <tr>
                                     <th>#</th>
-                                    <th class="text-center">
+                                    <!-- <th class="text-center">
                                         ID
-                                    </th>
+                                    </th> -->
                                     <th class="text-center">
                                         Name
                                     </th>
@@ -56,7 +56,7 @@
                                         Gender
                                     </th>
                                     <th class="text-center">
-                                        ID(Iqama)
+                                        ID
                                     </th>
                                     <th class="text-center">
                                         Nationality
@@ -75,11 +75,11 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditauthorizedPerson(brand.id)">{{ brand.authorizedPersonCode }}</a>
                                         </strong>
-                                    </td>
+                                    </td> -->
                                     <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditauthorizedPerson(brand.id)"> {{ brand.name }}</a>

@@ -22,21 +22,21 @@
 
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                ID(Iqama):<span class="text-danger"> *</span>
+                                ID:
                             </label>
                             <input class="form-control" v-model="$v.brand.ugamaNo.$model" type="text" />
                         </div>
 
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                Nationality:<span class="text-danger"> *</span>
+                                Nationality:
                             </label>
                             <input class="form-control" v-model="brand.nationality" type="text" />
                         </div>
 
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                Contact No:<span class="text-danger"> *</span>
+                                Contact No:
                             </label>
                             <input class="form-control" v-model="$v.brand.phoneNo.$model" type="number" />
                         </div>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                Payment Interval Months:<span class="text-danger"> *</span>
+                                Payment Interval Months:
                             </label>
                             <input class="form-control" v-model="$v.brand.paymentIntervalMonth.$model" type="number" />
                         </div>
@@ -79,13 +79,13 @@
 
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                Passport No:<span class="text-danger"> *</span>
+                                Passport No:
                             </label>
                             <input class="form-control" v-model="brand.passportNo" type="text" />
                         </div>
                          <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                               Gender:<span class="text-danger"> *</span>
+                               Gender:
                             </label>
                             <select v-model="brand.gender" class="form-select" aria-label="Default select example">
                                 <option value="Male">Male</option>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                Address:<span class="text-danger"> *</span>
+                                Address:
                             </label>
                             <input class="form-control" v-model="brand.address" type="text" />
                         </div>
@@ -107,20 +107,20 @@
                         
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                Recurring Amount:<span class="text-danger"> *</span>
+                                Recurring Amount:
                             </label>
                             <input class="form-control" v-model="$v.brand.recurringAmount.$model" type="number" />
                         </div>
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                Amount Per Month:<span class="text-danger"> *</span>
+                                Amount Per Month:
                             </label>
                             <input class="form-control" v-model="$v.brand.amountPerMonth.$model" type="number" />
                         </div>
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Note:<span class="text-danger"> *</span>
+                            Note:
                         </label>
                         <VueEditor v-model="brand.note" />
                     </div>
@@ -146,7 +146,7 @@
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
-import { required, requiredIf } from "vuelidate/lib/validators"
+import {  requiredIf } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { VueEditor } from "vue2-editor";
@@ -178,19 +178,14 @@ export default {
                 }),
             },
             paymentIntervalMonth: {
-                required
             },
             amountPerMonth: {
-                required
             },
             ugamaNo: {
-                required
             },
             phoneNo: {
-                required
             },
             recurringAmount: {
-                required
             }
         }
     },

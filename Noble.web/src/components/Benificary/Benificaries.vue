@@ -46,9 +46,9 @@
                             <thead class="thead-light table-hover">
                                 <tr>
                                     <th>#</th>
-                                    <th class="text-center">
+                                    <!-- <th class="text-center">
                                         Benificary Id
-                                    </th>
+                                    </th> -->
                                     <th class="text-center">
                                         Name
                                     </th>
@@ -59,7 +59,7 @@
                                        Amount Per Month
                                     </th>
                                     <th class="text-center">
-                                       Ugama No
+                                      ID
                                     </th>
                                     <th class="text-center">
                                         Contact No
@@ -84,11 +84,11 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)">{{ brand.beneficiaryId }}</a>
                                         </strong>
-                                    </td>
+                                    </td> -->
                                     <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{ brand.name }}</a>
