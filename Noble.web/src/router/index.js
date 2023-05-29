@@ -29,6 +29,9 @@ import authorizedpersons from '../components/AuthorizedPersons/AuthorizedPersons
 import chartDashboard from '../components/Dashboard/Dashboard.vue'
 
 
+//Benificary Note
+import benificarynote from '../components/BenificaryNote/BenificaryNote.vue'
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -104,6 +107,11 @@ const routes = [
                             path: '/ChartDashboard',
                             name: 'ChartDashboard',
                             component: chartDashboard
+                        },
+                        {
+                            path: '/benificarynote',
+                            name: 'benificarynote',
+                            component: benificarynote
                         },
                     ]
                 }

@@ -13,6 +13,8 @@ namespace Focus.Business.Interface
         DbSet<Color> Colors { get; set; }
         DbSet<Beneficiaries> Beneficiaries { get; set; }
         DbSet<AuthorizedPerson> AuthorizedPersons { get; set; }
+        DbSet<BenificaryNote> BenificaryNotes { get; set; }
+        DbSet<CharityResources> CharityResources { get; set; }
 
         bool DisableTenantFilter { get; set; }
         int SaveChanges();

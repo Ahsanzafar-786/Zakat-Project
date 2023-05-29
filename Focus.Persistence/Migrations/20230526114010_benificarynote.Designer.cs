@@ -4,6 +4,7 @@ using Focus.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Focus.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230526114010_benificarynote")]
+    partial class benificarynote
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,38 +234,6 @@ namespace Focus.Persistence.Migrations
                     b.HasIndex("BenificaryId");
 
                     b.ToTable("BenificaryNotes");
-                });
-
-            modelBuilder.Entity("Focus.Domain.Entities.CharityResources", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Business")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ChartiyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ContactPerson")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CharityResources");
                 });
 
             modelBuilder.Entity("Focus.Domain.Entities.Color", b =>
@@ -525,7 +495,7 @@ namespace Focus.Persistence.Migrations
                             Blocked = false,
                             CashVoucher = false,
                             CompanyRegNo = "56ty60",
-                            CreatedDate = new DateTime(2023, 5, 26, 13, 8, 11, 21, DateTimeKind.Utc).AddTicks(2219),
+                            CreatedDate = new DateTime(2023, 5, 26, 11, 40, 9, 644, DateTimeKind.Utc).AddTicks(4910),
                             DayStart = false,
                             English = false,
                             ExpenseAccount = false,

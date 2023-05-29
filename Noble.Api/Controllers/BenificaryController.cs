@@ -8,6 +8,12 @@ using System;
 using Focus.Business.AuthorizPersons.Model;
 using Focus.Business.AuthorizPersons.Commands;
 using Focus.Business.AuthorizPersons.Queries;
+using Focus.Business.BenificiariesNotes.Model;
+using Focus.Business.BenificiariesNotes.Commands;
+using Focus.Business.BenificiariesNotes.Queries;
+using Focus.Business.CharityResource.Model;
+using Focus.Business.CharityResource.Commands;
+using Focus.Business.CharityResource.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -93,6 +99,80 @@ namespace Noble.Api.Controllers
                 Id = id
             });
             return Ok(authorziedPersons);
+        }
+
+        #endregion
+
+        #region BenificaryNote
+        [Route("api/Benificary/SaveBenificaryNote")]
+        [HttpPost("SaveBenificaryNote")]
+        public async Task<IActionResult> SaveBenificaryNote([FromBody] BenificaryNoteLookupModel benificary)
+        {
+            var message = await Mediator.Send(new BenificaryNoteAddUpdateCommand
+            {
+                benificaryNote = benificary
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetBenificaryNoteList")]
+        [HttpGet("GetBenificaryNoteList")]
+        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown)
+        {
+            var benificary = await Mediator.Send(new GetBenificaryNoteListQuery
+            {
+                SearchTerm = searchTerm,
+                IsDropDown = isDropDown,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(benificary);
+        }
+
+        [Route("api/Benificary/GetBenificaryNoteDetail")]
+        [HttpGet("GetBenificaryNoteDetail")]
+        public async Task<IActionResult> GetBenificaryNoteDetail(Guid id)
+        {
+            var benificary = await Mediator.Send(new GetBenificaryNoteDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(benificary);
+        }
+
+        #endregion
+
+        #region Charity Resources
+        [Route("api/Benificary/SaveCharityResources")]
+        [HttpPost("SaveCharityResources")]
+        public async Task<IActionResult> SaveCharityResources([FromBody] CharityResourcesLookupModel charity)
+        {
+            var message = await Mediator.Send(new CharityResourceAddUpdateCommand
+            {
+                charityResources = charity
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetCharityResourcesList")]
+        [HttpGet("GetCharityResourcesList")]
+        public async Task<IActionResult> GetCharityResourcesList(string searchTerm, int? pageNumber, bool isDropDown)
+        {
+            var charity = await Mediator.Send(new CharityResourceListQuery
+            {
+                SearchTerm = searchTerm,
+                IsDropDown = isDropDown,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(charity);
+        }
+
+        [Route("api/Benificary/GetCharityResourcesDetail")]
+        [HttpGet("GetCharityResourcesDetail")]
+        public async Task<IActionResult> GetCharityResourcesDetail(Guid id)
+        {
+            var charity = await Mediator.Send(new CharityResourceDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(charity);
         }
 
         #endregion

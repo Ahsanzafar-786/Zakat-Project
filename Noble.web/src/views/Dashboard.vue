@@ -63,27 +63,32 @@
                         <li>
                             <a v-on:click="GoTo('/benificaries')" href="javascript:void(0);"> {{ $t('Benificary')
                                 }}</a>
-                        </li>
-                    </ul>
-                </li>
-                <li v-if="roleName!='Noble Admin'">
-                    <a href="javascript:void(0);">
-                        <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                            {{ $t('Authorized Persons') }}
-                        </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
-                    </a>
+                            </li>
+                            <li>
+                                <a v-on:click="GoTo('/benificarynote')" href="javascript:void(0);"> {{ $t('Benificary Note')
+                                }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
+                                {{ $t('Authorized Persons') }}
+                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                        </a>
 
                     <ul class="nav-second-level" aria-expanded="false">
                         <li>
                             <a v-on:click="GoTo('/authorizedpersons')" href="javascript:void(0);"> {{ $t('Authorized Persons')
                                 }}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
         </div>
-    </div>
-    <!--end left-sidenav-->
+        <!--end left-sidenav-->
 
     <div class="page-wrapper">
         <!--Top Bar Start-->

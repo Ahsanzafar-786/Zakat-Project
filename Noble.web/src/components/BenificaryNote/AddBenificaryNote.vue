@@ -1,89 +1,37 @@
 <template>
-    <modal :show="show" :modalLarge="true">
+    <modal :show="show">
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    Update Benificary
+                    Update Benificary Note
                 </h6>
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
-                    Add Benificary
+                    Add Benificary Note
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group has-label col-sm-12 ">
-                            <label class="text  font-weight-bolder">
-                                Name:<span class="text-danger"> *</span>
-                            </label>
-                            <input class="form-control" v-model="$v.brand.name.$model" type="text" />
-                        </div>
-                        <div class="form-group has-label col-sm-12 ">
-                            <label class="text  font-weight-bolder">
-                                Phone No:<span class="text-danger"> *</span>
-                            </label>
-                            <input class="form-control" v-model="$v.brand.phoneNo.$model" type="number" />
-                        </div>
-                        <div class="form-group has-label col-sm-12 ">
-                            <label class="text  font-weight-bolder">
-                                Authorized Person
-                            </label>
-                            <authorizedperson v-model="brand.authorizedPersonId" :values="brand.authorizedPersonId" />
-                        </div>
-                        <div class="form-group has-label col-sm-12 ">
-                            <label class="text  font-weight-bolder">
-                                Payment Interval Months:<span class="text-danger"> *</span>
-                            </label>
-                            <input class="form-control" v-model="$v.brand.paymentIntervalMonth.$model" type="number" />
-                        </div>
-
-                       
-                        <div class="form-group col-sm-12">
-                            <label></label>
-                            <div class="checkbox form-check-inline mx-2">
-                                <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
-                                <label for="inlineCheckbox1"> Active </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group has-label col-sm-12 ">
-                            <label class="text  font-weight-bolder">
-                                Recurring Amount:<span class="text-danger"> *</span>
-                            </label>
-                            <input class="form-control" v-model="$v.brand.recurringAmount.$model" type="number" />
-                        </div>
-                        <div class="form-group has-label col-sm-12 ">
-                            <label class="text  font-weight-bolder">
-                                Amount Per Month:<span class="text-danger"> *</span>
-                            </label>
-                            <input class="form-control" v-model="$v.brand.amountPerMonth.$model" type="number" />
-                        </div>
-                        <div class="form-group has-label col-sm-12 ">
-                            <label class="text  font-weight-bolder">
-                                Iqama No:<span class="text-danger"> *</span>
-                            </label>
-                            <input class="form-control" v-model="$v.brand.ugamaNo.$model" type="text" />
-                        </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <label class="text  font-weight-bolder">
+                           Benificary:
+                        </label>
+                        <benificary v-model="brand.benificaryId" :values="brand.benificaryId" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
                             Note:<span class="text-danger"> *</span>
                         </label>
-                        <VueEditor v-model="brand.note" />
+                        <input class="form-control" v-model="$v.brand.note.$model" type="text" />
                     </div>
-
-
-
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary"
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificaryNote"
                     v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
                     Save
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary"
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificaryNote"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
                     Update
                 </button>
@@ -101,14 +49,12 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import { required } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import { VueEditor } from "vue2-editor";
 export default {
     mixins: [clickMixin],
     name: 'AddBenificary',
     props: ['show', 'brand', 'type'],
     components: {
         Loading,
-        VueEditor
     },
     data: function () {
         return {
@@ -119,41 +65,27 @@ export default {
     },
     validations: {
         brand: {
-            name: {
+            note: {
                 required
             },
-            paymentIntervalMonth: {
-                required
-            },
-            amountPerMonth: {
-                required
-            },
-            ugamaNo: {
-                required
-            },
-            phoneNo: {
-                required
-            },
-            recurringAmount: {
-                required
-            }
         }
     },
     methods: {
         close: function () {
             this.$emit('close');
         },
-        SaveBenificary: function () {
+        SaveBenificaryNote: function () {
+            debugger;
             var root = this;
-            var aa = this.brand.beneficiaryId;
-            this.brand.beneficiaryId = aa;
+            var aa = this.brand.authorizedPersonCode;
+            this.brand.authorizedPersonCode = aa;
             this.loading = true;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
             debugger;
-            this.$https.post('/Benificary/SaveBenificary', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
+            this.$https.post('/Benificary/SaveBenificaryNote', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {
@@ -203,8 +135,7 @@ export default {
                         {
                             icon: 'error',
                             title: 'Something Went Wrong',
-                            text: error.response.data,
-
+                            text: error.response.data.isUpdate,
                             showConfirmButton: false,
                             timer: 5000,
                             timerProgressBar: true,

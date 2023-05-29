@@ -25,6 +25,7 @@ namespace Focus.Domain.Entities
         public bool IsRegister { get; set; }
         public Guid? AuthorizedPersonId { get; set; }
         public virtual AuthorizedPerson AuthorizedPersons { get; set; }
+        public virtual ICollection<BenificaryNote> BenificaryNotes { get; set; }
 
     }
 }
