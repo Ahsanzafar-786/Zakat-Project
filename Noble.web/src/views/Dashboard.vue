@@ -26,14 +26,16 @@
                         <a href="javascript:void(0);">
                             <i data-feather="grid" class="align-self-center menu-icon"></i><span>
                                 {{
-                                    $t('Company')
+                                    $t('Company.Company')
                                 }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
                                 <a v-on:click="GoTo('/company')" href="javascript:void(0);">
-                                    Company
+                                    {{
+                                    $t('Company.Company')
+                                    }}
                                 </a>
                             </li>
                         </ul>
