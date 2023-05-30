@@ -68,6 +68,64 @@
     "Note":"ملحوظة"
   },
 
+  "PaymentType":{
+    "PaymentType":"نوع الدفع",
+    "Name":"اسم"
+  },
+  "AddPaymentType":{
+    "AddPaymentType":"إضافة نوع الدفع",
+    "UpdatePaymentType":"تحديث نوع الدفع",
+    "Name":"اسم",
+    "NameArabic":"الاسم عربي",
+    "Description":"وصف",
+    "Active":"نشيط"
+  },
+  "ApprovalPerson":{
+    "ApprovalPerson":"شخص الموافقة",
+    "ApprovalPersonList":"قائمة أفراد الموافقة",
+    "ApprovalPersonId":"هوية شخص الموافقة",
+    "Name":"اسم"
+  },
+  "AddApprovalPerson":{
+    "AddApprovalPerson":"إضافة شخص الموافقة",
+    "UpdateApprovalPerson":"تحديث شخص الموافقة",
+    "Name":"اسم",
+    "NameArabic":"الاسم عربي",
+    "Email":"بريد إلكتروني",
+    "ContactNo":"رقم الاتصال"
+  },
+  "Charity Resources":{
+    "CharityResources":"الموارد الخيرية",
+    "CharityResourcesList":"قائمة الموارد الخيرية",
+    "CharityResourcesId":"معرّف الموارد الخيرية",
+    "Name":"اسم",
+    "Status":"حالة",
+    "FundsSource":"مصدر الأموال"
+  },
+  "Add Charity Resources":{
+    "AddCharityResources":"أضف الموارد الخيرية",
+    "UpdateCharityResources":"تحديث الموارد الخيرية",
+    "FundsSource":"مصدر الأموال",
+    "Entity":"كيان",
+    "Individual":"فردي",
+    "EntityName":"اسم الكيان",
+    "PersonName":"اسم الشخص",
+    "City":"مدينة",
+    "ContactNo":"رقم الاتصال",
+    "Active":"نشيط"
+  },
+
+
+
+
+
+
+
+  "Commit-ApplicationUpdate": "يلزم تحديث التطبيق",
+  "UpdateApplication": {
+    "CurrentVersion": "النسخة الحالية",
+    "LatestVersion": "أحدث إصدار",
+    "UpdateApplication": "تحديث التطبيق"
 
   "AuthorizedPerson":{
     "AuthorizedPerson" :"الشخص المرخص",
