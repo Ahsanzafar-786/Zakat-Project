@@ -175,5 +175,42 @@
     "Previous": "سابق",
     "Next": "التالي",
     "Last": "آخر"
+  },
+  "login":{
+    "login":"تسجيل الدخول",
+    "WelcomePleaselogintoyouraccount":"مرحبا الرجاء تسجيل الدخول إلى حسابك",
+    "UsernameorEmail":"اسم المستخدم أو البريد الالكتروني",
+    "RegisterUser_Password":"تسجيل كلمة مرور المستخدم",
+    "Rememberme":"تذكرنى",
+    "ForgotPassword?":"هل نسيت كلمة السر",
+    "Login1":"تسجيل الدخول",
+    "Support":"يدعم",
+    "ContactUs":"اتصل بنا",
+    "VisitUS":"زورنا"
+  },
+  "Dashboard":{
+    "Dashboard":"لوحة القيادة"
+  },
+  "SetupCompany":{
+    "SetupCompany":"شركة الإعداد",
+    "ClientCode":"رمز العميل",
+    "CompanyName":"اسم الشركة",
+    "CompanyEmail":"البريد الإلكتروني للشركة",
+    "CommercialRegistrationNo":"رقم السجل التجاري",
+    "VATNTNTAXNo":"ضريبة القيمة المضافة / الرقم الضريبي الوطني / رقم الضرائب",
+    "Website":"موقع إلكتروني",
+    "MobileNumber":"رقم الهاتف المحمول",
+    "LandlineNumber":"رقم الهاتف الثابت",
+    "Country":"دولة",
+    "City":"مدينة",
+    "Address":"عنوان",
+    "SelectCountry":"حدد الدولة",
+    "AdminInfo":"معلومات المسؤول",
+    "Email":"بريد إلكتروني",
+    "Name":"اسم",
+    "RegisterUser_Password":"تسجيل كلمة مرور المستخدم",
+    "RegisterUser_ConfirmPassword":"تسجيل مستخدم تأكيد كلمة المرور"
   }
+
+
 }
