@@ -74,14 +74,14 @@
                     <li v-if="roleName != 'Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('Authorized Persons') }}
+                                {{ $t('AuthorizedPerson.AuthorizedPerson') }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
                                 <a v-on:click="GoTo('/authorizedpersons')" href="javascript:void(0);"> 
-                                {{ $t('Authorized Persons')
+                                {{ $t('AuthorizedPerson.AuthorizedPerson')
                                 }}</a>
                             </li>
                         </ul>
@@ -133,13 +133,13 @@
                     <li v-if="roleName != 'Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('Funds') }}
+                                {{ $t('Funds.Funds') }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds')
+                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.Funds')
                                 }}</a>
                             </li>
                         </ul>

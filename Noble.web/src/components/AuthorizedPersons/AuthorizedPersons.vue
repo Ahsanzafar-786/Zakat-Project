@@ -6,18 +6,18 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Authorized Person</h4>
+                                <h4 class="page-title">{{ $t('AuthorizedPerson.AuthorizedPerson') }}</h4>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('brand.Home') }}</a>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Authorized Person List</li>
+                                    <li class="breadcrumb-item active">{{ $t('AuthorizedPerson.AuthorizedPersonList') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="openmodel" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('Add New') }}
+                                    {{ $t('AddNew') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -50,19 +50,19 @@
                                         ID
                                     </th> -->
                                     <th class="text-center">
-                                        Name
+                                        {{ $t('AuthorizedPerson.Name') }}
                                     </th>
                                     <th class="text-center">
-                                        Gender
+                                        {{ $t('AuthorizedPerson.Gender') }}
                                     </th>
                                     <th class="text-center">
-                                        ID
+                                        {{ $t('AuthorizedPerson.ID') }}
                                     </th>
                                     <th class="text-center">
-                                        Nationality
+                                        {{ $t('AuthorizedPerson.Nationality') }}
                                     </th>
                                     <th class="text-center">
-                                        Passport Number
+                                        {{ $t('AuthorizedPerson.PassportNo') }}
                                     </th>
                                 </tr>
                             </thead>

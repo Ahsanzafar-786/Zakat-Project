@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    Update Authorized Person
+                    {{ $t('AddAuthorizedPerson.UpdateAuthorizedPerson') }}
                 </h6>
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
-                    Add Authorized Person
+                    {{ $t('AddAuthorizedPerson.AddAuthorizedPerson') }}
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -14,52 +14,52 @@
                 <div class="row">
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Name:<span class="text-danger"> *</span>
+                            {{ $t('AddAuthorizedPerson.Name') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Name Arabic:<span class="text-danger"> *</span>
+                            {{ $t('AddAuthorizedPerson.NameArabic') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.nameAr.$model" type="text" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Gender:
+                            {{ $t('AddAuthorizedPerson.Gender') }}:
                         </label>
                         <select v-model="brand.gender" class="form-select" aria-label="Default select example">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                            <option value="Male">{{ $t('AddAuthorizedPerson.Male') }}</option>
+                            <option value="Female">{{ $t('AddAuthorizedPerson.Female') }}</option>
                         </select>
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Nationality:
+                            {{ $t('AddAuthorizedPerson.Nationality') }}:
                         </label>
                         <input class="form-control" v-model="brand.nationality" type="text" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            ID:
+                            {{ $t('AddAuthorizedPerson.ID') }}:
                         </label>
                         <input class="form-control" v-model="brand.iqamaNo" type="text" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Passport Number:
+                            {{ $t('AddAuthorizedPerson.PassportNo') }}:
                         </label>
                         <input class="form-control" v-model="brand.passportNo" type="text" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Contact No:
+                            {{ $t('AddAuthorizedPerson.ContactNo') }}:
                         </label>
                         <input class="form-control" v-model="brand.phoneNo" type="number" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Address:
+                            {{ $t('AddAuthorizedPerson.Address') }}:
                         </label>
                         <textarea class="form-control" v-model="brand.address" rows="3"></textarea>
                     </div>
@@ -68,14 +68,14 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveAuthorizedPerson"
                     v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
-                    Save
+                    {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveAuthorizedPerson"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
-                    Update
+                    {{ $t('Update') }}
                 </button>
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
-                    Close
+                    {{ $t('Close') }}
                 </button>
             </div>
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>

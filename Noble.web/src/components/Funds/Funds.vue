@@ -6,18 +6,18 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Funds</h4>
+                                <h4 class="page-title">{{ $t('Funds.Funds') }}</h4>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('brand.Home') }}</a>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Funds List</li>
+                                    <li class="breadcrumb-item active">{{ $t('Funds.FundsList') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="openmodel" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('Add New') }}
+                                    {{ $t('AddNew') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -35,7 +35,7 @@
                         <button class="btn btn-secondary" type="button" id="button-addon1">
                             <i class="fas fa-search"></i>
                         </button>
-                        <input v-model="search" type="text" class="form-control" :placeholder="$t('brand.Search')"
+                        <input v-model="search" type="text" class="form-control" :placeholder="$t('Search')"
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
                     </div>
 
@@ -47,13 +47,13 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
-                                        Charity Resource
+                                        {{ $t('Funds.CharityResource') }}
                                     </th>
                                     <th class="text-center">
-                                        Amount
+                                        {{ $t('Funds.Amount') }}
                                     </th>
                                     <th class="text-center">
-                                        Date
+                                        {{ $t('Funds.Date') }}
                                     </th>
                                 </tr>
                             </thead>

@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    Update Funds
+                    {{ $t('AddFunds.UpdateFunds') }}
                 </h6>
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
-                    Add Funds
+                    {{ $t('AddFunds.AddFunds') }}
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -14,19 +14,19 @@
                 <div class="row">
                     <div class="form-group has-label col-sm-6 ">
                         <label class="text  font-weight-bolder">
-                           Charity Resource:<span class="text-danger"> *</span>
+                           {{ $t('AddFunds.CharityResource') }}:<span class="text-danger"> *</span>
                         </label>
                         <charityresources v-model="brand.charityResouceId" :values="brand.charityResouceId" />
                     </div>
                     <div class="form-group has-label col-sm-6 ">
                         <label class="text  font-weight-bolder">
-                            Amount:<span class="text-danger"> *</span>
+                            {{ $t('AddFunds.Amount') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.amount.$model" type="number" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Description:
+                            {{ $t('AddFunds.Description') }}:
                         </label>
                         <VueEditor v-model="brand.description" />
                     </div>
@@ -35,14 +35,14 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveFunds"
                     v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
-                    Save
+                    {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveFunds"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
-                    Update
+                    {{ $t('Update') }}
                 </button>
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
-                    Close
+                    {{ $t('Close') }}
                 </button>
             </div>
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
