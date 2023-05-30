@@ -185,6 +185,13 @@
     "MyProfile":"ملفي",
     "LogOut":"تسجيل خروج"
   },
+  "Company":{
+    "Company":"شركة",
+    "Name":"اسم",
+    "Email":"بريد إلكتروني",
+    "VATNo":"ضريبة القيمة المضافة لا",
+    "Address":"عنوان"
+  },
   "SetupCompany":{
     "SetupCompany":"شركة الإعداد",
     "ClientCode":"رمز العميل",
