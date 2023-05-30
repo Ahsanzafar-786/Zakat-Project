@@ -114,19 +114,6 @@
     "ContactNo":"رقم الاتصال",
     "Active":"نشيط"
   },
-
-
-
-
-
-
-
-  "Commit-ApplicationUpdate": "يلزم تحديث التطبيق",
-  "UpdateApplication": {
-    "CurrentVersion": "النسخة الحالية",
-    "LatestVersion": "أحدث إصدار",
-    "UpdateApplication": "تحديث التطبيق"
-
   "AuthorizedPerson":{
     "AuthorizedPerson" :"الشخص المرخص",
     "AuthorizedPersonList": "قائمة المفوضين",
