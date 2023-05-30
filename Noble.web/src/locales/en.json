@@ -160,5 +160,48 @@
     "Previous": "Previous",
     "Next": "Next",
     "Last": "Last"
+  },
+  "login":{
+    "login":"login",
+    "WelcomePleaselogintoyouraccount":"Welcome Please login to your account",
+    "UsernameorEmail":"User name or Email",
+    "RegisterUser_Password":"Register User Password",
+    "Rememberme":"Remember me",
+    "ForgotPassword?":"Forgot Password",
+    "Login1":"Login",
+    "Support":"Support",
+    "ContactUs":"Contact Us",
+    "VisitUS":"Visit US"
+  },
+  "Dashboard":{
+    "Dashboard":"Dashboard"
+  },
+  "Company":{
+    "Company":"Company",
+    "Name":"Name",
+    "Email":"Email",
+    "VATNo":"VAT No",
+    "Address":"Address"
+  },
+  "SetupCompany":{
+    "SetupCompany":"Setup Company",
+    "ClientCode":"Client Code",
+    "CompanyName":"Company Name",
+    "CompanyEmail":"Company Email",
+    "CommercialRegistrationNo":"Commercial Registration No",
+    "VATNTNTAXNo":"VAT / NTN /TAX No",
+    "Website":"Website",
+    "MobileNumber":"Mobile Number",
+    "LandlineNumber":"Landline Number",
+    "Country":"Country",
+    "City":"City",
+    "Address":"Address",
+    "SelectCountry":"Select Country",
+    "AdminInfo":"Admin Info",
+    "Email":"Email",
+    "Name":"Name",
+    "RegisterUser_Password":"Register User Password",
+    "RegisterUser_ConfirmPassword":"Register User Confirm Password"
   }
+
 }
