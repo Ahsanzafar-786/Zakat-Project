@@ -174,7 +174,9 @@
     "VisitUS":"Visit US"
   },
   "Dashboard":{
-    "Dashboard":"Dashboard"
+    "Dashboard":"Dashboard",
+    "MyProfile":"My Profile",
+    "LogOut":"LogOut"
   },
   "Company":{
     "Company":"Company",

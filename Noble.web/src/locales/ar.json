@@ -181,7 +181,9 @@
     "VisitUS":"زورنا"
   },
   "Dashboard":{
-    "Dashboard":"لوحة القيادة"
+    "Dashboard":"لوحة القيادة",
+    "MyProfile":"ملفي",
+    "LogOut":"تسجيل خروج"
   },
   "SetupCompany":{
     "SetupCompany":"شركة الإعداد",
