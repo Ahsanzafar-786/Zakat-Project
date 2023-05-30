@@ -70,6 +70,7 @@
 
   "PaymentType":{
     "PaymentType":"نوع الدفع",
+    "PaymentTypeList":"قائمة نوع الدفع",
     "Name":"اسم"
   },
   "AddPaymentType":{
@@ -94,20 +95,27 @@
     "Email":"بريد إلكتروني",
     "ContactNo":"رقم الاتصال"
   },
-  "Charity Resources":{
+  "CharityResources":{
     "CharityResources":"الموارد الخيرية",
     "CharityResourcesList":"قائمة الموارد الخيرية",
     "CharityResourcesId":"معرّف الموارد الخيرية",
     "Name":"اسم",
+    "Charity": "صدقة",
+    "Individual":"فردي",
+    "Business":"عمل",
+    "Active" : "نشيط",
+    "Entity":"كيان",
+    "DeActive" : "معطل",
     "Status":"حالة",
     "FundsSource":"مصدر الأموال"
   },
-  "Add Charity Resources":{
+  "AddCharityResources":{
     "AddCharityResources":"أضف الموارد الخيرية",
     "UpdateCharityResources":"تحديث الموارد الخيرية",
     "FundsSource":"مصدر الأموال",
     "Entity":"كيان",
     "Individual":"فردي",
+    "Business":"عمل",
     "EntityName":"اسم الكيان",
     "PersonName":"اسم الشخص",
     "City":"مدينة",

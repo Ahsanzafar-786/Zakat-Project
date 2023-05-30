@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    Update Payment Type
+                    {{ $t('AddPaymentType.UpdatePaymentType') }} 
                 </h6>
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
-                    Add Payment Type
+                    {{ $t('AddPaymentType.AddPaymentType') }} 
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -14,20 +14,20 @@
                 <div class="row">
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Name:<span class="text-danger"> *</span>
+                            {{ $t('AddPaymentType.Name') }} :<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                     </div>
 
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Name Arabic:<span class="text-danger"> *</span>
+                            {{ $t('AddPaymentType.NameArabic') }} :<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.nameAr.$model" type="text" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Description:
+                            {{ $t('AddPaymentType.Description') }} :
                         </label>
                         <input class="form-control" v-model="brand.description" type="text" />
                     </div>
@@ -35,7 +35,7 @@
                         <label></label>
                         <div class="checkbox form-check-inline mx-2">
                             <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
-                            <label for="inlineCheckbox1"> Active </label>
+                            <label for="inlineCheckbox1"> {{ $t('AddPaymentType.Active') }} </label>
                         </div>
                     </div>
                 </div>
@@ -43,14 +43,14 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SavePaymentType"
                     v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
-                    Save
+                    {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SavePaymentType"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
-                    Update
+                    {{ $t('Update') }}
                 </button>
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
-                    Close
+                    {{ $t('Close') }}
                 </button>
             </div>
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
