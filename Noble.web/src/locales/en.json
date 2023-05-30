@@ -68,7 +68,52 @@
   },
 
 
-
+  "PaymentType":{
+    "PaymentType":"Payment Type",
+    "Name":"Name"
+  },
+  "AddPaymentType":{
+    "AddPaymentType":"Add Payment Type",
+    "UpdatePaymentType":"Update Payment Type",
+    "Name":"Name",
+    "NameArabic":"Name Arabic",
+    "Description":"Description",
+    "Active":"Active"
+  },
+  "ApprovalPerson":{
+    "ApprovalPerson":"Approval Person",
+    "ApprovalPersonList":"Approval Person List",
+    "ApprovalPersonId":"Approval Person Id",
+    "Name":"Name"
+  },
+  "AddApprovalPerson":{
+    "AddApprovalPerson":"Add Approval Person",
+    "UpdateApprovalPerson":"Update Approval Person",
+    "Name":"Name",
+    "NameArabic":"Name Arabic",
+    "Email":"Email",
+    "ContactNo":"Contact No"
+  },
+"Charity Resources":{
+  "CharityResources":"Charity Resources",
+  "CharityResourcesList":"Charity Resources List",
+  "CharityResourcesId":"Charity Resources Id",
+  "Name":"Name",
+  "Status":"Status",
+  "FundsSource":"Funds Source"
+},
+"Add Charity Resources":{
+  "AddCharityResources":"Add Charity Resources",
+  "UpdateCharityResources":"Update Charity Resources",
+  "FundsSource":"Funds Source",
+  "Entity":"Entity",
+  "Individual":"Individual",
+  "EntityName":"Entity Name",
+  "PersonName":"Person Name",
+  "City":"City",
+  "ContactNo":"Contact No",
+  "Active":"Active"
+},
 
 
   "Commit-ApplicationUpdate": "ApplicationUpdate",
