@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options" :searchable="false" :multiple="false" :placeholder="$t('Select Authorize Person')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
+        <multiselect v-model="DisplayValue" :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectAuthorizePerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
 
         </multiselect>      
     </div>
@@ -45,7 +45,7 @@ export default {
                 }
             }).then(function () {
                 root.value = root.options.find(function (x) {
-                    debugger;
+                     
                     return x.id == root.values;
                 })
             });

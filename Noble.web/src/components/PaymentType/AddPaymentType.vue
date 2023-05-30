@@ -96,14 +96,14 @@ export default {
             this.$emit('close');
         },
         SavePaymentType: function () {
-            debugger;
+             
             var root = this;
             this.loading = true;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            debugger;
+             
             this.$https.post('/Benificary/SavePaymentType', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data.isSuccess == true) {

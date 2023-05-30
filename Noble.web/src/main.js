@@ -104,6 +104,7 @@ Vue.component('benificarynote-mod', require('./components/BenificaryNote/AddBeni
 
 // Charity Resources
 Vue.component('charityresources-mod', require('./components/CharityResources/AddCharityResources.vue').default);
+Vue.component('charityresources', require('./components/General/CharityResourcesDropdown.vue').default);
 
 // Approval Person
 Vue.component('approvalperson-mod', require('./components/ApprovalPersons/AddApprovalPersons.vue').default);
@@ -112,6 +113,9 @@ Vue.component('approvalperson', require('./components/General/ApprovalPersonDrop
 //Payment Type
 Vue.component('paymenttype-mod', require('./components/PaymentType/AddPaymentType.vue').default);
 Vue.component('paymenttype', require('./components/General/PaymentType.vue').default);
+
+//Funds
+Vue.component('funds-mod', require('./components/Funds/AddFunds.vue').default);
 
 
 Vue.prototype.$https = axios;

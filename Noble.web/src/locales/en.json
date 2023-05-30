@@ -1,4 +1,76 @@
 ﻿{
+  "Home": "Home",
+  "AddNew": "Add New",
+  "Close": "Close",
+  "Search": "Search", 
+  "Save" : "Save",
+  "Update": "Update",
+
+  "General":{
+    "SelectAuthorizePerson":"Select Authorize Person",
+    "SelectApprovalPerson":"Select Approval Person",
+    "PaymentType":"Payment Type",
+    "SelectBenificary":"Select Benificary"
+  },
+
+  "Benificary":{
+    "Benificary" : "Benificary",
+    "BenificaryList" : "Benificary List",
+    "Name" : "Name",
+    "PayementIntervalMonths" : "Payement Interval Months",
+    "AmountPerMonth" : "Amount Per Month",
+    "ID" : "ID",
+    "Active" : "Active",
+    "DeActive" : "De-Active",
+    "ContactNo" : "Contact No",
+    "AuthorizePersonName" : "Authorize Person Name",
+    "Status" : "Status",
+    "Register" : "Register",
+    "UnRegister" : "Un-Register",
+    "BenificaryStatus" : "Benificary Status"
+  },
+
+  "AddBenificary":{
+    "AddBenificary" : "Add Benificary",
+    "UpdateBenificary" : "Update Benificary",
+    "NameArabic" : "Name Arabic",
+    "Name" : "Name",
+    "PassportNo" : "Passport No",
+    "Nationality" : "Nationality",
+    "Gender" : "Gender",
+    "Male" : "Male",
+    "Female" : "Female",
+    "ContactNo" : "Contact No",
+    "OtherDetail" : "Other Detail",
+    "PaymentType" : "Payment Type",
+    "ApprovalPersons" : "Approval Persons",
+    "AuthorizedPerson" : "Authorized Person",
+    "RecurringAmount" : "Recurring Amount",
+    "PaymentIntervalMonths" : "Payment Interval Months",
+    "AmountPerMonth" : "Amount Per Month",
+    "Active" : "Active",
+    "Address" : "Address",
+    "Note" : "Note"
+  },
+
+  "BenificaryNote":{
+    "BenificaryNote":"Benificary Note",
+    "BenificaryNoteList":"Benificary Note List",
+    "BenificaryName":"Benificary Name",
+    "Name":"Name",
+    "Date":"Date"
+  },
+  "AddBenificaryNote":{
+    "AddBenificaryNote":"AddBenificaryNote",
+    "UpdateBenificaryNote":"Update Beneficiary Note",
+    "Benificary":"Benificary",
+    "Note":"Note"
+  },
+
+
+
+
+
   "Commit-ApplicationUpdate": "ApplicationUpdate",
   "UpdateApplication": {
     "CurrentVersion": "Current Version",

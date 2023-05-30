@@ -20,6 +20,10 @@ using Focus.Business.ApprovalsPerson.Queries;
 using Focus.Business.PaymentsType.Commands;
 using Focus.Business.PaymentsType.Model;
 using Focus.Business.PaymentsType.Queries;
+using Focus.Business.AdminDashboard.Queries;
+using Focus.Business.CharityFunds.Models;
+using Focus.Business.CharityFunds.Commands;
+using Focus.Business.CharityFunds.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -34,6 +38,16 @@ namespace Noble.Api.Controllers
         {
             _Context = context;        
         }
+
+        #region Dashboard
+        [Route("api/Benificary/GetDashboardDetail")]
+        [HttpGet("GetDashboardDetail")]
+        public async Task<IActionResult> GetDashboardDetail()
+        {
+            var dashboard = await Mediator.Send(new AdminDashboardDetailsQuery {});
+            return Ok(dashboard);
+        }
+        #endregion
 
         #region Benificary
         [Route("api/Benificary/SaveBenificary")]
@@ -253,6 +267,43 @@ namespace Noble.Api.Controllers
                 Id = id
             });
             return Ok(payment);
+        }
+
+        #endregion
+
+        #region Funds
+        [Route("api/Benificary/SaveFunds")]
+        [HttpPost("SaveFunds")]
+        public async Task<IActionResult> SaveFunds([FromBody] FundsLookupModel funds)
+        {
+            var message = await Mediator.Send(new FundsAddUpdateCommand
+            {
+                Funds = funds
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetFundsList")]
+        [HttpGet("GetFundsList")]
+        public async Task<IActionResult> GetFundsList(string searchTerm, int? pageNumber, bool isDropDown)
+        {
+            var fund = await Mediator.Send(new FundsListQuery
+            {
+                SearchTerm = searchTerm,
+                IsDropDown = isDropDown,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(fund);
+        }
+
+        [Route("api/Benificary/GetFundsDetail")]
+        [HttpGet("GetFundsDetail")]
+        public async Task<IActionResult> GetFundsDetail(Guid id)
+        {
+            var fund = await Mediator.Send(new FundsDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(fund);
         }
 
         #endregion

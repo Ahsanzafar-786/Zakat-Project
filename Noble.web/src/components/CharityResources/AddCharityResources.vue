@@ -121,7 +121,7 @@ export default {
             this.$emit('close');
         },
         SaveAuthorizedPerson: function () {
-            debugger;
+             
             var root = this;
             var aa = this.brand.chartiyId;
             this.brand.chartiyId = aa;
@@ -138,7 +138,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            debugger;
+             
             this.$https.post('/Benificary/SaveCharityResources', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data.isSuccess == true) {

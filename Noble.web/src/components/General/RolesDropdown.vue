@@ -27,7 +27,7 @@
         },
         methods: {
             getData: function () {
-                debugger;
+                 
                 var root = this;
                 var token = '';
                 if (this.$session.exists()) {
@@ -36,7 +36,7 @@
                 
                 root.$https.get('/account/RolesList', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                     if (response.data != null) {
-                        debugger;
+                         
                         
                         response.data.forEach(function (result) {
                             root.options.push({

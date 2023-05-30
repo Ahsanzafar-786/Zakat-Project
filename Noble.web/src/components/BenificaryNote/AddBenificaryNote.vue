@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    Update Benificary Note
+                     {{ $t('AddBenificaryNote.UpdateBenificaryNote') }}
                 </h6>
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
-                    Add Benificary Note
+                    {{ $t('AddBenificaryNote.AddBenificaryNote') }}
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -14,13 +14,13 @@
                 <div class="row">
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                           Benificary:
+                           {{ $t('AddBenificaryNote.Benificary') }}:
                         </label>
                         <benificary v-model="brand.benificaryId" :values="brand.benificaryId" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Note:<span class="text-danger"> *</span>
+                            {{ $t('AddBenificaryNote.Note') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.note.$model" type="text" />
                     </div>
@@ -29,14 +29,14 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificaryNote"
                     v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
-                    Save
+                    {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificaryNote"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
-                    Update
+                    {{ $t('Update') }}
                 </button>
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
-                    Close
+                    {{ $t('Close') }}
                 </button>
             </div>
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
@@ -75,7 +75,7 @@ export default {
             this.$emit('close');
         },
         SaveBenificaryNote: function () {
-            debugger;
+             
             var root = this;
             var aa = this.brand.authorizedPersonCode;
             this.brand.authorizedPersonCode = aa;
@@ -84,7 +84,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            debugger;
+             
             this.$https.post('/Benificary/SaveBenificaryNote', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data.isSuccess == true) {

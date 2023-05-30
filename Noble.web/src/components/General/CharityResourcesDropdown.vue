@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.PaymentType')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
+        <multiselect v-model="DisplayValue" :options="options" :searchable="false" :multiple="false" :placeholder="$t('Select Authorize Person')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
 
         </multiselect>      
     </div>
@@ -34,7 +34,7 @@ export default {
                 token = localStorage.getItem('token');
             }
             root.options = [];
-            this.$https.get('/Benificary/GetPaymentTypeList?isDropDown=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            this.$https.get('/Benificary/GetCharityResourcesList?isDropDown=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     response.data.results.forEach(function (cat) {
                         root.options.push({

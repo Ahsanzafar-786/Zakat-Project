@@ -6,18 +6,18 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Benificary Note</h4>
+                                <h4 class="page-title"> {{ $t('BenificaryNote.BenificaryNote') }}</h4>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('brand.Home') }}</a>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Benificary Note List</li>
+                                    <li class="breadcrumb-item active">{{ $t('BenificaryNote.BenificaryNoteList') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="openmodel" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('Add New') }}
+                                    {{ $t('AddNew') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -47,13 +47,13 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
-                                        Benificary Name
+                                        {{ $t('BenificaryNote.BenificaryName') }}
                                     </th>
                                     <th class="text-center">
-                                        Name
+                                        {{ $t('BenificaryNote.Name') }}
                                     </th>
                                     <th class="text-center">
-                                        Date
+                                        {{ $t('BenificaryNote.Date') }}
                                     </th>
                                 </tr>
                             </thead>

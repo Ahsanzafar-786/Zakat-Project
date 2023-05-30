@@ -56,5 +56,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Focus.Domain\Focus.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AdminDashboard\Commands\" />
+  </ItemGroup>
 
 </Project>

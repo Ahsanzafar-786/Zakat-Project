@@ -330,7 +330,7 @@
             },
             getImage: function (value) { this.company.logoPath = value; },
             SaveCompany: function () {
-                debugger;
+                 
                 
                 this.loading = true;
                 var root = this;
@@ -341,7 +341,7 @@
                 root.$https
                     .post('/Company/SaveCompany', root.company, { headers: { "Authorization": `Bearer ${token}` } })
                     .then(response => {
-                        debugger;
+                         
                         this.loading = false
                         this.info = response.data.bpi
                         this.$swal.fire({

@@ -391,7 +391,7 @@
             getUserWiseRecords: function () {
 
                 if (this.$route.query.data != undefined) {
-                    debugger;
+                     
                     this.loginDetails.id = this.$route.query.data.userId;
                     this.loginDetails.firstName = this.$route.query.data.firstName;
                     this.loginDetails.lastName = this.$route.query.data.lastName;

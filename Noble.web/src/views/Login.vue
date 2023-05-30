@@ -202,9 +202,9 @@ export default {
             root.customError = '';
             root.loading = true;
             var url = '/account/login';
-            debugger;
+             
             this.$https.post(url, this.login).then(function (response) {
-                debugger;
+                 
                 if (response.data.companyId == "00000000-0000-0000-0000-000000000000") {
 
                     root.loading = false;

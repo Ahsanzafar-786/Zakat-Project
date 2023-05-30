@@ -6,18 +6,18 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">{{ $t('Benificary.Benificary') }}</h4>
+                                <h4 class="page-title">Funds</h4>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('brand.Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ $t('Benificary.BenificaryList') }}</li>
+                                    <li class="breadcrumb-item active">Funds List</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="openmodel" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('AddNew') }}
+                                    {{ $t('Add New') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -35,7 +35,7 @@
                         <button class="btn btn-secondary" type="button" id="button-addon1">
                             <i class="fas fa-search"></i>
                         </button>
-                        <input v-model="search" type="text" class="form-control" :placeholder="$t('Search')"
+                        <input v-model="search" type="text" class="form-control" :placeholder="$t('brand.Search')"
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
                     </div>
 
@@ -47,33 +47,18 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
-                                        {{ $t('Benificary.Name') }}
+                                        Charity Resource
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Benificary.PayementIntervalMonths') }}
+                                        Amount
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Benificary.AmountPerMonth') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Benificary.ID') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Benificary.ContactNo') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Benificary.AuthorizePersonName') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Benificary.Status') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Benificary.BenificaryStatus') }}
+                                        Date
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(brand, index) in benificarylist" v-bind:key="brand.id">
+                                <tr v-for="(brand, index) in fundslist" v-bind:key="brand.id">
                                     <td v-if="currentPage === 1">
                                         {{ index + 1 }}
                                     </td>
@@ -81,51 +66,18 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <!-- <td class="text-center">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)">{{ brand.beneficiaryId }}</a>
-                                        </strong>
-                                    </td> -->
                                     <td class="text-center">
                                         <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{
-                                                brand.name }}</a>
+                                            <a href="javascript:void(0)" v-on:click="EditFunds(brand.id)">{{ brand.charityResouceName }}</a>
                                         </strong>
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.paymentIntervalMonth }}
+                                        <strong>
+                                            <a href="javascript:void(0)" v-on:click="EditFunds(brand.id)"> {{ brand.amount }}</a>
+                                        </strong>
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.amountPerMonth }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ brand.ugamaNo }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ brand.phoneNo }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ brand.authorizationPersonName }}
-                                    </td>
-                                    <td class="text-center">
-                                        <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
-                                            {{
-                                                $t('Benificary.Active')
-                                            }}
-                                        </span>
-                                        <span v-else class="badge badge-boxed  badge-outline-danger">
-                                            {{
-                                                $t('Benificary.DeActive')
-                                            }}
-                                        </span>
-                                    </td>
-                                    <td class="text-center">
-                                        <span v-if="brand.isRegister" class="badge badge-boxed  badge-outline-success">
-                                            {{ $t('Benificary.Register') }}
-                                        </span>
-                                        <span v-else class="badge badge-boxed  badge-outline-danger">
-                                            {{ $t('Benificary.UnRegister') }}
-                                        </span>
+                                        {{ brand.date }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -164,7 +116,7 @@
                         </span>
                     </div>
                     <div class="float-end">
-                        <div class="" v-on:click="GetBenificaryData()">
+                        <div class="" v-on:click="GetFunds()">
                             <b-pagination pills size="sm" v-model="currentPage" :total-rows="rowCount" :per-page="10"
                                 :first-text="$t('Table.First')" :prev-text="$t('Table.Previous')"
                                 :next-text="$t('Table.Next')" :last-text="$t('Table.Last')"></b-pagination>
@@ -173,7 +125,7 @@
                 </div>
             </div>
 
-            <benificary-mod :brand="newBenificary" :show="show" v-if="show" @close="IsSave" :type="type" />
+            <funds-mod :brand="newFunds" :show="show" v-if="show" @close="IsSave" :type="type" />
         </div>
 
     </div>
@@ -187,27 +139,13 @@ export default {
     data: function () {
         return {
             show: false,
-            benificarylist: [],
-            newBenificary: {
+            fundslist: [],
+            newFunds: {
                 id: '',
-                name: '',
-                nameAr: '',
-                gender: '',
-                beneficiaryId: 0,
-                paymentIntervalMonth: 0,
-                amountPerMonth: 0,
-                recurringAmount: 0,
-                ugamaNo: '',
-                phoneNo: '',
-                note: '',
-                authorizedPersonId: '',
-                approvalPersonId: '',
-                paymentTypeId: '',
-                isActive: true,
-                isRegister: true,
-                address: '',
-                passportNo: '',
-                nationality: '',
+                description: '',
+                amount: '',
+                userId:'',
+                charityResouceId:''
             },
             type: '',
             search: '',
@@ -220,17 +158,17 @@ export default {
     },
     watch: {
         search: function (val) {
-            this.GetBenificaryData(val, 1);
+            this.GetFunds(val, 1);
         }
     },
     methods: {
         IsSave: function () {
             this.show = false;
-            this.GetBenificaryData(this.search, this.currentPage);
+            this.GetFunds(this.search, this.currentPage);
         },
 
         getPage: function () {
-            this.GetBenificaryData(this.search, this.currentPage);
+            this.GetFunds(this.search, this.currentPage);
         },
 
         GotoPage: function (link) {
@@ -238,40 +176,26 @@ export default {
         },
 
         openmodel: function () {
-            this.newBenificary = {
+            this.newFunds = {
                 id: '00000000-0000-0000-0000-000000000000',
-                name: '',
-                nameAr: '',
-                beneficiaryId: 0,
-                paymentIntervalMonth: 0,
-                amountPerMonth: 0,
-                recurringAmount: 0,
-                ugamaNo: '',
-                phoneNo: '',
-                note: '',
-                authorizedPersonId: '',
-                approvalPersonId: '',
-                paymentTypeId: '',
-                isActive: true,
-                isRegister: true,
-                address: '',
-                passportNo: '',
-                nationality: '',
-                gender: 'Male',
+                description: '',
+                amount: '',
+                userId:'',
+                charityResouceId:''
             }
             this.show = !this.show;
             this.type = "Add";
         },
 
-        GetBenificaryData: function () {
+        GetFunds: function () {
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetBenificaryList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetFundsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
-                    root.benificarylist = response.data.results;
+                    root.fundslist = response.data.results;
                     root.pageCount = response.data.pageCount;
                     root.rowCount = response.data.rowCount;
                     root.loading = false;
@@ -280,17 +204,17 @@ export default {
             });
         },
 
-        EditBenificary: function (Id) {
+        EditFunds: function (Id) {
 
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('/Benificary/GetBenificaryDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
+            root.$https.get('/Benificary/GetFundsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data) {
-                        root.newBenificary = response.data;
+                        root.newFunds= response.data;
                         root.show = !root.show;
                         root.type = "Edit"
                     } else {
@@ -311,7 +235,7 @@ export default {
     mounted: function () {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
-        this.GetBenificaryData(this.search, 1);
+        this.GetFunds(this.search, 1);
     }
 }
 </script>

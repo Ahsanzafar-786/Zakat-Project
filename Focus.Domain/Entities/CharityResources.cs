@@ -1,5 +1,6 @@
 ﻿using Focus.Domain.Interface;
 using System;
+using System.Collections.Generic;
 
 namespace Focus.Domain.Entities
 {
@@ -13,5 +14,8 @@ namespace Focus.Domain.Entities
         public bool Business { get; set; }
         public bool IsActive { get; set; }
         public Guid? ContactPerson { get; set; }
+        public virtual ICollection<Funds> Funds { get; set; }
+
     }
 }
+ 

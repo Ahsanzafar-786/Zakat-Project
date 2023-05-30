@@ -1,4 +1,82 @@
 {
+  "Home": "مسكن",
+  "AddNew": "أضف جديد",
+  "Close": "إغلاق",
+  "Search": "بحث",
+  "Save" : "يحفظ",
+  "Update": "تحديث", 
+
+  "General":{
+    "SelectAuthorizePerson":"حدد تخويل الشخص",
+    "SelectApprovalPerson":"حدد شخص الموافقة",
+    "PaymentType":"نوع الدفع",
+    "SelectBenificary":"حدد المستفيد"
+  },
+
+  "Benificary":{
+    "Benificary" : "المستفيد",
+    "BenificaryList" : "قائمة المستفيدين",
+    "Name" : "اسم",
+    "PayementIntervalMonths" : "الأشهر الفاصلة بين السداد",
+    "AmountPerMonth" : "المبلغ في الشهر",
+    "ID" : "بطاقة تعريف",
+    "ContactNo" : "رقم الاتصال",
+    "AuthorizePersonName" : "تخويل اسم الشخص",
+    "Status" : "حالة",
+    "Active" : "نشيط",
+    "DeActive" : "معطل",
+    "Register" : "يسجل",
+    "UnRegister" : "إلغاء التسجيل",
+    "BenificaryStatus" : "الحالة المستفيدة"
+  },
+
+  "AddBenificary":{
+    "AddBenificary" : "إضافة مستفيد",
+    "UpdateBenificary" : "تحديث المستفيد",
+    "NameArabic" : "الاسم عربي",
+    "Name" : "اسم",
+    "PassportNo" : "رقم جواز السفر",
+    "Nationality" : "جنسية",
+    "Gender" : "جنس",
+    "ID" : "بطاقة تعريف",
+    "Male" : "ذكر",
+    "Female" : "أنثى",
+    "ContactNo" : "رقم الاتصال",
+    "OtherDetail" : "تفاصيل أخرى",
+    "PaymentType" : "نوع الدفع",
+    "ApprovalPersons" : "الموافقة على الأشخاص",
+    "AuthorizedPerson" : "الشخص المرخص",
+    "RecurringAmount" : "المبلغ متكرر",
+    "PaymentIntervalMonths" : "أشهر الفاصل الزمني للدفع",
+    "AmountPerMonth" : "المبلغ في الشهر",
+    "Active" : "نشيط",
+    "Address" : "عنوان",
+    "Note" : "ملحوظة"
+  },
+
+  "BenificaryNote":{
+    "BenificaryNote":"ملاحظة المستفيد",
+    "BenificaryNoteList":"قائمة الملاحظات المفيدة",
+    "BenificaryName":"أسم المستفيد",
+    "Name":"اسم",
+    "Date":"تاريخ"
+  },
+  "AddBenificaryNote":{
+    "AddBenificaryNote":"أضف ملاحظة مفيدة",
+    "UpdateBenificaryNote":"تحديث ملاحظة المستفيد",
+    "Benificary":"المستفيد",
+    "Note":"ملحوظة"
+  },
+
+
+
+
+
+
+
+
+
+
   "Commit-ApplicationUpdate": "يلزم تحديث التطبيق",
   "UpdateApplication": {
     "CurrentVersion": "النسخة الحالية",
