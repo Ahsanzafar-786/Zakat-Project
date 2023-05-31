@@ -38,7 +38,7 @@
     "Male": "Male",
     "Female": "Female",
     "ContactNo": "Contact No",
-    "OtherDetail": "Other Detail",
+    "PaymentDetail": "Payment Detail",
     "PaymentType": "Payment Type",
     "ApprovalPersons": "Approval Persons",
     "AuthorizedPerson": "Authorized Person",
@@ -48,7 +48,8 @@
     "Active": "Active",
     "Address": "Address",
     "Note": "Note",
-    "Ids": "ID"
+    "Ids": "ID",
+    "SelectType": "Select Type"
   },
   "BenificaryNote": {
     "BenificaryNote": "Benificary Note",
@@ -147,6 +148,19 @@
     "CharityResource": "Charity Resource",
     "Amount": "Amount",
     "Date": "Date"
+  },
+  "DatePicker": {
+    "PickDate": "Pick Date",
+    "SelectMonth": "Select Month"
+  },
+  "DateFilter": {
+    "Today": "Today",
+    "Yesterday": "Yesterday",
+    "Aweekago": "A week ago",
+    "AMonthago": "A Month ago",
+    "Quarterago": "Quarter ago",
+    "HalfYear": "HalfYear",
+    "AYearago": "AYearago"
   },
   "AddFunds": {
     "AddFunds": "Add Funds",

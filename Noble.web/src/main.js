@@ -85,7 +85,7 @@ Vue.use(Vuelidate);
 Vue.use(cors);
 Vue.use(moment);
 Vue.config.productionTip = false;
-
+Vue.component('datepicker', require('./components/DatePicker.vue').default);
 Vue.component('dashboard', require('./components/Dashboard/Dashboard.vue').default);
 Vue.component('modal', require('./components/modalcomponent.vue').default);
 Vue.component('roledropdown', require('./components/General/RolesDropdown.vue').default);
