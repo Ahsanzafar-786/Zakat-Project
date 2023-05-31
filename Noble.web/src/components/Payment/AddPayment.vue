@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group has-label col-sm-12 " v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
+                    <div class="form-group has-label col-sm-12 " v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null && brand.durationType=='Customize'" >
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  font-weight-bolder">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="form-group has-label col-sm-12 "
-                        v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
+                        v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null && brand.durationType=='Customize'">
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  font-weight-bolder">
