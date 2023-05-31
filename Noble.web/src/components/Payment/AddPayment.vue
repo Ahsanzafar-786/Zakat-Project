@@ -144,7 +144,7 @@
                             <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName }}</label>
                         </div>
                         <div class=" col-sm-6 pt-1" >
-                            <label class="rounded text-white bg-primary px-2">Start Month:{{ brand.startMonth }}</label>
+                            <label class="rounded text-white bg-primary px-2">Start Month: &nbsp; &nbsp;{{ GetMonth(brand.startMonth) }}</label>
                         </div>
                     </div>
                  
@@ -228,6 +228,8 @@
     </div>
 </template>
 <script>
+import moment from 'moment'
+
 export default {
     data: function () {
         return {
@@ -252,6 +254,17 @@ export default {
         },
     },
     methods: {
+        GetMonth: function (link) {
+           if(link!=undefined)
+           {
+            return moment(link).format('MMMM');
+
+           } 
+           else
+           {
+            return '';
+           }
+        },
         GotoPage: function (link) {
             this.$router.push({ path: link });
         },
