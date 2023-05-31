@@ -31,7 +31,7 @@ namespace Focus.Business.Payments.Commands
             {
                 try
                 {
-                    if (request.Payment.Id == Guid.Empty && request.Payment.Id==null)
+                    if (request.Payment.Id == Guid.Empty || request.Payment.Id==null)
                     {
                         var isRecord = Context.Beneficiaries.Any(x =>
                             x.Id == request.Payment.BenificayId && x.PaymentTypes.Name == "One Time");
