@@ -54,12 +54,12 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="form-group has-label col-sm-12 ">
+                    <div class="form-group has-label col-sm-12 ">
                         <div class="row">
                             <div class="col-sm-7 form-group"
                                 v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
                                 <label>Start Month:</label>
-                                <datepicker v-model="brand.startDate" :type="'month'" />
+                                <datepicker v-model="brand.startDate" :type="'month'" v-bind:key="rander" />
 
                             </div>
                         </div>
@@ -69,11 +69,11 @@
                             <div class="col-sm-7 form-group"
                                 v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
                                 <label>End Month:</label>
-                                <datepicker v-model="brand.endDate" :type="'month'" />
+                                <datepicker v-model="brand.endDate" :type="'month'" v-bind:key="rander" />
 
                             </div>
                         </div>
-                    </div> -->
+                    </div>
 
 
                     <div class="form-group has-label col-sm-12 ">
@@ -216,6 +216,7 @@
 export default {
     data: function () {
         return {
+            rander: 0,
             arabic: '',
             english: '',
             brand: {},
@@ -250,7 +251,8 @@ export default {
                 .then(function (response) {
                     if (response.data) {
                         root.brand = response.data;
-                        root.addPayment.amount = response.data.amountPerMonth
+                        root.addPayment.amount = response.data.amountPerMonth;
+                        root.rander++;
                     } else {
                         console.log("error: something wrong from db.");
                     }
