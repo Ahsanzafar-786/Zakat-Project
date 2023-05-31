@@ -8,17 +8,17 @@
                             <div class="col">
                                 <h4 class="page-title">{{ $t('SignUp.SignUpDetails') }}</h4>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('SignUp.Home') }}</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a></li>
                                     <li class="breadcrumb-item active">{{ $t('SignUp.SignUpDetails') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
                                 <a  v-on:click="AddSignup" href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('Categories.AddNew') }}
+                                    {{ $t('AddNew') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">
-                                    {{ $t('Categories.Close') }}
+                                    {{ $t('Close') }}
                                 </a>
                             </div>
                         </div>

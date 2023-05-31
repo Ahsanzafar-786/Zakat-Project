@@ -5,7 +5,7 @@
   "Search": "Search",
   "Save": "Save",
   "Update": "Update",
-  
+
   "General": {
     "SelectAuthorizePerson": "Select Authorize Person",
     "SelectApprovalPerson": "Select Approval Person",
@@ -187,7 +187,7 @@
   "login":{
     "login":"login",
     "WelcomePleaselogintoyouraccount":"Welcome Please login to your account",
-    "UsernameorEmail":"User name or Email",
+    "UsernameorEmail":"User Name or Email",
     "RegisterUser_Password":"Register User Password",
     "Rememberme":"Remember me",
     "ForgotPassword?":"Forgot Password",
@@ -199,7 +199,9 @@
   "Dashboard":{
     "Dashboard":"Dashboard",
     "MyProfile":"My Profile",
-    "LogOut":"LogOut"
+    "LogOut":"LogOut",
+    "UserSetup":"User Setup",
+    "SignUpUser":"SignUp User"
   },
   "Company":{
     "Company":"Company",
@@ -208,6 +210,7 @@
     "VATNo":"VAT No",
     "Address":"Address"
   },
+  
   "SetupCompany":{
     "SetupCompany":"Setup Company",
     "ClientCode":"Client Code",
@@ -227,6 +230,42 @@
     "Name":"Name",
     "RegisterUser_Password":"Register User Password",
     "RegisterUser_ConfirmPassword":"Register User Confirm Password"
+  },
+
+  "RegisterUser":{
+    "RegisterUser":"Register User",
+    "MySetting":"My Setting",
+    "Profile":"Profile",
+    "ChangePassword":"Change Password",
+    "ProfileSetting":"Profile Setting",
+    "FirstName":"First Name",
+    "LastName":"Last Name",
+    "RegisterUser_EmailID":"Register User Email ID",
+    "UpdateProfile":"Update Profile",
+    "CurrentPasswordVerification":"Current Password Verification",
+    "VerifyCurrentPassword":"Verify Current Password",
+    "RegisterUser_Password":"Register User Password",
+    "RegisterUser_ConfirmPassword":"Register User Confirm Password",
+    "UpdatePassword":"Update Password"
+  },
+
+  "SignUp":{
+    "SignUp":"SignUp",
+    "SignUpDetails":"SignUp Details",
+    "SearchBYNameAndEmail":"Search BY Name And Email",
+    "USERNAME":"User Name",
+    "EMAILID":"Email Id",
+    "Location":"Location"
+  },
+
+  "AddSignUp":{
+    "AddSignUp":"Add SignUp",
+    "SignUpDetails":"SignUp Details",
+    "UserEmail":"User Email",
+    "RoleId":"Role Id",
+    "UserId":"User Id",
+    "Password":"Password",
+    "ConfirmPassword":"Confirm Password"   
   }
 
 }
