@@ -185,11 +185,11 @@
                         <thead class="thead-light table-hover">
                             <tr>
                                 <th class="text-center" style="width: 5% !important">#</th>
-                                <th class="text-center" style="width: 20% !important">Authorized Person</th>
+                                <th class="text-center" style="width: 25% !important">Authorized Person</th>
                                 <th class="text-center" style="width: 20% !important">Approved By</th>
                                 <th class="text-center" style="width: 20% !important">Date</th>
-                                <th class="text-center" style="width: 20% !important">Status</th>
-                                <th class="text-center" style="width: 15% !important">Action</th>
+                                <th class="text-center" style="width: 10% !important">Status</th>
+                                <th class="text-center" style="width: 20% !important">Action</th>
                             </tr>
                         </thead>
 
@@ -213,7 +213,7 @@
                                 <td class="border-top-0 text-center">
                                     <div class="checkbox form-check-inline">
                                         <input v-bind:id="index+1" type="checkbox" v-model="person.isActive">
-                                        <label v-bind:for="index+1"> </label>
+                                        <label v-bind:for="index+1"></label>
                                     </div>
                                 </td>
                                 <td class="border-top-0 text-center">
