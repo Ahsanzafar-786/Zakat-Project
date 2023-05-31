@@ -164,8 +164,8 @@
                         </div>
 
                         <div v-if="!loading" class=" col-md-12 pt-2 text-right">
-                            <a href="javascript:void(0)" class="btn btn-outline-primary  me-2" v-on:click="SaveCompany" v-bind:disabled="$v.company.$invalid"><i class="fa fa-save"></i> Save</a>
-                            <a href="javascript:void(0)" class="btn btn-outline-danger " v-on:click="GoToCompany"> Cancel</a>
+                            <a href="javascript:void(0)" class="btn btn-outline-primary  me-2" v-on:click="SaveCompany" v-bind:disabled="$v.company.$invalid"><i class="fa fa-save"></i> {{ $t('Save') }}</a>
+                            <a href="javascript:void(0)" class="btn btn-outline-danger " v-on:click="GoToCompany"> {{ $t('Close') }}</a>
 
 
                         </div>
