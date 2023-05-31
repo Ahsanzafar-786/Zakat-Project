@@ -228,7 +228,7 @@ export default {
             brand: {},
             cashierName: '',
             addPayment: {
-                Id:'00000000-0000-0000-0000-000000000000',
+                Id:'',
                 benificayId: '',
                 amount: '',
                 userId: '',

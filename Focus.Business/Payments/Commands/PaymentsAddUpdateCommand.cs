@@ -35,7 +35,7 @@ namespace Focus.Business.Payments.Commands
                 {
                     if (request.Payment.Id == Guid.Empty)
                     {
-                        var benficary = await Context.Beneficiaries.FirstOrDefaultAsync(x => x.Id == request.Payment.BenificayId);
+                        //var benficary = await Context.Beneficiaries.FirstOrDefaultAsync(x => x.Id == request.Payment.BenificayId);
 
                         var payment = new Payment
                         {
