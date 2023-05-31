@@ -9,13 +9,13 @@
                                 <h4 class="page-title">{{ $t('Company.Company') }}</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a></li>
-                                    <li class="breadcrumb-item active">Company</li>
+                                    <li class="breadcrumb-item active">{{ $t('Company.Company') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="AddCompany" href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('Add New') }}
+                                    {{ $t('AddNew') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -38,7 +38,7 @@
                         <i class="fas fa-search"></i>
                     </button>
                     <input v-model="searchQuery" type="text" class="form-control"
-                        placeholder="Search by Name, VAT, Reg, Client No" aria-label="Example text with button addon"
+                        :placeholder=" $t('Search')" aria-label="Example text with button addon"
                         aria-describedby="button-addon1">
                 </div>
 
@@ -49,10 +49,10 @@
                         <thead class="thead-light table-hover">
                             <tr>
                                 <th>#</th>
-                                <th>Name </th>
-                                <th>Email</th>
-                                <th>VAT No</th>
-                                <th>Address</th>
+                                <th>{{ $t('Company.Name') }} </th>
+                                <th>{{ $t('Company.Email') }}</th>
+                                <th>{{ $t('Company.VATNo') }}</th>
+                                <th>{{ $t('Company.Address') }}</th>
                                 
                             </tr>
                         </thead>
