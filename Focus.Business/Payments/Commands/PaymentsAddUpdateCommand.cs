@@ -12,6 +12,7 @@ using Focus.Domain.Entities;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using NPOI.SS.Formula.Functions;
+using System.Linq;
 
 namespace Focus.Business.Payments.Commands
 {
@@ -57,7 +58,7 @@ namespace Focus.Business.Payments.Commands
                     }
                     else
                     {
-                        var paymentDetails = await Context.Payments.FirstOrDefaultAsync(x => x.Id != request.Payment.Id);
+                        var paymentDetails =  Context.Payments.AsNoTracking().FirstOrDefault(x => x.Id == request.Payment.Id);
                         if (paymentDetails == null)
                             throw new NotFoundException("Payment Not Found","");
 
@@ -67,6 +68,7 @@ namespace Focus.Business.Payments.Commands
                         paymentDetails.Year = request.Payment.Year;
                         paymentDetails.Period = request.Payment.Period;
 
+                        Context.Payments.Update(paymentDetails);
                         await Context.SaveChangesAsync();
                         return new Message
                         {
