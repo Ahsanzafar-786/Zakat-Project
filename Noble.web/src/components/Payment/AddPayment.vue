@@ -54,11 +54,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group has-label col-sm-12 " v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null && brand.durationType=='Customize'" >
+                    <div class="form-group has-label col-sm-12 " v-if="brand.durationType=='Customize'" >
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  font-weight-bolder">
-                                    {{ $t('AddPayment.StartMonth') }}:
+                                    Start Month:
                                 </label>
                             </div>
                             <div class="col-sm-7">
@@ -68,11 +68,11 @@
                         </div>
                     </div>
                     <div class="form-group has-label col-sm-12 "
-                        v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null && brand.durationType=='Customize'">
+                        v-if="brand.durationType=='Customize'">
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  font-weight-bolder">
-                                    {{ $t('AddPayment.EndMonth') }}:
+                                    End Month:
                                 </label>
                             </div>
                             <div class="col-sm-7">

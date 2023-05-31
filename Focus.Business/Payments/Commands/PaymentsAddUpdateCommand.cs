@@ -9,9 +9,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Focus.Business.Payments.Models;
 using Focus.Domain.Entities;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Drawing.Charts;
-using NPOI.SS.Formula.Functions;
+
 using System.Linq;
 
 namespace Focus.Business.Payments.Commands
@@ -33,9 +31,15 @@ namespace Focus.Business.Payments.Commands
             {
                 try
                 {
-                    if (request.Payment.Id == Guid.Empty)
+                    if (request.Payment.Id == Guid.Empty && request.Payment.Id==null)
                     {
-                        var benficary = await Context.Beneficiaries.FirstOrDefaultAsync(x => x.Id == request.Payment.BenificayId);
+                        var isRecord = Context.Beneficiaries.Any(x =>
+                            x.Id == request.Payment.BenificayId && x.PaymentTypes.Name == "One Time");
+                        if (isRecord)
+                        {
+                            throw new ObjectAlreadyExistsException("You Can Receive Only One Time Amount");
+                        }
+
 
                         var payment = new Payment
                         {
