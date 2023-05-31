@@ -125,27 +125,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2" v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
-                    <div class="mt-1 col-sm-12">
-                        <label class="rounded text-white bg-primary px-2">Advance Payment: {{ brand.advancePayment
+                <div class="col-md-5" v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
+                    <div class="row">
+                        <div class=" col-sm-6 " >
+                            <label class="rounded text-white bg-primary px-2">Advance Payment: {{ brand.advancePayment
                         }}</label>
+                        </div>
+                        <div class=" col-sm-6 " >
+                            <label class="rounded text-white bg-primary px-2">Payment Type: {{ brand.paymentTypeName }}</label>
+                        </div>
+                        <div class=" col-sm-6 pt-1" >
+                            <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName }}</label>
+                        </div>
+                        <div class=" col-sm-6 pt-1" >
+                            <label class="rounded text-white bg-primary px-2">Start Month:{{ brand.startMonth }}</label>
+                        </div>
                     </div>
-                    <div class="mt-1 col-sm-12">
-                        <label class="rounded text-white bg-primary px-2">Payment Type: {{ brand.paymentTypeName }}</label>
-                    </div>
-                    <div class="mt-1 col-sm-12">
+                 
+                    <!-- <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName
                         }}</label>
                     </div>
                     <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Start Month: {{ brand.startMonth }}</label>
-                    </div>
-                    <div class="mt-1 col-sm-12">
+                    </div> -->
+                    <!-- <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Start Date: {{ brand.startDate }}</label>
                     </div>
                     <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">End Date: {{ brand.endDate }}</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-12 invoice-btn-fixed-bottom">
                     <div class="button-items">
