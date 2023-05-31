@@ -60,15 +60,29 @@ namespace Focus.Business.Benificary.Commands
                                 PhoneNo = request.benificiaries.PhoneNo,
                                 Note = request.benificiaries.Note,
                                 IsActive = request.benificiaries.IsActive,
-                                ApprovalPersonId= request.benificiaries.ApprovalPersonId,
-                                Address= request.benificiaries.Address,
-                                AuthorizedPersonId= request.benificiaries.AuthorizedPersonId,
+                                ApprovalPersonId = request.benificiaries.ApprovalPersonId,
+                                Address = request.benificiaries.Address,
+                                AuthorizedPersonId = request.benificiaries.AuthorizedPersonId,
                                 PaymentTypeId = request.benificiaries.PaymentTypeId,
                                 NameAr = request.benificiaries.NameAr,
                                 Nationality = request.benificiaries.Nationality,
                                 Gender = request.benificiaries.Gender,
                                 PassportNo = request.benificiaries.PassportNo,
+                                AdvancePayment = request.benificiaries.AdvancePayment,
+                                DurationType = request.benificiaries.DurationType,
+                                ApprovedPaymentId = request.benificiaries.ApprovedPaymentId,
+                                StartDate = request.benificiaries.StartDate,
+                                EndDate = request.benificiaries.EndDate,
+                                StartMonth = request.benificiaries.StartMonth,
                                 IsRegister = false,
+                                BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
+                                {
+                                    ApprovalPersonId = x.ApprovalPersonId,
+                                    AuthorizationPersonId= x.AuthorizationPersonId,
+                                    IsActive = x.IsActive,
+                                    Description= x.Description,
+                                    Date = DateTime.Now,
+                                }).ToList()
                             };
 
                             await Context.Beneficiaries.AddAsync(benifiary);
@@ -102,7 +116,21 @@ namespace Focus.Business.Benificary.Commands
                                 Nationality = request.benificiaries.Nationality,
                                 Gender = request.benificiaries.Gender,
                                 PassportNo = request.benificiaries.PassportNo,
+                                AdvancePayment = request.benificiaries.AdvancePayment,
+                                DurationType = request.benificiaries.DurationType,
+                                ApprovedPaymentId = request.benificiaries.ApprovedPaymentId,
+                                StartDate = request.benificiaries.StartDate,
+                                EndDate = request.benificiaries.EndDate,
+                                StartMonth = request.benificiaries.StartMonth,
                                 IsRegister = true,
+                                BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
+                                {
+                                    ApprovalPersonId = x.ApprovalPersonId,
+                                    AuthorizationPersonId = x.AuthorizationPersonId,
+                                    IsActive = x.IsActive,
+                                    Description = x.Description,
+                                    Date = DateTime.Now,
+                                }).ToList()
                             };
 
                             await Context.Beneficiaries.AddAsync(benifiary);
@@ -142,7 +170,28 @@ namespace Focus.Business.Benificary.Commands
                             benifiaryDetail.Nationality = request.benificiaries.Nationality;
                             benifiaryDetail.Gender = request.benificiaries.Gender;
                             benifiaryDetail.PassportNo = request.benificiaries.PassportNo;
+                            benifiaryDetail.StartDate = request.benificiaries.StartDate;
+                            benifiaryDetail.EndDate = request.benificiaries?.EndDate;
+                            benifiaryDetail.StartMonth = request.benificiaries.StartMonth;
+                            benifiaryDetail.AdvancePayment = request.benificiaries.AdvancePayment;
+                            benifiaryDetail.ApprovedPaymentId = request.benificiaries.ApprovedPaymentId;
+                            benifiaryDetail.DurationType = request.benificiaries.DurationType;
                             benifiaryDetail.IsRegister = false;
+
+                            Context.BenificaryAuthorizations.RemoveRange(benifiaryDetail.BenificaryAuthorization);
+
+                            benifiaryDetail.BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
+                            {
+                                BenficaryId = benifiaryDetail.Id,
+                                AuthorizationPersonId = x.AuthorizationPersonId,
+                                ApprovalPersonId = x.ApprovalPersonId,
+                                IsActive = x.IsActive,
+                                Date = DateTime.Now,
+                                Description = x.Description
+
+                            }).ToList();
+
+                            await Context.BenificaryAuthorizations.AddRangeAsync(benifiaryDetail.BenificaryAuthorization);
 
                             //Save changes to database
                             await Context.SaveChangesAsync(cancellationToken);
@@ -173,7 +222,28 @@ namespace Focus.Business.Benificary.Commands
                             benifiaryDetail.Nationality = request.benificiaries.Nationality;
                             benifiaryDetail.Gender = request.benificiaries.Gender;
                             benifiaryDetail.PassportNo = request.benificiaries.PassportNo;
+                            benifiaryDetail.StartDate = request.benificiaries.StartDate;
+                            benifiaryDetail.EndDate = request.benificiaries?.EndDate;
+                            benifiaryDetail.StartMonth = request.benificiaries.StartMonth;
+                            benifiaryDetail.AdvancePayment = request.benificiaries.AdvancePayment;
+                            benifiaryDetail.ApprovedPaymentId = request.benificiaries.ApprovedPaymentId;
+                            benifiaryDetail.DurationType = request.benificiaries.DurationType;
                             benifiaryDetail.IsRegister = true;
+
+                            Context.BenificaryAuthorizations.RemoveRange(benifiaryDetail.BenificaryAuthorization);
+
+                            benifiaryDetail.BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
+                            {
+                                BenficaryId = benifiaryDetail.Id,
+                                AuthorizationPersonId = x.AuthorizationPersonId,
+                                ApprovalPersonId= x.ApprovalPersonId,
+                                IsActive = x.IsActive,
+                                Date = DateTime.Now,
+                                Description = x.Description
+                                
+                            }).ToList();
+
+                            await Context.BenificaryAuthorizations.AddRangeAsync(benifiaryDetail.BenificaryAuthorization);
 
                             //Save changes to database
                             await Context.SaveChangesAsync(cancellationToken);

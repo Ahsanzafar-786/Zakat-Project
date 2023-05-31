@@ -52,6 +52,22 @@ namespace Focus.Business.Benificary.Queries
                         PassportNo= x.PassportNo,
                         PaymentTypeId= x.PaymentTypeId,
                         RecurringAmount= x.RecurringAmount,
+                        StartDate = x.StartDate,
+                        EndDate = x.EndDate,
+                        StartMonth = x.StartMonth,
+                        ApprovedPaymentId= x.ApprovedPaymentId,
+                        DurationType = x.DurationType,
+                        AdvancePayment = x.AdvancePayment,
+                        BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
+                        {
+                            Id= x.Id,
+                            BenficaryId = x.BenficaryId,
+                            ApprovalPersonId= x.ApprovalPersonId,
+                            AuthorizationPersonId= x.AuthorizationPersonId,
+                            IsActive = x.IsActive,
+                            Date = x.Date.ToString(),
+                            Description = x.Description,
+                        }).ToList(),
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                     if (query == null)
