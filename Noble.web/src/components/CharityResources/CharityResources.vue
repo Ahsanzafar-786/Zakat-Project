@@ -6,18 +6,18 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Charity Resources</h4>
+                                <h4 class="page-title">{{ $t('CharityResources.CharityResources') }}</h4>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('brand.Home') }}</a>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Charity Resources List</li>
+                                    <li class="breadcrumb-item active">{{ $t('CharityResources.CharityResourcesList') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="openmodel" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('Add New') }}
+                                    {{ $t('AddNew') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -35,7 +35,7 @@
                         <button class="btn btn-secondary" type="button" id="button-addon1">
                             <i class="fas fa-search"></i>
                         </button>
-                        <input v-model="search" type="text" class="form-control" :placeholder="$t('brand.Search')"
+                        <input v-model="search" type="text" class="form-control" :placeholder="$t('Search')"
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
                     </div>
 
@@ -47,19 +47,19 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
-                                        Charity Resources Id
+                                        {{ $t('CharityResources.CharityResourcesId') }}
                                     </th>
                                     <th class="text-center">
-                                        Name
+                                        {{ $t('CharityResources.Name') }}
                                     </th>
                                     <!-- <th class="text-center">
                                         Contact Person
                                     </th> -->
                                     <th class="text-center">
-                                       Status
+                                       {{ $t('CharityResources.Status') }}
                                     </th>
                                     <th class="text-center">
-                                        Funds Source
+                                        {{ $t('CharityResources.FundsSource') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -82,27 +82,28 @@
                                             <a href="javascript:void(0)" v-on:click="EditCharityResources(brand.id)"> {{ brand.name }}</a>
                                         </strong>
                                     </td>
-                                    <!-- <td class="text-center">
-                                        {{ brand.contactPerson }}
-                                    </td> -->
                                     <td class="text-center">
                                         <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
                                             {{
-                                                $t('brand.Active')
+                                                $t('CharityResources.Active')
                                             }}
                                         </span>
                                         <span v-else class="badge badge-boxed  badge-outline-danger">
                                             {{
-                                                $t('brand.De-Active')
+                                                $t('CharityResources.DeActive')
                                             }}
                                         </span>
                                     </td>
                                     <td class="text-center">
                                         <span v-if="brand.business" class="badge badge-boxed  badge-outline-success">
-                                               Business
+                                            {{
+                                                $t('CharityResources.Entity')
+                                            }}
                                         </span>
                                         <span v-else class="badge badge-boxed  badge-outline-danger">
-                                           Individual
+                                            {{
+                                                $t('CharityResources.Individual')
+                                            }}
                                         </span>
                                     </td>
                                 </tr>

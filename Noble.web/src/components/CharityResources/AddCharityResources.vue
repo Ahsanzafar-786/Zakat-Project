@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    Update Charity Resources
+                     {{ $t('AddCharityResources.UpdateCharityResources') }}
                 </h6>
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
-                    Add Charity Resources
+                     {{ $t('AddCharityResources.AddCharityResources') }}
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -15,18 +15,18 @@
                     <fieldset class="form-group">
                         <div class="row">
                             <div class="col-form-label col-sm-3 pt-0 text-start">
-                                <span id="ember694" class="text font-weight-bolder ">Funds Source:</span>
+                                <span id="ember694" class="text font-weight-bolder ">{{ $t('AddCharityResources.FundsSource') }}:</span>
                             </div>
                             <div class="col-sm-9">
                                 <div class="form-check form-check-inline">
                                     <input v-model="brand.business" name="contact-sub-type" id="a49946497"
                                         class=" form-check-input" type="radio" value="true">
-                                    <label class="form-check-label pl-0" for="a49946497">Entity</label>
+                                    <label class="form-check-label pl-0" for="a49946497"> {{ $t('AddCharityResources.Entity') }}</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input v-model="brand.business" name="contact-sub-type" id="a9ff8eb35"
                                         class=" form-check-input" type="radio" value="false">
-                                    <label class="form-check-label pl-0" for="a9ff8eb35">Individual</label>
+                                    <label class="form-check-label pl-0" for="a9ff8eb35">{{ $t('AddCharityResources.Individual') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -34,31 +34,23 @@
 
                     <div class="form-group has-label col-sm-12 ">
                         <label v-if="brand.business == 'true'" class="text  font-weight-bolder">
-                            Entity Name:<span class="text-danger"> *</span>
+                            {{ $t('AddCharityResources.EntityName') }}:<span class="text-danger"> *</span>
                         </label>
                         <label v-else class="text  font-weight-bolder">
-                            Person Name:<span class="text-danger"> *</span>
+                            {{ $t('AddCharityResources.PersonName') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                     </div>
-
-                    <!-- <div class="form-group has-label col-sm-12 " v-if="brand.business == 'true'">
-                        <label class="text  font-weight-bolder">
-                            Contact Person:
-                        </label>
-                        <input class="form-control" v-model="brand.contactPerson" type="text" />
-                    </div> -->
-
                     <div class="form-group has-label col-sm-12 " v-if="brand.business == 'true'">
                         <label class="text  font-weight-bolder">
-                            City:
+                            {{ $t('AddCharityResources.City') }}:
                         </label>
                         <input class="form-control" v-model="brand.city" type="text" />
                     </div>
 
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Contact No:
+                            {{ $t('AddCharityResources.ContactNo') }}:
                         </label>
                         <input class="form-control" v-model="brand.phone" type="number" />
                     </div>
@@ -67,7 +59,7 @@
                         <label></label>
                         <div class="checkbox form-check-inline mx-2">
                             <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
-                            <label for="inlineCheckbox1"> Active </label>
+                            <label for="inlineCheckbox1">  {{ $t('AddCharityResources.Active') }}</label>
                         </div>
                     </div>
                 </div>
@@ -75,14 +67,14 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveAuthorizedPerson"
                     v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
-                    Save
+                    {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveAuthorizedPerson"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
-                    Update
+                    {{ $t('Update') }}
                 </button>
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
-                    Close
+                    {{ $t('Close') }}
                 </button>
             </div>
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>

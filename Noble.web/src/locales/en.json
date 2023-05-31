@@ -64,6 +64,7 @@
   },
   "PaymentType": {
     "PaymentType": "Payment Type",
+    "PaymentTypeList":"Payment Type List",
     "Name": "Name"
   },
   "AddPaymentType": {
@@ -88,15 +89,21 @@
     "Email": "Email",
     "ContactNo": "Contact No"
   },
-  "Charity Resources": {
+  "CharityResources": {
     "CharityResources": "Charity Resources",
     "CharityResourcesList": "Charity Resources List",
     "CharityResourcesId": "Charity Resources Id",
+    "Charity": "Charity",
     "Name": "Name",
+    "Business":"Business",
+    "Individual": "Individual",
+    "Active": "Active",
+    "Entity": "Entity",
+    "DeActive": "De-Active",
     "Status": "Status",
     "FundsSource": "Funds Source"
   },
-  "Add Charity Resources": {
+  "AddCharityResources": {
     "AddCharityResources": "Add Charity Resources",
     "UpdateCharityResources": "Update Charity Resources",
     "FundsSource": "Funds Source",
