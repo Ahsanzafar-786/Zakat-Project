@@ -54,23 +54,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group has-label col-sm-12 ">
+                    <div class="form-group has-label col-sm-12 " v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
                         <div class="row">
-                            <div class="col-sm-7 form-group"
-                                v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
-                                <label>Start Month:</label>
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.StartMonth') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
                                 <datepicker v-model="brand.startDate" :type="'month'" v-bind:key="rander" />
 
                             </div>
                         </div>
                     </div>
-                    <div class="form-group has-label col-sm-12 ">
+                    <div class="form-group has-label col-sm-12 "
+                        v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
                         <div class="row">
-                            <div class="col-sm-7 form-group"
-                                v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
-                                <label>End Month:</label>
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.EndMonth') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
                                 <datepicker v-model="brand.endDate" :type="'month'" v-bind:key="rander" />
-
                             </div>
                         </div>
                     </div>
