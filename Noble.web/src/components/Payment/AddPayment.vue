@@ -302,15 +302,16 @@ export default {
             }
             this.$https.post('/Benificary/SavePayments', this.addPayment, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
+                    debugger;
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {
                             root.$swal({
                                 title: 'Save',
-                                text: response.data.isUpdate,
+                                text: response.data.isAddUpdate,
                                 type: 'success',
                                 icon: 'success',
                                 showConfirmButton: false,
-                                timer: 1500,
+                                timer: 3000,   
                                 timerProgressBar: true,
                             });
 
@@ -320,11 +321,11 @@ export default {
 
                             root.$swal({
                                 title: 'Update',
-                                text: response.data.isUpdate,
+                                text: response.data.isAddUpdate,
                                 type: 'success',
                                 icon: 'success',
                                 showConfirmButton: false,
-                                timer: 1500,
+                                timer: 3000,
                                 timerProgressBar: true,
                             });
                             root.GotoPage('/payment');
@@ -334,22 +335,23 @@ export default {
                     else {
                         root.$swal({
                             title: 'Error',
-                            text: response.data.isUpdate,
+                            text: response.data.isAddUpdate,
                             type: 'error',
                             icon: 'error',
                             showConfirmButton: false,
-                            timer: 1500,
+                            timer: 3000,
                             timerProgressBar: true,
                         });
                     }
                 })
                 .catch(error => {
+                    debugger;
                     console.log(error)
                     root.$swal.fire(
                         {
                             icon: 'error',
                             title: 'Something Went Wrong',
-                            text: error.response.data.isUpdate,
+                            text: error.response.data,
                             showConfirmButton: false,
                             timer: 5000,
                             timerProgressBar: true,
