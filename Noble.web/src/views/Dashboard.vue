@@ -6,7 +6,7 @@
             <div class="brand text-start ms-2">
                 <a v-on:click="GoTo('/dashboard')" href="javascript: void()" class="logo">
                     <span>
-                        <img src="Smartdigitalerpsol.png" alt="logo-small" class="logo-sm"
+                        <img src="msFakhry.png" alt="logo-small" class="logo-sm"
                             style="width:100px;height:auto; max-height:45px;">
                     </span>
 

@@ -38,11 +38,10 @@
     "PassportNo" : "رقم جواز السفر",
     "Nationality" : "جنسية",
     "Gender" : "جنس",
-    "ID" : "بطاقة تعريف",
     "Male" : "ذكر",
     "Female" : "أنثى",
     "ContactNo" : "رقم الاتصال",
-    "OtherDetail" : "تفاصيل أخرى",
+    "PaymentDetail" : "تفاصيل الدفع",
     "PaymentType" : "نوع الدفع",
     "ApprovalPersons" : "الموافقة على الأشخاص",
     "AuthorizedPerson" : "الشخص المرخص",
@@ -51,7 +50,23 @@
     "AmountPerMonth" : "المبلغ في الشهر",
     "Active" : "نشيط",
     "Address" : "عنوان",
-    "Note" : "ملحوظة"
+    "Note" : "ملحوظة",
+    "Ids": "بطاقة تعريف"
+
+  },
+  "DateFilter": {
+    "Today": "اليوم ",
+    "Yesterday": "الأمس",
+    "Aweekago": "من أسبوع مضى ",
+    "AMonthago": "من شهر مضى ",
+    "Quarterago": "ربع سنة ماضية",
+    "HalfYear": " نصف سنة ماضية ",
+    "AYearago": "منذ سنة ماضية "
+  },
+  "DatePicker": {
+    "PickDate": "اختر التاريخ",
+    "SelectMonth": "اختر الشهر"
+
   },
 
   "BenificaryNote":{
