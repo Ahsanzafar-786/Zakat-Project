@@ -192,7 +192,7 @@
                                 <th class="text-center" style="width: 15% !important">Action</th>
                             </tr>
                         </thead>
-                   
+
                         <tbody>
                             <tr v-for="(person , index) in brand.benificaryAuthorization" :key="index">
                                 <td class="border-top-0 text-center">
@@ -213,7 +213,7 @@
                                 <td class="border-top-0 text-center">
                                     <div class="checkbox form-check-inline">
                                         <input v-bind:id="index+1" type="checkbox" v-model="person.isActive">
-                                        <label v-bind:for="index+1">  </label>
+                                        <label v-bind:for="index+1"> </label>
                                     </div>
                                 </td>
                                 <td class="border-top-0 text-center">
@@ -349,10 +349,16 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            var prd = root.brand.benificaryAuthorization.findIndex(x => x.authorizationPersonId == '' || x.authorizationPersonId == null);
-                if (prd >= 0) {
-                    root.brand.benificaryAuthorization.splice(prd, 1)
+            this.brand.benificaryAuthorization.map(auth => {
+                if (auth.isActive === '') {
+                    auth.isActive = false;
                 }
+                return auth;
+            });
+            var prd = root.brand.benificaryAuthorization.findIndex(x => x.authorizationPersonId == '' || x.authorizationPersonId == null);
+            if (prd >= 0) {
+                root.brand.benificaryAuthorization.splice(prd, 1)
+            }
 
             this.$https.post('/Benificary/SaveBenificary', this.brand, {
                     headers: {
