@@ -215,7 +215,7 @@ export default {
                     approvalPersonId: '',
                     date: '',
                     description: '',
-                    isActive: ''
+                    isActive:true
                 }],
             },
             type: '',
@@ -282,7 +282,7 @@ export default {
                     approvalPersonId: '',
                     date: '',
                     description: '',
-                    isActive: ''
+                    isActive:true
                 }],
             }
             this.show = !this.show;
