@@ -308,6 +308,21 @@
     "Month":"شهر",
     "Year":"سنة",
     "Period":"فترة"
+  },
+
+  "Analytics":{
+    "Analytics":"تحليلات",
+    "Dashboard":"لوحة القيادة",
+    "Users":"المستخدمون",
+    "Benificary":"المستفيد",
+    "RegisterBenificary":"تسجيل المستفيد",
+    "Un-RegisterBenificary":"فائدة إلغاء التسجيل",
+    "OneTimeBenificary":"فائدة لمرة واحدة",
+    "MonthlyBenificary":"المستفيد الشهري",
+    "AuthorizePerson":"تفويض الشخص",
+    "Resource":"الموارد",
+    "BenificaryType":"نوع المستفيد",
+    "AudienceOverview":"نظرة عامة على الجمهور"
   }
 
 

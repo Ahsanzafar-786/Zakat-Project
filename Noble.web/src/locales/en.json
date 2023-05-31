@@ -301,6 +301,21 @@
     "Month":"Month",
     "Year":"Year",
     "Period":"Period"
+  },
+  
+  "Analytics":{
+    "Analytics":"Analytics",
+    "Dashboard":"Dashboard",
+    "Users":"Users",
+    "Benificary":"Benificary",
+    "RegisterBenificary":"Register Benificary",
+    "Un-RegisterBenificary":"Un-Register Benificary",
+    "OneTimeBenificary":"One Time Benificary",
+    "MonthlyBenificary":"Monthly Benificary",
+    "AuthorizePerson":"Authorize Person",
+    "Resource":"Resource",
+    "BenificaryType":"Benificary Type",
+    "AudienceOverview":"Audience Overview"
   }
 
 }

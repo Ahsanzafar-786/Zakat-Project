@@ -6,10 +6,10 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col">
-                            <h4 class="page-title">Analytics</h4>
+                            <h4 class="page-title">{{$t('Analytics.Analytics')}}</h4>
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">{{$t('Home')}}</a></li>
+                                <li class="breadcrumb-item active">{{$t('Analytics.Dashboard')}}</li>
                             </ol>
                         </div>
                         <!--end col-->
@@ -39,7 +39,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Users</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.Users')}}</p>
                                         <h3 class="m-0">{{ dashboard.totalUser}}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>8.5%</span> New Sessions Today</p>
@@ -61,7 +61,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Benificary</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.Benificary')}}</p>
                                         <h3 class="m-0">{{ dashboard.totalBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -82,7 +82,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Register Benificary</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.RegisterBenificary')}}</p>
                                         <h3 class="m-0">{{ dashboard.registerBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -103,7 +103,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Un-Register Benificary</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.Un-RegisterBenificary')}}</p>
                                         <h3 class="m-0">{{ dashboard.unRegisterBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -124,7 +124,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">One Time Benificary</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.OneTimeBenificary')}}</p>
                                         <h3 class="m-0">{{ dashboard.oneTimeBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -145,7 +145,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Monthly Benificary</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.MonthlyBenificary')}}</p>
                                         <h3 class="m-0">{{ dashboard.monthlyBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -167,7 +167,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Authorize Person</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.AuthorizePerson')}}</p>
                                         <h3 class="m-0">{{ dashboard.totalAuthorizePerson }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-danger"><i
                                                     class="mdi mdi-trending-down"></i>35%</span> Bounce Rate Weekly</p>
@@ -189,7 +189,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">Resource</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.Resource')}}</p>
                                         <h3 class="m-0">5000</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>10.5%</span> Completions Weekly</p>
@@ -212,7 +212,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">Benificary Type</h4>
+                                <h4 class="card-title">{{$t('Analytics.BenificaryType')}}</h4>
                             </div>
                             <!--end col-->
                             <div class="col-auto">
@@ -254,7 +254,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">Benificary Type</h4>
+                                <h4 class="card-title">{{$t('Analytics.BenificaryType')}}</h4>
                             </div>
                         </div>
                         <!--end row-->
@@ -280,7 +280,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">Audience Overview</h4>
+                                <h4 class="card-title">{{$t('Analytics.AudienceOverview')}}</h4>
                             </div>
                             <!--end col-->
                             <div class="col-auto">
