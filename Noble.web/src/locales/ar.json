@@ -12,7 +12,7 @@
     "PaymentType":"نوع الدفع",
     "SelectBenificary":"حدد المستفيد"
   },
-
+ 
   "Benificary":{
     "Benificary" : "المستفيد",
     "BenificaryList" : "قائمة المستفيدين",
@@ -219,6 +219,23 @@
     "Name":"اسم",
     "RegisterUser_Password":"تسجيل كلمة مرور المستخدم",
     "RegisterUser_ConfirmPassword":"تسجيل مستخدم تأكيد كلمة المرور"
+  },
+
+  "RegisterUser":{
+    "RegisterUser":"تسجيل المستخدم",
+    "MySetting":"الإعداد الخاص بي",
+    "Profile":"حساب تعريفي",
+    "ChangePassword":"تغيير كلمة المرور",
+    "ProfileSetting":"إعداد الملف الشخصي",
+    "FirstName":"الاسم الأول",
+    "LastName":"اسم العائلة",
+    "RegisterUser_EmailID":"تسجيل معرف البريد الإلكتروني للمستخدم",
+    "UpdateProfile":"تحديث الملف",
+    "CurrentPasswordVerification":"التحقق من كلمة المرور الحالية",
+    "VerifyCurrentPassword":"تحقق من كلمة المرور الحالية",
+    "RegisterUser_Password":"تسجيل كلمة مرور المستخدم",
+    "RegisterUser_ConfirmPassword":"تسجيل المستخدم تأكيد كلمة المرور",
+    "UpdatePassword":"تطوير كلمة السر"
   }
 
 

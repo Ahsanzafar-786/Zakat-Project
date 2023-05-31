@@ -5,7 +5,7 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col">
-                            <h4 class="page-title">Setup Company</h4>
+                            <h4 class="page-title">{{$t('SetupCompany.SetupCompany')}}</h4>
 
                         </div>
                         <!-- <div class="col-auto align-self-center">
@@ -28,14 +28,14 @@
                 <div class="text-left">
                     <div class="row ">
                         <div class="col-sm-4" v-if="role=='Noble Admin'">
-                            <label>Client Code:<span class="text-danger"> *</span></label>
+                            <label>{{$t('SetupCompany.ClientCode')}}:<span class="text-danger"> *</span></label>
                             <div>
                                 <input class="form-control" disabled :key="rander" v-model="company.clientNo" />
 
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label>Company Name :<span class="text-danger"> *</span></label>
+                            <label>{{$t('SetupCompany.CompanyName')}}:<span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.company.nameEnglish.$error}">
                                 <input class="form-control" v-model="$v.company.nameEnglish.$model" />
                                 <span v-if="$v.company.nameEnglish.$error" class="error text-danger">
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label for="company.email">Company Email : <span class="text-danger"> *</span></label>
+                            <label for="company.email">{{$t('SetupCompany.CompanyEmail')}}: <span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.company.companyEmail.$error,'has-blue':($v.company.companyEmail.required && $v.company.companyEmail.email)}">
                                 <input class="form-control" v-model="$v.company.companyEmail.$model" />
                                 <span v-if="$v.company.companyEmail.$error" class="error text-danger">
@@ -57,46 +57,46 @@
 
                         </div>
                         <div class="col-sm-4">
-                            <label>Commercial Registration No :</label>
+                            <label>{{$t('SetupCompany.CommercialRegistrationNo')}} :</label>
                           
                                 <input class="form-control" v-model="company.comercialRegNo" />
                               
                         </div>
                         <div class="col-sm-4">
-                            <label for="company.TaxRegisterNo">VAT / NTN /TAX No  : </label>
+                            <label for="company.TaxRegisterNo">{{$t('SetupCompany.VATNTNTAXNo')}}: </label>
                             <input class="form-control" v-model="company.vatRegistrationNo" />
                           
                         </div>
                        
                         <div class="col-sm-4">
-                            <label>Website: </label>
+                            <label>{{$t('SetupCompany.Website')}}: </label>
                             <div>
                                 <input class="form-control" v-model="company.website" />
 
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <label>Mobile Number: </label>
+                            <label>{{$t('SetupCompany.MobileNumber')}}: </label>
                             <input class="form-control" v-model="company.phoneNo" type="number" />
                         </div>
                         <div class="col-sm-4">
-                            <label>Landline Number: </label>
+                            <label>{{$t('SetupCompany.LandlineNumber')}}: </label>
                             <input class="form-control" type="number" v-model="company.landLine" />
 
                         </div>
 
                         <div class="col-sm-4">
-                            <label for="company.country">Country: </label>
+                            <label for="company.country">{{$t('SetupCompany.Country')}}: </label>
                             <country-select class="form-control" v-model="company.countryEnglish" :country="country" topCountry="SA" />
 
                         </div>
                         <div class="col-sm-4">
-                            <label for="company.city">City: </label>
+                            <label for="company.city">{{$t('SetupCompany.City')}}: </label>
                             <input class="form-control" v-model="company.cityEnglish" />
 
                         </div>
                         <div class="col-sm-8">
-                            <label for="company.address">Address: </label>
+                            <label for="company.address">{{$t('SetupCompany.Address')}}: </label>
                             <textarea class="form-control" v-model="company.addressEnglish" />
                         </div>
                         <div v-if="$route.query.data!=undefined" class="card-footer col-md-12 text-right">
@@ -114,23 +114,23 @@
             <div class="card col-lg-12  " >
                 <div class="card-body  " v-if="$route.query.data==undefined">
                     <div class="pb-2">
-                        <h5 class="card-title  "> Admin Info</h5>
+                        <h5 class="card-title  "> {{$t('SetupCompany.AdminInfo')}}</h5>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="company.email">Email:<span class="text-danger"> *</span></label>
+                            <label for="company.email">{{$t('SetupCompany.Email')}}:<span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.company.email.$error,'has-blue':($v.company.email.required && $v.company.email.email)}">
                                 <input class="form-control" type="text" v-model="$v.company.email.$model" />
                                 <span v-if="$v.company.email.$error" class="error text-danger">
                                     <span v-if="!$v.company.email.required">Email  is required  </span>
                                     <span v-if="!$v.company.email.email">Email is invalid</span>
                                     <!--<span v-if="!$v.company.email.isExist && $v.company.email.$error" class="error validation-error field-validation-valid">Email is already exist</span>-->
-
+                                       
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label>Name:<span class="text-danger"> *</span></label>
+                            <label>{{$t('SetupCompany.Name')}}:<span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.company.firstName.$error}">
                                 <input class="form-control" autofocus="autofocus" v-model="$v.company.firstName.$model" />
                                 <span v-if="$v.company.firstName.$error" class="error text-danger">
@@ -140,22 +140,22 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="addLocation.password">{{ $t('AddCompany.RegisterUser_Password') }} :<span class="text-danger"> *</span></label>
+                            <label for="addLocation.password">{{ $t('SetupCompany.RegisterUser_Password') }} :<span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.company.password.$error,'has-blue':($v.company.password.required && $v.company.password.strongPassword)}">
                                 <input class="form-control " type="password" v-model="$v.company.password.$model" />
                                 <span v-if="$v.company.password.$error" class="error text-danger">
-                                    <span v-if="!$v.company.password.required">{{ $t('AddCompany.RegisterUser_Error_Required_Password') }} </span>
-                                    <span v-if="!$v.company.password.strongPassword">{{ $t('AddCompany.RegisterUser_Error_Format_Password') }}</span>
+                                    <span v-if="!$v.company.password.required">{{ $t('SetupCompany.RegisterUser_Error_Required_Password') }} </span>
+                                    <span v-if="!$v.company.password.strongPassword">{{ $t('SetupCompany.RegisterUser_Error_Format_Password') }}</span>
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="addLocation.confirmPassword">{{ $t('AddCompany.RegisterUser_ConfirmPassword') }}:<span class="text-danger"> *</span></label>
+                            <label for="addLocation.confirmPassword">{{ $t('SetupCompany.RegisterUser_ConfirmPassword') }}:<span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.company.confirmPassword.$error,'has-blue':($v.company.confirmPassword.required && $v.company.confirmPassword.sameAsPassword)}">
                                 <input class="form-control " type="password" v-model="$v.company.confirmPassword.$model" />
                                 <span v-if="$v.company.confirmPassword.$error" class="error text-danger">
-                                    <span v-if="!$v.company.confirmPassword.required">{{ $t('AddCompany.RegisterUser_Error_Required_ConfirmPassword') }}  </span>
-                                    <span v-if="!$v.company.confirmPassword.sameAsPassword">{{ $t('AddCompany.RegisterUser_Error_SameAs_ConfirmPassword') }}</span>
+                                    <span v-if="!$v.company.confirmPassword.required">{{ $t('SetupCompany.RegisterUser_Error_Required_ConfirmPassword') }}  </span>
+                                    <span v-if="!$v.company.confirmPassword.sameAsPassword">{{ $t('SetupCompany.RegisterUser_Error_SameAs_ConfirmPassword') }}</span>
                                 </span>
                             </div>
                         </div>
@@ -164,8 +164,8 @@
                         </div>
 
                         <div v-if="!loading" class=" col-md-12 pt-2 text-right">
-                            <a href="javascript:void(0)" class="btn btn-outline-primary  me-2" v-on:click="SaveCompany" v-bind:disabled="$v.company.$invalid"><i class="fa fa-save"></i> Save</a>
-                            <a href="javascript:void(0)" class="btn btn-outline-danger " v-on:click="GoToCompany"> Cancel</a>
+                            <a href="javascript:void(0)" class="btn btn-outline-primary  me-2" v-on:click="SaveCompany" v-bind:disabled="$v.company.$invalid"><i class="fa fa-save"></i> {{$t('Save')}}</a>
+                            <a href="javascript:void(0)" class="btn btn-outline-danger " v-on:click="GoToCompany"> {{$t('Close')}}</a>
 
 
                         </div>
