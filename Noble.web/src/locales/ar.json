@@ -4,7 +4,8 @@
   "Close": "إغلاق",
   "Search": "بحث",
   "Save" : "يحفظ",
-  "Update": "تحديث", 
+  "Update": "تحديث",
+  "Arabic":"العربية", 
 
   "General":{
     "SelectAuthorizePerson":"حدد تخويل الشخص",
@@ -51,7 +52,17 @@
     "Active" : "نشيط",
     "Address" : "عنوان",
     "Note" : "ملحوظة",
-    "Ids": "بطاقة تعريف"
+    "Ids": "بطاقة تعريف",
+    "SelectType": "اختر صنف",
+    "AdvancePayment":"دفعه مقدمه",
+    "StartFrom":"يبدأ من",
+    "ApprovedBy":"تمت الموافقة عليه من قبل",
+    "PaymentDuration":"مدة الدفع",
+    "Type":"يكتب",
+    "BeneficiaryAuthorization":"إذن المستفيد",
+    "Date":"تاريخ",
+    "Status":"حالة",
+    "Action":"فعل"
 
   },
   "DateFilter": {
@@ -274,6 +285,29 @@
     "RoleId":"معرف الدور",
     "Password":"كلمة المرور",
     "ConfirmPassword":"تأكيد كلمة المرور"  
+  },
+
+  "Payment":{
+    "Payment":"قسط",
+    "AddPayment":"إضافة الدفع",
+    "PaymentList":"قائمة الدفع",
+    "BenifcaryName":"أسم المستفيد",
+    "Amount":"كمية",
+    "Cashier":"أمين الصندوق",
+    "Month":"شهر",
+    "Year":"سنة",
+    "Period":"فترة"
+  },
+
+  "AddPayment":{
+    "AddPayment":"إضافة الدفع",
+    "Benificary":"المستفيد",
+    "BenificaryDetails":"تفاصيل مفيدة",
+    "Amount":"كمية",
+    "Cashier":"أمين الصندوق",
+    "Month":"شهر",
+    "Year":"سنة",
+    "Period":"فترة"
   }
 
 

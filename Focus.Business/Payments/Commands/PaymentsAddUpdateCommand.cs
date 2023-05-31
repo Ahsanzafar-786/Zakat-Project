@@ -57,7 +57,7 @@ namespace Focus.Business.Payments.Commands
                     }
                     else
                     {
-                        var paymentDetails = await Context.Payments.FirstOrDefaultAsync(x => x.Id!= request.Payment.Id);
+                        var paymentDetails = await Context.Payments.FirstOrDefaultAsync(x => x.Id != request.Payment.Id);
                         if (paymentDetails == null)
                             throw new NotFoundException("Payment Not Found","");
 

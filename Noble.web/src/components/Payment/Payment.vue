@@ -56,9 +56,6 @@
                                         {{ $t('Payment.Amount') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Payment.Cashier') }}
-                                    </th>
-                                    <th class="text-center">
                                         {{ $t('Payment.Month') }}
                                     </th>
                                     <th class="text-center">
@@ -78,28 +75,25 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <!-- <td class="text-center">
+                                    <td class="text-center">
                                         <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{ brand.authorizedPersonCode }}</a>
-                                        </strong>
-                                    </td> -->
-                                    <!-- <td class="text-center">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)"> {{ brand.name }}</a>
+                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{ brand.benificaryName }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
-                                        {{ brand.gender }}
+                                     <td class="text-center">
+                                        <strong>
+                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)"> {{ brand.amount }}</a>
+                                        </strong>
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.iqamaNo }}
+                                        {{ brand.month }}
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.nationality }}
+                                        {{ brand.year }}
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.passportNo }}
-                                    </td> -->
+                                        {{ brand.period }}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -212,9 +206,9 @@ export default {
             root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data) {
-                        this.$router.push({
+                        root.$router.push({
                             path: '/addpayment',
-                            query: response.dat
+                            query: response.data
                         });
                     } else {
                         console.log("error: something wrong from db.");
@@ -235,6 +229,8 @@ export default {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.GetPayment(this.search, 1);
+
+        
     }
 }
 </script>

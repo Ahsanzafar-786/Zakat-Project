@@ -32,10 +32,10 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <benificary v-model="addPayment.benificaryId"
-                                    v-on:input="EditBenificary(addPayment.benificaryId)" />
-                                <a v-if="addPayment.benificaryId == '' || addPayment.benificaryId == null"
-                                    href="javascript:void()" class="text-secondary">Benificary Details</a>
+                                <benificary v-model="addPayment.benificayId"
+                                    v-on:input="EditBenificary(addPayment.benificayId)" />
+                                <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()"
+                                    class="text-secondary">{{ $t('AddPayment.BenificaryDetails') }}</a>
                                 <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas"
                                     ref="offcanvasRight" data-bs-target="#offcanvasRight"
                                     aria-controls="offcanvasRight">Benificary Details</a>
@@ -164,14 +164,14 @@
                 </div>
                 <div class="col-lg-12 invoice-btn-fixed-bottom">
                     <div class="button-items">
-                        <button class="btn btn-outline-primary  mr-2">
-                            <i v-on:click="SavePayment()" class="far fa-save"></i>
+                        <button  v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2">
+                            <i class="far fa-save"></i>
                             <span>
                                 {{ $t('Save') }}
                             </span>
                         </button>
-                        <button class="btn btn-danger mr-2" v-on:click="GotoPage('/dashboard')">
-                            {{ $t('Cancel') }}
+                        <button class="btn btn-danger mr-2" v-on:click="GotoPage('/payment')">
+                            {{ $t('Close') }}
                         </button>
                     </div>
                 </div>
@@ -239,7 +239,8 @@ export default {
             brand: {},
             cashierName: '',
             addPayment: {
-                benificaryId: '',
+                Id:'00000000-0000-0000-0000-000000000000',
+                benificayId: '',
                 amount: '',
                 userId: '',
                 month: '',
@@ -303,7 +304,6 @@ export default {
                 .then(function (response) {
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {
-
                             root.$swal({
                                 title: 'Save',
                                 text: response.data.isUpdate,
@@ -314,7 +314,7 @@ export default {
                                 timerProgressBar: true,
                             });
 
-                            root.close();
+                            root.GotoPage('/payment');
                         }
                         else {
 
@@ -327,7 +327,7 @@ export default {
                                 timer: 1500,
                                 timerProgressBar: true,
                             });
-                            root.close();
+                            root.GotoPage('/payment');
 
                         }
                     }
@@ -373,6 +373,11 @@ export default {
         this.arabic = localStorage.getItem('Arabic');
         this.addPayment.userId = localStorage.getItem('UserId');
         this.cashierName = localStorage.getItem('UserName');
+        
+        if (this.$route.query != undefined) 
+        {
+            this.addPayment = this.$route.query;
+        }
     }
 }
 </script>
