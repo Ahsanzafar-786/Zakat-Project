@@ -4,6 +4,7 @@ using Focus.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Focus.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230531112600_payments")]
+    partial class payments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -705,7 +707,7 @@ namespace Focus.Persistence.Migrations
                             Blocked = false,
                             CashVoucher = false,
                             CompanyRegNo = "56ty60",
-                            CreatedDate = new DateTime(2023, 5, 31, 11, 29, 4, 610, DateTimeKind.Utc).AddTicks(5952),
+                            CreatedDate = new DateTime(2023, 5, 31, 11, 25, 58, 970, DateTimeKind.Utc).AddTicks(7851),
                             DayStart = false,
                             English = false,
                             ExpenseAccount = false,
@@ -794,7 +796,10 @@ namespace Focus.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,4)");
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("BeneficiariesId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("BenificayId")
                         .HasColumnType("uniqueidentifier");
@@ -832,7 +837,7 @@ namespace Focus.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BenificayId");
+                    b.HasIndex("BeneficiariesId");
 
                     b.HasIndex("CompanyId");
 
@@ -1270,7 +1275,7 @@ namespace Focus.Persistence.Migrations
                 {
                     b.HasOne("Focus.Domain.Entities.Beneficiaries", "Beneficiaries")
                         .WithMany("Payments")
-                        .HasForeignKey("BenificayId");
+                        .HasForeignKey("BeneficiariesId");
 
                     b.HasOne("Focus.Domain.Entities.Company", null)
                         .WithMany()

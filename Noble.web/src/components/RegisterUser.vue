@@ -8,7 +8,7 @@
                             <div class="col">
                                 <h4 class="page-title">{{ $t('RegisterUser.MySetting') }}</h4>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{$t('Home')}}</a></li>
                                     <li class="breadcrumb-item active">{{ $t('RegisterUser.MySetting') }}</li>
                                 </ol>
                             </div>

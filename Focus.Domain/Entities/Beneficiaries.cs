@@ -40,6 +40,7 @@ namespace Focus.Domain.Entities
         public int AdvancePayment { get; set; }
         public string DurationType { get; set; }
         public virtual ICollection<BenificaryAuthorization> BenificaryAuthorization { get;set; }
+        public virtual ICollection<Payment> Payments { get;set; }
 
     }
 }

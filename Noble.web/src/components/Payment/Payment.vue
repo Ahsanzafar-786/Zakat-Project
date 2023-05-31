@@ -192,7 +192,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetAuthorizedPersonsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;
@@ -204,18 +204,18 @@ export default {
         },
 
         EditPayment: function (Id) {
-
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('/Benificary/GetAuthorizedPersonsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
+            root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data) {
-                        root.newauthorizedPerson= response.data;
-                        root.show = !root.show;
-                        root.type = "Edit"
+                        this.$router.push({
+                            path: '/addpayment',
+                            query: response.dat
+                        });
                     } else {
                         console.log("error: something wrong from db.");
                     }

@@ -19,6 +19,7 @@ namespace Focus.Business.Interface
         DbSet<PaymentType> PaymentTypes { get; set; }
         DbSet<Funds> Funds { get; set; }
         DbSet<BenificaryAuthorization> BenificaryAuthorizations { get; set; }
+        DbSet<Payment> Payments { get; set; }
         bool DisableTenantFilter { get; set; }
         int SaveChanges();
         int SaveChangesAfter();

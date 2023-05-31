@@ -24,6 +24,9 @@ using Focus.Business.AdminDashboard.Queries;
 using Focus.Business.CharityFunds.Models;
 using Focus.Business.CharityFunds.Commands;
 using Focus.Business.CharityFunds.Queries;
+using Focus.Business.Payments.Models;
+using Focus.Business.Payments.Commands;
+using Focus.Business.Payments.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -300,6 +303,42 @@ namespace Noble.Api.Controllers
         public async Task<IActionResult> GetFundsDetail(Guid id)
         {
             var fund = await Mediator.Send(new FundsDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(fund);
+        }
+
+        #endregion
+
+        #region Payments
+        [Route("api/Benificary/SavePayments")]
+        [HttpPost("SavePayments")]
+        public async Task<IActionResult> SavePayments([FromBody] PaymentLookupModel payment)
+        {
+            var message = await Mediator.Send(new PaymentsAddUpdateCommand
+            {
+                Payment = payment
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetPaymentsList")]
+        [HttpGet("GetPaymentsList")]
+        public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber)
+        {
+            var payment = await Mediator.Send(new PaymentListQuery
+            {
+                SearchTerm = searchTerm,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(payment);
+        }
+
+        [Route("api/Benificary/GetPaymentsDetail")]
+        [HttpGet("GetPaymentsDetail")]
+        public async Task<IActionResult> GetPaymentsDetail(Guid id)
+        {
+            var fund = await Mediator.Send(new PaymentDetailsQuery
             {
                 Id = id
             });
