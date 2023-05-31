@@ -32,6 +32,7 @@ namespace Focus.Persistence
         public virtual DbSet<ApprovalPerson> ApprovalPersons { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
         public virtual DbSet<Funds> Funds { get; set; }
+        public virtual DbSet<BenificaryAuthorization> BenificaryAuthorizations { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -33,5 +33,13 @@ namespace Focus.Domain.Entities
         public Guid? PaymentTypeId { get; set; }
         public virtual PaymentType PaymentTypes { get; set; }
 
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public DateTime? StartMonth { get; set; }
+        public Guid? ApprovedPaymentId { get; set; }
+        public int AdvancePayment { get; set; }
+        public string DurationType { get; set; }
+        public virtual ICollection<BenificaryAuthorization> BenificaryAuthorization { get;set; }
+
     }
 }

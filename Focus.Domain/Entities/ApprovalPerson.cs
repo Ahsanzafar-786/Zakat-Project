@@ -11,6 +11,7 @@ namespace Focus.Domain.Entities
         public string PhoneNo { get; set; }
         public int AprovalPersonId { get; set; }
         public virtual ICollection<Beneficiaries> Beneficiaries { get; set; }
+        public virtual ICollection<BenificaryAuthorization> BenificaryAuthorization { get; set; }
 
     }
 }

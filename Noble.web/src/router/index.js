@@ -44,6 +44,10 @@ import paymenttype from '../components/PaymentType/PaymentType.vue'
 //Funds
 import funds from '../components/Funds/Funds.vue'
 
+//Payment
+import payment from '../components/Payment/Payment.vue';
+import addpayment from '../components/Payment/AddPayment.vue';
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -144,6 +148,16 @@ const routes = [
                             path: '/funds',
                             name: 'funds',
                             component: funds
+                        },
+                        {
+                            path: '/payment',
+                            name: 'payment',
+                            component: payment
+                        },
+                        {
+                            path: '/addpayment',
+                            name: 'addpayment',
+                            component: addpayment
                         },
                     ]
                 }

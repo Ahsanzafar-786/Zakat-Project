@@ -141,6 +141,24 @@
                             </li>
                         </ul>
                     </li>
+                    <li v-if="roleName != 'Noble Admin'">
+                        <a href="javascript:void(0);">
+                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
+                                {{ $t('Payment.Payment') }}
+                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                        </a>
+
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/payment')" href="javascript:void(0);"> {{ $t('Payment.Payment')
+                                }}</a>
+                            </li>
+                            <li>
+                                <a v-on:click="GoTo('/addpayment')" href="javascript:void(0);"> {{ $t('Payment.AddPayment')
+                                }}</a>
+                            </li>
+                        </ul>
+                    </li>
 
                 </ul>
             </div>
