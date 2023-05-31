@@ -51,8 +51,8 @@ namespace Focus.Business.Payments.Commands
                             BenificayId = request.Payment.BenificayId,
                             Amount = request.Payment.Amount,
                             Month = request.Payment.Month,
-                            Year = request.Payment.Year,
-                            Period = request.Payment.Period,
+                            Year = DateTime.Now.Year.ToString(),
+                            Period = DateTime.Now.Year.ToString(),
                         };
 
                         Context.Payments.Add(payment);
@@ -74,8 +74,8 @@ namespace Focus.Business.Payments.Commands
                         paymentDetails.BenificayId = request.Payment.BenificayId;
                         paymentDetails.Amount = request.Payment.Amount;
                         paymentDetails.Month = request.Payment.Month;
-                        paymentDetails.Year = request.Payment.Year;
-                        paymentDetails.Period = request.Payment.Period;
+                        paymentDetails.Year = DateTime.Now.Year.ToString();
+                        paymentDetails.Period = DateTime.Now.Year.ToString();
 
                         Context.Payments.Update(paymentDetails);
                         await Context.SaveChangesAsync();

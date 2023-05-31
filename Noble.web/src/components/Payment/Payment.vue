@@ -86,7 +86,7 @@
                                         </strong>
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.month }}
+                                        {{ GetMonth(brand.month) }}
                                     </td>
                                     <td class="text-center">
                                         {{ brand.year }}
@@ -149,6 +149,8 @@
 
 <script>
 import clickMixin from '@/Mixins/clickMixin'
+import moment from 'moment'
+
 export default {
     mixins: [clickMixin],
     data: function () {
@@ -170,6 +172,17 @@ export default {
         }
     },
     methods: {
+        GetMonth: function (link) {
+           if(link!=undefined)
+           {
+            return moment(link).format('MMMM');
+
+           } 
+           else
+           {
+            return '';
+           }
+        },
         getPage: function () {
             this.GetPayment(this.search, this.currentPage);
         },

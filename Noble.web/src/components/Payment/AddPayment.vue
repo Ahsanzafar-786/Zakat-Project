@@ -106,32 +106,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group has-label col-sm-12 ">
-                        <div class="row">
-                            <div class="col-sm-5 text-md-end align-middle">
-                                <label class="text  font-weight-bolder">
-                                    {{ $t('AddPayment.Year') }}:
-                                </label>
-                            </div>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" v-model="addPayment.year" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group has-label col-sm-12 ">
-                        <div class="row">
-                            <div class="col-sm-5 text-md-end align-middle">
-                                <label class="text  font-weight-bolder">
-                                    {{ $t('AddPayment.Period') }}:
-                                </label>
-                            </div>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" v-model="addPayment.period" />
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="col-md-5" v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
+                <div class="col-md-5" v-if="addPayment.benificayId != '' && addPayment.benificayId != null">
                     <div class="row">
                         <div class=" col-sm-6 " >
                             <label class="rounded text-white bg-primary px-2">Advance Payment: {{ brand.advancePayment
@@ -147,20 +123,6 @@
                             <label class="rounded text-white bg-primary px-2">Start Month: &nbsp; &nbsp;{{ GetMonth(brand.startMonth) }}</label>
                         </div>
                     </div>
-                 
-                    <!-- <div class="mt-1 col-sm-12">
-                        <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName
-                        }}</label>
-                    </div>
-                    <div class="mt-1 col-sm-12">
-                        <label class="rounded text-white bg-primary px-2">Start Month: {{ brand.startMonth }}</label>
-                    </div> -->
-                    <!-- <div class="mt-1 col-sm-12">
-                        <label class="rounded text-white bg-primary px-2">Start Date: {{ brand.startDate }}</label>
-                    </div>
-                    <div class="mt-1 col-sm-12">
-                        <label class="rounded text-white bg-primary px-2">End Date: {{ brand.endDate }}</label>
-                    </div> -->
                 </div>
                 <div class="col-lg-12 invoice-btn-fixed-bottom">
                     <div class="button-items">
