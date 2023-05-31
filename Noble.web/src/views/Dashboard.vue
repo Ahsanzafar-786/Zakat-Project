@@ -201,7 +201,7 @@
                                     English
                                 </a>
                                 <a @click="setLocale('ar')" class="dropdown-item" href="javascript:void(0)">
-                                    Arabic
+                                   {{$t( 'Arabic')}}
                                 </a>
                             </div>
                         </li>

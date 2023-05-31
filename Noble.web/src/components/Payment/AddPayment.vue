@@ -35,7 +35,7 @@
                                 <benificary v-model="addPayment.benificaryId"
                                     v-on:input="EditBenificary(addPayment.benificaryId)" />
                                 <a v-if="addPayment.benificaryId == '' || addPayment.benificaryId == null" href="javascript:void()"
-                                    class="text-secondary">Benificary Details</a>
+                                    class="text-secondary">{{ $t('AddPayment.BenificaryDetails') }}</a>
                                 <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas"
                                     ref="offcanvasRight" data-bs-target="#offcanvasRight"
                                     aria-controls="offcanvasRight">Benificary Details</a>
@@ -134,7 +134,7 @@
                             </span>
                         </button>
                         <button class="btn btn-danger mr-2" v-on:click="GotoPage('/dashboard')">
-                            {{ $t('Cancel') }}
+                            {{ $t('Close') }}
                         </button>
                     </div>
                 </div>

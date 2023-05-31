@@ -89,7 +89,7 @@
                 <div class="col-md-6 form-group">
 
                     <label class="text  font-weight-bolder">
-                        Advance Payment
+                        {{ $t('AddBenificary.AdvancePayment') }}:
                     </label>
                     <multiselect v-model="brand.advancePayment " v-on:input="GetDateMonth" :options="[0,1,2,3,4,5,6,7,8,9,10,11,12]" :show-labels="false" :placeholder="$t('AddBenificary.SelectType')">
                     </multiselect>
@@ -101,13 +101,13 @@
                     <input class="form-control" v-model="$v.brand.amountPerMonth.$model" type="number" />
                 </div>
                 <div class="col-md-6 form-group">
-                    <label>Start From:</label>
+                    <label>{{ $t('AddBenificary.StartFrom') }}:</label>
                     <datepicker v-model="brand.startMonth " :type="'month'" />
 
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="text  font-weight-bolder">
-                        Approved By
+                        {{ $t('AddBenificary.ApprovedBy') }}:
                     </label>
                     <approvalperson v-model="brand.approvedPaymentId " :values="brand.approvedPaymentId" />
                 </div>
@@ -143,14 +143,15 @@
             <div class="row">
                 <div class="col-md-12 form-group">
                     <h4 style="color:black !important;">
-                        Payment Duration
+                        
+                        {{ $t('AddBenificary.PaymentDuration') }}
 
                     </h4>
                 </div>
 
                 <div class="col-md-6 form-group">
                     <label class="text  font-weight-bolder">
-                        Type
+                        {{ $t('AddBenificary.Type') }}:
                     </label>
                     <multiselect v-model="brand.durationType " v-on:input="GetDateMonth" :options="['Indefinite ', 'Customize']" :show-labels="false" :placeholder="$t('AddBenificary.SelectType')">
                     </multiselect>
@@ -167,7 +168,7 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="text  font-weight-bolder">
-                        Approved By
+                        {{ $t('AddBenificary.ApprovedBy') }}:
                     </label>
                     <approvalperson v-model="brand.approvedPaymentId " :values="brand.approvedPaymentId" />
                 </div>
@@ -176,7 +177,8 @@
             <div class="row">
                 <div class="col-md-12 form-group">
                     <h4 style="color:black !important;">
-                        Beneficiary Authorization
+                    
+                        {{ $t('AddBenificary.BeneficiaryAuthorization') }}
 
                     </h4>
                 </div>
@@ -185,11 +187,11 @@
                         <thead class="thead-light table-hover">
                             <tr>
                                 <th class="text-center" style="width: 5% !important">#</th>
-                                <th class="text-center" style="width: 20% !important">Authorized Person</th>
-                                <th class="text-center" style="width: 20% !important">Approved By</th>
-                                <th class="text-center" style="width: 20% !important">Date</th>
-                                <th class="text-center" style="width: 20% !important">Status</th>
-                                <th class="text-center" style="width: 15% !important">Action</th>
+                                <th class="text-center" style="width: 20% !important">{{ $t('AddBenificary.AuthorizedPerson') }}</th>
+                                <th class="text-center" style="width: 20% !important">{{ $t('AddBenificary.ApprovedBy') }}</th>
+                                <th class="text-center" style="width: 20% !important">{{ $t('AddBenificary.Date') }}</th>
+                                <th class="text-center" style="width: 20% !important">{{ $t('AddBenificary.Status') }}</th>
+                                <th class="text-center" style="width: 15% !important">{{ $t('AddBenificary.Action') }}</th>
                             </tr>
                         </thead>
                    
