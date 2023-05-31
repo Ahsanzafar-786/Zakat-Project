@@ -104,24 +104,24 @@
                     </div>
                 </div>
                 <div class="col-md-2" v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
-                    <div class="mt-1">
+                    <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Advance Payment: {{ brand.advancePayment
                         }}</label>
                     </div>
-                    <div class="mt-1">
+                    <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Payment Type: {{ brand.paymentTypeName }}</label>
                     </div>
-                    <div class="mt-1">
+                    <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName
                         }}</label>
                     </div>
-                    <div class="mt-1">
+                    <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Start Month: {{ brand.startMonth }}</label>
                     </div>
-                    <div class="mt-1">
+                    <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Start Date: {{ brand.startDate }}</label>
                     </div>
-                    <div class="mt-1">
+                    <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">End Date: {{ brand.endDate }}</label>
                     </div>
                 </div>
