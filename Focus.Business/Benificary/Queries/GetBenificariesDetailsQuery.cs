@@ -58,6 +58,8 @@ namespace Focus.Business.Benificary.Queries
                         ApprovedPaymentId= x.ApprovedPaymentId,
                         DurationType = x.DurationType,
                         AdvancePayment = x.AdvancePayment,
+                        PaymentTypeName = x.PaymentTypes.Name,
+                        ApprovalPersonName = x.ApprovalPersons.Name,
                         BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
                         {
                             Id= x.Id,
