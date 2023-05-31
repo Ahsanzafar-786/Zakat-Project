@@ -23,8 +23,8 @@
                     </div>
                 </div>
                 <hr />
-                <div class="col-md-12">
-                    <div class="form-group has-label col-sm-6 ">
+                <div class="col-md-10">
+                    <div class="form-group has-label col-sm-8 ">
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  font-weight-bolder">
@@ -32,59 +32,125 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <benificary v-model="addPayment.benificaryId" v-on:input="EditBenificary(addPayment.benificaryId)" />
-                                <a v-if="addPayment.benificaryId == ''" href="javascript:void()" class="text-secondary">Benificary Details</a>
-                                <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Benificary Details</a>
+                                <benificary v-model="addPayment.benificaryId"
+                                    v-on:input="EditBenificary(addPayment.benificaryId)" />
+                                <a v-if="addPayment.benificaryId == ''" href="javascript:void()"
+                                    class="text-secondary">Benificary Details</a>
+                                <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas"
+                                    ref="offcanvasRight" data-bs-target="#offcanvasRight"
+                                    aria-controls="offcanvasRight">Benificary Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-label col-sm-8 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Amount') }}:<span class="text-danger"> *</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="number" class="form-control" v-model="addPayment.benificaryId"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-label col-sm-8 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Cashier') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" v-model="cashierName" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-label col-sm-8 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Month') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="number" class="form-control" v-model="addPayment.month" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-label col-sm-8 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Year') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" v-model="addPayment.year" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-label col-sm-8 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Period') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" v-model="addPayment.period" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="offcanvas offcanvas-end p-0" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 500px !important;">
-                                <div class="offcanvas-header">
-                                    <h5 id="offcanvasRightLabel" class="m-0">{{ $t('AddPayment.BenificaryDetails') }}</h5>
-                                    <button type="button" class="btn-close text-reset filter-green " data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                </div>
-                                <div class="offcanvas-body">
-                                    <div class="row">
-                                        <div class="col-lg-12 form-group">
-                                            <label> {{ $t('AddBenificary.Name') }}:</label>
-                                            <input type="text" class="form-control" v-model="brand.name"  />
-                                        </div>
-                                        <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddBenificary.NameArabic') }} :</label>
-                                            <input type="text" class="form-control" v-model="brand.nameAr"  />
-                                        </div>
-                                        <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddBenificary.ID') }} :</label>
-                                            <input type="text" class="form-control" v-model="brand.ugamaNo" />
-                                        </div>
-                                        <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddBenificary.PassportNo') }} :</label>
-                                            <input type="text" class="form-control" v-model="brand.passportNo" />
-                                        </div>
-                                        <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddBenificary.Nationality') }} :</label>
-                                            <input type="text" class="form-control" v-model="brand.nationality" />
-                                        </div>
-
-                                        <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddBenificary.Gender') }} :</label>
-                                            <input type="text" class="form-control" v-model="brand.gender" />
-                                        </div>
-                                        <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddBenificary.ContactNo') }} :</label>
-                                            <input type="text" class="form-control" v-model="brand.phoneNo" />
-                                        </div>
-
-                                        <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddBenificary.Address') }} :</label>
-                                            <textarea rows="3"  class="form-control" v-model="brand.address">  </textarea>
-                                        </div>
-                                        
-
-                                    </div>
-                                </div>
+                <div class="offcanvas offcanvas-end p-0" tabindex="-1" id="offcanvasRight"
+                    aria-labelledby="offcanvasRightLabel" style="width: 500px !important;">
+                    <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel" class="m-0">{{ $t('AddPayment.BenificaryDetails') }}</h5>
+                        <button type="button" class="btn-close text-reset filter-green " data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label> {{ $t('AddBenificary.Name') }}:</label>
+                                <input type="text" class="form-control" v-model="brand.name" />
                             </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.NameArabic') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.nameAr" />
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.ID') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.ugamaNo" />
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.PassportNo') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.passportNo" />
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.Nationality') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.nationality" />
+                            </div>
+
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.Gender') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.gender" />
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.ContactNo') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.phoneNo" />
+                            </div>
+
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.Address') }} :</label>
+                                <textarea rows="3" class="form-control" v-model="brand.address">  </textarea>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -95,9 +161,15 @@ export default {
         return {
             arabic: '',
             english: '',
-            brand:{},
+            brand: {},
+            cashierName:'',
             addPayment: {
                 benificaryId: '',
+                amount:'',
+                userId:'',
+                month:'',
+                year:'',
+                period:'',
             }
         }
     },
@@ -144,6 +216,8 @@ export default {
     mounted: function () {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
+        this.addPayment.userId = localStorage.getItem('UserId');
+        this.cashierName = localStorage.getItem('UserName');
     }
 }
 </script>
