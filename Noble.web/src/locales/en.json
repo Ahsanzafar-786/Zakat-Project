@@ -5,6 +5,7 @@
   "Search": "Search",
   "Save": "Save",
   "Update": "Update",
+  "Arabic":"العربية",
 
   "General": {
     "SelectAuthorizePerson": "Select Authorize Person",
@@ -27,6 +28,7 @@
     "Register": "Register",
     "UnRegister": "Un-Register",
     "BenificaryStatus": "Benificary Status"
+    
   },
   "AddBenificary": {
     "AddBenificary": "Add Benificary",
@@ -50,8 +52,18 @@
     "Address": "Address",
     "Note": "Note",
     "Ids": "ID",
-    "SelectType": "Select Type"
+    "SelectType": "Select Type",
+    "AdvancePayment":"Advance Payment",
+    "StartFrom":"Start From",
+    "ApprovedBy":"Approved By",
+    "PaymentDuration":"Payment Duration",
+    "Type":"Type",
+    "BeneficiaryAuthorization":"Beneficiary Authorization",
+    "Date":"Date",
+    "Status":"Status",
+    "Action":"Action"
   },
+
   "BenificaryNote": {
     "BenificaryNote": "Benificary Note",
     "BenificaryNoteList": "Benificary Note List",
@@ -266,6 +278,29 @@
     "UserId":"User Id",
     "Password":"Password",
     "ConfirmPassword":"Confirm Password"   
+  },
+
+  "Payment":{
+    "Payment":"Payment",
+    "AddPayment":"Add Payment",
+    "PaymentList":"Payment List",
+    "BenifcaryName":"BenifcaryName",
+    "Amount":"Amount",
+    "Cashier":"Cashier",
+    "Month":"Month",
+    "Year":"Year",
+    "Period":"Period"
+  },
+
+  "AddPayment":{
+    "AddPayment":"Add Payment",
+    "Benificary":"Benificary",
+    "BenificaryDetails":"Benificary Details",
+    "Amount":"Amount",
+    "Cashier":"Cashier",
+    "Month":"Month",
+    "Year":"Year",
+    "Period":"Period"
   }
 
 }
