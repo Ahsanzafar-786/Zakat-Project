@@ -54,11 +54,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group has-label col-sm-12 " v-if="addPayment.benificayId != '' && addPayment.benificayId != null">
+                    <div class="form-group has-label col-sm-12 " v-if="brand.durationType=='Customize'" >
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  font-weight-bolder">
-                                    {{ $t('AddPayment.StartMonth') }}:
+                                    Start Month:
                                 </label>
                             </div>
                             <div class="col-sm-7">
@@ -68,11 +68,11 @@
                         </div>
                     </div>
                     <div class="form-group has-label col-sm-12 "
-                        v-if="addPayment.benificayId != '' && addPayment.benificayId != null">
+                        v-if="brand.durationType=='Customize'">
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  font-weight-bolder">
-                                    {{ $t('AddPayment.EndMonth') }}:
+                                    End Month:
                                 </label>
                             </div>
                             <div class="col-sm-7">
@@ -131,27 +131,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2" v-if="addPayment.benificayId != '' && addPayment.benificayId != null">
-                    <div class="mt-1 col-sm-12">
-                        <label class="rounded text-white bg-primary px-2">Advance Payment: {{ brand.advancePayment
+                <div class="col-md-5" v-if="addPayment.benificaryId != '' && addPayment.benificaryId != null">
+                    <div class="row">
+                        <div class=" col-sm-6 " >
+                            <label class="rounded text-white bg-primary px-2">Advance Payment: {{ brand.advancePayment
                         }}</label>
+                        </div>
+                        <div class=" col-sm-6 " >
+                            <label class="rounded text-white bg-primary px-2">Payment Type: {{ brand.paymentTypeName }}</label>
+                        </div>
+                        <div class=" col-sm-6 pt-1" >
+                            <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName }}</label>
+                        </div>
+                        <div class=" col-sm-6 pt-1" >
+                            <label class="rounded text-white bg-primary px-2">Start Month: &nbsp; &nbsp;{{ GetMonth(brand.startMonth) }}</label>
+                        </div>
                     </div>
-                    <div class="mt-1 col-sm-12">
-                        <label class="rounded text-white bg-primary px-2">Payment Type: {{ brand.paymentTypeName }}</label>
-                    </div>
-                    <div class="mt-1 col-sm-12">
+                 
+                    <!-- <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName
                         }}</label>
                     </div>
                     <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Start Month: {{ brand.startMonth }}</label>
-                    </div>
-                    <div class="mt-1 col-sm-12">
+                    </div> -->
+                    <!-- <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">Start Date: {{ brand.startDate }}</label>
                     </div>
                     <div class="mt-1 col-sm-12">
                         <label class="rounded text-white bg-primary px-2">End Date: {{ brand.endDate }}</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-12 invoice-btn-fixed-bottom">
                     <div class="button-items">
@@ -219,6 +228,8 @@
     </div>
 </template>
 <script>
+import moment from 'moment'
+
 export default {
     data: function () {
         return {
@@ -244,6 +255,17 @@ export default {
         },
     },
     methods: {
+        GetMonth: function (link) {
+           if(link!=undefined)
+           {
+            return moment(link).format('MMMM');
+
+           } 
+           else
+           {
+            return '';
+           }
+        },
         GotoPage: function (link) {
             this.$router.push({ path: link });
         },
