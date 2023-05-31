@@ -22,7 +22,7 @@
 
                         <div class="form-group has-label col-sm-12 ">
                             <label class="text  font-weight-bolder">
-                                {{ $t('AddBenificary.ID') }}:
+                                {{ $t('AddBenificary.Ids') }}:
                             </label>
                             <input class="form-control" v-model="$v.brand.ugamaNo.$model" type="text" />
                         </div>

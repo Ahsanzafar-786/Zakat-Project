@@ -11,9 +11,9 @@
                             <div class="card-body p-0 auth-header-box bg-white">
                                 <div class="text-center p-3">
                                     <a href="javascript:void(0);" class="logo logo-admin">
-                                        <img src="Smartdigitalerpsol.png" height="50" alt="logo" class="auth-logo">
+                                        <img src="msFakhry.png" height="50" alt="logo" class="auth-logo">
                                     </a>
-                                    <h4 class="mt-3 mb-1 fw-semibold font-18" style="color: #0C213A;">Smart Digital-ERP</h4>
+                                    <h4 class="mt-3 mb-1 fw-semibold font-18" style="color: #0C213A;">NMS Fakhry-ERP</h4>
                                     <p class="text-muted  mb-0">{{ $t('login.WelcomePleaselogintoyouraccount') }}</p>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                             <!--end card-body-->
                             <div class="card-body bg-light-alt text-center">
                                 <span class="text-muted d-none d-sm-inline-block">
-                                    <small>Version 1.2.9.5 Last Updated May 10, 2023. Smart Digital (Pvt) Ltd.</small>
+                                    <small>Version 1.2.9.5 Last Updated June 1, 2023. ms Fakhry (Pvt) Ltd.</small>
                                 </span>
                             </div>
                         </div>

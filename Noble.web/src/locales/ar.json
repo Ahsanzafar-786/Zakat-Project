@@ -38,7 +38,6 @@
     "PassportNo" : "رقم جواز السفر",
     "Nationality" : "جنسية",
     "Gender" : "جنس",
-    "ID" : "بطاقة تعريف",
     "Male" : "ذكر",
     "Female" : "أنثى",
     "ContactNo" : "رقم الاتصال",
@@ -51,7 +50,9 @@
     "AmountPerMonth" : "المبلغ في الشهر",
     "Active" : "نشيط",
     "Address" : "عنوان",
-    "Note" : "ملحوظة"
+    "Note" : "ملحوظة",
+    "Ids": "بطاقة تعريف"
+
   },
 
   "BenificaryNote":{

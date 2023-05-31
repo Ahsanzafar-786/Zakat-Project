@@ -47,7 +47,8 @@
     "AmountPerMonth": "Amount Per Month",
     "Active": "Active",
     "Address": "Address",
-    "Note": "Note"
+    "Note": "Note",
+    "Ids": "ID"
   },
   "BenificaryNote": {
     "BenificaryNote": "Benificary Note",
