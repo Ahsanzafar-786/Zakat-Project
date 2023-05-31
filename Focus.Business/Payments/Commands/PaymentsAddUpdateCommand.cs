@@ -33,11 +33,16 @@ namespace Focus.Business.Payments.Commands
                 {
                     if (request.Payment.Id == Guid.Empty || request.Payment.Id==null)
                     {
-                        var isRecord = Context.Beneficiaries.Any(x =>
-                            x.Id == request.Payment.BenificayId && x.PaymentTypes.Name == "One Time");
-                        if (isRecord)
+                        var pay = Context.Payments.AsNoTracking()
+                            .Any(x => x.BenificayId == request.Payment.BenificayId);
+                        if (pay)
                         {
-                            throw new ObjectAlreadyExistsException("You Can Receive Only One Time Amount");
+                            var isRecord = Context.Beneficiaries.Any(x =>
+                                x.Id == request.Payment.BenificayId && x.PaymentTypes.Name == "One Time");
+                            if (isRecord)
+                            {
+                                throw new ObjectAlreadyExistsException("You Can Receive Only One Time Amount");
+                            }
                         }
 
 
