@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 500px !important;">
+                <div class="offcanvas offcanvas-end p-0" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 500px !important;">
                                 <div class="offcanvas-header">
                                     <h5 id="offcanvasRightLabel" class="m-0">{{ $t('AddPayment.BenificaryDetails') }}</h5>
                                     <button type="button" class="btn-close text-reset filter-green " data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -47,34 +47,38 @@
                                 <div class="offcanvas-body">
                                     <div class="row">
                                         <div class="col-lg-12 form-group">
-                                            <label> {{ $t('AddSale.CustomerId') }}:</label>
-                                            <input type="text" class="form-control"   />
+                                            <label> {{ $t('AddBenificary.Name') }}:</label>
+                                            <input type="text" class="form-control" v-model="brand.name"  />
                                         </div>
                                         <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddSale.NameCustomer') }} :</label>
-                                            <input type="text" class="form-control"   />
+                                            <label>{{ $t('AddBenificary.NameArabic') }} :</label>
+                                            <input type="text" class="form-control" v-model="brand.nameAr"  />
                                         </div>
                                         <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddCustomer.CommercialRegistrationNo') }} :</label>
-                                            <input type="text" class="form-control"  />
+                                            <label>{{ $t('AddBenificary.ID') }} :</label>
+                                            <input type="text" class="form-control" v-model="brand.ugamaNo" />
                                         </div>
                                         <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddCustomer.VAT/NTN/Tax No') }} :</label>
-                                            <input type="text" class="form-control"  />
+                                            <label>{{ $t('AddBenificary.PassportNo') }} :</label>
+                                            <input type="text" class="form-control" v-model="brand.passportNo" />
                                         </div>
                                         <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddSale.Mobile') }} :</label>
-                                            <input type="text" class="form-control"  />
-                                        </div>
-
-                                        <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddCustomer.Email') }} :</label>
-                                            <input type="text" class="form-control" />
+                                            <label>{{ $t('AddBenificary.Nationality') }} :</label>
+                                            <input type="text" class="form-control" v-model="brand.nationality" />
                                         </div>
 
                                         <div class="col-lg-12 form-group">
-                                            <label>{{ $t('AddSale.CustomerAddress') }} :</label>
-                                            <textarea rows="3"  class="form-control"> </textarea>
+                                            <label>{{ $t('AddBenificary.Gender') }} :</label>
+                                            <input type="text" class="form-control" v-model="brand.gender" />
+                                        </div>
+                                        <div class="col-lg-12 form-group">
+                                            <label>{{ $t('AddBenificary.ContactNo') }} :</label>
+                                            <input type="text" class="form-control" v-model="brand.phoneNo" />
+                                        </div>
+
+                                        <div class="col-lg-12 form-group">
+                                            <label>{{ $t('AddBenificary.Address') }} :</label>
+                                            <textarea rows="3"  class="form-control" v-model="brand.address">  </textarea>
                                         </div>
                                         
 
@@ -91,7 +95,7 @@ export default {
         return {
             arabic: '',
             english: '',
-            benificaryDetails:{},
+            brand:{},
             addPayment: {
                 benificaryId: '',
             }
@@ -116,7 +120,7 @@ export default {
             root.$https.get('/Benificary/GetBenificaryDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data) {
-                        root.benificaryDetails = response.data;
+                        root.brand = response.data;
                     } else {
                         console.log("error: something wrong from db.");
                     }
