@@ -32,7 +32,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <benificary v-model="addPayment.benificayId"
+                                <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander"
                                     v-on:input="EditBenificary(addPayment.benificayId)" />
                                 <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()"
                                     class="text-secondary">{{ $t('AddPayment.BenificaryDetails') }}</a>
@@ -341,6 +341,8 @@ export default {
         if (this.$route.query != undefined) 
         {
             this.addPayment = this.$route.query;
+            this.EditBenificary(this.$route.query.benificayId);
+            this.rander++;
         }
     }
 }
