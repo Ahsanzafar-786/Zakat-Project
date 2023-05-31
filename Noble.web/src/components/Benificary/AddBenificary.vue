@@ -165,6 +165,12 @@
                     <datepicker v-model="brand.endDate  " v-bind:key="randerforempty" :type="'month'" />
 
                 </div>
+                <div class="col-md-6 form-group">
+                    <label class="text  font-weight-bolder">
+                        Approved By
+                    </label>
+                    <approvalperson v-model="brand.approvedPaymentId " :values="brand.approvedPaymentId" />
+                </div>
 
             </div>
             <div class="row">
@@ -186,17 +192,18 @@
                                 <th class="text-center" style="width: 15% !important">Action</th>
                             </tr>
                         </thead>
+                   
                         <tbody>
                             <tr v-for="(person , index) in brand.benificaryAuthorization" :key="index">
                                 <td class="border-top-0 text-center">
                                     {{ index+1 }}
                                 </td>
                                 <td class="border-top-0 text-center">
-                                    <authorizedperson v-model="person.authorizedPersonId" :values="person.authorizedPersonId" />
+                                    <authorizedperson v-model="person.authorizationPersonId" :values="person.authorizationPersonId" />
 
                                 </td>
                                 <td class="border-top-0 text-center">
-                                    <approvalperson v-model="person.approvedPaymentId " :values="person.approvedPaymentId" />
+                                    <approvalperson v-model="person.approvalPersonId " :values="person.approvalPersonId" />
 
                                 </td>
                                 <td class="border-top-0 text-center">
@@ -342,6 +349,10 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
+            var prd = root.brand.benificaryAuthorization.findIndex(x => x.authorizationPersonId == '' || x.authorizationPersonId == null);
+                if (prd >= 0) {
+                    root.brand.benificaryAuthorization.splice(prd, 1)
+                }
 
             this.$https.post('/Benificary/SaveBenificary', this.brand, {
                     headers: {

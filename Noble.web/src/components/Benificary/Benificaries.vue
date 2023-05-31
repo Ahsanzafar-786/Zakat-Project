@@ -282,7 +282,7 @@ export default {
                     approvalPersonId: '',
                     date: '',
                     description: '',
-                    isActive: true
+                    isActive:true
                 }],
             }
             this.show = !this.show;
