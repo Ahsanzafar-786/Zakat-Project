@@ -10,8 +10,8 @@
     </el-date-picker>
 </div>
 <div v-else>
-    <div v-if="type=='month'">
-        <el-date-picker v-model="inputValue" v-bind:type="type" v-bind:placeholder="$t('DatePicker.SelectMonth')" style="width: 100%; " >
+    <div v-if="type=='month'"> 
+        <el-date-picker v-model="inputValue" v-bind:type="type" format='MMMM yyyy ' v-bind:placeholder="$t('DatePicker.SelectMonth')" style="width: 100%; " >
         </el-date-picker>
 
     </div>
