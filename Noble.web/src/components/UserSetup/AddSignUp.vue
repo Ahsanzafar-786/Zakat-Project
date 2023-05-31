@@ -9,7 +9,7 @@
                                 <h4 class="page-title" v-if="loginDetails.id=='00000000-0000-0000-0000-000000000000'">{{ $t('AddSignUp.SignUpDetails') }}</h4>
                                 <h4 class="page-title" v-if="loginDetails.id!='00000000-0000-0000-0000-000000000000'">{{ $t('AddSignUp.SignUpDetails') }}</h4>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('AddSignUp.Home') }}</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a></li>
                                     <li class="breadcrumb-item active">{{ $t('AddSignUp.SignUpDetails') }}</li>
                                 </ol>
                             </div>
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label>Role Id :<span class="text-danger"> *</span></label>
+                            <label>{{ $t('AddSignUp.RoleId')}} :<span class="text-danger"> *</span></label>
                             <roledropdown v-model="loginDetails.roleName" :values="loginDetails.roleName" :isDisable="loginDetails.isProceed"></roledropdown>
                            
                         </div>
@@ -84,9 +84,9 @@
                     <div class="row">
                         <div v-if="!loading" class=" col-md-12">
                             <div class="button-items">
-                                <button class="btn btn-primary" v-bind:disabled="$v.loginDetails.$invalid " v-if="loginDetails.id=='00000000-0000-0000-0000-000000000000' " v-on:click="SaveLoginDetails"><i class="mdi mdi-check-all me-2"></i> {{ $t('AddSignUp.btnSave') }}</button>
+                                <button class="btn btn-primary" v-bind:disabled="$v.loginDetails.$invalid " v-if="loginDetails.id=='00000000-0000-0000-0000-000000000000' " v-on:click="SaveLoginDetails"><i class="mdi mdi-check-all me-2"></i> {{ $t('Save') }}</button>
                                 <button class="btn btn-primary" v-if="loginDetails.id!='00000000-0000-0000-0000-000000000000' " v-on:click="UpdateLoginDetails"><i class="mdi mdi-check-all me-2"></i> {{ $t('AddSignUp.btnUpdate') }}</button>
-                                <button class="btn btn-danger" v-on:click="Cancel">{{ $t('AddSignUp.btnClear') }}</button>
+                                <button class="btn btn-danger" v-on:click="Cancel">{{ $t('Close') }}</button>
                             </div>
                         </div>
                     </div>

@@ -191,8 +191,11 @@
   "Dashboard":{
     "Dashboard":"لوحة القيادة",
     "MyProfile":"ملفي",
-    "LogOut":"تسجيل خروج"
+    "LogOut":"تسجيل خروج",
+    "UserSetup":"إعداد المستخدم",
+    "SignUpUser":"تسجيل المستخدم"
   },
+
   "Company":{
     "Company":"شركة",
     "Name":"اسم",
@@ -200,6 +203,7 @@
     "VATNo":"ضريبة القيمة المضافة لا",
     "Address":"عنوان"
   },
+
   "SetupCompany":{
     "SetupCompany":"شركة الإعداد",
     "ClientCode":"رمز العميل",
@@ -236,6 +240,25 @@
     "RegisterUser_Password":"تسجيل كلمة مرور المستخدم",
     "RegisterUser_ConfirmPassword":"تسجيل المستخدم تأكيد كلمة المرور",
     "UpdatePassword":"تطوير كلمة السر"
+  },
+
+  "SignUp":{
+    "SignUp":"اشتراك",
+    "SignUpDetails":"تفاصيل التسجيل",
+    "SearchBYNameAndEmail":"البحث بالاسم والبريد الإلكتروني",
+    "USERNAME":"اسم المستخدم",
+    "EMAILID":"عنوان الايميل",
+    "Location":"موقع"
+  },
+
+  "AddSignUp":{
+    "AddSignUp":"أضف تسجيل",
+    "SignUpDetails":"تفاصيل التسجيل",
+    "UserEmail":"البريد الالكتروني للمستخدم",
+    "UserId":"معرف المستخدم",
+    "RoleId":"معرف الدور",
+    "Password":"كلمة المرور",
+    "ConfirmPassword":"تأكيد كلمة المرور"  
   }
 
 

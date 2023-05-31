@@ -184,7 +184,9 @@
   "Dashboard":{
     "Dashboard":"Dashboard",
     "MyProfile":"My Profile",
-    "LogOut":"LogOut"
+    "LogOut":"LogOut",
+    "UserSetup":"User Setup",
+    "SignUpUser":"SignUp User"
   },
   "Company":{
     "Company":"Company",
@@ -230,6 +232,25 @@
     "RegisterUser_Password":"Register User Password",
     "RegisterUser_ConfirmPassword":"Register User Confirm Password",
     "UpdatePassword":"Update Password"
+  },
+
+  "SignUp":{
+    "SignUp":"SignUp",
+    "SignUpDetails":"SignUp Details",
+    "SearchBYNameAndEmail":"Search BY Name And Email",
+    "USERNAME":"User Name",
+    "EMAILID":"Email Id",
+    "Location":"Location"
+  },
+
+  "AddSignUp":{
+    "AddSignUp":"Add SignUp",
+    "SignUpDetails":"SignUp Details",
+    "UserEmail":"User Email",
+    "RoleId":"Role Id",
+    "UserId":"User Id",
+    "Password":"Password",
+    "ConfirmPassword":"Confirm Password"   
   }
 
 }
