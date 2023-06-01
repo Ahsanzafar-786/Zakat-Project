@@ -104,7 +104,7 @@
                                     </button>
                                 </div>
                                 <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth" v-bind:key="val+index" style="position: relative;font-size: 13px !important;">
-                                    <span>{{val}}</span>
+                                    <span>{{val.selectedMonth}}</span>
                                     <span style="position:absolute; right: -12px; top: -8px;">
                                         <button class="btn  btn-danger btn-round btn-sm btn-icon" style="font-size: .4rem;  padding: 0.2rem 0.35rem;" @click="RemoveEffect(val)">
                                             <i class="fas fa-times"></i>
@@ -291,6 +291,7 @@ export default {
                 year: '',
                 code: 0,
                 period: '',
+                selectedMonth:''
             }
         }
     },
@@ -309,9 +310,9 @@ export default {
             }
         },
         MonthSelection: function () {
-            if (this.addPayment.month != null && this.addPayment.month != undefined) {
-                this.selectedMonth.push(this.addPayment.month);
-
+            if(this.addPayment.month!=null && this.addPayment.month!=undefined )
+            {
+                this.selectedMonth.push({selectedMonth:this.addPayment.month});
             }
 
         },
@@ -426,6 +427,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
+            this.addPayment.selectedMonth = this.selectedMonth;
             this.$https.post('/Benificary/SavePayments', this.addPayment, {
                     headers: {
                         "Authorization": `Bearer ${token}`

@@ -66,19 +66,23 @@ namespace Focus.Business.Payments.Commands
 
                         Context.Payments.Add(payment);
 
-                        var charityTransaction = new CharityTransaction
+                        foreach (var item in request.Payment.SelectedMonth)
                         {
-                            DoucmentId = payment.Id,
-                            CharityTransactionDate = payment.Date,
-                            DoucmentDate = DateTime.Now,
-                            DoucmentCode = payment.Code,
-                            BenificayId = payment.BenificayId,
-                            Month = payment.Month,
-                            Amount = payment.Amount,
-                            Year = payment.Year,
-                        };
+                            var charityTransaction = new CharityTransaction
+                            {
+                                DoucmentId = payment.Id,
+                                CharityTransactionDate = payment.Date,
+                                DoucmentDate = DateTime.Now,
+                                DoucmentCode = payment.Code,
+                                BenificayId = payment.BenificayId,
+                                Month = payment.Month,
+                                Amount = payment.Amount,
+                                Year = payment.Year,
+                            };
 
-                        await Context.CharityTransaction.AddAsync(charityTransaction);
+                            await Context.CharityTransaction.AddAsync(charityTransaction);
+                        }
+                       
 
                         await Context.SaveChangesAsync();
 
