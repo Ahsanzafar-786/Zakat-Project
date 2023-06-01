@@ -27,6 +27,7 @@ using Focus.Business.CharityFunds.Queries;
 using Focus.Business.Payments.Models;
 using Focus.Business.Payments.Commands;
 using Focus.Business.Payments.Queries;
+using Focus.Business.Transactions.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -345,6 +346,19 @@ namespace Noble.Api.Controllers
             return Ok(fund);
         }
 
+        #endregion
+
+        #region CharityTransaction
+        [Route("api/Benificary/GetCharityTransactionList")]
+        [HttpGet("GetCharityTransactionList")]
+        public async Task<IActionResult> GetCharityTransactionList(Guid benificaryId)
+        {
+            var charity = await Mediator.Send(new CharityTransactionListQuery
+            {
+                BenificayId = benificaryId
+            });
+            return Ok(charity);
+        }
         #endregion
     }
 }

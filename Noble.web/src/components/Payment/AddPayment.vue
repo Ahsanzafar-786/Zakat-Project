@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-sm-7">
                                 <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander"
-                                    v-on:input="EditBenificary(addPayment.benificayId)" />
+                                    v-on:input="EditBenificary(addPayment.benificayId), GetTransactions(addPayment.benificayId)" />
                                 <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()"
                                     class="text-secondary">{{ $t('AddPayment.BenificaryDetails') }}</a>
                                 <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas"
@@ -199,6 +199,7 @@ export default {
             arabic: '',
             english: '',
             brand: {},
+            transactions:[],
             cashierName: '',
             addPayment: {
                 Id:'',
@@ -245,6 +246,27 @@ export default {
                         root.brand = response.data;
                         root.addPayment.amount = response.data.amountPerMonth;
                         root.rander++;
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
+
+        },
+        GetTransactions: function (Id) {
+            debugger;
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
+                .then(function (response) {
+                    if (response.data) {
+                        root.transactions = response.data;
                     } else {
                         console.log("error: something wrong from db.");
                     }
