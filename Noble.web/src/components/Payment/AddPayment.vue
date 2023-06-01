@@ -31,7 +31,7 @@
                             </label>
                         </div>
                         <div class="col-sm-7">
-                            <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander" v-on:input="EditBenificary(addPayment.benificayId)" />
+                            <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander" v-on:input="EditBenificary(addPayment.benificayId, true)" />
                             <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails') }}</a>
                             <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Benificary Details</a>
                         </div>
@@ -324,7 +324,7 @@ export default {
                 path: link
             });
         },
-        EditBenificary: function (Id) {
+        EditBenificary: function (Id, val) {
             debugger;
             var root = this;
             var token = '';
@@ -337,7 +337,7 @@ export default {
                 }
                 return auth;
             });
-            root.$https.get('/Benificary/GetBenificaryDetail?Id=' + Id, {
+            root.$https.get('/Benificary/GetBenificaryDetail?Id=' + Id + '&isPayment=' + val, {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }

@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using Focus.Business.Payments.Models;
+using Focus.Business.Transactions.Models;
 using System;
 using System.Collections.Generic;
 
@@ -41,5 +42,6 @@ namespace Focus.Business.Benificary.Models
         public int? FirstMonth { get; set; }
         public int? EndMonth { get; set; }
         public string Reason { get; set; }
+        public List<CharityTransactionLookupModel> CharityTransactions { get; set; }
     }
 }
