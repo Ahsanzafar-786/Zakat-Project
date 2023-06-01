@@ -6,26 +6,26 @@
 </div>
 <div v-else-if="isDisable">
     <!--Disable Date-->
-    <div v-if="type=='month'"> 
-        <el-date-picker v-model="inputValue" v-bind:type="type" disabled format='MMMM yyyy ' v-bind:placeholder="$t('DatePicker.SelectMonth')" style="width: 100%; " >
+    <div v-if="type=='month'">
+        <el-date-picker v-model="DisplayValue" v-bind:type="type" disabled format='MMMM yyyy ' v-bind:placeholder="$t('DatePicker.SelectMonth')" style="width: 100%; ">
         </el-date-picker>
 
     </div>
     <div v-else>
-        <el-date-picker v-model="inputValue" v-bind:type="date" disabled v-bind:placeholder="$t('DatePicker.PickDate')" style="width: 100%;  " format='dd MMM yyyy' :picker-options="pickerOptions">
-    </el-date-picker>
+        <el-date-picker v-model="DisplayValue" v-bind:type="date" disabled v-bind:placeholder="$t('DatePicker.PickDate')" style="width: 100%;  " format='dd MMM yyyy' :picker-options="pickerOptions">
+        </el-date-picker>
 
     </div>
-    
+
 </div>
 <div v-else>
-    <div v-if="type=='month'"> 
-        <el-date-picker v-model="inputValue" v-bind:type="type" format='MMMM yyyy ' v-bind:placeholder="$t('DatePicker.SelectMonth')" style="width: 100%; " >
+    <div v-if="type=='month'">
+        <el-date-picker v-model="DisplayValue" v-bind:type="type" format='MMMM yyyy ' v-bind:placeholder="$t('DatePicker.SelectMonth')" style="width: 100%; ">
         </el-date-picker>
 
     </div>
     <div v-else>
-        <el-date-picker v-model="inputValue" type="date" v-bind:placeholder="$t('DatePicker.PickDate')" style="width: 100%; " :picker-options="pickerOptions">
+        <el-date-picker v-model="DisplayValue" type="date" v-bind:placeholder="$t('DatePicker.PickDate')" style="width: 100%; " :picker-options="pickerOptions">
         </el-date-picker>
     </div>
 
@@ -119,6 +119,20 @@ export default {
             },
         }
     },
+    computed: {
+        DisplayValue: {
+            get: function () {
+                if (this.inputValue != "" || this.inputValue!= undefined) {
+                    return this.inputValue;
+                }
+                return this.values;
+            },
+            set: function (value) {
+                this.inputValue = value;
+                this.$emit('input', moment(String(this.inputValue)).format('DD MMM YYYY'));
+            }
+        }
+    },
     methods: {
 
     },
@@ -126,13 +140,13 @@ export default {
         this.dropdownDatecss = this.dropdowndatecss;
         this.inputValue = this.value;
     },
-    updated: function () {
-        var input = "";
-        if (this.inputValue != "" && this.inputValue != null && this.inputValue != undefined) {
-            input = moment(String(this.inputValue)).format('DD MMM YYYY');
-        }
-        this.inputValue = input;
-        this.$emit('input', this.inputValue);
-    }
+    // updated: function () {
+    //     var input = "";
+    //     if (this.inputValue != "" && this.inputValue != null && this.inputValue != undefined) {
+    //         input = moment(String(this.inputValue)).format('DD MMM YYYY');
+    //     }
+    //     this.inputValue = input;
+    //     this.$emit('input', this.inputValue);
+    // }
 }
 </script>

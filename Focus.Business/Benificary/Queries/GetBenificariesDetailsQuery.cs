@@ -68,6 +68,7 @@ namespace Focus.Business.Benificary.Queries
                             Id = x.Id,
                             Amount = x.Amount,
                             Month = x.Month,
+                            PaymentMonth = x.Month.Value.Month,
                             BenificayId = x.BenificayId,
                         }).ToList(),
                         BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()

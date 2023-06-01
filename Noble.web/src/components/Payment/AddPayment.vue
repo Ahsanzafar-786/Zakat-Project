@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group has-label col-sm-12 " v-if="brand.durationType=='Customize'">
+                <!-- <div class="form-group has-label col-sm-12 " v-if="brand.durationType=='Customize'">
                     <div class="row">
                         <div class="col-sm-5 text-md-end align-middle">
                             <label class="text  font-weight-bolder">
@@ -74,7 +74,7 @@
                             <datepicker v-model="brand.endDate" :type="'month'" v-bind:key="rander" />
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group has-label col-sm-12 ">
                     <div class="row">
@@ -96,7 +96,19 @@
                             </label>
                         </div>
                         <div class="col-sm-7">
-                            <datepicker :type="'month'" v-model="addPayment.month" />
+                            <datepicker :type="'month'" v-model="addPayment.month" v-on:input="MonthSelection" />
+                            <div class="row mt-2">
+                                <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth" v-bind:key="val+index" style="position: relative;font-size: 13px !important;" >
+                                    <span>{{val}}</span>
+                                    <span style="position:absolute; right: -12px; top: -8px;">
+                                        <button class="btn  btn-danger btn-round btn-sm btn-icon" style="font-size: .4rem;  padding: 0.2rem 0.35rem;" >
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                               
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -119,13 +131,9 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-sm-4 " v-for="(month) in months" v-bind:key="month.id">
-                        <div class="checkbox form-check-inline">
-                            <input v-bind:id="month.id" type="checkbox" v-model="month.isActive">
-                            <label v-bind:for="month.id">
-                                <span v-if="month.color=='red'" style="color:red !important">{{ month.name}}</span>
-                                <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}}</span>
-                                <span v-else style="color:gray !important">{{ month.name}}</span></label>
-                        </div>
+                        <span v-if="month.color=='red'" style="color:red !important">{{ month.name}}</span>
+                        <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}}</span>
+                        <span v-else style="color:gray !important">{{ month.name}}</span>
 
                     </div>
                 </div>
@@ -200,6 +208,7 @@ import moment from 'moment'
 export default {
     data: function () {
         return {
+            selectedMonth: [],
             months: [{
                     id: 1,
                     name: 'January',
@@ -262,6 +271,7 @@ export default {
                 }
             ],
             rander: 0,
+            forRequest: 0,
             arabic: '',
             english: '',
             brand: {},
@@ -291,6 +301,21 @@ export default {
                 return '';
             }
         },
+        MonthSelection: function () {
+            this.selectedMonth.push(this.addPayment.month);
+
+            // if(this.forRequest==0)
+            // {
+            //     debugger;
+            // }
+            // else
+            // {
+            //     this.forRequest=0;
+            // }
+
+            // this.forRequest++;
+
+        },
         GotoPage: function (link) {
             this.$router.push({
                 path: link
@@ -319,20 +344,32 @@ export default {
                             debugger;
                             root.brand = response.data;
                             root.addPayment.amount = response.data.amountPerMonth;
+                            //const paymentMonths = [...new Set(response.data.paymentLists.map(x => x.month))];
+                            var paymentMonths = response.data.paymentLists;
                             if (response.data.firstMonth != null && response.data.endMonth != null) {
                                 for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
                                     if (i <= response.data.endMonth) {
+                                        root.months.map(auth => {
+
+                                            if (auth.id === i) {
+                                                auth.color = 'green';
+                                            }
+                                            return auth;
+                                        })
+                                    }
+
+                                }
+                                for (var j = 0; j <= paymentMonths.length; j++) {
+
                                     root.months.map(auth => {
-                                        if (auth.id === i) {
-                                            auth.color = 'green';
+
+                                        if (auth.id === paymentMonths[j].paymentMonth) {
+                                            auth.color = 'red';
                                         }
                                         return auth;
                                     });
-                                }
-                                   
-                                }
 
-                              
+                                }
 
                             }
                             root.rander++;
