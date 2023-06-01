@@ -139,6 +139,7 @@ namespace Focus.Business.PaymentsType.Queries
                         {
                             Id = x.Id,
                             Name = x.Name,
+                            Code = x.Code,
                             NameAr = x.NameAr,
                         }).ToListAsync();
 
@@ -254,6 +255,7 @@ namespace Focus.Business.PaymentsType.Queries
                         {
                             Id = x.Id,
                             Name = x.Name,
+                            Code = x.Code,
                             NameAr = x.NameAr,
                             Description = x.Description,
                             IsActive = x.IsActive,

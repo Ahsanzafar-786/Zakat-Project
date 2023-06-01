@@ -28,8 +28,6 @@ export default {
     },
     methods: {
         GetSalaryOfSelected: function () {
-            debugger;
-              
                     return this.value;
             },
         getData: function () {
@@ -44,6 +42,7 @@ export default {
                     response.data.results.forEach(function (cat) {
                         root.options.push({
                             id: cat.id,
+                            code: cat.code,
                             name: cat.name == '' ? cat.nameAr : cat.name,
                         })
                     })
