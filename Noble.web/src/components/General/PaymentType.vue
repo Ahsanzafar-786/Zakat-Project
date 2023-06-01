@@ -27,6 +27,11 @@ export default {
         }
     },
     methods: {
+        GetSalaryOfSelected: function () {
+            debugger;
+              
+                    return this.value;
+            },
         getData: function () {
             var root = this;
             var token = '';

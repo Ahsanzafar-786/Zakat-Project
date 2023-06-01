@@ -78,15 +78,15 @@
                     <label class="text  font-weight-bolder">
                         {{ $t('AddBenificary.PaymentType') }}
                     </label>
-                    <paymenttype v-model="brand.paymentTypeId" :values="brand.paymentTypeId" />
+                    <paymenttype v-model="brand.paymentTypeId" v-on:input="GetRecord" ref="ChlidDropdown" :values="brand.paymentTypeId" />
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-6 form-group" v-if="paymentType!='One Time'">
                     <label class="text  font-weight-bolder">
                         {{ $t('AddBenificary.RecurringAmount') }}:
                     </label>
                     <input class="form-control" v-model="$v.brand.recurringAmount.$model" type="number" />
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-6 form-group" v-if="paymentType!='One Time'">
 
                     <label class="text  font-weight-bolder">
                         {{ $t('AddBenificary.AdvancePayment') }}:
@@ -95,8 +95,11 @@
                     </multiselect>
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
+                    <label class="text  font-weight-bolder" v-if="paymentType!='One Time'">
                         {{ $t('AddBenificary.AmountPerMonth') }}:
+                    </label>
+                    <label class="text  font-weight-bolder" v-else>
+                        Amount:
                     </label>
                     <input class="form-control" v-model="$v.brand.amountPerMonth.$model" type="number" />
                 </div>
@@ -140,7 +143,7 @@
                     <VueEditor v-model="brand.note" />
                 </div> -->
             </div>
-            <div class="row">
+            <div class="row" v-if="paymentType!='One Time'">
                 <div class="col-md-12 form-group">
                     <h4 style="color:black !important;">
                         
@@ -174,7 +177,7 @@
                 </div>
 
             </div>
-            <div class="row">
+            <div class="row" v-if="paymentType!='One Time'">
                 <div class="col-md-12 form-group">
                     <h4 style="color:black !important;">
                     
@@ -281,6 +284,7 @@ export default {
     data: function () {
         return {
             randerforempty: 0,
+            paymentType: '',
             arabic: '',
             english: '',
             loading: false,
@@ -306,6 +310,29 @@ export default {
         }
     },
     methods: {
+        GetRecord: function () {
+            var root=this;
+            debugger;
+            if (root.$refs.ChlidDropdown != undefined) {
+                   var value= this.$refs.ChlidDropdown.GetSalaryOfSelected();
+                   debugger;
+                   if(value=='')
+                   {
+                    this.paymentType='';
+                   }
+                   else
+                   {
+                    this.paymentType=value.name;
+                   }
+
+
+
+                }
+                else
+                {
+                    this.paymentType='';
+                }
+        },
         RemoveRow: function (index) {
             this.brand.benificaryAuthorization.splice(index, 1);
         },
