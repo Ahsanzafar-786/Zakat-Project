@@ -46,9 +46,9 @@
                                 <th class="text-center">
                                     {{ $t('Benificary.Name') }}
                                 </th>
-                                <th class="text-center">
+                                <!-- <th class="text-center">
                                     {{ $t('Benificary.PayementIntervalMonths') }}
-                                </th>
+                                </th> -->
                                 <th class="text-center">
                                     {{ $t('Benificary.AmountPerMonth') }}
                                 </th>
@@ -58,9 +58,9 @@
                                 <th class="text-center">
                                     {{ $t('Benificary.ContactNo') }}
                                 </th>
-                                <th class="text-center">
+                                <!-- <th class="text-center">
                                     {{ $t('Benificary.AuthorizePersonName') }}
-                                </th>
+                                </th> -->
                                 <th class="text-center">
                                     {{ $t('Benificary.Status') }}
                                 </th>
@@ -89,9 +89,9 @@
                                                 brand.name }}</a>
                                     </strong>
                                 </td>
-                                <td class="text-center">
+                                <!-- <td class="text-center">
                                     {{ brand.paymentIntervalMonth }}
-                                </td>
+                                </td> -->
                                 <td class="text-center">
                                     {{ brand.amountPerMonth }}
                                 </td>
@@ -101,9 +101,9 @@
                                 <td class="text-center">
                                     {{ brand.phoneNo }}
                                 </td>
-                                <td class="text-center">
+                                <!-- <td class="text-center">
                                     {{ brand.authorizationPersonName }}
-                                </td>
+                                </td> -->
                                 <td class="text-center">
                                     <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
                                         {{
