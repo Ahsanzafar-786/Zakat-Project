@@ -96,7 +96,8 @@ export default {
             this.$emit('close');
         },
         SavePaymentType: function () {
-             
+             var aa = this.brand.code;
+             this.brand.code = aa;
             var root = this;
             this.loading = true;
             var token = '';

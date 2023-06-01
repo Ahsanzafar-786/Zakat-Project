@@ -34,6 +34,7 @@ namespace Focus.Business.PaymentsType.Commands
                         {
                             Name = request.Payments.Name,
                             NameAr = request.Payments.NameAr,
+                            Code = request.Payments.Code,
                             Description = request.Payments.Description,
                             IsActive = request.Payments.IsActive
                         };
@@ -57,6 +58,7 @@ namespace Focus.Business.PaymentsType.Commands
 
                         paymentType.Name = request.Payments.Name;
                         paymentType.NameAr = request.Payments.NameAr;
+                        paymentType.Code = request.Payments.Code;
                         paymentType.Description = request.Payments.Description;
                         paymentType.IsActive = request.Payments.IsActive;
 

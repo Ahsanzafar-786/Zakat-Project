@@ -14,11 +14,11 @@
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
-                                <a v-on:click="openmodel" href="javascript:void(0);"
+                                <!-- <a v-on:click="openmodel" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
-                                </a>
+                                </a> -->
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
                                     {{ $t('Close') }}
@@ -49,6 +49,9 @@
                                     <th class="text-center">
                                         {{ $t('PaymentType.Name') }}
                                     </th>
+                                    <th class="text-center">
+                                    {{ $t('Benificary.Status') }}
+                                </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,6 +72,18 @@
                                             <a href="javascript:void(0)" v-on:click="EditpaymentTypelist(brand.id)"> {{ brand.nameAr }}</a>
                                         </strong>
                                     </td>
+                                    <td class="text-center">
+                                    <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
+                                        {{
+                                                $t('Benificary.Active')
+                                            }}
+                                    </span>
+                                    <span v-else class="badge badge-boxed  badge-outline-danger">
+                                        {{
+                                                $t('Benificary.DeActive')
+                                            }}
+                                    </span>
+                                </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -134,6 +149,7 @@ export default {
                 id: '',
                 name: '',
                 nameAr: '',
+                code:'',
                 description: '',
                 isActive: true
             },
@@ -170,6 +186,7 @@ export default {
                 id: '00000000-0000-0000-0000-000000000000',
                 name: '',
                 nameAr: '',
+                code:'',
                 description: '',
                 isActive: true  
             }
