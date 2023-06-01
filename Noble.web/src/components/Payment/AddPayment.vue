@@ -98,6 +98,11 @@
                         <div class="col-sm-7">
                             <datepicker :type="'month'" v-model="addPayment.month" v-on:input="MonthSelection" />
                             <div class="row mt-2">
+                                <div style="text-align: right !important;" v-if="selectedMonth.length>0">
+                                    <button class="btn  btn-danger btn-round btn-sm btn-icon" @click="RemoveAll()" style="font-size: .4rem;  padding: 0.2rem 0.35rem;">
+                                        Close All
+                                    </button>
+                                </div>
                                 <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth" v-bind:key="val+index" style="position: relative;font-size: 13px !important;">
                                     <span>{{val}}</span>
                                     <span style="position:absolute; right: -12px; top: -8px;">
@@ -304,10 +309,8 @@ export default {
             }
         },
         MonthSelection: function () {
-            if(this.addPayment.month!=null && this.addPayment.month!=undefined )
-            {
+            if (this.addPayment.month != null && this.addPayment.month != undefined) {
                 this.selectedMonth.push(this.addPayment.month);
-
 
             }
 
@@ -317,6 +320,10 @@ export default {
             if (index !== -1) {
                 this.selectedMonth.splice(index, 1);
             }
+
+        },
+        RemoveAll: function () {
+            this.selectedMonth=[];
 
         },
         GotoPage: function (link) {
@@ -346,7 +353,7 @@ export default {
                         if (response.data) {
                             debugger;
                             root.brand = response.data;
-                            root.addPayment.amount = response.data.amountPerMonth;
+                            root.addPayment.amount = response.data.charityTransactions;
                             //const paymentMonths = [...new Set(response.data.paymentLists.map(x => x.month))];
                             var paymentMonths = response.data.paymentLists;
                             if (response.data.firstMonth != null && response.data.endMonth != null) {
