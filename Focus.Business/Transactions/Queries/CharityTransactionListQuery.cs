@@ -13,6 +13,7 @@ using System.Linq;
 using Focus.Business.Payments.Models;
 using Syncfusion.CompoundFile.Net;
 using Microsoft.EntityFrameworkCore;
+using Focus.Domain.Entities;
 
 namespace Focus.Business.Transactions.Queries
 {
@@ -34,33 +35,17 @@ namespace Focus.Business.Transactions.Queries
             {
                 try
                 {
-                    var payments = Context.Payments.Where(x => x.BenificayId == request.BenificayId).Select(x => new PaymentLookupModel()
+                    var charity = await Context.CharityTransaction.Where(x => x.BenificayId == request.BenificayId).Select(x => new CharityTransactionLookupModel()
                     {
-                        Id = x.BenificayId,
-                    }).ToList();
-
-                    var transactions = await Context.CharityTransaction.ToListAsync(); 
-
-                    var charity = new List<CharityTransactionLookupModel>();
-
-                    foreach (var payment in payments)
-                    {
-                        var charityTransaction = transactions.FirstOrDefault(x => x.DoucmentId == payment.Id);
-                        if(charityTransaction != null)
-                        {
-                            charity.Add(new CharityTransactionLookupModel()
-                            {
-                                Id = charityTransaction.Id,
-                                DoucmentId = charityTransaction.DoucmentId,
-                                DoucmentCode = charityTransaction.DoucmentCode,
-                                Amount = charityTransaction.Amount,
-                                CharityTransactionDate = charityTransaction.CharityTransactionDate,
-                                DoucmentDate= charityTransaction.DoucmentDate,
-                                Month= charityTransaction.Month,
-                                Year = charityTransaction.Year,
-                            });
-                        }
-                    }
+                        Id = x.Id,
+                        DoucmentId = x.DoucmentId,
+                        DoucmentCode = x.DoucmentCode,
+                        Amount = x.Amount,
+                        CharityTransactionDate = x.CharityTransactionDate,
+                        DoucmentDate = x.DoucmentDate,
+                        Month = x.Month,
+                        Year = x.Year,
+                    }).ToListAsync();
 
                     return charity;
                 }

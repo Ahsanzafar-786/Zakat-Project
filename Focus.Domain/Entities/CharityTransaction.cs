@@ -7,6 +7,7 @@ namespace Focus.Domain.Entities
     {
         public Guid? DoucmentId { get; set; }
         public int DoucmentCode { get; set; }
+        public Guid? BenificayId { get; set; }
         public decimal Amount { get; set; }
         public DateTime? DoucmentDate { get; set; }
         public DateTime? Month { get; set; }

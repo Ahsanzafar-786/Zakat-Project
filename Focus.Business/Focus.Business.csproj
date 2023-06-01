@@ -12,7 +12,6 @@
     <Compile Remove="Roles\**" />
     <Compile Remove="SaleOrders\**" />
     <Compile Remove="Stocks\**" />
-    <Compile Remove="Transactions\**" />
     <Compile Remove="UserPermission\**" />
     <EmbeddedResource Remove="EmployeeToAspNetUser\**" />
     <EmbeddedResource Remove="HR\**" />
@@ -20,7 +19,6 @@
     <EmbeddedResource Remove="Roles\**" />
     <EmbeddedResource Remove="SaleOrders\**" />
     <EmbeddedResource Remove="Stocks\**" />
-    <EmbeddedResource Remove="Transactions\**" />
     <EmbeddedResource Remove="UserPermission\**" />
     <None Remove="EmployeeToAspNetUser\**" />
     <None Remove="HR\**" />
@@ -28,7 +26,6 @@
     <None Remove="Roles\**" />
     <None Remove="SaleOrders\**" />
     <None Remove="Stocks\**" />
-    <None Remove="Transactions\**" />
     <None Remove="UserPermission\**" />
   </ItemGroup>
   

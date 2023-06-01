@@ -6,6 +6,7 @@ namespace Focus.Business.Transactions.Models
     {
         public Guid? Id { get; set; }
         public Guid? DoucmentId { get; set; }
+        public Guid? BenificayId { get; set; }
         public int DoucmentCode { get; set; }
         public decimal Amount { get; set; }
         public DateTime? DoucmentDate { get; set; }

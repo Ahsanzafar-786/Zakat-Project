@@ -72,6 +72,7 @@ namespace Focus.Business.Payments.Commands
                             CharityTransactionDate = payment.Date,
                             DoucmentDate = DateTime.Now,
                             DoucmentCode = payment.Code,
+                            BenificayId = payment.BenificayId,
                             Month = payment.Month,
                             Amount = payment.Amount,
                             Year = payment.Year,
