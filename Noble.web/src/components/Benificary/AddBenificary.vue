@@ -105,7 +105,7 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label>{{ $t('AddBenificary.StartFrom') }}:</label>
-                    <datepicker v-model="brand.startMonth " :type="'month'" />
+                    <datepicker v-model="brand.startMonth "   v-on:input="GetDateMonth"  :type="'month'" />
 
                 </div>
                 <div class="col-md-6 form-group">
@@ -161,7 +161,7 @@
                 </div>
                 <div class="col-md-3 form-group" v-if="brand.durationType=='Customize'">
                     <label>Start Month:</label>
-                    <datepicker v-model="brand.startDate " v-bind:key="randerforempty" :type="'month'" />
+                    <datepicker v-model="brand.startDate " v-bind:isDisable="true" v-bind:key="randerforempty" :type="'month'" />
 
                 </div>
                 <div class="col-md-3 form-group" v-if="brand.durationType=='Customize'">

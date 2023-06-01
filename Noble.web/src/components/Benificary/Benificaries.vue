@@ -274,7 +274,7 @@ export default {
                 endDate: '',
                 approvedPaymentId: '',
                 advancePayment: 0,
-                durationType: '',
+                durationType: 'Indefinite',
                 benificaryAuthorization: [{
                     id: '',
                     benficaryId: '',

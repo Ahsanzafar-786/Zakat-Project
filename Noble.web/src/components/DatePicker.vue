@@ -6,8 +6,17 @@
 </div>
 <div v-else-if="isDisable">
     <!--Disable Date-->
-    <el-date-picker v-model="inputValue" v-bind:type="date" disabled v-bind:placeholder="$t('DatePicker.PickDate')" style="width: 100%;  " format='dd MMM yyyy' :picker-options="pickerOptions">
+    <div v-if="type=='month'"> 
+        <el-date-picker v-model="inputValue" v-bind:type="type" disabled format='MMMM yyyy ' v-bind:placeholder="$t('DatePicker.SelectMonth')" style="width: 100%; " >
+        </el-date-picker>
+
+    </div>
+    <div v-else>
+        <el-date-picker v-model="inputValue" v-bind:type="date" disabled v-bind:placeholder="$t('DatePicker.PickDate')" style="width: 100%;  " format='dd MMM yyyy' :picker-options="pickerOptions">
     </el-date-picker>
+
+    </div>
+    
 </div>
 <div v-else>
     <div v-if="type=='month'"> 
