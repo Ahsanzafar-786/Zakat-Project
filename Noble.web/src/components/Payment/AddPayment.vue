@@ -98,15 +98,15 @@
                         <div class="col-sm-7">
                             <datepicker :type="'month'" v-model="addPayment.month" v-on:input="MonthSelection" />
                             <div class="row mt-2">
-                                <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth" v-bind:key="val+index" style="position: relative;font-size: 13px !important;" >
+                                <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth" v-bind:key="val+index" style="position: relative;font-size: 13px !important;">
                                     <span>{{val}}</span>
                                     <span style="position:absolute; right: -12px; top: -8px;">
-                                        <button class="btn  btn-danger btn-round btn-sm btn-icon" style="font-size: .4rem;  padding: 0.2rem 0.35rem;" >
+                                        <button class="btn  btn-danger btn-round btn-sm btn-icon" style="font-size: .4rem;  padding: 0.2rem 0.35rem;" @click="RemoveEffect(val)">
                                             <i class="fas fa-times"></i>
                                         </button>
                                     </span>
                                 </div>
-                               
+
                             </div>
 
                         </div>
@@ -275,7 +275,7 @@ export default {
             arabic: '',
             english: '',
             brand: {},
-            transactions:[],
+            transactions: [],
             cashierName: '',
             addPayment: {
                 Id: '',
@@ -284,7 +284,7 @@ export default {
                 userId: '',
                 month: '',
                 year: '',
-                code:0,
+                code: 0,
                 period: '',
             }
         }
@@ -304,18 +304,19 @@ export default {
             }
         },
         MonthSelection: function () {
-            this.selectedMonth.push(this.addPayment.month);
+            if(this.addPayment.month!=null && this.addPayment.month!=undefined )
+            {
+                this.selectedMonth.push(this.addPayment.month);
 
-            // if(this.forRequest==0)
-            // {
-            //     debugger;
-            // }
-            // else
-            // {
-            //     this.forRequest=0;
-            // }
 
-            // this.forRequest++;
+            }
+
+        },
+        RemoveEffect: function (value) {
+            const index = this.selectedMonth.indexOf(value);
+            if (index !== -1) {
+                this.selectedMonth.splice(index, 1);
+            }
 
         },
         GotoPage: function (link) {
@@ -392,14 +393,18 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
-                .then(function (response) {
-                    if (response.data) {
-                        root.transactions = response.data;
-                    } else {
-                        console.log("error: something wrong from db.");
+            root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + Id, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
                     }
-                },
+                })
+                .then(function (response) {
+                        if (response.data) {
+                            root.transactions = response.data;
+                        } else {
+                            console.log("error: something wrong from db.");
+                        }
+                    },
                     function (error) {
                         this.loading = false;
                         console.log(error);
