@@ -331,9 +331,13 @@ export default {
         GetValueOfRecurring: function () {
             if(this.brand.recurringAmount>0)
             {
-                this.brand.amountPerMonth=parseFloat(this.brand.recurringAmount/this.paymentType);
+                this.brand.amountPerMonth=parseFloat(this.brand.recurringAmount/this.paymentType).toFixed(3).slice(0, -1);
 
 
+            }
+            else
+            {
+                this.brand.amountPerMonth=0;
             }
 
            
