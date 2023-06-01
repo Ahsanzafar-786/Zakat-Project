@@ -4,6 +4,7 @@ using Focus.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Focus.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230601113057_charitytrans_benificary_update")]
+    partial class charitytrans_benificary_update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -505,9 +507,6 @@ namespace Focus.Persistence.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,4)");
 
-                    b.Property<Guid?>("BenificayId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("CharityTransactionDate")
                         .HasColumnType("datetime2");
 
@@ -764,7 +763,7 @@ namespace Focus.Persistence.Migrations
                             Blocked = false,
                             CashVoucher = false,
                             CompanyRegNo = "56ty60",
-                            CreatedDate = new DateTime(2023, 6, 1, 12, 55, 12, 560, DateTimeKind.Utc).AddTicks(2550),
+                            CreatedDate = new DateTime(2023, 6, 1, 11, 30, 56, 322, DateTimeKind.Utc).AddTicks(3624),
                             DayStart = false,
                             English = false,
                             ExpenseAccount = false,

@@ -40,5 +40,6 @@ namespace Focus.Business.Benificary.Models
         public string DurationType { get; set; }
         public int? FirstMonth { get; set; }
         public int? EndMonth { get; set; }
+        public string Reason { get; set; }
     }
 }

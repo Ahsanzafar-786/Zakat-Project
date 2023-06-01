@@ -4,6 +4,7 @@ using Focus.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Focus.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230601110716_charity_transactions")]
+    partial class charity_transactions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,9 +336,6 @@ namespace Focus.Persistence.Migrations
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("RecurringAmount")
                         .HasColumnType("decimal(18,4)");
 
@@ -505,9 +504,6 @@ namespace Focus.Persistence.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,4)");
 
-                    b.Property<Guid?>("BenificayId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("CharityTransactionDate")
                         .HasColumnType("datetime2");
 
@@ -538,12 +534,6 @@ namespace Focus.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GetUtcDate()");
-
-                    b.Property<DateTime?>("Month")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Year")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -764,7 +754,7 @@ namespace Focus.Persistence.Migrations
                             Blocked = false,
                             CashVoucher = false,
                             CompanyRegNo = "56ty60",
-                            CreatedDate = new DateTime(2023, 6, 1, 12, 55, 12, 560, DateTimeKind.Utc).AddTicks(2550),
+                            CreatedDate = new DateTime(2023, 6, 1, 11, 7, 15, 257, DateTimeKind.Utc).AddTicks(124),
                             DayStart = false,
                             English = false,
                             ExpenseAccount = false,
@@ -945,9 +935,6 @@ namespace Focus.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GetUtcDate()");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("ModifiedById")
                         .HasColumnType("nvarchar(max)");

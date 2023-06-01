@@ -51,6 +51,7 @@
     "AmountPerMonth" : "المبلغ في الشهر",
     "Active" : "نشيط",
     "Address" : "عنوان",
+    "Reason":"سبب",
     "Note" : "ملحوظة",
     "Ids": "بطاقة تعريف",
     "SelectType": "اختر صنف",

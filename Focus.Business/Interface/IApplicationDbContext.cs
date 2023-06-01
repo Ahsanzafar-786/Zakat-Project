@@ -20,6 +20,8 @@ namespace Focus.Business.Interface
         DbSet<Funds> Funds { get; set; }
         DbSet<BenificaryAuthorization> BenificaryAuthorizations { get; set; }
         DbSet<Payment> Payments { get; set; }
+        DbSet<Logs> Logs { get; set; }
+        DbSet<CharityTransaction> CharityTransaction { get; set; }
         bool DisableTenantFilter { get; set; }
         int SaveChanges();
         int SaveChangesAfter();

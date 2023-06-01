@@ -135,7 +135,12 @@
                         <label for="inlineCheckbox1"> {{ $t('AddBenificary.Active') }} </label>
                     </div>
                 </div>
-
+                <div class="col-md-12 form-group" v-if="brand.id != '00000000-0000-0000-0000-000000000000' && !brand.isActive">
+                    <label class="text  font-weight-bolder">
+                        {{ $t('AddBenificary.Reason') }}:<span class="text-danger"> *</span>
+                    </label>
+                    <textarea rows="3" class="form-control" v-model="brand.reason" ></textarea>
+                </div>
                 <!-- <div class="col-md-12">
                     <label class="text  font-weight-bolder">
                         {{ $t('AddBenificary.Note') }}:
@@ -387,6 +392,21 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
+            debugger;
+            if(this.brand.id != '00000000-0000-0000-0000-000000000000' && this.brand.isActive == false && this.brand.reason == null)
+            {  
+                this.loading = false;
+                return this.$swal({
+                                title: 'Error',
+                                text: this.english == 'en' ? 'Please give reason' : 'من فضلك اذكر السبب',
+                                type: 'error',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: true,
+                            });   
+            }
+
             this.brand.benificaryAuthorization.map(auth => {
                 if (auth.isActive === '') {
                     auth.isActive = false;
@@ -462,8 +482,8 @@ export default {
         }
     },
     mounted: function () {
-        this.english = localStorage.getItem('English');
-        this.arabic = localStorage.getItem('Arabic');
+        this.english = localStorage.getItem('locales');
+        this.arabic = localStorage.getItem('locales');
     }
 }
 </script>

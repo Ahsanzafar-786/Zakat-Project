@@ -63,14 +63,7 @@ namespace Focus.Business.Benificary.Queries
                         AdvancePayment = x.AdvancePayment,
                         PaymentTypeName = x.PaymentTypes.Name,
                         ApprovalPersonName = x.ApprovalPersons.Name,
-                        PaymentLists = x.Payments.Select(x => new PaymentLookupModel()
-                        {
-                            Id = x.Id,
-                            Amount = x.Amount,
-                            Month = x.Month,
-                            PaymentMonth = x.Month.Value.Month,
-                            BenificayId = x.BenificayId,
-                        }).ToList(),
+                        Reason = x.Reason,
                         BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
                         {
                             Id= x.Id,

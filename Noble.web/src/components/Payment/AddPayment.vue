@@ -275,6 +275,7 @@ export default {
             arabic: '',
             english: '',
             brand: {},
+            transactions:[],
             cashierName: '',
             addPayment: {
                 Id: '',
@@ -283,6 +284,7 @@ export default {
                 userId: '',
                 month: '',
                 year: '',
+                code:0,
                 period: '',
             }
         }
@@ -379,6 +381,27 @@ export default {
                     },
                     function (error) {
                         root.loading = false;
+                        console.log(error);
+                    });
+
+        },
+        GetTransactions: function (Id) {
+            debugger;
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
+                .then(function (response) {
+                    if (response.data) {
+                        root.transactions = response.data;
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
+                    function (error) {
+                        this.loading = false;
                         console.log(error);
                     });
 
