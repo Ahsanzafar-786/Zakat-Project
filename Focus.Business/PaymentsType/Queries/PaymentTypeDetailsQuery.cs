@@ -38,6 +38,7 @@ namespace Focus.Business.PaymentsType.Queries
                         Name = x.Name,
                         NameAr = x.NameAr,
                         Description = x.Description,
+                        Code = x.Code,
                         IsActive = x.IsActive,
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
