@@ -14,6 +14,7 @@ namespace Focus.Domain.Entities
         public string Nationality { get; set; }
         public string Gender { get; set; }
         public string Address { get; set; }
+        public string Reason { get; set; }
         public int PaymentIntervalMonth { get; set; }
         public decimal AmountPerMonth { get; set; }
         public decimal RecurringAmount { get; set; }

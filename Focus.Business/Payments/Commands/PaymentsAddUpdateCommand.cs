@@ -61,9 +61,24 @@ namespace Focus.Business.Payments.Commands
                             Code = paymentNo,
                             Year = DateTime.Now.Year.ToString(),
                             Period = DateTime.Now.Year.ToString(),
+                            Date = DateTime.Now,
                         };
 
                         Context.Payments.Add(payment);
+
+                        var charityTransaction = new CharityTransaction
+                        {
+                            DoucmentId = payment.Id,
+                            CharityTransactionDate = payment.Date,
+                            DoucmentDate = DateTime.Now,
+                            DoucmentCode = payment.Code,
+                            Month = payment.Month,
+                            Amount = payment.Amount,
+                            Year = payment.Year,
+                        };
+
+                        await Context.CharityTransaction.AddAsync(charityTransaction);
+
                         await Context.SaveChangesAsync();
 
                         return new Message
@@ -79,14 +94,25 @@ namespace Focus.Business.Payments.Commands
                         if (paymentDetails == null)
                             throw new NotFoundException("Payment Not Found","");
 
+                        //var charityTransaction = await Context.CharityTransaction.FindAsync(paymentDetails.Id);
+
                         paymentDetails.BenificayId = request.Payment.BenificayId;
                         paymentDetails.Amount = request.Payment.Amount;
                         paymentDetails.Month = request.Payment.Month;
                         paymentDetails.Code = request.Payment.Code; 
                         paymentDetails.Year = DateTime.Now.Year.ToString();
                         paymentDetails.Period = DateTime.Now.Year.ToString();
+                        paymentDetails.Date = DateTime.Now;
 
                         Context.Payments.Update(paymentDetails);
+
+                        //if(charityTransaction != null)
+                        //{
+                        //    charityTransaction.DoucmentId = paymentDetails.Id;
+                        //    charityTransaction.DoucmentCode = paymentDetails.Code;
+
+                        //}
+
                         await Context.SaveChangesAsync();
                         return new Message
                         {

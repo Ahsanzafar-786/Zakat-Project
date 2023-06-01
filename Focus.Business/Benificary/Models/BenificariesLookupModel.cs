@@ -36,5 +36,6 @@ namespace Focus.Business.Benificary.Models
         public Guid? ApprovedPaymentId { get; set; }
         public int AdvancePayment { get; set; }
         public string DurationType { get; set; }
+        public string Reason { get; set; }
     }
 }

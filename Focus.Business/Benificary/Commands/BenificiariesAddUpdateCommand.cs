@@ -172,6 +172,7 @@ namespace Focus.Business.Benificary.Commands
                             benifiaryDetail.AdvancePayment = request.benificiaries.AdvancePayment;
                             benifiaryDetail.ApprovedPaymentId = request.benificiaries.ApprovedPaymentId;
                             benifiaryDetail.DurationType = request.benificiaries.DurationType;
+                            benifiaryDetail.Reason = request.benificiaries.Reason;
                             benifiaryDetail.IsRegister = false;
 
                             Context.BenificaryAuthorizations.RemoveRange(benifiaryDetail.BenificaryAuthorization);
@@ -188,6 +189,29 @@ namespace Focus.Business.Benificary.Commands
                             }).ToList();
 
                             await Context.BenificaryAuthorizations.AddRangeAsync(benifiaryDetail.BenificaryAuthorization);
+
+                            if(benifiaryDetail.RecurringAmount != request.benificiaries.RecurringAmount)
+                            {
+                                var logs = new Logs
+                                {
+                                    BenificaryId = benifiaryDetail.Id,
+                                    Name = request.benificiaries.Name,
+                                    NameAr = request.benificiaries.NameAr,
+                                    PhoneNo = request.benificiaries.PhoneNo,
+                                    AdvancePayment = request.benificiaries.AdvancePayment,
+                                    AmountPerMonth = request.benificiaries.AmountPerMonth,
+                                    ApprovalPersonId = request.benificiaries.ApprovalPersonId,
+                                    ApprovedPaymentId = request.benificiaries.ApprovedPaymentId,
+                                    RecurringAmount = request.benificiaries.RecurringAmount,
+                                    DurationType = request.benificiaries.DurationType,
+                                    EndDate= request.benificiaries.EndDate,
+                                    StartDate= request.benificiaries.StartDate,
+                                    StartMonth = request.benificiaries.StartMonth,
+                                    PaymentTypeId = request.benificiaries.PaymentTypeId,
+                                };
+
+                                await Context.Logs.AddAsync(logs);
+                            }
 
                             //Save changes to database
                             await Context.SaveChangesAsync(cancellationToken);
@@ -224,6 +248,7 @@ namespace Focus.Business.Benificary.Commands
                             benifiaryDetail.AdvancePayment = request.benificiaries.AdvancePayment;
                             benifiaryDetail.ApprovedPaymentId = request.benificiaries.ApprovedPaymentId;
                             benifiaryDetail.DurationType = request.benificiaries.DurationType;
+                            benifiaryDetail.Reason = request.benificiaries.Reason;
                             benifiaryDetail.IsRegister = true;
 
                             Context.BenificaryAuthorizations.RemoveRange(benifiaryDetail.BenificaryAuthorization);
@@ -241,6 +266,29 @@ namespace Focus.Business.Benificary.Commands
 
                             await Context.BenificaryAuthorizations.AddRangeAsync(benifiaryDetail.BenificaryAuthorization);
 
+                            if (benifiaryDetail.RecurringAmount != request.benificiaries.RecurringAmount)
+                            {
+                                var logs = new Logs
+                                {
+                                    BenificaryId = benifiaryDetail.Id,
+                                    Name = request.benificiaries.Name,
+                                    NameAr = request.benificiaries.NameAr,
+                                    PhoneNo = request.benificiaries.PhoneNo,
+                                    AdvancePayment = request.benificiaries.AdvancePayment,
+                                    AmountPerMonth = request.benificiaries.AmountPerMonth,
+                                    ApprovalPersonId = request.benificiaries.ApprovalPersonId,
+                                    ApprovedPaymentId = request.benificiaries.ApprovedPaymentId,
+                                    RecurringAmount = request.benificiaries.RecurringAmount,
+                                    DurationType = request.benificiaries.DurationType,
+                                    EndDate = request.benificiaries.EndDate,
+                                    StartDate = request.benificiaries.StartDate,
+                                    StartMonth = request.benificiaries.StartMonth,
+                                    PaymentTypeId = request.benificiaries.PaymentTypeId,
+                                };
+
+                                await Context.Logs.AddAsync(logs);
+                            }
+
                             //Save changes to database
                             await Context.SaveChangesAsync(cancellationToken);
 
@@ -251,9 +299,6 @@ namespace Focus.Business.Benificary.Commands
                                 IsAddUpdate = "Data has been Added successfully"
                             };
                         }
-
-                       
-
                     }
                 }
                 catch (NotFoundException exception)
