@@ -207,6 +207,7 @@ export default {
                 userId: '',
                 month: '',
                 year: '',
+                code:0,
                 period: '',
             }
         }

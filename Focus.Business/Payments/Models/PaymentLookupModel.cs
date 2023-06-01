@@ -10,6 +10,7 @@ namespace Focus.Business.Payments.Models
         public string UserId { get; set; }
         public DateTime? Month { get; set; }
         public string Year { get; set; }
+        public int Code { get; set; }
         public string Period { get; set; }
         public string BenificaryName { get; set; }
     }

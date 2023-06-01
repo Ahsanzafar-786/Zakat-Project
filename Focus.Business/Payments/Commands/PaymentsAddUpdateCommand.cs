@@ -33,6 +33,13 @@ namespace Focus.Business.Payments.Commands
                 {
                     if (request.Payment.Id == Guid.Empty || request.Payment.Id==null)
                     {
+                        var paymentCode = Context.Payments.OrderBy(x => x.Id).LastOrDefault();
+                        var paymentNo = 1;
+                        if (paymentCode != null)
+                        {
+                            paymentNo = paymentCode.Code + 1;
+                        }
+
                         var pay = Context.Payments.AsNoTracking()
                             .Any(x => x.BenificayId == request.Payment.BenificayId);
                         if (pay)
@@ -51,6 +58,7 @@ namespace Focus.Business.Payments.Commands
                             BenificayId = request.Payment.BenificayId,
                             Amount = request.Payment.Amount,
                             Month = request.Payment.Month,
+                            Code = paymentNo,
                             Year = DateTime.Now.Year.ToString(),
                             Period = DateTime.Now.Year.ToString(),
                         };
@@ -74,6 +82,7 @@ namespace Focus.Business.Payments.Commands
                         paymentDetails.BenificayId = request.Payment.BenificayId;
                         paymentDetails.Amount = request.Payment.Amount;
                         paymentDetails.Month = request.Payment.Month;
+                        paymentDetails.Code = request.Payment.Code; 
                         paymentDetails.Year = DateTime.Now.Year.ToString();
                         paymentDetails.Period = DateTime.Now.Year.ToString();
 
