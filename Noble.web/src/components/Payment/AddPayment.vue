@@ -354,9 +354,9 @@ export default {
                         if (response.data) {
                             debugger;
                             root.brand = response.data;
-                            root.addPayment.amount = response.data.charityTransactions;
+                            root.addPayment.amount =response.data.amountPerMonth;
                             //const paymentMonths = [...new Set(response.data.paymentLists.map(x => x.month))];
-                            var paymentMonths = response.data.paymentLists;
+                            var paymentMonths =  response.data.charityTransactions;
                             if (response.data.firstMonth != null && response.data.endMonth != null) {
                                 for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
                                     if (i <= response.data.endMonth) {
@@ -374,7 +374,7 @@ export default {
 
                                     root.months.map(auth => {
 
-                                        if (auth.id === paymentMonths[j].paymentMonth) {
+                                        if (auth.id === paymentMonths[j].paymentMonths) {
                                             auth.color = 'red';
                                         }
                                         return auth;
