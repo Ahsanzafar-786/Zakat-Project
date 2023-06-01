@@ -1,6 +1,7 @@
 ﻿using Focus.Business.Benificary.Models;
 using Focus.Business.Exceptions;
 using Focus.Business.Interface;
+using Focus.Business.Payments.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -31,7 +32,7 @@ namespace Focus.Business.Benificary.Queries
             {
                 try
                 {
-                    var query = await Context.Beneficiaries.Select(x => new BenificariesLookupModel
+                    var query = await Context.Beneficiaries.AsNoTracking().Select(x => new BenificariesLookupModel
                     {
                         Id = x.Id,
                         Name = x.Name,
@@ -53,6 +54,8 @@ namespace Focus.Business.Benificary.Queries
                         PaymentTypeId= x.PaymentTypeId,
                         RecurringAmount= x.RecurringAmount,
                         StartDate = x.StartDate,
+                        FirstMonth=x.StartDate.Value.Month,
+                        EndMonth = x.EndDate.Value.Month,
                         EndDate = x.EndDate,
                         StartMonth = x.StartMonth,
                         ApprovedPaymentId= x.ApprovedPaymentId,
@@ -60,6 +63,13 @@ namespace Focus.Business.Benificary.Queries
                         AdvancePayment = x.AdvancePayment,
                         PaymentTypeName = x.PaymentTypes.Name,
                         ApprovalPersonName = x.ApprovalPersons.Name,
+                        PaymentLists = x.Payments.Select(x => new PaymentLookupModel()
+                        {
+                            Id = x.Id,
+                            Amount = x.Amount,
+                            Month = x.Month,
+                            BenificayId = x.BenificayId,
+                        }).ToList(),
                         BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
                         {
                             Id= x.Id,

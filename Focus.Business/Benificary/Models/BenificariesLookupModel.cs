@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using Focus.Business.Payments.Models;
 using System;
 using System.Collections.Generic;
 
@@ -30,11 +31,14 @@ namespace Focus.Business.Benificary.Models
         public string ApprovalPersonName { get; set; }
 
         public List<BenificaryAuthorizationLookupModel> BenificaryAuthorization { get; set; }
+        public List<PaymentLookupModel> PaymentLists { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime? StartMonth { get; set; }
         public Guid? ApprovedPaymentId { get; set; }
         public int AdvancePayment { get; set; }
         public string DurationType { get; set; }
+        public int? FirstMonth { get; set; }
+        public int? EndMonth { get; set; }
     }
 }
