@@ -11,6 +11,7 @@ namespace Focus.Business.Transactions.Models
         public decimal Amount { get; set; }
         public DateTime? DoucmentDate { get; set; }
         public DateTime? Month { get; set; }
+        public int? PaymentMonths { get; set; }
         public DateTime? CharityTransactionDate { get; set; }
         public string Year { get; set; }
 
