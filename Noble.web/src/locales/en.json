@@ -60,6 +60,7 @@
     "Type":"Type",
     "BeneficiaryAuthorization":"Beneficiary Authorization",
     "Date":"Date",
+    "Reason":"Reason",
     "Status":"Status",
     "Action":"Action"
   },
