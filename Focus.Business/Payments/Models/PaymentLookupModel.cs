@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Focus.Business.Payments.Models
 {
@@ -14,5 +15,6 @@ namespace Focus.Business.Payments.Models
         public int Code { get; set; }
         public string Period { get; set; }
         public string BenificaryName { get; set; }
+        public List<SelectedMonthLookupModel> SelectedMonth { get; set; }
     }
 }
