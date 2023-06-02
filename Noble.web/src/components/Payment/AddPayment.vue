@@ -147,10 +147,15 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-sm-4 " v-for="(month) in months" v-bind:key="month.id">
-                        <span v-if="month.color=='red'" style="color:red !important">{{ month.name}} {{month.year }}</span>
-                        <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}} {{month.year }}</span>
-                        <!-- <span v-else style="color:gray !important">{{ month.name}}</span> -->
+                    <div class="row" v-for="(month) in months" v-bind:key="month.id">
+                        <div class="col-sm-4" v-if="month.color=='red'">
+                            <span  style="color:red !important">{{ month.name}} {{month.year }}</span>
+                        </div>
+                        <div class="col-sm-4" v-else-if="month.color=='green'">
+                            <span  style="color:green !important">{{ month.name}} {{month.year }}</span>
+
+                        </div>
+                       
 
                     </div>
                 </div>
@@ -229,13 +234,14 @@ export default {
             year: '',
             randerDate: 0,
             selectedMonth: [],
-            months: [{
+            months: [
+                {
                     id: 1,
                     order: 0,
                     year: '',
                     name: 'January',
                     color: '',
-                    active: false,
+                    active: false,on: false,
                 },
                 {
                     id: 2,
@@ -244,7 +250,8 @@ export default {
 
                     name: 'February',
                     color: '',
-                    active: false,
+                    active: false, on: false,
+
 
                 },
                 {
@@ -255,6 +262,8 @@ export default {
                     name: 'March',
                     color: '',
                     active: false,
+                    on: false,
+
 
                 },
                 {
@@ -265,6 +274,8 @@ export default {
                     name: 'April',
                     color: '',
                     active: false,
+                    on: false,
+
 
                 },
                 {
@@ -275,6 +286,8 @@ export default {
                     name: 'May',
                     color: '',
                     active: false,
+                    on: false,
+
 
                 },
                 {
@@ -285,6 +298,8 @@ export default {
                     name: 'June',
                     color: '',
                     active: false,
+                    on: false,
+
 
                 },
                 {
@@ -295,6 +310,8 @@ export default {
                     name: 'July',
                     color: '',
                     active: false,
+                    on: false,
+
 
                 },
                 {
@@ -304,7 +321,7 @@ export default {
 
                     name: 'August',
                     color: '',
-                    active: false,
+                    active: false,on: false,
 
                 },
                 {
@@ -312,7 +329,7 @@ export default {
                     order: 0,
                     name: 'September',
                     color: '',
-                    active: false,
+                    active: false,on: false,
                     year: '',
 
                 },
@@ -321,7 +338,7 @@ export default {
                     order: 0,
                     name: 'October',
                     color: '',
-                    active: false,
+                    active: false,on: false,
                     year: '',
 
                 },
@@ -330,7 +347,7 @@ export default {
                     order: 0,
                     name: 'November',
                     color: '',
-                    active: false,
+                    active: false,on: false,
                     year: '',
 
                 },
@@ -339,11 +356,126 @@ export default {
                     order: 0,
                     name: 'December',
                     color: '',
-                    active: false,
+                    active: false,on: false,
+                    year: '',
+
+                },
+                {
+                    id: 13,
+                    order: 0,
+                    year: '',
+                    name: 'January',
+                    color: '',
+                    active: false,on: false,
+                },
+                {
+                    id: 14,
+                    order: 0,
+                    year: '',
+
+                    name: 'February',
+                    color: '',
+                    active: false,on: false,
+
+                },
+                {
+                    id: 15,
+                    order: 0,
+                    year: '',
+
+                    name: 'March',
+                    color: '',
+                    active: false,on: false,
+
+                },
+                {
+                    id: 16,
+                    order: 0,
+                    year: '',
+
+                    name: 'April',
+                    color: '',
+                    active: false,on: false,
+
+                },
+                {
+                    id: 17,
+                    order: 0,
+                    year: '',
+
+                    name: 'May',
+                    color: '',
+                    active: false,on: false,
+
+                },
+                {
+                    id: 18,
+                    order: 0,
+                    year: '',
+
+                    name: 'June',
+                    color: '',
+                    active: false,on: false,
+
+                },
+                {
+                    id: 19,
+                    order: 0,
+                    year: '',
+
+                    name: 'July',
+                    color: '',
+                    active: false,on: false,
+
+                },
+                {
+                    id: 20,
+                    order: 0,
+                    year: '',
+
+                    name: 'August',
+                    color: '',
+                    active: false,on: false,
+
+                },
+                {
+                    id: 21,
+                    order: 0,
+                    name: 'September',
+                    color: '',
+                    active: false,on: false,
+                    year: '',
+
+                },
+                {
+                    id: 22,
+                    order: 0,
+                    name: 'October',
+                    color: '',
+                    active: false,on: false,
+                    year: '',
+
+                },
+                {
+                    id: 23,
+                    order: 0,
+                    name: 'November',
+                    color: '',
+                    active: false,on: false,
+                    year: '',
+
+                },
+                {
+                    id: 24,
+                    order: 0,
+                    name: 'December',
+                    color: '',
+                    active: false,on: false,
                     year: '',
 
                 }
             ],
+            month2:[],
             rander: 0,
             forRequest: 0,
             arabic: '',
@@ -381,7 +513,7 @@ export default {
             }
         },
         MonthSelection: function () {
-            debugger;
+            
             var root = this;
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
                 // if(brand.payment.advancePayment==0)
@@ -439,7 +571,7 @@ export default {
             });
         },
         EditBenificary: function (Id, val) {
-            debugger;
+            
             var root = this;
             var token = '';
             if (this.$session.exists()) {
@@ -452,6 +584,7 @@ export default {
                 }
                 return auth;
             });
+            debugger;
             root.$https.get('/Benificary/GetBenificaryDetail?Id=' + Id + '&isPayment=' + val, {
                     headers: {
                         "Authorization": `Bearer ${token}`
@@ -496,6 +629,14 @@ export default {
                             } else if (response.data.firstMonth != null && response.data.endMonth != null) {
 
                                 {
+                                    if(response.data.year!=response.data.endYear)
+                                    {
+                                        response.data.endMonth=response.data.endMonth+12;
+
+
+                                    }
+                                    
+                                    debugger;
                                     for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
                                         if (i <= response.data.endMonth) {
                                             root.months.map(auth => {
@@ -543,7 +684,7 @@ export default {
 
         },
         GetTransactions: function (Id) {
-            debugger;
+            
             var root = this;
             var token = '';
             if (this.$session.exists()) {
@@ -582,7 +723,7 @@ export default {
                     }
                 })
                 .then(function (response) {
-                    debugger;
+                    
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {
                             root.$swal({
@@ -623,7 +764,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                    debugger;
+                    
                     console.log(error)
                     root.$swal.fire({
                         icon: 'error',
