@@ -111,6 +111,11 @@
                         <div class="col-sm-7">
                             <datepicker :type="'month'" v-model="addPayment.month" v-on:input="MonthSelection" />
                             <div class="row mt-2">
+                                <div style="text-align: right !important;" v-if="selectedMonth.length>0">
+                                    <button class="btn  btn-danger btn-round btn-sm btn-icon" @click="RemoveAll()" style="font-size: .4rem;  padding: 0.2rem 0.35rem;">
+                                        Close All
+                                    </button>
+                                </div>
                                 <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth" v-bind:key="val+index" style="position: relative;font-size: 13px !important;">
                                     <span>{{val.selectedMonth}}</span>
                                     <span style="position:absolute; right: -12px; top: -8px;">
@@ -333,6 +338,10 @@ export default {
             }
 
         },
+        RemoveAll: function () {
+            this.selectedMonth=[];
+
+        },
         GotoPage: function (link) {
             this.$router.push({
                 path: link
@@ -360,9 +369,9 @@ export default {
                         if (response.data) {
                             debugger;
                             root.brand = response.data;
-                            root.addPayment.amount = response.data.amountPerMonth;
+                            root.addPayment.amount =response.data.amountPerMonth;
                             //const paymentMonths = [...new Set(response.data.paymentLists.map(x => x.month))];
-                            var paymentMonths = response.data.paymentLists;
+                            var paymentMonths =  response.data.charityTransactions;
                             if (response.data.firstMonth != null && response.data.endMonth != null) {
                                 for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
                                     if (i <= response.data.endMonth) {
@@ -380,7 +389,7 @@ export default {
 
                                     root.months.map(auth => {
 
-                                        if (auth.id === paymentMonths[j].paymentMonth) {
+                                        if (auth.id === paymentMonths[j].paymentMonths) {
                                             auth.color = 'red';
                                         }
                                         return auth;
