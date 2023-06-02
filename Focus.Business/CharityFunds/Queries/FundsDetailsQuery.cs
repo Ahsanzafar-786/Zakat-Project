@@ -36,6 +36,7 @@ namespace Focus.Business.CharityFunds.Queries
                         Id = x.Id,
                         Description = x.Description,
                         Amount = x.Amount,
+                        Code = x.Code,
                         CharityResouceId = x.CharityResouceId,
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 

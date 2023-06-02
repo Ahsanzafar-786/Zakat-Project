@@ -13,6 +13,7 @@ namespace Focus.Business.Payments.Queries
 {
     public class AutoCodeGenerateQuery : IRequest<string>
     {
+        public string Name { get; set; }
         public class Handler : IRequestHandler<AutoCodeGenerateQuery, string>
         {
             public readonly IApplicationDbContext Context;
@@ -25,10 +26,17 @@ namespace Focus.Business.Payments.Queries
             }
             public async Task<string> Handle(AutoCodeGenerateQuery request, CancellationToken cancellationToken)
             {
-
                 try
                 {
-                    string code = await AutoGenerateCashCustomer();
+                    string code = "";
+                    if (request.Name == "Funds")
+                    {
+                        code = await AutoGenerateFunds();
+                    }
+                    else
+                    {
+                        code = await AutoGenerateCashCustomer();
+                    }
 
                     return code;
                 }
@@ -38,6 +46,41 @@ namespace Focus.Business.Payments.Queries
                     throw new ApplicationException("Something Went Wrong.");
                 }
             }
+
+            //Funds Auto Code
+            public async Task<string> AutoGenerateFunds()
+            {
+                var funds = await Context.Funds
+                       .OrderBy(x => x.Code)
+                       .LastOrDefaultAsync();
+
+                if (funds != null)
+                {
+                    if (string.IsNullOrEmpty(funds.Code))
+                    {
+                        return GenerateCodeFirstTimeFunds();
+                    }
+
+                    return GenerateNewCodeFunds(funds.Code);
+                }
+
+                return GenerateCodeFirstTimeFunds();
+            }
+            public string GenerateCodeFirstTimeFunds()
+            {
+                return "FU-00001";
+            }
+            public string GenerateNewCodeFunds(string soNumber)
+            {
+                string fetchNo = soNumber.Substring(3);
+                Int32 autoNo = Convert.ToInt32((fetchNo));
+                var format = "00000";
+                autoNo++;
+                var newCode = "FU-" + autoNo.ToString(format);
+                return newCode;
+            }
+
+            // Payments Auto Code
             public async Task<string> AutoGenerateCashCustomer()
             {
                 var payment = await Context.Payments
@@ -56,12 +99,10 @@ namespace Focus.Business.Payments.Queries
 
                 return GenerateCodeFirstTime();
             }
-
             public string GenerateCodeFirstTime()
             {
                 return "PA-00001";
             }
-
             public string GenerateNewCode(string soNumber)
             {
                 string fetchNo = soNumber.Substring(3);

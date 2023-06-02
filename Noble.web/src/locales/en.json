@@ -290,6 +290,7 @@
     "Cashier":"Cashier",
     "Month":"Month",
     "Year":"Year",
+    "Code":"Code",
     "Period":"Period"
   },
 
@@ -317,6 +318,9 @@
     "Resource":"Resource",
     "BenificaryType":"Benificary Type",
     "AudienceOverview":"Audience Overview"
+  },
+  "LedgerReport":{
+    "LedgerReport": "Ledger Report",
+    "Report":"Report"
   }
-
 }

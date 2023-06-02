@@ -12,6 +12,7 @@ namespace Focus.Domain.Entities
         public DateTime Date { get; set; }
         public Decimal Amount { get; set; }
         public string UserId { get; set; }
+        public string Code { get; set; }
         public Guid? CharityResouceId { get; set; }
         public virtual CharityResources CharityResources { get; set; }
     }
