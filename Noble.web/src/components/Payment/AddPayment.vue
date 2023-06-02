@@ -479,7 +479,7 @@ export default {
                         root.addPayment.amountPerMonth = response.data.amountPerMonth;
                         //const paymentMonths = [...new Set(response.data.paymentLists.map(x => x.month))];
                         var paymentMonths = response.data.charityTransactions;
-                        if (response.data.durationType == 'Indefinite') {
+                        
                             debugger;
                             root.months.map(auth => {
 
@@ -489,6 +489,7 @@ export default {
                                     auth.year = response.data.year;
                                 }
                                 return auth;
+
                             });
                             if (paymentMonths.length > 0) {
 
@@ -508,7 +509,7 @@ export default {
                                 }
                             }
 
-                        } else if (response.data.firstMonth != null && response.data.endMonth != null) {
+                         if (response.data.firstMonth != null && response.data.endMonth != null) {
 
                             {
                                 for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {

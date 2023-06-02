@@ -49,7 +49,7 @@ namespace Focus.Business.Benificary.Queries
                             Year = x.Year,
                         }).ToListAsync();
 
-                        var query = await Context.Beneficiaries.AsNoTracking().Select(x => new BenificariesLookupModel
+                        var query = await Context.Beneficiaries.AsNoTracking().Include(x=>x.PaymentTypes).Select(x => new BenificariesLookupModel
                         {
                             Id = x.Id,
                             Name = x.Name,
@@ -61,6 +61,7 @@ namespace Focus.Business.Benificary.Queries
                             Note = x.Note,
                             IsActive = x.IsActive,
                             IsRegister = x.IsRegister,
+                            PaymentType = x.PaymentTypes.Code,
                             AuthorizedPersonId = x.AuthorizedPersonId,
                             Address = x.Address,
                             ApprovalPersonId = x.ApprovalPersonId,
