@@ -50,6 +50,9 @@
                                         ID
                                     </th> -->
                                     <th class="text-center">
+                                        {{ $t('Payment.Code') }}
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('Payment.BenifcaryName') }}
                                     </th>
                                     <th class="text-center">
@@ -75,6 +78,11 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
+                                    <td class="text-center">
+                                        <strong>
+                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{ brand.paymentCode }}</a>
+                                        </strong>
+                                    </td>
                                     <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{ brand.benificaryName }}</a>

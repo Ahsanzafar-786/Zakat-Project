@@ -537,11 +537,9 @@ export default {
         this.arabic = localStorage.getItem('Arabic');
         this.addPayment.userId = localStorage.getItem('UserId');
         this.cashierName = localStorage.getItem('UserName');  
-        debugger;      
         if (this.$route.query.data != undefined) {
-           debugger;
                 this.addPayment = this.$route.query.data;
-                this.EditBenificary(this.addPayment.benificayId);
+                this.EditBenificary(this.addPayment.benificayId, true);
                 this.rander++;
             
         }

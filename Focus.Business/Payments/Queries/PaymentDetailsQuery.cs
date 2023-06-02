@@ -32,7 +32,7 @@ namespace Focus.Business.Payments.Queries
                 {
                     var query = await Context.Payments.Select(x => new PaymentLookupModel
                     {
-                        Id = x.Id,
+                        Id = x.Id, 
                         BenificayId = x.BenificayId,
                         Amount = x.Amount,
                         Month = x.Month,
