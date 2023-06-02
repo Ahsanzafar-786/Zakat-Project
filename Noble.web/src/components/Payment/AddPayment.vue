@@ -384,10 +384,10 @@ export default {
             debugger;
             var root = this;
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
-                if(brand.payment.advancePayment==0)
-                {
-                    
-                }
+                // if(brand.payment.advancePayment==0)
+                // {
+
+                // }
                 const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
                 if (record != null) {
                     if (record.active == true) {
