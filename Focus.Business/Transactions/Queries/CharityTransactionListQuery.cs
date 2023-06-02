@@ -20,6 +20,9 @@ namespace Focus.Business.Transactions.Queries
     public class CharityTransactionListQuery : IRequest<List<CharityTransactionLookupModel>>
     {
         public Guid BenificayId { get; set; }
+        public DateTime? Month { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
         public class Handler : IRequestHandler<CharityTransactionListQuery, List<CharityTransactionLookupModel>>
         {
@@ -46,6 +49,19 @@ namespace Focus.Business.Transactions.Queries
                         Month = x.Month,
                         Year = x.Year,
                     }).ToListAsync();
+
+                    if(request.Month != null) 
+                    {
+                        charity = charity.Where(x => x.Month.Value.Month == request.Month.Value.Month).ToList();
+                    }
+                    if(request.FromDate != null) 
+                    {
+                        charity = charity.Where(x => x.Month == request.FromDate).ToList();
+                    }
+                    if(request.ToDate != null) 
+                    {
+                        charity = charity.Where(x => x.Month == request.ToDate).ToList();
+                    }
 
                     return charity;
                 }

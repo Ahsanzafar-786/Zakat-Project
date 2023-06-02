@@ -326,6 +326,10 @@
     "Resource":"الموارد",
     "BenificaryType":"نوع المستفيد",
     "AudienceOverview":"نظرة عامة على الجمهور"
+  },
+  "LedgerReport":{
+    "LedgerReport": "تقرير دفتر الأستاذ",
+    "Report":"تقرير"
   }
 
 

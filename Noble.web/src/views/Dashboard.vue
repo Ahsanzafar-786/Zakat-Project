@@ -159,6 +159,20 @@
                             </li>
                         </ul>
                     </li>
+                    <li v-if="roleName != 'Noble Admin'">
+                        <a href="javascript:void(0);">
+                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
+                                {{ $t('LedgerReport.Report') }}
+                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                        </a>
+
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/ledgerreport')" href="javascript:void(0);"> {{ $t('LedgerReport.LedgerReport')
+                                }}</a>
+                            </li>
+                        </ul>
+                    </li>
 
                 </ul>
             </div>

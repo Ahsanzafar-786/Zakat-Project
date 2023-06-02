@@ -48,6 +48,9 @@ import funds from '../components/Funds/Funds.vue'
 import payment from '../components/Payment/Payment.vue';
 import addpayment from '../components/Payment/AddPayment.vue';
 
+//LedgerReport
+import ledgerreport from '../components/Reports/LedgerReport.vue'
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -158,6 +161,11 @@ const routes = [
                             path: '/addpayment',
                             name: 'addpayment',
                             component: addpayment
+                        },
+                        {
+                            path: '/ledgerreport',
+                            name: 'ledgerreport',
+                            component: ledgerreport
                         },
                     ]
                 }
