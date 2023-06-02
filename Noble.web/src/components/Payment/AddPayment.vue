@@ -148,8 +148,8 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-sm-4 " v-for="(month) in months" v-bind:key="month.id">
-                        <span v-if="month.color=='red'" style="color:red !important">{{ month.name}} {{month.year  }}</span>
-                        <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}} {{month.year  }}</span>
+                        <span v-if="month.color=='red'" style="color:red !important">{{ month.name}} {{month.year }}</span>
+                        <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}} {{month.year }}</span>
                         <!-- <span v-else style="color:gray !important">{{ month.name}}</span> -->
 
                     </div>
@@ -226,21 +226,21 @@ export default {
     data: function () {
         return {
             rendar: 0,
-            year:'',
+            year: '',
             randerDate: 0,
             selectedMonth: [],
             months: [{
                     id: 1,
-                    order:0,
-                    year:'',
-                    name: 'January ',
+                    order: 0,
+                    year: '',
+                    name: 'January',
                     color: '',
                     active: false,
                 },
                 {
                     id: 2,
-                    order:0,
-                    year:'',
+                    order: 0,
+                    year: '',
 
                     name: 'February',
                     color: '',
@@ -249,8 +249,8 @@ export default {
                 },
                 {
                     id: 3,
-                    order:0,
-                    year:'',
+                    order: 0,
+                    year: '',
 
                     name: 'March',
                     color: '',
@@ -259,8 +259,8 @@ export default {
                 },
                 {
                     id: 4,
-                    order:0,
-                    year:'',
+                    order: 0,
+                    year: '',
 
                     name: 'April',
                     color: '',
@@ -269,8 +269,8 @@ export default {
                 },
                 {
                     id: 5,
-                    order:0,
-                    year:'',
+                    order: 0,
+                    year: '',
 
                     name: 'May',
                     color: '',
@@ -279,8 +279,8 @@ export default {
                 },
                 {
                     id: 6,
-                    order:0,
-                    year:'',
+                    order: 0,
+                    year: '',
 
                     name: 'June',
                     color: '',
@@ -289,8 +289,8 @@ export default {
                 },
                 {
                     id: 7,
-                    order:0,
-                    year:'',
+                    order: 0,
+                    year: '',
 
                     name: 'July',
                     color: '',
@@ -299,8 +299,8 @@ export default {
                 },
                 {
                     id: 8,
-                    order:0,
-                    year:'',
+                    order: 0,
+                    year: '',
 
                     name: 'August',
                     color: '',
@@ -309,42 +309,38 @@ export default {
                 },
                 {
                     id: 9,
-                    order:0,
+                    order: 0,
                     name: 'September',
                     color: '',
                     active: false,
-                    year:'',
-
+                    year: '',
 
                 },
                 {
                     id: 10,
-                    order:0,
+                    order: 0,
                     name: 'October',
                     color: '',
                     active: false,
-                    year:'',
-
+                    year: '',
 
                 },
                 {
                     id: 11,
-                    order:0,
+                    order: 0,
                     name: 'November',
                     color: '',
                     active: false,
-                    year:'',
-
+                    year: '',
 
                 },
                 {
                     id: 12,
-                    order:0,
+                    order: 0,
                     name: 'December',
                     color: '',
                     active: false,
-                    year:'',
-
+                    year: '',
 
                 }
             ],
@@ -390,24 +386,20 @@ export default {
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
                 const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
                 if (record != null) {
-                    if (record.active==true) {
+                    if (record.active == true) {
                         this.selectedMonth.push({
                             selectedMonth: this.addPayment.month
                         });
-                        if(root.selectedMonth.length!=0)
-                        {
-                            root.addPayment.amount = root.addPayment.amount*root.selectedMonth.length;
-   
-                        }
-                        else
-                        {
-                            root.addPayment.amount= root.addPayment.amountPerMonth;
+                        if (root.selectedMonth.length != 0) {
+                            root.addPayment.amount = root.addPayment.amount * root.selectedMonth.length;
 
+                        } else {
+                            root.addPayment.amount = root.addPayment.amountPerMonth;
 
                         }
 
                     } else {
-                        this.addPayment.month=null;
+                        this.addPayment.month = null;
                         this.randerDate++;
                         root.$swal({
                             title: 'Error',
@@ -433,7 +425,7 @@ export default {
 
         },
         RemoveAll: function () {
-            this.addPayment.amount= this.addPayment.amountPerMonth;
+            this.addPayment.amount = this.addPayment.amountPerMonth;
             this.selectedMonth = [];
 
         },
@@ -479,19 +471,22 @@ export default {
                                     }
                                     return auth;
                                 });
-                                for (var k = 0; k <= paymentMonths.length; k++) {
+                                if (paymentMonths.length > 0) {
 
-                                    root.months.map(auth => {
+                                    for (var k = 0; k <= paymentMonths.length; k++) {
 
-                                        if (auth.id === paymentMonths[k].paymentMonths) {
-                                            auth.color = 'red';
-                                            auth.active = false;
-                                            auth.year = paymentMonths[k].year;
+                                        root.months.map(auth => {
 
-                                        }
-                                        return auth;
-                                    });
+                                            if (auth.id === paymentMonths[k].paymentMonths) {
+                                                auth.color = 'red';
+                                                auth.active = false;
+                                                auth.year = paymentMonths[k].year;
 
+                                            }
+                                            return auth;
+                                        });
+
+                                    }
                                 }
 
                             } else if (response.data.firstMonth != null && response.data.endMonth != null) {
@@ -511,18 +506,21 @@ export default {
                                         }
 
                                     }
-                                    for (var j = 0; j <= paymentMonths.length; j++) {
+                                    if (paymentMonths.length > 0) {
+                                        for (var j = 0; j <= paymentMonths.length; j++) {
 
-                                        root.months.map(auth => {
+                                            root.months.map(auth => {
 
-                                            if (auth.id === paymentMonths[j].paymentMonths) {
-                                                auth.color = 'red';
-                                                auth.active = false;
-                                                auth.year = paymentMonths[k].year;
+                                                if (auth.id === paymentMonths[j].paymentMonths) {
+                                                    auth.color = 'red';
+                                                    auth.active = false;
+                                                    auth.year = paymentMonths[j].year;
 
-                                            }
-                                            return auth;
-                                        });
+                                                }
+                                                return auth;
+                                            });
+
+                                        }
 
                                     }
 
