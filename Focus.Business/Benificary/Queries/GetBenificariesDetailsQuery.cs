@@ -75,6 +75,7 @@ namespace Focus.Business.Benificary.Queries
                             EndMonth = x.EndDate.Value.Month,
                             EndDate = x.EndDate,
                             Year = x.StartMonth.Value.Year.ToString(),
+                            EndYear = x.EndDate.Value.Year.ToString(),
                             StartMonth = x.StartMonth,
                             ApprovedPaymentId = x.ApprovedPaymentId,
                             DurationType = x.DurationType,
