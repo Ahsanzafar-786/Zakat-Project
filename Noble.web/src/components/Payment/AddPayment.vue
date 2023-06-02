@@ -27,6 +27,18 @@
                     <div class="row">
                         <div class="col-sm-5 text-md-end align-middle">
                             <label class="text  font-weight-bolder">
+                                {{ $t('AddPayment.Code') }}:<span class="text-danger"> *</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-7">
+                            <input type="text" disabled class="form-control" v-model="addPayment.paymentCode" readonly :key="rendar"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group has-label col-sm-12 ">
+                    <div class="row">
+                        <div class="col-sm-5 text-md-end align-middle">
+                            <label class="text  font-weight-bolder">
                                 {{ $t('AddPayment.Benificary') }}:<span class="text-danger"> *</span>
                             </label>
                         </div>
@@ -38,6 +50,7 @@
                     </div>
                 </div>
 
+                
                 <div class="form-group has-label col-sm-12 ">
                     <div class="row">
                         <div class="col-sm-5 text-md-end align-middle">
@@ -178,25 +191,25 @@
                         </div>
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.PassportNo') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.passportNo" />
+                            <input type="text" class="form-control" v-model="brand.passportNo"  />
                         </div>
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.Nationality') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.nationality" />
+                            <input type="text" class="form-control" v-model="brand.nationality"  />
                         </div>
 
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.Gender') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.gender" />
+                            <input type="text" class="form-control" v-model="brand.gender"  />
                         </div>
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.ContactNo') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.phoneNo" />
+                            <input type="text" class="form-control" v-model="brand.phoneNo"  />
                         </div>
 
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.Address') }} :</label>
-                            <textarea rows="3" class="form-control" v-model="brand.address">  </textarea>
+                            <textarea rows="3" class="form-control" v-model="brand.address" >  </textarea>
                         </div>
 
                     </div>
@@ -213,6 +226,7 @@ import moment from 'moment'
 export default {
     data: function () {
         return {
+            rendar:0,
             selectedMonth: [],
             months: [{
                     id: 1,
@@ -285,6 +299,7 @@ export default {
             addPayment: {
                 Id: '',
                 benificayId: '',
+                paymentCode:'',
                 amount: '',
                 userId: '',
                 month: '',
@@ -489,24 +504,51 @@ export default {
                     root.loading = false
                 })
                 .finally(() => root.loading = false);
-        }
+        },
+        GetAutoCode: function () {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('/Benificary/AutoCodeGenerate', {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                })
+                .then(function (response) {
+                        if (response.data) {
+                            root.addPayment.paymentCode = response.data;
+                            root.rendar++;
+                        } else {
+                            console.log("error: something wrong from db.");
+                        }
+                    },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
+        },
 
     },
 
     created: function () {
-        this.$emit('input', this.$route.name);
-    },
-    mounted: function () {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.addPayment.userId = localStorage.getItem('UserId');
-        this.cashierName = localStorage.getItem('UserName');
-
-        if (this.$route.query != undefined) {
-            this.addPayment = this.$route.query;
-            this.EditBenificary(this.$route.query.benificayId);
-            this.rander++;
+        this.cashierName = localStorage.getItem('UserName');  
+        if (this.$route.query.data != undefined) {
+                this.addPayment = this.$route.query.data;
+                this.EditBenificary(this.addPayment.benificayId, true);
+                this.rander++;
+            
         }
+        else{
+             this.GetAutoCode();
+        }
+    },
+    mounted: function () {
+        
     }
 }
 </script>

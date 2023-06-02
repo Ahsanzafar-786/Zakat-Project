@@ -1,7 +1,9 @@
-﻿namespace Focus.Business.Payments.Models
+﻿using System;
+
+namespace Focus.Business.Payments.Models
 {
     public class SelectedMonthLookupModel
     {
-        public string SelectedMonth { get; set; }
+        public DateTime? SelectedMonth { get; set; }
     }
 }
