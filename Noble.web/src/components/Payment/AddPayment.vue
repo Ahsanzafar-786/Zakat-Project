@@ -360,6 +360,7 @@ export default {
                 benificayId: '',
                 paymentCode: '',
                 amount: '',
+                amountPerMonth: '',
                 userId: '',
                 month: '',
                 year: '',
@@ -393,6 +394,18 @@ export default {
                         this.selectedMonth.push({
                             selectedMonth: this.addPayment.month
                         });
+                        if(root.selectedMonth.length!=0)
+                        {
+                            root.addPayment.amount = root.addPayment.amount*root.selectedMonth.length;
+   
+                        }
+                        else
+                        {
+                            root.addPayment.amount= root.addPayment.amountPerMonth;
+
+
+                        }
+
                     } else {
                         this.addPayment.month=null;
                         this.randerDate++;
@@ -420,6 +433,7 @@ export default {
 
         },
         RemoveAll: function () {
+            this.addPayment.amount= this.addPayment.amountPerMonth;
             this.selectedMonth = [];
 
         },
@@ -452,6 +466,7 @@ export default {
                             debugger;
                             root.brand = response.data;
                             root.addPayment.amount = response.data.amountPerMonth;
+                            root.addPayment.amountPerMonth = response.data.amountPerMonth;
                             //const paymentMonths = [...new Set(response.data.paymentLists.map(x => x.month))];
                             var paymentMonths = response.data.charityTransactions;
                             if (response.data.durationType == 'Indefinite') {
