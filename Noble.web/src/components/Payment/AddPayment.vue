@@ -148,8 +148,8 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-sm-4 " v-for="(month) in months" v-bind:key="month.id">
-                        <span v-if="month.color=='red'" style="color:red !important">{{ month.name}}</span>
-                        <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}}</span>
+                        <span v-if="month.color=='red'" style="color:red !important">{{ month.name}} {{month.year  }}</span>
+                        <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}} {{month.year  }}</span>
                         <!-- <span v-else style="color:gray !important">{{ month.name}}</span> -->
 
                     </div>
@@ -226,16 +226,22 @@ export default {
     data: function () {
         return {
             rendar: 0,
+            year:'',
             randerDate: 0,
             selectedMonth: [],
             months: [{
                     id: 1,
-                    name: 'January',
+                    order:0,
+                    year:'',
+                    name: 'January ',
                     color: '',
                     active: false,
                 },
                 {
                     id: 2,
+                    order:0,
+                    year:'',
+
                     name: 'February',
                     color: '',
                     active: false,
@@ -243,6 +249,9 @@ export default {
                 },
                 {
                     id: 3,
+                    order:0,
+                    year:'',
+
                     name: 'March',
                     color: '',
                     active: false,
@@ -250,6 +259,9 @@ export default {
                 },
                 {
                     id: 4,
+                    order:0,
+                    year:'',
+
                     name: 'April',
                     color: '',
                     active: false,
@@ -257,6 +269,9 @@ export default {
                 },
                 {
                     id: 5,
+                    order:0,
+                    year:'',
+
                     name: 'May',
                     color: '',
                     active: false,
@@ -264,6 +279,9 @@ export default {
                 },
                 {
                     id: 6,
+                    order:0,
+                    year:'',
+
                     name: 'June',
                     color: '',
                     active: false,
@@ -271,6 +289,9 @@ export default {
                 },
                 {
                     id: 7,
+                    order:0,
+                    year:'',
+
                     name: 'July',
                     color: '',
                     active: false,
@@ -278,6 +299,9 @@ export default {
                 },
                 {
                     id: 8,
+                    order:0,
+                    year:'',
+
                     name: 'August',
                     color: '',
                     active: false,
@@ -285,30 +309,42 @@ export default {
                 },
                 {
                     id: 9,
+                    order:0,
                     name: 'September',
                     color: '',
                     active: false,
+                    year:'',
+
 
                 },
                 {
                     id: 10,
+                    order:0,
                     name: 'October',
                     color: '',
                     active: false,
+                    year:'',
+
 
                 },
                 {
                     id: 11,
+                    order:0,
                     name: 'November',
                     color: '',
                     active: false,
+                    year:'',
+
 
                 },
                 {
                     id: 12,
+                    order:0,
                     name: 'December',
                     color: '',
                     active: false,
+                    year:'',
+
 
                 }
             ],
@@ -424,6 +460,7 @@ export default {
                                     {
                                         auth.color = 'green';
                                         auth.active = true;
+                                        auth.year = response.data.year;
                                     }
                                     return auth;
                                 });
@@ -434,6 +471,7 @@ export default {
                                         if (auth.id === paymentMonths[k].paymentMonths) {
                                             auth.color = 'red';
                                             auth.active = false;
+                                            auth.year = paymentMonths[k].year;
 
                                         }
                                         return auth;
@@ -451,6 +489,7 @@ export default {
                                                 if (auth.id === i) {
                                                     auth.color = 'green';
                                                     auth.active = true;
+                                                    auth.year = response.data.year;
                                                 }
                                                 return auth;
                                             })
@@ -464,6 +503,7 @@ export default {
                                             if (auth.id === paymentMonths[j].paymentMonths) {
                                                 auth.color = 'red';
                                                 auth.active = false;
+                                                auth.year = paymentMonths[k].year;
 
                                             }
                                             return auth;
