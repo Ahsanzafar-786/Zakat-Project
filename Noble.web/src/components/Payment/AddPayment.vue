@@ -147,12 +147,12 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-sm-4 " v-for="(month) in months" v-bind:key="month.id">
+                        <div  v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-4'">
                         <span v-if="month.color=='red'" style="color:red !important">{{ month.name}} {{month.year }}</span>
                         <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}} {{month.year }}</span>
                         <!-- <span v-else style="color:gray !important">{{ month.name}}</span> -->
-
                     </div>
+                    
                 </div>
             </div>
 
