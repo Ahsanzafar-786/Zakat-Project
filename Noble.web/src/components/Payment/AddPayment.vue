@@ -403,6 +403,24 @@ export default {
             debugger;
             var root = this;
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
+                if(this.brand.advancePayment==0)
+                {
+                    alert(moment().format('MMMM'));
+                   if(this.addPayment.month ==moment().format('MMMM'))
+                   {
+                    root.$swal({
+                            title: 'Error',
+                            text: 'You have no Permission to Select another Month',
+                            type: 'error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+
+                   }
+                   return;
+                }
                
                 const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
                 if (record != null) {
