@@ -15,6 +15,7 @@ namespace Focus.Business.Benificary.Models
         public string PassportNo { get; set; }
         public string Address { get; set; }
         public string Year { get; set; }
+        public string EndYear { get; set; }
         public string Nationality { get; set; }
         public string Gender { get; set; }
         public int PaymentIntervalMonth { get; set; }

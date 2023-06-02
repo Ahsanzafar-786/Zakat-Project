@@ -141,12 +141,7 @@
                     </label>
                     <textarea rows="3" class="form-control" v-model="brand.reason"></textarea>
                 </div>
-                <!-- <div class="col-md-12">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.Note') }}:
-                    </label>
-                    <VueEditor v-model="brand.note" />
-                </div> -->
+               
             </div>
             <div class="row" v-if="paymentType!=0">
                 <div class="col-md-12 form-group">
@@ -244,6 +239,16 @@
                 </div>
 
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="text  font-weight-bolder">
+                        {{ $t('AddBenificary.Note') }}:
+                    </label>
+                    <VueEditor v-model="brand.note" />
+                </div>
+
+            </div>
+           
 
         </div>
         <div class="modal-footer">
@@ -270,9 +275,9 @@ import {
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-// import {
-//     VueEditor
-// } from "vue2-editor";
+import {
+    VueEditor
+} from "vue2-editor";
 
 import Multiselect from 'vue-multiselect';
 import moment from 'moment'
@@ -284,7 +289,7 @@ export default {
     components: {
         Loading,
         Multiselect,
-        // VueEditor
+        VueEditor
     },
     data: function () {
         return {
@@ -326,6 +331,16 @@ export default {
                     this.paymentType = null;
                 } else {
                     this.paymentType = value.code;
+                    if(value.code==0)
+                    {
+                        this.brand.durationType='';
+
+                    }
+                    else
+                    {
+                        this.brand.durationType= 'Indefinite';
+
+                    }
                     this.GetValueOfRecurring();
                 }
 
