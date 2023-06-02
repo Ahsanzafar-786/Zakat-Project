@@ -91,7 +91,7 @@
                     <label class="text  font-weight-bolder">
                         {{ $t('AddBenificary.AdvancePayment') }}:
                     </label>
-                    <multiselect v-model="brand.advancePayment " v-on:input="GetDateMonth" :options="[0,1,2,3,4,5,6,7,8,9,10,11,12]" :show-labels="false" :placeholder="$t('AddBenificary.SelectType')">
+                    <multiselect v-model="brand.advancePayment" v-on:input="GetDateMonth" :options="[0,1,2,3,4,5,6,7,8,9,10,11,12]" :show-labels="false" :placeholder="$t('AddBenificary.SelectType')">
                     </multiselect>
                 </div>
                 <div class="col-md-6 form-group">
