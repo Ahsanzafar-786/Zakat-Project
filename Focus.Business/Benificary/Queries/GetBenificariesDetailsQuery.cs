@@ -74,6 +74,7 @@ namespace Focus.Business.Benificary.Queries
                             FirstMonth = x.StartDate.Value.Month,
                             EndMonth = x.EndDate.Value.Month,
                             EndDate = x.EndDate,
+                            Year = x.StartMonth.Value.Year.ToString(),
                             StartMonth = x.StartMonth,
                             ApprovedPaymentId = x.ApprovedPaymentId,
                             DurationType = x.DurationType,
@@ -102,11 +103,12 @@ namespace Focus.Business.Benificary.Queries
                     }
                     else
                     { 
-                        var query = await Context.Beneficiaries.AsNoTracking().Select(x => new BenificariesLookupModel
+                        var query = await Context.Beneficiaries.AsNoTracking().Include(x=>x.PaymentTypes).Select(x => new BenificariesLookupModel
                         {
                             Id = x.Id,
                             Name = x.Name,
                             BeneficiaryId = x.BeneficiaryId,
+                            PaymentType = x.PaymentTypes.Code,
                             PaymentIntervalMonth = x.PaymentIntervalMonth,
                             AmountPerMonth = x.AmountPerMonth,
                             UgamaNo = x.UgamaNo,

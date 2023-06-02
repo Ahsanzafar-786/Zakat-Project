@@ -81,7 +81,7 @@ namespace Focus.Business.Payments.Commands
                                 DoucmentDate = DateTime.Now,
                                 DoucmentCode = payment.PaymentCode,
                                 BenificayId = payment.BenificayId,
-                                Month = payment.Month,
+                                Month = item.SelectedMonth,
                                 Amount = payment.Amount,
                                 Year = payment.Year,
                             };
