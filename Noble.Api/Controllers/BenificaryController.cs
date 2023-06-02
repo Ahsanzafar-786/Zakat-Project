@@ -361,5 +361,15 @@ namespace Noble.Api.Controllers
             return Ok(charity);
         }
         #endregion
+
+        #region AutoCode
+        [Route("api/Benificary/AutoCodeGenerate")]
+        [HttpGet("AutoCodeGenerate")]
+        public async Task<IActionResult> AutoCodeGenerate()
+        {
+            var autoNo = await Mediator.Send(new AutoCodeGenerateQuery{});
+            return Ok(autoNo);
+        }
+        #endregion
     }
 }

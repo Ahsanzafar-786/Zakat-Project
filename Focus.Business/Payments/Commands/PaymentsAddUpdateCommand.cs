@@ -11,6 +11,7 @@ using Focus.Business.Payments.Models;
 using Focus.Domain.Entities;
 
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Focus.Business.Payments.Commands
 {
@@ -33,13 +34,6 @@ namespace Focus.Business.Payments.Commands
                 {
                     if (request.Payment.Id == Guid.Empty || request.Payment.Id==null)
                     {
-                        var paymentCode = Context.Payments.OrderBy(x => x.Id).LastOrDefault();
-                        var paymentNo = 1;
-                        if (paymentCode != null)
-                        {
-                            paymentNo = paymentCode.Code + 1;
-                        }
-
                         var pay = Context.Payments.AsNoTracking()
                             .Any(x => x.BenificayId == request.Payment.BenificayId);
                         if (pay)
@@ -58,13 +52,25 @@ namespace Focus.Business.Payments.Commands
                             BenificayId = request.Payment.BenificayId,
                             Amount = request.Payment.Amount,
                             Month = request.Payment.Month,
-                            Code = paymentNo,
+                            PaymentCode = request.Payment.PaymentCode,
                             Year = DateTime.Now.Year.ToString(),
                             Period = DateTime.Now.Year.ToString(),
                             Date = DateTime.Now,
                         };
 
                         Context.Payments.Add(payment);
+
+                        var selectedMonth = new List<SelectedMonth>();
+                        foreach (var item in request.Payment.SelectedMonth)
+                        {
+                            selectedMonth.Add(new SelectedMonth
+                            {
+                                PaymentId = payment.Id,
+                                SelectMonth = item.SelectedMonth,
+                            });
+                        }
+
+                        await Context.SelectedMonths.AddRangeAsync(selectedMonth);
 
                         foreach (var item in request.Payment.SelectedMonth)
                         {
@@ -73,7 +79,7 @@ namespace Focus.Business.Payments.Commands
                                 DoucmentId = payment.Id,
                                 CharityTransactionDate = payment.Date,
                                 DoucmentDate = DateTime.Now,
-                                DoucmentCode = payment.Code,
+                                DoucmentCode = payment.PaymentCode,
                                 BenificayId = payment.BenificayId,
                                 Month = payment.Month,
                                 Amount = payment.Amount,
@@ -104,7 +110,7 @@ namespace Focus.Business.Payments.Commands
                         paymentDetails.BenificayId = request.Payment.BenificayId;
                         paymentDetails.Amount = request.Payment.Amount;
                         paymentDetails.Month = request.Payment.Month;
-                        paymentDetails.Code = request.Payment.Code; 
+                        paymentDetails.PaymentCode = request.Payment.PaymentCode; 
                         paymentDetails.Year = DateTime.Now.Year.ToString();
                         paymentDetails.Period = DateTime.Now.Year.ToString();
                         paymentDetails.Date = DateTime.Now;

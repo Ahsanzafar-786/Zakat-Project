@@ -4,6 +4,7 @@ using Focus.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Focus.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230601141002_selected_month")]
+    partial class selected_month
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -522,8 +524,8 @@ namespace Focus.Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GetUtcDate()");
 
-                    b.Property<string>("DoucmentCode")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DoucmentCode")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DoucmentDate")
                         .HasColumnType("datetime2");
@@ -764,7 +766,7 @@ namespace Focus.Persistence.Migrations
                             Blocked = false,
                             CashVoucher = false,
                             CompanyRegNo = "56ty60",
-                            CreatedDate = new DateTime(2023, 6, 2, 6, 25, 36, 313, DateTimeKind.Utc).AddTicks(4111),
+                            CreatedDate = new DateTime(2023, 6, 1, 14, 10, 1, 494, DateTimeKind.Utc).AddTicks(918),
                             DayStart = false,
                             English = false,
                             ExpenseAccount = false,
@@ -959,9 +961,6 @@ namespace Focus.Persistence.Migrations
 
                     b.Property<DateTime?>("Month")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("PaymentCode")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Period")
                         .HasColumnType("nvarchar(max)");
