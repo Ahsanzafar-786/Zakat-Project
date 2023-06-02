@@ -44,8 +44,7 @@
                         </div>
                         <div class="col-sm-7">
                             <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander" v-on:input="EditBenificary(addPayment.benificayId, true)" />
-                            <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails')
-                                    }}</a>
+                            <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails') }}</a>
                             <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Benificary Details</a>
                         </div>
                     </div>
@@ -111,13 +110,13 @@
                         <div class="col-sm-7">
                             <datepicker :type="'month'" v-model="addPayment.month" v-bind:key="randerDate" v-on:input="MonthSelection" />
                             <div class="row mt-2">
-                                <div style="text-align: right !important;" v-if="selectedMonth.length > 0">
+                                <div style="text-align: right !important;" v-if="selectedMonth.length>0">
                                     <button class="btn  btn-danger btn-round btn-sm btn-icon" @click="RemoveAll()" style="font-size: .4rem;  padding: 0.2rem 0.35rem;">
                                         Close All
                                     </button>
                                 </div>
-                                <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth" v-bind:key="val + index" style="position: relative;font-size: 13px !important;">
-                                    <span>{{ val.selectedMonth }}</span>
+                                <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth" v-bind:key="val+index" style="position: relative;font-size: 13px !important;">
+                                    <span>{{val.selectedMonth}}</span>
                                     <span style="position:absolute; right: -12px; top: -8px;">
                                         <button class="btn  btn-danger btn-round btn-sm btn-icon" style="font-size: .4rem;  padding: 0.2rem 0.35rem;" @click="RemoveEffect(val)">
                                             <i class="fas fa-times"></i>
@@ -135,30 +134,25 @@
                 <div class="row">
                     <div class=" col-sm-6 ">
                         <label class="rounded text-white bg-primary px-2">Advance Payment: {{ brand.advancePayment
-                            }}</label>
+                        }}</label>
                     </div>
                     <div class=" col-sm-6 ">
-                        <label class="rounded text-white bg-primary px-2">Payment Type: {{ brand.paymentTypeName
-                            }}</label>
+                        <label class="rounded text-white bg-primary px-2">Payment Type: {{ brand.paymentTypeName }}</label>
                     </div>
                     <div class=" col-sm-6 pt-1">
-                        <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName
-                            }}</label>
+                        <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName }}</label>
                     </div>
                     <div class=" col-sm-6 pt-1">
-                        <label class="rounded text-white bg-primary px-2">Start Month: &nbsp; &nbsp;{{
-                                GetMonth(brand.startMonth) }}</label>
+                        <label class="rounded text-white bg-primary px-2">Start Month: &nbsp; &nbsp;{{ GetMonth(brand.startMonth) }}</label>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-sm-4 " v-for="(month) in months" v-bind:key="month.id">
-                        <span v-if="month.color == 'red'" style="color:red !important">{{ month.name }} {{ month.year
-                            }}</span>
-                        <span v-else-if="month.color == 'green'" style="color:green !important">{{ month.name }}
-                            {{ month.year }}</span>
+                        <div  v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-4'">
+                        <span v-if="month.color=='red'" style="color:red !important">{{ month.name}} {{month.year }}</span>
+                        <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}} {{month.year }}</span>
                         <!-- <span v-else style="color:gray !important">{{ month.name}}</span> -->
-
                     </div>
+                    
                 </div>
             </div>
 
@@ -483,6 +477,7 @@ export default {
             });
         },
         EditBenificary: function (Id, val) {
+            debugger;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
@@ -502,13 +497,13 @@ export default {
                 })
                 .then(function (response) {
                         if (response.data) {
+                            debugger;
                             root.brand = response.data;
                             root.addPayment.amount = response.data.amountPerMonth;
                             root.addPayment.amountPerMonth = response.data.amountPerMonth;
                             //const paymentMonths = [...new Set(response.data.paymentLists.map(x => x.month))];
                             var paymentMonths = response.data.charityTransactions;
                             if (response.data.durationType == 'Indefinite') {
-                                debugger;
                                 root.months.map(auth => {
 
                                     {
@@ -586,6 +581,7 @@ export default {
 
         },
         GetTransactions: function (Id) {
+            debugger;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
@@ -624,6 +620,7 @@ export default {
                     }
                 })
                 .then(function (response) {
+                    debugger;
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {
                             root.$swal({
@@ -664,6 +661,7 @@ export default {
                     }
                 })
                 .catch(error => {
+                    debugger;
                     console.log(error)
                     root.$swal.fire({
                         icon: 'error',
