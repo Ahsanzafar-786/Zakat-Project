@@ -101,11 +101,11 @@
                     <label class="text  font-weight-bolder" v-else>
                         Amount:
                     </label>
-                    <input class="form-control" v-model="$v.brand.amountPerMonth.$model"  @click="$event.target.select()" type="number" />
+                    <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" type="number" />
                 </div>
                 <div class="col-md-6 form-group">
                     <label>{{ $t('AddBenificary.StartFrom') }}:</label>
-                    <datepicker v-model="brand.startMonth "   v-on:input="GetDateMonth"  :type="'month'" />
+                    <datepicker v-model="brand.startMonth " v-on:input="GetDateMonth" :type="'month'" />
 
                 </div>
                 <div class="col-md-6 form-group">
@@ -139,7 +139,7 @@
                     <label class="text  font-weight-bolder">
                         {{ $t('AddBenificary.Reason') }}:<span class="text-danger"> *</span>
                     </label>
-                    <textarea rows="3" class="form-control" v-model="brand.reason" ></textarea>
+                    <textarea rows="3" class="form-control" v-model="brand.reason"></textarea>
                 </div>
                 <!-- <div class="col-md-12">
                     <label class="text  font-weight-bolder">
@@ -334,18 +334,19 @@ export default {
             }
         },
         GetValueOfRecurring: function () {
-            if(this.brand.recurringAmount>0)
-            {
-                this.brand.amountPerMonth=parseFloat(this.brand.recurringAmount/this.paymentType).toFixed(3).slice(0, -1);
+            debugger;
+            if (this.brand.recurringAmount > 0) {
+                if (this.paymentType == null || this.paymentType == 0) {
+                    this.brand.amountPerMonth = 0
+                } else {
+                    this.brand.amountPerMonth = parseFloat(this.brand.recurringAmount / this.paymentType).toFixed(3).slice(0, -1);
 
+                }
 
+            } else {
+                this.brand.amountPerMonth = 0;
             }
-            else
-            {
-                this.brand.amountPerMonth=0;
-            }
 
-           
         },
         RemoveRow: function (index) {
             this.brand.benificaryAuthorization.splice(index, 1);
@@ -367,9 +368,15 @@ export default {
             debugger;
 
             if (this.brand.durationType != undefined && this.brand.durationType != '' && this.brand.durationType != null) {
-                if (this.brand.startMonth != undefined && this.brand.startMonth != '' && this.brand.startMonth != null) {
-                    this.brand.startDate = this.brand.startMonth;
-                    this.brand.endDate = moment(this.brand.startMonth).add(1, 'months');
+                if (this.brand.durationType != 'Indefinite') {
+                    if (this.brand.startMonth != undefined && this.brand.startMonth != '' && this.brand.startMonth != null) {
+                        this.brand.startDate = this.brand.startMonth;
+                        this.brand.endDate = moment(this.brand.startMonth).add(1, 'months');
+
+                    } else {
+                        this.brand.startDate = '';
+                        this.brand.endDate = '';
+                    }
 
                 }
 
@@ -393,18 +400,17 @@ export default {
                 token = localStorage.getItem('token');
             }
             debugger;
-            if(this.brand.id != '00000000-0000-0000-0000-000000000000' && this.brand.isActive == false && this.brand.reason == null)
-            {  
+            if (this.brand.id != '00000000-0000-0000-0000-000000000000' && this.brand.isActive == false && this.brand.reason == null) {
                 this.loading = false;
                 return this.$swal({
-                                title: 'Error',
-                                text: this.english == 'en' ? 'Please give reason' : 'من فضلك اذكر السبب',
-                                type: 'error',
-                                icon: 'error',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                timerProgressBar: true,
-                            });   
+                    title: 'Error',
+                    text: this.english == 'en' ? 'Please give reason' : 'من فضلك اذكر السبب',
+                    type: 'error',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                });
             }
 
             this.brand.benificaryAuthorization.map(auth => {
@@ -482,6 +488,11 @@ export default {
         }
     },
     mounted: function () {
+        debugger;
+        if (this.type == 'Edit') {
+
+            this.paymentType = this.brand.paymentType;
+        }
         this.english = localStorage.getItem('locales');
         this.arabic = localStorage.getItem('locales');
     }

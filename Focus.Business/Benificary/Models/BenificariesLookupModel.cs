@@ -38,6 +38,7 @@ namespace Focus.Business.Benificary.Models
         public DateTime? StartMonth { get; set; }
         public Guid? ApprovedPaymentId { get; set; }
         public int AdvancePayment { get; set; }
+        public int? PaymentType { get; set; }
         public string DurationType { get; set; }
         public int? FirstMonth { get; set; }
         public int? EndMonth { get; set; }

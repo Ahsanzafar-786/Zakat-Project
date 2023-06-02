@@ -217,62 +217,85 @@ export default {
             months: [{
                     id: 1,
                     name: 'January',
-                    color: ''
+                    color: '',
+                    active: false,
                 },
                 {
                     id: 2,
                     name: 'February',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 3,
                     name: 'March',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 4,
                     name: 'April',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 5,
                     name: 'May',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 6,
                     name: 'June',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 7,
                     name: 'July',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 8,
                     name: 'August',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 9,
                     name: 'September',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 10,
                     name: 'October',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 11,
                     name: 'November',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 },
                 {
                     id: 12,
                     name: 'December',
-                    color: ''
+                    color: '',
+                    active: false,
+
                 }
             ],
             rander: 0,
@@ -291,7 +314,7 @@ export default {
                 year: '',
                 code: 0,
                 period: '',
-                selectedMonth:''
+                selectedMonth: ''
             }
         }
     },
@@ -310,9 +333,10 @@ export default {
             }
         },
         MonthSelection: function () {
-            if(this.addPayment.month!=null && this.addPayment.month!=undefined )
-            {
-                this.selectedMonth.push({selectedMonth:this.addPayment.month});
+            if (this.addPayment.month != null && this.addPayment.month != undefined) {
+                this.selectedMonth.push({
+                    selectedMonth: this.addPayment.month
+                });
             }
 
         },
@@ -324,7 +348,7 @@ export default {
 
         },
         RemoveAll: function () {
-            this.selectedMonth=[];
+            this.selectedMonth = [];
 
         },
         GotoPage: function (link) {
@@ -342,6 +366,7 @@ export default {
             root.months.map(auth => {
                 {
                     auth.color = '';
+                    auth.active = false;
                 }
                 return auth;
             });
@@ -354,31 +379,61 @@ export default {
                         if (response.data) {
                             debugger;
                             root.brand = response.data;
-                            root.addPayment.amount =response.data.amountPerMonth;
+                            root.addPayment.amount = response.data.amountPerMonth;
                             //const paymentMonths = [...new Set(response.data.paymentLists.map(x => x.month))];
-                            var paymentMonths =  response.data.charityTransactions;
-                            if (response.data.firstMonth != null && response.data.endMonth != null) {
-                                for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
-                                    if (i <= response.data.endMonth) {
-                                        root.months.map(auth => {
+                            var paymentMonths = response.data.charityTransactions;
+                            if (response.data.durationType == 'Indefinite') {
+                                root.months.map(auth => {
 
-                                            if (auth.id === i) {
-                                                auth.color = 'green';
-                                            }
-                                            return auth;
-                                        })
+                                    {
+                                        auth.color = 'green';
+                                        auth.active = true;
                                     }
-
-                                }
-                                for (var j = 0; j <= paymentMonths.length; j++) {
+                                    return auth;
+                                });
+                                for (var k = 0; k <= paymentMonths.length; k++) {
 
                                     root.months.map(auth => {
 
-                                        if (auth.id === paymentMonths[j].paymentMonths) {
+                                        if (auth.id === paymentMonths[k].paymentMonths) {
                                             auth.color = 'red';
+                                            auth.active = true;
+
                                         }
                                         return auth;
                                     });
+
+                                }
+
+                            } else if (response.data.firstMonth != null && response.data.endMonth != null) {
+
+                                {
+                                    for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
+                                        if (i <= response.data.endMonth) {
+                                            root.months.map(auth => {
+
+                                                if (auth.id === i) {
+                                                    auth.color = 'green';
+                                                    auth.active = true;
+                                                }
+                                                return auth;
+                                            })
+                                        }
+
+                                    }
+                                    for (var j = 0; j <= paymentMonths.length; j++) {
+
+                                        root.months.map(auth => {
+
+                                            if (auth.id === paymentMonths[j].paymentMonths) {
+                                                auth.color = 'red';
+                                                auth.active = true;
+
+                                            }
+                                            return auth;
+                                        });
+
+                                    }
 
                                 }
 
