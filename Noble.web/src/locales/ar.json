@@ -259,44 +259,45 @@
     "ChangePassword":"تغيير كلمة المرور",
     "ProfileSetting":"إعداد الملف الشخصي",
     "FirstName":"الاسم الأول",
-    "LastName":"اسم العائلة",
+    "LastName":"الاسم الأخير",
     "RegisterUser_EmailID":"تسجيل معرف البريد الإلكتروني للمستخدم",
     "UpdateProfile":"تحديث الملف",
     "CurrentPasswordVerification":"التحقق من كلمة المرور الحالية",
     "VerifyCurrentPassword":"تحقق من كلمة المرور الحالية",
     "RegisterUser_Password":"تسجيل كلمة مرور المستخدم",
-    "RegisterUser_ConfirmPassword":"تسجيل المستخدم تأكيد كلمة المرور",
-    "UpdatePassword":"تطوير كلمة السر"
+    "RegisterUser_ConfirmPassword":"تسجيل مستخدم تأكيد كلمة المرور",
+    "UpdatePassword":"تحديث كلمة المرور"
   },
 
   "SignUp":{
-    "SignUp":"اشتراك",
-    "SignUpDetails":"تفاصيل التسجيل",
+    "SignUp":"الاشتراك",
+    "SignUpDetails":"تفاصيل الاشتراك",
     "SearchBYNameAndEmail":"البحث بالاسم والبريد الإلكتروني",
     "USERNAME":"اسم المستخدم",
     "EMAILID":"عنوان الايميل",
-    "Location":"موقع"
+    "Location":"الموقع"
   },
 
   "AddSignUp":{
-    "AddSignUp":"أضف تسجيل",
+    "AddSignUp":"أضف الاشتراك",
     "SignUpDetails":"تفاصيل التسجيل",
     "UserEmail":"البريد الالكتروني للمستخدم",
-    "UserId":"معرف المستخدم",
     "RoleId":"معرف الدور",
+    "UserId":"معرف المستخدم",
     "Password":"كلمة المرور",
     "ConfirmPassword":"تأكيد كلمة المرور"  
   },
 
   "Payment":{
-    "Payment":"قسط",
+    "Payment":"الدفع",
     "AddPayment":"إضافة الدفع",
     "PaymentList":"قائمة الدفع",
     "BenifcaryName":"أسم المستفيد",
-    "Amount":"كمية",
+    "Amount":"المبلغ",
     "Cashier":"أمين الصندوق",
-    "Month":"شهر",
-    "Year":"سنة",
+    "Month":"الشهر",
+    "Year":"السنة",
+    "Code":"شفرة",
     "Period":"فترة"
   },
 
@@ -304,23 +305,24 @@
     "AddPayment":"إضافة الدفع",
     "Benificary":"المستفيد",
     "BenificaryDetails":"تفاصيل مفيدة",
-    "Amount":"كمية",
+    "Amount":"المبلغ",
     "Cashier":"أمين الصندوق",
-    "Month":"شهر",
-    "Year":"سنة",
+    "Month":"الشهر",
+    "Year":"السنة",
+    "Code":"شفرة",
     "Period":"فترة"
   },
 
   "Analytics":{
-    "Analytics":"تحليلات",
+    "Analytics":"التحليلات",
     "Dashboard":"لوحة القيادة",
     "Users":"المستخدمون",
     "Benificary":"المستفيد",
     "RegisterBenificary":"تسجيل المستفيد",
-    "Un-RegisterBenificary":"فائدة إلغاء التسجيل",
+    "Un-RegisterBenificary":"المستفيد غير المسجل",
     "OneTimeBenificary":"فائدة لمرة واحدة",
     "MonthlyBenificary":"المستفيد الشهري",
-    "AuthorizePerson":"تفويض الشخص",
+    "AuthorizePerson":"الشخص المرخص",
     "Resource":"الموارد",
     "BenificaryType":"نوع المستفيد",
     "AudienceOverview":"نظرة عامة على الجمهور"
