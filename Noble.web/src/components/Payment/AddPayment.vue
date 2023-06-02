@@ -389,6 +389,7 @@ export default {
         MonthSelection: function () {
             debugger;
             var root = this;
+            debugger;
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
                 if (this.brand.advancePayment == 0) {
                     if (this.brand.paymentType != null) {
@@ -403,12 +404,18 @@ export default {
                                     timer: 3000,
                                     timerProgressBar: true,
                                 });
+                                return;
 
                             }
-                            return;
+                           
                         }
                         else if (this.brand.paymentType == 2) {
-                            if (moment(this.addPayment.month).format('MMMM') != moment().add(1, 'months').format('MMMM') ||moment(this.addPayment.month).format('MMMM') != moment().format('MMMM') ) {
+                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||moment(this.addPayment.month).format('MMMM') == moment().format('MMMM') ) {
+                                console.log("ok");
+
+                            }
+                            else
+                            {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -418,9 +425,9 @@ export default {
                                     timer: 3000,
                                     timerProgressBar: true,
                                 });
-
+                                return;
                             }
-                            return;
+                           
                         }
                     }
                 }
