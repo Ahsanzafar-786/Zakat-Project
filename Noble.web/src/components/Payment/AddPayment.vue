@@ -31,7 +31,7 @@
                             </label>
                         </div>
                         <div class="col-sm-7">
-                            <input type="text" disabled class="form-control" v-model="addPayment.paymentCode" readonly :key="rendar"/>
+                            <input type="text" disabled class="form-control" v-model="addPayment.paymentCode" readonly :key="rendar" />
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,6 @@
                     </div>
                 </div>
 
-                
                 <div class="form-group has-label col-sm-12 ">
                     <div class="row">
                         <div class="col-sm-5 text-md-end align-middle">
@@ -109,7 +108,7 @@
                             </label>
                         </div>
                         <div class="col-sm-7">
-                            <datepicker :type="'month'" v-model="addPayment.month" v-on:input="MonthSelection" />
+                            <datepicker :type="'month'" v-model="addPayment.month" v-bind:key="randerDate" v-on:input="MonthSelection" />
                             <div class="row mt-2">
                                 <div style="text-align: right !important;" v-if="selectedMonth.length>0">
                                     <button class="btn  btn-danger btn-round btn-sm btn-icon" @click="RemoveAll()" style="font-size: .4rem;  padding: 0.2rem 0.35rem;">
@@ -151,7 +150,7 @@
                     <div class="col-sm-4 " v-for="(month) in months" v-bind:key="month.id">
                         <span v-if="month.color=='red'" style="color:red !important">{{ month.name}}</span>
                         <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}}</span>
-                        <span v-else style="color:gray !important">{{ month.name}}</span>
+                        <!-- <span v-else style="color:gray !important">{{ month.name}}</span> -->
 
                     </div>
                 </div>
@@ -191,25 +190,25 @@
                         </div>
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.PassportNo') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.passportNo"  />
+                            <input type="text" class="form-control" v-model="brand.passportNo" />
                         </div>
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.Nationality') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.nationality"  />
+                            <input type="text" class="form-control" v-model="brand.nationality" />
                         </div>
 
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.Gender') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.gender"  />
+                            <input type="text" class="form-control" v-model="brand.gender" />
                         </div>
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.ContactNo') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.phoneNo"  />
+                            <input type="text" class="form-control" v-model="brand.phoneNo" />
                         </div>
 
                         <div class="col-lg-12 form-group">
                             <label>{{ $t('AddBenificary.Address') }} :</label>
-                            <textarea rows="3" class="form-control" v-model="brand.address" >  </textarea>
+                            <textarea rows="3" class="form-control" v-model="brand.address">  </textarea>
                         </div>
 
                     </div>
@@ -226,7 +225,8 @@ import moment from 'moment'
 export default {
     data: function () {
         return {
-            rendar:0,
+            rendar: 0,
+            randerDate: 0,
             selectedMonth: [],
             months: [{
                     id: 1,
@@ -322,7 +322,7 @@ export default {
             addPayment: {
                 Id: '',
                 benificayId: '',
-                paymentCode:'',
+                paymentCode: '',
                 amount: '',
                 userId: '',
                 month: '',
@@ -348,10 +348,31 @@ export default {
             }
         },
         MonthSelection: function () {
+            debugger;
+            var root = this;
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
-                this.selectedMonth.push({
-                    selectedMonth: this.addPayment.month
-                });
+                const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
+                if (record != null) {
+                    if (record.active==true) {
+                        this.selectedMonth.push({
+                            selectedMonth: this.addPayment.month
+                        });
+                    } else {
+                        this.addPayment.month=null;
+                        this.randerDate++;
+                        root.$swal({
+                            title: 'Error',
+                            text: 'You have no Permission to Select another Month',
+                            type: 'error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                    }
+
+                }
+
             }
 
         },
@@ -412,7 +433,7 @@ export default {
 
                                         if (auth.id === paymentMonths[k].paymentMonths) {
                                             auth.color = 'red';
-                                            auth.active = true;
+                                            auth.active = false;
 
                                         }
                                         return auth;
@@ -442,7 +463,7 @@ export default {
 
                                             if (auth.id === paymentMonths[j].paymentMonths) {
                                                 auth.color = 'red';
-                                                auth.active = true;
+                                                auth.active = false;
 
                                             }
                                             return auth;
@@ -591,19 +612,18 @@ export default {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.addPayment.userId = localStorage.getItem('UserId');
-        this.cashierName = localStorage.getItem('UserName');  
+        this.cashierName = localStorage.getItem('UserName');
         if (this.$route.query.data != undefined) {
-                this.addPayment = this.$route.query.data;
-                this.EditBenificary(this.addPayment.benificayId, true);
-                this.rander++;
-            
-        }
-        else{
-             this.GetAutoCode();
+            this.addPayment = this.$route.query.data;
+            this.EditBenificary(this.addPayment.benificayId, true);
+            this.rander++;
+
+        } else {
+            this.GetAutoCode();
         }
     },
     mounted: function () {
-        
+
     }
 }
 </script>
