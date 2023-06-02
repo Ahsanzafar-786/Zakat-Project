@@ -36,7 +36,7 @@ namespace Focus.Business.Payments.Queries
                         BenificayId = x.BenificayId,
                         Amount = x.Amount,
                         Month = x.Month,
-                        Code = x.Code,
+                        PaymentCode = x.PaymentCode,
                         Year = x.Year,
                         Period = x.Period,
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);

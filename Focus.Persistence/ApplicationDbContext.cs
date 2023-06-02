@@ -36,6 +36,7 @@ namespace Focus.Persistence
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Logs> Logs { get; set; }
         public virtual DbSet<CharityTransaction> CharityTransaction { get; set; }
+        public virtual DbSet<SelectedMonth> SelectedMonths { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

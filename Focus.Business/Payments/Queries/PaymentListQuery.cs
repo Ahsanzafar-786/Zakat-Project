@@ -41,7 +41,7 @@ namespace Focus.Business.Payments.Queries
                         Month = x.Month,
                         Year = x.Year,
                         Period = x.Period,
-                        Code =x.Code,
+                        PaymentCode =x.PaymentCode,
                         BenificaryName = x.Beneficiaries.Name,
                     }).AsQueryable();
 

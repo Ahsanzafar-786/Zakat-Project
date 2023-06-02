@@ -8,6 +8,7 @@ namespace Focus.Business.Payments.Models
         public Guid? Id { get; set; }
         public Guid? BenificayId { get; set; }
         public decimal Amount { get; set; }
+        public string PaymentCode { get; set; }
         public string UserId { get; set; }
         public DateTime? Month { get; set; }
         public int? PaymentMonth { get; set; }

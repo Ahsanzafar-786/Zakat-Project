@@ -221,7 +221,7 @@ export default {
                     if (response.data) {
                         root.$router.push({
                             path: '/addpayment',
-                            query: response.data
+                            query: {data:response.data}
                         });
                     } else {
                         console.log("error: something wrong from db.");
