@@ -384,10 +384,40 @@ export default {
             debugger;
             var root = this;
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
-                // if(brand.payment.advancePayment==0)
-                // {
+                if(root.brand.advancePayment == 0)
+                {
 
-                // }
+                    //Same Month Selection 
+                    var startMonth = this.GetMonth(this.brand.startMonth);
+                    var sameMonth = this.GetMonth(this.addPayment.month);
+
+                    //Select other then next month 
+                    var endMonth = this.GetMonth(this.brand.endDate);
+                    if(startMonth == sameMonth)
+                    {
+                        return root.$swal({
+                            title: 'Error',
+                            text: `You've not Permission to Select this Month`,
+                            type: 'error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                    }
+                    else if(endMonth != sameMonth)
+                    {
+                        return root.$swal({
+                            title: 'Error',
+                            text: `You've not Permission to Select this Month`,
+                            type: 'error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                    }
+                }
                 const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
                 if (record != null) {
                     if (record.active == true) {
@@ -439,7 +469,6 @@ export default {
             });
         },
         EditBenificary: function (Id, val) {
-            debugger;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
@@ -459,7 +488,6 @@ export default {
                 })
                 .then(function (response) {
                         if (response.data) {
-                            debugger;
                             root.brand = response.data;
                             root.addPayment.amount = response.data.amountPerMonth;
                             root.addPayment.amountPerMonth = response.data.amountPerMonth;
@@ -543,7 +571,6 @@ export default {
 
         },
         GetTransactions: function (Id) {
-            debugger;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
@@ -582,7 +609,6 @@ export default {
                     }
                 })
                 .then(function (response) {
-                    debugger;
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {
                             root.$swal({
@@ -623,7 +649,6 @@ export default {
                     }
                 })
                 .catch(error => {
-                    debugger;
                     console.log(error)
                     root.$swal.fire({
                         icon: 'error',
