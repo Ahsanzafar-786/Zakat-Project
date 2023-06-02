@@ -384,7 +384,23 @@ export default {
             debugger;
             var root = this;
             debugger;
+           
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
+                // const record1 = this.selectedMonth.some(x => x.selectedMonth == (moment(this.addPayment.month).format('MMMM')));
+                // if(record1)
+                // {
+                //     root.$swal({
+                //                     title: 'Error',
+                //                     text: 'You cannot Add Duplicate Month',
+                //                     type: 'error',
+                //                     icon: 'error',
+                //                     showConfirmButton: false,
+                //                     timer: 3000,
+                //                     timerProgressBar: true,
+                //                 });
+                //                 return;
+
+                // }
                 if (this.brand.advancePayment == 0) {
                     if (this.brand.paymentType != null) {
                         if (this.brand.paymentType == 1) {
@@ -425,6 +441,7 @@ export default {
                         }
                     }
                 }
+                
 
                 const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
                 if (record != null) {
@@ -432,6 +449,21 @@ export default {
                         this.selectedMonth.push({
                             selectedMonth: this.addPayment.month
                         });
+                        if(this.selectedMonth.length>this.brand.advancePayment)
+                        {
+                            root.$swal({
+                                    title: 'Error',
+                                    text: 'You can Only Take'+this.brand.advancePayment +' Month Payment in Advance',
+                                    type: 'error',
+                                    icon: 'error',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                return;
+                        }
+
+
                         if (root.selectedMonth.length != 0) {
                             root.addPayment.amount = root.addPayment.amount * root.selectedMonth.length;
 
