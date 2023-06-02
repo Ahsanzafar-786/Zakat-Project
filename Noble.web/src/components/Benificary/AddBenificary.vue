@@ -326,6 +326,16 @@ export default {
                     this.paymentType = null;
                 } else {
                     this.paymentType = value.code;
+                    if(value.code==0)
+                    {
+                        this.brand.durationType='';
+
+                    }
+                    else
+                    {
+                        this.brand.durationType= 'Indefinite';
+
+                    }
                     this.GetValueOfRecurring();
                 }
 
