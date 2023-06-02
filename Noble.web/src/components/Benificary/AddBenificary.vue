@@ -386,7 +386,7 @@ export default {
                 if (this.brand.durationType != 'Indefinite') {
                     if (this.brand.startMonth != undefined && this.brand.startMonth != '' && this.brand.startMonth != null) {
                         this.brand.startDate = this.brand.startMonth;
-                        this.brand.endDate = moment(this.brand.startMonth).add(1, 'months');
+                        this.brand.endDate = moment(this.brand.startMonth).add(this.paymentType-1, 'months');
 
                     } else {
                         this.brand.startDate = '';

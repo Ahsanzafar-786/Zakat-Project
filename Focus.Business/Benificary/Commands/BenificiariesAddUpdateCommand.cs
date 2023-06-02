@@ -68,7 +68,7 @@ namespace Focus.Business.Benificary.Commands
                                 DurationType = request.benificiaries.DurationType,
                                 ApprovedPaymentId = request.benificiaries.ApprovedPaymentId,
                                 StartDate = request.benificiaries.StartDate,
-                                EndDate = request.benificiaries.EndDate == null ? null : request.benificiaries.EndDate.Value.AddDays(1),
+                                EndDate = request.benificiaries.EndDate == null ? null : request.benificiaries.EndDate.Value.AddDays(6),
                                 StartMonth = request.benificiaries.StartMonth,
                                 IsRegister = false,
                                 BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
