@@ -300,7 +300,8 @@
     "Month":"Month",
     "Year":"Year",
     "Code":"Code",
-    "Period":"Period"
+    "Period":"Period",
+    "Print":"Print"
   },
 
   "AddPayment":{
@@ -353,7 +354,6 @@
     "Address(InArabic)":"Address "
   },
   "AddProductImage":{
-    "AddProductImage":"AddProductImage",
     "UploadProductImage":"Upload Product Image"
   }
 }

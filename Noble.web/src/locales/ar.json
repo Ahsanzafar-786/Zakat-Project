@@ -307,7 +307,8 @@
     "Month":"الشهر",
     "Year":"السنة",
     "Code":"شفرة",
-    "Period":"فترة"
+    "Period":"فترة",
+    "Print":"مطبعة"
   },
 
   "AddPayment":{
@@ -345,6 +346,23 @@
     "PrintSettings":"إعدادات الطباعة",
     "DataBackUp":"النسخ الاحتياطي للبيانات",
     "DataRestore":"استعادة البيانات"
+  },
+  "CompanyProfile":{
+    "CompanyProfile":"ملف الشركة",
+    "CompanyInfo":"معلومات الشركة"
+  },
+  "CompanyInfo":{
+    "CompanyInfo":"معلومات الشركة",
+    "CompanyProfile":"ملف الشركة",
+    "CompanyName(InEnglish)":"اسم الشركة ",
+    "CompanyName(InArabic)":"اسم الشركة ",
+    "CommercialRegistrationNo":"رقم السجل التجاري",
+    "VATNo":"ضريبة القيمة المضافة لا",
+    "Address(InEnglish)":"عنوان ",
+    "Address(InArabic)":"عنوان "
+  },
+  "AddProductImage":{
+    "UploadProductImage":"تحميل صورة المنتج"
   }
 
 
