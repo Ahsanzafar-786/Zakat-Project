@@ -337,5 +337,23 @@
     "PrintSettings":"Print Settings",
     "DataBackUp":"Data BackUp",
     "DataRestore":"Data Restore"
+  },
+  "CompanyProfile":{
+    "CompanyProfile":"Company Profile",
+    "CompanyInfo":"Company Info"
+  },
+  "CompanyInfo":{
+    "CompanyInfo":"Company Info",
+    "CompanyProfile":"Company Profile",
+    "CompanyName(InEnglish)":"Company Name ",
+    "CompanyName(InArabic)":"Company Name ",
+    "CommercialRegistrationNo":"Commercial Registration No",
+    "VATNo":"VAT No",
+    "Address(InEnglish)":"Address ",
+    "Address(InArabic)":"Address "
+  },
+  "AddProductImage":{
+    "AddProductImage":"AddProductImage",
+    "UploadProductImage":"Upload Product Image"
   }
 }

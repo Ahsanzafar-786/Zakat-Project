@@ -1,5 +1,5 @@
 <template>
-    <div class="row" v-if="isValid('CanUpdateCompanyInfo')">
+    <div class="row" >
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12">
@@ -8,7 +8,7 @@
                             <div class="col">
                                 <h4 class="page-title">{{ $t('CompanyProfile.CompanyProfile') }}</h4>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('CompanyProfile.Home') }}</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a></li>
                                     <li class="breadcrumb-item active">{{ $t('CompanyProfile.CompanyProfile') }}</li>
                                 </ol>
                             </div>
@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group row" v-if="english=='true'">
+                                        <div class="form-group row" >
                                             <label class="col-lg-4 col-form-label">{{ $t('CompanyProfile.BusinessNameInEnglish') |englishLanguage}} :<span class="text-danger"> *</span></label>
                                             <div class="col-lg-8" v-bind:class="{'has-danger' : $v.companyProfile.nameInEnglish.$error}">
                                                 <input class="form-control "  v-model="$v.companyProfile.nameInEnglish.$model" />
@@ -42,7 +42,7 @@
                                         </div><!--end form-group-->
                                     </div><!--end col-->
                                     <div class="col-md-6">
-                                        <div class="form-group row" v-if="isOtherLang()">
+                                        <div class="form-group row" >
                                             <label class="col-lg-4 col-form-label">{{ $t('CompanyProfile.BusinessName(InArabic)') |arabicLanguage}}  :<span class="text-danger"> *</span>.</label>
                                             <div class="col-lg-8" v-bind:class="{'has-danger' :  $v.companyProfile.nameInArabic.$error}">
                                                 <input class="form-control "  v-model="$v.companyProfile.nameInArabic.$model" />
@@ -56,7 +56,7 @@
                                 </div><!--end row-->
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group row" v-if="english=='true'">
+                                        <div class="form-group row" >
                                             <label class="col-lg-4 col-form-label">{{ $t('CompanyProfile.BusinessType(InEnglish)') |englishLanguage}}  :<span class="text-danger"> *</span></label>
                                             <div class="col-lg-8" v-bind:class="{'has-danger' :  $v.companyProfile.categoryInEnglish.$error}">
                                                 <input class="form-control "  v-model="$v.companyProfile.categoryInEnglish.$model" />
@@ -92,7 +92,7 @@
                                         <div>
                                             <div class="form-group row">
                                                 <div class="col-md-6">
-                                                    <div class="form-group row" v-if="english=='true'">
+                                                    <div class="form-group row" >
                                                         <label class="col-lg-12 col-form-label">{{ $t('CompanyProfile.CompanyName(InEnglish)') |englishLanguage}}  :<span class="text-danger"> *</span></label>
                                                         <div class="col-lg-12" v-bind:class="{'has-danger' : $v.companyProfile.companyNameEnglish.$error}">
                                                             <input class="form-control "  v-model="$v.companyProfile.companyNameEnglish.$model" />
@@ -104,7 +104,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6" v-if="isOtherLang()">
+                                                <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label class="col-lg-12 col-form-label">{{ $t('CompanyProfile.CompanyName(InArabic)') |arabicLanguage}}:<span class="text-danger"> *</span></label>
                                                         <div class="col-lg-12" v-bind:class="{'has-danger' : $v.companyProfile.companyNameArabic.$error}">
@@ -175,7 +175,7 @@
                                 </div><!--end row-->
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group row" v-if="english=='true'">
+                                        <div class="form-group row" >
                                             <label class="col-lg-4 col-form-label" for="companyProfile.address">{{ $t('CompanyProfile.AddressEn') }}  : <span class="text-danger"> *</span></label>
                                             <div class="col-lg-8" v-bind:class="{'has-danger' : $v.companyProfile.addressInEnglish.$error}">
                                                 <textarea rows="3" disabled class="form-control" v-model="$v.companyProfile.addressInEnglish.$model" />
@@ -186,7 +186,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                        <div class="col-md-6" v-if="isOtherLang()">
+                                        <div class="col-md-6" >
                                             <div class="form-group row">
                                                 <label class="col-lg-4 col-form-label" for="companyProfile.address">{{ $t('CompanyProfile.AddressAr') }} : <span class="text-danger"> *</span></label>
                                                 <div class="col-lg-8" v-bind:class="{'has-danger' : $v.companyProfile.addressInArabic.$error}">
@@ -214,9 +214,9 @@
                     <div class="row">
                         <div class=" col-md-12">
                             <div class="button-items">
-                                <button class="btn btn-primary mr-2" v-on:click="Attachment()"><span v-if="AttachmentLength>0">({{AttachmentLength}})</span> {{ $t('AddSaleOrder.Attachment') }}</button>
+                                <button class="btn btn-primary mr-2" v-on:click="Attachment()"><span v-if="AttachmentLength>0">({{AttachmentLength}})</span> {{ $t('CompanyProfile.Attachment') }}</button>
                                 <button class="btn btn-outline-primary   mr-2" v-on:click="SaveCompanyAccountSetup()"> <i class="far fa-save "></i>  {{ $t('CompanyProfile.Update') }}</button>
-                                <button class="btn  btn-danger   mr-2" v-on:click="BackToList()">{{ $t('CompanyProfile.btnClear') }}</button>
+                                <button class="btn  btn-danger   mr-2" v-on:click="BackToList()">{{ $t('Close') }}</button>
 
                             </div>
                         </div>
@@ -227,7 +227,7 @@
         </div>
         <bulk-attachment :attachmentList="companyProfile.attachmentList" :show="show" v-if="show" @close="attachmentSave" />
     </div>
-    <div v-else> <acessdenied></acessdenied></div>
+   
 </template>
 <script>
     import clickMixin from '@/Mixins/clickMixin'

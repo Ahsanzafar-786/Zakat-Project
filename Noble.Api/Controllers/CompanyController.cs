@@ -65,7 +65,7 @@ namespace Noble.Api.Controllers
       
         [Route("api/Company/EditCompany")]
         [HttpPost("EditCompany")]
-        [Authorize(Roles = "Noble Admin")]
+       
         public IActionResult Edit(Guid Id)
         {
             var company = _companyComponent.GetCompanyById(Id);
@@ -499,7 +499,7 @@ namespace Noble.Api.Controllers
       
         [Route("api/Company/SaveLocation")]
         [HttpPost("SaveLocation")]
-        [Authorize(Roles = "Admin, Admin,User, Noble Admin")]
+        
         public async Task<IActionResult> SaveLocation([FromBody] BusinessVm business)
         {
             if (business.Id == string.Empty)
