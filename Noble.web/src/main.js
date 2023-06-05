@@ -117,6 +117,10 @@ Vue.component('paymenttype', require('./components/General/PaymentType.vue').def
 //Funds
 Vue.component('funds-mod', require('./components/Funds/AddFunds.vue').default);
 
+//Print
+Vue.component('print', require('./components/Print/Print.vue').default);
+
+
 
 Vue.prototype.$https = axios;
 axios.defaults.baseURL = json.ServerIP;
@@ -125,6 +129,7 @@ Vue.prototype.$PermissionIp = json.PermissionIP;
 Vue.prototype.$ClientIP = json.ClientIP;
 Vue.prototype.$ReportServer = json.ReportServer;
 Vue.prototype.$macAddess = 'D8-FC-93-2E-5B-94';
+Vue.prototype.$ReportServer = json.ReportServer;
 Vue.prototype.$SystemType = json.SystemType;
 
 router.beforeEach((to, from, next) => { // <------------

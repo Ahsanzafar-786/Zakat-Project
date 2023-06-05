@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web;
+using System.Globalization;
 
 namespace Noble.Report.Reports.Invoice
 {
@@ -21,53 +22,22 @@ namespace Noble.Report.Reports.Invoice
         {
             try
             {
-                var CompanyId = Request.QueryString["CompanyId"];
+                var CompanyId = Request.QueryString["CompanyID"];
                 if (Session["CompanyId"] == null && Session["CompanyId"] != CompanyId)
                 {
                     var myData = GetToken.TokenValue(Guid.Parse(CompanyId));
-                    Session["CompanyId"] = myData.Where(x => x.TokenName == "ServerAddress").Select(x => x.CompanyId).FirstOrDefault();
-                    Session["ServerAddress"] = myData.Where(x => x.Token == "ServerAddress").Select(x => x.TokenName).FirstOrDefault();
-                    Session["Sales"] = myData.Where(x => x.TokenName == "Sales").Select(x => x.Token).FirstOrDefault();
-                    Session["Expenses"] = myData.Where(x => x.TokenName == "Expenses").Select(x => x.Token).FirstOrDefault();
-                    Session["Other"] = myData.Where(x => x.TokenName == "Other").Select(x => x.Token).FirstOrDefault();
-                    Session["Setups_And_Configuration"] = myData.Where(x => x.TokenName == "Setups_And_Configuration").Select(x => x.Token).FirstOrDefault();
-                    Session["Purchase"] = myData.Where(x => x.TokenName == "Purchase").Select(x => x.Token).FirstOrDefault();
-                    Session["Product_And_Inventory_Management"] = myData.Where(x => x.TokenName == "Product_And_Inventory_Management").Select(x => x.Token).FirstOrDefault();
-                    Session["WareHouse_Management"] = myData.Where(x => x.TokenName == "WareHouse_Management").Select(x => x.Token).FirstOrDefault();
-                    Session["HR_And_PayRoll"] = myData.Where(x => x.TokenName == "HR_And_PayRoll").Select(x => x.Token).FirstOrDefault();
-                    Session["Settings And Permission"] = myData.Where(x => x.TokenName == "Settings And Permission").Select(x => x.Token).FirstOrDefault();
-                    Session["Accounting"] = myData.Where(x => x.TokenName == "Accounting").Select(x => x.Token).FirstOrDefault();
-                    Session["DayStart"] = myData.Where(x => x.TokenName == "DayStart").Select(x => x.Token).FirstOrDefault();
-                    Session["Reporting"] = myData.Where(x => x.TokenName == "Reporting").Select(x => x.Token).FirstOrDefault();
-
-                    // use the salesToken value as needed
+                    string token = myData.Token;
+                    var serverAddress = myData.TokenName;
+                    var companyInfo = GetCompanyInfo.GetCompanyInfodetials(CompanyId, token, serverAddress);
+                    var formName = Request.QueryString["formName"];
+                    var pageNumber = Request.QueryString["pageNumber"];
+                    var id = Request.QueryString["id"];
+                    var searchTerm = Request.QueryString["searchTerm"];
+                    var TrailBalanceAccount = GetPayment.GetPaymentDtl(id,token, serverAddress);
+                    XtraReport BalanceSheetReport = new Noble.Report.Reports.Invoice.PaymentReport(companyInfo, TrailBalanceAccount);
+                    ASPxWebDocumentViewer1.OpenReport(BalanceSheetReport);
                 }
-
-                var PageType = Request.QueryString["PageType"];
-                var isSale = Request.QueryString["isSale"];
-                var formName = Request.QueryString["formName"];
-                string report = Request.QueryString["reportName"] == null ? null : Request.QueryString["reportName"];
-                string id = Request.QueryString["id"] == null ? null : Request.QueryString["id"];
-                bool isFifo = bool.Parse(Request.QueryString["isFifo"] == null ? "false" : Request.QueryString["isFifo"]);
-                int openBatch = int.Parse(Request.QueryString["openBatch"] == null ? "0" : Request.QueryString["openBatch"]);
-                bool IsDayStart = bool.Parse(Request.QueryString["IsDayStart"] == null ? "false" : Request.QueryString["IsDayStart"]);
-                string CounterId = Request.QueryString["CounterId"]==null ? null: Request.QueryString["CounterId"];
-                bool colorVariants = bool.Parse(Request.QueryString["colorVariants"] == null?"false":Request.QueryString["colorVariants"]);
-                bool isReturn = bool.Parse(Request.QueryString["isReturn"] == null ? "false" : Request.QueryString["isReturn"]);
-                bool isMultiUnit = bool.Parse(Request.QueryString["isMultiUnit"] == null ? "false" : Request.QueryString["isMultiUnit"]);
-                bool isReturnView = bool.Parse(Request.QueryString["isReturnView"] == null ? "false" : Request.QueryString["isReturnView"]);
-                string invoiceNo = Request.QueryString["invoiceNo"]==null?"":Request.QueryString["invoiceNo"];
-                bool deliveryChallan = bool.Parse(Request.QueryString["deliveryChallan"] == null ? "false" : Request.QueryString["deliveryChallan"]);
-                bool simpleQuery = bool.Parse(Request.QueryString["simpleQuery"] == null ? "false" : Request.QueryString["simpleQuery"]);
-                var serverAddress = Session["ServerAddress"].ToString()==null?null : Session["ServerAddress"].ToString();
-                var printSetting = GetPrintSetting.PrintDetails(Session["Sales"].ToString(), serverAddress);
-                string Print = Request.QueryString["Print"] == null ? "" : Request.QueryString["Print"];
-                var companyInfo = GetCompanyInfo.GetCompanyInfodetials(CompanyId, Session["Sales"].ToString(), serverAddress);
-                //  var SaleOrderDetail = GetSaleOrder.GetSaleOrderDetail(id, isFifo, openBatch, deliveryChallan, Session["Sales"].ToString(), serverAddress);
-                //var DeliveryNoteDetail = GetDeliveryNode.GetDeliveryNodeDetail(id, isFifo, openBatch, deliveryChallan, Session["Sales"].ToString(), serverAddress);
-                //end of Reports nobelReport/reports/reports===========ProductComparisionReport
-
-            }
+                }
             catch (Exception ex)
             {
                 throw ex;

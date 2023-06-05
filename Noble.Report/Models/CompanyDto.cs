@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -18,9 +19,9 @@ namespace Noble.Report.Models
         public string CompanyEmail { get; set; }
         public string CityEnglish { get; set; }
         public string CityArabic { get; set; }
-        public string Base64Logo { get; set; }
 
         public string CountryEnglish { get; set; }
+        public string Base64Logo { get; set; }
         public string CountryArabic { get; set; }
         public string CategoryEnglish { get; set; }
         public string CategoryArabic { get; set; }
@@ -29,14 +30,18 @@ namespace Noble.Report.Models
         public string AddressEnglish { get; set; }
         public string AddressArabic { get; set; }
 
+        [Display(Name = "DFE Number")]
 
         public string DfeNumber { get; set; }
-
+        [Display(Name = "Created Date")]
         public string CreatedDate { get; set; }
         public string LogoPath { get; set; }
+        [Display(Name = "Company Registration No.")]
         public string CompanyRegNo { get; set; }
+        [Display(Name = "House Number")]
         public string HouseNumber { get; set; }
 
+        [RegularExpression("(^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$)", ErrorMessage = "Please Enter Valid Post Code")]
         public string Postcode { get; set; }
         public string Town { get; set; }
         public string LandLine { get; set; }
@@ -52,6 +57,7 @@ namespace Noble.Report.Models
         public string CompanyType { get; set; }
         public decimal NoOfTransactionsAllow { get; set; }
         public Guid CompanyLicenceId { get; set; }
+        public List<CompanyLicenceDto> CompanyLicences { get; set; }
         public string Currency { get; set; }
         public bool IsMultiUnit { get; set; }
         public bool IsProduction { get; set; }

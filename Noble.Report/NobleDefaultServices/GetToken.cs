@@ -9,7 +9,7 @@ namespace Noble.Report.NobleDefaultServices
     public static class GetToken
     {
 
-        public static List<ModuleWiseClaimsLookupModel> TokenValue(Guid companyIdAsParam)
+        public static ModuleWiseClaimsLookupModel TokenValue(Guid companyIdAsParam)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["ServerString"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -33,7 +33,7 @@ namespace Noble.Report.NobleDefaultServices
                         {
 
                             string token = reader["Token"].ToString();
-                            return JsonConvert.DeserializeObject<List<ModuleWiseClaimsLookupModel>>(token);
+                            return JsonConvert.DeserializeObject<ModuleWiseClaimsLookupModel>(token);
 
 
                         }

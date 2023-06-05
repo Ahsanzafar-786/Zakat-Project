@@ -297,7 +297,9 @@
     "Cashier":"أمين الصندوق",
     "Month":"شهر",
     "Year":"سنة",
-    "Period":"فترة"
+    "Period":"فترة",
+    "Print":"مطبعة",
+    "Action":"فعل"
   },
 
   "AddPayment":{

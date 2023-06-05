@@ -43,6 +43,7 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
@@ -179,66 +180,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountLedgerReportLookUp.cs" />
-    <Compile Include="Models\AccountTypeLookupModel.cs" />
-    <Compile Include="Models\BalanceSheetListModel.cs" />
-    <Compile Include="Models\BalanceSheetModel.cs" />
-    <Compile Include="Models\BankDetailLookUpModel.cs" />
-    <Compile Include="Models\BankTransactionDetailLookUp.cs" />
-    <Compile Include="Models\CashVoucherLookUpModel.cs" />
+    <Compile Include="Models\CompanyLicenceDto.cs" />
     <Compile Include="Models\CompanyDto.cs" />
-    <Compile Include="Models\ContactLookUpModel.cs" />
-    <Compile Include="Models\CostCenterLookUpModel.cs" />
-    <Compile Include="Models\CreditNotesItemModel.cs" />
-    <Compile Include="Models\CreditNotesModel.cs" />
-    <Compile Include="Models\CustomerLedgerModel.cs" />
-    <Compile Include="Models\DailyExpenseLookUpModel.cs" />
-    <Compile Include="Models\DayStartLookUpModel.cs" />
-    <Compile Include="Models\DeliveryChallanItemLookUpModel.cs" />
-    <Compile Include="Models\DeliveryChallanLookUp.cs" />
-    <Compile Include="Models\IncomeStatementListModel.cs" />
-    <Compile Include="Models\IncomeStatementModel.cs" />
-    <Compile Include="Models\InventoryLookUpModel.cs" />
-    <Compile Include="Models\IsDayStartLookupModel.cs" />
-    <Compile Include="Models\LedgerTransactionLookUpModel.cs" />
+    <Compile Include="Models\SelectedMonthLookupModel.cs" />
+    <Compile Include="Models\PaymentLookupModel.cs" />
     <Compile Include="Models\ModuleWiseClaimsLookupModel.cs" />
-    <Compile Include="Models\OpeningBalanceLookUpModel.cs" />
-    <Compile Include="Models\PaymentVoucher.cs" />
-    <Compile Include="Models\PaymentVoucherLookUpModel.cs" />
     <Compile Include="Models\PrintSetting.cs" />
-    <Compile Include="Models\ProductLedgerModel.cs" />
-    <Compile Include="Models\ProductList.cs" />
-    <Compile Include="Models\ProductLookUpModel.cs" />
-    <Compile Include="Models\PurchaseOrderItemLookupModel.cs" />
-    <Compile Include="Models\PurchaseOrderLookupModel.cs" />
-    <Compile Include="Models\PurchasePostItemLookupModel.cs" />
-    <Compile Include="Models\PurchasePostLookupModel.cs" />
-    <Compile Include="Models\SaleDetailLookupModel.cs" />
-    <Compile Include="Models\SaleInvoiceModel.cs" />
-    <Compile Include="Models\SaleItemLookupModel.cs" />
-    <Compile Include="Models\SaleOrderDetailLookUpModel.cs" />
-    <Compile Include="Models\SaleOrderItemLookupModel.cs" />
-    <Compile Include="Models\SalePaymentLookupModel.cs" />
-    <Compile Include="Models\StockListLookUpModel.cs" />
-    <Compile Include="Models\TerminalLookUpModel.cs" />
-    <Compile Include="Models\TransactionDto.cs" />
-    <Compile Include="Models\TrialBalanceAccountReportLookup.cs" />
-    <Compile Include="Models\TrialBalanceModel.cs" />
-    <Compile Include="Models\TrialLookUp.cs" />
-    <Compile Include="Models\VatPayableListModel.cs" />
-    <Compile Include="Models\VatPayableModel.cs" />
+    <Compile Include="NobleDefaultServices\GetPayment.cs" />
     <Compile Include="NobleDefaultServices\GetCompanyInfo.cs" />
-    <Compile Include="NobleDefaultServices\GetCreditNote.cs" />
-    <Compile Include="NobleDefaultServices\GetDeliveryNode.cs" />
-    <Compile Include="NobleDefaultServices\GetInActiveDay.cs" />
-    <Compile Include="NobleDefaultServices\GetInvoiceDetails.cs" />
-    <Compile Include="NobleDefaultServices\GetOpeningBalance.cs" />
-    <Compile Include="NobleDefaultServices\GetPrintSetting.cs" />
-    <Compile Include="NobleDefaultServices\GetProductLedger.cs" />
-    <Compile Include="NobleDefaultServices\GetPurchaseOrder.cs" />
-    <Compile Include="NobleDefaultServices\GetPurchasePost.cs" />
-    <Compile Include="NobleDefaultServices\GetSaleOrder.cs" />
-    <Compile Include="NobleDefaultServices\GetTerminalDtl.cs" />
     <Compile Include="NobleDefaultServices\GetToken.cs" />
     <Compile Include="PredefinedReports\ReportsFactory.cs" />
     <Compile Include="PredefinedReports\TestReport.cs">
@@ -258,6 +207,12 @@
     <Compile Include="Reports\Invoice\A4_DefaultTempletForm.aspx.designer.cs">
       <DependentUpon>A4_DefaultTempletForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Invoice\PaymentReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\PaymentReport.Designer.cs">
+      <DependentUpon>PaymentReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\CustomReportStorageWebExtension.cs" />
     <Compile Include="Site.master.cs">
       <DependentUpon>Site.master</DependentUpon>
@@ -274,7 +229,12 @@
       <DependentUpon>Viewer.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\Invoice\PaymentReport.resx">
+      <DependentUpon>PaymentReport.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
