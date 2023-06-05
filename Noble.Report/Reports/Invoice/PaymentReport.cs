@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 
 namespace Noble.Report.Reports.Invoice
 {
@@ -16,6 +17,13 @@ namespace Noble.Report.Reports.Invoice
 
             PaymentDtl.DataSource = Payments;
             CompanyDtl.DataSource = companyDetail;
+            if (companyDetail.LogoPath != null && companyDetail.LogoPath != "" && companyDetail.LogoPath != string.Empty)
+            {
+                byte[] footerData = Convert.FromBase64String(companyDetail.LogoPath);
+                MemoryStream Footerms = new MemoryStream(footerData);
+                Bitmap FooterImg = new Bitmap(Footerms);
+                xrPictureBox1.Image = FooterImg;
+            }
         }
 
     }

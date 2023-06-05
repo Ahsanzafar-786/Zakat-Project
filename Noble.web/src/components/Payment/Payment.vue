@@ -212,7 +212,7 @@ export default {
                     companyId = localStorage.getItem('CompanyID');
                 }
                
-                this.reportsrc=   this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?id='+Id+'&pageNumber=' + this.currentPage + '&searchTerm=' + this.search+'&CompanyID='+companyId
+                this.reportsrc=   this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?id='+Id+'&pageNumber=' + this.currentPage + '&searchTerm=' + this.search+'&CompanyID='+companyId+'&formName=Payment'
                 this.changereport++;
                 this.show = !this.show;
             },

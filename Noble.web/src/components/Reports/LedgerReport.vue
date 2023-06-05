@@ -14,7 +14,7 @@
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
-                                <a v-on:click="GotoPage()" href="javascript:void(0);"
+                                <a v-on:click="PrintRdlc()" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('Payment.Print') }}
@@ -54,11 +54,10 @@
                 </div>
             </div>
         </div>
-
+        <iframe :key="changereport" height="1500" width="1000" :src="reportsrc"></iframe>
     </div>
 </template>
-
-
+<invoicedetailsprint :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show=false" @IsSave="IsSave" />
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 
@@ -66,6 +65,11 @@ export default {
     mixins: [clickMixin],
     data: function () {
         return {
+            reportsrc:'',
+            changereport:0,
+            reportsrc1:'',
+            show:false,
+            changereportt:0,
             benificaryId: '',
             arabic: '',
             english: '',
@@ -79,10 +83,13 @@ export default {
     watch: {
         benificaryId: function (val) {
             this.GetTransactions(val, 1);
+            this.PrintRdlc(val,1);
         }
     },
     methods: {
-        
+        IsSave:function(){
+                this.show = !this.show;
+            },
         GotoPage: function (link) {
             this.$router.push({ path: link });
         },
@@ -94,7 +101,24 @@ export default {
             this.month =  '';
             this.render++
         },
+        PrintRdlc:function(val) {
+                
+                var companyId = '';
+                    if (this.$session.exists()) {
+                        companyId = localStorage.getItem('CompanyID');
+                    }
+                    debugger;
 
+                    if(val){
+                        this.reportsrc1=  this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?companyId='+companyId+'&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate +'&formName=LedgerReport' + "&Print=" + val
+                        this.changereportt++;
+                        this.show = !this.show;
+                    }
+                    else{
+                        this.reportsrc= this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?companyId='+companyId+'&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate +'&formName=LedgerReport' + "&Print=" + val
+                        this.changereport++;
+                    }
+                },
         GetTransactions: function () {
             debugger;
             var root = this;
