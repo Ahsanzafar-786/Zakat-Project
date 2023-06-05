@@ -178,10 +178,13 @@
 
   "Funds":{
     "Funds":"أموال",
+    "AddFunds":"إضافة الأموال",
     "FundsList":"قائمة الصناديق",
     "CharityResource":"الموارد الخيرية",
     "Amount":"كمية",
-    "Date":"تاريخ"
+    "Date":"تاريخ",
+    "CharityFundsReports":"تقارير الصناديق الخيرية",
+    "CharityFundsResource":"موارد الصناديق الخيرية"
   },
   "AddFunds":{
     "AddFunds" : "إضافة الأموال",
@@ -219,8 +222,12 @@
     "Dashboard":"لوحة القيادة",
     "MyProfile":"ملفي",
     "LogOut":"تسجيل خروج",
-    "UserSetup":"إعداد المستخدم",
-    "SignUpUser":"تسجيل المستخدم"
+    "Setup":"يثبت",
+    "AddUser":" إضافة مستخدم",
+    "AddAuthorizedPerson":"إضافة شخص مفوض",
+    "AddApprovalPerson":"إضافة شخص الموافقة",
+    "AddPaymentType":"إضافة نوع الدفع",
+    "AddCharityFundsResources":"أضف موارد الصناديق الخيرية"
   },
 
   "Company":{
@@ -290,6 +297,8 @@
 
   "Payment":{
     "Payment":"الدفع",
+    "BenificaryPayment":"الدفع المستحق",
+    "BenificaryReports":"التقارير المفيدة",
     "AddPayment":"إضافة الدفع",
     "PaymentList":"قائمة الدفع",
     "BenifcaryName":"أسم المستفيد",
@@ -329,7 +338,13 @@
   },
   "LedgerReport":{
     "LedgerReport": "تقرير دفتر الأستاذ",
-    "Report":"تقرير"
+    "ReportsManagement":"إدارة التقارير"
+  },
+  "SystemManagement":{
+    "SystemManagement":"ادارة النظام",
+    "PrintSettings":"إعدادات الطباعة",
+    "DataBackUp":"النسخ الاحتياطي للبيانات",
+    "DataRestore":"استعادة البيانات"
   }
 
 

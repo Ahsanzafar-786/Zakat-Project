@@ -158,10 +158,13 @@
   },
   "Funds": {
     "Funds": "Funds",
+    "AddFunds":"Add Funds",
     "FundsList": "Funds List",
     "CharityResource": "Charity Resource",
     "Amount": "Amount",
-    "Date": "Date"
+    "Date": "Date",
+    "CharityFundsReports":"Charity Funds Reports",
+    "CharityFundsResource":"Charity Funds Resource"
   },
   "DatePicker": {
     "PickDate": "Pick Date",
@@ -213,8 +216,12 @@
     "Dashboard":"Dashboard",
     "MyProfile":"My Profile",
     "LogOut":"LogOut",
-    "UserSetup":"User Setup",
-    "SignUpUser":"SignUp User"
+    "Setup":"Setup",
+    "AddUser":"Add User",
+    "AddAuthorizedPerson":"Add Authorized Person",
+    "AddApprovalPerson":"Add Approval Person",
+    "AddPaymentType":"Add Payment Type",
+    "AddCharityFundsResources":"Add Charity Funds Resources"
   },
   "Company":{
     "Company":"Company",
@@ -283,6 +290,8 @@
 
   "Payment":{
     "Payment":"Payment",
+    "BenificaryPayment":"Benificary Payment",
+    "BenificaryReports":"Benificary Reports",
     "AddPayment":"Add Payment",
     "PaymentList":"Payment List",
     "BenifcaryName":"BenifcaryName",
@@ -321,6 +330,12 @@
   },
   "LedgerReport":{
     "LedgerReport": "Ledger Report",
-    "Report":"Report"
+    "ReportsManagement":"Reports Management"
+  },
+  "SystemManagement":{
+    "SystemManagement":"System Management",
+    "PrintSettings":"Print Settings",
+    "DataBackUp":"Data BackUp",
+    "DataRestore":"Data Restore"
   }
 }
