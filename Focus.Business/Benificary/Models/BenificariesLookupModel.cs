@@ -14,6 +14,8 @@ namespace Focus.Business.Benificary.Models
         public string NameAr { get; set; }
         public string PassportNo { get; set; }
         public string Address { get; set; }
+        public string Year { get; set; }
+        public string EndYear { get; set; }
         public string Nationality { get; set; }
         public string Gender { get; set; }
         public int PaymentIntervalMonth { get; set; }
@@ -38,6 +40,7 @@ namespace Focus.Business.Benificary.Models
         public DateTime? StartMonth { get; set; }
         public Guid? ApprovedPaymentId { get; set; }
         public int AdvancePayment { get; set; }
+        public int? PaymentType { get; set; }
         public string DurationType { get; set; }
         public int? FirstMonth { get; set; }
         public int? EndMonth { get; set; }

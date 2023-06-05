@@ -50,8 +50,8 @@ namespace Focus.Business.Benificary.Commands
                                 BeneficiaryId = benificaryNo,
                                 Name = request.benificiaries.Name,
                                 PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
-                                AmountPerMonth = Convert.ToDecimal(request.benificiaries.AmountPerMonth),
-                                RecurringAmount = Convert.ToDecimal(request.benificiaries.RecurringAmount),
+                                AmountPerMonth = request.benificiaries.AmountPerMonth,
+                                RecurringAmount = request.benificiaries.RecurringAmount,
                                 UgamaNo = request.benificiaries.UgamaNo,
                                 PhoneNo = request.benificiaries.PhoneNo,
                                 Note = request.benificiaries.Note,
@@ -68,7 +68,7 @@ namespace Focus.Business.Benificary.Commands
                                 DurationType = request.benificiaries.DurationType,
                                 ApprovedPaymentId = request.benificiaries.ApprovedPaymentId,
                                 StartDate = request.benificiaries.StartDate,
-                                EndDate = request.benificiaries.EndDate,
+                                EndDate = request.benificiaries.EndDate == null ? null : request.benificiaries.EndDate.Value.AddDays(6),
                                 StartMonth = request.benificiaries.StartMonth,
                                 IsRegister = false,
                                 BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
@@ -98,8 +98,8 @@ namespace Focus.Business.Benificary.Commands
                                 BeneficiaryId = benificaryNo,
                                 Name = request.benificiaries.Name,
                                 PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
-                                AmountPerMonth = Convert.ToDecimal(request.benificiaries.AmountPerMonth),
-                                RecurringAmount = Convert.ToDecimal(request.benificiaries.RecurringAmount),
+                                AmountPerMonth = request.benificiaries.AmountPerMonth,
+                                RecurringAmount = request.benificiaries.RecurringAmount,
                                 UgamaNo = request.benificiaries.UgamaNo,
                                 PhoneNo = request.benificiaries.PhoneNo,
                                 Note = request.benificiaries.Note,
@@ -116,7 +116,7 @@ namespace Focus.Business.Benificary.Commands
                                 DurationType = request.benificiaries.DurationType,
                                 ApprovedPaymentId = request.benificiaries.ApprovedPaymentId,
                                 StartDate = request.benificiaries.StartDate,
-                                EndDate = request.benificiaries.EndDate,
+                                EndDate = request.benificiaries.EndDate.Value.AddDays(1),
                                 StartMonth = request.benificiaries.StartMonth,
                                 IsRegister = true,
                                 BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
@@ -152,8 +152,8 @@ namespace Focus.Business.Benificary.Commands
                             benifiaryDetail.BeneficiaryId = request.benificiaries.BeneficiaryId;
                             benifiaryDetail.Name = request.benificiaries.Name;
                             benifiaryDetail.PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth;
-                            benifiaryDetail.AmountPerMonth = Convert.ToDecimal(request.benificiaries.AmountPerMonth);
-                            benifiaryDetail.RecurringAmount = Convert.ToDecimal(request.benificiaries.RecurringAmount);
+                            benifiaryDetail.AmountPerMonth = request.benificiaries.AmountPerMonth;
+                            benifiaryDetail.RecurringAmount = request.benificiaries.RecurringAmount;
                             benifiaryDetail.UgamaNo = request.benificiaries.UgamaNo;
                             benifiaryDetail.AuthorizedPersonId = request.benificiaries.AuthorizedPersonId;
                             benifiaryDetail.PhoneNo = request.benificiaries.PhoneNo;

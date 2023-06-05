@@ -12,13 +12,19 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="form-group has-label col-sm-6 ">
+                    <div class="form-group has-label col-sm-4 ">
+                        <label class="text  font-weight-bolder">
+                           {{ $t('Payment.Code') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <input type="text" class="form-control" v-model="$v.brand.code.$model" :values="brand.code" disabled />
+                    </div>
+                    <div class="form-group has-label col-sm-4 ">
                         <label class="text  font-weight-bolder">
                            {{ $t('AddFunds.CharityResource') }}:<span class="text-danger"> *</span>
                         </label>
                         <charityresources v-model="brand.charityResouceId" :values="brand.charityResouceId" />
                     </div>
-                    <div class="form-group has-label col-sm-6 ">
+                    <div class="form-group has-label col-sm-4 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.Amount') }}:<span class="text-danger"> *</span>
                         </label>
@@ -77,6 +83,9 @@ export default {
             amount: {
                 required
             },
+            code:{
+                required
+            }
         }
     },
     methods: {
@@ -153,11 +162,41 @@ export default {
                     root.loading = false
                 })
                 .finally(() => root.loading = false);
-        }
+        },
+        GetAutoCode: function (val) {
+            debugger;
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('/Benificary/AutoCodeGenerate?name=' + val, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                })
+                .then(function (response) {
+                        if (response.data) {
+                            root.brand.code = response.data;
+                            root.rendar++;
+                        } else {
+                            console.log("error: something wrong from db.");
+                        }
+                    },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
+        },
     },
     mounted: function () {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
+
+        if(this.brand.id == '00000000-0000-0000-0000-000000000000')
+        {
+            this.GetAutoCode('Funds');
+        }
     }
 }
 </script>

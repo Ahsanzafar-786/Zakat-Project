@@ -35,6 +35,7 @@ namespace Focus.Business.CharityFunds.Commands
                     {
                         var fund = new Funds
                         {
+                           Code = request.Funds.Code,
                            Description = request.Funds.Description,
                            UserId = request.Funds.UserId,
                            Amount = request.Funds.Amount,
@@ -43,6 +44,20 @@ namespace Focus.Business.CharityFunds.Commands
                         };
 
                         await Context.Funds.AddAsync(fund);
+
+                        var charityTransactions = new CharityTransaction
+                        {
+                            DoucmentId = fund.Id,
+                            DoucmentCode = fund.Code,
+                            DocumentName = "Funds",
+                            Amount = fund.Amount,
+                            DoucmentDate = fund.Date,
+                            CharityTransactionDate = DateTime.Now,
+                            Month = DateTime.Now,
+                            Year = DateTime.Now.Year.ToString(),
+                        };
+
+                        await Context.CharityTransaction.AddAsync(charityTransactions);
 
                         await Context.SaveChangesAsync();
 
@@ -59,6 +74,7 @@ namespace Focus.Business.CharityFunds.Commands
                         if (fund == null)
                             throw new NotFoundException("Funds Not Found", "");
 
+                        fund.Code = request.Funds.Code;
                         fund.Description = request.Funds.Description;
                         fund.UserId = request.Funds.UserId;
                         fund.Amount = request.Funds.Amount;

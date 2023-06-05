@@ -28,6 +28,7 @@ using Focus.Business.Payments.Models;
 using Focus.Business.Payments.Commands;
 using Focus.Business.Payments.Queries;
 using Focus.Business.Transactions.Queries;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Noble.Api.Controllers
 {
@@ -352,11 +353,14 @@ namespace Noble.Api.Controllers
         #region CharityTransaction
         [Route("api/Benificary/GetCharityTransactionList")]
         [HttpGet("GetCharityTransactionList")]
-        public async Task<IActionResult> GetCharityTransactionList(Guid benificaryId)
+        public async Task<IActionResult> GetCharityTransactionList(Guid benificaryId, DateTime? month, DateTime? fromDate, DateTime? toDate)
         {
             var charity = await Mediator.Send(new CharityTransactionListQuery
             {
-                BenificayId = benificaryId
+                BenificayId = benificaryId,
+                Month = month,
+                FromDate = fromDate,
+                ToDate = toDate,
             });
             return Ok(charity);
         }
@@ -365,9 +369,12 @@ namespace Noble.Api.Controllers
         #region AutoCode
         [Route("api/Benificary/AutoCodeGenerate")]
         [HttpGet("AutoCodeGenerate")]
-        public async Task<IActionResult> AutoCodeGenerate()
+        public async Task<IActionResult> AutoCodeGenerate(string name)
         {
-            var autoNo = await Mediator.Send(new AutoCodeGenerateQuery{});
+            var autoNo = await Mediator.Send(new AutoCodeGenerateQuery
+            {
+                Name = name,
+            });
             return Ok(autoNo);
         }
         #endregion

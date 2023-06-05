@@ -319,6 +319,9 @@
     "Resource":"Resource",
     "BenificaryType":"Benificary Type",
     "AudienceOverview":"Audience Overview"
+  },
+  "LedgerReport":{
+    "LedgerReport": "Ledger Report",
+    "Report":"Report"
   }
-
 }

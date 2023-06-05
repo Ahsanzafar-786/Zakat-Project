@@ -38,6 +38,7 @@ namespace Focus.Business.CharityFunds.Queries
                         Id = x.Id,
                         Description = x.Description,
                         Amount = x.Amount,
+                        Code = x.Code,
                         CharityResouceName = x.CharityResources.Name,
                         Date = x.Date.ToString("dd/MM/yyyy"),
                     }).AsQueryable();
