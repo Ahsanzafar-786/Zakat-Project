@@ -705,19 +705,19 @@ export default {
                         this.selectedMonth.push({
                             selectedMonth: this.addPayment.month
                         });
-                        if(this.selectedMonth.length>this.brand.advancePayment)
-                        {
-                            root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Take'+this.brand.advancePayment +' Month Payment in Advance',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                        }
+                        // if(this.selectedMonth.length>this.brand.advancePayment)
+                        // {
+                        //     root.$swal({
+                        //             title: 'Error',
+                        //             text: 'You can Only Take'+this.brand.advancePayment +' Month Payment in Advance',
+                        //             type: 'error',
+                        //             icon: 'error',
+                        //             showConfirmButton: false,
+                        //             timer: 3000,
+                        //             timerProgressBar: true,
+                        //         });
+                        //         return;
+                        // }
 
 
                         if (root.selectedMonth.length != 0) {
