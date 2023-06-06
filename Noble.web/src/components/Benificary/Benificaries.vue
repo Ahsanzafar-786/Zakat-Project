@@ -206,6 +206,7 @@ export default {
                 startMonth: '',
                 startDate: '',
                 endDate: '',
+                isDisable:false,
                 approvedPaymentId: '',
                 advancePayment: 0,
                 durationType: '',
@@ -262,6 +263,7 @@ export default {
                 ugamaNo: '',
                 phoneNo: '',
                 note: '',
+                isDisable:false,
                 authorizedPersonId: '',
                 approvalPersonId: '',
                 paymentTypeId: '',
@@ -284,7 +286,7 @@ export default {
                     approvalPersonId: '',
                     date: '',
                     description: '',
-                    isActive:false
+                    isActive:true
                 }],
             }
             this.show = !this.show;

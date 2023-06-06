@@ -56,49 +56,49 @@ namespace Focus.Business.PaymentsType.Queries
                             payment.Add(new PaymentType
                             {
                                 Code = 2,
-                                Name = "2 Month",
+                                Name = "2 Months",
                                 NameAr = "2 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 3,
-                                Name = "3 Month",
+                                Name = "3 Months",
                                 NameAr = "3 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 4,
-                                Name = "4 Month",
+                                Name = "4 Months",
                                 NameAr = "4 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 5,
-                                Name = "5 Month",
+                                Name = "5 Months",
                                 NameAr = "5 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 6,
-                                Name = "6 Month",
+                                Name = "6 Months",
                                 NameAr = "6 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 7,
-                                Name = "7 Month",
+                                Name = "7 Months",
                                 NameAr = "7 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 8,
-                                Name = "8 Month",
+                                Name = "8 Months",
                                 NameAr = "8 شهر",
                                 IsActive = true,
                             });
@@ -112,21 +112,21 @@ namespace Focus.Business.PaymentsType.Queries
                             payment.Add(new PaymentType
                             {
                                 Code = 10,
-                                Name = "10 Month",
+                                Name = "10 Months",
                                 NameAr = "10 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 11,
-                                Name = "11 Month",
+                                Name = "11 Months",
                                 NameAr = "11 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 12,
-                                Name = "12 Month",
+                                Name = "12 Months",
                                 NameAr = "12 شهر",
                                 IsActive = true,
                             });
@@ -172,77 +172,77 @@ namespace Focus.Business.PaymentsType.Queries
                             payment.Add(new PaymentType
                             {
                                 Code = 2,
-                                Name = "2 Month",
+                                Name = "2 Months",
                                 NameAr = "2 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 3,
-                                Name = "3 Month",
+                                Name = "3 Months",
                                 NameAr = "3 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 4,
-                                Name = "4 Month",
+                                Name = "4 Months",
                                 NameAr = "4 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 5,
-                                Name = "5 Month",
+                                Name = "5 Months",
                                 NameAr = "5 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 6,
-                                Name = "6 Month",
+                                Name = "6 Months",
                                 NameAr = "6 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 7,
-                                Name = "7 Month",
+                                Name = "7 Months",
                                 NameAr = "7 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 8,
-                                Name = "8 Month",
+                                Name = "8 Months",
                                 NameAr = "8 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 9,
-                                Name = "9 Month",
+                                Name = "9 Months",
                                 NameAr = "9 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 10,
-                                Name = "10 Month",
+                                Name = "10 Months",
                                 NameAr = "10 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 11,
-                                Name = "11 Month",
+                                Name = "11 Months",
                                 NameAr = "11 شهر",
                                 IsActive = true,
                             });
                             payment.Add(new PaymentType
                             {
                                 Code = 12,
-                                Name = "12 Month",
+                                Name = "12 Months",
                                 NameAr = "12 شهر",
                                 IsActive = true,
                             });

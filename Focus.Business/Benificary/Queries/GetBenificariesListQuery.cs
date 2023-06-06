@@ -38,6 +38,9 @@ namespace Focus.Business.Benificary.Queries
                             Id= x.Id,
                             Name = x.Name,
                             NameAr =x.NameAr,
+                            UgamaNo = x.UgamaNo,
+                            PhoneNo = x.PhoneNo,
+                            BeneficiaryId = x.BeneficiaryId
                         }).ToListAsync();
 
                         return new PagedResult<List<BenificariesLookupModel>>

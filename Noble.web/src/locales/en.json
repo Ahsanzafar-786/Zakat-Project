@@ -10,7 +10,7 @@
   "General": {
     "SelectAuthorizePerson": "Select Authorize Person",
     "SelectApprovalPerson": "Select Approval Person",
-    "PaymentType": "Payment Type",
+    "PaymentType": "Select Payment Type",
     "SelectBenificary": "Select Benificary"
   },
   "Benificary": {
@@ -19,7 +19,7 @@
     "Name": "Name",
     "PayementIntervalMonths": "Payement Interval Months",
     "AmountPerMonth": "Amount Per Month",
-    "ID": "ID",
+    "ID": "National ID",
     "Active": "Active",
     "DeActive": "De-Active",
     "ContactNo": "Contact No",
@@ -50,8 +50,9 @@
     "AmountPerMonth": "Amount Per Month",
     "Active": "Active",
     "Address": "Address",
+    "Amount": "Amount",
     "Note": "Note",
-    "Ids": "ID",
+    "Ids": "National ID",
     "SelectType": "Select Type",
     "AdvancePayment":"Advance Payment",
     "StartFrom":"Start From",
@@ -148,6 +149,7 @@
     "Name": "Name",
     "NameArabic": "Name Arabic",
     "Gender": "Gender",
+    "AuthorizedPersonId":"Authorized Person Id",
     "Nationality": "Nationality",
     "ID": "ID",
     "Male": "Male",
@@ -301,6 +303,7 @@
     "Amount":"Amount",
     "Cashier":"Cashier",
     "Month":"Month",
+    "Code":"Payment Code",
     "Year":"Year",
     "Period":"Period"
   },

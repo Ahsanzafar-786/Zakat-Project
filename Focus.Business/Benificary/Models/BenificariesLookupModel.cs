@@ -46,5 +46,7 @@ namespace Focus.Business.Benificary.Models
         public int? EndMonth { get; set; }
         public string Reason { get; set; }
         public List<CharityTransactionLookupModel> CharityTransactions { get; set; }
+
+        public bool IsDisable { get; set; }
     }
 }

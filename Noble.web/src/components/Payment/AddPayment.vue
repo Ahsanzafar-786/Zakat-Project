@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group has-label col-sm-12 ">
+                <div class="form-group has-label col-sm-12" v-if="brand.paymentType != 0">
                     <div class="row">
                         <div class="col-sm-5 text-md-end align-middle">
                             <label class="text  font-weight-bolder">
@@ -126,6 +126,18 @@
 
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group has-label col-sm-12 ">
+                    <div class="row">
+                        <div class="col-sm-5 text-md-end align-middle">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('AddBenificary.Note') }}:
+                            </label>
+                        </div>
+                        <div class="col-sm-7">
+                            <textarea name=""  rows="3" class="form-control" v-model="addPayment.note"></textarea>
                         </div>
                     </div>
                 </div>
@@ -220,9 +232,10 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from 'moment';
 
 export default {
+   
     data: function () {
         return {
             rendar: 0,
@@ -359,6 +372,7 @@ export default {
                 amountPerMonth: '',
                 userId: '',
                 month: '',
+                note:'',
                 year: '',
                 code: 0,
                 period: '',
@@ -381,9 +395,9 @@ export default {
             }
         },
         MonthSelection: function () {
-            debugger;
+          
             var root = this;
-            debugger;
+          
            
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
                 // const record1 = this.selectedMonth.some(x => x.selectedMonth == (moment(this.addPayment.month).format('MMMM')));
@@ -765,7 +779,7 @@ export default {
             });
         },
         EditBenificary: function (Id, val) {
-            debugger;
+          
             var root = this;
             var token = '';
             if (this.$session.exists()) {
@@ -785,7 +799,7 @@ export default {
                 })
                 .then(function (response) {
                         if (response.data) {
-                            debugger;
+                          
                             root.brand = response.data;
                             root.addPayment.amount = response.data.amountPerMonth;
                             root.addPayment.amountPerMonth = response.data.amountPerMonth;
@@ -869,7 +883,7 @@ export default {
 
         },
         GetTransactions: function (Id) {
-            debugger;
+          
             var root = this;
             var token = '';
             if (this.$session.exists()) {
@@ -898,6 +912,8 @@ export default {
             var root = this;
             this.loading = true;
             var token = '';
+            var userId = localStorage.getItem('UserId');
+            root.addPayment.userId = userId;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
@@ -908,7 +924,7 @@ export default {
                     }
                 })
                 .then(function (response) {
-                    debugger;
+                  
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {
                             root.$swal({
@@ -949,7 +965,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                    debugger;
+                  
                     console.log(error)
                     root.$swal.fire({
                         icon: 'error',

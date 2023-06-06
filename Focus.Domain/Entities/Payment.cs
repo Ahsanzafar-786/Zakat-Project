@@ -1,6 +1,8 @@
 ﻿using Focus.Domain.Interface;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Focus.Domain.Entities
 {
@@ -14,6 +16,8 @@ namespace Focus.Domain.Entities
         public string UserId { get; set; }
         public DateTime? Month { get; set; }
         public DateTime? Date { get; set; }
+        [Column(TypeName = "ntext")]
+        public string Note { get;set; }
         public string Year { get;set; }
         public string Period { get; set; }
         public virtual ICollection<SelectedMonth> SelectedMonth { get; set; }
