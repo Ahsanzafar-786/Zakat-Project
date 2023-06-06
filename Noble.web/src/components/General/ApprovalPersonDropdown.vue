@@ -1,6 +1,9 @@
 ﻿<template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectApprovalPerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
+        <multiselect v-model="DisplayValue" v-if="isDisable == 'true'"  disabled :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectApprovalPerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
+
+        </multiselect>      
+        <multiselect v-model="DisplayValue" v-else :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectApprovalPerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
 
         </multiselect>      
     </div>
@@ -9,7 +12,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import Multiselect from 'vue-multiselect';
 export default {
-    props: ["values", "isTemporary", 'isMultiple'],
+    props: ["values", "isDisable", 'isMultiple'],
     mixins: [clickMixin],
 
     components: {

@@ -93,8 +93,11 @@
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)"> {{ brand.amount }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" v-if="brand.month != null">
                                         {{ GetMonth(brand.month) }}
+                                    </td>
+                                    <td class="text-center" v-else>
+                                        {{ GetMonth(brand.date) }}
                                     </td>
                                     <td class="text-center">
                                         {{ brand.year }}

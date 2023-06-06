@@ -93,6 +93,8 @@ namespace Focus.Business.Benificary.Queries
                                 AuthorizationPersonId = x.AuthorizationPersonId,
                                 IsActive = x.IsActive,
                                 Date = x.Date.ToString(),
+                                ApprovalPersonName = x.ApprovalPerson.Name,
+                                AuthorizationPersonName = x.AuthorizedPerson.Name,
                                 Description = x.Description,
                             }).ToList(),
                         }).FirstOrDefaultAsync(x => x.Id == request.Id);
@@ -104,7 +106,16 @@ namespace Focus.Business.Benificary.Queries
                         return query;
                     }
                     else
-                    { 
+                    {
+                        var charityTransaction = await Context.CharityTransaction.Where(x => x.BenificayId == request.Id).ToListAsync();
+
+                        bool isDisable = false;
+
+                        if (charityTransaction.Count > 0)
+                        {
+                            isDisable = true;
+                        }
+
                         var query = await Context.Beneficiaries.AsNoTracking().Include(x=>x.PaymentTypes).Select(x => new BenificariesLookupModel
                         {
                             Id = x.Id,
@@ -138,6 +149,7 @@ namespace Focus.Business.Benificary.Queries
                             PaymentTypeName = x.PaymentTypes.Name,
                             ApprovalPersonName = x.ApprovalPersons.Name,
                             Reason = x.Reason,
+                            IsDisable = isDisable,
                             BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
                             {
                                 Id= x.Id,

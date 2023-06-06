@@ -39,6 +39,7 @@ namespace Focus.Business.Payments.Queries
                         PaymentCode = x.PaymentCode,
                         Year = x.Year,
                         Period = x.Period,
+                        Note = x.Note,
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                     if (query == null)

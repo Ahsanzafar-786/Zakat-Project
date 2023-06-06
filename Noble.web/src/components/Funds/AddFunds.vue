@@ -164,7 +164,7 @@ export default {
                 .finally(() => root.loading = false);
         },
         GetAutoCode: function (val) {
-            debugger;
+          
             var root = this;
             var token = '';
             if (this.$session.exists()) {

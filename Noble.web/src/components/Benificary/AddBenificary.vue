@@ -1,277 +1,338 @@
 <template>
-<modal :show="show" :modalLarge="true">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                {{ $t('AddBenificary.UpdateBenificary') }}
-            </h6>
-            <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
-                {{ $t('AddBenificary.AddBenificary') }}
-            </h6>
-            <button type="button" class="btn-close" v-on:click="close()"></button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.Name') }}:<span class="text-danger"> *</span>
-                    </label>
-                    <input class="form-control" v-model="$v.brand.name.$model" type="text" />
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.NameArabic') }}:<span class="text-danger"> *</span>
-                    </label>
-                    <input class="form-control" v-model="$v.brand.nameAr.$model" type="text" />
-                </div>
-
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.Ids') }}:
-                    </label>
-                    <input class="form-control" v-model="$v.brand.ugamaNo.$model" type="text" />
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.PassportNo') }}:
-                    </label>
-                    <input class="form-control" v-model="brand.passportNo" type="text" />
-                </div>
-
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.Nationality') }}:
-                    </label>
-                    <input class="form-control" v-model="brand.nationality" type="text" />
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.Gender') }}:
-                    </label>
-                    <select v-model="brand.gender" class="form-select" aria-label="Default select example">
-                        <option value="Male">{{ $t('AddBenificary.Male') }}</option>
-                        <option value="Female">{{ $t('AddBenificary.Female') }}</option>
-                    </select>
-                </div>
-
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.ContactNo') }}:
-                    </label>
-                    <input class="form-control" v-model="$v.brand.phoneNo.$model" type="number" />
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.Address') }}:
-                    </label>
-                    <input class="form-control" v-model="brand.address" type="text" />
-                </div>
-                <div class="col-md-12">
-                    <h4 style="color:black !important;">
-                        {{ $t('AddBenificary.PaymentDetail') }}
-
-                    </h4>
-
-                </div>
-
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.PaymentType') }}
-                    </label>
-                    <paymenttype v-model="brand.paymentTypeId" v-on:input="GetRecord" ref="ChlidDropdown" :values="brand.paymentTypeId" />
-                </div>
-                <div class="col-md-6 form-group" v-if="paymentType!=0">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.RecurringAmount') }}:
-                    </label>
-                    <input class="form-control" v-on:input="GetValueOfRecurring" v-model="$v.brand.recurringAmount.$model" @click="$event.target.select()" type="number" />
-                </div>
-                <div class="col-md-6 form-group" v-if="paymentType!=0">
-
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.AdvancePayment') }}:
-                    </label>
-                    <multiselect v-model="brand.advancePayment" v-on:input="GetDateMonth" :options="[0,1,2,3,4,5,6,7,8,9,10,11,12]" :show-labels="false" :placeholder="$t('AddBenificary.SelectType')">
-                    </multiselect>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder" v-if="paymentType!=0">
-                        {{ $t('AddBenificary.AmountPerMonth') }}:
-                    </label>
-                    <label class="text  font-weight-bolder" v-else>
-                        Amount:
-                    </label>
-                    <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" type="number" />
-                </div>
-                <div class="col-md-6 form-group">
-                    <label>{{ $t('AddBenificary.StartFrom') }}:</label>
-                    <datepicker v-model="brand.startMonth " v-on:input="GetDateMonth" :type="'month'" />
-
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.ApprovedBy') }}:
-                    </label>
-                    <approvalperson v-model="brand.approvedPaymentId " :values="brand.approvedPaymentId" />
-                </div>
-
-                <!-- <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.AuthorizedPerson') }}
-                    </label>
-                    <authorizedperson v-model="brand.authorizedPersonId" :values="brand.authorizedPersonId" />
-                </div> -->
-
-                <!-- <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.PaymentIntervalMonths') }}:
-                    </label>
-                    <input class="form-control" v-model="$v.brand.paymentIntervalMonth.$model" type="number" />
-                </div> -->
-                <div class="form-group col-sm-12">
-                    <label></label>
-                    <div class="checkbox form-check-inline mx-2">
-                        <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
-                        <label for="inlineCheckbox1"> {{ $t('AddBenificary.Active') }} </label>
+    <modal :show="show" :modalLarge="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
+                    {{ $t('AddBenificary.UpdateBenificary') }}
+                </h6>
+                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
+                    {{ $t('AddBenificary.AddBenificary') }}
+                </h6>
+                <button type="button" class="btn-close" v-on:click="close()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.Name') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                     </div>
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.NameArabic') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="$v.brand.nameAr.$model" type="text" />
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.Ids') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="$v.brand.ugamaNo.$model" placeholder="XXXXXXXXXX" type="text" />
+                        <span v-if="$v.brand.ugamaNo.$error && english == 'en'" class="error text-danger">
+                            <span v-if="!$v.brand.ugamaNo.minLength ">ID length should be 10 characters.</span>
+                            <span v-if="!$v.brand.ugamaNo.maxLength ">ID length should be 10 characters.</span>
+                        </span>
+                        <span v-else class="error text-danger">
+                            <span v-if="!$v.brand.ugamaNo.minLength ">يجب أن يكون طول الهوية 10 أحرف</span>
+                            <span v-if="!$v.brand.ugamaNo.maxLength ">يجب أن يكون طول الهوية 10 أحرف</span>
+                        </span>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.PassportNo') }}:
+                        </label>
+                        <input class="form-control" v-model="brand.passportNo" type="text" />
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.Nationality') }}:
+                        </label>
+                        <input class="form-control" v-model="brand.nationality" type="text" />
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.Gender') }}:
+                        </label>
+                        <select v-model="brand.gender" class="form-select" aria-label="Default select example">
+                            <option value="Male">{{ $t('AddBenificary.Male') }}</option>
+                            <option value="Female">{{ $t('AddBenificary.Female') }}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.ContactNo') }}:
+                        </label>
+                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" type="text" />
+                        <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
+                            <span v-if="!$v.brand.phoneNo.minLength ">Contact Number length should be 10 characters.</span>
+                            <span v-if="!$v.brand.phoneNo.maxLength ">Contact Number length should be 10 characters.</span>
+                            <span v-if="!$v.brand.phoneNo.numeric ">Only use numbers</span>
+                        </span>
+                        <span v-else class="error text-danger">
+                            <span v-if="!$v.brand.phoneNo.minLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
+                            <span v-if="!$v.brand.phoneNo.maxLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
+                            <span v-if="!$v.brand.phoneNo.numeric ">فقط استخدم الأرقام</span>
+                        </span>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.Address') }}:
+                        </label>
+                        <input class="form-control" v-model="brand.address" type="text" />
+                    </div>
+                    <div class="col-md-12">
+                        <h4 style="color:black !important;">
+                            {{ $t('AddBenificary.PaymentDetail') }}
+
+                        </h4>
+
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.PaymentType') }}
+                        </label>
+                        <paymenttype v-model="brand.paymentTypeId" v-on:input="GetRecord" ref="ChlidDropdown"
+                            :values="brand.paymentTypeId" />
+                    </div>
+                    <div class="col-md-6 form-group" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0 ">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.RecurringAmount') }}:
+                        </label>
+                        <input class="form-control" v-on:input="GetValueOfRecurring"
+                            v-model="$v.brand.recurringAmount.$model" @click="$event.target.select()" type="text" />
+                            <span v-if="$v.brand.recurringAmount.$error && english == 'en'" class="error text-danger">
+                            <span v-if="!$v.brand.recurringAmount.numeric ">Amount should be in number</span>
+                        </span>
+                        <span v-else class="error text-danger">
+                            <span v-if="!$v.brand.recurringAmount.numeric ">يجب أن يكون المبلغ عبارة عن رقم</span>
+                        </span>
+                    </div>
+                    <div class="col-md-6 form-group" v-if="paymentType != 0">
+
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.AdvancePayment') }}:
+                        </label>
+                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth"
+                            :options="['1 Month', '2 Months', '3 Months', '4 Months', '5 Months', '6 Months', '7 Months', '8 Months', '9 Months', '10 Months', '11 Months', '12 Months']" :show-labels="false"
+                            :placeholder="$t('AddBenificary.SelectType')" >
+                        </multiselect>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 ">
+                            {{ $t('AddBenificary.AmountPerMonth') }}:
+                        </label>
+                        <label class="text  font-weight-bolder" v-else>
+                            {{ $t('AddBenificary.Amount') }}:
+                        </label>
+                        <input class="form-control" v-model="brand.amountPerMonth" @click="$event.target.select()"
+                            type="text" />
+                    </div>
+                    <div class="col-md-6 form-group" v-if="paymentType != 0 ">
+                        <label>{{ $t('AddBenificary.StartFrom') }}:</label>
+                        <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" />
+
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.ApprovedBy') }}:
+                        </label>
+                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label></label>
+                        <div class="checkbox form-check-inline mx-2">
+                            <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
+                            <label for="inlineCheckbox1"> {{ $t('AddBenificary.Active') }} </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group"
+                        v-if="brand.id != '00000000-0000-0000-0000-000000000000' && !brand.isActive && brand.advancePayment != 0">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.Reason') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <textarea rows="3" class="form-control" v-model="brand.reason"></textarea>
+                    </div>
+
                 </div>
-                <div class="col-md-12 form-group" v-if="brand.id != '00000000-0000-0000-0000-000000000000' && !brand.isActive">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.Reason') }}:<span class="text-danger"> *</span>
-                    </label>
-                    <textarea rows="3" class="form-control" v-model="brand.reason"></textarea>
+                <div class="row" v-if="paymentType != 0">
+                    <div class="col-md-12 form-group">
+                        <h4 style="color:black !important;">
+
+                            {{ $t('AddBenificary.PaymentDuration') }}
+
+                        </h4>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.Type') }}:
+                        </label>
+                        <multiselect v-model="brand.durationType" v-on:input="GetDateMonth"
+                            :options="['Indefinite ', 'Customize']" :show-labels="false"
+                            :placeholder="$t('AddBenificary.SelectType')">
+                        </multiselect>
+                    </div>
+                    <div class="col-md-3 form-group" v-if="brand.durationType == 'Customize'">
+                        <label>Start Month:</label>
+                        <datepicker v-model="brand.startDate" v-bind:isDisable="true" v-bind:key="randerforempty"
+                            :type="'month'" />
+
+                    </div>
+                    <div class="col-md-3 form-group" v-if="brand.durationType == 'Customize'">
+                        <label>End Month:</label>
+                        <datepicker v-model="brand.endDate" v-bind:key="randerforempty" :type="'month'" />
+
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.ApprovedBy') }}:
+                        </label>
+                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
+                    </div>
+
                 </div>
-               
+                <div class="row" v-if="paymentType != 0">
+                    <div class="col-md-12 form-group">
+                        <h4 style="color:black !important;">
+
+                            {{ $t('AddBenificary.BeneficiaryAuthorization') }}
+
+                        </h4>
+                    </div>
+                    <div class="col-lg-12">
+                        <table class="table mb-0">
+                            <thead class="thead-light table-hover">
+                                <tr>
+                                    <th class="text-center"> #</th>
+                                    <th class="text-center" >{{
+                                        $t('AddBenificary.AuthorizedPerson') }}</th>
+                                    <th class="text-center" >{{ $t('AddBenificary.ApprovedBy')
+                                    }}</th>
+                                    <th class="text-center" >{{ $t('AddBenificary.Date') }}
+                                    </th>
+                                    <th class="text-center"  v-if="rollName != 'Admin'">{{ $t('AddBenificary.Status') }}
+                                    </th>
+                                    <th class="text-center" v-if="rollName == 'Admin'">{{ $t('AddBenificary.Status') }}
+                                    </th>
+                                    <th class="text-center"  v-if="rollName == 'Admin' && giveReason">{{ $t('AddBenificary.Reason') }}
+                                    </th>
+                                    <th class="text-center" >{{ $t('AddBenificary.Action') }}
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr v-for="(person, index) in brand.benificaryAuthorization" :key="index">
+                                    <td class="border-top-0 text-center">
+                                        {{ index + 1 }}
+                                    </td>
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                        <authorizedperson v-model="person.authorizationPersonId"
+                                            :values="person.authorizationPersonId" :isDisable="'true'"/>
+                                    </td>
+                                    <td class="border-top-0 text-center" v-else>
+                                        <authorizedperson v-model="person.authorizationPersonId"
+                                            :values="person.authorizationPersonId" />
+                                    </td>
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                        <approvalperson v-model="person.approvalPersonId"
+                                            :values="person.approvalPersonId" :isDisable="'true'"/>
+                                    </td>
+                                    <td class="border-top-0 text-center" v-else>
+                                        <approvalperson v-model="person.approvalPersonId"
+                                            :values="person.approvalPersonId"/>
+
+                                    </td>
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                        <datepicker v-model="person.date" :isDisable="true" />
+                                    </td>
+                                    <td class="border-top-0 text-center" v-else>
+                                        <datepicker v-model="person.date"  />
+                                    </td>
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                        <div class="checkbox form-check-inline">
+                                            <input v-bind:id="index + 1" type="checkbox" disabled v-model="person.isActive">
+                                            <label v-bind:for="index + 1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="border-top-0 text-center" v-else>
+                                        <div class="checkbox form-check-inline">
+                                            <input v-bind:id="index + 1" type="checkbox" v-model="person.isActive" v-on:input="GiveReason()">
+                                            <label v-bind:for="index + 1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="border-top-0 text-center" v-if="giveReason && rollName == 'Admin'">
+                                        <div class="checkbox form-check-inline">
+                                           <textarea  class="form-control" v-model="person.dec" rows="1"></textarea>
+                                        </div>
+                                    </td>
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                        <button title="Remove Item" id="bElim" type="button" disabled
+                                            class="btn btn-sm btn-soft-danger btn-circle" v-on:click="RemoveRow(index)">
+                                            <i class="dripicons-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                    <td class="border-top-0 text-center" v-else>
+                                        <button title="Remove Item" id="bElim" type="button"
+                                            class="btn btn-sm btn-soft-danger btn-circle" v-on:click="RemoveRow(index)">
+                                            <i class="dripicons-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                <tr class="text-end">
+                                    <td colspan="6" class="border-top-0 text-end">
+                                        <button id="but_add" class="btn btn-success btn-sm"
+                                            v-on:click="AddRow()">+Add</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.Note') }}:
+                        </label>
+                        <VueEditor v-model="brand.note" />
+                    </div>
+
+                </div>
+
+
             </div>
-            <div class="row" v-if="paymentType!=0">
-                <div class="col-md-12 form-group">
-                    <h4 style="color:black !important;">
-
-                        {{ $t('AddBenificary.PaymentDuration') }}
-
-                    </h4>
-                </div>
-
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.Type') }}:
-                    </label>
-                    <multiselect v-model="brand.durationType " v-on:input="GetDateMonth" :options="['Indefinite ', 'Customize']" :show-labels="false" :placeholder="$t('AddBenificary.SelectType')">
-                    </multiselect>
-                </div>
-                <div class="col-md-3 form-group" v-if="brand.durationType=='Customize'">
-                    <label>Start Month:</label>
-                    <datepicker v-model="brand.startDate " v-bind:isDisable="true" v-bind:key="randerforempty" :type="'month'" />
-
-                </div>
-                <div class="col-md-3 form-group" v-if="brand.durationType=='Customize'">
-                    <label>End Month:</label>
-                    <datepicker v-model="brand.endDate  " v-bind:key="randerforempty" :type="'month'" />
-
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.ApprovedBy') }}:
-                    </label>
-                    <approvalperson v-model="brand.approvedPaymentId " :values="brand.approvedPaymentId" />
-                </div>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary"
+                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
+                    {{ $t('Save') }}
+                </button>
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary"
+                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
+                    {{ $t('Update') }}
+                </button>
+                <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
+                    {{ $t('Close') }}
+                </button>
             </div>
-            <div class="row" v-if="paymentType!=0">
-                <div class="col-md-12 form-group">
-                    <h4 style="color:black !important;">
-
-                        {{ $t('AddBenificary.BeneficiaryAuthorization') }}
-
-                    </h4>
-                </div>
-                <div class="col-lg-12">
-                    <table class="table mb-0">
-                        <thead class="thead-light table-hover">
-                            <tr>
-                                <th class="text-center" style="width: 5% !important">#</th>
-                                <th class="text-center" style="width: 20% !important">{{ $t('AddBenificary.AuthorizedPerson') }}</th>
-                                <th class="text-center" style="width: 20% !important">{{ $t('AddBenificary.ApprovedBy') }}</th>
-                                <th class="text-center" style="width: 20% !important">{{ $t('AddBenificary.Date') }}</th>
-                                <th class="text-center" style="width: 20% !important">{{ $t('AddBenificary.Status') }}</th>
-                                <th class="text-center" style="width: 15% !important">{{ $t('AddBenificary.Action') }}</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr v-for="(person , index) in brand.benificaryAuthorization" :key="index">
-                                <td class="border-top-0 text-center">
-                                    {{ index+1 }}
-                                </td>
-                                <td class="border-top-0 text-center">
-                                    <authorizedperson v-model="person.authorizationPersonId" :values="person.authorizationPersonId" />
-
-                                </td>
-                                <td class="border-top-0 text-center">
-                                    <approvalperson v-model="person.approvalPersonId " :values="person.approvalPersonId" />
-
-                                </td>
-                                <td class="border-top-0 text-center">
-                                    <datepicker v-model="person.date" />
-
-                                </td>
-                                <td class="border-top-0 text-center">
-                                    <div class="checkbox form-check-inline">
-                                        <input v-bind:id="index+1" type="checkbox" v-model="person.isActive">
-                                        <label v-bind:for="index+1"></label>
-                                    </div>
-                                </td>
-                                <td class="border-top-0 text-center">
-                                    <button title="Remove Item" id="bElim" type="button" class="btn btn-sm btn-soft-danger btn-circle" v-on:click="RemoveRow(index)">
-                                        <i class="dripicons-trash" aria-hidden="true"></i>
-                                    </button>
-                                </td>
-
-                            </tr>
-                            <tr class="text-end">
-                                <td colspan="6" class="border-top-0 text-end">
-                                    <button id="but_add" class="btn btn-success btn-sm" v-on:click="AddRow()">+Add</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="text  font-weight-bolder">
-                        {{ $t('AddBenificary.Note') }}:
-                    </label>
-                    <VueEditor v-model="brand.note" />
-                </div>
-
-            </div>
-           
-
+            <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary" v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
-                {{ $t('Save') }}
-            </button>
-            <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary" v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
-                {{ $t('Update') }}
-            </button>
-            <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
-                {{ $t('Close') }}
-            </button>
-        </div>
-        <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
-    </div>
-</modal>
+    </modal>
 </template>
 
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import {
-    requiredIf
+    required, requiredIf, minLength, maxLength,numeric
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -293,11 +354,14 @@ export default {
     },
     data: function () {
         return {
+            advancePaymentvalue:'',
+            giveReason:false,
             randerforempty: 0,
             paymentType: null,
             arabic: '',
             english: '',
             loading: false,
+            rollName : ''
         }
     },
     validations: {
@@ -313,32 +377,47 @@ export default {
                 }),
             },
             paymentIntervalMonth: {},
-            amountPerMonth: {},
-            ugamaNo: {},
-            phoneNo: {},
-            recurringAmount: {}
+            amountPerMonth: {
+                numeric,
+                //minValue:minValue(0.1)
+            },
+            ugamaNo: {
+                required,
+                minLength: minLength(10),
+                maxLength: maxLength(10),
+            },
+            phoneNo: {
+                numeric,
+                minLength: minLength(10),
+                maxLength: maxLength(10),
+            },
+            recurringAmount: {
+                numeric,
+            }
         }
     },
     methods: {
+        GiveReason: function(){
+            this.giveReason = true;
+        },
         GetRecord: function () {
             var root = this;
             debugger;
 
             if (root.$refs.ChlidDropdown != undefined) {
-                debugger;
+              
                 var value = this.$refs.ChlidDropdown.GetSalaryOfSelected();
                 if (value == '' || value == null) {
                     this.paymentType = null;
                 } else {
                     this.paymentType = value.code;
-                    if(value.code==0)
-                    {
-                        this.brand.durationType='';
-
+                    if (value.code == 0) {
+                        this.brand.durationType = '';
+                        this.brand.isActive = false;
                     }
-                    else
-                    {
-                        this.brand.durationType= 'Indefinite';
+                    else {
+                        this.brand.durationType = 'Indefinite';
+                        this.brand.isActive = true;
 
                     }
                     this.GetValueOfRecurring();
@@ -349,17 +428,18 @@ export default {
             }
         },
         GetValueOfRecurring: function () {
-            debugger;
+          debugger;
             if (this.brand.recurringAmount > 0) {
                 if (this.paymentType == null || this.paymentType == 0) {
                     this.brand.amountPerMonth = 0
+                   
                 } else {
                     this.brand.amountPerMonth = parseFloat(this.brand.recurringAmount / this.paymentType).toFixed(3).slice(0, -1);
-
                 }
 
             } else {
                 this.brand.amountPerMonth = 0;
+                
             }
 
         },
@@ -380,13 +460,13 @@ export default {
 
         },
         GetDateMonth: function () {
-            debugger;
+          
 
             if (this.brand.durationType != undefined && this.brand.durationType != '' && this.brand.durationType != null) {
                 if (this.brand.durationType != 'Indefinite') {
                     if (this.brand.startMonth != undefined && this.brand.startMonth != '' && this.brand.startMonth != null) {
                         this.brand.startDate = this.brand.startMonth;
-                        this.brand.endDate = moment(this.brand.startMonth).add(this.paymentType-1, 'months');
+                        this.brand.endDate = moment(this.brand.startMonth).add(this.paymentType - 1, 'months');
 
                     } else {
                         this.brand.startDate = '';
@@ -406,16 +486,18 @@ export default {
             this.$emit('close');
         },
         SaveBenificary: function () {
+            debugger;
             var root = this;
             var aa = this.brand.beneficiaryId;
             this.brand.beneficiaryId = aa;
             this.loading = true;
             var token = '';
+            
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            debugger;
-            if (this.brand.id != '00000000-0000-0000-0000-000000000000' && this.brand.isActive == false && this.brand.reason == null) {
+          
+            if (this.brand.id != '00000000-0000-0000-0000-000000000000' && this.brand.isActive == false && this.brand.advancePayment != 0 && this.brand.reason == null) {
                 this.loading = false;
                 return this.$swal({
                     title: 'Error',
@@ -439,18 +521,26 @@ export default {
                 root.brand.benificaryAuthorization.splice(prd, 1)
             }
 
-            this.$https.post('/Benificary/SaveBenificary', this.brand, {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
-                .then(function (response) {
-                    if (response.data.isSuccess == true) {
-                        if (root.type != "Edit") {
+            if(this.advancePaymentvalue != '' && this.advancePaymentvalue != null)
+            {
+                var advance = parseInt(this.advancePaymentvalue.match(/\d+/)[0], 10); 
+                this.brand.advancePayment = advance;
+            }
+            
 
+            this.$https.post('/Benificary/SaveBenificary', this.brand, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(function (response) {
+                  
+                    if (response.data.isSuccess == true) {
+                  
+                        if (root.type != "Edit") {
                             root.$swal({
                                 title: 'Save',
-                                text: response.data.isUpdate,
+                                text: response.data.isAddUpdate,
                                 type: 'success',
                                 icon: 'success',
                                 showConfirmButton: false,
@@ -463,7 +553,7 @@ export default {
 
                             root.$swal({
                                 title: 'Update',
-                                text: response.data.isUpdate,
+                                text: response.data.isAddUpdate,
                                 type: 'success',
                                 icon: 'success',
                                 showConfirmButton: false,
@@ -476,7 +566,7 @@ export default {
                     } else {
                         root.$swal({
                             title: 'Error',
-                            text: response.data.isUpdate,
+                            text: response.data.isAddUpdate,
                             type: 'error',
                             icon: 'error',
                             showConfirmButton: false,
@@ -503,10 +593,10 @@ export default {
         }
     },
     mounted: function () {
-        debugger;
+        this.rollName = localStorage.getItem('RoleName');
         if (this.type == 'Edit') {
-
             this.paymentType = this.brand.paymentType;
+            this.advancePaymentvalue = `${this.brand.advancePayment} Months`;
         }
         this.english = localStorage.getItem('locales');
         this.arabic = localStorage.getItem('locales');

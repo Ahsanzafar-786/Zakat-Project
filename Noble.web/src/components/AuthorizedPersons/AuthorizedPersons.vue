@@ -61,9 +61,7 @@
                                     <th class="text-center">
                                         {{ $t('AuthorizedPerson.Nationality') }}
                                     </th>
-                                    <th class="text-center">
-                                        {{ $t('AuthorizedPerson.PassportNo') }}
-                                    </th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,9 +92,7 @@
                                     <td class="text-center">
                                         {{ brand.nationality }}
                                     </td>
-                                    <td class="text-center">
-                                        {{ brand.passportNo }}
-                                    </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>

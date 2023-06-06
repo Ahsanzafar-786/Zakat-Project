@@ -37,9 +37,11 @@ export default {
             this.$https.get('/Benificary/GetBenificaryList?isDropDown=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     response.data.results.forEach(function (cat) {
+                        var name = cat.name == '' ? cat.nameAr : cat.name;
+                        var benficaryId =  cat.beneficiaryId;
                         root.options.push({
                             id: cat.id,
-                            name: cat.name == '' ? cat.nameAr : cat.name,
+                            name:  benficaryId + ' ' +  '-' + ' ' + name,
                         })
                     })
                 }
