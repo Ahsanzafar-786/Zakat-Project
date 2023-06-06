@@ -86,6 +86,7 @@ Vue.use(cors);
 Vue.use(moment);
 Vue.config.productionTip = false;
 Vue.component('datepicker', require('./components/DatePicker.vue').default);
+Vue.component('AddProductImage', require('./components/AddProductImage.vue').default);
 Vue.component('dashboard', require('./components/Dashboard/Dashboard.vue').default);
 Vue.component('modal', require('./components/modalcomponent.vue').default);
 Vue.component('roledropdown', require('./components/General/RolesDropdown.vue').default);
@@ -117,6 +118,9 @@ Vue.component('paymenttype', require('./components/General/PaymentType.vue').def
 //Funds
 Vue.component('funds-mod', require('./components/Funds/AddFunds.vue').default);
 
+//CompanyProfile
+Vue.component('companyprofile-mod' , require('./components/CompanyProfile/CompanyProfile.vue').default);
+Vue.component('companyinfo-mod', require('./components/CompanyProfile/CompanyInfo.vue').default);
 
 Vue.prototype.$https = axios;
 axios.defaults.baseURL = json.ServerIP;

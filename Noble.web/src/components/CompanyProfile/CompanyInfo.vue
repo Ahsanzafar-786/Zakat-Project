@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-sm-8">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" v-if="english=='true'">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" v-if="english=='true'" >
                                     <label>{{ $t('CompanyInfo.BusinessNameInEnglish') |englishLanguage}} :<span class="text-danger"> *</span></label>
                                     <div v-bind:class="{'has-danger' : $v.companyProfile.nameInEnglish.$error}">
                                         <input class="form-control " v-bind:disabled="isDisable" v-model="$v.companyProfile.nameInEnglish.$model" />
@@ -19,7 +19,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" v-if="isOtherLang()">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" v-if="english=='true'" >
                                     <label>{{ $t('CompanyInfo.BusinessName(InArabic)') |arabicLanguage}} :<span class="text-danger"> *</span></label>
                                     <div v-bind:class="{'has-danger' : $v.companyProfile.nameInArabic.$error}">
                                         <input class="form-control text-right " v-bind:disabled="isDisable" v-model="$v.companyProfile.nameInArabic.$model" />
@@ -29,10 +29,30 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" >
+                                    <label>{{ $t('CompanyInfo.CompanyName(InEnglish)') |englishLanguage}}  :<span class="text-danger"> *</span></label>
+                                    <div v-bind:class="{'has-danger' : $v.companyProfile.companyNameEnglish.$error}">
+                                        <input class="form-control "   v-model="$v.companyProfile.companyNameEnglish.$model" />
+                                        <span v-if="$v.companyProfile.companyNameEnglish.$error" class="error text-danger">
+                                            <span v-if="!$v.companyProfile.companyNameEnglish.required"> {{ $t('CompanyInfo.NameRequired') }}</span>
+                                            <span v-if="!$v.companyProfile.companyNameEnglish.maxLength"> {{ $t('CompanyInfo.NameMaximum') }}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" >
+                                    <label>{{ $t('CompanyInfo.CompanyName(InArabic)') |arabicLanguage}}:<span class="text-danger"> *</span></label>
+                                    <div v-bind:class="{'has-danger' : $v.companyProfile.companyNameArabic.$error}">
+                                        <input class="form-control text-right "   v-model="$v.companyProfile.companyNameArabic.$model" />
+                                        <span v-if="$v.companyProfile.companyNameArabic.$error" class="error text-danger">
+                                            <span v-if="!$v.companyProfile.companyNameArabic.required"> {{ $t('CompanyInfo.NameRequired') }}</span>
+                                            <span v-if="!$v.companyProfile.companyNameArabic.maxLength"> {{ $t('CompanyInfo.NameMaximum') }}</span>
+                                        </span>
+                                    </div>
+                                </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <label>{{ $t('CompanyInfo.CommercialRegistrationNo') }} :<span class="text-danger"> *</span></label>
                                     <div v-bind:class="{'has-danger' : $v.companyProfile.companyRegNo.$error}">
-                                        <input class="form-control "  disabled v-model="$v.companyProfile.companyRegNo.$model" />
+                                        <input class="form-control "   v-model="$v.companyProfile.companyRegNo.$model" />
                                         <span v-if="$v.companyProfile.companyRegNo.$error" class="error text-danger">
                                             <span v-if="!$v.companyProfile.companyRegNo.required">{{ $t('CompanyInfo.RegistrationRequired') }} </span>
                                             <span v-if="!$v.companyProfile.companyRegNo.maxLength"> {{ $t('CompanyInfo.RegistrationLength') }}</span>
@@ -42,33 +62,14 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <label for="companyProfile.TaxRegisterNo">{{ $t('CompanyInfo.VATNo') }} : <span class="text-danger"> *</span></label>
                                     <div v-bind:class="{'has-danger' : $v.companyProfile.vatRegistrationNo.$error}">
-                                        <input class="form-control "  disabled v-model="$v.companyProfile.vatRegistrationNo.$model" />
+                                        <input class="form-control "   v-model="$v.companyProfile.vatRegistrationNo.$model" />
                                         <span v-if="$v.companyProfile.vatRegistrationNo.$error" class="error text-danger">
                                             <span v-if="!$v.companyProfile.vatRegistrationNo.required">{{ $t('CompanyInfo.VatNoRequired') }}</span>
                                             <span v-if="!$v.companyProfile.vatRegistrationNo.maxLength">{{ $t('CompanyInfo.VatMaximum') }}</span>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" v-if="english=='true'">
-                                    <label>{{ $t('CompanyInfo.CompanyName(InEnglish)') |englishLanguage}}  :<span class="text-danger"> *</span></label>
-                                    <div v-bind:class="{'has-danger' : $v.companyProfile.companyNameEnglish.$error}">
-                                        <input class="form-control " v-bind:disabled="isDisable"  v-model="$v.companyProfile.companyNameEnglish.$model" />
-                                        <span v-if="$v.companyProfile.companyNameEnglish.$error" class="error text-danger">
-                                            <span v-if="!$v.companyProfile.companyNameEnglish.required"> {{ $t('CompanyInfo.NameRequired') }}</span>
-                                            <span v-if="!$v.companyProfile.companyNameEnglish.maxLength"> {{ $t('CompanyInfo.NameMaximum') }}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" v-if="isOtherLang()">
-                                    <label>{{ $t('CompanyInfo.CompanyName(InArabic)') |arabicLanguage}}:<span class="text-danger"> *</span></label>
-                                    <div v-bind:class="{'has-danger' : $v.companyProfile.companyNameArabic.$error}">
-                                        <input class="form-control text-right " v-bind:disabled="isDisable"  v-model="$v.companyProfile.companyNameArabic.$model" />
-                                        <span v-if="$v.companyProfile.companyNameArabic.$error" class="error text-danger">
-                                            <span v-if="!$v.companyProfile.companyNameArabic.required"> {{ $t('CompanyInfo.NameRequired') }}</span>
-                                            <span v-if="!$v.companyProfile.companyNameArabic.maxLength"> {{ $t('CompanyInfo.NameMaximum') }}</span>
-                                        </span>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" v-if="english=='true'">
                                     <label>{{ $t('CompanyInfo.BusinessType(InEnglish)') |englishLanguage}} :<span class="text-danger"> *</span></label>
                                     <div v-bind:class="{'has-danger' : $v.companyProfile.categoryInEnglish.$error}">
@@ -79,7 +80,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" v-if="isOtherLang()">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" v-if="english=='true'">
                                     <label>{{ $t('CompanyInfo.BusinessType(InArabic)') |arabicLanguage}} :<span class="text-danger"> *</span></label>
                                     <div v-bind:class="{'has-danger' : $v.companyProfile.categoryInArabic.$error}">
                                         <input class="form-control text-right " v-bind:disabled="isDisable"  v-model="$v.companyProfile.categoryInArabic.$model" />
@@ -100,7 +101,7 @@
 
                     <div class="row">
 
-                        <div class="col-sm-12" v-if="english=='true'">
+                        <div class="col-sm-12" >
                             <label for="companyProfile.address">{{ $t('CompanyInfo.Address(InEnglish)') |englishLanguage}}  : <span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.companyProfile.addressInEnglish.$error}">
                                 <textarea class="form-control" v-model="$v.companyProfile.addressInEnglish.$model" />
@@ -110,10 +111,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-sm-12" v-if="isOtherLang()">
+                        <div class="col-sm-12" >
                             <label for="companyProfile.address">{{ $t('CompanyInfo.Address(InArabic)') |arabicLanguage}} : <span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.companyProfile.addressInArabic.$error}">
-                                <textarea class="form-control text-right" v-bind:disabled="isDisable" v-model="$v.companyProfile.addressInArabic.$model" />
+                                <textarea class="form-control text-right"  v-model="$v.companyProfile.addressInArabic.$model" />
                                 <span v-if="$v.companyProfile.addressInArabic.$error" class="error text-danger">
                                     <span v-if="!$v.companyProfile.addressInArabic.required">{{ $t('CompanyInfo.AddressRequired') }}</span>
                                     <span v-if="!$v.companyProfile.addressInArabic.maxLength">{{ $t('CompanyInfo.AddressMaximum') }}</span>
@@ -122,8 +123,8 @@
                         </div>
                         <div class="col-sm-12 mt-3">
                             <div class="button-items">
-                                <button class="btn btn-outline-primary   mr-2" v-bind:disabled="$v.companyProfile.$invalid" v-on:click="SaveCompanyAccountSetup()"> <i class="far fa-save "></i>  {{ $t('CompanyProfile.Update') }}</button>
-                                <button class="btn  btn-danger   mr-2" v-on:click="BackToList()">{{ $t('CompanyProfile.btnClear') }}</button>
+                                <button class="btn btn-outline-primary   mr-2"  v-on:click="SaveCompanyAccountSetup()"> <i class="far fa-save "></i>  {{ $t('Update') }}</button>
+                                <button class="btn  btn-danger   mr-2" v-on:click="BackToList()">{{ $t('Close') }}</button>
 
                             </div>
                            
@@ -133,15 +134,12 @@
             </div>
         </div>
     </div>
-    <!--<div v-else> <acessdenied></acessdenied></div>-->
 
 </template>
 <script>
-    import clickMixin from '@/Mixins/clickMixin'
     import { required, maxLength, requiredIf } from 'vuelidate/lib/validators';
     export default ({
 
-        mixins: [clickMixin],
         data: function () {
             return {
                 companyProfile: {
@@ -365,6 +363,7 @@
                 }
 
                 this.$https.get('/Company/EditCompany?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+
                     if (response.data != null) {
                         
                         root.companyProfile.id = response.data.id;

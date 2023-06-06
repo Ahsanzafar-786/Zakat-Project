@@ -36,17 +36,24 @@
                             </li>
                         </ul>
                     </li>
-                    <li v-if="roleName == 'Admin'">
+                    <li v-if="roleName != 'Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('Dashboard.UserSetup') }}
+                                {{ $t('Payment.Payment') }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
                         <ul class="nav-second-level" aria-expanded="false">
-
                             <li>
-                                <a v-on:click="GoTo('/signup')" href="javascript:void(0);"> {{ $t('Dashboard.SignUpUser')
+                                <a v-on:click="GoTo('/payment')" href="javascript:void(0);"> {{ $t('Payment.BenificaryPayment')
+                                }}</a>
+                            </li>
+                            <li>
+                                <a v-on:click="GoTo('/addpayment')" href="javascript:void(0);"> {{ $t('Payment.AddPayment')
+                                }}</a>
+                            </li>
+                            <li>
+                                <a v-on:click="GoTo('/payment')" href="javascript:void(0);"> {{ $t('Payment.BenificaryReports')
                                 }}</a>
                             </li>
                         </ul>
@@ -72,103 +79,120 @@
                     <li v-if="roleName != 'Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('AuthorizedPerson.AuthorizedPerson') }}
-                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
-                        </a>
-
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li>
-                                <a v-on:click="GoTo('/authorizedpersons')" href="javascript:void(0);"> 
-                                {{ $t('AuthorizedPerson.AuthorizedPerson')
-                                }}</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li v-if="roleName != 'Noble Admin'">
-                        <a href="javascript:void(0);">
-                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('CharityResources.Charity') }}
-                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
-                        </a>
-
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li>
-                                <a v-on:click="GoTo('/charityresource')" href="javascript:void(0);"> 
-                                    {{ $t('CharityResources.CharityResources') }}</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li v-if="roleName != 'Noble Admin'">
-                        <a href="javascript:void(0);">
-                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('ApprovalPerson.ApprovalPerson') }}
-                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
-                        </a>
-
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li>
-                                <a v-on:click="GoTo('/approvalpersons')" href="javascript:void(0);"> 
-                                    {{ $t('ApprovalPerson.ApprovalPerson') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li v-if="roleName != 'Noble Admin'">
-                        <a href="javascript:void(0);">
-                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('PaymentType.PaymentType') }}
-                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
-                        </a>
-
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li>
-                                <a v-on:click="GoTo('/paymenttype')" href="javascript:void(0);"> {{ $t('PaymentType.PaymentType')
-                                }}</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li v-if="roleName != 'Noble Admin'">
-                        <a href="javascript:void(0);">
-                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Funds.Funds') }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.Funds')
+                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.AddFunds')
+                                }}</a>
+                            </li>
+                        </ul>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.CharityFundsReports')
+                                }}</a>
+                            </li>
+                        </ul>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.CharityFundsResource')
                                 }}</a>
                             </li>
                         </ul>
                     </li>
-                    <li v-if="roleName != 'Noble Admin'">
+                    <li v-if="roleName == 'Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('Payment.Payment') }}
+                                {{ $t('Dashboard.Setup') }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
                         <ul class="nav-second-level" aria-expanded="false">
+
                             <li>
-                                <a v-on:click="GoTo('/payment')" href="javascript:void(0);"> {{ $t('Payment.Payment')
-                                }}</a>
-                            </li>
-                            <li>
-                                <a v-on:click="GoTo('/addpayment')" href="javascript:void(0);"> {{ $t('Payment.AddPayment')
+                                <a v-on:click="GoTo('/signup')" href="javascript:void(0);"> {{ $t('Dashboard.AddUser')
                                 }}</a>
                             </li>
                         </ul>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/authorizedpersons')" href="javascript:void(0);"> 
+                                {{ $t('Dashboard.AddAuthorizedPerson')
+                                }}</a>
+                            </li>
+                        </ul>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/approvalpersons')" href="javascript:void(0);"> 
+                                    {{ $t('Dashboard.AddApprovalPerson') }}
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/paymenttype')" href="javascript:void(0);"> {{ $t('Dashboard.AddPaymentType')
+                                }}</a>
+                            </li>
+                        </ul>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/charityresource')" href="javascript:void(0);"> 
+                                    {{ $t('Dashboard.AddCharityFundsResources') }}</a>
+                            </li>
+                        </ul>
                     </li>
+                    
                     <li v-if="roleName != 'Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('LedgerReport.Report') }}
+                                {{ $t('LedgerReport.ReportsManagement') }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
                                 <a v-on:click="GoTo('/ledgerreport')" href="javascript:void(0);"> {{ $t('LedgerReport.LedgerReport')
+                                }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li v-if="roleName != 'Noble Admin'">
+                        <a href="javascript:void(0);">
+                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
+                                {{ $t('SystemManagement.SystemManagement') }}
+                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                        </a>
+
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/SystemManagement')" href="javascript:void(0);"> {{ $t('SystemManagement.PrintSettings')
+                                }}</a>
+                            </li>
+                        </ul>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/SystemManagement')" href="javascript:void(0);"> {{ $t('SystemManagement.DataBackUp')
+                                }}</a>
+                            </li>
+                        </ul>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/SystemManagement')" href="javascript:void(0);"> {{ $t('SystemManagement.DataRestore')
+                                }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li v-if="roleName != 'Noble Admin'">
+                        <a href="javascript:void(0);">
+                            <i data-feather="user" class="align-self-center menu-icon"></i><span>
+                                {{ $t('CompanyProfile.CompanyProfile') }}
+                            </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li>
+                                <a v-on:click="GoTo('/companyinfo')" href="javascript:void(0);"> {{ $t('CompanyProfile.CompanyInfo')
                                 }}</a>
                             </li>
                         </ul>

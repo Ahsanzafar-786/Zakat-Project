@@ -51,6 +51,11 @@ import addpayment from '../components/Payment/AddPayment.vue';
 //LedgerReport
 import ledgerreport from '../components/Reports/LedgerReport.vue'
 
+//CompanyProfile
+import companyprofile from '../components/CompanyProfile/CompanyProfile.vue';
+import companyinfo from '../components/CompanyProfile/CompanyInfo.vue';
+
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -166,6 +171,16 @@ const routes = [
                             path: '/ledgerreport',
                             name: 'ledgerreport',
                             component: ledgerreport
+                        },
+                        {
+                            path:'/companyprofile',
+                            name:'companyprofile',
+                            component: companyprofile
+                        },
+                        {
+                            path:'/companyinfo',
+                            name:'comapanyinfo',
+                            component: companyinfo
                         },
                     ]
                 }
