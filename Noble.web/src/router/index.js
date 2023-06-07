@@ -62,6 +62,8 @@ import printsetting from '../components/PrintSettings/ComingSoon.vue';
 import databackup from '../components/DataBackUp/ComingSoon.vue';
 import datarestore from '../components/DataRestore/ComingSoon.vue';
 
+import benificaryreports from '../components/Benificary/BenificaryReports.vue';
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -212,6 +214,11 @@ const routes = [
                             path:'/charityfundsresource',
                             name:'charityfundsresource',
                             component: charityfundsresource
+                        },
+                        {
+                            path:'/benificaryreports',
+                            name:'benificaryreports',
+                            component: benificaryreports
                         },
 
                     ]

@@ -36,7 +36,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li v-if="roleName != 'Noble Admin'">
+                    <li v-if="roleName != 'Noble Admin' ">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Payment.Payment') }}
@@ -53,7 +53,7 @@
                                 }}</a>
                             </li> -->
                             <li>
-                                <a v-on:click="GoTo('/payment')" href="javascript:void(0);"> {{ $t('Payment.BenificaryReports')
+                                <a v-on:click="GoTo('/benificaryreports')" href="javascript:void(0);"> {{ $t('Payment.BenificaryReports')
                                 }}</a>
                             </li>
                         </ul>
@@ -102,7 +102,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li v-if="roleName != 'Nobel Admin'">
+                    <li v-if="roleName != 'Nobel Admin' && roleName != 'Cashier'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Dashboard.Setup') }}
@@ -158,7 +158,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li v-if="roleName != 'Noble Admin'">
+                    <li v-if="roleName != 'Noble Admin' && roleName != 'Cashier'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('SystemManagement.SystemManagement') }}
@@ -184,7 +184,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li v-if="roleName != 'Noble Admin'">
+                    <li v-if="roleName != 'Noble Admin' && roleName != 'Cashier'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('CompanyProfile.CompanyProfile') }}
