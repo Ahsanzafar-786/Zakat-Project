@@ -142,7 +142,7 @@
 
         data: function () {
             return {
-            user:'',
+            roleName:'',
                 companyProfile: {
                     id: '00000000-0000-0000-0000-000000000000',
                     nameInArabic: '',
@@ -253,7 +253,7 @@
                 if (this.$session.exists()) {
                     token = localStorage.getItem('token');
                 }
-                this.$https.get('/Contact/DeleteAttachment?path=' + path, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                this.$https.get('/Company/DeleteAttachment?path=' + path, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                     if (response.data == true) {
                         
                         root.renderedImage++;
@@ -273,7 +273,7 @@
                 }
                 
                 root.$https
-                    .get('/Contact/GetBaseImage?filePath=' + path, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                    .get('/Company/GetBaseImage?filePath=' + path, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                         if (response.data != null) {
 
                             root.image = response.data;

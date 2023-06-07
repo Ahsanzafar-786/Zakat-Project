@@ -62,7 +62,24 @@ namespace Noble.Api.Controllers
 
         #region For Company
 
-      
+        [Route("api/Company/GetBaseImage")]
+        [HttpGet("GetBaseImage")]
+
+        public async Task<IActionResult> GetBaseImage(string filePath)
+        {
+            var path = Path.Combine(_hostingEnvironment.WebRootPath) + filePath;
+            if (System.IO.File.Exists(path))
+            {
+                var bytes = await System.IO.File.ReadAllBytesAsync(path);
+                var base64 = Convert.ToBase64String(bytes);
+                return Ok(base64);
+
+
+            }
+            return Ok(null);
+
+        }
+
         [Route("api/Company/EditCompany")]
         [HttpPost("EditCompany")]
        
