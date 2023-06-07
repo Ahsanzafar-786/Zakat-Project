@@ -310,7 +310,8 @@
     "Action":"Action",
     "IsVoid":"Void",
     "Period":"Period",
-    "Print":"Print"
+    "Print":"Print",
+    "AllowVoid":"Allow Void"
   },
 
   "AddPayment":{

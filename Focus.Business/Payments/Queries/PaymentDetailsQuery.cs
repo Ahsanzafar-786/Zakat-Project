@@ -53,6 +53,7 @@ namespace Focus.Business.Payments.Queries
                             SelectedMonth= x.SelectedMonth,
                             Note = x.Note,
                             IsVoid = x.IsVoid,
+                            AllowVoid = x.AllowVoid,
                         }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                         if (query == null)
@@ -62,31 +63,56 @@ namespace Focus.Business.Payments.Queries
 
                         Context.Payments.Update(query);
 
-                        var charity = await Context.CharityTransaction.Where(x => x.DoucmentId == request.Id).ToListAsync();
+                        
 
-                        Context.CharityTransaction.RemoveRange(charity);
-
-                        var charitTransaction = new List<CharityTransaction>();
-
-                        foreach (var item in query.SelectedMonth)
+                        if(query.SelectedMonth.Count == 0 )
                         {
-                            charitTransaction.Add(new CharityTransaction()
+                            var charity = await Context.CharityTransaction.Where(x => x.DoucmentId == request.Id).ToListAsync();
+
+                            Context.CharityTransaction.RemoveRange(charity);
+
+                            var charitTransaction = new CharityTransaction()
                             {
                                 DoucmentId = query.Id,
                                 CharityTransactionDate = query.Date,
                                 DoucmentDate = DateTime.Now,
                                 DoucmentCode = query.PaymentCode,
                                 BenificayId = query.BenificayId,
-                                Month = item.SelectMonth,
+                                Month = query.Date,
                                 Amount = query.Amount,
                                 Year = query.Year,
                                 IsVoid = true
-                            });
+                            };
+
+                            await Context.CharityTransaction.AddAsync(charitTransaction);
                         }
+                        else
+                        {
+                            var charity = await Context.CharityTransaction.Where(x => x.DoucmentId == request.Id).ToListAsync();
+
+                            Context.CharityTransaction.RemoveRange(charity);
+
+                            var charitTransaction = new List<CharityTransaction>();
+
+                            foreach (var item in query.SelectedMonth)
+                            {
+                                charitTransaction.Add(new CharityTransaction()
+                                {
+                                    DoucmentId = query.Id,
+                                    CharityTransactionDate = query.Date,
+                                    DoucmentDate = DateTime.Now,
+                                    DoucmentCode = query.PaymentCode,
+                                    BenificayId = query.BenificayId,
+                                    Month = item.SelectMonth,
+                                    Amount = query.Amount,
+                                    Year = query.Year,
+                                    IsVoid = true
+                                });
+                            }
 
 
-                        await Context.CharityTransaction.AddRangeAsync(charitTransaction);
-
+                            await Context.CharityTransaction.AddRangeAsync(charitTransaction);
+                        }
                         await Context.SaveChangesAsync();
 
                         return null;
