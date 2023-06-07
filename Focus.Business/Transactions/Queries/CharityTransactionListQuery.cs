@@ -39,7 +39,7 @@ namespace Focus.Business.Transactions.Queries
                 try
                 {
                     var benific =  Context.Beneficiaries.AsNoTracking().ToList();
-                    var charity =  Context.CharityTransaction.Where(x => x.DocumentName == null).ToList().Select(x => new CharityTransactionLookupModel()
+                    var charity =  Context.CharityTransaction.Where(x => x.DocumentName == null && !x.IsVoid).ToList().Select(x => new CharityTransactionLookupModel()
                     {
                         Id = x.Id,
                         DoucmentId = x.DoucmentId,

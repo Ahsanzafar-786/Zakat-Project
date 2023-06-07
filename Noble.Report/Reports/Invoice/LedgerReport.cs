@@ -18,9 +18,9 @@ namespace Noble.Report.Reports.Invoice
 
             Company.DataSource = companyDtl;
             Charity.DataSource = charitydel;
-            if (companyDtl.LogoPath != null && companyDtl.LogoPath != "" && companyDtl.LogoPath != string.Empty)
+            if (companyDtl.Base64Logo != null && companyDtl.Base64Logo != "" && companyDtl.Base64Logo != string.Empty)
             {
-                byte[] footerData = Convert.FromBase64String(companyDtl.LogoPath);
+                byte[] footerData = Convert.FromBase64String(companyDtl.Base64Logo);
                 MemoryStream Footerms = new MemoryStream(footerData);
                 Bitmap FooterImg = new Bitmap(Footerms);
                 xrPictureBox1.Image = FooterImg;

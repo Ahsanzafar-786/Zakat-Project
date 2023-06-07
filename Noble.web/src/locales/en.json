@@ -144,7 +144,7 @@
     "Gender": "Gender",
     "Male": "Male",
     "Female": "Female",
-    "ID": "ID",
+    "ID": "National ID",
     "Nationality": "Nationality",
     "PassportNo": "Passport No"
   },
@@ -156,7 +156,7 @@
     "Gender": "Gender",
     "AuthorizedPersonId":"Authorized Person Id",
     "Nationality": "Nationality",
-    "ID": "ID",
+    "ID": "National ID",
     "Male": "Male",
     "Female": "Female",
     "PassportNo": "Passport Number",
