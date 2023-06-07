@@ -47,6 +47,7 @@ namespace Focus.Business.AdminDashboard.Queries
                     var oneTimeBenificary = query.Where(x => x.PaymentTypes.Name == "One Time").Count();
                     var monthlyBenificary = query.Where(x => x.PaymentTypes.Name == "Monthly").Count();
                     var totalUser = _userManager.Users.Where(x => x.Code != null && x.CompanyId == user.Identity.CompanyId()).Count();
+                    
 
                     return new DashboardLookupModel
                     {

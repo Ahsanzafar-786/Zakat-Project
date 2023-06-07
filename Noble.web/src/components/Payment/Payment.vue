@@ -114,8 +114,8 @@
                                     <td class="text-center">
                                         {{ brand.period }}
                                     </td>
-                                    <td class="text-center">
-                                        {{ brand.period }}
+                                    <td class="text-center d-flex align-items-baseline justify-content-center">
+                                        <input type="checkbox"  v-model="brand.isVoid" v-on:change="EditPayment(brand.id,brand.isVoid)"/><span class="mx-1" > {{ $t('Payment.IsVoid') }}</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -188,7 +188,8 @@ export default {
             arabic: '',
             english: '',
             user: '',
-            roleName:''
+            isVoid:false,
+            roleName:'',
         }
     },
     watch: {
@@ -216,8 +217,6 @@ export default {
             this.$router.push({ path: link });
         },
 
-       
-
         GetPayment: function () {
             var root = this;
             var token = '';
@@ -234,14 +233,32 @@ export default {
                 root.loading = false;
             });
         },
-
-        EditPayment: function (Id) {
+        
+        EditPayment: function (Id, val) {
+            debugger;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
+            if(val)
+            {
+                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id + '&isVoid=' + val, { headers: { "Authorization": `Bearer ${token}` } })
+                .then(function (response) {
+                    if (response.data) {
+                        root.GetPayment();
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
+            }
+            else
+            {
+                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data) {
                         root.$router.push({
@@ -256,7 +273,7 @@ export default {
                         this.loading = false;
                         console.log(error);
                     });
-
+            }
         }
     },
 

@@ -339,11 +339,13 @@ namespace Noble.Api.Controllers
 
         [Route("api/Benificary/GetPaymentsDetail")]
         [HttpGet("GetPaymentsDetail")]
-        public async Task<IActionResult> GetPaymentsDetail(Guid id)
+        public async Task<IActionResult> GetPaymentsDetail(Guid id, bool isVoid, bool allowVoid)
         {
             var fund = await Mediator.Send(new PaymentDetailsQuery
             {
-                Id = id
+                Id = id,
+                IsVoid = isVoid,
+                AllowVoid = allowVoid
             });
             return Ok(fund);
         }
