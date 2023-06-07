@@ -61,6 +61,7 @@ export default {
         user:'',
             arabic: '',
             english: '',
+            roleName: '',
             loading: false,
         }
     },

@@ -224,11 +224,11 @@
                                     }}</th>
                                     <th class="text-center" >{{ $t('AddBenificary.Date') }}
                                     </th>
-                                    <th class="text-center"  v-if="rollName != 'Admin'">{{ $t('AddBenificary.Status') }}
+                                    <th class="text-center"  v-if="roleName != 'Admin'">{{ $t('AddBenificary.Status') }}
                                     </th>
-                                    <th class="text-center" v-if="rollName == 'Admin'">{{ $t('AddBenificary.Status') }}
+                                    <th class="text-center" v-if="roleName == 'Admin'">{{ $t('AddBenificary.Status') }}
                                     </th>
-                                    <th class="text-center"  v-if="rollName == 'Admin' && giveReason">{{ $t('AddBenificary.Reason') }}
+                                    <th class="text-center"  v-if="roleName == 'Admin' && giveReason">{{ $t('AddBenificary.Reason') }}
                                     </th>
                                     <th class="text-center" >{{ $t('AddBenificary.Action') }}
                                     </th>
@@ -240,7 +240,7 @@
                                     <td class="border-top-0 text-center">
                                         {{ index + 1 }}
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
                                         <authorizedperson v-model="person.authorizationPersonId"
                                             :values="person.authorizationPersonId" :isDisable="'true'"/>
                                     </td>
@@ -248,7 +248,7 @@
                                         <authorizedperson v-model="person.authorizationPersonId"
                                             :values="person.authorizationPersonId" />
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
                                         <approvalperson v-model="person.approvalPersonId"
                                             :values="person.approvalPersonId" :isDisable="'true'"/>
                                     </td>
@@ -257,13 +257,13 @@
                                             :values="person.approvalPersonId"/>
 
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
                                         <datepicker v-model="person.date" :isDisable="true" />
                                     </td>
                                     <td class="border-top-0 text-center" v-else>
                                         <datepicker v-model="person.date"  />
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
                                         <div class="checkbox form-check-inline">
                                             <input v-bind:id="index + 1" type="checkbox" disabled v-model="person.isActive">
                                             <label v-bind:for="index + 1"></label>
@@ -275,12 +275,12 @@
                                             <label v-bind:for="index + 1"></label>
                                         </div>
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="giveReason && rollName == 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="giveReason && roleName == 'Admin'">
                                         <div class="checkbox form-check-inline">
                                            <textarea  class="form-control" v-model="person.dec" rows="1"></textarea>
                                         </div>
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && rollName != 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
                                         <button title="Remove Item" id="bElim" type="button" disabled
                                             class="btn btn-sm btn-soft-danger btn-circle" v-on:click="RemoveRow(index)">
                                             <i class="dripicons-trash" aria-hidden="true"></i>
@@ -369,7 +369,7 @@ export default {
             arabic: '',
             english: '',
             loading: false,
-            rollName : ''
+            roleName : ''
         }
     },
     validations: {
@@ -611,7 +611,7 @@ export default {
         }
     },
     mounted: function () {
-        this.rollName = localStorage.getItem('RoleName');
+        this.roleName = localStorage.getItem('RoleName');
         if (this.type == 'Edit') {
             this.paymentType = this.brand.paymentType;
             this.advancePaymentvalue = `${this.brand.advancePayment} Months`;

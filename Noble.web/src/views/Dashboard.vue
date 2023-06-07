@@ -48,10 +48,10 @@
                                 <a v-on:click="GoTo('/payment')" href="javascript:void(0);"> {{ $t('Payment.BenificaryPayment')
                                 }}</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a v-on:click="GoTo('/addpayment')" href="javascript:void(0);"> {{ $t('Payment.AddPayment')
                                 }}</a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a v-on:click="GoTo('/payment')" href="javascript:void(0);"> {{ $t('Payment.BenificaryReports')
                                 }}</a>

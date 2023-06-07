@@ -137,7 +137,7 @@ export default {
     mixins: [clickMixin],
     data: function () {
         return {
-        user:'',
+            roleName:'',
             show: false,
             approvalPersonlist: [],
             newapprovalPerson: {

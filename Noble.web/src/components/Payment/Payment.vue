@@ -176,6 +176,7 @@ export default {
             arabic: '',
             english: '',
             user: '',
+            roleName:''
         }
     },
     watch: {

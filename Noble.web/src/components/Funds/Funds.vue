@@ -164,6 +164,7 @@ export default {
             rowCount: '0',
             arabic: '',
             english: '',
+            roleName: '',
         }
     },
     watch: {

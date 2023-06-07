@@ -45,9 +45,6 @@
                                     <th>
                                         {{ $t('SignUp.EMAILID') }}
                                     </th>
-                                    <th>
-                                        {{ $t('SignUp.Location') }}
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,7 +58,6 @@
                                         </strong>
                                     </td>
                                     <td>{{details.email}}</td>
-                                    <td>{{details.companyName}}</td>
                                 </tr>
                             </tbody>
                         </table>

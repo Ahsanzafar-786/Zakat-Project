@@ -102,7 +102,7 @@
         mixins: [clickMixin],
         data: function () {
             return {
-            user:'',
+                roleName:'',
                 invoiveItem: false,
                 terminalUserTypeOptions:[],
                 invoiveBarCode: false,

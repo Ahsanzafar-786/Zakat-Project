@@ -14,13 +14,14 @@
                 <div class="row">
                     <div class="form-group has-label col-sm-4 ">
                         <label class="text  font-weight-bolder">
-                           {{ $t('Payment.Code') }}:<span class="text-danger"> *</span>
+                            {{ $t('Payment.Code') }}:<span class="text-danger"> *</span>
                         </label>
-                        <input type="text" class="form-control" v-model="$v.brand.code.$model" :values="brand.code" disabled />
+                        <input type="text" class="form-control" v-model="$v.brand.code.$model" :values="brand.code"
+                            disabled />
                     </div>
                     <div class="form-group has-label col-sm-4 ">
                         <label class="text  font-weight-bolder">
-                           {{ $t('AddFunds.CharityResource') }}:<span class="text-danger"> *</span>
+                            {{ $t('AddFunds.CharityResource') }}:<span class="text-danger"> *</span>
                         </label>
                         <charityresources v-model="brand.charityResouceId" :values="brand.charityResouceId" />
                     </div>
@@ -40,7 +41,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveFunds"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' && roleName != 'User'" >
+                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' && roleName != 'User'">
                     {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveFunds"
@@ -73,9 +74,10 @@ export default {
     },
     data: function () {
         return {
-        user:'',
+            user: '',
             arabic: '',
             english: '',
+            roleName: '',
             loading: false,
         }
     },
@@ -84,7 +86,7 @@ export default {
             amount: {
                 required
             },
-            code:{
+            code: {
                 required
             }
         }
@@ -94,7 +96,7 @@ export default {
             this.$emit('close');
         },
         SaveFunds: function () {
-             
+
             var root = this;
             var aa = localStorage.getItem('UserId');
             this.brand.userId = aa;
@@ -103,7 +105,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-             
+
             this.$https.post('/Benificary/SaveFunds', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data.isSuccess == true) {
@@ -165,25 +167,25 @@ export default {
                 .finally(() => root.loading = false);
         },
         GetAutoCode: function (val) {
-          
+
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
             root.$https.get('/Benificary/AutoCodeGenerate?name=' + val, {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
                 .then(function (response) {
-                        if (response.data) {
-                            root.brand.code = response.data;
-                            root.rendar++;
-                        } else {
-                            console.log("error: something wrong from db.");
-                        }
-                    },
+                    if (response.data) {
+                        root.brand.code = response.data;
+                        root.rendar++;
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
                     function (error) {
                         this.loading = false;
                         console.log(error);
@@ -195,8 +197,7 @@ export default {
         this.arabic = localStorage.getItem('Arabic');
         this.roleName = localStorage.getItem('RoleName');
 
-        if(this.brand.id == '00000000-0000-0000-0000-000000000000')
-        {
+        if (this.brand.id == '00000000-0000-0000-0000-000000000000') {
             this.GetAutoCode('Funds');
         }
     }

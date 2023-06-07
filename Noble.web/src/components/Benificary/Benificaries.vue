@@ -182,6 +182,7 @@ export default {
         return {
         user:'',
             show: false,
+            roleName:'',
             benificarylist: [],
             newBenificary: {
                 id: '',
@@ -351,7 +352,7 @@ export default {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.GetBenificaryData(this.search, 1);
-        this.rollName = localStorage.getItem('RoleName');
+        this.roleName = localStorage.getItem('RoleName');
     }
 }
 </script>
