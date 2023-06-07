@@ -8,6 +8,7 @@
         public int OneTimeBenificary { get; set; }
         public int MonthlyBenificary { get; set; }
         public int TotalAuthorizePerson { get; set; }
+        public int TotalResources {get; set; }
         public int TotalUser { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace Focus.Domain.Entities
         public string UserId { get; set; }
         public string Code { get; set; }
         public Guid? CharityResouceId { get; set; }
+        public int TotalResources { get; set; }
         public virtual CharityResources CharityResources { get; set; }
     }
 }
