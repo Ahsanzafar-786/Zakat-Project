@@ -381,6 +381,7 @@ export default {
 
             }
             ],
+            user: '',
             rander: 0,
             forRequest: 0,
             arabic: '',

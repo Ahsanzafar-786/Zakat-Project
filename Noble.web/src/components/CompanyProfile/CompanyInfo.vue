@@ -123,7 +123,7 @@
                         </div>
                         <div class="col-sm-12 mt-3">
                             <div class="button-items">
-                                <button class="btn btn-outline-primary   mr-2"  v-on:click="SaveCompanyAccountSetup()"> <i class="far fa-save "></i>  {{ $t('Update') }}</button>
+                                <button class="btn btn-outline-primary   mr-2"  v-on:click="SaveCompanyAccountSetup()" v-if ="roleName != 'User'"> <i class="far fa-save "></i>  {{ $t('Update') }}</button>
                                 <button class="btn  btn-danger   mr-2" v-on:click="BackToList()">{{ $t('Close') }}</button>
 
                             </div>
@@ -142,6 +142,7 @@
 
         data: function () {
             return {
+            user:'',
                 companyProfile: {
                     id: '00000000-0000-0000-0000-000000000000',
                     nameInArabic: '',
@@ -409,6 +410,7 @@
             this.companyId = localStorage.getItem('CompanyID');
 
             this.GetCompanyDetails(this.companyId);
+            this.roleName = localStorage.getItem('RoleName');
 
         }
     })

@@ -84,8 +84,8 @@
                     <div class="row">
                         <div v-if="!loading" class=" col-md-12">
                             <div class="button-items">
-                                <button class="btn btn-primary" v-bind:disabled="$v.loginDetails.$invalid " v-if="loginDetails.id=='00000000-0000-0000-0000-000000000000' " v-on:click="SaveLoginDetails"><i class="mdi mdi-check-all me-2"></i> {{ $t('Save') }}</button>
-                                <button class="btn btn-primary" v-if="loginDetails.id!='00000000-0000-0000-0000-000000000000' " v-on:click="UpdateLoginDetails"><i class="mdi mdi-check-all me-2"></i> {{ $t('AddSignUp.btnUpdate') }}</button>
+                                <button class="btn btn-primary" v-bind:disabled="$v.loginDetails.$invalid " v-if="loginDetails.id=='00000000-0000-0000-0000-000000000000' && roleName != 'User' " v-on:click="SaveLoginDetails" ><i class="mdi mdi-check-all me-2"></i> {{ $t('Save') }}</button>
+                                <button class="btn btn-primary" v-if="loginDetails.id!='00000000-0000-0000-0000-000000000000' && roleName != 'User' " v-on:click="UpdateLoginDetails" ><i class="mdi mdi-check-all me-2"></i> {{ $t('Update') }}</button>
                                 <button class="btn btn-danger" v-on:click="Cancel">{{ $t('Close') }}</button>
                             </div>
                         </div>
@@ -102,6 +102,7 @@
         mixins: [clickMixin],
         data: function () {
             return {
+            user:'',
                 invoiveItem: false,
                 terminalUserTypeOptions:[],
                 invoiveBarCode: false,
@@ -414,6 +415,7 @@
             this.arabic = localStorage.getItem('Arabic');
             this.isOpenDay = localStorage.getItem('IsOpenDay') == 'true' ? true : false;
             this.language = this.$i18n.locale;
+            this.roleName = localStorage.getItem('RoleName');
         }
     })
 </script>

@@ -102,7 +102,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li v-if="roleName == 'Admin'">
+                    <li v-if="roleName != 'Nobel Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Dashboard.Setup') }}
@@ -167,7 +167,7 @@
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/SystemManagement')" href="javascript:void(0);"> {{ $t('SystemManagement.PrintSettings')
+                                <a v-on:click="GoTo('/PrintSetting')" href="javascript:void(0);"> {{ $t('SystemManagement.PrintSettings')
                                 }}</a>
                             </li>
                         </ul>

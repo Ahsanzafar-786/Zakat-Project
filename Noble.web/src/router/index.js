@@ -55,6 +55,7 @@ import ledgerreport from '../components/Reports/LedgerReport.vue'
 import companyprofile from '../components/CompanyProfile/CompanyProfile.vue';
 import companyinfo from '../components/CompanyProfile/CompanyInfo.vue';
 
+import printsetting from '../components/PrintSettings/PrintSetting.vue';
 
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
@@ -181,6 +182,11 @@ const routes = [
                             path:'/companyinfo',
                             name:'comapanyinfo',
                             component: companyinfo
+                        },
+                        {
+                            path:'/printsetting',
+                            name:'printsetting',
+                            component: printsetting
                         },
                     ]
                 }
