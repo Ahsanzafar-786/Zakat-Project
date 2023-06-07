@@ -1,4 +1,6 @@
 {
   "ServerIP": "https://localhost:44318/api",
+  "ClientIP": "http://localhost:805",
+  "ReportServer":"http://localhost:64319//Reports/",
   "SystemType": "Local"
 }

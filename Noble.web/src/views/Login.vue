@@ -219,14 +219,33 @@ export default {
                     localStorage.setItem('UserId', response.data.userId);
                     localStorage.setItem('UserName', response.data.userName);
                     localStorage.setItem('Email', response.data.emailConfirmed);
+                    root.ReportServerLog();
+
                     root.$router.push('/dashboard');
                 }
+
             }).catch(error => {
                 root.customError = JSON.stringify(error.response.data.error);
                 root.loading = false;
             })
-        },
 
+        },
+        ReportServerLog: function () {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('/account/ReportServer' , { headers: { "Authorization": `Bearer ${token}` } }) 
+            .then(function (response) {
+                   console.log(response);
+                },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });               
+
+        },
     },
     created: function () {
 

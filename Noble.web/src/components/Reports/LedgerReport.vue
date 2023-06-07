@@ -14,7 +14,7 @@
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
-                                <a v-on:click="GotoPage()" href="javascript:void(0);"
+                                <a v-on:click="PrintRdlc(true)" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('Payment.Print') }}
@@ -44,7 +44,7 @@
                             <datepicker v-model="toDate" :isDisabled="month == '' ? false : true " :key="render"/>
                         </div>
                         <div class="col-sm-2">
-                            <button class="btn btn-outline-primary me-2"  v-on:click="GetTransactions()" >Filter</button>
+                            <button class="btn btn-outline-primary me-2"  v-on:click="PrintRdlc(false)" >Filter</button>
                             <button class="btn btn-outline-primary" v-on:click="ClearFilter()">Clear Filters</button>
                         </div>
                     </div>
@@ -54,11 +54,11 @@
                 </div>
             </div>
         </div>
+        <print :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show=false" @IsSave="IsSave" />
 
+        <iframe :key="changereport" height="1500" width="1000" :src="reportsrc"></iframe>
     </div>
 </template>
-
-
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 
@@ -66,6 +66,11 @@ export default {
     mixins: [clickMixin],
     data: function () {
         return {
+            reportsrc:'',
+            changereport:0,
+            reportsrc1:'',
+            show:false,
+            changereportt:0,
             benificaryId: '',
             arabic: '',
             english: '',
@@ -82,7 +87,9 @@ export default {
         }
     },
     methods: {
-        
+        IsSave:function(){
+                this.show = !this.show;
+            },
         GotoPage: function (link) {
             this.$router.push({ path: link });
         },
@@ -94,7 +101,23 @@ export default {
             this.month =  '';
             this.render++
         },
+        PrintRdlc:function(val) {
+                var companyId = '';
+                    if (this.$session.exists()) {
+                        companyId = localStorage.getItem('CompanyID');
+                    }
+                    debugger;
 
+                    if(val){
+                        this.reportsrc1=  this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?companyId='+companyId+'&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate +'&formName=LedgerReport' + "&Print=" + val
+                        this.changereportt++;
+                        this.show = !this.show;
+                    }
+                    else{
+                        this.reportsrc= this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?companyId='+companyId+'&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate +'&formName=LedgerReport' + "&Print=" + val
+                        this.changereport++;
+                    }
+                },
         GetTransactions: function () {
           
             var root = this;

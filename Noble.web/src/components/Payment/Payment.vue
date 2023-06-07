@@ -190,7 +190,8 @@
                 </div>
             </div>
 
-            <authorizedPerson-mod :brand="newauthorizedPerson" :show="show" v-if="show" @close="IsSave" :type="type" />
+            <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show=false" @IsSave="IsSave" />
+
         </div>
 
     </div>
@@ -206,6 +207,8 @@ export default {
     data: function () {
         return {
             show: false,
+            reportsrc:'',
+            changereport:0,
             paymentList: [],
             type: '',
             search: '',
@@ -225,15 +228,30 @@ export default {
         }
     },
     methods: {
+        IsSave : function()
+            {
+                this.show = false;
+            },
         GetMonth: function (link) {
             if (link != undefined) {
                 return moment(link).format('MMMM');
 
-            }
-            else {
-                return '';
-            }
+           } 
+           else
+           {
+            return '';
+           }
         },
+        PrintRdlc:function(Id) {
+                var companyId = '';
+                if (this.$session.exists()) {
+                    companyId = localStorage.getItem('CompanyID');
+                }
+               
+                this.reportsrc=   this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?id='+Id+'&pageNumber=' + this.currentPage + '&searchTerm=' + this.search+'&CompanyID='+companyId+'&formName=Payment'
+                this.changereport++;
+                this.show = !this.show;
+            },
         getPage: function () {
             this.GetPayment(this.search, this.currentPage);
         },
