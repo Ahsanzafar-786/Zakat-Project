@@ -94,6 +94,7 @@ namespace Focus.Business.Benificary.Queries
                                 IsActive = x.IsActive,
                                 Date = x.Date.ToString(),
                                 ApprovalPersonName = x.ApprovalPerson.Name,
+                                AuthorizationPersonCode = x.AuthorizedPerson.AuthorizedPersonCode,
                                 AuthorizationPersonName = x.AuthorizedPerson.Name,
                                 Description = x.Description,
                             }).ToList(),

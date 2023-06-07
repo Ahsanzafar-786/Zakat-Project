@@ -151,7 +151,7 @@
                     <div class=" col-sm-6 ">
                         <label class="rounded text-white bg-primary px-2">Payment Type: </label>
                     </div>
-                    <div class=" col-sm-6 ">
+                    <div class=" col-sm-6 mt-1">
                         <label class="rounded text-white bg-primary px-2">Authorize Person: 
                             <span v-for="item in brand.benificaryAuthorization" :key="item.id">
                                 <span>{{ item.authorizationPersonName }}</span>
@@ -159,13 +159,18 @@
                             </span>
                         </label>
                     </div>
-                    <div class=" col-sm-6 ">
-                        <label class="rounded text-white bg-primary px-2">Payment Type: </label>
+                    <div class=" col-sm-6 mt-1">
+                        <label class="rounded text-white bg-primary px-2">Authorize Person Id: 
+                            <span v-for="item in brand.benificaryAuthorization" :key="item.id">
+                                <span>{{ item.authorizationPersonCode }}</span>
+                                &nbsp;
+                            </span>
+                        </label>
                     </div>
-                    <div class=" col-sm-6 pt-1">
+                    <div class=" col-sm-6 mt-1">
                         <label class="rounded text-white bg-primary px-2">Approval Person: </label>
                     </div>
-                    <div class=" col-sm-6 pt-1">
+                    <div class=" col-sm-6 mt-1">
                         <label class="rounded text-white bg-primary px-2">Start Month: &nbsp; &nbsp;{{ GetMonth(brand.startMonth) }}</label>
                     </div>
                 </div>
