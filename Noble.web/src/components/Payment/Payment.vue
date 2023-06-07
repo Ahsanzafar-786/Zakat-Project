@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="GotoPage('/addpayment')" href="javascript:void(0);"
-                                    class="btn btn-sm btn-outline-primary mx-1" v-if ="UserRole == 'User'">
+                                    class="btn btn-sm btn-outline-primary mx-1" v-if ="roleName != 'User'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
                                 </a>
@@ -254,7 +254,7 @@ export default {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.GetPayment(this.search, 1);
-        this.payment = localStorage.getItem('User');
+        this.roleName = localStorage.getItem('RoleName');
 
         
     }

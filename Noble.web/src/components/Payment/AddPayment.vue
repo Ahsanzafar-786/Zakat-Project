@@ -170,7 +170,7 @@
 
             <div class="col-lg-12 invoice-btn-fixed-bottom">
                 <div class="button-items" >
-                    <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-if ="UserRole == 'User'">
+                    <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-if ="roleName != 'User'">
                         <i class="far fa-save"></i>
                         <span>
                             {{ $t('Save') }}
@@ -1024,7 +1024,7 @@ export default {
     },
     mounted: function () {
 
-    this.addPayment = localStorage.getItem('User');
+    this.roleName = localStorage.getItem('RoleName');
 
     }
 }

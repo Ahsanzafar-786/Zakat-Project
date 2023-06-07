@@ -102,7 +102,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li v-if="roleName == 'Admin'">
+                    <li v-if="roleName != 'Nobel Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Dashboard.Setup') }}
