@@ -190,7 +190,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
                                         <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.Resource')}}</p>
-                                        <h3 class="m-0">5000</h3>
+                                        <h3 class="m-0">{{dashboard.totalResources}}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>10.5%</span> Completions Weekly</p>
                                     </div>
