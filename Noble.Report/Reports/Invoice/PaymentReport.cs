@@ -18,9 +18,10 @@ namespace Noble.Report.Reports.Invoice
             PaymentDtl.DataSource = Payments;
             CompanyDtl.DataSource = companyDetail;
             xrLabel17.Text=Convert.ToDateTime(Payments.Month).ToString("MMMM");
-            if (companyDetail.LogoPath != null && companyDetail.LogoPath != "" && companyDetail.LogoPath != string.Empty)
+
+            if (companyDetail.Base64Logo != null && companyDetail.Base64Logo != "" && companyDetail.Base64Logo != string.Empty)
             {
-                byte[] footerData = Convert.FromBase64String(companyDetail.LogoPath);
+                byte[] footerData = Convert.FromBase64String(companyDetail.Base64Logo);
                 MemoryStream Footerms = new MemoryStream(footerData);
                 Bitmap FooterImg = new Bitmap(Footerms);
                 xrPictureBox1.Image = FooterImg;

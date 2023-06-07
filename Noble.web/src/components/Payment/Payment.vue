@@ -81,15 +81,23 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <td class="text-center" v-if="roleName != 'Cashier'">
+                                    <td class="text-center " v-if="brand.isVoid && roleName == 'Admin'">
+                                        <strong>
+                                            <a class="text-danger" href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
+                                                brand.paymentCode }}</a>
+                                        </strong></td>
+                                    <td class="text-center" v-else-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
                                                 brand.paymentCode }}</a>
                                         </strong>
                                     </td>
+                                    <td class="text-center text-danger" v-else-if="brand.isVoid">{{ brand.paymentCode }}</td>
+
                                     <td class="text-center" v-else>{{ brand.paymentCode }}</td>
 
-                                    <td class="text-center" v-if="roleName != 'Cashier'">
+                                    <td class="text-center text-danger" v-if="brand.isVoid">Payment Voided</td>
+                                    <td class="text-center" v-else-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
                                                 brand.benificaryName }}</a>
@@ -97,24 +105,30 @@
                                     </td>
                                     <td class="text-center" v-else>{{ brand.benificaryName }}</td>
 
-                                    <td class="text-center" v-if="roleName != 'Cashier'">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)"> {{ brand.amount
-                                            }}</a>
-                                        </strong>
-                                    </td>
+                                    
+                                    <td class="text-center" v-if="brand.isVoid">--</td>
                                     <td class="text-center" v-else>{{ brand.amount }}</td>
 
-                                    <td class="text-center" v-if="brand.month != null">
+                                    <td class="text-center" v-if="brand.isVoid">
+                                        --
+                                    </td>
+                                    <td class="text-center" v-else-if="brand.month != null">
                                         {{ GetMonth(brand.month) }}
                                     </td>
+                                    
                                     <td class="text-center" v-else>
                                         {{ GetMonth(brand.date) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" v-if="brand.isVoid">
+                                        --
+                                    </td>
+                                    <td class="text-center" v-else>
                                         {{ brand.year }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" v-if="brand.isVoid">
+                                        --
+                                    </td>
+                                    <td class="text-center" v-else>
                                         {{ brand.period }}
                                     </td>
                                     <td class="text-center d-flex align-items-baseline justify-content-center" v-if="roleName != 'User'">
@@ -122,9 +136,16 @@
                                             data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
                                                 class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
-                                            <div v-if="brand.allowVoid && roleName == 'Cashier'">
+                                            <div v-if="brand.allowVoid && !brand.isVoid && roleName == 'Cashier'">
                                                 <input type="checkbox" v-model="brand.isVoid"
                                                 v-on:change="EditPayment(brand.id, brand.isVoid)" />
+                                                <span class="mx-1"> {{
+                                                    $t('Payment.IsVoid') }}
+                                                </span>
+                                            </div>
+                                            <div v-if="brand.allowVoid && brand.isVoid && roleName == 'Cashier'">
+                                                <input type="checkbox" v-model="brand.isVoid"
+                                                v-on:change="EditPayment(brand.id, brand.isVoid)" disabled />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.IsVoid') }}
                                                 </span>
@@ -142,6 +163,9 @@
                                                     $t('Payment.AllowVoid') }}
                                                 </span> 
                                             </div>
+                                            <strong>
+                                            <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{ $t('Payment.Print') }}</a>
+                                        </strong>
                                         </div>
                                     </td>
                                 </tr>

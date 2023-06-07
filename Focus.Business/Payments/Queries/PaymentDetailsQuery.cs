@@ -153,7 +153,7 @@ namespace Focus.Business.Payments.Queries
                             Id = x.Id,
                             BenificayId = x.BenificayId,
                             Amount = x.Amount,
-                            BenificaryName = x.Beneficiaries,
+                            BenificaryName = x.Beneficiaries.Name,
                             Month = x.Month,
                             PaymentCode = x.PaymentCode,
                             Year = x.Year,

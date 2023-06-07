@@ -105,7 +105,7 @@ namespace Focus.Business.PaymentsType.Queries
                             payment.Add(new PaymentType
                             {
                                 Code = 9,
-                                Name = "9 Month",
+                                Name = "9 Months",
                                 NameAr = "9 شهر",
                                 IsActive = true,
                             });
