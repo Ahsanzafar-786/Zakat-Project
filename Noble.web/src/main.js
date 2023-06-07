@@ -110,6 +110,7 @@ Vue.component('charityresources', require('./components/General/CharityResources
 // Approval Person
 Vue.component('approvalperson-mod', require('./components/ApprovalPersons/AddApprovalPersons.vue').default);
 Vue.component('approvalperson', require('./components/General/ApprovalPersonDropdown.vue').default);
+Vue.component('print-setting', require('./components/PrintSettings/PrintSetting.vue').default);
 
 //Payment Type
 Vue.component('paymenttype-mod', require('./components/PaymentType/AddPaymentType.vue').default);

@@ -167,7 +167,7 @@
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/SystemManagement')" href="javascript:void(0);"> {{ $t('SystemManagement.PrintSettings')
+                                <a v-on:click="GoTo('/PrintSetting')" href="javascript:void(0);"> {{ $t('SystemManagement.PrintSettings')
                                 }}</a>
                             </li>
                         </ul>

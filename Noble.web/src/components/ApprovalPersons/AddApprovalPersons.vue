@@ -41,11 +41,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveApprovalPerson"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit'">
+                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' && UserRole == 'User'">
                     {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveApprovalPerson"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit'">
+                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && UserRole == 'User'">
                     {{ $t('Update') }}
                 </button>
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
@@ -71,6 +71,7 @@ export default {
     },
     data: function () {
         return {
+        user:'',
             arabic: '',
             english: '',
             loading: false,
@@ -169,6 +170,7 @@ export default {
     mounted: function () {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
+        this.addaprovalpersons = localStorage.getItem('User');
     }
 }
 </script>
