@@ -99,7 +99,7 @@
                                         </button>
                                     </div>
                                     <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth"
-                                        v-bind:key="val + index" style="position: relative;font-size: 13px !important;">
+                                        v-bind:key="val + 1" style="position: relative;font-size: 13px !important;">
                                         <span>{{ val.selectedMonth }}</span>
                                         <span style="position:absolute; right: -12px; top: -8px;">
                                             <button class="btn  btn-danger btn-round btn-sm btn-icon"
@@ -728,13 +728,36 @@ export default {
                     }
                 }
 
-
+               
                 const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
                 if (record != null) {
                     if (record.active == true) {
-                        this.selectedMonth.push({
-                            selectedMonth: this.addPayment.month
-                        });
+                        debugger;
+                        var str = moment(this.addPayment.month).format('DD MMMM YYYY');
+                        console.log(this.selectedMonth);
+                        var res = this.selectedMonth.some(item => item.selectedMonth === str);
+                        console.log(this.addPayment.month);
+
+                            if(res)
+                            {
+                                root.$swal({
+                                title: 'Error',
+                                text: 'You have no Permission to Select Same Month',
+                                type: 'error',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+                            }
+                            else
+                            {
+                                this.selectedMonth.push({
+                                    selectedMonth: this.addPayment.month
+                                });
+                            }
+                        
+                       
                         
                         // if(this.selectedMonth.length>this.brand.advancePayment)
                         // {
@@ -816,7 +839,7 @@ export default {
             })
                 .then(function (response) {
                     if (response.data) {
-
+                      
                         root.brand = response.data;
 
                         if (root.brand.paymentType == 0) {
@@ -854,7 +877,7 @@ export default {
                             });
                             if (paymentMonths.length > 0) {
 
-                                for (var k = 0; k <= paymentMonths.length; k++) {
+                                for (var k = 0; k < paymentMonths.length; k++) {
 
                                     root.months.map(auth => {
 
@@ -888,7 +911,7 @@ export default {
 
                                 }
                                 if (paymentMonths.length > 0) {
-                                    for (var j = 0; j <= paymentMonths.length; j++) {
+                                    for (var j = 0; j < paymentMonths.length; j++) {
 
                                         root.months.map(auth => {
 
@@ -908,6 +931,15 @@ export default {
                             }
 
                         }
+                        root.selectedMonth = [];
+                        root.months.forEach(element => {
+                            if(element.color == 'green')
+                            {
+                                root.selectedMonth.push({
+                                    selectedMonth: '01' + ' ' + element.name + ' ' + element.year
+                                });
+                            }
+                        });
                         root.rander++;
                     } else {
                         console.log("error: something wrong from db.");

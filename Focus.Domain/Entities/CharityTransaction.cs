@@ -13,6 +13,9 @@ namespace Focus.Domain.Entities
         public DateTime? DoucmentDate { get; set; }
         public DateTime? Month { get; set; }
         public DateTime? CharityTransactionDate { get; set; }
+        public bool IsVoid { get; set; }
+        public string HijriYear { get; set; }
+        public string HijriMonth { get; set; }
         public string Year { get; set; }
     }
 }

@@ -305,6 +305,8 @@
 
   "Payment":{
     "Payment":"الدفع",
+    "Action":"فعل",
+    "IsVoid":"هو الفراغ",
     "BenificaryPayment":"الدفع المستحق",
     "BenificaryReports":"التقارير المفيدة",
     "AddPayment":"إضافة الدفع",

@@ -67,6 +67,9 @@
                                     <th class="text-center">
                                         {{ $t('Payment.Period') }}
                                     </th>
+                                    <th class="text-center">
+                                        {{ $t('Payment.Action') }}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,21 +81,27 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <td class="text-center">
-                                        <strong>
+                                    <td class="text-center" v-if="roleName != 'Cashier'">
+                                        <strong >
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{ brand.paymentCode }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" v-else>{{ brand.paymentCode }}</td>
+
+                                    <td class="text-center" v-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{ brand.benificaryName }}</a>
                                         </strong>
                                     </td>
-                                     <td class="text-center">
+                                    <td class="text-center" v-else>{{ brand.benificaryName }}</td>
+
+                                     <td class="text-center" v-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)"> {{ brand.amount }}</a>
                                         </strong>
                                     </td>
+                                    <td class="text-center" v-else>{{ brand.amount }}</td>
+
                                     <td class="text-center" v-if="brand.month != null">
                                         {{ GetMonth(brand.month) }}
                                     </td>
@@ -101,6 +110,9 @@
                                     </td>
                                     <td class="text-center">
                                         {{ brand.year }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ brand.period }}
                                     </td>
                                     <td class="text-center">
                                         {{ brand.period }}

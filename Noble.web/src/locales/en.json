@@ -307,6 +307,8 @@
     "Month":"Month",
     "Year":"Year",
     "Code":"Code",
+    "Action":"Action",
+    "IsVoid":"Is Void",
     "Period":"Period",
     "Print":"Print"
   },

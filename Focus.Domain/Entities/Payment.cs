@@ -19,7 +19,10 @@ namespace Focus.Domain.Entities
         [Column(TypeName = "ntext")]
         public string Note { get;set; }
         public string Year { get;set; }
+        public string HijriYear { get;set; }
+        public string HijriMonth { get;set; }
         public string Period { get; set; }
+        public bool IsVoid { get; set; }
         public virtual ICollection<SelectedMonth> SelectedMonth { get; set; }
     }
 }
