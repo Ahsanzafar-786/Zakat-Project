@@ -94,6 +94,8 @@ Vue.component('roledropdown', require('./components/General/RolesDropdown.vue').
 // Benificary
 Vue.component('benificary-mod', require('./components/Benificary/AddBenificary.vue').default);
 Vue.component('benificary', require('./components/General/BenificaryDropdown.vue').default);
+Vue.component('benificaryreports', require('./components/Benificary/BenificaryReports.vue').default);
+
 
 //Authorized Person
 Vue.component('authorizedPerson-mod', require('./components/AuthorizedPersons/AddAuthorizedPersons.vue').default);
