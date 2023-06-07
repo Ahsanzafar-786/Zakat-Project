@@ -43,6 +43,8 @@ import paymenttype from '../components/PaymentType/PaymentType.vue'
 
 //Funds
 import funds from '../components/Funds/Funds.vue'
+import charityfundsreports from '../components/Funds/CharityFundsReports.vue'
+import charityfundsresource from '../components/Funds/CharityFundsResource.vue'
 
 //Payment
 import payment from '../components/Payment/Payment.vue';
@@ -55,7 +57,10 @@ import ledgerreport from '../components/Reports/LedgerReport.vue'
 import companyprofile from '../components/CompanyProfile/CompanyProfile.vue';
 import companyinfo from '../components/CompanyProfile/CompanyInfo.vue';
 
-import printsetting from '../components/PrintSettings/PrintSetting.vue';
+//comingsoon
+import printsetting from '../components/PrintSettings/ComingSoon.vue';
+import databackup from '../components/DataBackUp/ComingSoon.vue';
+import datarestore from '../components/DataRestore/ComingSoon.vue';
 
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
@@ -185,9 +190,30 @@ const routes = [
                         },
                         {
                             path:'/printsetting',
-                            name:'printsetting',
+                            name:'comingsoon',
                             component: printsetting
                         },
+                        {
+                            path:'/databackup',
+                            name:'comingsoon',
+                            component: databackup
+                        },
+                        {
+                            path:'/datarestore',
+                            name:'comingsoon',
+                            component: datarestore
+                        },
+                        {
+                            path:'/charityfundsreports',
+                            name:'charityfundsreports',
+                            component: charityfundsreports
+                        },
+                        {
+                            path:'/charityfundsresource',
+                            name:'charityfundsresource',
+                            component: charityfundsresource
+                        },
+
                     ]
                 }
             ]

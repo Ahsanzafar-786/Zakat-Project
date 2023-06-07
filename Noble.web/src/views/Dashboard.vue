@@ -91,13 +91,13 @@
                         </ul>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.CharityFundsReports')
+                                <a v-on:click="GoTo('/charityfundsreports')" href="javascript:void(0);"> {{ $t('Funds.CharityFundsReports')
                                 }}</a>
                             </li>
                         </ul>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.CharityFundsResource')
+                                <a v-on:click="GoTo('/charityfundsresource')" href="javascript:void(0);"> {{ $t('Funds.CharityFundsResource')
                                 }}</a>
                             </li>
                         </ul>
@@ -173,13 +173,13 @@
                         </ul>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/SystemManagement')" href="javascript:void(0);"> {{ $t('SystemManagement.DataBackUp')
+                                <a v-on:click="GoTo('/DataBackUp')" href="javascript:void(0);"> {{ $t('SystemManagement.DataBackUp')
                                 }}</a>
                             </li>
                         </ul>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/SystemManagement')" href="javascript:void(0);"> {{ $t('SystemManagement.DataRestore')
+                                <a v-on:click="GoTo('/DataRestore')" href="javascript:void(0);"> {{ $t('SystemManagement.DataRestore')
                                 }}</a>
                             </li>
                         </ul>
