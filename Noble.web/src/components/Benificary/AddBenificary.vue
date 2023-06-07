@@ -103,13 +103,13 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.RecurringAmount') }}:
                         </label>
-                        <input class="form-control" v-on:input="GetValueOfRecurring"
+                        <input class="form-control" v-on:change="GetValueOfRecurring"
                             v-model="$v.brand.recurringAmount.$model" @click="$event.target.select()" type="text" />
                             <span v-if="$v.brand.recurringAmount.$error && english == 'en'" class="error text-danger">
-                            <span v-if="!$v.brand.recurringAmount.numeric ">Amount should be in number</span>
+                            <span v-if="!$v.brand.recurringAmount.decimal ">Amount should be in number</span>
                         </span>
                         <span v-else class="error text-danger">
-                            <span v-if="!$v.brand.recurringAmount.numeric ">يجب أن يكون المبلغ عبارة عن رقم</span>
+                            <span v-if="!$v.brand.recurringAmount.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
                         </span>
                     </div>
                     <div class="col-md-6 form-group" v-if="paymentType != 0">
@@ -129,8 +129,16 @@
                         <label class="text  font-weight-bolder" v-else>
                             {{ $t('AddBenificary.Amount') }}:
                         </label>
-                        <input class="form-control" v-model="brand.amountPerMonth" @click="$event.target.select()"
+                        <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
                             type="text" />
+                        <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-else
+                            type="text" v-on:change="FloatValue()"/>
+                            <span v-if="$v.brand.amountPerMonth.$error && english == 'en'" class="error text-danger">
+                            <span v-if="!$v.brand.amountPerMonth.decimal ">Amount should be in number</span>
+                        </span>
+                        <span v-else class="error text-danger">
+                            <span v-if="!$v.brand.amountPerMonth.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
+                        </span>
                     </div>
                     <div class="col-md-6 form-group" v-if="paymentType != 0 ">
                         <label>{{ $t('AddBenificary.StartFrom') }}:</label>
@@ -332,7 +340,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import {
-    required, requiredIf, minLength, maxLength,numeric
+    required, requiredIf, minLength, maxLength,numeric,decimal
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -378,8 +386,12 @@ export default {
             },
             paymentIntervalMonth: {},
             amountPerMonth: {
-                numeric,
-                //minValue:minValue(0.1)
+                decimal,
+                required: requiredIf((x) => {
+                    if (x.recurringAmount == 0)
+                        return true;
+                    return false;
+                }),
             },
             ugamaNo: {
                 required,
@@ -392,7 +404,7 @@ export default {
                 maxLength: maxLength(10),
             },
             recurringAmount: {
-                numeric,
+                decimal,
             }
         }
     },
@@ -427,6 +439,7 @@ export default {
                 this.paymentType = null;
             }
         },
+        
         GetValueOfRecurring: function () {
           debugger;
             if (this.brand.recurringAmount > 0) {
@@ -435,6 +448,7 @@ export default {
                    
                 } else {
                     this.brand.amountPerMonth = parseFloat(this.brand.recurringAmount / this.paymentType).toFixed(3).slice(0, -1);
+                    this.brand.recurringAmount = parseFloat(this.brand.recurringAmount).toFixed(3).slice(0, -1);
                 }
 
             } else {
@@ -442,6 +456,9 @@ export default {
                 
             }
 
+        },
+        FloatValue: function () {
+            this.brand.amountPerMonth = parseFloat(this.brand.amountPerMonth).toFixed(3).slice(0, -1);
         },
         RemoveRow: function (index) {
             this.brand.benificaryAuthorization.splice(index, 1);
@@ -464,9 +481,10 @@ export default {
 
             if (this.brand.durationType != undefined && this.brand.durationType != '' && this.brand.durationType != null) {
                 if (this.brand.durationType != 'Indefinite') {
+                    debugger;
                     if (this.brand.startMonth != undefined && this.brand.startMonth != '' && this.brand.startMonth != null) {
                         this.brand.startDate = this.brand.startMonth;
-                        this.brand.endDate = moment(this.brand.startMonth).add(this.paymentType - 1, 'months');
+                        this.brand.endDate = moment(this.brand.startMonth).add((this.paymentType - 1), 'months');
 
                     } else {
                         this.brand.startDate = '';

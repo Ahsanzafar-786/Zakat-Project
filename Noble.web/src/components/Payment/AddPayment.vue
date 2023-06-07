@@ -149,10 +149,21 @@
                         }}</label>
                     </div>
                     <div class=" col-sm-6 ">
-                        <label class="rounded text-white bg-primary px-2">Payment Type: {{ brand.paymentTypeName }}</label>
+                        <label class="rounded text-white bg-primary px-2">Payment Type: </label>
+                    </div>
+                    <div class=" col-sm-6 ">
+                        <label class="rounded text-white bg-primary px-2">Authorize Person: 
+                            <span v-for="item in brand.benificaryAuthorization" :key="item.id">
+                                <span>{{ item.authorizationPersonName }}</span>
+                                &nbsp;
+                            </span>
+                        </label>
+                    </div>
+                    <div class=" col-sm-6 ">
+                        <label class="rounded text-white bg-primary px-2">Payment Type: </label>
                     </div>
                     <div class=" col-sm-6 pt-1">
-                        <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName }}</label>
+                        <label class="rounded text-white bg-primary px-2">Approval Person: </label>
                     </div>
                     <div class=" col-sm-6 pt-1">
                         <label class="rounded text-white bg-primary px-2">Start Month: &nbsp; &nbsp;{{ GetMonth(brand.startMonth) }}</label>
@@ -170,7 +181,7 @@
 
             <div class="col-lg-12 invoice-btn-fixed-bottom">
                 <div class="button-items">
-                    <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2">
+                    <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-if="rollName != 'User'">
                         <i class="far fa-save"></i>
                         <span>
                             {{ $t('Save') }}
@@ -238,6 +249,7 @@ export default {
    
     data: function () {
         return {
+            rollName:'',
             rendar: 0,
             year: '',
             randerDate: 0,
@@ -1022,7 +1034,7 @@ export default {
         }
     },
     mounted: function () {
-
+        this.rollName = localStorage.getItem('RoleName');
     }
 }
 </script>

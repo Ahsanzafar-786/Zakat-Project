@@ -69,7 +69,7 @@ namespace Focus.Business.Payments.Queries
                     return GenerateNewCodeAuthorizePerson(authorize.AuthorizedPersonCode);
                 }
 
-                return GenerateCodeFirstTimeFunds();
+                return GenerateCodeFirstTimeAuthorizePerson();
             }
 
              public string GenerateCodeFirstTimeAuthorizePerson()
