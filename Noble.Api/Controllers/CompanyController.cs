@@ -80,6 +80,17 @@ namespace Noble.Api.Controllers
 
         }
 
+        //[Route("api/Company/DeleteAttachment")]
+        //[HttpGet("DeleteAttachment")]
+
+        //public async Task<IActionResult> DeleteAttachment(string path)
+        //{
+
+        //    var filePath = Path.Combine(_hostingEnvironment.WebRootPath) + path;
+        //    System.IO.File.Delete(Path.Combine(filePath));
+        //    return Ok(true);
+        //}
+
         [Route("api/Company/EditCompany")]
         [HttpPost("EditCompany")]
        
