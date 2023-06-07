@@ -6,6 +6,10 @@
   "Save" : "يحفظ",
   "Update": "تحديث",
   "Arabic":"العربية", 
+  "PaidPayments":"المدفوعات المدفوعة",
+  "DuePayments":"المدفوعات المستحقة",
+  "UnPaidPayments":"المدفوعات غير المدفوعة",
+
 
   "General":{
     "SelectAuthorizePerson":"حدد تخويل الشخص",
@@ -55,6 +59,8 @@
     "Amount": "رقم",
     "Note" : "ملحوظة",
     "Ids": "هوية وطنية",
+    "StartMonth":"شهر البدء",
+    "AuthorizePersonId":"تفويض هوية الشخص",
     "SelectType": "اختر صنف",
     "AdvancePayment":"دفعه مقدمه",
     "StartFrom":"يبدأ من",

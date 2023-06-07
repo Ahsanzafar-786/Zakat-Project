@@ -149,7 +149,7 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
-                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
+                        <approvalperson v-model="brand.approvalPersonId" :values="brand.approvalPersonId" />
                     </div>
 
                     <div class="form-group col-sm-12">

@@ -6,6 +6,9 @@
   "Save": "Save",
   "Update": "Update",
   "Arabic":"العربية",
+  "PaidPayments":"Paid Payments",
+  "DuePayments":"Due Payments",
+  "UnPaidPayments":"UnPaid Payments",
 
   "General": {
     "SelectAuthorizePerson": "Select Authorize Person",
@@ -53,6 +56,8 @@
     "Amount": "Amount",
     "Note": "Note",
     "Ids": "National ID",
+    "StartMonth":"Start Month",
+    "AuthorizePersonId":"Authorize Person Id",
     "SelectType": "Select Type",
     "AdvancePayment":"Advance Payment",
     "StartFrom":"Start From",
