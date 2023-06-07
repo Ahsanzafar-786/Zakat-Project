@@ -36,6 +36,7 @@
             
         },
         mounted: function () {
+            debugger;
             
            
         }

@@ -353,7 +353,7 @@ namespace Noble.Api.Controllers
         #region CharityTransaction
         [Route("api/Benificary/GetCharityTransactionList")]
         [HttpGet("GetCharityTransactionList")]
-        public async Task<IActionResult> GetCharityTransactionList(Guid benificaryId, DateTime? month, DateTime? fromDate, DateTime? toDate)
+        public async Task<IActionResult> GetCharityTransactionList(Guid? benificaryId, DateTime? month, DateTime? fromDate, DateTime? toDate)
         {
             var charity = await Mediator.Send(new CharityTransactionListQuery
             {

@@ -17,6 +17,7 @@ namespace Noble.Report.Reports.Invoice
 
             PaymentDtl.DataSource = Payments;
             CompanyDtl.DataSource = companyDetail;
+            xrLabel17.Text=Convert.ToDateTime(Payments.Month).ToString("MMMM");
             if (companyDetail.LogoPath != null && companyDetail.LogoPath != "" && companyDetail.LogoPath != string.Empty)
             {
                 byte[] footerData = Convert.FromBase64String(companyDetail.LogoPath);

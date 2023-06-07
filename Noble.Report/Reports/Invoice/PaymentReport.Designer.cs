@@ -201,8 +201,6 @@
             // 
             this.xrLabel17.BorderDashStyle = DevExpress.XtraPrinting.BorderDashStyle.Dot;
             this.xrLabel17.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
-            this.xrLabel17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Month]")});
             this.xrLabel17.Font = new DevExpress.Drawing.DXFont("Calibri", 10F);
             this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(53.43142F, 85.11966F);
             this.xrLabel17.Multiline = true;
@@ -213,7 +211,6 @@
             this.xrLabel17.StylePriority.UseBorders = false;
             this.xrLabel17.StylePriority.UseFont = false;
             this.xrLabel17.StylePriority.UseTextAlignment = false;
-            this.xrLabel17.Text = "xrLabel17";
             this.xrLabel17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // xrLabel16
