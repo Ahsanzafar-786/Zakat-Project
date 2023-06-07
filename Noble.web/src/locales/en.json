@@ -6,11 +6,14 @@
   "Save": "Save",
   "Update": "Update",
   "Arabic":"العربية",
+  "PaidPayments":"Paid Payments",
+  "DuePayments":"Due Payments",
+  "UnPaidPayments":"UnPaid Payments",
 
   "General": {
     "SelectAuthorizePerson": "Select Authorize Person",
     "SelectApprovalPerson": "Select Approval Person",
-    "PaymentType": "Payment Type",
+    "PaymentType": "Select Payment Type",
     "SelectBenificary": "Select Benificary"
   },
   "Benificary": {
@@ -19,7 +22,7 @@
     "Name": "Name",
     "PayementIntervalMonths": "Payement Interval Months",
     "AmountPerMonth": "Amount Per Month",
-    "ID": "ID",
+    "ID": "National ID",
     "Active": "Active",
     "DeActive": "De-Active",
     "ContactNo": "Contact No",
@@ -50,8 +53,11 @@
     "AmountPerMonth": "Amount Per Month",
     "Active": "Active",
     "Address": "Address",
+    "Amount": "Amount",
     "Note": "Note",
-    "Ids": "ID",
+    "Ids": "National ID",
+    "StartMonth":"Start Month",
+    "AuthorizePersonId":"Authorize Person Id",
     "SelectType": "Select Type",
     "AdvancePayment":"Advance Payment",
     "StartFrom":"Start From",
@@ -148,6 +154,7 @@
     "Name": "Name",
     "NameArabic": "Name Arabic",
     "Gender": "Gender",
+    "AuthorizedPersonId":"Authorized Person Id",
     "Nationality": "Nationality",
     "ID": "ID",
     "Male": "Male",
@@ -158,10 +165,13 @@
   },
   "Funds": {
     "Funds": "Funds",
+    "AddFunds":"Add Funds",
     "FundsList": "Funds List",
     "CharityResource": "Charity Resource",
     "Amount": "Amount",
-    "Date": "Date"
+    "Date": "Date",
+    "CharityFundsReports":"Charity Funds Reports",
+    "CharityFundsResource":"Charity Funds Resource"
   },
   "DatePicker": {
     "PickDate": "Pick Date",
@@ -213,8 +223,12 @@
     "Dashboard":"Dashboard",
     "MyProfile":"My Profile",
     "LogOut":"LogOut",
-    "UserSetup":"User Setup",
-    "SignUpUser":"SignUp User"
+    "Setup":"Setup",
+    "AddUser":"Add User",
+    "AddAuthorizedPerson":"Add Authorized Person",
+    "AddApprovalPerson":"Add Approval Person",
+    "AddPaymentType":"Add Payment Type",
+    "AddCharityFundsResources":"Add Charity Funds Resources"
   },
   "Company":{
     "Company":"Company",
@@ -283,6 +297,8 @@
 
   "Payment":{
     "Payment":"Payment",
+    "BenificaryPayment":"Benificary Payment",
+    "BenificaryReports":"Benificary Reports",
     "AddPayment":"Add Payment",
     "PaymentList":"Payment List",
     "BenifcaryName":"BenifcaryName",
@@ -290,9 +306,11 @@
     "Cashier":"Cashier",
     "Month":"Month",
     "Year":"Year",
-    "Print":"Print",
+    "Code":"Code",
     "Action":"Action",
-    "Period":"Period"
+    "IsVoid":"Void",
+    "Period":"Period",
+    "Print":"Print"
   },
 
   "AddPayment":{
@@ -302,6 +320,7 @@
     "Amount":"Amount",
     "Cashier":"Cashier",
     "Month":"Month",
+    "Code":"Payment Code",
     "Year":"Year",
     "Period":"Period"
   },
@@ -322,6 +341,29 @@
   },
   "LedgerReport":{
     "LedgerReport": "Ledger Report",
-    "Report":"Report"
+    "ReportsManagement":"Reports Management"
+  },
+  "SystemManagement":{
+    "SystemManagement":"System Management",
+    "PrintSettings":"Print Settings",
+    "DataBackUp":"Data BackUp",
+    "DataRestore":"Data Restore"
+  },
+  "CompanyProfile":{
+    "CompanyProfile":"Company Profile",
+    "CompanyInfo":"Company Info"
+  },
+  "CompanyInfo":{
+    "CompanyInfo":"Company Info",
+    "CompanyProfile":"Company Profile",
+    "CompanyName(InEnglish)":"Company Name ",
+    "CompanyName(InArabic)":"Company Name ",
+    "CommercialRegistrationNo":"Commercial Registration No",
+    "VATNo":"VAT No",
+    "Address(InEnglish)":"Address ",
+    "Address(InArabic)":"Address "
+  },
+  "AddProductImage":{
+    "UploadProductImage":"Upload Product Image"
   }
 }

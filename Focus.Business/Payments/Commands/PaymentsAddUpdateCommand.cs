@@ -52,6 +52,7 @@ namespace Focus.Business.Payments.Commands
                             BenificayId = request.Payment.BenificayId,
                             Amount = request.Payment.Amount,
                             Month = request.Payment.Month,
+                            Note = request.Payment.Note,
                             PaymentCode = request.Payment.PaymentCode,
                             Year = DateTime.Now.Year.ToString(),
                             Period = DateTime.Now.Year.ToString(),
@@ -114,6 +115,7 @@ namespace Focus.Business.Payments.Commands
                         paymentDetails.Year = DateTime.Now.Year.ToString();
                         paymentDetails.Period = DateTime.Now.Year.ToString();
                         paymentDetails.Date = DateTime.Now;
+                        paymentDetails.Note = request.Payment.Note;
 
                         Context.Payments.Update(paymentDetails);
 

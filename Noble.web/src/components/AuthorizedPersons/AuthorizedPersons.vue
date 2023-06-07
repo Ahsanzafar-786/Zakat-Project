@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="openmodel" href="javascript:void(0);"
-                                    class="btn btn-sm btn-outline-primary mx-1">
+                                    class="btn btn-sm btn-outline-primary mx-1" v-if ="roleName != 'User'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
                                 </a>
@@ -61,9 +61,7 @@
                                     <th class="text-center">
                                         {{ $t('AuthorizedPerson.Nationality') }}
                                     </th>
-                                    <th class="text-center">
-                                        {{ $t('AuthorizedPerson.PassportNo') }}
-                                    </th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,9 +92,7 @@
                                     <td class="text-center">
                                         {{ brand.nationality }}
                                     </td>
-                                    <td class="text-center">
-                                        {{ brand.passportNo }}
-                                    </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -156,6 +152,7 @@ export default {
     mixins: [clickMixin],
     data: function () {
         return {
+        user: '',
             show: false,
             authorizedPersonlist: [],
             newauthorizedPerson: {
@@ -177,6 +174,7 @@ export default {
             rowCount: '0',
             arabic: '',
             english: '',
+            roleName: '',
         }
     },
     watch: {
@@ -264,6 +262,7 @@ export default {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.GetauthorizedPerson(this.search, 1);
+        this.roleName = localStorage.getItem('RoleName');
     }
 }
 </script>

@@ -8,6 +8,7 @@ using System.Threading;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using NPOI.SS.Formula.Functions;
 
 namespace Focus.Business.Payments.Queries
 {
@@ -33,10 +34,15 @@ namespace Focus.Business.Payments.Queries
                     {
                         code = await AutoGenerateFunds();
                     }
+                    else if(request.Name == "AuthorizePerson")
+                    {
+                        code = await AutoGenerateAuthorizePerson();
+                    }
                     else
                     {
                         code = await AutoGenerateCashCustomer();
                     }
+
 
                     return code;
                 }
@@ -45,6 +51,38 @@ namespace Focus.Business.Payments.Queries
                     _logger.LogError(exception.Message);
                     throw new ApplicationException("Something Went Wrong.");
                 }
+            }
+            // Authorize Person Auto ID
+                public async Task<string> AutoGenerateAuthorizePerson()
+            {
+                var authorize = await Context.AuthorizedPersons
+                       .OrderBy(x => x.AuthorizedPersonCode)
+                       .LastOrDefaultAsync();
+
+                if (authorize != null)
+                {
+                    if (authorize.AuthorizedPersonCode == 0)
+                    {
+                        return GenerateCodeFirstTimeAuthorizePerson();
+                    }
+
+                    return GenerateNewCodeAuthorizePerson(authorize.AuthorizedPersonCode);
+                }
+
+                return GenerateCodeFirstTimeAuthorizePerson();
+            }
+
+             public string GenerateCodeFirstTimeAuthorizePerson()
+            {
+                int code = 1;
+                return code.ToString();
+            }
+            public string GenerateNewCodeAuthorizePerson(int soNumber)
+            {
+                Int32 autoNo = Convert.ToInt32((soNumber));
+                autoNo++;
+                var newCode = autoNo.ToString();
+                return newCode;
             }
 
             //Funds Auto Code

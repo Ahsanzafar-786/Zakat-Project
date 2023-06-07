@@ -33,15 +33,11 @@ namespace Focus.Business.AuthorizPersons.Commands
                     if(request.authorziedPersons.Id == Guid.Empty)
                     {
                         var authorize = Context.AuthorizedPersons.OrderBy(x => x.Id).LastOrDefault();
-                        var authorizeNo = 1;
-                        if (authorize != null)
-                        {
-                            authorizeNo = authorize.AuthorizedPersonCode + 1;
-                        }
+                       
 
                         var auth = new AuthorizedPerson
                         {
-                            AuthorizedPersonCode = authorizeNo,
+                            AuthorizedPersonCode = request.authorziedPersons.AuthorizedPersonCode,
                             Name = request.authorziedPersons.Name,
                             NameAr = request.authorziedPersons.NameAr,
                             PhoneNo = request.authorziedPersons.PhoneNo,

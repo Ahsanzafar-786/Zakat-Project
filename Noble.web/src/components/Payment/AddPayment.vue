@@ -1,354 +1,394 @@
 <template>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-title-box">
-                    <div class="row">
-                        <div class="col">
-                            <h4 class="page-title">{{ $t('AddPayment.AddPayment') }}</h4>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
-                                </li>
-                                <li class="breadcrumb-item active">{{ $t('AddPayment.AddPayment') }}</li>
-                            </ol>
-                        </div>
-                        <div class="col-auto align-self-center">
-                            <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">
-                                {{ $t('Close') }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <div class="col-md-7">
-                <div class="form-group has-label col-sm-12 ">
-                    <div class="row">
-                        <div class="col-sm-5 text-md-end align-middle">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('AddPayment.Code') }}:<span class="text-danger"> *</span>
-                            </label>
-                        </div>
-                        <div class="col-sm-7">
-                            <input type="text" disabled class="form-control" v-model="addPayment.paymentCode" readonly :key="rendar" />
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">{{ $t('AddPayment.AddPayment') }}</h4>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">{{ $t('AddPayment.AddPayment') }}</li>
+                                </ol>
+                            </div>
+                            <div class="col-auto align-self-center">
+                                <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
+                                    class="btn btn-sm btn-outline-danger">
+                                    {{ $t('Close') }}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group has-label col-sm-12 ">
-                    <div class="row">
-                        <div class="col-sm-5 text-md-end align-middle">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('AddPayment.Benificary') }}:<span class="text-danger"> *</span>
-                            </label>
-                        </div>
-                        <div class="col-sm-7">
-                            <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander" v-on:input="EditBenificary(addPayment.benificayId, true)" />
-                            <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails') }}</a>
-                            <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Benificary Details</a>
+                <hr />
+                <div class="col-md-7">
+                    <div class="form-group has-label col-sm-12 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Code') }}:<span class="text-danger"> *</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" disabled class="form-control" v-model="addPayment.paymentCode" readonly
+                                    :key="rendar" />
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Benificary') }}:<span class="text-danger"> *</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander"
+                                    v-on:input="EditBenificary(addPayment.benificayId, true)" />
+                                <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null"
+                                    href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails')
+                                    }}</a>
+                                <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas"
+                                    ref="offcanvasRight" data-bs-target="#offcanvasRight"
+                                    aria-controls="offcanvasRight">Benificary Details</a>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group has-label col-sm-12 ">
-                    <div class="row">
-                        <div class="col-sm-5 text-md-end align-middle">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('AddPayment.Amount') }}:<span class="text-danger"> *</span>
-                            </label>
-                        </div>
-                        <div class="col-sm-7">
-                            <input type="number" class="form-control" v-model="addPayment.amount" readonly />
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="form-group has-label col-sm-12 " v-if="brand.durationType=='Customize'">
-                    <div class="row">
-                        <div class="col-sm-5 text-md-end align-middle">
-                            <label class="text  font-weight-bolder">
-                                Start Month:
-                            </label>
-                        </div>
-                        <div class="col-sm-7">
-                            <datepicker v-model="brand.startDate" :type="'month'" v-bind:key="rander" />
-
+                    <div class="form-group has-label col-sm-12 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Amount') }}:<span class="text-danger"> *</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="number" class="form-control" v-model="addPayment.amount" readonly />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group has-label col-sm-12 " v-if="brand.durationType=='Customize'">
-                    <div class="row">
-                        <div class="col-sm-5 text-md-end align-middle">
-                            <label class="text  font-weight-bolder">
-                                End Month:
-                            </label>
-                        </div>
-                        <div class="col-sm-7">
-                            <datepicker v-model="brand.endDate" :type="'month'" v-bind:key="rander" />
-                        </div>
-                    </div>
-                </div> -->
-
-                <div class="form-group has-label col-sm-12 ">
-                    <div class="row">
-                        <div class="col-sm-5 text-md-end align-middle">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('AddPayment.Cashier') }}:
-                            </label>
-                        </div>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" v-model="cashierName" readonly />
+                    <div class="form-group has-label col-sm-12 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Cashier') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" v-model="cashierName" readonly />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group has-label col-sm-12 ">
-                    <div class="row">
-                        <div class="col-sm-5 text-md-end align-middle">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('AddPayment.Month') }}:
-                            </label>
-                        </div>
-                        <div class="col-sm-7">
-                            <datepicker :type="'month'" v-model="addPayment.month" v-bind:key="randerDate" v-on:input="MonthSelection" />
-                            <div class="row mt-2">
-                                <div style="text-align: right !important;" v-if="selectedMonth.length>0">
-                                    <button class="btn  btn-danger btn-round btn-sm btn-icon" @click="RemoveAll()" style="font-size: .4rem;  padding: 0.2rem 0.35rem;">
-                                        Close All
-                                    </button>
-                                </div>
-                                <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth" v-bind:key="val+index" style="position: relative;font-size: 13px !important;">
-                                    <span>{{val.selectedMonth}}</span>
-                                    <span style="position:absolute; right: -12px; top: -8px;">
-                                        <button class="btn  btn-danger btn-round btn-sm btn-icon" style="font-size: .4rem;  padding: 0.2rem 0.35rem;" @click="RemoveEffect(val)">
-                                            <i class="fas fa-times"></i>
+                    <div class="form-group has-label col-sm-12" v-if="brand.paymentType != 0">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddPayment.Month') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <datepicker :type="'month'" v-model="addPayment.month" v-bind:key="randerDate"
+                                    v-on:input="MonthSelection" />
+                                <div class="row mt-2">
+                                    <div style="text-align: right !important;" v-if="selectedMonth.length > 0">
+                                        <button class="btn  btn-danger btn-round btn-sm btn-icon" @click="RemoveAll()"
+                                            style="font-size: .4rem;  padding: 0.2rem 0.35rem;">
+                                            Close All
                                         </button>
-                                    </span>
+                                    </div>
+                                    <div class="badge bg-success col-sm-3 me-3 mt-2" v-for="(val) in selectedMonth"
+                                        v-bind:key="val + 1" style="position: relative;font-size: 13px !important;">
+                                        <span>{{ val.selectedMonth }}</span>
+                                        <span style="position:absolute; right: -12px; top: -8px;">
+                                            <button class="btn  btn-danger btn-round btn-sm btn-icon"
+                                                style="font-size: .4rem;  padding: 0.2rem 0.35rem;"
+                                                @click="RemoveEffect(val)">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+
                                 </div>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-label col-sm-12 mb-5">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('AddBenificary.Note') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <textarea name="" rows="3" class="form-control" v-model="addPayment.note"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5" v-if="addPayment.benificayId != '' && addPayment.benificayId != null">
+                    <div class="row">
+                        <div class=" col-sm-6 ">
+                            <label class="rounded text-white bg-primary px-2">{{ $t('AddBenificary.AdvancePayment') }}: {{
+                                advancePayment
+                            }}</label>
+                        </div>
+                        <div class=" col-sm-6 ">
+                            <label class="rounded text-white bg-primary px-2">{{ $t('AddBenificary.PaymentType') }}: {{
+                                paymentType }}</label>
+                        </div>
+                        <div class=" col-sm-6 mt-1">
+                            <label class="rounded text-white bg-primary px-2">{{ $t('AddBenificary.AuthorizedPerson') }}:
+                                <span v-for="item in brand.benificaryAuthorization" :key="item.id">
+                                    <span>{{ item.authorizationPersonName }}</span>
+                                    &nbsp;
+                                </span>
+                            </label>
+                        </div>
+                        <div class=" col-sm-6 mt-1">
+                            <label class="rounded text-white bg-primary px-2">{{ $t('AddBenificary.AuthorizePersonId') }}:
+                                <span v-for="item in brand.benificaryAuthorization" :key="item.id">
+                                    <span>{{ item.authorizationPersonCode }}</span>
+                                    &nbsp;,
+                                </span>
+                            </label>
+                        </div>
+                        <div class=" col-sm-6 mt-1">
+                            <label class="rounded text-white bg-primary px-2">{{ $t('AddBenificary.ApprovalPersons') }}: {{
+                                brand.approvalPersonName }}</label>
+                        </div>
+                        <div class=" col-sm-6 mt-1">
+                            <label class="rounded text-white bg-primary px-2">{{ $t('AddBenificary.StartMonth') }}: &nbsp;
+                                &nbsp;{{ GetMonth(brand.startMonth) }}</label>
+                        </div>
+                    </div>
+                    <div class="row mt-2" v-if="brand.paymentType != 0">
+                        <div class="col-md-4">
+                            <p class="text-primary"><b>{{ $t('PaidPayments') }}</b></p>
+                            <div v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-12'">
+                                <span v-if="month.color == 'red'" class="text-primary"><b>{{ month.name }} {{ month.year
+                                }}</b></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-success"><b>{{ $t('DuePayments') }}</b></p>
+                            <div v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-12'">
+                                <span v-if="month.color == 'green'" class="text-success"><b>{{ month.name }}
+                                    {{ month.year }}</b></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-danger"><b>{{ $t('UnPaidPayments') }}</b></p>
+                            <div v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-12'">
+                                <span v-if="month.color == ''" class="text-danger"><b>{{ month.name }}
+                                    {{ month.year }}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 invoice-btn-fixed-bottom">
+                    <div class="button-items">
+                        <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-if="rollName != 'User'">
+                            <i class="far fa-save"></i>
+                            <span>
+                                {{ $t('Save') }}
+                            </span>
+                        </button>
+                        <button class="btn btn-danger mr-2" v-on:click="GotoPage('/payment')">
+                            {{ $t('Close') }}
+                        </button>
+                    </div>
+                </div>
+                <div class="offcanvas offcanvas-end p-0" tabindex="-1" id="offcanvasRight"
+                    aria-labelledby="offcanvasRightLabel" style="width: 500px !important;">
+                    <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel" class="m-0">{{ $t('AddPayment.BenificaryDetails') }}</h5>
+                        <button type="button" class="btn-close text-reset filter-green " data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label> {{ $t('AddBenificary.Name') }}:</label>
+                                <input type="text" class="form-control" v-model="brand.name" />
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.NameArabic') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.nameAr" />
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.ID') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.ugamaNo" />
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.PassportNo') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.passportNo" />
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.Nationality') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.nationality" />
+                            </div>
+
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.Gender') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.gender" />
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.ContactNo') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.phoneNo" />
+                            </div>
+
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.Address') }} :</label>
+                                <textarea rows="3" class="form-control" v-model="brand.address">  </textarea>
                             </div>
 
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-5" v-if="addPayment.benificayId != '' && addPayment.benificayId != null">
-                <div class="row">
-                    <div class=" col-sm-6 ">
-                        <label class="rounded text-white bg-primary px-2">Advance Payment: {{ brand.advancePayment
-                        }}</label>
-                    </div>
-                    <div class=" col-sm-6 ">
-                        <label class="rounded text-white bg-primary px-2">Payment Type: {{ brand.paymentTypeName }}</label>
-                    </div>
-                    <div class=" col-sm-6 pt-1">
-                        <label class="rounded text-white bg-primary px-2">Approval Person: {{ brand.approvalPersonName }}</label>
-                    </div>
-                    <div class=" col-sm-6 pt-1">
-                        <label class="rounded text-white bg-primary px-2">Start Month: &nbsp; &nbsp;{{ GetMonth(brand.startMonth) }}</label>
-                    </div>
-                </div>
-                <div class="row mt-2">
-                        <div  v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-4'">
-                        <span v-if="month.color=='red'" style="color:red !important">{{ month.name}} {{month.year }}</span>
-                        <span v-else-if="month.color=='green'" style="color:green !important">{{ month.name}} {{month.year }}</span>
-                        <!-- <span v-else style="color:gray !important">{{ month.name}}</span> -->
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="col-lg-12 invoice-btn-fixed-bottom">
-                <div class="button-items">
-                    <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2">
-                        <i class="far fa-save"></i>
-                        <span>
-                            {{ $t('Save') }}
-                        </span>
-                    </button>
-                    <button class="btn btn-danger mr-2" v-on:click="GotoPage('/payment')">
-                        {{ $t('Close') }}
-                    </button>
-                </div>
-            </div>
-            <div class="offcanvas offcanvas-end p-0" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 500px !important;">
-                <div class="offcanvas-header">
-                    <h5 id="offcanvasRightLabel" class="m-0">{{ $t('AddPayment.BenificaryDetails') }}</h5>
-                    <button type="button" class="btn-close text-reset filter-green " data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="row">
-                        <div class="col-lg-12 form-group">
-                            <label> {{ $t('AddBenificary.Name') }}:</label>
-                            <input type="text" class="form-control" v-model="brand.name" />
-                        </div>
-                        <div class="col-lg-12 form-group">
-                            <label>{{ $t('AddBenificary.NameArabic') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.nameAr" />
-                        </div>
-                        <div class="col-lg-12 form-group">
-                            <label>{{ $t('AddBenificary.ID') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.ugamaNo" />
-                        </div>
-                        <div class="col-lg-12 form-group">
-                            <label>{{ $t('AddBenificary.PassportNo') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.passportNo" />
-                        </div>
-                        <div class="col-lg-12 form-group">
-                            <label>{{ $t('AddBenificary.Nationality') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.nationality" />
-                        </div>
-
-                        <div class="col-lg-12 form-group">
-                            <label>{{ $t('AddBenificary.Gender') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.gender" />
-                        </div>
-                        <div class="col-lg-12 form-group">
-                            <label>{{ $t('AddBenificary.ContactNo') }} :</label>
-                            <input type="text" class="form-control" v-model="brand.phoneNo" />
-                        </div>
-
-                        <div class="col-lg-12 form-group">
-                            <label>{{ $t('AddBenificary.Address') }} :</label>
-                            <textarea rows="3" class="form-control" v-model="brand.address">  </textarea>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
-import moment from 'moment'
+import moment from 'moment';
 
 export default {
+
     data: function () {
         return {
+            rollName: '',
             rendar: 0,
             year: '',
             randerDate: 0,
             selectedMonth: [],
             months: [{
-                    id: 1,
-                    order: 0,
-                    year: '',
-                    name: 'January',
-                    color: '',
-                    active: false,
-                },
-                {
-                    id: 2,
-                    order: 0,
-                    year: '',
+                id: 1,
+                order: 0,
+                year: '',
+                name: 'January',
+                color: '',
+                active: false,
+            },
+            {
+                id: 2,
+                order: 0,
+                year: '',
 
-                    name: 'February',
-                    color: '',
-                    active: false,
+                name: 'February',
+                color: '',
+                active: false,
 
-                },
-                {
-                    id: 3,
-                    order: 0,
-                    year: '',
+            },
+            {
+                id: 3,
+                order: 0,
+                year: '',
 
-                    name: 'March',
-                    color: '',
-                    active: false,
+                name: 'March',
+                color: '',
+                active: false,
 
-                },
-                {
-                    id: 4,
-                    order: 0,
-                    year: '',
+            },
+            {
+                id: 4,
+                order: 0,
+                year: '',
 
-                    name: 'April',
-                    color: '',
-                    active: false,
+                name: 'April',
+                color: '',
+                active: false,
 
-                },
-                {
-                    id: 5,
-                    order: 0,
-                    year: '',
+            },
+            {
+                id: 5,
+                order: 0,
+                year: '',
 
-                    name: 'May',
-                    color: '',
-                    active: false,
+                name: 'May',
+                color: '',
+                active: false,
 
-                },
-                {
-                    id: 6,
-                    order: 0,
-                    year: '',
+            },
+            {
+                id: 6,
+                order: 0,
+                year: '',
 
-                    name: 'June',
-                    color: '',
-                    active: false,
+                name: 'June',
+                color: '',
+                active: false,
 
-                },
-                {
-                    id: 7,
-                    order: 0,
-                    year: '',
+            },
+            {
+                id: 7,
+                order: 0,
+                year: '',
 
-                    name: 'July',
-                    color: '',
-                    active: false,
+                name: 'July',
+                color: '',
+                active: false,
 
-                },
-                {
-                    id: 8,
-                    order: 0,
-                    year: '',
+            },
+            {
+                id: 8,
+                order: 0,
+                year: '',
 
-                    name: 'August',
-                    color: '',
-                    active: false,
+                name: 'August',
+                color: '',
+                active: false,
 
-                },
-                {
-                    id: 9,
-                    order: 0,
-                    name: 'September',
-                    color: '',
-                    active: false,
-                    year: '',
+            },
+            {
+                id: 9,
+                order: 0,
+                name: 'September',
+                color: '',
+                active: false,
+                year: '',
 
-                },
-                {
-                    id: 10,
-                    order: 0,
-                    name: 'October',
-                    color: '',
-                    active: false,
-                    year: '',
+            },
+            {
+                id: 10,
+                order: 0,
+                name: 'October',
+                color: '',
+                active: false,
+                year: '',
 
-                },
-                {
-                    id: 11,
-                    order: 0,
-                    name: 'November',
-                    color: '',
-                    active: false,
-                    year: '',
+            },
+            {
+                id: 11,
+                order: 0,
+                name: 'November',
+                color: '',
+                active: false,
+                year: '',
 
-                },
-                {
-                    id: 12,
-                    order: 0,
-                    name: 'December',
-                    color: '',
-                    active: false,
-                    year: '',
+            },
+            {
+                id: 12,
+                order: 0,
+                name: 'December',
+                color: '',
+                active: false,
+                year: '',
 
-                }
+            }
             ],
+            user: '',
             rander: 0,
             forRequest: 0,
             arabic: '',
             english: '',
             brand: {},
+            paymentType: '',
+            advancePayment: '',
             transactions: [],
             cashierName: '',
             addPayment: {
@@ -359,6 +399,7 @@ export default {
                 amountPerMonth: '',
                 userId: '',
                 month: '',
+                note: '',
                 year: '',
                 code: 0,
                 period: '',
@@ -381,10 +422,10 @@ export default {
             }
         },
         MonthSelection: function () {
-            debugger;
+
             var root = this;
-            debugger;
-           
+
+
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
                 // const record1 = this.selectedMonth.some(x => x.selectedMonth == (moment(this.addPayment.month).format('MMMM')));
                 // if(record1)
@@ -417,16 +458,15 @@ export default {
                                 return;
 
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 2) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM') ) {
+                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
 
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -438,16 +478,15 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 3) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
                                 moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM') ) {
+                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -459,7 +498,7 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 4) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
@@ -468,8 +507,7 @@ export default {
                                 moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -481,7 +519,7 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 5) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
@@ -491,8 +529,7 @@ export default {
                                 moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -504,7 +541,7 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 6) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
@@ -515,8 +552,7 @@ export default {
                                 moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -528,7 +564,7 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 7) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
@@ -540,8 +576,7 @@ export default {
                                 moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -553,7 +588,7 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 8) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
@@ -566,8 +601,7 @@ export default {
                                 moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -579,7 +613,7 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 9) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
@@ -593,8 +627,7 @@ export default {
                                 moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -606,7 +639,7 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 10) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
@@ -621,8 +654,7 @@ export default {
                                 moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -634,7 +666,7 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 11) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
@@ -650,8 +682,7 @@ export default {
                                 moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -663,7 +694,7 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                         else if (this.brand.paymentType == 12) {
                             if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
@@ -680,8 +711,7 @@ export default {
                                 moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
                                 console.log("");
                             }
-                            else
-                            {
+                            else {
                                 root.$swal({
                                     title: 'Error',
                                     text: 'You can Only Rceive Payment of Current Month',
@@ -693,18 +723,42 @@ export default {
                                 });
                                 return;
                             }
-                           
+
                         }
                     }
                 }
-                
 
+               
                 const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
                 if (record != null) {
                     if (record.active == true) {
-                        this.selectedMonth.push({
-                            selectedMonth: this.addPayment.month
-                        });
+                        debugger;
+                        var str = moment(this.addPayment.month).format('DD MMMM YYYY');
+                        console.log(this.selectedMonth);
+                        var res = this.selectedMonth.some(item => item.selectedMonth === str);
+                        console.log(this.addPayment.month);
+
+                            if(res)
+                            {
+                                root.$swal({
+                                title: 'Error',
+                                text: 'You have no Permission to Select Same Month',
+                                type: 'error',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+                            }
+                            else
+                            {
+                                this.selectedMonth.push({
+                                    selectedMonth: this.addPayment.month
+                                });
+                            }
+                        
+                       
+                        
                         // if(this.selectedMonth.length>this.brand.advancePayment)
                         // {
                         //     root.$swal({
@@ -765,7 +819,7 @@ export default {
             });
         },
         EditBenificary: function (Id, val) {
-            debugger;
+
             var root = this;
             var token = '';
             if (this.$session.exists()) {
@@ -779,89 +833,118 @@ export default {
                 return auth;
             });
             root.$https.get('/Benificary/GetBenificaryDetail?Id=' + Id + '&isPayment=' + val, {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
                 .then(function (response) {
-                        if (response.data) {
-                            debugger;
-                            root.brand = response.data;
-                            root.addPayment.amount = response.data.amountPerMonth;
-                            root.addPayment.amountPerMonth = response.data.amountPerMonth;
-                            //const paymentMonths = [...new Set(response.data.paymentLists.map(x => x.month))];
-                            var paymentMonths = response.data.charityTransactions;
-                            if (response.data.durationType == 'Indefinite') {
-                                root.months.map(auth => {
+                    if (response.data) {
+                      
+                        root.brand = response.data;
 
-                                    {
-                                        auth.color = 'green';
-                                        auth.active = true;
-                                        auth.year = response.data.year;
+                        if (root.brand.paymentType == 0) {
+                            root.paymentType = 'One Time';
+                        }
+                        else if (root.brand.paymentType == 1) {
+                            root.paymentType = 'Monthly';
+                        }
+                        else {
+                            root.paymentType = `${root.brand.paymentType} Months`;
+                        }
+
+                        if (root.brand.advancePayment == 0) {
+                            root.advancePayment = 'None';
+                        }
+                        else if (root.brand.advancePayment == 1) {
+                            root.advancePayment = 'One Month';
+                        }
+                        else {
+                            root.advancePayment = `${root.brand.advancePayment} Months`;
+                        }
+
+                        root.addPayment.amount = response.data.amountPerMonth;
+                        root.addPayment.amountPerMonth = response.data.amountPerMonth;
+                        var paymentMonths = response.data.charityTransactions;
+                        if (response.data.durationType == 'Indefinite') {
+                            root.months.map(auth => {
+
+                                {
+                                    auth.color = 'green';
+                                    auth.active = true;
+                                    auth.year = response.data.year;
+                                }
+                                return auth;
+                            });
+                            if (paymentMonths.length > 0) {
+
+                                for (var k = 0; k < paymentMonths.length; k++) {
+
+                                    root.months.map(auth => {
+
+                                        if (auth.id === paymentMonths[k].paymentMonths) {
+                                            auth.color = 'red';
+                                            auth.active = false;
+                                            auth.year = paymentMonths[k].year;
+
+                                        }
+                                        return auth;
+                                    });
+
+                                }
+                            }
+
+                        } else if (response.data.firstMonth != null && response.data.endMonth != null) {
+
+                            {
+                                for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
+                                    if (i <= response.data.endMonth) {
+                                        root.months.map(auth => {
+
+                                            if (auth.id === i) {
+                                                auth.color = 'green';
+                                                auth.active = true;
+                                                auth.year = response.data.year;
+                                            }
+                                            return auth;
+                                        })
                                     }
-                                    return auth;
-                                });
-                                if (paymentMonths.length > 0) {
 
-                                    for (var k = 0; k <= paymentMonths.length; k++) {
+                                }
+                                if (paymentMonths.length > 0) {
+                                    for (var j = 0; j < paymentMonths.length; j++) {
 
                                         root.months.map(auth => {
 
-                                            if (auth.id === paymentMonths[k].paymentMonths) {
+                                            if (auth.id === paymentMonths[j].paymentMonths) {
                                                 auth.color = 'red';
                                                 auth.active = false;
-                                                auth.year = paymentMonths[k].year;
+                                                auth.year = paymentMonths[j].year;
 
                                             }
                                             return auth;
                                         });
 
                                     }
-                                }
-
-                            } else if (response.data.firstMonth != null && response.data.endMonth != null) {
-
-                                {
-                                    for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
-                                        if (i <= response.data.endMonth) {
-                                            root.months.map(auth => {
-
-                                                if (auth.id === i) {
-                                                    auth.color = 'green';
-                                                    auth.active = true;
-                                                    auth.year = response.data.year;
-                                                }
-                                                return auth;
-                                            })
-                                        }
-
-                                    }
-                                    if (paymentMonths.length > 0) {
-                                        for (var j = 0; j <= paymentMonths.length; j++) {
-
-                                            root.months.map(auth => {
-
-                                                if (auth.id === paymentMonths[j].paymentMonths) {
-                                                    auth.color = 'red';
-                                                    auth.active = false;
-                                                    auth.year = paymentMonths[j].year;
-
-                                                }
-                                                return auth;
-                                            });
-
-                                        }
-
-                                    }
 
                                 }
 
                             }
-                            root.rander++;
-                        } else {
-                            console.log("error: something wrong from db.");
+
                         }
-                    },
+                        root.selectedMonth = [];
+                        root.months.forEach(element => {
+                            if(element.color == 'green')
+                            {
+                                root.selectedMonth.push({
+                                    selectedMonth: '01' + ' ' + element.name + ' ' + element.year
+                                });
+                            }
+                        });
+                        root.rander++;
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
                     function (error) {
                         root.loading = false;
                         console.log(error);
@@ -869,24 +952,24 @@ export default {
 
         },
         GetTransactions: function (Id) {
-            debugger;
+
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
             root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + Id, {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
                 .then(function (response) {
-                        if (response.data) {
-                            root.transactions = response.data;
-                        } else {
-                            console.log("error: something wrong from db.");
-                        }
-                    },
+                    if (response.data) {
+                        root.transactions = response.data;
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
                     function (error) {
                         this.loading = false;
                         console.log(error);
@@ -898,17 +981,19 @@ export default {
             var root = this;
             this.loading = true;
             var token = '';
+            var userId = localStorage.getItem('UserId');
+            root.addPayment.userId = userId;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
             this.addPayment.selectedMonth = this.selectedMonth;
             this.$https.post('/Benificary/SavePayments', this.addPayment, {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
                 .then(function (response) {
-                    debugger;
+
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {
                             root.$swal({
@@ -949,7 +1034,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                    debugger;
+
                     console.log(error)
                     root.$swal.fire({
                         icon: 'error',
@@ -971,18 +1056,18 @@ export default {
                 token = localStorage.getItem('token');
             }
             root.$https.get('/Benificary/AutoCodeGenerate', {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
                 .then(function (response) {
-                        if (response.data) {
-                            root.addPayment.paymentCode = response.data;
-                            root.rendar++;
-                        } else {
-                            console.log("error: something wrong from db.");
-                        }
-                    },
+                    if (response.data) {
+                        root.addPayment.paymentCode = response.data;
+                        root.rendar++;
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
                     function (error) {
                         this.loading = false;
                         console.log(error);
@@ -1006,7 +1091,7 @@ export default {
         }
     },
     mounted: function () {
-
+        this.rollName = localStorage.getItem('RoleName');
     }
 }
 </script>

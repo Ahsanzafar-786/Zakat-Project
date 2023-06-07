@@ -40,9 +40,12 @@ namespace Focus.Business.Payments.Queries
                         Amount = x.Amount,
                         Month = x.Month,
                         Year = x.Year,
+                        Date = x.Date,
                         Period = x.Period,
                         PaymentCode =x.PaymentCode,
                         BenificaryName = x.Beneficiaries.Name,
+                        IsVoid = x.IsVoid,
+                        AllowVoid = x.AllowVoid,
                     }).AsQueryable();
 
                     if (!string.IsNullOrEmpty(request.SearchTerm))

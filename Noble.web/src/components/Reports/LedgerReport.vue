@@ -119,7 +119,7 @@ export default {
                     }
                 },
         GetTransactions: function () {
-            debugger;
+          
             var root = this;
             var token = '';
             if (this.$session.exists()) {

@@ -12,5 +12,6 @@ namespace Focus.Business.CharityResource.Model
         public bool Business { get; set; }
         public bool IsActive { get; set; }
         public Guid? ContactPerson { get; set; }
+
     }
 }

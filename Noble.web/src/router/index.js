@@ -43,6 +43,8 @@ import paymenttype from '../components/PaymentType/PaymentType.vue'
 
 //Funds
 import funds from '../components/Funds/Funds.vue'
+import charityfundsreports from '../components/Funds/CharityFundsReports.vue'
+import charityfundsresource from '../components/Funds/CharityFundsResource.vue'
 
 //Payment
 import payment from '../components/Payment/Payment.vue';
@@ -50,6 +52,17 @@ import addpayment from '../components/Payment/AddPayment.vue';
 
 //LedgerReport
 import ledgerreport from '../components/Reports/LedgerReport.vue'
+
+//CompanyProfile
+import companyprofile from '../components/CompanyProfile/CompanyProfile.vue';
+import companyinfo from '../components/CompanyProfile/CompanyInfo.vue';
+
+//comingsoon
+import printsetting from '../components/PrintSettings/ComingSoon.vue';
+import databackup from '../components/DataBackUp/ComingSoon.vue';
+import datarestore from '../components/DataRestore/ComingSoon.vue';
+
+import benificaryreports from '../components/Benificary/BenificaryReports.vue';
 
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
@@ -167,6 +180,47 @@ const routes = [
                             name: 'ledgerreport',
                             component: ledgerreport
                         },
+                        {
+                            path:'/companyprofile',
+                            name:'companyprofile',
+                            component: companyprofile
+                        },
+                        {
+                            path:'/companyinfo',
+                            name:'comapanyinfo',
+                            component: companyinfo
+                        },
+                        {
+                            path:'/printsetting',
+                            name:'comingsoon',
+                            component: printsetting
+                        },
+                        {
+                            path:'/databackup',
+                            name:'comingsoon',
+                            component: databackup
+                        },
+                        {
+                            path:'/datarestore',
+                            name:'comingsoon',
+                            component: datarestore
+                        },
+                        {
+                            path:'/charityfundsreports',
+                            name:'charityfundsreports',
+                            component: charityfundsreports
+                        },
+                        {
+                            path:'/charityfundsresource',
+                            name:'charityfundsresource',
+                            component: charityfundsresource
+                        },
+                        {
+                            path:'/benificaryreports',
+                            name:'benificaryreports',
+                            component: benificaryreports
+                        },
+
                     ]
                 }
             ]

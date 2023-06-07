@@ -13,7 +13,7 @@
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
-                                <a  v-on:click="AddSignup" href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1">
+                                <a  v-on:click="AddSignup" href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1" v-if ="roleName != 'User'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
                                 </a>
@@ -45,9 +45,6 @@
                                     <th>
                                         {{ $t('SignUp.EMAILID') }}
                                     </th>
-                                    <th>
-                                        {{ $t('SignUp.Location') }}
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,7 +58,6 @@
                                         </strong>
                                     </td>
                                     <td>{{details.email}}</td>
-                                    <td>{{details.companyName}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -90,6 +86,7 @@
                     id: '',
                     isActive: '',
                     isUser: true,
+                    user:'',
                 },
 
             }
@@ -176,6 +173,7 @@
        
         mounted: function () {
             this.GetData();
+            this.roleName = localStorage.getItem('RoleName');
         }
     }
 </script>

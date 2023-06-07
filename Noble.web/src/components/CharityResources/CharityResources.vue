@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="openmodel" href="javascript:void(0);"
-                                    class="btn btn-sm btn-outline-primary mx-1">
+                                    class="btn btn-sm btn-outline-primary mx-1" v-if ="roleName != 'User'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
                                 </a>
@@ -165,6 +165,7 @@ export default {
     mixins: [clickMixin],
     data: function () {
         return {
+            roleName:'',
             show: false,
             charityResourceslist: [],
             newCharityResources: {
@@ -269,6 +270,7 @@ export default {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.GetCharityResourcesData(this.search, 1);
+        this.roleName = localStorage.getItem('RoleName');
     }
 }
 </script>

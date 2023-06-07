@@ -86,6 +86,7 @@ Vue.use(cors);
 Vue.use(moment);
 Vue.config.productionTip = false;
 Vue.component('datepicker', require('./components/DatePicker.vue').default);
+Vue.component('AddProductImage', require('./components/AddProductImage.vue').default);
 Vue.component('dashboard', require('./components/Dashboard/Dashboard.vue').default);
 Vue.component('modal', require('./components/modalcomponent.vue').default);
 Vue.component('roledropdown', require('./components/General/RolesDropdown.vue').default);
@@ -93,6 +94,8 @@ Vue.component('roledropdown', require('./components/General/RolesDropdown.vue').
 // Benificary
 Vue.component('benificary-mod', require('./components/Benificary/AddBenificary.vue').default);
 Vue.component('benificary', require('./components/General/BenificaryDropdown.vue').default);
+Vue.component('benificaryreports', require('./components/Benificary/BenificaryReports.vue').default);
+
 
 //Authorized Person
 Vue.component('authorizedPerson-mod', require('./components/AuthorizedPersons/AddAuthorizedPersons.vue').default);
@@ -110,13 +113,23 @@ Vue.component('charityresources', require('./components/General/CharityResources
 Vue.component('approvalperson-mod', require('./components/ApprovalPersons/AddApprovalPersons.vue').default);
 Vue.component('approvalperson', require('./components/General/ApprovalPersonDropdown.vue').default);
 
+//comingsoon system management
+Vue.component('print-setting', require('./components/PrintSettings/ComingSoon.vue').default);
+Vue.component('databackup', require('./components/DataBackUp/ComingSoon.vue').default);
+Vue.component('datarestore', require('./components/DataRestore/ComingSoon.vue').default);
+
 //Payment Type
 Vue.component('paymenttype-mod', require('./components/PaymentType/AddPaymentType.vue').default);
 Vue.component('paymenttype', require('./components/General/PaymentType.vue').default);
 
 //Funds
 Vue.component('funds-mod', require('./components/Funds/AddFunds.vue').default);
+Vue.component('charityfundsreports', require('./components/Funds/CharityFundsReports.vue').default);
+Vue.component('charityfundsresource', require('./components/Funds/CharityFundsResource.vue').default);
 
+//CompanyProfile
+Vue.component('companyprofile-mod' , require('./components/CompanyProfile/CompanyProfile.vue').default);
+Vue.component('companyinfo-mod', require('./components/CompanyProfile/CompanyInfo.vue').default);
 //Print
 Vue.component('print', require('./components/Print/Print.vue').default);
 

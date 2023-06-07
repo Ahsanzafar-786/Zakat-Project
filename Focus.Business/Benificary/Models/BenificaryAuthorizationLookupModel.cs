@@ -8,6 +8,9 @@ namespace Focus.Business.Benificary.Models
         public Guid? BenficaryId { get; set; }
         public Guid? AuthorizationPersonId { get; set; }
         public Guid? ApprovalPersonId { get; set; }
+        public string ApprovalPersonName { get; set; }
+        public string AuthorizationPersonName { get; set; }
+        public int AuthorizationPersonCode { get; set; }
         public string Date { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }

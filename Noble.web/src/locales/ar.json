@@ -6,6 +6,10 @@
   "Save" : "يحفظ",
   "Update": "تحديث",
   "Arabic":"العربية", 
+  "PaidPayments":"المدفوعات المدفوعة",
+  "DuePayments":"المدفوعات المستحقة",
+  "UnPaidPayments":"المدفوعات غير المدفوعة",
+
 
   "General":{
     "SelectAuthorizePerson":"حدد تخويل الشخص",
@@ -52,8 +56,11 @@
     "Active" : "نشيط",
     "Address" : "عنوان",
     "Reason":"سبب",
+    "Amount": "رقم",
     "Note" : "ملحوظة",
-    "Ids": "بطاقة تعريف",
+    "Ids": "هوية وطنية",
+    "StartMonth":"شهر البدء",
+    "AuthorizePersonId":"تفويض هوية الشخص",
     "SelectType": "اختر صنف",
     "AdvancePayment":"دفعه مقدمه",
     "StartFrom":"يبدأ من",
@@ -170,6 +177,7 @@
     "Nationality":"جنسية",
     "ID":"بطاقة تعريف",
     "Male" : "ذكر",
+    "AuthorizedPersonId":"معرف الشخص المُفوّض",
     "Female" : "أنثى",
     "PassportNo":"رقم جواز السفر",
     "ContactNo":"رقم الاتصال",
@@ -178,10 +186,13 @@
 
   "Funds":{
     "Funds":"أموال",
+    "AddFunds":"إضافة الأموال",
     "FundsList":"قائمة الصناديق",
     "CharityResource":"الموارد الخيرية",
     "Amount":"كمية",
-    "Date":"تاريخ"
+    "Date":"تاريخ",
+    "CharityFundsReports":"تقارير الصناديق الخيرية",
+    "CharityFundsResource":"موارد الصناديق الخيرية"
   },
   "AddFunds":{
     "AddFunds" : "إضافة الأموال",
@@ -219,8 +230,12 @@
     "Dashboard":"لوحة القيادة",
     "MyProfile":"ملفي",
     "LogOut":"تسجيل خروج",
-    "UserSetup":"إعداد المستخدم",
-    "SignUpUser":"تسجيل المستخدم"
+    "Setup":"يثبت",
+    "AddUser":" إضافة مستخدم",
+    "AddAuthorizedPerson":"إضافة شخص مفوض",
+    "AddApprovalPerson":"إضافة شخص الموافقة",
+    "AddPaymentType":"إضافة نوع الدفع",
+    "AddCharityFundsResources":"أضف موارد الصناديق الخيرية"
   },
 
   "Company":{
@@ -288,18 +303,23 @@
     "ConfirmPassword":"تأكيد كلمة المرور"  
   },
 
-  "Payment":{
-    "Payment":"الدفع",
-    "AddPayment":"إضافة الدفع",
-    "PaymentList":"قائمة الدفع",
-    "BenifcaryName":"أسم المستفيد",
-    "Amount":"المبلغ",
-    "Cashier":"أمين الصندوق",
-    "Month":"شهر",
-    "Year":"سنة",
-    "Period":"فترة",
-    "Print":"مطبعة",
-    "Action":"فعل"
+  "Payment": {
+    "Payment": "الدفع",
+    "Action": "فعل",
+    "IsVoid": "هو الفراغ",
+    "BenificaryPayment": "الدفع المستحق",
+    "BenificaryReports": "التقارير المفيدة",
+    "AddPayment": "إضافة الدفع",
+    "PaymentList": "قائمة الدفع",
+    "BenifcaryName": "أسم المستفيد",
+    "Amount": "المبلغ",
+    "Cashier": "أمين الصندوق",
+    "Month": "الشهر",
+    "Year": "السنة",
+    "Code": "شفرة",
+    "Period": "فترة",
+    "Action": "فعل",
+    "Print": "مطبعة"
   },
 
   "AddPayment":{
@@ -330,7 +350,30 @@
   },
   "LedgerReport":{
     "LedgerReport": "تقرير دفتر الأستاذ",
-    "Report":"تقرير"
+    "ReportsManagement":"إدارة التقارير"
+  },
+  "SystemManagement":{
+    "SystemManagement":"ادارة النظام",
+    "PrintSettings":"إعدادات الطباعة",
+    "DataBackUp":"النسخ الاحتياطي للبيانات",
+    "DataRestore":"استعادة البيانات"
+  },
+  "CompanyProfile":{
+    "CompanyProfile":"ملف الشركة",
+    "CompanyInfo":"معلومات الشركة"
+  },
+  "CompanyInfo":{
+    "CompanyInfo":"معلومات الشركة",
+    "CompanyProfile":"ملف الشركة",
+    "CompanyName(InEnglish)":"اسم الشركة ",
+    "CompanyName(InArabic)":"اسم الشركة ",
+    "CommercialRegistrationNo":"رقم السجل التجاري",
+    "VATNo":"ضريبة القيمة المضافة لا",
+    "Address(InEnglish)":"عنوان ",
+    "Address(InArabic)":"عنوان "
+  },
+  "AddProductImage":{
+    "UploadProductImage":"تحميل صورة المنتج"
   }
 
 
