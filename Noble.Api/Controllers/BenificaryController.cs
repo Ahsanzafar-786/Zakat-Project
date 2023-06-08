@@ -36,6 +36,8 @@ using Microsoft.EntityFrameworkCore;
 using Noble.Api.Models;
 using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
 using Org.BouncyCastle.Asn1.Ocsp;
+using Focus.Persistence.Migrations;
+using NPOI.POIFS.Properties;
 
 namespace Noble.Api.Controllers
 {
@@ -532,6 +534,80 @@ namespace Noble.Api.Controllers
 
 
             return Ok(null);
+        }
+        [Route("api/Benificary/Funds")]
+        [HttpPost("Funds")]
+        public async Task<IActionResult> Funds([FromBody] List<AuthorizeVm> rows)
+        {
+            try
+            {
+
+                var list = new List<Funds>();
+
+                foreach (var request in rows)
+                {
+                    list.Add(new Funds
+                    {
+                        Date=Convert.ToDateTime(request.Stamp_date),
+                        Amount=request.Amount,
+                        Description=request.Check_No,
+
+
+                    });
+
+                }
+                await _Context.Funds.AddRangeAsync(list);
+                await _Context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+            return Ok(null);
+        }
+
+        [Route("api/Benificary/Payments")]
+        [HttpPost("Payments")]
+        public async Task<IActionResult> Payments([FromBody] List<AuthorizeVm> rows)
+        {
+            var Beneficiaries = _Context.Beneficiaries.AsNoTracking().ToList();
+            try
+            {
+
+                var list = new List<Payment>();
+
+                foreach (var request in rows)
+                {
+                    list.Add(new Payment
+                    {
+                        BenificayId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == Convert.ToInt32(request.Id))?.Id,
+                        Month = Convert.ToDateTime(request.Month),
+                        Year=request.Year,
+                        Amount=request.Amount,
+                        Date=Convert.ToDateTime(request.Stamp_date),
+                        Period=request.Period,
+
+
+                    }) ;
+
+                }
+                await _Context.Payments.AddRangeAsync(list);
+                await _Context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+            var message = "done";
+            return Ok(message);
         }
 
 

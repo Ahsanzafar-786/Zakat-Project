@@ -241,6 +241,59 @@
                             root.totalImportRecord = allRows.length;
                             root.isUploadDisabled = false;
                         }
+                        else if ((root.formName == 'funds' )) {
+                            allRows.splice(0, 1)
+                            allRows.forEach(function (data) {
+                                root.selectedFileData.push({
+
+                                    id: data[0],
+                                    org_id: data[1],
+                                    isactive: data[2],
+                                    stamp_date: data[3],
+                                    sync_erp: data[4],
+                                    created_date: data[5],
+                                    edited_date: data[6],
+                                    created_by_id: data[7],
+                                    edited_by_id: data[8],
+                                    Transection_Type: data[9],
+                                    Amount: data[9],
+                                    cheque_number:data[10]
+                                   
+                                })
+
+
+                            })
+                            root.totalImportRecord = allRows.length;
+                            root.isUploadDisabled = false;
+                        }
+                        else if ((root.formName == 'funds' )) {
+                            allRows.splice(0, 1)
+                            allRows.forEach(function (data) {
+                                root.selectedFileData.push({
+
+                                    id: data[0],
+                                    org_id: data[1],
+                                    isactive: data[2],
+                                    stamp_date: data[3],
+                                    sync_erp: data[4],
+                                    created_date: data[5],
+                                    edited_date: data[6],
+                                    created_by_id: data[7],
+                                    edited_by_id: data[8],
+                                    Transection_Type: data[9],
+                                    Amount: data[9],
+                                    Month:data[10],
+                                    Year:data[11],
+                                    Period:data[12],
+                                    beneficiary_id:data[13]
+                                   
+                                })
+
+
+                            })
+                            root.totalImportRecord = allRows.length;
+                            root.isUploadDisabled = false;
+                        }
                       
                         else {
                             root.file1 = null
@@ -286,6 +339,14 @@
                     rows = this.selectedFileData;
                     url = '/Benificary/Payments_Beneficries'
                 }
+                else if (root.formName == 'funds') {
+                    rows = this.selectedFileData;
+                    url = '/Benificary/Funds'
+                }
+                else if (root.formName == 'Payment') {
+                    rows = this.selectedFileData;
+                    url = '/Benificary/Payment'
+                }
                 
                 root.$https.post(url, rows, { headers: { "Authorization": `Bearer ${token}` } })
                     .then(function (response) {
@@ -318,7 +379,31 @@
                                         root.errorCollection.push(errorData)
                                     })
                                 }
+                                else if (root.formName == 'funds' ) {
+                                    response.data.forEach(function (x) {
+                                        var errorData = {
+                                            AuthorizedPersonCode: x.AuthorizedPersonCode,
+                                            NameAr: x.NameAr,
+                                           
+                                            ErrorDescription: x.errorDescription,
+                                        }
+                                        
+                                        root.errorCollection.push(errorData)
+                                    })
+                                }
                                 else if (root.formName == 'Beneficries' ) {
+                                    response.data.forEach(function (x) {
+                                        var errorData = {
+                                            AuthorizedPersonCode: x.AuthorizedPersonCode,
+                                            NameAr: x.NameAr,
+                                           
+                                            ErrorDescription: x.errorDescription,
+                                        }
+                                        
+                                        root.errorCollection.push(errorData)
+                                    })
+                                }
+                                else if (root.formName == 'Payment' ) {
                                     response.data.forEach(function (x) {
                                         var errorData = {
                                             AuthorizedPersonCode: x.AuthorizedPersonCode,
@@ -388,7 +473,7 @@
         },
         mounted: function () {
             debugger;
-              this.formName = 'Payments_Beneficries';
+              this.formName = 'Payment';
             
 
 
@@ -410,6 +495,18 @@
                 "iqama_no","authorized_person_id"];
                 this.sheets = [];
                 this.sheets.push({ name: "payment_beneficiary", data: [this.collection] });
+            }
+            else if ( this.formName == 'Payment') {
+                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date","edited_date","Amount","Created_By","Edit_By","cheque_number","Transection_Type",
+                "iqama_no","authorized_person_id"];
+                this.sheets = [];
+                this.sheets.push({ name: "Payments", data: [this.collection] });
+            }
+            else if ( this.formName == 'funds') {
+                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date","edited_date","Amount","Month","Year","Period","beneficiary_id",
+                "iqama_no","authorized_person_id"];
+                this.sheets = [];
+                this.sheets.push({ name: "fund", data: [this.collection] });
             }
            
         }
