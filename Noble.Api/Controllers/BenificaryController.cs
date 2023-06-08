@@ -28,7 +28,13 @@ using Focus.Business.Payments.Models;
 using Focus.Business.Payments.Commands;
 using Focus.Business.Payments.Queries;
 using Focus.Business.Transactions.Queries;
-using DocumentFormat.OpenXml.Wordprocessing;
+using System.Collections.Generic;
+using System.Linq;
+using Focus.Domain.Entities;
+using DocumentFormat.OpenXml.InkML;
+using Microsoft.EntityFrameworkCore;
+using Noble.Api.Models;
+using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
 
 namespace Noble.Api.Controllers
 {
@@ -379,6 +385,93 @@ namespace Noble.Api.Controllers
             });
             return Ok(autoNo);
         }
+        #endregion
+
+        #region Imports
+
+      
+        [Route("api/Benificary/UploadFilesForImportAuthorize")]
+        [HttpPost("UploadFilesForImportAuthorize")]
+        public async Task<IActionResult> UploadFilesForImportAuthorize([FromBody] List<AuthorizeVm> rows)
+        {
+            var list=new List<AuthorizedPerson>();
+            foreach (var request in rows)
+            {
+                 list.Add( new AuthorizedPerson
+                {
+                    Name = request.Name,
+                    AuthorizedPersonCode = Int32.Parse(request.Id),
+                    NameAr = request.NameAr,
+                    PhoneNo = request.Phone,
+                    Address = request.Address,
+                    Nationality = request.Nationality,
+                    Gender = request.Gender,
+                    IqamaNo = request.IqamaNo,
+                    PassportNo = request.PassportNo,
+                });
+
+            }
+            await _Context.AuthorizedPersons.AddRangeAsync(list);
+            await _Context.SaveChangesAsync();
+
+            return Ok(null);
+        }
+
+
+        [Route("api/Benificary/UploadFilesForBeneficary")]
+        [HttpPost("UploadFilesForBeneficary")]
+        public async Task<IActionResult> UploadFilesForBeneficary([FromBody] List<AuthorizeVm> rows)
+        {
+            try
+            {
+                var authorizedPerson = _Context.AuthorizedPersons.AsNoTracking().ToList();
+                var payment = _Context.PaymentTypes.AsNoTracking().ToList();
+                var list = new List<Beneficiaries>();
+                foreach (var request in rows)
+                {
+                    list.Add(new Beneficiaries
+                    {
+                        BeneficiaryId = Int32.Parse(request.Id),
+                        Name = "",
+                        PaymentIntervalMonth = Int32.Parse(request.Payment_interval),
+                        AmountPerMonth = decimal.Parse(request.Recurring_amount) / Int32.Parse(request.Payment_interval),
+                        RecurringAmount = decimal.Parse(request.Recurring_amount),
+                        UgamaNo = request.Iqama_no,
+                        PhoneNo = request.Phone,
+                        Note = "",
+                        IsActive = request.Isactive == "TRUE" ? true : false,
+                        ApprovalPersonId = null,
+                        Address = request.Address,
+                        AuthorizedPersonId = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == Int32.Parse(request.Authorized_person_id))!.Id,
+                        PaymentTypeId = payment.FirstOrDefault(x => x.Code == Int32.Parse(request.Payment_interval))!.Id,
+                        NameAr = request.Name,
+                        AdvancePayment = 0,
+                        DurationType = "Indefinite",
+                        ApprovedPaymentId = null,
+                        StartDate = null,
+                        EndDate = null,
+                        StartMonth = DateTime.Parse(request.Stamp_date),
+                        IsRegister = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == Int32.Parse(request.Authorized_person_id)) != null ? true : false
+
+                    });
+
+
+
+                }
+                await _Context.Beneficiaries.AddRangeAsync(list);
+                await _Context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+          
+
+            return Ok(null);
+        }
+
         #endregion
     }
 }
