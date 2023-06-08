@@ -395,7 +395,9 @@ namespace Noble.Api.Controllers
         [HttpPost("UploadFilesForImportAuthorize")]
         public async Task<IActionResult> UploadFilesForImportAuthorize([FromBody] List<AuthorizeVm> rows)
         {
-            var list=new List<AuthorizedPerson>();
+            try
+            {
+                var list=new List<AuthorizedPerson>();
             foreach (var request in rows)
             {
                  list.Add( new AuthorizedPerson
@@ -414,8 +416,15 @@ namespace Noble.Api.Controllers
             }
             await _Context.AuthorizedPersons.AddRangeAsync(list);
             await _Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
-            return Ok(null);
+            var message = "done";
+            return Ok(message); 
         }
 
 
@@ -484,9 +493,9 @@ namespace Noble.Api.Controllers
                 Console.WriteLine(e);
                 throw;
             }
-          
 
-            return Ok(null);
+            var message = "done";
+            return Ok(message);
         }
 
         #endregion
