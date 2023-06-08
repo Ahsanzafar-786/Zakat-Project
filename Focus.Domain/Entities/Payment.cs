@@ -23,6 +23,7 @@ namespace Focus.Domain.Entities
         public string HijriMonth { get;set; }
         public string Period { get; set; }
         public bool IsVoid { get; set; }
+        public bool AllowVoid { get; set; }
         public virtual ICollection<SelectedMonth> SelectedMonth { get; set; }
     }
 }

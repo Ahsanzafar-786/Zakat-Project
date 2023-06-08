@@ -19,7 +19,7 @@ namespace Focus.Business.Transactions.Queries
 {
     public class CharityTransactionListQuery : IRequest<List<CharityTransactionLookupModel>>
     {
-        public Guid BenificayId { get; set; }
+        public Guid? BenificayId { get; set; }
         public DateTime? Month { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
@@ -38,7 +38,8 @@ namespace Focus.Business.Transactions.Queries
             {
                 try
                 {
-                    var charity = await Context.CharityTransaction.Where(x => x.BenificayId == request.BenificayId).Select(x => new CharityTransactionLookupModel()
+                    var benific =  Context.Beneficiaries.AsNoTracking().ToList();
+                    var charity =  Context.CharityTransaction.Where(x => x.DocumentName == null && !x.IsVoid).ToList().Select(x => new CharityTransactionLookupModel()
                     {
                         Id = x.Id,
                         DoucmentId = x.DoucmentId,
@@ -47,9 +48,14 @@ namespace Focus.Business.Transactions.Queries
                         CharityTransactionDate = x.CharityTransactionDate,
                         DoucmentDate = x.DoucmentDate,
                         Month = x.Month,
+                        benificaryName=benific.FirstOrDefault(z=>z.Id==x.BenificayId)?.Name,
+                        BenificayId=x.BenificayId,
                         Year = x.Year,
-                    }).ToListAsync();
-
+                    }).ToList();
+                    if(request.BenificayId != Guid.Empty && request.BenificayId!=null )
+                    {
+                        charity = charity.Where(x => x.BenificayId == request.BenificayId).ToList();
+                    }
                     if(request.Month != null) 
                     {
                         charity = charity.Where(x => x.Month.Value.Month == request.Month.Value.Month).ToList();

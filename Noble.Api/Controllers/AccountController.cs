@@ -21,8 +21,10 @@ using Microsoft.EntityFrameworkCore;
 using Focus.Business;
 using Focus.Business.Claims.Command.UpdateClaims;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
-
-
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net.NetworkInformation;
+using System.Net;
 
 namespace Noble.Api.Controllers
 {
@@ -38,12 +40,12 @@ namespace Noble.Api.Controllers
         private readonly ISendEmail _sendEmail;
         private readonly IPrincipal _principal;
         private readonly IApplicationDbContext _context;
-
+        public readonly IConfiguration _configuration;
 
 
         public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager,
             IApplicationDbContext context, IUserComponent userComponent, ISendEmail sendEmail,
-            IPrincipal principal, ICompanyComponent companyComponent)
+            IPrincipal principal, ICompanyComponent companyComponent, IConfiguration configuration)
         {
             _signInManager = signInManager;
             _context = context;
@@ -52,6 +54,7 @@ namespace Noble.Api.Controllers
             _userComponent = userComponent;
             _principal = principal;
             _companyComponent = companyComponent;
+            _configuration = configuration;
         }
         [HttpPost("Login")]
         [AllowAnonymous]
@@ -143,7 +146,7 @@ namespace Noble.Api.Controllers
                         return Ok(new LoginModel());
                     }
                 }
-             
+
                 if (result.RequiresTwoFactor)
                 {
                     return Ok(true);
@@ -173,7 +176,7 @@ namespace Noble.Api.Controllers
                         EmployeeId = user.EmployeeId,
                         EmailConfirmed = user.EmailConfirmed,
                         PhoneNo = user.PhoneNumber,
-                      
+
                     });
                 }
                 else
@@ -201,9 +204,23 @@ namespace Noble.Api.Controllers
                 ApplicationUser = user,
 
             });
-            return token;
-        }
 
+            var current = HttpContext;
+            var permissionList = new ModuleWiseClaimsLookupModel();
+            permissionList.Token = token;
+            permissionList.CompanyId = User.Identity.CompanyId();
+            permissionList.TokenName = current.Request.Scheme + "://" + current.Request.Host + "/api";
+            var reportPath = _configuration.GetSection("ReportServer:Path").Value;
+
+            using var ping = new Ping();
+                using var httpClient = new HttpClient();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(permissionList), Encoding.UTF8, "application/json");
+                using var response = httpClient.PostAsync(reportPath, content);
+                string errorResponse = response.Result.ToString();
+
+            return token;
+
+        }
 
 
 
@@ -329,9 +346,6 @@ namespace Noble.Api.Controllers
 
         }
 
-
-
-     
         private string FormatKey(string unformattedKey)
         {
             var result = new StringBuilder();

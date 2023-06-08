@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Noble.Api", "Noble.Api\Nobl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Focus.External", "Focus.External\Focus.External.csproj", "{AF24318F-36E6-412A-BF9D-A60D330482F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Noble.Report", "Noble.Report\Noble.Report.csproj", "{35BD0C1F-EF3D-4246-AC9A-5209FBACD4A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{AF24318F-36E6-412A-BF9D-A60D330482F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF24318F-36E6-412A-BF9D-A60D330482F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF24318F-36E6-412A-BF9D-A60D330482F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35BD0C1F-EF3D-4246-AC9A-5209FBACD4A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35BD0C1F-EF3D-4246-AC9A-5209FBACD4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35BD0C1F-EF3D-4246-AC9A-5209FBACD4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35BD0C1F-EF3D-4246-AC9A-5209FBACD4A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

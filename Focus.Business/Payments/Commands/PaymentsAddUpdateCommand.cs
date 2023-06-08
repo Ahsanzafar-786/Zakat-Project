@@ -12,6 +12,7 @@ using Focus.Domain.Entities;
 
 using System.Linq;
 using System.Collections.Generic;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Focus.Business.Payments.Commands
 {
@@ -46,35 +47,24 @@ namespace Focus.Business.Payments.Commands
                             }
                         }
 
-
-                        var payment = new Payment
+                        if(request.Payment.SelectedMonth.Count == 0)
                         {
-                            BenificayId = request.Payment.BenificayId,
-                            Amount = request.Payment.Amount,
-                            Month = request.Payment.Month,
-                            Note = request.Payment.Note,
-                            PaymentCode = request.Payment.PaymentCode,
-                            Year = DateTime.Now.Year.ToString(),
-                            Period = DateTime.Now.Year.ToString(),
-                            Date = DateTime.Now,
-                        };
 
-                        Context.Payments.Add(payment);
-
-                        var selectedMonth = new List<SelectedMonth>();
-                        foreach (var item in request.Payment.SelectedMonth)
-                        {
-                            selectedMonth.Add(new SelectedMonth
+                            var payment = new Payment
                             {
-                                PaymentId = payment.Id,
-                                SelectMonth = item.SelectedMonth,
-                            });
-                        }
+                                BenificayId = request.Payment.BenificayId,
+                                Amount = request.Payment.Amount,
+                                Month = DateTime.Now,
+                                Note = request.Payment.Note,
+                                PaymentCode = request.Payment.PaymentCode,
+                                Year = DateTime.Now.Year.ToString(),
+                                Period = DateTime.Now.Year.ToString(),
+                                Date = DateTime.Now,
+                                UserId = request.Payment.UserId,
+                            };
 
-                        await Context.SelectedMonths.AddRangeAsync(selectedMonth);
+                            Context.Payments.Add(payment);
 
-                        foreach (var item in request.Payment.SelectedMonth)
-                        {
                             var charityTransaction = new CharityTransaction
                             {
                                 DoucmentId = payment.Id,
@@ -82,13 +72,60 @@ namespace Focus.Business.Payments.Commands
                                 DoucmentDate = DateTime.Now,
                                 DoucmentCode = payment.PaymentCode,
                                 BenificayId = payment.BenificayId,
-                                Month = item.SelectedMonth,
+                                Month = payment.Date,
                                 Amount = payment.Amount,
                                 Year = payment.Year,
                             };
 
                             await Context.CharityTransaction.AddAsync(charityTransaction);
                         }
+                        else
+                        {
+                            var payment = new Payment
+                            {
+                                BenificayId = request.Payment.BenificayId,
+                                Amount = request.Payment.Amount,
+                                Month = request.Payment.Month,
+                                Note = request.Payment.Note,
+                                PaymentCode = request.Payment.PaymentCode,
+                                Year = DateTime.Now.Year.ToString(),
+                                Period = DateTime.Now.Year.ToString(),
+                                UserId = request.Payment.UserId,
+                                Date = DateTime.Now,
+                            };
+
+                            Context.Payments.Add(payment);
+
+                            var selectedMonth = new List<SelectedMonth>();
+                            foreach (var item in request.Payment.SelectedMonth)
+                            {
+                                selectedMonth.Add(new SelectedMonth
+                                {
+                                    PaymentId = payment.Id,
+                                    SelectMonth = item.SelectedMonth,
+                                });
+                            }
+
+                            await Context.SelectedMonths.AddRangeAsync(selectedMonth);
+
+                            foreach (var item in request.Payment.SelectedMonth)
+                            {
+                                var charityTransaction = new CharityTransaction
+                                {
+                                    DoucmentId = payment.Id,
+                                    CharityTransactionDate = payment.Date,
+                                    DoucmentDate = DateTime.Now,
+                                    DoucmentCode = payment.PaymentCode,
+                                    BenificayId = payment.BenificayId,
+                                    Month = item.SelectedMonth,
+                                    Amount = payment.Amount,
+                                    Year = payment.Year,
+                                };
+
+                                await Context.CharityTransaction.AddAsync(charityTransaction);
+                            }
+                        }
+                        
                        
 
                         await Context.SaveChangesAsync();
@@ -116,6 +153,7 @@ namespace Focus.Business.Payments.Commands
                         paymentDetails.Period = DateTime.Now.Year.ToString();
                         paymentDetails.Date = DateTime.Now;
                         paymentDetails.Note = request.Payment.Note;
+                        paymentDetails.UserId = request.Payment.UserId;
 
                         Context.Payments.Update(paymentDetails);
 

@@ -776,7 +776,7 @@ namespace Focus.Persistence.Migrations
                             Blocked = false,
                             CashVoucher = false,
                             CompanyRegNo = "56ty60",
-                            CreatedDate = new DateTime(2023, 6, 7, 10, 57, 55, 93, DateTimeKind.Utc).AddTicks(2905),
+                            CreatedDate = new DateTime(2023, 6, 7, 12, 34, 8, 879, DateTimeKind.Utc).AddTicks(6314),
                             DayStart = false,
                             English = false,
                             ExpenseAccount = false,
@@ -940,6 +940,9 @@ namespace Focus.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("AllowVoid")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,4)");

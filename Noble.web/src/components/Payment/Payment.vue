@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="GotoPage('/addpayment')" href="javascript:void(0);"
-                                    class="btn btn-sm btn-outline-primary mx-1" v-if ="roleName != 'User'">
+                                    class="btn btn-sm btn-outline-primary mx-1" v-if="roleName != 'User'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
                                 </a>
@@ -68,7 +68,7 @@
                                         {{ $t('Payment.Period') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Payment.Action') }}
+
                                     </th>
                                 </tr>
                             </thead>
@@ -81,41 +81,92 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <td class="text-center" v-if="roleName != 'Cashier'">
-                                        <strong >
-                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{ brand.paymentCode }}</a>
+                                    <td class="text-center " v-if="brand.isVoid && roleName == 'Admin'">
+                                        <strong>
+                                            <a class="text-danger" href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
+                                                brand.paymentCode }}</a>
+                                        </strong></td>
+                                    <td class="text-center" v-else-if="roleName != 'Cashier'">
+                                        <strong>
+                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
+                                                brand.paymentCode }}</a>
                                         </strong>
                                     </td>
+                                    <td class="text-center text-danger" v-else-if="brand.isVoid">{{ brand.paymentCode }}</td>
+
                                     <td class="text-center" v-else>{{ brand.paymentCode }}</td>
 
-                                    <td class="text-center" v-if="roleName != 'Cashier'">
+                                    <td class="text-center text-danger" v-if="brand.isVoid">Payment Voided</td>
+                                    <td class="text-center" v-else-if="roleName != 'Cashier'">
                                         <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{ brand.benificaryName }}</a>
+                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
+                                                brand.benificaryName }}</a>
                                         </strong>
                                     </td>
                                     <td class="text-center" v-else>{{ brand.benificaryName }}</td>
 
-                                     <td class="text-center" v-if="roleName != 'Cashier'">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)"> {{ brand.amount }}</a>
-                                        </strong>
-                                    </td>
+                                    
+                                    <td class="text-center" v-if="brand.isVoid">--</td>
                                     <td class="text-center" v-else>{{ brand.amount }}</td>
 
-                                    <td class="text-center" v-if="brand.month != null">
+                                    <td class="text-center" v-if="brand.isVoid">
+                                        --
+                                    </td>
+                                    <td class="text-center" v-else-if="brand.month != null">
                                         {{ GetMonth(brand.month) }}
                                     </td>
+                                    
                                     <td class="text-center" v-else>
                                         {{ GetMonth(brand.date) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" v-if="brand.isVoid">
+                                        --
+                                    </td>
+                                    <td class="text-center" v-else>
                                         {{ brand.year }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" v-if="brand.isVoid">
+                                        --
+                                    </td>
+                                    <td class="text-center" v-else>
                                         {{ brand.period }}
                                     </td>
-                                    <td class="text-center">
-                                        {{ brand.period }}
+                                    <td class="text-center d-flex align-items-baseline justify-content-center" v-if="roleName != 'User'">
+                                        <button type="button" class="btn btn-light dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
+                                                class="mdi mdi-chevron-down"></i></button>
+                                        <div class="dropdown-menu text-center">
+                                            <div v-if="brand.allowVoid && !brand.isVoid && roleName == 'Cashier'">
+                                                <input type="checkbox" v-model="brand.isVoid"
+                                                v-on:change="EditPayment(brand.id, brand.isVoid)" />
+                                                <span class="mx-1"> {{
+                                                    $t('Payment.IsVoid') }}
+                                                </span>
+                                            </div>
+                                            <div v-if="brand.allowVoid && brand.isVoid && roleName == 'Cashier'">
+                                                <input type="checkbox" v-model="brand.isVoid"
+                                                v-on:change="EditPayment(brand.id, brand.isVoid)" disabled />
+                                                <span class="mx-1"> {{
+                                                    $t('Payment.IsVoid') }}
+                                                </span>
+                                            </div>
+                                            <div v-if="roleName != 'Cashier' && roleName != 'User'">
+                                                <input type="checkbox" disabled v-model="brand.isVoid"/>
+                                                <span class="mx-1"> {{
+                                                    $t('Payment.IsVoid') }}
+                                                </span>
+                                            </div>
+                                            <div v-if="roleName != 'Cashier' && roleName != 'User' ">
+                                                <input type="checkbox" v-model="brand.allowVoid"
+                                                v-on:change="EditPayment(brand.id, brand.isVoid, brand.allowVoid)" />
+                                                <span class="mx-1"> {{
+                                                    $t('Payment.AllowVoid') }}
+                                                </span> 
+                                            </div>
+                                            <strong>
+                                            <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{ $t('Payment.Print') }}</a>
+                                        </strong>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -163,7 +214,8 @@
                 </div>
             </div>
 
-            <authorizedPerson-mod :brand="newauthorizedPerson" :show="show" v-if="show" @close="IsSave" :type="type" />
+            <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show=false" @IsSave="IsSave" />
+
         </div>
 
     </div>
@@ -179,6 +231,8 @@ export default {
     data: function () {
         return {
             show: false,
+            reportsrc:'',
+            changereport:0,
             paymentList: [],
             type: '',
             search: '',
@@ -188,7 +242,8 @@ export default {
             arabic: '',
             english: '',
             user: '',
-            roleName:''
+            isVoid: false,
+            roleName: '',
         }
     },
     watch: {
@@ -197,10 +252,13 @@ export default {
         }
     },
     methods: {
+        IsSave : function()
+            {
+                this.show = false;
+            },
         GetMonth: function (link) {
-           if(link!=undefined)
-           {
-            return moment(link).format('MMMM');
+            if (link != undefined) {
+                return moment(link).format('MMMM');
 
            } 
            else
@@ -208,6 +266,16 @@ export default {
             return '';
            }
         },
+        PrintRdlc:function(Id) {
+                var companyId = '';
+                if (this.$session.exists()) {
+                    companyId = localStorage.getItem('CompanyID');
+                }
+               
+                this.reportsrc=   this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?id='+Id+'&pageNumber=' + this.currentPage + '&searchTerm=' + this.search+'&CompanyID='+companyId+'&formName=Payment'
+                this.changereport++;
+                this.show = !this.show;
+            },
         getPage: function () {
             this.GetPayment(this.search, this.currentPage);
         },
@@ -215,8 +283,6 @@ export default {
         GotoPage: function (link) {
             this.$router.push({ path: link });
         },
-
-       
 
         GetPayment: function () {
             var root = this;
@@ -235,28 +301,80 @@ export default {
             });
         },
 
-        EditPayment: function (Id) {
+        EditPayment: function (Id, val, allowVoid) {
+            debugger;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
-                .then(function (response) {
-                    if (response.data) {
-                        root.$router.push({
-                            path: '/addpayment',
-                            query: {data:response.data}
-                        });
-                    } else {
-                        console.log("error: something wrong from db.");
-                    }
-                },
-                    function (error) {
-                        this.loading = false;
-                        console.log(error);
-                    });
+            if(allowVoid)
+            {
+                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id + '&allowVoid=' + allowVoid, { headers: { "Authorization": `Bearer ${token}` } })
+                    .then(function (response) {
+                        debugger;
 
+                        if (response.data == "") {
+                            root.$swal({
+                                title: 'Save Allow Void',
+                                text: 'Permission Allow to make payment void',
+                                type: 'success',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+                            root.GetPayment();
+                        } else {
+                            console.log("error: something wrong from db.");
+                        }
+                    },
+                        function (error) {
+                            this.loading = false;
+                            console.log(error);
+                        });
+            }
+            else if (val) {
+                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id + '&isVoid=' + val, { headers: { "Authorization": `Bearer ${token}` } })
+                    .then(function (response) {
+                        debugger;
+                        if (response.data == "") {
+                            root.$swal({
+                                title: 'Save Void',
+                                text: 'Successfully Payment Voided',
+                                type: 'success',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+                            root.GetPayment();
+                        } else {
+                            console.log("error: something wrong from db.");
+                        }
+                    },
+                        function (error) {
+                            this.loading = false;
+                            console.log(error);
+                        });
+            }
+            else {
+                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
+                    .then(function (response) {
+                        if (response.data) {
+                            root.$router.push({
+                                path: '/addpayment',
+                                query: { data: response.data }
+                            });
+                        } else {
+                            console.log("error: something wrong from db.");
+                        }
+                    },
+                        function (error) {
+                            this.loading = false;
+                            console.log(error);
+                        });
+            }
         }
     },
 
@@ -269,7 +387,7 @@ export default {
         this.GetPayment(this.search, 1);
         this.roleName = localStorage.getItem('RoleName');
 
-        
+
     }
 }
 </script>

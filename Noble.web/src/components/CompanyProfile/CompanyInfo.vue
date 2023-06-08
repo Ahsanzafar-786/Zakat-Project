@@ -289,7 +289,7 @@
                 this.isDelete = true;
             },
             BackToList: function () {
-                this.$router.push('/Setup')
+                this.$router.push('/dashboard')
             },
             SaveCompanyAccountSetup: function () {
                 var root = this;

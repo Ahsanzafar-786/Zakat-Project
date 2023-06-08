@@ -339,11 +339,13 @@ namespace Noble.Api.Controllers
 
         [Route("api/Benificary/GetPaymentsDetail")]
         [HttpGet("GetPaymentsDetail")]
-        public async Task<IActionResult> GetPaymentsDetail(Guid id)
+        public async Task<IActionResult> GetPaymentsDetail(Guid id, bool isVoid, bool allowVoid)
         {
             var fund = await Mediator.Send(new PaymentDetailsQuery
             {
-                Id = id
+                Id = id,
+                IsVoid = isVoid,
+                AllowVoid = allowVoid
             });
             return Ok(fund);
         }
@@ -353,7 +355,7 @@ namespace Noble.Api.Controllers
         #region CharityTransaction
         [Route("api/Benificary/GetCharityTransactionList")]
         [HttpGet("GetCharityTransactionList")]
-        public async Task<IActionResult> GetCharityTransactionList(Guid benificaryId, DateTime? month, DateTime? fromDate, DateTime? toDate)
+        public async Task<IActionResult> GetCharityTransactionList(Guid? benificaryId, DateTime? month, DateTime? fromDate, DateTime? toDate)
         {
             var charity = await Mediator.Send(new CharityTransactionListQuery
             {
