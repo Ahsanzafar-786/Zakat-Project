@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-lg-12 ml-auto mr-auto mt-4">
                         <!--<b-progress :value="totalImportItem" :max="max" :label="'${((totalImportItem / max) * 100).toFixed(2)}%'" show-progress animated></b-progress>-->
-                        <b-progress :max="totalImportRecord" height="15px" variant="success" :striped="striped">
+                        <b-progress :max="totalImportRecord" height="15px" variant="success" >
                             <b-progress-bar :value="totalImportItem" :label="`${((totalImportItem / (totalImportRecord==0?1:totalImportRecord)) * 100).toFixed(0)}%`"></b-progress-bar>
                         </b-progress>
                     </div>
@@ -275,11 +275,11 @@
                 var rows = ''
                 
                  if (root.formName == 'Beneficries') {
-                    rows = this.selectedFileData.splice(0, 1000);
+                    rows = this.selectedFileData;
                     url = '/Benificary/UploadFilesForBeneficary'
                 }
                 else if (root.formName == 'Authorized') {
-                    rows = this.selectedFileData.splice(0,100);
+                    rows = this.selectedFileData;
                     url = '/Benificary/UploadFilesForImportAuthorize'
                 }
                 else if (root.formName == 'Payments_Beneficries') {
