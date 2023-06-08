@@ -861,10 +861,10 @@ export default {
                         else {
                             root.advancePayment = `${root.brand.advancePayment} Months`;
                         }
-
                         root.addPayment.amount = response.data.amountPerMonth;
                         root.addPayment.amountPerMonth = response.data.amountPerMonth;
                         var paymentMonths = response.data.charityTransactions;
+                        
                         if (response.data.durationType == 'Indefinite') {
                             root.months.map(auth => {
 
