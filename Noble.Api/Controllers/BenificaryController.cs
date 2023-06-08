@@ -35,6 +35,7 @@ using DocumentFormat.OpenXml.InkML;
 using Microsoft.EntityFrameworkCore;
 using Noble.Api.Models;
 using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace Noble.Api.Controllers
 {
@@ -427,23 +428,41 @@ namespace Noble.Api.Controllers
                 var authorizedPerson = _Context.AuthorizedPersons.AsNoTracking().ToList();
                 var payment = _Context.PaymentTypes.AsNoTracking().ToList();
                 var list = new List<Beneficiaries>();
+
                 foreach (var request in rows)
                 {
+                    int paymentInterval;
+                    if (!int.TryParse(request.Payment_interval, out paymentInterval))
+                    {
+
+                    }
+
+                    decimal recurringAmount;
+                    if (!decimal.TryParse(request.Recurring_amount, out recurringAmount))
+                    {
+
+                    }
+
+                    int authorizedPersonCode;
+                    if (!int.TryParse(request.Authorized_person_id, out authorizedPersonCode))
+                    {
+
+                    }
                     list.Add(new Beneficiaries
                     {
-                        BeneficiaryId = Int32.Parse(request.Id),
+                        BeneficiaryId = Convert.ToInt32(request.Id),
                         Name = "",
-                        PaymentIntervalMonth = Int32.Parse(request.Payment_interval),
-                        AmountPerMonth = decimal.Parse(request.Recurring_amount) / Int32.Parse(request.Payment_interval),
-                        RecurringAmount = decimal.Parse(request.Recurring_amount),
+                        PaymentIntervalMonth = paymentInterval,
+                        AmountPerMonth = recurringAmount / paymentInterval,
+                        RecurringAmount = recurringAmount,
                         UgamaNo = request.Iqama_no,
                         PhoneNo = request.Phone,
                         Note = "",
-                        IsActive = request.Isactive == "TRUE" ? true : false,
+                        IsActive = request.Isactive == "TRUE",
                         ApprovalPersonId = null,
                         Address = request.Address,
-                        AuthorizedPersonId = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == Int32.Parse(request.Authorized_person_id))!.Id,
-                        PaymentTypeId = payment.FirstOrDefault(x => x.Code == Int32.Parse(request.Payment_interval))!.Id,
+                        AuthorizedPersonId = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode)?.Id,
+                        PaymentTypeId = payment.FirstOrDefault(x => x.Code == paymentInterval)?.Id,
                         NameAr = request.Name,
                         AdvancePayment = 0,
                         DurationType = "Indefinite",
@@ -451,11 +470,9 @@ namespace Noble.Api.Controllers
                         StartDate = null,
                         EndDate = null,
                         StartMonth = DateTime.Parse(request.Stamp_date),
-                        IsRegister = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == Int32.Parse(request.Authorized_person_id)) != null ? true : false
+                        IsRegister = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode) != null
 
                     });
-
-
 
                 }
                 await _Context.Beneficiaries.AddRangeAsync(list);
