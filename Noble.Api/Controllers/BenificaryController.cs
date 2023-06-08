@@ -489,6 +489,43 @@ namespace Noble.Api.Controllers
             return Ok(null);
         }
 
+        [Route("api/Benificary/Payments_Beneficries")]
+        [HttpPost("Payments_Beneficries")]
+        public async Task<IActionResult> Payments_Beneficries([FromBody] List<AuthorizeVm> rows)
+        {
+            try
+            {
+                var authorizedPerson = _Context.AuthorizedPersons.AsNoTracking().ToList();
+                var payment = _Context.PaymentTypes.AsNoTracking().ToList();
+                var Beneficiaries = _Context.Beneficiaries.AsNoTracking().ToList();
+                var list = new List<BenificaryNote>();
+
+                foreach (var request in rows)
+                {
+                    list.Add(new BenificaryNote
+                    {
+                        Note = "",
+                        Date=Convert.ToDateTime(request.Stamp_date),
+                        BenificaryId=Beneficiaries.FirstOrDefault(x=>x.BeneficiaryId==Convert.ToInt32(request.Id))?.Id,
+
+                    }) ;
+
+                }
+                await _Context.BenificaryNotes.AddRangeAsync(list);
+                await _Context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+            return Ok(null);
+        }
+
+
         #endregion
     }
 }

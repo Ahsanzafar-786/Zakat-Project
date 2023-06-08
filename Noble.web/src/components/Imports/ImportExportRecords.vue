@@ -215,8 +215,29 @@
 
 
                             })
+                            root.totalImportRecord = allRows.length;
+                            root.isUploadDisabled = false;
+                        }
+                        else if ((root.formName == 'Payments_Beneficries' )) {
+                            allRows.splice(0, 1)
+                            allRows.forEach(function (data) {
+                                root.selectedFileData.push({
+
+                                    id: data[0],
+                                    org_id: data[1],
+                                    isactive: data[2],
+                                    stamp_date: data[3],
+                                    sync_erp: data[4],
+                                    created_date: data[5],
+                                    edited_date: data[6],
+                                    created_by_id: data[7],
+                                    edited_by_id: data[8],
+                                    note: data[9],
+                                   
+                                })
 
 
+                            })
                             root.totalImportRecord = allRows.length;
                             root.isUploadDisabled = false;
                         }
@@ -261,6 +282,10 @@
                     rows = this.selectedFileData.splice(0,100);
                     url = '/Benificary/UploadFilesForImportAuthorize'
                 }
+                else if (root.formName == 'Payments_Beneficries') {
+                    rows = this.selectedFileData.splice(0,100);
+                    url = '/Benificary/Payments_Beneficries'
+                }
                 
                 root.$https.post(url, rows, { headers: { "Authorization": `Bearer ${token}` } })
                     .then(function (response) {
@@ -281,7 +306,19 @@
                                         root.errorCollection.push(errorData)
                                     })
                                 }
-                                 else if (root.formName == 'Beneficries' ) {
+                                 else if (root.formName == 'Payments_Beneficries' ) {
+                                    response.data.forEach(function (x) {
+                                        var errorData = {
+                                            AuthorizedPersonCode: x.AuthorizedPersonCode,
+                                            NameAr: x.NameAr,
+                                           
+                                            ErrorDescription: x.errorDescription,
+                                        }
+                                        
+                                        root.errorCollection.push(errorData)
+                                    })
+                                }
+                                else if (root.formName == 'Beneficries' ) {
                                     response.data.forEach(function (x) {
                                         var errorData = {
                                             AuthorizedPersonCode: x.AuthorizedPersonCode,
@@ -351,7 +388,7 @@
         },
         mounted: function () {
             debugger;
-              this.formName = 'Beneficries';
+              this.formName = 'Payments_Beneficries';
             
 
 
@@ -364,6 +401,12 @@
             }
             else if ( this.formName == 'Beneficries') {
                 this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date","edited_date","name","phone","payment_interval","recurring_amount",
+                "iqama_no","authorized_person_id"];
+                this.sheets = [];
+                this.sheets.push({ name: "payment_beneficiary", data: [this.collection] });
+            }
+            else if ( this.formName == 'Payments_Beneficries') {
+                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date","edited_date","note","beneficary_Id","Created_By","Edit_By",
                 "iqama_no","authorized_person_id"];
                 this.sheets = [];
                 this.sheets.push({ name: "payment_beneficiary", data: [this.collection] });

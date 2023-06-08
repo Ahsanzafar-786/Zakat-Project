@@ -17,5 +17,6 @@
         public string Iqama_no { get; set; }
         public string Authorized_person_id { get; set; }
         public string Stamp_date { get; set; }
+        public string Note { get;set; }
     }
 }
