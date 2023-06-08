@@ -304,7 +304,7 @@
                     <!--end card-header-->
                     <div class="card-body">
                         <div class="">
-                            <apexchart type="line" height="350" :options="chartOptions" :series="series"></apexchart>
+                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="render"></apexchart>
                         </div>
                     </div>
                     <!--end card-body-->
@@ -336,12 +336,13 @@ export default {
             randerChart: 0,
             income: 0,
             date: '',
+            render:0,
             randerDropdown: 0,
             fromDate: moment().format("DD MMM YYYY"),
             toDate: Date(),
             series: [{
-                name: "Desktops",
-                data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                name: 'Total Amount',
+                data: []
             }],
             chartOptions: {
                 chart: {
@@ -368,7 +369,7 @@ export default {
                     },
                 },
                 xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                    categories: [],
                 }
             },
             series2: [],
@@ -475,14 +476,29 @@ export default {
                 token = localStorage.getItem('token');
             }
             root.$https.get('Benificary/GetDashboardDetail', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
-                if (response.data != null) {
+                debugger;
+                if (response.data != null ) {
                     root.dashboard = response.data;
+                    root.series[0].data=[];
+                    root.chartOptions.xaxis.categories=[];
+
+                    response.data.monthList.forEach(function (result) {
+                        root.series[0].data.push(result.amount);
+                        root.chartOptions.xaxis.categories.push(result.monthName);
+                    });
+
+
+
                     root.series2.push(response.data.totalBenificary, response.data.registerBenificary, response.data.unRegisterBenificary, response.data.oneTimeBenificary, response.data.monthlyBenificary);
+                    
+            
                 }
                 root.loading = false;
+                root.render++
             });
         }
     },
+    
     created: function () {
 
     },

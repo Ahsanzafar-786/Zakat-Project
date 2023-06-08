@@ -70,7 +70,18 @@ namespace Focus.Business.AdminDashboard.Queries
                             Amount = transaction?.TotalAmount ?? 0
                         });
                     }
+                    List<TransactionByMonthLookupModel> newList = new List<TransactionByMonthLookupModel>();
+                    foreach (var item in list)
+                    {
+                        TransactionByMonthLookupModel model = new TransactionByMonthLookupModel
+                        {
+                            Month = item.Month,
+                            MonthName = item.MonthName,
+                            Amount = item.Amount
+                        };
 
+                        newList.Add(model);
+                    }
                     return new DashboardLookupModel
                     {
                         TotalBenificary = totalBenificary,
@@ -81,6 +92,7 @@ namespace Focus.Business.AdminDashboard.Queries
                         TotalAuthorizePerson = totalAuthorizePerson,
                         TotalUser = totalUser,
                         TotalResources = totalResources,
+                        MonthList=newList
                     };
                 }
                 catch (Exception exception)
