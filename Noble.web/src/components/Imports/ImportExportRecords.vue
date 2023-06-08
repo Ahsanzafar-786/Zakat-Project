@@ -283,7 +283,7 @@
                     url = '/Benificary/UploadFilesForImportAuthorize'
                 }
                 else if (root.formName == 'Payments_Beneficries') {
-                    rows = this.selectedFileData.splice(0,100);
+                    rows = this.selectedFileData;
                     url = '/Benificary/Payments_Beneficries'
                 }
                 
