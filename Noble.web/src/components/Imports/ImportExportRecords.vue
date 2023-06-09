@@ -1,0 +1,536 @@
+﻿<template>
+    <div class="col-lg-12 ">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+
+                            <h4 class="page-title" >Import</h4>
+                           
+
+
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                              
+
+                            </ol>
+                        </div>
+                        <div class="col-auto align-self-center d-flex" >
+                           12 <xlsx-workbook>
+                                <xlsx-sheet :collection="sheet.data"
+                                            v-for="sheet in sheets"
+                                            :key="sheet.name"
+                                            :sheet-name="sheet.name" />
+                                <xlsx-download :filename="'Item Template.xlsx'">
+                                    <a class="btn btn-sm btn-outline-primary mx-1"  data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-download"></i> DownloadTemplate</a>
+
+                                </xlsx-download>
+                            </xlsx-workbook>
+                            <a v-on:click="GotoPage('/StartScreen')" href="javascript:void(0);" class="btn btn-sm btn-outline-danger " >
+                              colorNameEnglish
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            
+            <div class="card-body ">
+
+                <div class="row" :key="render">
+                  
+                    <div class="col-lg-12 ml-auto mr-auto">
+                        <label>File</label>
+                        34<b-form-file v-model="file1"
+                                     id="uplaodfile"
+                                     :no-drop="true"
+                                     accept=".xlsx" 
+                                     :state="Boolean(file1)"
+                                     @change="onFileChanging"
+                                     placeholder="Choose File"></b-form-file>
+
+                    </div>
+                    <div class="col-lg-12 ml-auto mr-auto mt-4">
+                        <!--<b-progress :value="totalImportItem" :max="max" :label="'${((totalImportItem / max) * 100).toFixed(2)}%'" show-progress animated></b-progress>-->
+                        <b-progress :max="totalImportRecord" height="15px" variant="success" >
+                            <b-progress-bar :value="totalImportItem" :label="`${((totalImportItem / (totalImportRecord==0?1:totalImportRecord)) * 100).toFixed(0)}%`"></b-progress-bar>
+                        </b-progress>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 ml-0 mr-0 mt-4 mb-2">
+                        <a href="javascript:void(0)" class="btn btnTotalHover mx-1 " style="border-radius: 20px; background: #DDE9FF; color: #3178F6; ">Total <span>{{totalImportRecord}}</span></a>
+                        <a href="javascript:void(0)" class="btn  btnUpdatedHover mx-1" style="border-radius: 20px; background: #B9E9C6; color: #198754; ">Updated <span>{{totalImportItem - errorCollection.length}}</span></a>
+                        <a href="javascript:void(0)" class="btn  btnErrorHover mx-1" style="border-radius: 20px; background: #FEDCDC; color: #EB5757 ">Error<span>{{errorCollection.length}}</span></a>
+                    </div>
+
+
+
+                </div>
+                <div class="row">
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <xlsx-workbook>
+                                        <xlsx-sheet :collection="sheet.data"
+                                                    v-for="sheet in errorSheets"
+                                                    :key="sheet.name"
+                                                    :sheet-name="sheet.name" />
+                                        <xlsx-download :filename="'MSF DATA.xlsx'">
+                                            <a class="btn btn-sm btn-outline-primary mx-1" data-toggle="tooltip" :disabled="isErrorFileDownload" data-placement="top" title="Download Error File"><i class="fa fa-download"></i> ErrorFile</a>
+
+                                        </xlsx-download>
+                                    </xlsx-workbook>
+                                   
+                                </div>
+                            </div>
+                            <div class="col-auto align-self-center d-flex">
+                                <button class="btn btn-sm btn-primary mx-1  "
+                                        @click="uploadFile">
+                                    <i class="nc-icon nc-cloud-upload-94"></i> Upload
+                                </button>
+                                <button class="btn btn-sm btn-danger mx-1  "
+                                        v-on:click="onCancel">
+                                        Cancel
+                                </button>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <!--<div class="col-lg-6 mt-3 ">
+                        
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+<script>
+    /*import { BFormFile } from 'bootstrap-vue';*/
+    import { XlsxWorkbook, XlsxSheet, XlsxDownload } from "vue-xlsx"
+    import readXlsxFile from 'read-excel-file'
+    export default {
+        components: {
+            //BFormFile,
+            XlsxWorkbook,
+            XlsxSheet,
+            XlsxDownload
+        },
+        data: function () {
+            return {
+                file1: null,
+                loading: false,
+                render: 0,
+                year: '',
+                fileInterval: '',
+                sheets: [],
+                collection: [],
+                selectedFileData: [],
+                isUploadDisabled: true,
+                isErrorFileDownload: true,
+                errorSheets: [],
+                errorCollection: [],
+                totalImportItem: 0,
+                totalImportRecord: 0,
+                wareHouseId: null,
+                formName: ''
+            }
+        },
+        methods: {
+            GotoPage: function (link) {
+                this.$router.push({ path: link });
+            },
+            onCancel: function () {
+              
+
+            },
+            onFileChanging: function (file) {
+                debugger;
+                this.errorSheets = []
+                this.errorCollection = []
+                var root = this;
+                this.file1 = file.target.files ? event.target.files[0] : null;
+                root.selectedFileData = []
+                root.totalImportItem = 0;
+                root.totalImportRecord = 0;
+                root.isErrorFileDownload = true
+                readXlsxFile(this.file1).then((allRows) => {
+                    if (allRows.length > 1) {
+                       
+
+                       
+                         if ((root.formName == 'Authorized' )) {
+                            allRows.splice(0, 1)
+                            allRows.forEach(function (data) {
+                                root.selectedFileData.push({
+
+                                    id: data[0],
+                                    org_id: data[1],
+                                    isactive: data[2],
+                                    stamp_date: data[3],
+                                    sync_erp: data[4],
+                                    created_date: data[5],
+                                    edited_date: data[6],
+                                    name: data[7],
+                                    created_by_id: data[8],
+                                    edited_by_id: data[9],
+                                   
+                                })
+
+
+                            })
+
+
+                            root.totalImportRecord = allRows.length;
+                            root.isUploadDisabled = false;
+                        }
+                      
+
+
+                        else if ((root.formName == 'Beneficries' )) {
+                            allRows.splice(0, 1)
+                            allRows.forEach(function (data) {
+                                root.selectedFileData.push({
+
+                                    id: data[0],
+                                    org_id: data[1],
+                                    isactive: data[2],
+                                    stamp_date: data[3],
+                                    sync_erp: data[4],
+                                    created_date: data[5],
+                                    edited_date: data[6],
+                                    name: data[7],
+                                    phone: data[8],
+                                    payment_interval: data[9],
+                                    recurring_amount: data[10],
+                                    iqama_no: data[11],
+                                    authorized_person_id: data[12],
+                                    created_by_id: data[13],
+                                    edited_by_id: data[14],
+                                   
+                                })
+
+
+                            })
+                            root.totalImportRecord = allRows.length;
+                            root.isUploadDisabled = false;
+                        }
+                        else if ((root.formName == 'Payments_Beneficries' )) {
+                            allRows.splice(0, 1)
+                            allRows.forEach(function (data) {
+                                root.selectedFileData.push({
+
+                                    id: data[0],
+                                    org_id: data[1],
+                                    isactive: data[2],
+                                    stamp_date: data[3],
+                                    sync_erp: data[4],
+                                    created_date: data[5],
+                                    edited_date: data[6],
+                                    created_by_id: data[7],
+                                    edited_by_id: data[8],
+                                    note: data[9],
+                                   
+                                })
+
+
+                            })
+                            root.totalImportRecord = allRows.length;
+                            root.isUploadDisabled = false;
+                        }
+                        else if ((root.formName == 'funds' )) {
+                            allRows.splice(0, 1)
+                            allRows.forEach(function (data) {
+                                root.selectedFileData.push({
+
+                                    id: data[0],
+                                    org_id: data[1],
+                                    isactive: data[2],
+                                    stamp_date: data[3],
+                                    sync_erp: data[4],
+                                    created_date: data[5],
+                                    edited_date: data[6],
+                                    created_by_id: data[7],
+                                    edited_by_id: data[8],
+                                    Transection_Type: data[9],
+                                    Amount: data[9],
+                                    cheque_number:data[10]
+                                   
+                                })
+
+
+                            })
+                            root.totalImportRecord = allRows.length;
+                            root.isUploadDisabled = false;
+                        }
+                        else if ((root.formName == 'funds' )) {
+                            allRows.splice(0, 1)
+                            allRows.forEach(function (data) {
+                                root.selectedFileData.push({
+
+                                    id: data[0],
+                                    org_id: data[1],
+                                    isactive: data[2],
+                                    stamp_date: data[3],
+                                    sync_erp: data[4],
+                                    created_date: data[5],
+                                    edited_date: data[6],
+                                    created_by_id: data[7],
+                                    edited_by_id: data[8],
+                                    Transection_Type: data[9],
+                                    Amount: data[9],
+                                    Month:data[10],
+                                    Year:data[11],
+                                    Period:data[12],
+                                    beneficiary_id:data[13]
+                                   
+                                })
+
+
+                            })
+                            root.totalImportRecord = allRows.length;
+                            root.isUploadDisabled = false;
+                        }
+                      
+                        else {
+                            root.file1 = null
+                            root.$swal({
+                                title: 'Wrong File',
+                                text: "Please select correct file",
+                                type: 'warning',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: true,
+                            });
+                        }
+
+                    }
+                })
+
+            },
+            uploadFile: function () {
+                debugger;
+
+                this.loading = true;
+                var root = this;
+                var token = '';
+                if (this.$session.exists()) {
+                    token = localStorage.getItem('token');
+                }
+                root.loding == true;
+
+                root.isUploadDisabled = true;
+                var url = ''
+                var rows = ''
+                
+                 if (root.formName == 'Beneficries') {
+                    rows = this.selectedFileData;
+                    url = '/Benificary/UploadFilesForBeneficary'
+                }
+                else if (root.formName == 'Authorized') {
+                    rows = this.selectedFileData;
+                    url = '/Benificary/UploadFilesForImportAuthorize'
+                }
+                else if (root.formName == 'Payments_Beneficries') {
+                    rows = this.selectedFileData;
+                    url = '/Benificary/Payments_Beneficries'
+                }
+                else if (root.formName == 'funds') {
+                    rows = this.selectedFileData;
+                    url = '/Benificary/Funds'
+                }
+                else if (root.formName == 'Payment') {
+                    rows = this.selectedFileData;
+                    url = '/Benificary/Payment'
+                }
+                
+                root.$https.post(url, rows, { headers: { "Authorization": `Bearer ${token}` } })
+                    .then(function (response) {
+                        if (response.data != null) {
+                            root.totalImportItem += rows.length
+                            if (response.data.length > 0) {
+
+                              
+                                 if (root.formName == 'Authorized' ) {
+                                    response.data.forEach(function (x) {
+                                        var errorData = {
+                                            AuthorizedPersonCode: x.AuthorizedPersonCode,
+                                            NameAr: x.NameAr,
+                                           
+                                            ErrorDescription: x.errorDescription,
+                                        }
+                                        
+                                        root.errorCollection.push(errorData)
+                                    })
+                                }
+                                 else if (root.formName == 'Payments_Beneficries' ) {
+                                    response.data.forEach(function (x) {
+                                        var errorData = {
+                                            AuthorizedPersonCode: x.AuthorizedPersonCode,
+                                            NameAr: x.NameAr,
+                                           
+                                            ErrorDescription: x.errorDescription,
+                                        }
+                                        
+                                        root.errorCollection.push(errorData)
+                                    })
+                                }
+                                else if (root.formName == 'funds' ) {
+                                    response.data.forEach(function (x) {
+                                        var errorData = {
+                                            AuthorizedPersonCode: x.AuthorizedPersonCode,
+                                            NameAr: x.NameAr,
+                                           
+                                            ErrorDescription: x.errorDescription,
+                                        }
+                                        
+                                        root.errorCollection.push(errorData)
+                                    })
+                                }
+                                else if (root.formName == 'Beneficries' ) {
+                                    response.data.forEach(function (x) {
+                                        var errorData = {
+                                            AuthorizedPersonCode: x.AuthorizedPersonCode,
+                                            NameAr: x.NameAr,
+                                           
+                                            ErrorDescription: x.errorDescription,
+                                        }
+                                        
+                                        root.errorCollection.push(errorData)
+                                    })
+                                }
+                                else if (root.formName == 'Payment' ) {
+                                    response.data.forEach(function (x) {
+                                        var errorData = {
+                                            AuthorizedPersonCode: x.AuthorizedPersonCode,
+                                            NameAr: x.NameAr,
+                                           
+                                            ErrorDescription: x.errorDescription,
+                                        }
+                                        
+                                        root.errorCollection.push(errorData)
+                                    })
+                                }
+                                // root.errorCollection.push(response.data)
+
+                            }
+                            if (root.selectedFileData.length > 0) {
+                                root.uploadFile()
+                            }
+                            else {
+                                root.errorSheets.push({ name: "Template", data: [...root.errorCollection] });
+                                if (root.errorCollection.length > 0) {
+                                    root.isErrorFileDownload = false
+                                }
+
+                                root.file1 = null;
+
+                            }
+                        }
+
+                    });
+
+            },
+
+            DownloadRecordForStockIn: function () {
+
+                this.loading = true;
+                var root = this;
+                var token = '';
+                if (this.$session.exists()) {
+                    token = localStorage.getItem('token');
+                }
+                root.loding == true;
+                root.isUploadDisabled = true;
+                root.$https.get('/Product/DownloadStockFileAsync', { headers: { "Authorization": `Bearer ${token}` } })
+                    .then(function (response) {
+                        if (response.data != null) {
+                            if (response.data.length > 0) {
+                                root.collection = []
+                                // root.errorCollection.push(response.data)
+                                response.data.forEach(function (x) {
+                                    var data = {
+                                        ProductCode: x.productCode,
+                                        ProductNameEnglish: x.productNameEnglish,
+                                        ProductNameArabic: x.productNameArabic,
+                                        Quantity: x.quantity,
+                                        UnitPrice: x.unitPrice,
+                                    }
+                                    root.collection.push(data)
+                                })
+                                root.sheets.push({ name: "Template", data: [...root.collection] });
+                            }
+
+                        }
+
+                    });
+
+            }
+        },
+        mounted: function () {
+            debugger;
+              this.formName = 'Payment';
+            
+
+
+            // this.formName = 'Authorized';
+            if ( this.formName == 'Authorized') {
+                this.collection = ["AuthorizedPersonCode", "org_id", "isactive", "stamp_date", "sync_erp", "created_date","edited_date","NameAr","created_by_id","edited_by_id"
+                    ]
+                this.sheets = [];
+                this.sheets.push({ name: "payment_authorizedperson", data: [this.collection] });
+            }
+            else if ( this.formName == 'Beneficries') {
+                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date","edited_date","name","phone","payment_interval","recurring_amount",
+                "iqama_no","authorized_person_id"];
+                this.sheets = [];
+                this.sheets.push({ name: "payment_beneficiary", data: [this.collection] });
+            }
+            else if ( this.formName == 'Payments_Beneficries') {
+                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date","edited_date","note","beneficary_Id","Created_By","Edit_By",
+                "iqama_no","authorized_person_id"];
+                this.sheets = [];
+                this.sheets.push({ name: "payment_beneficiary", data: [this.collection] });
+            }
+            else if ( this.formName == 'Payment') {
+                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date","edited_date","Amount","Created_By","Edit_By","cheque_number","Transection_Type",
+                "iqama_no","authorized_person_id"];
+                this.sheets = [];
+                this.sheets.push({ name: "Payments", data: [this.collection] });
+            }
+            else if ( this.formName == 'funds') {
+                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date","edited_date","Amount","Month","Year","Period","beneficiary_id",
+                "iqama_no","authorized_person_id"];
+                this.sheets = [];
+                this.sheets.push({ name: "fund", data: [this.collection] });
+            }
+           
+        }
+    }
+</script>
+
+<style>
+    
+</style>
+<style scoped>
+
+    .btnTotalHover:hover {
+        background-color: #DDE9FF !important;
+        color: #3178F6 !important;
+    }
+
+    .btnUpdatedHover:hover {
+        background-color: #B9E9C6 !important;
+        color: #198754 !important;
+    }
+
+    .btnErrorHover:hover {
+        background-color: #FEDCDC !important;
+        color: #EB5757 !important;
+    }
+    
+</style>

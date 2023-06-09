@@ -64,6 +64,8 @@ import datarestore from '../components/DataRestore/ComingSoon.vue';
 
 import benificaryreports from '../components/Benificary/BenificaryReports.vue';
 
+import Imports from '../components/Imports/ImportExportRecords.vue';
+
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
 
@@ -129,6 +131,12 @@ const routes = [
                             path: '/benificaries',
                             name: 'benificaries',
                             component: benificaries
+                        },
+                        {
+                            path: '/Imports',
+                            name: 'Imports',
+                            component: Imports,
+                            
                         },
                         {
                             path: '/authorizedpersons',

@@ -28,7 +28,16 @@ using Focus.Business.Payments.Models;
 using Focus.Business.Payments.Commands;
 using Focus.Business.Payments.Queries;
 using Focus.Business.Transactions.Queries;
-using DocumentFormat.OpenXml.Wordprocessing;
+using System.Collections.Generic;
+using System.Linq;
+using Focus.Domain.Entities;
+using DocumentFormat.OpenXml.InkML;
+using Microsoft.EntityFrameworkCore;
+using Noble.Api.Models;
+using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
+using Org.BouncyCastle.Asn1.Ocsp;
+using Focus.Persistence.Migrations;
+using NPOI.POIFS.Properties;
 
 namespace Noble.Api.Controllers
 {
@@ -379,6 +388,229 @@ namespace Noble.Api.Controllers
             });
             return Ok(autoNo);
         }
+        #endregion
+
+        #region Imports
+
+      
+        [Route("api/Benificary/UploadFilesForImportAuthorize")]
+        [HttpPost("UploadFilesForImportAuthorize")]
+        public async Task<IActionResult> UploadFilesForImportAuthorize([FromBody] List<AuthorizeVm> rows)
+        {
+            try
+            {
+                var list=new List<AuthorizedPerson>();
+            foreach (var request in rows)
+            {
+                 list.Add( new AuthorizedPerson
+                {
+                    Name = request.Name,
+                    AuthorizedPersonCode = Int32.Parse(request.Id),
+                    NameAr = request.NameAr,
+                    PhoneNo = request.Phone,
+                    Address = request.Address,
+                    Nationality = request.Nationality,
+                    Gender = request.Gender,
+                    IqamaNo = request.IqamaNo,
+                    PassportNo = request.PassportNo,
+                });
+
+            }
+            await _Context.AuthorizedPersons.AddRangeAsync(list);
+            await _Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            var message = "done";
+            return Ok(message); 
+        }
+
+
+        [Route("api/Benificary/UploadFilesForBeneficary")]
+        [HttpPost("UploadFilesForBeneficary")]
+        public async Task<IActionResult> UploadFilesForBeneficary([FromBody] List<AuthorizeVm> rows)
+        {
+            try
+            {
+                var authorizedPerson = _Context.AuthorizedPersons.AsNoTracking().ToList();
+                var payment = _Context.PaymentTypes.AsNoTracking().ToList();
+                var list = new List<Beneficiaries>();
+
+                foreach (var request in rows)
+                {
+                    int paymentInterval;
+                    if (!int.TryParse(request.Payment_interval, out paymentInterval))
+                    {
+
+                    }
+
+                    decimal recurringAmount;
+                    if (!decimal.TryParse(request.Recurring_amount, out recurringAmount))
+                    {
+
+                    }
+
+                    int authorizedPersonCode;
+                    if (!int.TryParse(request.Authorized_person_id, out authorizedPersonCode))
+                    {
+
+                    }
+                    list.Add(new Beneficiaries
+                    {
+                        BeneficiaryId = Convert.ToInt32(request.Id),
+                        Name = "",
+                        PaymentIntervalMonth = paymentInterval,
+                        AmountPerMonth = recurringAmount / paymentInterval,
+                        RecurringAmount = recurringAmount,
+                        UgamaNo = request.Iqama_no,
+                        PhoneNo = request.Phone,
+                        Note = "",
+                        IsActive = request.Isactive == "TRUE",
+                        ApprovalPersonId = null,
+                        Address = request.Address,
+                        AuthorizedPersonId = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode)?.Id,
+                        PaymentTypeId = payment.FirstOrDefault(x => x.Code == paymentInterval)?.Id,
+                        NameAr = request.Name,
+                        AdvancePayment = 0,
+                        DurationType = "Indefinite",
+                        ApprovedPaymentId = null,
+                        StartDate = null,
+                        EndDate = null,
+                        StartMonth = DateTime.Parse(request.Stamp_date),
+                        IsRegister = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode) != null
+
+                    });
+
+                }
+                await _Context.Beneficiaries.AddRangeAsync(list);
+                await _Context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            var message = "done";
+            return Ok(message);
+        }
+
+        [Route("api/Benificary/Payments_Beneficries")]
+        [HttpPost("Payments_Beneficries")]
+        public async Task<IActionResult> Payments_Beneficries([FromBody] List<AuthorizeVm> rows)
+        {
+            try
+            {
+                var authorizedPerson = _Context.AuthorizedPersons.AsNoTracking().ToList();
+                var payment = _Context.PaymentTypes.AsNoTracking().ToList();
+                var Beneficiaries = _Context.Beneficiaries.AsNoTracking().ToList();
+                var list = new List<BenificaryNote>();
+
+                foreach (var request in rows)
+                {
+                    list.Add(new BenificaryNote
+                    {
+                        Note = "",
+                        Date=Convert.ToDateTime(request.Stamp_date),
+                        BenificaryId=Beneficiaries.FirstOrDefault(x=>x.BeneficiaryId==Convert.ToInt32(request.Id))?.Id,
+
+                    }) ;
+
+                }
+                await _Context.BenificaryNotes.AddRangeAsync(list);
+                await _Context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+            return Ok(null);
+        }
+        [Route("api/Benificary/Funds")]
+        [HttpPost("Funds")]
+        public async Task<IActionResult> Funds([FromBody] List<AuthorizeVm> rows)
+        {
+            try
+            {
+
+                var list = new List<Funds>();
+
+                foreach (var request in rows)
+                {
+                    list.Add(new Funds
+                    {
+                        Date=Convert.ToDateTime(request.Stamp_date),
+                        Amount=request.Amount,
+                        Description=request.Check_No,
+
+
+                    });
+
+                }
+                await _Context.Funds.AddRangeAsync(list);
+                await _Context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+            return Ok(null);
+        }
+
+        [Route("api/Benificary/Payments")]
+        [HttpPost("Payments")]
+        public async Task<IActionResult> Payments([FromBody] List<AuthorizeVm> rows)
+        {
+            var Beneficiaries = _Context.Beneficiaries.AsNoTracking().ToList();
+            try
+            {
+
+                var list = new List<Payment>();
+
+                foreach (var request in rows)
+                {
+                    list.Add(new Payment
+                    {
+                        BenificayId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == Convert.ToInt32(request.Id))?.Id,
+                        Month = Convert.ToDateTime(request.Month),
+                        Year=request.Year,
+                        Amount=request.Amount,
+                        Date=Convert.ToDateTime(request.Stamp_date),
+                        Period=request.Period,
+
+
+                    }) ;
+
+                }
+                await _Context.Payments.AddRangeAsync(list);
+                await _Context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+            var message = "done";
+            return Ok(message);
+        }
+
+
         #endregion
     }
 }

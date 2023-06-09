@@ -195,6 +195,9 @@
                                 <a v-on:click="GoTo('/companyinfo')" href="javascript:void(0);"> {{ $t('CompanyProfile.CompanyInfo')
                                 }}</a>
                             </li>
+                            <li>
+                                <a v-on:click="GoTo('/Imports')" href="javascript:void(0);">Imports</a>
+                            </li>
                         </ul>
                     </li>
 
