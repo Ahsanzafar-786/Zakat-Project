@@ -44,6 +44,8 @@ namespace Focus.Business.Payments.Queries
                         Period = x.Period,
                         PaymentCode =x.PaymentCode,
                         BenificaryName = x.Beneficiaries.Name,
+                        BenificaryNameAr = x.Beneficiaries.NameAr,
+                        Code = x.Code,
                         IsVoid = x.IsVoid,
                         AllowVoid = x.AllowVoid,
                     }).AsQueryable();
@@ -51,7 +53,7 @@ namespace Focus.Business.Payments.Queries
                     if (!string.IsNullOrEmpty(request.SearchTerm))
                     {
                         var searchTerm = request.SearchTerm.ToLower();
-                        query = query.Where(x => x.Amount.ToString().Contains(searchTerm)
+                        query = query.Where(x => x.Amount.ToString().Contains(searchTerm) || x.BenificaryNameAr.ToString().Contains(searchTerm) 
                                               || x.BenificaryName.ToString().Contains(searchTerm));
                     }
 

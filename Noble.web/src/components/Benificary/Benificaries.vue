@@ -86,14 +86,13 @@
                                             <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)">{{ brand.beneficiaryId }}</a>
                                         </strong>
                                     </td> -->
-                                    <td class="text-center">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)">
-                                                {{ brand.name }}
-                                            </a>
-                                        </strong>
-                                    </td>
-                                    <!-- <td class="text-center">
+                                <td class="text-center">
+                                    <strong>
+                                        <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{
+                                                brand.name==''?brand.nameAr:brand.name }}</a>
+                                    </strong>
+                                </td>
+                                <!-- <td class="text-center">
                                     {{ brand.paymentIntervalMonth }}
                                 </td> -->
                                     <td class="text-center">
