@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Focus.Domain.Entities;
 using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Office.MetaAttributes;
 using Microsoft.EntityFrameworkCore;
 using Noble.Api.Models;
 using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
@@ -460,6 +461,26 @@ namespace Noble.Api.Controllers
                     {
 
                     }
+                    var benificaryAuthorization = new List<BenificaryAuthorization>();
+
+                    var authorize = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode)
+                        ?.Id;
+                    if (authorize != null)
+                    {
+                        benificaryAuthorization.Add(new BenificaryAuthorization
+                        {
+                            ApprovalPersonId = null,
+                            AuthorizationPersonId = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode)?.Id,
+                            IsActive = true,
+                            Description = "",
+                            Date = DateTime.Parse(request.Stamp_date),
+                        });
+
+                    }
+
+
+                   
+
                     list.Add(new Beneficiaries
                     {
                         BeneficiaryId = Convert.ToInt32(request.Id),
@@ -470,10 +491,9 @@ namespace Noble.Api.Controllers
                         UgamaNo = request.Iqama_no,
                         PhoneNo = request.Phone,
                         Note = "",
-                        IsActive = request.Isactive == "TRUE",
+                        IsActive = request.Isactive == "true"?true:false,
                         ApprovalPersonId = null,
                         Address = request.Address,
-                        AuthorizedPersonId = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode)?.Id,
                         PaymentTypeId = payment.FirstOrDefault(x => x.Code == paymentInterval)?.Id,
                         NameAr = request.Name,
                         AdvancePayment = 0,
@@ -482,6 +502,7 @@ namespace Noble.Api.Controllers
                         StartDate = null,
                         EndDate = null,
                         StartMonth = DateTime.Parse(request.Stamp_date),
+                        BenificaryAuthorization = benificaryAuthorization,
                         IsRegister = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode) != null
 
                     });
@@ -507,8 +528,7 @@ namespace Noble.Api.Controllers
         {
             try
             {
-                var authorizedPerson = _Context.AuthorizedPersons.AsNoTracking().ToList();
-                var payment = _Context.PaymentTypes.AsNoTracking().ToList();
+              
                 var Beneficiaries = _Context.Beneficiaries.AsNoTracking().ToList();
                 var list = new List<BenificaryNote>();
 
@@ -516,9 +536,10 @@ namespace Noble.Api.Controllers
                 {
                     list.Add(new BenificaryNote
                     {
-                        Note = "",
+                        Note = request.Note,
                         Date=Convert.ToDateTime(request.Stamp_date),
                         BenificaryId=Beneficiaries.FirstOrDefault(x=>x.BeneficiaryId==Convert.ToInt32(request.Id))?.Id,
+                        
 
                     }) ;
 

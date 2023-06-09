@@ -36,7 +36,7 @@
                 <div class="col-5">
                     <label class="col-form-label">Select Import Type: </label>
 
-                    <multiselect v-model="formName" v-on:input="ImportType" :options="['Authorized','Beneficries','Payment','funds']" :show-labels="false" placeholder="Select  Type">
+                    <multiselect v-model="formName" v-on:input="ImportType" :options="['Authorized','Beneficries','Payment','funds','Payments_Beneficries']" :show-labels="false" placeholder="Select  Type">
                     </multiselect>
 
                 </div>
@@ -211,6 +211,8 @@ export default {
                     } else if ((root.formName == 'Payments_Beneficries')) {
                         allRows.splice(0, 1)
                         allRows.forEach(function (data) {
+
+                          
                             root.selectedFileData.push({
 
                                 id: data[0],
@@ -220,9 +222,8 @@ export default {
                                 sync_erp: data[4],
                                 created_date: data[5],
                                 edited_date: data[6],
-                                created_by_id: data[7],
-                                edited_by_id: data[8],
-                                note: data[9],
+                                note: data[7],
+                                beneficary_Id: data[8],
 
                             })
 
