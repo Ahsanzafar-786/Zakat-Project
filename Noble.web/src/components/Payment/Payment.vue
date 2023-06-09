@@ -84,26 +84,26 @@
                                     <td class="text-center " v-if="brand.isVoid && roleName == 'Admin'">
                                         <strong>
                                             <a class="text-danger" href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
-                                                brand.paymentCode }}</a>
+                                                brand.code }}</a>
                                         </strong></td>
                                     <td class="text-center" v-else-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
-                                                brand.paymentCode }}</a>
+                                                brand.code }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center text-danger" v-else-if="brand.isVoid">{{ brand.paymentCode }}</td>
+                                    <td class="text-center text-danger" v-else-if="brand.isVoid">{{ brand.code }}</td>
 
-                                    <td class="text-center" v-else>{{ brand.paymentCode }}</td>
+                                    <td class="text-center" v-else>{{ brand.code }}</td>
 
                                     <td class="text-center text-danger" v-if="brand.isVoid">Payment Voided</td>
                                     <td class="text-center" v-else-if="roleName != 'Cashier'">
                                         <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
-                                                brand.benificaryName }}</a>
+                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">
+                                                {{ brand.benificaryName==''?brand.benificaryNameAr:brand.benificaryName}}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center" v-else>{{ brand.benificaryName }}</td>
+                                    <td class="text-center" v-else>{{ brand.benificaryName==''?brand.benificaryNameAr:brand.benificaryName}}</td>
 
                                     
                                     <td class="text-center" v-if="brand.isVoid">--</td>

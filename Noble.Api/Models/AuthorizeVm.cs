@@ -18,10 +18,17 @@
         public string Authorized_person_id { get; set; }
         public string Stamp_date { get; set; }
         public string Note { get;set; }
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
         public string Check_No { get; set; }
         public string Month { get; set; }
         public string Year { get; set; }
+        public string Cashier_id { get; set; }
+        public string Created_by_id { get; set; }
+        public string Beneficiary_id { get; set; }
+        public string By_order { get; set; }
         public string Period { get; set; }
+        public string Created_date { get; set; }
+        public string Edited_date { get; set; }
+        public string Sync_erp { get; set; }
     }
 }

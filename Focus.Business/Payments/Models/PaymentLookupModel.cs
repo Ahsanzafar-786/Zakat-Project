@@ -18,6 +18,7 @@ namespace Focus.Business.Payments.Models
         public int Code { get; set; }
         public string Period { get; set; }
         public string BenificaryName { get; set; }
+        public string BenificaryNameAr { get; set; }
         public bool IsVoid { get; set; }
         public string HijriYear { get; set; }
         public string HijriMonth { get; set; }

@@ -38,6 +38,7 @@ using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Focus.Persistence.Migrations;
 using NPOI.POIFS.Properties;
+using NPOI.SS.Formula.Functions;
 
 namespace Noble.Api.Controllers
 {
@@ -533,7 +534,8 @@ namespace Noble.Api.Controllers
             }
 
 
-            return Ok(null);
+            var message = "done";
+            return Ok(message);
         }
         [Route("api/Benificary/Funds")]
         [HttpPost("Funds")]
@@ -549,7 +551,7 @@ namespace Noble.Api.Controllers
                     list.Add(new Funds
                     {
                         Date=Convert.ToDateTime(request.Stamp_date),
-                        Amount=request.Amount,
+                        Amount=Convert.ToDecimal(request.Amount),
                         Description=request.Check_No,
 
 
@@ -567,12 +569,13 @@ namespace Noble.Api.Controllers
             }
 
 
-            return Ok(null);
+            var message = "done";
+            return Ok(message);
         }
 
-        [Route("api/Benificary/Payments")]
-        [HttpPost("Payments")]
-        public async Task<IActionResult> Payments([FromBody] List<AuthorizeVm> rows)
+        [Route("api/Benificary/PaymentsBeneficry")]
+        [HttpPost("PaymentsBeneficry")]
+        public async Task<IActionResult> PaymentsBeneficry([FromBody] List<AuthorizeVm> rows)
         {
             var Beneficiaries = _Context.Beneficiaries.AsNoTracking().ToList();
             try
@@ -582,20 +585,62 @@ namespace Noble.Api.Controllers
 
                 foreach (var request in rows)
                 {
-                    list.Add(new Payment
+
+                    int beneficiary_id;
+                    if (!int.TryParse(request.Beneficiary_id, out beneficiary_id))
                     {
-                        BenificayId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == Convert.ToInt32(request.Id))?.Id,
-                        Month = Convert.ToDateTime(request.Month),
-                        Year=request.Year,
-                        Amount=request.Amount,
-                        Date=Convert.ToDateTime(request.Stamp_date),
-                        Period=request.Period,
+
+                    }
+
+                    //list.Add(new Payment
+                    //{
+                    //    Code = Convert.ToInt32(request.Id),
+                    //    BenificayId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == beneficiary_id)?.Id,
+                    //    Month = Convert.ToDateTime(request.Month),
+                    //    MonthName = request.Month,
+                    //    Year = request.Year,
+                    //    HijriYear = request.Year,
+                    //    Amount = Convert.ToDecimal(request.Amount),
+                    //    Date = Convert.ToDateTime(request.Stamp_date),
+                    //    Period = request.Period,
 
 
-                    }) ;
+                    //});
+
+                  var payment = new Payment()
+                    {
+                        Code = Convert.ToInt32(request.Id),
+                        BenificayId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == beneficiary_id)?.Id,
+                        Month = Convert.ToDateTime(request.Stamp_date),
+                        MonthName = request.Month,
+                        Year = request.Year,
+                        HijriYear = request.Year,
+                        Amount = Convert.ToDecimal(request.Amount),
+                        Date = Convert.ToDateTime(request.Stamp_date),
+                        Period = request.Period,
+
+
+                    };
+
+                    _Context.Payments.Add(payment);
+
+                    var charityTransaction = new CharityTransaction
+                    {
+                        DoucmentId = payment.Id,
+                        CharityTransactionDate = payment.Date,
+                        DoucmentDate = DateTime.Now,
+                        DoucmentCode = payment.Code.ToString(),
+                        BenificayId = payment.BenificayId,
+                        Month = payment.Date,
+                        Amount = payment.Amount,
+                        Year = payment.Year,
+                        HijriYear= payment.HijriYear,
+                    };
+
+                     _Context.CharityTransaction.Add(charityTransaction);
 
                 }
-                await _Context.Payments.AddRangeAsync(list);
+               // await _Context.Payments.AddRangeAsync(list);
                 await _Context.SaveChangesAsync();
 
             }
@@ -605,9 +650,10 @@ namespace Noble.Api.Controllers
                 throw;
             }
 
+            return Ok(null);
 
-            var message = "done";
-            return Ok(message);
+            //var message = "done";
+            //return Ok(message);
         }
 
 

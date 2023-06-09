@@ -18,6 +18,7 @@ namespace Focus.Domain.Entities
         public DateTime? Date { get; set; }
         [Column(TypeName = "ntext")]
         public string Note { get;set; }
+        public string MonthName { get;set; }
         public string Year { get;set; }
         public string HijriYear { get;set; }
         public string HijriMonth { get;set; }
