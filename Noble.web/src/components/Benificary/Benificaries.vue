@@ -89,7 +89,7 @@
                                     <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)">
-                                                {{ brand.name ? brand.name : brand.nameAr }}
+                                                {{ brand.name }}
                                             </a>
                                         </strong>
                                     </td>
