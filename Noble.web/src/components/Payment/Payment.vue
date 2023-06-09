@@ -59,6 +59,9 @@
                                         {{ $t('Payment.Amount') }}
                                     </th>
                                     <th class="text-center">
+                                        Date
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('Payment.Month') }}
                                     </th>
                                     <th class="text-center">
@@ -108,6 +111,7 @@
                                     
                                     <td class="text-center" v-if="brand.isVoid">--</td>
                                     <td class="text-center" v-else>{{ brand.amount }}</td>
+                                    <td class="text-center" >{{ GetDate(brand.date) }}</td>
 
                                     <td class="text-center" v-if="brand.isVoid">
                                         --
@@ -259,6 +263,16 @@ export default {
         GetMonth: function (link) {
             if (link != undefined) {
                 return moment(link).format('MMMM');
+
+           } 
+           else
+           {
+            return '';
+           }
+        },
+        GetDate: function (link) {
+            if (link != undefined) {
+                return moment(link).format('MMMM Do YYYY');
 
            } 
            else
