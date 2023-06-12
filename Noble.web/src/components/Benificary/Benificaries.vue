@@ -96,7 +96,11 @@
                                     {{ brand.paymentIntervalMonth }}
                                 </td> -->
                                 <td class="text-center">
-                                        {{ brand.authorizationPersonNameAr ==''?brand.authorizationPersonName:brand.authorizationPersonNameAr  }}
+
+                                    <span v-for="item in brand.benificaryAuthorization" :key="item.id" class="mx-2">
+                                        {{ item.authorizationPersonName == '' ? item.authorizationPersonNameAr : item.authorizationPersonName}}
+                                    </span>
+                                        <!-- {{ brand.authorizationPersonName ==''?brand.authorizationPersonNameAr:brand.authorizationPersonName  }} -->
                                     </td>
                                     <td class="text-center">
                                         {{ brand.amountPerMonth }}
@@ -289,6 +293,7 @@ export default {
                 approvedPaymentId: '',
                 advancePayment: 0,
                 durationType: 'Indefinite',
+                authorizationPersonName:'',
                 benificaryAuthorization: [{
                     id: '',
                     benficaryId: '',

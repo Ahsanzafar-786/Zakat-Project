@@ -52,16 +52,16 @@ namespace Focus.Business.Benificary.Queries
                     {
                         var query = Context.Beneficiaries.AsNoTracking().Include(x => x.AuthorizedPersons).Select(x => new BenificariesLookupModel
                         {
-                            Id= x.Id,
+                            Id = x.Id,
                             Name = x.Name,
                             BeneficiaryId = x.BeneficiaryId,
                             PaymentIntervalMonth = x.PaymentIntervalMonth,
                             AmountPerMonth = x.AmountPerMonth,
                             UgamaNo = x.UgamaNo,
-                            PhoneNo= x.PhoneNo,
+                            PhoneNo = x.PhoneNo,
                             IsActive = x.IsActive,
                             IsRegister = x.IsRegister,
-                            //AuthorizationPersonName = x.AuthorizedPersons.Name,
+                            AuthorizationPersonName = x.AuthorizedPersons.Name,
                             AuthorizedPersonId = x.AuthorizedPersonId,
                             Address = x.Address,
                             ApprovalPersonId = x.ApprovalPersonId,
@@ -71,6 +71,13 @@ namespace Focus.Business.Benificary.Queries
                             PassportNo = x.PassportNo,
                             PaymentTypeId = x.PaymentTypeId,
                             RecurringAmount = x.RecurringAmount,
+                            BenificaryAuthorization = x.BenificaryAuthorization.Select(y => new BenificaryAuthorizationLookupModel
+                            {
+                                Id = y.Id,
+                                AuthorizationPersonName = y.AuthorizedPerson.AuthorizedPersonCode + " " + y.AuthorizedPerson.Name,
+                                AuthorizationPersonNameAr = y.AuthorizedPerson.AuthorizedPersonCode + " " +  y.AuthorizedPerson.NameAr,
+
+                            }).ToList(),
                         }).AsQueryable();
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
