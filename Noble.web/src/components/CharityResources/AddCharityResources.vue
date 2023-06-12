@@ -12,6 +12,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <div class="form-group has-label col-sm-12 ">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddCharityResources.Id') }}:
+                        </label>
+                        <input class="form-control" v-model="brand.chartiyId" type="text" readonly />
+                    </div>
+
                     <fieldset class="form-group">
                         <div class="row">
                             <div class="col-form-label col-sm-3 pt-0 text-start">
@@ -113,6 +120,31 @@ export default {
         close: function () {
             this.$emit('close');
         },
+        GetAutoCode: function () {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('/Benificary/AutoCodeGenerate?name=CharityResources', {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                })
+                .then(function (response) {
+                        if (response.data) {
+                            debugger;
+                            root.brand.chartiyId = parseInt(response.data);
+                            root.rendar++;
+                        } else {
+                            console.log("error: something wrong from db.");
+                        }
+                    },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
+        },
         SaveAuthorizedPerson: function () {
              
             var root = this;
@@ -197,6 +229,11 @@ export default {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.roleName = localStorage.getItem('RoleName');
+
+        if(this.brand.id == '00000000-0000-0000-0000-000000000000')
+        {
+            this.GetAutoCode();
+        }
     }
 }
 </script>

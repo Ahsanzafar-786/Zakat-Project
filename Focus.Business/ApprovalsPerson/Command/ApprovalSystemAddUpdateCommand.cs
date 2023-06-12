@@ -33,16 +33,9 @@ namespace Focus.Business.ApprovalsPerson.Command
                 {
                     if (request.ApprovalsPerson.Id == Guid.Empty)
                     {
-                        var approval = Context.ApprovalPersons.OrderBy(x => x.Id).LastOrDefault();
-                        var approvalNo = 1;
-                        if (approval != null)
-                        {
-                            approvalNo = approval.AprovalPersonId + 1;
-                        }
-
                         var approve = new ApprovalPerson
                         {
-                            AprovalPersonId = approvalNo,
+                            AprovalPersonId = request.ApprovalsPerson.AprovalPersonId,
                             Name = request.ApprovalsPerson.Name,
                             NameAr = request.ApprovalsPerson.NameAr,
                             PhoneNo = request.ApprovalsPerson.PhoneNo,

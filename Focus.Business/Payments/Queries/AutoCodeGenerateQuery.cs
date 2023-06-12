@@ -38,6 +38,14 @@ namespace Focus.Business.Payments.Queries
                     {
                         code = await AutoGenerateAuthorizePerson();
                     }
+                    else if(request.Name == "ApprovalPerson")
+                    {
+                        code = await AutoGenerateApprovalPerson();
+                    }
+                    else if(request.Name == "CharityResources")
+                    {
+                        code = await AutoGenerateCharityResources();
+                    }
                     else
                     {
                         code = await AutoGenerateCashCustomer();
@@ -52,6 +60,72 @@ namespace Focus.Business.Payments.Queries
                     throw new ApplicationException("Something Went Wrong.");
                 }
             }
+            // Charity Resources Auto ID
+            public async Task<string> AutoGenerateCharityResources()
+            {
+                var authorize = await Context.CharityResources
+                       .OrderBy(x => x.ChartiyId)
+                       .LastOrDefaultAsync();
+
+                if (authorize != null)
+                {
+                    if (authorize.ChartiyId == 0)
+                    {
+                        return GenerateCodeFirstTimeCharityResources();
+                    }
+
+                    return GenerateNewCodeCharityResources(authorize.ChartiyId);
+                }
+
+                return GenerateCodeFirstTimeCharityResources();
+            }
+
+             public string GenerateCodeFirstTimeCharityResources()
+            {
+                int code = 1;
+                return code.ToString();
+            }
+            public string GenerateNewCodeCharityResources(int soNumber)
+            {
+                Int32 autoNo = Convert.ToInt32((soNumber));
+                autoNo++;
+                var newCode = autoNo.ToString();
+                return newCode;
+            } 
+            
+            // Approval Person Auto ID
+                public async Task<string> AutoGenerateApprovalPerson()
+            {
+                var authorize = await Context.ApprovalPersons
+                       .OrderBy(x => x.AprovalPersonId)
+                       .LastOrDefaultAsync();
+
+                if (authorize != null)
+                {
+                    if (authorize.AprovalPersonId == 0)
+                    {
+                        return GenerateCodeFirstTimeApprovalPerson();
+                    }
+
+                    return GenerateNewCodeApprovalPerson(authorize.AprovalPersonId);
+                }
+
+                return GenerateCodeFirstTimeAuthorizePerson();
+            }
+
+             public string GenerateCodeFirstTimeApprovalPerson()
+            {
+                int code = 1;
+                return code.ToString();
+            }
+            public string GenerateNewCodeApprovalPerson(int soNumber)
+            {
+                Int32 autoNo = Convert.ToInt32((soNumber));
+                autoNo++;
+                var newCode = autoNo.ToString();
+                return newCode;
+            } 
+            
             // Authorize Person Auto ID
                 public async Task<string> AutoGenerateAuthorizePerson()
             {
@@ -122,32 +196,31 @@ namespace Focus.Business.Payments.Queries
             public async Task<string> AutoGenerateCashCustomer()
             {
                 var payment = await Context.Payments
-                       .OrderBy(x => x.PaymentCode)
+                       .OrderBy(x => x.Code)
                        .LastOrDefaultAsync();
 
                 if (payment != null)
                 {
-                    if (string.IsNullOrEmpty(payment.PaymentCode))
+                    if (payment.Code == 0)
                     {
                         return GenerateCodeFirstTime();
                     }
 
-                    return GenerateNewCode(payment.PaymentCode);
+                    return GenerateNewCode(payment.Code);
                 }
 
                 return GenerateCodeFirstTime();
             }
             public string GenerateCodeFirstTime()
             {
-                return "PA-00001";
+                int code = 1;
+                return code.ToString();
             }
-            public string GenerateNewCode(string soNumber)
+            public string GenerateNewCode(int soNumber)
             {
-                string fetchNo = soNumber.Substring(3);
-                Int32 autoNo = Convert.ToInt32((fetchNo));
-                var format = "00000";
+                Int32 autoNo = Convert.ToInt32((soNumber));
                 autoNo++;
-                var newCode = "PA-" + autoNo.ToString(format);
+                var newCode = autoNo.ToString();
                 return newCode;
             }
         }

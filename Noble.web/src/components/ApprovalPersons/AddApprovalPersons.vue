@@ -14,6 +14,12 @@
                 <div class="row">
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
+                            {{ $t('AddApprovalPerson.Id') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="brand.aprovalPersonId" type="text" readonly />
+                    </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <label class="text  font-weight-bolder">
                             {{ $t('AddApprovalPerson.Name') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
@@ -95,6 +101,31 @@ export default {
         close: function () {
             this.$emit('close');
         },
+        GetAutoCode: function () {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('/Benificary/AutoCodeGenerate?name=ApprovalPerson', {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                })
+                .then(function (response) {
+                        if (response.data) {
+                            debugger;
+                            root.brand.aprovalPersonId = parseInt(response.data);
+                            root.rendar++;
+                        } else {
+                            console.log("error: something wrong from db.");
+                        }
+                    },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
+        },
         SaveApprovalPerson: function () {
              
             var root = this;
@@ -171,6 +202,11 @@ export default {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.roleName = localStorage.getItem('RoleName');
+
+        if(this.brand.id == '00000000-0000-0000-0000-000000000000')
+        {
+            this.GetAutoCode();
+        }
     }
 }
 </script>

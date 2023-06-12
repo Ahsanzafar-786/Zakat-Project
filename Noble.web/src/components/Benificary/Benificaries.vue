@@ -49,9 +49,9 @@
                                     <th class="text-center">
                                         {{ $t('Benificary.Name') }}
                                     </th>
-                                    <!-- <th class="text-center">
-                                    {{ $t('Benificary.PayementIntervalMonths') }}
-                                </th> -->
+                                    <th class="text-center">
+                                    {{ $t('Benificary.AuthorizePersonName') }}
+                                    </th> 
                                     <th class="text-center">
                                         {{ $t('Benificary.AmountPerMonth') }}
                                     </th>
@@ -61,9 +61,9 @@
                                     <th class="text-center">
                                         {{ $t('Benificary.ContactNo') }}
                                     </th>
-                                    <!-- <th class="text-center">
-                                    {{ $t('Benificary.AuthorizePersonName') }}
-                                </th> -->
+                                    <th class="text-center">
+                                    {{ $t('Benificary.Note') }}
+                                </th> 
                                     <th class="text-center">
                                         {{ $t('Benificary.Status') }}
                                     </th>
@@ -95,6 +95,9 @@
                                 <!-- <td class="text-center">
                                     {{ brand.paymentIntervalMonth }}
                                 </td> -->
+                                <td class="text-center">
+                                        {{ brand.authorizationPersonNameAr ==''?brand.authorizationPersonName:brand.authorizationPersonNameAr  }}
+                                    </td>
                                     <td class="text-center">
                                         {{ brand.amountPerMonth }}
                                     </td>
@@ -104,9 +107,9 @@
                                     <td class="text-center">
                                         {{ brand.phoneNo }}
                                     </td>
-                                    <!-- <td class="text-center">
-                                    {{ brand.authorizationPersonName }}
-                                </td> -->
+                                    <td class="text-center">
+                                    {{ brand.note }}
+                                </td> 
                                     <td class="text-center">
                                         <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
                                             {{

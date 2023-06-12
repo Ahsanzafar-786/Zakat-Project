@@ -46,13 +46,13 @@
                             <thead class="thead-light table-hover">
                                 <tr>
                                     <th>#</th>
-                                    <!-- <th class="text-center">
+                                    <th class="text-center">
                                         ID
-                                    </th> -->
+                                    </th>
                                     <th class="text-center">
                                         {{ $t('AuthorizedPerson.Name') }}
                                     </th>
-                                    <th class="text-center">
+                                    <!-- <th class="text-center">
                                         {{ $t('AuthorizedPerson.Gender') }}
                                     </th>
                                     <th class="text-center">
@@ -60,7 +60,7 @@
                                     </th>
                                     <th class="text-center">
                                         {{ $t('AuthorizedPerson.Nationality') }}
-                                    </th>
+                                    </th> -->
                                    
                                 </tr>
                             </thead>
@@ -73,17 +73,17 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <!-- <td class="text-center">
+                                    <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditauthorizedPerson(brand.id)">{{ brand.authorizedPersonCode }}</a>
                                         </strong>
-                                    </td> -->
+                                    </td>
                                     <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditauthorizedPerson(brand.id)"> {{ brand.name }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         {{ brand.gender }}
                                     </td>
                                     <td class="text-center">
@@ -91,7 +91,7 @@
                                     </td>
                                     <td class="text-center">
                                         {{ brand.nationality }}
-                                    </td>
+                                    </td> -->
                                     
                                 </tr>
                             </tbody>

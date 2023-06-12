@@ -13,6 +13,7 @@ using Focus.Domain.Entities;
 using System.Linq;
 using System.Collections.Generic;
 using DocumentFormat.OpenXml.Spreadsheet;
+using NPOI.SS.Formula.Functions;
 
 namespace Focus.Business.Payments.Commands
 {
@@ -55,6 +56,7 @@ namespace Focus.Business.Payments.Commands
                                 BenificayId = request.Payment.BenificayId,
                                 Amount = request.Payment.Amount,
                                 Month = DateTime.Now,
+                                Code = request.Payment.Code,
                                 Note = request.Payment.Note,
                                 PaymentCode = request.Payment.PaymentCode,
                                 Year = DateTime.Now.Year.ToString(),
@@ -87,6 +89,7 @@ namespace Focus.Business.Payments.Commands
                                 Amount = request.Payment.Amount,
                                 Month = request.Payment.Month,
                                 Note = request.Payment.Note,
+                                Code = request.Payment.Code,
                                 PaymentCode = request.Payment.PaymentCode,
                                 Year = DateTime.Now.Year.ToString(),
                                 Period = DateTime.Now.Year.ToString(),
@@ -154,6 +157,7 @@ namespace Focus.Business.Payments.Commands
                         paymentDetails.Date = DateTime.Now;
                         paymentDetails.Note = request.Payment.Note;
                         paymentDetails.UserId = request.Payment.UserId;
+                        paymentDetails.Code = request.Payment.Code;
 
                         Context.Payments.Update(paymentDetails);
 

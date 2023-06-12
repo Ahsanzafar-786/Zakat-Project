@@ -61,7 +61,7 @@ namespace Focus.Business.Benificary.Queries
                             PhoneNo= x.PhoneNo,
                             IsActive = x.IsActive,
                             IsRegister = x.IsRegister,
-                            AuthorizationPersonName = x.AuthorizedPersons.Name,
+                            //AuthorizationPersonName = x.AuthorizedPersons.Name,
                             AuthorizedPersonId = x.AuthorizedPersonId,
                             Address = x.Address,
                             ApprovalPersonId = x.ApprovalPersonId,

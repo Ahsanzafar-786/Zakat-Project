@@ -32,7 +32,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <input type="text" disabled class="form-control" v-model="addPayment.paymentCode" readonly
+                                <input type="text" disabled class="form-control" v-model="addPayment.code" readonly
                                     :key="rendar" />
                             </div>
                         </div>
@@ -1062,7 +1062,7 @@ export default {
             })
                 .then(function (response) {
                     if (response.data) {
-                        root.addPayment.paymentCode = response.data;
+                        root.addPayment.code = parseInt(response.data);
                         root.rendar++;
                     } else {
                         console.log("error: something wrong from db.");

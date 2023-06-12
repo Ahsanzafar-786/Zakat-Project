@@ -59,7 +59,11 @@
                                         {{ $t('Payment.Amount') }}
                                     </th>
                                     <th class="text-center">
-                                        Date
+                                        {{ $t('Payment.Cashier') }}
+                                    </th>
+                                    <th class="text-center">
+                                        
+                                        {{ $t('Payment.Date') }}
                                     </th>
                                     <th class="text-center">
                                         {{ $t('Payment.Month') }}
@@ -103,7 +107,7 @@
                                     <td class="text-center" v-else-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">
-                                                {{ brand.benificaryName==''?brand.benificaryNameAr:brand.benificaryName}}</a>
+                                                {{ brand.benificaryNameAr == ''?brand.benificaryName:brand.benificaryNameAr}}</a>
                                         </strong>
                                     </td>
                                     <td class="text-center" v-else>{{ brand.benificaryName==''?brand.benificaryNameAr:brand.benificaryName}}</td>
@@ -111,6 +115,7 @@
                                     
                                     <td class="text-center" v-if="brand.isVoid">--</td>
                                     <td class="text-center" v-else>{{ brand.amount }}</td>
+                                    <td class="text-center" >{{ brand.cashier }}</td>
                                     <td class="text-center" >{{ GetDate(brand.date) }}</td>
 
                                     <td class="text-center" v-if="brand.isVoid">

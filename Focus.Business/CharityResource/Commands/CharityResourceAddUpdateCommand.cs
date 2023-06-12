@@ -33,16 +33,9 @@ namespace Focus.Business.CharityResource.Commands
                 {
                     if(request.charityResources.Id == Guid.Empty)
                     {
-                        var charity = Context.CharityResources.OrderBy(x => x.Id).LastOrDefault();
-                        var charityNo = 1;
-                        if (charity != null)
-                        {
-                            charityNo = charity.ChartiyId + 1;
-                        }
-
                         var charityResource = new CharityResources
                         {
-                            ChartiyId = charityNo,
+                            ChartiyId = request.charityResources.ChartiyId,
                             Name = request.charityResources.Name,
                             Phone = request.charityResources.Phone,
                             Business = request.charityResources.Business,

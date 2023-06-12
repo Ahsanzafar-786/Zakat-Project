@@ -30,7 +30,8 @@
     "Status": "Status",
     "Register": "Register",
     "UnRegister": "Un-Register",
-    "BenificaryStatus": "Benificary Status"
+    "BenificaryStatus": "Benificary Status",
+    "Note": "Note"
     
   },
   "AddBenificary": {
@@ -109,7 +110,8 @@
     "Name": "Name",
     "NameArabic": "Name Arabic",
     "Email": "Email",
-    "ContactNo": "Contact No"
+    "ContactNo": "Contact No",
+    "Id":"ID"
   },
   "CharityResources": {
     "CharityResources": "Charity Resources",
@@ -135,7 +137,8 @@
     "PersonName": "Person Name",
     "City": "City",
     "ContactNo": "Contact No",
-    "Active": "Active"
+    "Active": "Active",
+    "Id":"ID"
   },
   "AuthorizedPerson": {
     "AuthorizedPerson": "Authorized Person",
@@ -306,12 +309,13 @@
     "Cashier":"Cashier",
     "Month":"Month",
     "Year":"Year",
-    "Code":"Code",
+    "Code":"ID",
     "Action":"Action",
     "IsVoid":"Void",
     "Period":"Period",
     "Print":"Print",
-    "AllowVoid":"Allow Void"
+    "AllowVoid":"Allow Void",
+    "Date":"Date"
   },
 
   "AddPayment":{

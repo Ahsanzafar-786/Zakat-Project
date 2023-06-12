@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Focus.Business.Users;
+using Microsoft.AspNetCore.Identity;
 
 namespace Focus.Business.Payments.Queries
 {
@@ -21,12 +23,15 @@ namespace Focus.Business.Payments.Queries
         public class Handler : IRequestHandler<PaymentListQuery, PagedResult<List<PaymentLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
+            private readonly UserManager<ApplicationUser> _userManager;
             private readonly ILogger _logger;
 
-            public Handler(IApplicationDbContext context, ILogger<PaymentListQuery> logger)
+            public Handler(IApplicationDbContext context, ILogger<PaymentListQuery> logger, UserManager<ApplicationUser> userManager)
             {
                 Context = context;
                 _logger = logger;
+                _userManager = userManager;
+
             }
             public async Task<PagedResult<List<PaymentLookupModel>>> Handle(PaymentListQuery request, CancellationToken cancellationToken)
             {
@@ -43,11 +48,12 @@ namespace Focus.Business.Payments.Queries
                         Date = x.Date,
                         Period = x.Period,
                         PaymentCode =x.PaymentCode,
-                        BenificaryName = x.Beneficiaries.Name,
-                        BenificaryNameAr = x.Beneficiaries.NameAr,
+                        BenificaryName = x.Beneficiaries.BeneficiaryId + " " + x.Beneficiaries.Name,
+                        BenificaryNameAr = x.Beneficiaries.BeneficiaryId + " " + x.Beneficiaries.NameAr,
                         Code = x.Code,
                         IsVoid = x.IsVoid,
                         AllowVoid = x.AllowVoid,
+                        Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
                     }).AsQueryable();
 
                     if (!string.IsNullOrEmpty(request.SearchTerm))

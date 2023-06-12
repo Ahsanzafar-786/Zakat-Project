@@ -32,7 +32,8 @@
     "DeActive" : "معطل",
     "Register" : "يسجل",
     "UnRegister" : "إلغاء التسجيل",
-    "BenificaryStatus" : "الحالة المستفيدة"
+    "BenificaryStatus" : "الحالة المستفيدة",
+    "Note": "ملحوظة"
   },
 
   "AddBenificary":{
@@ -127,7 +128,8 @@
     "Name":"اسم",
     "NameArabic":"الاسم عربي",
     "Email":"بريد إلكتروني",
-    "ContactNo":"رقم الاتصال"
+    "ContactNo":"رقم الاتصال",
+    "Id":"بطاقة تعريف"
   },
   "CharityResources":{
     "CharityResources":"الموارد الخيرية",
@@ -154,7 +156,8 @@
     "PersonName":"اسم الشخص",
     "City":"مدينة",
     "ContactNo":"رقم الاتصال",
-    "Active":"نشيط"
+    "Active":"نشيط",
+    "Id":"بطاقة تعريف"
   },
   "AuthorizedPerson":{
     "AuthorizedPerson" :"الشخص المرخص",
@@ -316,10 +319,11 @@
     "Cashier":"أمين الصندوق",
     "Month":"الشهر",
     "Year":"السنة",
-    "Code":"شفرة",
+    "Code":"بطاقة تعريف",
     "Period":"فترة",
     "AllowVoid":"السماح باطل",
-    "Print":"مطبعة"
+    "Print":"مطبعة",
+    "Date":"تاريخ"
   },
 
   "AddPayment":{
@@ -330,7 +334,7 @@
     "Cashier":"أمين الصندوق",
     "Month":"الشهر",
     "Year":"السنة",
-    "Code":"شفرة",
+    "Code":"كود الدفع",
     "Period":"فترة"
   },
 
