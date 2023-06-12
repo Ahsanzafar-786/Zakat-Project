@@ -45,6 +45,7 @@ namespace Focus.Business.Benificary.Queries
                             CharityTransactionDate = x.CharityTransactionDate,
                             DoucmentDate = x.DoucmentDate,
                             Month = x.Month,
+                            Years = x.Month.Value.Year.ToString(),
                             PaymentMonths = x.Month.Value.Month,
                             Year = x.Year,
                         }).ToListAsync();

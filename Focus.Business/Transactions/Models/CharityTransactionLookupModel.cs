@@ -16,6 +16,7 @@ namespace Focus.Business.Transactions.Models
         public int? PaymentMonths { get; set; }
         public DateTime? CharityTransactionDate { get; set; }
         public string Year { get; set; }
+        public string Years { get; set; }
         public bool IsVoid { get; set; }
         public string HijriYear { get; set; }
         public string HijriMonth { get; set; }

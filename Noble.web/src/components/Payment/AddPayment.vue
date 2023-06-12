@@ -168,7 +168,7 @@
                         <div class="col-md-4">
                             <p class="text-primary"><b>{{ $t('PaidPayments') }}</b></p>
                             <div v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-12'">
-                                <span v-if="month.color == 'red'" class="text-primary"><b>{{ month.name }} {{ month.year
+                                <span v-if="month.color == 'red'" class="text-primary"><b>{{ month.name }} {{ month.year==''?month.years:brand.year
                                 }}</b></span>
                             </div>
                         </div>
@@ -759,19 +759,19 @@ export default {
                         
                        
                         
-                        // if(this.selectedMonth.length>this.brand.advancePayment)
-                        // {
-                        //     root.$swal({
-                        //             title: 'Error',
-                        //             text: 'You can Only Take'+this.brand.advancePayment +' Month Payment in Advance',
-                        //             type: 'error',
-                        //             icon: 'error',
-                        //             showConfirmButton: false,
-                        //             timer: 3000,
-                        //             timerProgressBar: true,
-                        //         });
-                        //         return;
-                        // }
+                        if(this.selectedMonth.length>this.brand.advancePayment)
+                        {
+                            root.$swal({
+                                    title: 'Error',
+                                    text: 'You can Only Take'+this.brand.advancePayment +' Month Payment in Advance',
+                                    type: 'error',
+                                    icon: 'error',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                return;
+                        }
 
 
                         if (root.selectedMonth.length != 0) {
