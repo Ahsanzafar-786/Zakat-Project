@@ -17,6 +17,8 @@ using Focus.Business.Extensions;
 using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using System.Collections.Generic;
 using System.Collections;
+using DocumentFormat.OpenXml.Bibliography;
+using Focus.Domain.Entities;
 
 namespace Focus.Business.AdminDashboard.Queries
 {
@@ -51,8 +53,24 @@ namespace Focus.Business.AdminDashboard.Queries
                     var monthlyBenificary = query.Where(x => x.PaymentTypes.Name == "Monthly").Count();
                     var totalUser = _userManager.Users.Where(x => x.Code != null && x.CompanyId == user.Identity.CompanyId()).Count();
                     var totalResources = await Context.Funds.AsNoTracking().Select(x => x.Amount).SumAsync();
-                    var list = new List<TransactionByMonthLookupModel>();
-                    var charityByMonth = await Context.CharityTransaction.AsNoTracking().GroupBy(x => x.Month.Value.Month).Select(g => new { Month = g.Key, TotalAmount = g.Sum(x => x.Amount) }).ToListAsync();
+                    var paymentTypeList = await Context.PaymentTypes.ToListAsync();
+                    var paymentWiseBenificaries = new List<BeneficiariesDurationTypeLookUpModel>();
+                    if (paymentTypeList != null)
+                    {
+                        foreach( var paymentType in paymentTypeList)
+                        {
+                            paymentWiseBenificaries.Add(new BeneficiariesDurationTypeLookUpModel()
+                            {
+                                PaymentType = paymentType.Name,
+                                Indefinate = query.Where(x => x.DurationType == "Indefinite" && x.PaymentTypeId == paymentType.Id).Count(),
+                                Customize = query.Where(x => x.DurationType == "Customize" && x.PaymentTypeId == paymentType.Id).Count(),
+                            });
+                        }
+                    }
+
+
+                    var transactionList = new List<TransactionByMonthLookupModel>();
+                    var charityByMonth = await Context.CharityTransaction.AsNoTracking().GroupBy(x => new { x.Month.Value.Month }).Select(g => new { Month = g.Key ,TotalAmount = g.Sum(x => x.Amount) }).ToListAsync();
                     Hashtable monthTable = new Hashtable(){{ "January", 1 },{ "February", 2 },{ "March", 3 },{ "April", 4 },{ "May", 5 },{ "June", 6 },{ "July", 7 },{ "August", 8 },{ "September", 9 },{ "October", 10 },{ "November", 11 },{"December", 12 }};
                     for (int i = 1; i <= 12; i++)
                     {
@@ -60,18 +78,22 @@ namespace Focus.Business.AdminDashboard.Queries
                             .Keys
                             .OfType<string>()
                             .FirstOrDefault(key => (int)monthTable[key] == i);
+                        
 
-                        var transaction = charityByMonth.FirstOrDefault(x => x.Month == i);
+                            var transaction = charityByMonth.FirstOrDefault(x => x.Month.Month == i );
 
-                        list.Add(new TransactionByMonthLookupModel
-                        {
-                            Month = i,
-                            MonthName = monthName,
-                            Amount = transaction?.TotalAmount ?? 0
-                        });
+
+                            transactionList.Add(new TransactionByMonthLookupModel
+                            {
+                                Month = i,
+                                MonthName = monthName,
+                                Amount = transaction?.TotalAmount ?? 0,
+                                
+                            });
+                        
                     }
                     List<TransactionByMonthLookupModel> newList = new List<TransactionByMonthLookupModel>();
-                    foreach (var item in list)
+                    foreach (var item in transactionList)
                     {
                         TransactionByMonthLookupModel model = new TransactionByMonthLookupModel
                         {
@@ -92,7 +114,9 @@ namespace Focus.Business.AdminDashboard.Queries
                         TotalAuthorizePerson = totalAuthorizePerson,
                         TotalUser = totalUser,
                         TotalResources = totalResources,
-                        MonthList=newList
+                        MonthList=newList,
+                        BenificaryPaymentType = paymentWiseBenificaries
+
                     };
                 }
                 catch (Exception exception)

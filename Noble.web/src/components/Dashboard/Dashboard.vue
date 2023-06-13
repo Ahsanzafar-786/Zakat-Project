@@ -6,10 +6,10 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col">
-                            <h4 class="page-title">{{$t('Analytics.Analytics')}}</h4>
+                            <h4 class="page-title">{{ $t('Analytics.Analytics') }}</h4>
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">{{$t('Home')}}</a></li>
-                                <li class="breadcrumb-item active">{{$t('Analytics.Dashboard')}}</li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a></li>
+                                <li class="breadcrumb-item active">{{ $t('Analytics.Dashboard') }}</li>
                             </ol>
                         </div>
                         <!--end col-->
@@ -39,8 +39,8 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.Users')}}</p>
-                                        <h3 class="m-0">{{ dashboard.totalUser}}</h3>
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Users') }}</p>
+                                        <h3 class="m-0">{{ dashboard.totalUser }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>8.5%</span> New Sessions Today</p>
                                     </div>
@@ -61,7 +61,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.Benificary')}}</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Benificary') }}</p>
                                         <h3 class="m-0">{{ dashboard.totalBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -82,7 +82,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.RegisterBenificary')}}</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.RegisterBenificary') }}</p>
                                         <h3 class="m-0">{{ dashboard.registerBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -103,7 +103,8 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.Un-RegisterBenificary')}}</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Un-RegisterBenificary') }}
+                                        </p>
                                         <h3 class="m-0">{{ dashboard.unRegisterBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -124,7 +125,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.OneTimeBenificary')}}</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.OneTimeBenificary') }}</p>
                                         <h3 class="m-0">{{ dashboard.oneTimeBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -145,7 +146,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.MonthlyBenificary')}}</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.MonthlyBenificary') }}</p>
                                         <h3 class="m-0">{{ dashboard.monthlyBenificary }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
@@ -167,7 +168,7 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.AuthorizePerson')}}</p>
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.AuthorizePerson') }}</p>
                                         <h3 class="m-0">{{ dashboard.totalAuthorizePerson }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-danger"><i
                                                     class="mdi mdi-trending-down"></i>35%</span> Bounce Rate Weekly</p>
@@ -189,8 +190,8 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{$t('Analytics.Resource')}}</p>
-                                        <h3 class="m-0">{{dashboard.totalResources}}</h3>
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Resource') }}</p>
+                                        <h3 class="m-0">{{ dashboard.totalResources }}</h3>
                                         <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
                                                     class="mdi mdi-trending-up"></i>10.5%</span> Completions Weekly</p>
                                     </div>
@@ -212,7 +213,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">{{$t('Analytics.BenificaryType')}}</h4>
+                                <h4 class="card-title">{{ $t('Analytics.BenificaryType') }}</h4>
                             </div>
                             <!--end col-->
                             <div class="col-auto">
@@ -222,8 +223,8 @@
                                         All<i class="las la-angle-down ms-1"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">Purchases</a>
-                                        <a class="dropdown-item" href="#">Emails</a>
+                                        <a class="dropdown-item" href="#">Indefinate</a>
+                                        <a class="dropdown-item" href="#">Customize</a>
                                     </div>
                                 </div>
                             </div>
@@ -235,10 +236,10 @@
                     <div class="card-body">
                         <div class="text-center">
                             <apexchart type="line" height="350" :options="chartOptions3" :series="series3"></apexchart>
-                            <h6 class="bg-light-alt py-3 px-2 mb-0">
+                            <!-- <h6 class="bg-light-alt py-3 px-2 mb-0">
                                 <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
                                 01 January 2020 to 31 December 2020
-                            </h6>
+                            </h6> -->
                         </div>
 
                         <!--end /div-->
@@ -254,7 +255,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">{{$t('Analytics.BenificaryType')}}</h4>
+                                <h4 class="card-title">{{ $t('Analytics.BenificaryType') }}</h4>
                             </div>
                         </div>
                         <!--end row-->
@@ -280,20 +281,21 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">{{$t('Analytics.AudienceOverview')}}</h4>
+                                <h4 class="card-title">{{ $t('Analytics.AudienceOverview') }}</h4>
                             </div>
                             <!--end col-->
                             <div class="col-auto">
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        This Year<i class="las la-angle-down ms-1"></i>
+                                        Select Year<i class="las la-angle-down ms-1"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">Today</a>
-                                        <a class="dropdown-item" href="#">Last Week</a>
-                                        <a class="dropdown-item" href="#">Last Month</a>
-                                        <a class="dropdown-item" href="#">This Year</a>
+                                        <a class="dropdown-item" href="#">2023</a>
+                                        <a class="dropdown-item" href="#">2022</a>
+                                        <a class="dropdown-item" href="#">2021</a>
+                                        <a class="dropdown-item" href="#">2020</a>
+                                        <a class="dropdown-item" href="#">2019</a>
                                     </div>
                                 </div>
                             </div>
@@ -304,7 +306,8 @@
                     <!--end card-header-->
                     <div class="card-body">
                         <div class="">
-                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="render"></apexchart>
+                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="render">
+                            </apexchart>
                         </div>
                     </div>
                     <!--end card-body-->
@@ -336,7 +339,7 @@ export default {
             randerChart: 0,
             income: 0,
             date: '',
-            render:0,
+            render: 0,
             randerDropdown: 0,
             fromDate: moment().format("DD MMM YYYY"),
             toDate: Date(),
@@ -411,13 +414,13 @@ export default {
                 }
             },
             series3: [{
-                name: 'Website Blog',
+                name: 'Indefinate',
                 type: 'column',
-                data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+                data: []
             }, {
-                name: 'Social Media',
+                name: 'Customize',
                 type: 'line',
-                data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+                data: []
             }],
             chartOptions3: {
                 chart: {
@@ -434,19 +437,18 @@ export default {
                     enabled: true,
                     enabledOnSeries: [1]
                 },
-                labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
                 xaxis: {
-                    type: 'datetime'
+                    categories: ["One Time","One Time","One Time","One Time","One Time","One Time","One Time","One Time","One Time","One Time","One Time","One Time","One Time"],
                 },
                 yaxis: [{
                     title: {
-                        text: 'Website Blog',
+                        text: 'Indefinate',
                     },
 
                 }, {
                     opposite: true,
                     title: {
-                        text: 'Social Media'
+                        text: 'Customize',
                     }
                 }]
             },
@@ -477,28 +479,40 @@ export default {
             }
             root.$https.get('Benificary/GetDashboardDetail', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 debugger;
-                if (response.data != null ) {
+                if (response.data != null) {
                     root.dashboard = response.data;
-                    root.series[0].data=[];
-                    root.chartOptions.xaxis.categories=[];
+                    root.series[0].data = [];
+                    root.chartOptions.xaxis.categories = [];
+                    root.series3[0].data = [];
+                    root.series3[1].data = [];
+                    root.chartOptions3.xaxis.categories = [];
+
 
                     response.data.monthList.forEach(function (result) {
                         root.series[0].data.push(result.amount);
                         root.chartOptions.xaxis.categories.push(result.monthName);
+
+                    });
+                    debugger;
+                    response.data.benificaryPaymentType.forEach(function (result) {
+                        root.series3[0].data.push(result.indefinate);
+                        root.series3[1].data.push(result.customize);
+                       // root.chartOptions3.xaxis.categories.push(result.paymentType);
+
                     });
 
 
 
                     root.series2.push(response.data.totalBenificary, response.data.registerBenificary, response.data.unRegisterBenificary, response.data.oneTimeBenificary, response.data.monthlyBenificary);
-                    
-            
+
+
                 }
                 root.loading = false;
                 root.render++
             });
         }
     },
-    
+
     created: function () {
 
     },
