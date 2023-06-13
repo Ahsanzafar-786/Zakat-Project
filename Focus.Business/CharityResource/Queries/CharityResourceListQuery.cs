@@ -38,7 +38,7 @@ namespace Focus.Business.CharityResource.Queries
                         var query = await Context.CharityResources.AsNoTracking().Select(x => new CharityResourcesLookupModel
                         {
                             Id = x.Id,
-                            Name = x.Name,
+                            Name = x.ChartiyId + " - " + x.Name,
                         }).ToListAsync();
 
                         return new PagedResult<List<CharityResourcesLookupModel>>

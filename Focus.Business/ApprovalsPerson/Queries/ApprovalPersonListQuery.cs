@@ -37,8 +37,8 @@ namespace Focus.Business.ApprovalsPerson.Queries
                         var query = await Context.ApprovalPersons.AsNoTracking().Select(x => new ApprovalPersonLookupModel
                         {
                             Id = x.Id,
-                            Name = x.Name,
-                            NameAr = x.NameAr
+                            Name = x.AprovalPersonId + " - " + x.Name,
+                            NameAr = x.AprovalPersonId + " - " + x.NameAr
                         }).ToListAsync();
 
                         return new PagedResult<List<ApprovalPersonLookupModel>>

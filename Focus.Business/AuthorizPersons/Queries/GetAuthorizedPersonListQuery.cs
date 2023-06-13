@@ -36,8 +36,8 @@ namespace Focus.Business.AuthorizPersons.Queries
                         var query = await Context.AuthorizedPersons.AsNoTracking().Select(x => new AuthorizedPersonsLookupModel
                         {
                             Id = x.Id,
-                            Name = x.Name,
-                            NameAr = x.NameAr,
+                            Name = x.AuthorizedPersonCode + " - " + x.Name,
+                            NameAr = x.AuthorizedPersonCode + " - " + x.NameAr,
                         }).ToListAsync();
 
                         return new PagedResult<List<AuthorizedPersonsLookupModel>>
