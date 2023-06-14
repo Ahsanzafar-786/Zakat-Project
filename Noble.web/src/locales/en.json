@@ -346,7 +346,9 @@
   },
   "LedgerReport":{
     "LedgerReport": "Ledger Report",
-    "ReportsManagement":"Reports Management"
+    "ReportsManagement":"Reports Management",
+    "Filter":"Filter",
+    "ClearFilters":"Clear ilters"
   },
   "SystemManagement":{
     "SystemManagement":"System Management",
@@ -356,7 +358,8 @@
   },
   "CompanyProfile":{
     "CompanyProfile":"Company Profile",
-    "CompanyInfo":"Company Info"
+    "CompanyInfo":"Company Info",
+    "Imports":"Imports"
   },
   "CompanyInfo":{
     "CompanyInfo":"Company Info",
@@ -370,5 +373,20 @@
   },
   "AddProductImage":{
     "UploadProductImage":"Upload Product Image"
+  },
+  "Import":{
+    "Import":"Import",
+    "Total":"Total",
+    "SelectImportType":"Select Import Type",
+    "File":"File",
+    "Updated":"Updated",
+    "Error":"Error",
+    "ErrorFile":"Error File",
+    "Upload":"Upload",
+    "Cancel":"Cancel",
+    "DownloadTemplate":"Download Template",
+    "colorNameEnglish":"Color Name English",
+    "SelectType":"Select Type",
+    "ChooseFile":"Choose File"
   }
 }

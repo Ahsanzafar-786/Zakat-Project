@@ -326,8 +326,7 @@ export default {
     data: function () {
 
         return {
-            selectedYear: new Date().getFullYear(),
-            yearList: [],
+
             dashboard: '',
             active: 'Dashboard',
             overView: 'Monthly',
@@ -431,10 +430,10 @@ export default {
                 },
                 dataLabels: {
                     enabled: true,
-                    enabledOnSeries: [1]
+                    // enabledOnSeries: [1]
                 },
                 xaxis: {
-                    categories: ['One Time', '1 Month','2 Months','3 Months','4 Months','5 Months','6 Months','7 Months','8 Months','9 Months','10 Months','11 Months','12 Months'],
+                    categories: ['One Time', '1 Month', '2 Months', '3 Months', '4 Months', '5 Months', '6 Months', '7 Months', '8 Months', '9 Months', '10 Months', '11 Months', '12 Months'],
                 },
                 yaxis: [{
                     title: {
@@ -466,11 +465,8 @@ export default {
         getDate: function (date) {
             return moment(date).format('l');
         },
-        
-    setSelectedYear(year) {
-      this.selectedYear = year;
-    //   this.getDashboardData();
-    },
+
+
 
         getDashboardData: function () {
             var root = this;
@@ -479,37 +475,37 @@ export default {
                 token = localStorage.getItem('token');
             }
             debugger;
-            var year = this.selectedYear;
-            
-            
-                root.$https.get(`Benificary/GetDashboardDetail?year=${year}`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
-                    if (response.data != null) {
-                        root.dashboard = response.data;
-                        root.series[0].data = [];
-                        root.chartOptions.xaxis.categories = [];
-                        root.series3[0].data = [];
-                        root.series3[1].data = [];
-                        root.chartOptions3.xaxis.categories = [];
 
-                        response.data.monthList.forEach(function (result) {
-                            root.series[0].data.push(result.amount);
-                            root.chartOptions.xaxis.categories.push(result.monthName);
-                        });
 
-                        response.data.benificaryPaymentType.forEach(function (result) {
-                            root.series3[0].data.push(result.indefinate);
-                            root.series3[1].data.push(result.customize);
-                            //root.chartOptions3.xaxis.categories.push(result.paymentType);
-                        });
 
-                        root.series2.push(response.data.totalBenificary, response.data.registerBenificary, response.data.unRegisterBenificary, response.data.oneTimeBenificary, response.data.monthlyBenificary);
-                    }
-                    root.loading = false;
-                    root.render++;
-                }).catch(function (error) {
-                    console.error(error);
+            root.$https.get(`Benificary/GetDashboardDetail`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                if (response.data != null) {
+                    root.dashboard = response.data;
+                    root.series[0].data = [];
+                    root.chartOptions.xaxis.categories = [];
+                    root.series3[0].data = [];
+                    root.series3[1].data = [];
+                    root.chartOptions3.xaxis.categories = [];
+
+                    response.data.monthList.forEach(function (result) {
+                        root.series[0].data.push(result.amount);
+                        root.chartOptions.xaxis.categories.push(result.monthName);
+                    });
+
+                    response.data.benificaryPaymentType.forEach(function (result) {
+                        root.series3[0].data.push(result.indefinate);
+                        root.series3[1].data.push(result.customize);
+                        //root.chartOptions3.xaxis.categories.push(result.paymentType);
+                    });
+
+                    root.series2.push(response.data.totalBenificary, response.data.registerBenificary, response.data.unRegisterBenificary, response.data.oneTimeBenificary, response.data.monthlyBenificary);
+                }
+                root.loading = false;
+                root.render++;
+            }).catch(function (error) {
+                console.error(error);
             });
-            
+
         }
 
     },
@@ -535,10 +531,7 @@ export default {
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
 
-        var currentYear = new Date().getFullYear();
-    for (let i = 0; i < 5; i++) {
-      this.yearList.push(currentYear - i);
-    }
+
 
 
         const now = new Date();

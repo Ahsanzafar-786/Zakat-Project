@@ -167,23 +167,27 @@
                     <div class="row mt-2" v-if="brand.paymentType != 0">
                         <div class="col-md-4">
                             <p class="text-primary"><b>{{ $t('PaidPayments') }}</b></p>
-                            <div v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-12'">
-                                <span v-if="month.color == 'red'" class="text-primary"><b>{{ month.name }} {{ month.year==''?month.years:brand.year
+                            <div v-for="(month) in months" v-bind:key="month.id"
+                                :class="month.year == '' ? '' : 'col-sm-12'">
+                                <span v-if="month.color == 'red'" class="text-primary"><b>{{ month.name }} {{
+                                    month.year == '' ? month.years : brand.year
                                 }}</b></span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <p class="text-success"><b>{{ $t('DuePayments') }}</b></p>
-                            <div v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-12'">
+                            <div v-for="(month) in months" v-bind:key="month.id"
+                                :class="month.year == '' ? '' : 'col-sm-12'">
                                 <span v-if="month.color == 'green'" class="text-success"><b>{{ month.name }}
-                                    {{ month.year }}</b></span>
+                                        {{ month.year }}</b></span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <p class="text-danger"><b>{{ $t('UnPaidPayments') }}</b></p>
-                            <div v-for="(month) in months" v-bind:key="month.id" :class="month.year == '' ? '' : 'col-sm-12'">
+                            <div v-for="(month) in months" v-bind:key="month.id"
+                                :class="month.year == '' ? '' : 'col-sm-12'">
                                 <span v-if="month.color == ''" class="text-danger"><b>{{ month.name }}
-                                    {{ month.year }}</b></span>
+                                        {{ month.year }}</b></span>
                             </div>
                         </div>
                     </div>
@@ -425,7 +429,7 @@ export default {
 
             var root = this;
 
-
+            debugger;
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
                 // const record1 = this.selectedMonth.some(x => x.selectedMonth == (moment(this.addPayment.month).format('MMMM')));
                 // if(record1)
@@ -728,7 +732,7 @@ export default {
                     }
                 }
 
-               
+
                 const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
                 if (record != null) {
                     if (record.active == true) {
@@ -738,9 +742,8 @@ export default {
                         var res = this.selectedMonth.some(item => item.selectedMonth === str);
                         console.log(this.addPayment.month);
 
-                            if(res)
-                            {
-                                root.$swal({
+                        if (res) {
+                            root.$swal({
                                 title: 'Error',
                                 text: 'You have no Permission to Select Same Month',
                                 type: 'error',
@@ -749,28 +752,26 @@ export default {
                                 timer: 3000,
                                 timerProgressBar: true,
                             });
-                            }
-                            else
-                            {
-                                this.selectedMonth.push({
-                                    selectedMonth: this.addPayment.month
-                                });
-                            }
-                        
-                       
-                        
-                        if(this.selectedMonth.length>this.brand.advancePayment)
-                        {
+                        }
+                        else {
+                            this.selectedMonth.push({
+                                selectedMonth: this.addPayment.month
+                            });
+                        }
+
+
+
+                        if (this.selectedMonth.length > this.brand.advancePayment) {
                             root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Take'+this.brand.advancePayment +' Month Payment in Advance',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
+                                title: 'Error',
+                                text: 'You can Only Take' + this.brand.advancePayment + ' Month Payment in Advance',
+                                type: 'error',
+                                icon: 'error',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+                            return;
                         }
 
 
@@ -782,18 +783,22 @@ export default {
 
                         }
 
-                    } else {
-                        this.addPayment.month = null;
-                        this.randerDate++;
-                        root.$swal({
-                            title: 'Error',
-                            text: 'You have no Permission to Select another Month',
-                            type: 'error',
-                            icon: 'error',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
+                    }
+                    else {
+                        this.selectedMonth.push({
+                            selectedMonth: this.addPayment.month
                         });
+                        // this.addPayment.month = null;
+                        // this.randerDate++;
+                        // root.$swal({
+                        //     title: 'Error',
+                        //     text: 'You have no Permission to Select another Month',
+                        //     type: 'error',
+                        //     icon: 'error',
+                        //     showConfirmButton: false,
+                        //     timer: 3000,
+                        //     timerProgressBar: true,
+                        // });
                     }
 
                 }
@@ -839,7 +844,7 @@ export default {
             })
                 .then(function (response) {
                     if (response.data) {
-                      
+
                         root.brand = response.data;
 
                         if (root.brand.paymentType == 0) {
@@ -933,8 +938,7 @@ export default {
                         }
                         root.selectedMonth = [];
                         root.months.forEach(element => {
-                            if(element.color == 'green')
-                            {
+                            if (element.color == 'green') {
                                 root.selectedMonth.push({
                                     selectedMonth: '01' + ' ' + element.name + ' ' + element.year
                                 });

@@ -44,8 +44,9 @@
                             <datepicker v-model="toDate" :isDisabled="month == '' ? false : true " :key="render"/>
                         </div>
                         <div class="col-sm-2">
-                            <button class="btn btn-outline-primary me-2"  v-on:click="PrintRdlc(false)" >Filter</button>
-                            <button class="btn btn-outline-primary" v-on:click="ClearFilter()">Clear Filters</button>
+                            <button class="btn btn-outline-primary me-2"  v-on:click="PrintRdlc(false)">{{ $t('LedgerReport.Filter') }}
+                            </button>
+                            <button class="btn btn-outline-primary" v-on:click="ClearFilter()">{{ $t('LedgerReport.ClearFilters') }}</button>
                         </div>
                     </div>
                 </div>

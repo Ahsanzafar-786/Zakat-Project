@@ -196,7 +196,7 @@
                                 }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/Imports')" href="javascript:void(0);">Imports</a>
+                                <a v-on:click="GoTo('/Imports')" href="javascript:void(0);">{{ $t('CompanyProfile.Imports') }}</a>
                             </li>
                         </ul>
                     </li>

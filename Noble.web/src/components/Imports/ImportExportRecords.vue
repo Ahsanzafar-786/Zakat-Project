@@ -6,10 +6,10 @@
                 <div class="row">
                     <div class="col">
 
-                        <h4 class="page-title">Import</h4>
+                        <h4 class="page-title">{{$t('Import.Import')}}</h4>
 
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">{{$t('Home')}}</a></li>
 
                         </ol>
                     </div>
@@ -17,12 +17,12 @@
                         <xlsx-workbook >
                             <xlsx-sheet :collection="sheet.data" v-for="sheet in sheets" :key="sheet.name" :sheet-name="sheet.name"  />
                             <xlsx-download :filename="'Item Template.xlsx'" v-bind:key="randerAll">
-                                <a class="btn btn-sm btn-outline-primary mx-1" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-download"></i> DownloadTemplate</a>
+                                <a class="btn btn-sm btn-outline-primary mx-1" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-download"></i> {{ $t('Import.DownloadTemplate') }}</a>
 
                             </xlsx-download>
                         </xlsx-workbook>
                         <a v-on:click="GotoPage('/StartScreen')" href="javascript:void(0);" class="btn btn-sm btn-outline-danger ">
-                            colorNameEnglish
+                            {{ $t('Import.colorNameEnglish') }}
                         </a>
                     </div>
                 </div>
@@ -34,9 +34,9 @@
         <div class="card-body ">
             <div class="row">
                 <div class="col-5">
-                    <label class="col-form-label">Select Import Type: </label>
+                    <label class="col-form-label">{{ $t('Import.SelectImportType') }}: </label>
 
-                    <multiselect v-model="formName" v-on:input="ImportType" :options="['Authorized','Beneficries','Payment','funds','Payments_Beneficries']" :show-labels="false" placeholder="Select  Type">
+                    <multiselect v-model="formName" v-on:input="ImportType" :options="['Authorized','Beneficries','Payment','funds','Payments_Beneficries']" :show-labels="false" :placeholder="$t('Import.SelectType')">
                     </multiselect>
 
                 </div>
@@ -46,8 +46,8 @@
             <div class="row" :key="render">
 
                 <div class="col-lg-12 ml-auto mr-auto">
-                    <label>File</label>
-                    <b-form-file v-model="file1" id="uplaodfile" :no-drop="true" accept=".xlsx" :state="Boolean(file1)" @change="onFileChanging" placeholder="Choose File"></b-form-file>
+                    <label>{{ $t('Import.File') }}</label>
+                    <b-form-file v-model="file1" id="uplaodfile" :no-drop="true" accept=".xlsx" :state="Boolean(file1)" @change="onFileChanging" :placeholder="$t('Import.ChooseFile')"></b-form-file>
 
                 </div>
                 <div class="col-lg-12 ml-auto mr-auto mt-4">
@@ -58,9 +58,9 @@
                 </div>
 
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 ml-0 mr-0 mt-4 mb-2">
-                    <a href="javascript:void(0)" class="btn btnTotalHover mx-1 " style="border-radius: 20px; background: #DDE9FF; color: #3178F6; ">Total <span>{{totalImportRecord}}</span></a>
-                    <a href="javascript:void(0)" class="btn  btnUpdatedHover mx-1" style="border-radius: 20px; background: #B9E9C6; color: #198754; ">Updated <span>{{totalImportItem - errorCollection.length}}</span></a>
-                    <a href="javascript:void(0)" class="btn  btnErrorHover mx-1" style="border-radius: 20px; background: #FEDCDC; color: #EB5757 ">Error<span>{{errorCollection.length}}</span></a>
+                    <a href="javascript:void(0)" class="btn btnTotalHover mx-1 " style="border-radius: 20px; background: #DDE9FF; color: #3178F6; ">{{ $t('Import.Total') }} <span>{{totalImportRecord}}</span></a>
+                    <a href="javascript:void(0)" class="btn  btnUpdatedHover mx-1" style="border-radius: 20px; background: #B9E9C6; color: #198754; ">{{ $t('Import.Updated') }} <span>{{totalImportItem - errorCollection.length}}</span></a>
+                    <a href="javascript:void(0)" class="btn  btnErrorHover mx-1" style="border-radius: 20px; background: #FEDCDC; color: #EB5757 ">{{ $t('Import.Error') }} <span>{{errorCollection.length}}</span></a>
                 </div>
 
             </div>
@@ -72,7 +72,7 @@
                                 <xlsx-workbook>
                                     <xlsx-sheet :collection="sheet.data" v-for="sheet in errorSheets" :key="sheet.name" :sheet-name="sheet.name" />
                                     <xlsx-download :filename="'MSF DATA.xlsx'">
-                                        <a class="btn btn-sm btn-outline-primary mx-1" data-toggle="tooltip" :disabled="isErrorFileDownload" data-placement="top" title="Download Error File"><i class="fa fa-download"></i> ErrorFile</a>
+                                        <a class="btn btn-sm btn-outline-primary mx-1" data-toggle="tooltip" :disabled="isErrorFileDownload" data-placement="top" title="Download Error File"><i class="fa fa-download"></i> {{ $t('Import.ErrorFile') }}</a>
 
                                     </xlsx-download>
                                 </xlsx-workbook>
@@ -81,10 +81,10 @@
                         </div>
                         <div class="col-auto align-self-center d-flex">
                             <button class="btn btn-sm btn-primary mx-1  " @click="uploadFile">
-                                <i class="nc-icon nc-cloud-upload-94"></i> Upload
+                                <i class="nc-icon nc-cloud-upload-94"></i> {{ $t('Import.Upload') }}
                             </button>
                             <button class="btn btn-sm btn-danger mx-1  " v-on:click="onCancel">
-                                Cancel
+                                {{ $t('Import.Cancel') }}
                             </button>
                         </div>
                     </div>

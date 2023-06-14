@@ -354,7 +354,9 @@
   },
   "LedgerReport":{
     "LedgerReport": "تقرير دفتر الأستاذ",
-    "ReportsManagement":"إدارة التقارير"
+    "ReportsManagement":"إدارة التقارير",
+    "Filter":"منقي",
+    "ClearFilters":"مرشحات واضحة"
   },
   "SystemManagement":{
     "SystemManagement":"ادارة النظام",
@@ -364,7 +366,8 @@
   },
   "CompanyProfile":{
     "CompanyProfile":"ملف الشركة",
-    "CompanyInfo":"معلومات الشركة"
+    "CompanyInfo":"معلومات الشركة",
+    "Imports":"الواردات"
   },
   "CompanyInfo":{
     "CompanyInfo":"معلومات الشركة",
@@ -378,6 +381,21 @@
   },
   "AddProductImage":{
     "UploadProductImage":"تحميل صورة المنتج"
+  },
+  "Import":{
+    "Import":"يستورد",
+    "Total":"المجموع",
+    "SelectImportType":"حدد نوع الاستيراد",
+    "File":"ملف",
+    "Updated":"محدث",
+    "Error":"خطأ",
+    "ErrorFile":"ملف خطأ",
+    "Upload":"رفع",
+    "Cancel":"يلغي",
+    "DownloadTemplate":"تحميل النموذج",
+    "colorNameEnglish":"اسم اللون انجليزي",
+    "SelectType":"اختر صنف",
+    "ChooseFile":"اختر ملف"
   }
 
 
