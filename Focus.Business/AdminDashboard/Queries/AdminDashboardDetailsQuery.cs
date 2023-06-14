@@ -50,7 +50,7 @@ namespace Focus.Business.AdminDashboard.Queries
                     var registerBenificary = query.Where(x => x.IsRegister).Count();
                     var unRegisterBenificary = query.Where(x => !x.IsRegister).Count();
                     var oneTimeBenificary = query.Where(x => x.PaymentTypes.Name == "One Time").Count();
-                    var monthlyBenificary = query.Where(x => x.PaymentTypes.Name == "Monthly").Count();
+                    var monthlyBenificary = query.Where(x => x.PaymentTypes.Name == "1 Month").Count();
                     var totalUser = _userManager.Users.Where(x => x.Code != null && x.CompanyId == user.Identity.CompanyId()).Count();
                     var totalResources = await Context.Funds.AsNoTracking().Select(x => x.Amount).SumAsync();
                     var paymentTypeList = await Context.PaymentTypes.ToListAsync();
@@ -68,7 +68,7 @@ namespace Focus.Business.AdminDashboard.Queries
                         }
                     }
 
-
+                 
                     var transactionList = new List<TransactionByMonthLookupModel>();
                     var charityByMonth = await Context.CharityTransaction.AsNoTracking().GroupBy(x => new { x.Month.Value.Month }).Select(g => new { Month = g.Key ,TotalAmount = g.Sum(x => x.Amount) }).ToListAsync();
                     Hashtable monthTable = new Hashtable(){{ "January", 1 },{ "February", 2 },{ "March", 3 },{ "April", 4 },{ "May", 5 },{ "June", 6 },{ "July", 7 },{ "August", 8 },{ "September", 9 },{ "October", 10 },{ "November", 11 },{"December", 12 }};
