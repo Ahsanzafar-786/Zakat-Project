@@ -538,7 +538,7 @@ namespace Noble.Api.Controllers
                     {
                         Note = request.Note,
                         Date=Convert.ToDateTime(request.Stamp_date),
-                        BenificaryId=Beneficiaries.FirstOrDefault(x=>x.BeneficiaryId==Convert.ToInt32(request.Id))?.Id,
+                        BenificaryId=Beneficiaries.FirstOrDefault(x=>x.BeneficiaryId==Convert.ToInt32(request.Beneficiary_id))?.Id,
                         
 
                     }) ;

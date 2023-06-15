@@ -223,7 +223,7 @@ export default {
                                 created_date: data[5],
                                 edited_date: data[6],
                                 note: data[7],
-                                beneficary_Id: data[8],
+                               beneficiary_id: data[8],
 
                             })
 
@@ -340,7 +340,7 @@ export default {
                     data: [this.collection]
                 });
             } else if (this.formName == 'Payments_Beneficries') {
-                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date", "edited_date", "note", "beneficary_Id", "Created_By", "Edit_By",
+                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date", "edited_date", "note", "beneficiary_id", "Created_By", "Edit_By",
                     "iqama_no", "authorized_person_id"
                 ];
                 this.sheets = [];
