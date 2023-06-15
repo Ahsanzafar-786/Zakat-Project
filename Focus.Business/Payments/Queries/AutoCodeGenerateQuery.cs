@@ -46,6 +46,10 @@ namespace Focus.Business.Payments.Queries
                     {
                         code = await AutoGenerateCharityResources();
                     }
+                    else if (request.Name == "Benificaries")
+                    {
+                        code = await AutoGenerateBenificaries();
+                    }
                     else
                     {
                         code = await AutoGenerateCashCustomer();
@@ -60,6 +64,40 @@ namespace Focus.Business.Payments.Queries
                     throw new ApplicationException("Something Went Wrong.");
                 }
             }
+            // Charity Resources Auto ID
+            public async Task<string> AutoGenerateBenificaries()
+            {
+                var authorize = await Context.Beneficiaries
+                       .OrderBy(x => x.BeneficiaryId)
+                       .LastOrDefaultAsync();
+
+                if (authorize != null)
+                {
+                    if (authorize.BeneficiaryId == 0)
+                    {
+                        return GenerateCodeFirstTimeBenificaries();
+                    }
+
+                    return GenerateNewCodeBenificaries(authorize.BeneficiaryId);
+                }
+
+                return GenerateCodeFirstTimeBenificaries();
+            }
+
+             public string GenerateCodeFirstTimeBenificaries()
+            {
+                int code = 1;
+                return code.ToString();
+            }
+            public string GenerateNewCodeBenificaries(int soNumber)
+            {
+                Int32 autoNo = Convert.ToInt32((soNumber));
+                autoNo++;
+                var newCode = autoNo.ToString();
+                return newCode;
+            }
+            
+            
             // Charity Resources Auto ID
             public async Task<string> AutoGenerateCharityResources()
             {

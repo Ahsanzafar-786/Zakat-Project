@@ -36,19 +36,11 @@ namespace Focus.Business.Benificary.Commands
                 {
                     if(request.benificiaries.Id == Guid.Empty)
                     {
-                        var benificary = Context.Beneficiaries.OrderBy(x => x.Id).LastOrDefault();
-
-                        var benificaryNo = 000001;
-                        if (benificary!= null)
-                        {
-                            benificaryNo = benificary.BeneficiaryId + 1;
-                        }
-
                         if(request.benificiaries.BenificaryAuthorization.Count > 0)
                         {
                             var benifiary = new Beneficiaries
                             {
-                                BeneficiaryId = benificaryNo,
+                                BeneficiaryId = request.benificiaries.BeneficiaryId,
                                 Name = request.benificiaries.Name,
                                 PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
                                 AmountPerMonth = request.benificiaries.AmountPerMonth,
@@ -96,7 +88,7 @@ namespace Focus.Business.Benificary.Commands
                         {
                             var benifiary = new Beneficiaries
                             {
-                                BeneficiaryId = benificaryNo,
+                                BeneficiaryId = request.benificiaries.BeneficiaryId,
                                 Name = request.benificiaries.Name,
                                 PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
                                 AmountPerMonth = request.benificiaries.AmountPerMonth,

@@ -4,7 +4,9 @@ Author: Mannatthemes
 Version: 2.0.0
 File: App Css
 */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap");
+/* @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700&display=swap');
+ */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700&display=swap');
 /*
 Template Name: Dastone - Admin & Dashboard Template
 Author: Mannatthemes
@@ -1280,7 +1282,7 @@ h4 {
 }
 
 a {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Cairo', sans-serif;
   color: #303e67;
   text-decoration: none;
 }
@@ -3880,7 +3882,7 @@ dt {
 .apexcharts-data-labels,
 .apexcharts-xaxis text,
 .apexcharts-yaxis text {
-  font-family: "Roboto", sans-serif !important;
+  font-family: "Cairo", sans-serif !important;
   fill: #8997bd;
 }
 
@@ -3998,7 +4000,7 @@ dt {
 .apexcharts-datalabels-group .apexcharts-text.apexcharts-datalabel-value, .apexcharts-datalabels-group .apexcharts-text.apexcharts-datalabel-label {
   fill: #7081b9;
   color: #7081b9;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Cairo', sans-serif;
   font-weight: 600;
 }
 
@@ -7174,7 +7176,7 @@ hr.thick {
 
 .profile-card .socials-data h3 {
   color: #303e67;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Cairo', sans-serif;
   font-size: 18px;
 }
 
@@ -7355,7 +7357,7 @@ hr.thick {
 .c-progress-steps {
   margin: 0;
   list-style-type: none;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Cairo', sans-serif;
 }
 
 .c-progress-steps li {
@@ -9127,7 +9129,7 @@ input.add-file-input {
 }
 
 .blog-card p {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Cairo', sans-serif;
 }
 
 .faq-qa li h6 {

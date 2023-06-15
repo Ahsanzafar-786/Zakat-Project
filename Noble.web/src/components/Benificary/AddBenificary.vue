@@ -14,6 +14,12 @@
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
+                            {{ $t('Payment.Code') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="brand.beneficiaryId" type="text" disabled/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Name') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
@@ -608,7 +614,32 @@ export default {
                     root.loading = false
                 })
                 .finally(() => root.loading = false);
-        }
+        },
+        GetAutoCode: function () {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('/Benificary/AutoCodeGenerate?name=Benificaries', {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                })
+                .then(function (response) {
+                        if (response.data) {
+                            debugger;
+                            root.brand.beneficiaryId = parseInt(response.data);
+                            root.rendar++;
+                        } else {
+                            console.log("error: something wrong from db.");
+                        }
+                    },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
+        },
     },
     mounted: function () {
         this.roleName = localStorage.getItem('RoleName');
@@ -618,6 +649,11 @@ export default {
         }
         this.english = localStorage.getItem('locales');
         this.arabic = localStorage.getItem('locales');
+
+        if(this.brand.id == '00000000-0000-0000-0000-000000000000')
+        {
+            this.GetAutoCode();
+        }
     }
 }
 </script>

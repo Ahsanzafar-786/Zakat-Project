@@ -2,7 +2,8 @@
 Template Name: Dastone - Admin & Dashboard Template
 Author: Mannatthemes
 */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700&display=swap');
+
 /*!
  * Bootstrap v5.0.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -35,7 +36,7 @@ Author: Mannatthemes
   --bs-beanred: #FE6B8B;
   --bs-orange: #ff8500;
   --bs-blue: #1761fd;
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Cairo, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 }
@@ -54,7 +55,7 @@ Author: Mannatthemes
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Cairo', sans-serif;
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
@@ -6169,7 +6170,7 @@ fieldset:disabled .btn {
   z-index: 1080;
   display: block;
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Cairo', sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -6282,7 +6283,7 @@ fieldset:disabled .btn {
   z-index: 1070;
   display: block;
   max-width: 276px;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Cairo', sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;

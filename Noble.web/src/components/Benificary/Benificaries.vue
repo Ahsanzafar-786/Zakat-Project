@@ -47,23 +47,23 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
+                                        {{ $t('Payment.Code') }}
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('Benificary.Name') }}
                                     </th>
                                     <th class="text-center">
-                                    {{ $t('Benificary.AuthorizePersonName') }}
-                                    </th> 
+                                        {{ $t('Benificary.AuthorizePersonName') }}
+                                    </th>
                                     <th class="text-center">
                                         {{ $t('Benificary.AmountPerMonth') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Benificary.ID') }}
+                                        {{ $t('AddBenificary.RecurringAmount') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Benificary.ContactNo') }}
+                                        {{ $t('Benificary.Note') }}
                                     </th>
-                                    <th class="text-center">
-                                    {{ $t('Benificary.Note') }}
-                                </th> 
                                     <th class="text-center">
                                         {{ $t('Benificary.Status') }}
                                     </th>
@@ -80,40 +80,40 @@
                                     <td v-else>
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
-
+                                    <td class="text-center">
+                                        {{ brand.beneficiaryId }}
+                                    </td>
                                     <!-- <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)">{{ brand.beneficiaryId }}</a>
                                         </strong>
                                     </td> -->
-                                <td class="text-center">
-                                    <strong>
-                                        <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{
-                                                brand.name==''?brand.nameAr:brand.name }}</a>
-                                    </strong>
-                                </td>
-                                <!-- <td class="text-center">
+                                    <td class="text-center">
+                                        <strong>
+                                            <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{
+                                                brand.name == '' ? brand.nameAr : brand.name }}</a>
+                                        </strong>
+                                    </td>
+                                    <!-- <td class="text-center">
                                     {{ brand.paymentIntervalMonth }}
                                 </td> -->
-                                <td class="text-center">
+                                    <td class="text-center">
 
-                                    <span v-for="item in brand.benificaryAuthorization" :key="item.id" class="mx-2">
-                                        {{ item.authorizationPersonName == '' ? item.authorizationPersonNameAr : item.authorizationPersonName}}
-                                    </span>
+                                        <span v-for="item in brand.benificaryAuthorization" :key="item.id" class="mx-2">
+                                            {{ item.authorizationPersonName == '' ? item.authorizationPersonNameAr :
+                                                item.authorizationPersonName }}
+                                        </span>
                                         <!-- {{ brand.authorizationPersonName ==''?brand.authorizationPersonNameAr:brand.authorizationPersonName  }} -->
                                     </td>
                                     <td class="text-center">
                                         {{ brand.amountPerMonth }}
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.ugamaNo }}
+                                        {{ brand.recurringAmount }}
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.phoneNo }}
+                                        {{ brand.note }}
                                     </td>
-                                    <td class="text-center">
-                                    {{ brand.note }}
-                                </td> 
                                     <td class="text-center">
                                         <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
                                             {{
@@ -293,7 +293,7 @@ export default {
                 approvedPaymentId: '',
                 advancePayment: 0,
                 durationType: 'Indefinite',
-                authorizationPersonName:'',
+                authorizationPersonName: '',
                 benificaryAuthorization: [{
                     id: '',
                     benficaryId: '',
