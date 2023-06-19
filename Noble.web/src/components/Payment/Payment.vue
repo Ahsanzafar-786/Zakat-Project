@@ -256,7 +256,9 @@ export default {
         }
     },
     watch: {
+
         search: function (val) {
+            debugger; //eslint-disable-line
             this.GetPayment(val, 1);
         }
     },
@@ -303,13 +305,13 @@ export default {
             this.$router.push({ path: link });
         },
 
-        GetPayment: function () {
+        GetPayment: function (search,currentPage) {
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + currentPage + '&searchTerm=' + search, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;

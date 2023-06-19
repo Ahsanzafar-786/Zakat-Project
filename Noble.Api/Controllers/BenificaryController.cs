@@ -154,7 +154,7 @@ namespace Noble.Api.Controllers
         [Route("api/Benificary/GetBenificaryNoteList")]
         [HttpGet("GetBenificaryNoteList")]
         public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown)
-        {
+     {
             var benificary = await Mediator.Send(new GetBenificaryNoteListQuery
             {
                 SearchTerm = searchTerm,

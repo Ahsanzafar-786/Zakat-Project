@@ -48,33 +48,33 @@ namespace Focus.Business.BenificiariesNotes.Queries
                     }
                     else
                     {
-                        var query = Context.BenificaryNotes.AsNoTracking().Include(x => x.Beneficiaries).Select(x => new BenificaryNoteLookupModel
+                        var query = await Context.BenificaryNotes.AsNoTracking().Include(x => x.Beneficiaries).Select(x => new BenificaryNoteLookupModel
                         {
                             Id = x.Id,
                             Note = x.Note,
                             BenificaryName = x.Beneficiaries.BeneficiaryId.ToString() + " " + x.Beneficiaries.Name,
                             Date = x.Date.ToString("dd/MM/yyyy"),
-                        }).AsQueryable();
+                        }).ToListAsync();
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
                         {
                             var searchTerm = request.SearchTerm.ToLower();
-                            query = query.Where(x => x.Note.ToLower().Contains(searchTerm)
-                                                  || x.BenificaryName.ToString().Contains(searchTerm));
+                            query = query.Where(x => x.Note.Contains(searchTerm)
+                                                  || x.BenificaryName.Contains(searchTerm)).ToList();
                         }
 
-                        var count = await query.CountAsync();
-                        query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);
+                        var count =  query.Count();
+                        query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize).ToList();
 
-                        var queryList = await query.ToListAsync();
+                        //var queryList = await query.ToListAsync();
 
                         return new PagedResult<List<BenificaryNoteLookupModel>>
                         {
-                            Results = queryList,
+                            Results = query,
                             RowCount = count,
                             PageSize = request.PageSize,
                             CurrentPage = request.PageNumber,
-                            PageCount = queryList.Count / request.PageSize
+                            PageCount = query.Count / request.PageSize
                         };
                     }
                 }

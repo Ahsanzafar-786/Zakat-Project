@@ -26,7 +26,7 @@
     "AmountPerMonth" : "المبلغ في الشهر",
     "ID" : "بطاقة تعريف",
     "ContactNo" : "رقم الاتصال",
-    "AuthorizePersonName" : "تخويل اسم الشخص",
+    "AuthorizePersonName" : " اسم الوكيل",
     "Status" : "حالة",
     "Active" : "نشيط",
     "DeActive" : "معطل",
@@ -235,7 +235,7 @@
     "LogOut":"تسجيل خروج",
     "Setup":"يثبت",
     "AddUser":" إضافة مستخدم",
-    "AddAuthorizedPerson":"إضافة شخص مفوض",
+    "AddAuthorizedPerson":"أضف الوكيل",
     "AddApprovalPerson":"إضافة شخص الموافقة",
     "AddPaymentType":"إضافة نوع الدفع",
     "AddCharityFundsResources":"أضف موارد الصناديق الخيرية"
@@ -307,10 +307,10 @@
   },
 
   "Payment":{
-    "Payment":"الدفع",
+    "Payment":"المدفوعات",
     "Action":"فعل",
     "IsVoid":"هو الفراغ",
-    "BenificaryPayment":"الدفع المستحق",
+    "BenificaryPayment":"أضف دفع",
     "BenificaryReports":"التقارير المفيدة",
     "AddPayment":"إضافة الدفع",
     "PaymentList":"قائمة الدفع",

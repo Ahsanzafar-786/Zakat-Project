@@ -59,11 +59,11 @@ namespace Focus.Business.Payments.Queries
                     if (!string.IsNullOrEmpty(request.SearchTerm))
                     {
                         var searchTerm = request.SearchTerm.ToLower();
-                        query = query.Where(x => x.Amount.ToString().Contains(searchTerm) || x.BenificaryNameAr.ToString().Contains(searchTerm) 
-                                              || x.BenificaryName.ToString().Contains(searchTerm));
+                        query = query.Where(x => x.Amount.ToString().Contains(searchTerm) || x.BenificaryNameAr.Contains(searchTerm) 
+                                              || x.BenificaryName.Contains(searchTerm));
                     }
 
-                    var count = await query.CountAsync();
+                    var count =  query.Count();
                     query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);
 
                     var queryList = await query.ToListAsync();
