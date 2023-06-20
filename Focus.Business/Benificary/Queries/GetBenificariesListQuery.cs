@@ -86,7 +86,7 @@ namespace Focus.Business.Benificary.Queries
                             query = query.Where(x => x.Name.ToLower().Contains(searchTerm) 
                                                   || x.PhoneNo.Contains(searchTerm) 
                                                   || x.UgamaNo.Contains(searchTerm)
-                                                  || x.BeneficiaryId.ToString().Contains(searchTerm));
+                                                  || x.BeneficiaryId.ToString().Contains(searchTerm) || x.NameAr.Contains(searchTerm));
                         }
 
                         var count = await query.CountAsync();

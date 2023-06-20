@@ -14,11 +14,11 @@
     "SelectAuthorizePerson": "Select Authorize Person",
     "SelectApprovalPerson": "Select Approval Person",
     "PaymentType": "Select Payment Type",
-    "SelectBenificary": "Select Benificary"
+    "SelectBenificary": "Search By Beneficiary Name or ID"
   },
   "Benificary": {
-    "Benificary": "Benificary",
-    "BenificaryList": "Benificary List",
+    "Benificary": "Beneficiary",
+    "BenificaryList": "Beneficiary List",
     "Name": "Name",
     "PayementIntervalMonths": "Payement Interval Months",
     "AmountPerMonth": "Amount Per Month",
@@ -30,13 +30,14 @@
     "Status": "Status",
     "Register": "Register",
     "UnRegister": "Un-Register",
-    "BenificaryStatus": "Benificary Status",
-    "Note": "Note"
+    "BenificaryStatus": "Beneficiary Status",
+    "Note": "Note",
+    "Search":"Search By Name, ID or PhoneNo"
     
   },
   "AddBenificary": {
-    "AddBenificary": "Add Benificary",
-    "UpdateBenificary": "Update Benificary",
+    "AddBenificary": "Add Beneficiary",
+    "UpdateBenificary": "Update Beneficiary",
     "NameArabic": "Name Arabic",
     "Name": "Name",
     "PassportNo": "Passport No",
@@ -73,16 +74,17 @@
   },
 
   "BenificaryNote": {
-    "BenificaryNote": "Benificary Note",
-    "BenificaryNoteList": "Benificary Note List",
-    "BenificaryName": "Benificary Name",
+    "BenificaryNote": "Beneficiary Note",
+    "BenificaryNoteList": "Beneficiary Note List",
+    "BenificaryName": "Beneficiary Name",
     "Name": "Name",
-    "Date": "Date"
+    "Date": "Date",
+    "Search":"Search By Beneficiary Name or Beneficiary Note"
   },
   "AddBenificaryNote": {
-    "AddBenificaryNote": "AddBenificaryNote",
+    "AddBenificaryNote": "Add Beneficiary Note",
     "UpdateBenificaryNote": "Update Beneficiary Note",
-    "Benificary": "Benificary",
+    "Benificary": "Beneficiary",
     "Note": "Note"
   },
   "PaymentType": {
@@ -300,11 +302,11 @@
 
   "Payment":{
     "Payment":"Payment",
-    "BenificaryPayment":"Benificary Payment",
-    "BenificaryReports":"Benificary Reports",
+    "BenificaryPayment":"Beneficiary Payment",
+    "BenificaryReports":"Beneficiary Reports",
     "AddPayment":"Add Payment",
     "PaymentList":"Payment List",
-    "BenifcaryName":"BenifcaryName",
+    "BenificaryName":"Beneficiary Name",
     "Amount":"Amount",
     "Cashier":"Cashier",
     "Month":"Month",
@@ -315,13 +317,14 @@
     "Period":"Period",
     "Print":"Print",
     "AllowVoid":"Allow Void",
-    "Date":"Date"
+    "Date":"Date",
+    "Search":"Search By Name, Id or Amount"
   },
 
   "AddPayment":{
     "AddPayment":"Add Payment",
-    "Benificary":"Benificary",
-    "BenificaryDetails":"Benificary Details",
+    "Benificary":"Beneficiary",
+    "BenificaryDetails":"Beneficiary Details",
     "Amount":"Amount",
     "Cashier":"Cashier",
     "Month":"Month",
@@ -334,14 +337,14 @@
     "Analytics":"Analytics",
     "Dashboard":"Dashboard",
     "Users":"Users",
-    "Benificary":"Benificary",
-    "RegisterBenificary":"Register Benificary",
-    "Un-RegisterBenificary":"Un-Register Benificary",
-    "OneTimeBenificary":"One Time Benificary",
-    "MonthlyBenificary":"Monthly Benificary",
+    "Benificary":"Beneficiary",
+    "RegisterBenificary":"Register Beneficiary",
+    "Un-RegisterBenificary":"Un-Register Beneficiary",
+    "OneTimeBenificary":"One Time Beneficiary",
+    "MonthlyBenificary":"Monthly Beneficiary",
     "AuthorizePerson":"Authorize Person",
     "Resource":"Resource",
-    "BenificaryType":"Benificary Type",
+    "BenificaryType":"Beneficiary Type",
     "AudienceOverview":"Audience Overview"
   },
   "LedgerReport":{

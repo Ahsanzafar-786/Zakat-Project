@@ -15,7 +15,8 @@
     "SelectAuthorizePerson":"حدد تخويل الشخص",
     "SelectApprovalPerson":"حدد شخص الموافقة",
     "PaymentType":"نوع الدفع",
-    "SelectBenificary":"حدد المستفيد"
+    "SelectBenificary":"حدد المستفيد  /البحث بالاسم أو المعرف"
+
   },
  
   "Benificary":{
@@ -33,7 +34,8 @@
     "Register" : "يسجل",
     "UnRegister" : "إلغاء التسجيل",
     "BenificaryStatus" : "الحالة المستفيدة",
-    "Note": "ملحوظة"
+    "Note": "ملحوظة",
+    "Search":" البحث بالاسم أو الهوية أو رقم الهاتف "
   },
 
   "AddBenificary":{
@@ -94,7 +96,8 @@
     "BenificaryNoteList":"قائمة الملاحظات المفيدة",
     "BenificaryName":"أسم المستفيد",
     "Name":"اسم",
-    "Date":"تاريخ"
+    "Date":"تاريخ",
+    "Search":" البحث عن طريق اسم المستفيد أو ملاحظة المستفيد "
   },
   "AddBenificaryNote":{
     "AddBenificaryNote":"أضف ملاحظة مفيدة",
@@ -314,7 +317,7 @@
     "BenificaryReports":"التقارير المفيدة",
     "AddPayment":"إضافة الدفع",
     "PaymentList":"قائمة الدفع",
-    "BenifcaryName":"أسم المستفيد",
+    "BenificaryName":"أسم المستفيد",
     "Amount":"المبلغ",
     "Cashier":"أمين الصندوق",
     "Month":"الشهر",
@@ -323,7 +326,8 @@
     "Period":"فترة",
     "AllowVoid":"السماح باطل",
     "Print":"مطبعة",
-    "Date":"تاريخ"
+    "Date":"تاريخ",
+    "Search":" البحث بالاسم أو المعرف أو المبلغ "
   },
 
   "AddPayment":{

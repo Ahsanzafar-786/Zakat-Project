@@ -60,7 +60,7 @@ namespace Focus.Business.Payments.Queries
                     {
                         var searchTerm = request.SearchTerm.ToLower();
                         query = query.Where(x => x.Amount.ToString().Contains(searchTerm) || x.BenificaryNameAr.Contains(searchTerm) 
-                                              || x.BenificaryName.Contains(searchTerm));
+                                              || x.BenificaryName.Contains(searchTerm) || x.BenificayId.ToString().Contains(searchTerm) || x.Code.ToString().Contains(searchTerm));
                     }
 
                     var count =  query.Count();
