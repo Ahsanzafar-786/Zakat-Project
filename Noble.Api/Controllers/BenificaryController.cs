@@ -338,12 +338,16 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetPaymentsList")]
         [HttpGet("GetPaymentsList")]
-        public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber)
+        public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber , string beneficiaryName, int? code, decimal? amount)
         {
             var payment = await Mediator.Send(new PaymentListQuery
             {
                 SearchTerm = searchTerm,
-                PageNumber = pageNumber ?? 1
+                PageNumber = pageNumber ?? 1,
+                BeneficiaryName = beneficiaryName,
+                Code=code,
+                Amount=amount
+
             });
             return Ok(payment);
         }

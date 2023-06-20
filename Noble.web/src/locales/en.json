@@ -22,7 +22,7 @@
     "Name": "Name",
     "PayementIntervalMonths": "Payement Interval Months",
     "AmountPerMonth": "Amount Per Month",
-    "ID": "National ID",
+    "UgamaNo": "Ugama No",
     "Active": "Active",
     "DeActive": "De-Active",
     "ContactNo": "Contact No",
@@ -318,7 +318,11 @@
     "Print":"Print",
     "AllowVoid":"Allow Void",
     "Date":"Date",
-    "Search":"Search By Name, Id or Amount"
+    "Search":"Search By Beneficiary Name",
+    "SearchByCode":"Search By ID",
+    "SearchByAmount":"Search By Amount",
+    "SearchFilter":"Search Filter",
+    "ClearFilter":"Clear Filter"
   },
 
   "AddPayment":{

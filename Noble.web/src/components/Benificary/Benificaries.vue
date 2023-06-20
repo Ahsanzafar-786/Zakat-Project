@@ -56,7 +56,7 @@
                                         {{ $t('Benificary.AmountPerMonth') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Benificary.ID') }}
+                                        {{ $t('Benificary.UgamaNo') }}
                                     </th>
                                     <th class="text-center">
                                         {{ $t('Benificary.ContactNo') }}

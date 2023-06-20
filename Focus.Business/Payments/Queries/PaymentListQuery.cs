@@ -13,12 +13,16 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
+using Focus.Domain.Entities;
 
 namespace Focus.Business.Payments.Queries
 {
     public class PaymentListQuery : PagedRequest, IRequest<PagedResult<List<PaymentLookupModel>>>
     {
         public string SearchTerm { get; set; }
+        public string BeneficiaryName { get; set; }
+        public int? Code { get; set; }
+        public decimal? Amount { get; set; }
 
         public class Handler : IRequestHandler<PaymentListQuery, PagedResult<List<PaymentLookupModel>>>
         {
@@ -56,12 +60,30 @@ namespace Focus.Business.Payments.Queries
                         Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
                     }).AsQueryable();
 
-                    if (!string.IsNullOrEmpty(request.SearchTerm))
+                    //if (!string.IsNullOrEmpty(request.SearchTerm))
+                    //{
+                    //    var searchTerm = request.SearchTerm.ToLower();
+                    //    query = query.Where(x => x.Amount.ToString().Contains(searchTerm) || x.BenificaryNameAr.Contains(searchTerm) 
+                    //                          || x.BenificaryName.Contains(searchTerm) || x.BenificayId.ToString().Contains(searchTerm) || x.Code.ToString().Contains(searchTerm));
+
+                    //}
+                    
+                     if (!string.IsNullOrEmpty(request.SearchTerm))
                     {
                         var searchTerm = request.SearchTerm.ToLower();
-                        query = query.Where(x => x.Amount.ToString().Contains(searchTerm) || x.BenificaryNameAr.Contains(searchTerm) 
-                                              || x.BenificaryName.Contains(searchTerm) || x.BenificayId.ToString().Contains(searchTerm) || x.Code.ToString().Contains(searchTerm));
+                        query = query.Where(x => x.BenificaryNameAr.Contains(searchTerm)
+                                              || x.BenificaryName.Contains(searchTerm));
+
                     }
+                     if (request.Amount!=null && request.Amount > 0)
+                    {
+                        query = query.Where(x => x.Amount == request.Amount);
+                    }
+                     if (request.Code != null && request.Code > 0)
+                    {
+                        query = query.Where(x => x.Code == request.Code);
+                    }
+
 
                     var count =  query.Count();
                     query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);

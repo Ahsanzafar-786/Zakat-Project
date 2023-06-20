@@ -25,7 +25,7 @@
     "Name" : "اسم",
     "PayementIntervalMonths" : "الأشهر الفاصلة بين السداد",
     "AmountPerMonth" : "المبلغ في الشهر",
-    "ID" : "بطاقة تعريف",
+    "UgamaNo": "رقم الإقامة",
     "ContactNo" : "رقم الاتصال",
     "AuthorizePersonName" : " اسم الوكيل",
     "Status" : "حالة",
@@ -327,7 +327,11 @@
     "AllowVoid":"السماح باطل",
     "Print":"مطبعة",
     "Date":"تاريخ",
-    "Search":" البحث بالاسم أو المعرف أو المبلغ "
+    "Search":"البحث عن طريق اسم المستفيد",
+    "SearchByCode":"البحث بالمعرف",
+    "SearchByAmount":"البحث بالمبلغ",
+    "SearchFilter":"تصفية البحث",
+    "ClearFilter":"مرشح واضح"
   },
 
   "AddPayment":{
