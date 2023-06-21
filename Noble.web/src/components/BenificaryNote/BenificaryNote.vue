@@ -31,12 +31,32 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="input-group">
+                    <!-- <div class="input-group">
                         <button class="btn btn-secondary" type="button" id="button-addon1">
                             <i class="fas fa-search"></i>
                         </button>
-                        <input v-model="search" type="text" class="form-control" :placeholder="$t('Search')"
+                        <input v-model="search" type="text" class="form-control" :placeholder="$t('BenificaryNote.Search')"
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
+                    </div> -->
+                    <div class="row">
+                        <div class="col-4">
+                            <input v-model="search" type="text" class="form-control" :placeholder="$t('BenificaryNote.Search')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-4">
+                            <input v-model="beneficiaryNote" type="text" class="form-control" :placeholder="$t('BenificaryNote.SearchByBeneficiaryNote')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-4">
+                            <a v-on:click="SearchFilter" href="javascript:void(0);"
+                                class="btn btn-sm btn-outline-primary mx-1">
+                                {{ $t('BenificaryNote.SearchFilter') }}
+                            </a>
+                            <a @click="ClearFilter" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">
+                                {{ $t('BenificaryNote.ClearFilter') }}
+                            </a>
+
+                        </div>
                     </div>
 
                 </div>
@@ -154,21 +174,38 @@ export default {
             arabic: '',
             english: '',
             roleName: '',
+            beneficiaryNote:'',
         }
     },
-    watch: {
-        search: function (val) {
-            this.GetbenificaryNote(val, 1);
-        }
-    },
+    // watch: {
+    //     search: function (val) {
+    //         this.GetbenificaryNote(val, 1);
+    //     }
+    // },
     methods: {
+        ClearFilter() {
+            // Reset the filter conditions here
+            this.search = '';
+            this.beneficiaryNote = '';
+
+            // Trigger the search or data refresh
+            this.GetbenificaryNote(this.currentPage);
+        },
+
+
+        SearchFilter: function () {
+            debugger;
+            this.GetbenificaryNote(this.currentPage);
+        },
+
+
         IsSave: function () {
             this.show = false;
             this.GetbenificaryNote(this.search, this.currentPage);
         },
 
         getPage: function () {
-            this.GetbenificaryNote(this.search, this.currentPage);
+            this.GetbenificaryNote(this.currentPage);
         },
 
         GotoPage: function (link) {
@@ -191,7 +228,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryNote=' +this.beneficiaryNote, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.benificaryNotelist = response.data.results;
                     root.pageCount = response.data.pageCount;
@@ -233,7 +270,7 @@ export default {
     mounted: function () {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
-        this.GetbenificaryNote(this.search, 1);
+        this.GetbenificaryNote(this.currentPage);
         this.roleName = localStorage.getItem('RoleName');
     }
 }

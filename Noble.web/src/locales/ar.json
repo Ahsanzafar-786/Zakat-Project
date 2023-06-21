@@ -15,7 +15,8 @@
     "SelectAuthorizePerson":"حدد تخويل الشخص",
     "SelectApprovalPerson":"حدد شخص الموافقة",
     "PaymentType":"نوع الدفع",
-    "SelectBenificary":"حدد المستفيد"
+    "SelectBenificary":"حدد المستفيد  /البحث بالاسم أو المعرف"
+
   },
  
   "Benificary":{
@@ -24,16 +25,22 @@
     "Name" : "اسم",
     "PayementIntervalMonths" : "الأشهر الفاصلة بين السداد",
     "AmountPerMonth" : "المبلغ في الشهر",
-    "ID" : "بطاقة تعريف",
+    "UgamaNo": "رقم الإقامة",
     "ContactNo" : "رقم الاتصال",
-    "AuthorizePersonName" : "تخويل اسم الشخص",
+    "AuthorizePersonName" : " اسم الوكيل",
     "Status" : "حالة",
     "Active" : "نشيط",
     "DeActive" : "معطل",
     "Register" : "يسجل",
     "UnRegister" : "إلغاء التسجيل",
     "BenificaryStatus" : "الحالة المستفيدة",
-    "Note": "ملحوظة"
+    "Note": "ملحوظة",
+    "Search":"البحث عن طريق اسم المستفيد",
+    "SearchByUqamaNo":"البحث برقم الإقامة",
+    "SearchByID":"البحث عن طريق معرف المستفيد",
+    "SearchFilter":"تصفية البحث",
+    "ClearFilter":"مرشح واضح",
+    "ID":"بطاقة تعريف"
   },
 
   "AddBenificary":{
@@ -94,7 +101,11 @@
     "BenificaryNoteList":"قائمة الملاحظات المفيدة",
     "BenificaryName":"أسم المستفيد",
     "Name":"اسم",
-    "Date":"تاريخ"
+    "Date":"تاريخ",
+    "Search":"البحث عن طريق اسم المستفيد",
+    "SearchByBeneficiaryNote":"البحث عن طريق ملاحظة المستفيد",
+    "SearchFilter":"تصفية البحث",
+    "ClearFilter":"مرشح واضح"
   },
   "AddBenificaryNote":{
     "AddBenificaryNote":"أضف ملاحظة مفيدة",
@@ -106,7 +117,8 @@
   "PaymentType":{
     "PaymentType":"نوع الدفع",
     "PaymentTypeList":"قائمة نوع الدفع",
-    "Name":"اسم"
+    "Name":"اسم",
+    "SearchByName":"البحث عن طريق الإسم"
   },
   "AddPaymentType":{
     "AddPaymentType":"إضافة نوع الدفع",
@@ -120,7 +132,8 @@
     "ApprovalPerson":"شخص الموافقة",
     "ApprovalPersonList":"قائمة أفراد الموافقة",
     "ApprovalPersonId":"هوية شخص الموافقة",
-    "Name":"اسم"
+    "Name":"اسم",
+    "SearchByNameAndId":"البحث بالاسم والموافقة الشخصية"
   },
   "AddApprovalPerson":{
     "AddApprovalPerson":"إضافة شخص الموافقة",
@@ -143,7 +156,8 @@
     "Entity":"كيان",
     "DeActive" : "معطل",
     "Status":"حالة",
-    "FundsSource":"مصدر الأموال"
+    "FundsSource":"مصدر الأموال",
+    "SearchByNameAndCharityResourcesId":"البحث بالاسم ومعرف الموارد الخيرية"
   },
   "AddCharityResources":{
     "AddCharityResources":"أضف الموارد الخيرية",
@@ -166,9 +180,10 @@
     "Gender":"جنس",
     "Male":"ذكر",
     "Female":"أنثى",
-    "ID":"الهوية",
+    "ID":"بطاقة تعريف",
     "Nationality":"جنسية",
-    "PassportNo":"رقم جواز السفر"
+    "PassportNo":"رقم جواز السفر",
+    "SearchByNameAndID":"البحث بالاسم والمعرف"
   },
 
   "AddAuthorizedPerson":{
@@ -191,11 +206,12 @@
     "Funds":"أموال",
     "AddFunds":"إضافة الأموال",
     "FundsList":"قائمة الصناديق",
-    "CharityResource":"الموارد الخيرية",
+    "CharityResource":"اسم المورد الخيرية ",
     "Amount":"كمية",
     "Date":"تاريخ",
     "CharityFundsReports":"تقارير الصناديق الخيرية",
-    "CharityFundsResource":"موارد الصناديق الخيرية"
+    "CharityFundsResource":"موارد الصناديق الخيرية",
+    "SearchByCharityResourceNameAndAmount":"البحث عن طريق اسم المورد الخيرية والمبلغ"
   },
   "AddFunds":{
     "AddFunds" : "إضافة الأموال",
@@ -235,7 +251,7 @@
     "LogOut":"تسجيل خروج",
     "Setup":"يثبت",
     "AddUser":" إضافة مستخدم",
-    "AddAuthorizedPerson":"إضافة شخص مفوض",
+    "AddAuthorizedPerson":"أضف الوكيل",
     "AddApprovalPerson":"إضافة شخص الموافقة",
     "AddPaymentType":"إضافة نوع الدفع",
     "AddCharityFundsResources":"أضف موارد الصناديق الخيرية"
@@ -307,14 +323,14 @@
   },
 
   "Payment":{
-    "Payment":"الدفع",
+    "Payment":"المدفوعات",
     "Action":"فعل",
     "IsVoid":"هو الفراغ",
-    "BenificaryPayment":"الدفع المستحق",
+    "BenificaryPayment":"أضف دفع",
     "BenificaryReports":"التقارير المفيدة",
     "AddPayment":"إضافة الدفع",
     "PaymentList":"قائمة الدفع",
-    "BenifcaryName":"أسم المستفيد",
+    "BenificaryName":"أسم المستفيد",
     "Amount":"المبلغ",
     "Cashier":"أمين الصندوق",
     "Month":"الشهر",
@@ -323,7 +339,12 @@
     "Period":"فترة",
     "AllowVoid":"السماح باطل",
     "Print":"مطبعة",
-    "Date":"تاريخ"
+    "Date":"تاريخ",
+    "Search":"البحث عن طريق اسم المستفيد",
+    "SearchByCode":"البحث بالمعرف",
+    "SearchByAmount":"البحث بالمبلغ",
+    "SearchFilter":"تصفية البحث",
+    "ClearFilter":"مرشح واضح"
   },
 
   "AddPayment":{

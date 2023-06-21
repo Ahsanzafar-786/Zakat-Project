@@ -35,7 +35,7 @@
                         <button class="btn btn-secondary" type="button" id="button-addon1">
                             <i class="fas fa-search"></i>
                         </button>
-                        <input v-model="search" type="text" class="form-control" :placeholder="$t('Search')"
+                        <input v-model="search" type="text" class="form-control" :placeholder="$t('CharityResources.SearchByNameAndCharityResourcesId')"
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
                     </div>
 

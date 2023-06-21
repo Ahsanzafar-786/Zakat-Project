@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectBenificary')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
+        <multiselect v-model="DisplayValue" :options="options"  :multiple="false" :placeholder="$t('General.SelectBenificary')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
 
         </multiselect>      
     </div>

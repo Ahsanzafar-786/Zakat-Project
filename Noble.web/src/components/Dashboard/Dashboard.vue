@@ -235,7 +235,7 @@
                     <!--end card-header-->
                     <div class="card-body">
                         <div class="text-center">
-                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3"></apexchart>
+                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render"></apexchart>
                             <!-- <h6 class="bg-light-alt py-3 px-2 mb-0">
                                 <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
                                 01 January 2020 to 31 December 2020
@@ -429,7 +429,7 @@ export default {
                     text: 'Traffic Sources'
                 },
                 dataLabels: {
-                    enabled: true,
+                    enabled: false,
                     // enabledOnSeries: [1]
                 },
                 xaxis: {

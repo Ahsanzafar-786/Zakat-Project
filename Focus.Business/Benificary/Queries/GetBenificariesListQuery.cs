@@ -16,6 +16,9 @@ namespace Focus.Business.Benificary.Queries
     {
         public string SearchTerm { get; set; }
         public bool IsDropDown { get; set; }
+        public string BeneficiaryName { get; set; }
+        public string UqamaNo { get; set; }
+        public string BenificiaryId { get; set; }
 
         public class Handler : IRequestHandler<GetBenificariesListQuery, PagedResult<List<BenificariesLookupModel>>>
         {
@@ -84,9 +87,15 @@ namespace Focus.Business.Benificary.Queries
                         {
                             var searchTerm = request.SearchTerm.ToLower();
                             query = query.Where(x => x.Name.ToLower().Contains(searchTerm) 
-                                                  || x.PhoneNo.Contains(searchTerm) 
-                                                  || x.UgamaNo.Contains(searchTerm)
-                                                  || x.BeneficiaryId.ToString().Contains(searchTerm));
+                                                  || x.NameAr.Contains(searchTerm) );
+                        }
+                        if (request.UqamaNo != null )
+                        {
+                            query = query.Where(x => x.UgamaNo == request.UqamaNo);
+                        }
+                        if (!string.IsNullOrEmpty(request.BenificiaryId)  )
+                        {
+                            query = query.Where(x => x.BeneficiaryId.ToString() == request.BenificiaryId);
                         }
 
                         var count = await query.CountAsync();

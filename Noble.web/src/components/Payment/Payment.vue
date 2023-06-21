@@ -31,12 +31,33 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="input-group">
-                        <button class="btn btn-secondary" type="button" id="button-addon1">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <input v-model="search" type="text" class="form-control" :placeholder="$t('Search')"
-                            aria-label="Example text with button addon" aria-describedby="button-addon1">
+                    <div class="row">
+                        <div class="col-3">
+                            <input v-model="search" type="text" class="form-control" :placeholder="$t('Payment.Search')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-3">
+                            <input v-model="code" type="text" class="form-control" :placeholder="$t('Payment.SearchByCode')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-3">
+                            <input v-model="amount" type="text" class="form-control"
+                                :placeholder="$t('Payment.SearchByAmount')" aria-label="Example text with button addon"
+                                aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-3">
+                            <a v-on:click="SearchFilter" href="javascript:void(0);"
+                                class="btn btn-sm btn-outline-primary mx-1">
+                                {{ $t('Payment.SearchFilter') }}
+                            </a>
+                            <a @click="ClearFilter" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">
+                                {{ $t('Payment.ClearFilter') }}
+                            </a>
+
+                        </div>
+
+
+
                     </div>
 
                 </div>
@@ -53,7 +74,7 @@
                                         {{ $t('Payment.Code') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Payment.BenifcaryName') }}
+                                        {{ $t('Payment.BenificaryName') }}
                                     </th>
                                     <th class="text-center">
                                         {{ $t('Payment.Amount') }}
@@ -62,7 +83,7 @@
                                         {{ $t('Payment.Cashier') }}
                                     </th>
                                     <th class="text-center">
-                                        
+
                                         {{ $t('Payment.Date') }}
                                     </th>
                                     <th class="text-center">
@@ -90,9 +111,11 @@
 
                                     <td class="text-center " v-if="brand.isVoid && roleName == 'Admin'">
                                         <strong>
-                                            <a class="text-danger" href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
-                                                brand.code }}</a>
-                                        </strong></td>
+                                            <a class="text-danger" href="javascript:void(0)"
+                                                v-on:click="EditPayment(brand.id)">{{
+                                                    brand.code }}</a>
+                                        </strong>
+                                    </td>
                                     <td class="text-center" v-else-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
@@ -107,16 +130,18 @@
                                     <td class="text-center" v-else-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">
-                                                {{ brand.benificaryNameAr == ''?brand.benificaryName:brand.benificaryNameAr}}</a>
+                                                {{ brand.benificaryNameAr ==
+                                                    '' ? brand.benificaryName : brand.benificaryNameAr }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center" v-else>{{ brand.benificaryName==''?brand.benificaryNameAr:brand.benificaryName}}</td>
+                                    <td class="text-center" v-else>{{
+                                        brand.benificaryName == '' ? brand.benificaryNameAr : brand.benificaryName }}</td>
 
-                                    
+
                                     <td class="text-center" v-if="brand.isVoid">--</td>
                                     <td class="text-center" v-else>{{ brand.amount }}</td>
-                                    <td class="text-center" >{{ brand.cashier }}</td>
-                                    <td class="text-center" >{{ GetDate(brand.date) }}</td>
+                                    <td class="text-center">{{ brand.cashier }}</td>
+                                    <td class="text-center">{{ GetDate(brand.date) }}</td>
 
                                     <td class="text-center" v-if="brand.isVoid">
                                         --
@@ -124,7 +149,7 @@
                                     <td class="text-center" v-else-if="brand.month != null">
                                         {{ GetMonth(brand.month) }}
                                     </td>
-                                    
+
                                     <td class="text-center" v-else>
                                         {{ GetMonth(brand.date) }}
                                     </td>
@@ -140,41 +165,43 @@
                                     <td class="text-center" v-else>
                                         {{ brand.period }}
                                     </td>
-                                    <td class="text-center d-flex align-items-baseline justify-content-center" v-if="roleName != 'User'">
+                                    <td class="text-center d-flex align-items-baseline justify-content-center"
+                                        v-if="roleName != 'User'">
                                         <button type="button" class="btn btn-light dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
                                                 class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
                                             <div v-if="brand.allowVoid && !brand.isVoid && roleName == 'Cashier'">
                                                 <input type="checkbox" v-model="brand.isVoid"
-                                                v-on:change="EditPayment(brand.id, brand.isVoid)" />
+                                                    v-on:change="EditPayment(brand.id, brand.isVoid)" />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.IsVoid') }}
                                                 </span>
                                             </div>
                                             <div v-if="brand.allowVoid && brand.isVoid && roleName == 'Cashier'">
                                                 <input type="checkbox" v-model="brand.isVoid"
-                                                v-on:change="EditPayment(brand.id, brand.isVoid)" disabled />
+                                                    v-on:change="EditPayment(brand.id, brand.isVoid)" disabled />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.IsVoid') }}
                                                 </span>
                                             </div>
                                             <div v-if="roleName != 'Cashier' && roleName != 'User'">
-                                                <input type="checkbox" disabled v-model="brand.isVoid"/>
+                                                <input type="checkbox" disabled v-model="brand.isVoid" />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.IsVoid') }}
                                                 </span>
                                             </div>
-                                            <div v-if="roleName != 'Cashier' && roleName != 'User' ">
+                                            <div v-if="roleName != 'Cashier' && roleName != 'User'">
                                                 <input type="checkbox" v-model="brand.allowVoid"
-                                                v-on:change="EditPayment(brand.id, brand.isVoid, brand.allowVoid)" />
+                                                    v-on:change="EditPayment(brand.id, brand.isVoid, brand.allowVoid)" />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.AllowVoid') }}
-                                                </span> 
+                                                </span>
                                             </div>
                                             <strong>
-                                            <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{ $t('Payment.Print') }}</a>
-                                        </strong>
+                                                <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
+                                                    $t('Payment.Print') }}</a>
+                                            </strong>
                                         </div>
                                     </td>
                                 </tr>
@@ -223,7 +250,8 @@
                 </div>
             </div>
 
-            <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show=false" @IsSave="IsSave" />
+            <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show = false"
+                @IsSave="IsSave" />
 
         </div>
 
@@ -240,8 +268,8 @@ export default {
     data: function () {
         return {
             show: false,
-            reportsrc:'',
-            changereport:0,
+            reportsrc: '',
+            changereport: 0,
             paymentList: [],
             type: '',
             search: '',
@@ -253,50 +281,67 @@ export default {
             user: '',
             isVoid: false,
             roleName: '',
+            benificaryName: '',
+            code: '',
+            amount: '',
         }
     },
-    watch: {
-        search: function (val) {
-            this.GetPayment(val, 1);
-        }
-    },
+    // watch: {
+
+    //     search: function (val) {
+    //         debugger; //eslint-disable-line
+    //         this.GetPayment(val, 1, '', 0, 0);
+    //     }
+    // },
     methods: {
-        IsSave : function()
-            {
-                this.show = false;
-            },
+        ClearFilter() {
+            // Reset the filter conditions here
+            this.search = '';
+            this.amount = '';
+            this.code = '';
+
+            // Trigger the search or data refresh
+            this.GetPayment(this.currentPage);
+        },
+
+
+        SearchFilter: function () {
+            debugger;
+            this.GetPayment(this.currentPage);
+        },
+        IsSave: function () {
+            this.show = false;
+        },
         GetMonth: function (link) {
             if (link != undefined) {
                 return moment(link).format('MMMM');
 
-           } 
-           else
-           {
-            return '';
-           }
+            }
+            else {
+                return '';
+            }
         },
         GetDate: function (link) {
             if (link != undefined) {
                 return moment(link).format('MMMM Do YYYY');
 
-           } 
-           else
-           {
-            return '';
-           }
+            }
+            else {
+                return '';
+            }
         },
-        PrintRdlc:function(Id) {
-                var companyId = '';
-                if (this.$session.exists()) {
-                    companyId = localStorage.getItem('CompanyID');
-                }
-               
-                this.reportsrc=   this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?id='+Id+'&pageNumber=' + this.currentPage + '&searchTerm=' + this.search+'&CompanyID='+companyId+'&formName=Payment'
-                this.changereport++;
-                this.show = !this.show;
-            },
+        PrintRdlc: function (Id) {
+            var companyId = '';
+            if (this.$session.exists()) {
+                companyId = localStorage.getItem('CompanyID');
+            }
+
+            this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' + Id + '&pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&CompanyID=' + companyId + '&formName=Payment'
+            this.changereport++;
+            this.show = !this.show;
+        },
         getPage: function () {
-            this.GetPayment(this.search, this.currentPage);
+            this.GetPayment(this.currentPage);
         },
 
         GotoPage: function (link) {
@@ -304,12 +349,14 @@ export default {
         },
 
         GetPayment: function () {
+            debugger;
+
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;
@@ -327,8 +374,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            if(allowVoid)
-            {
+            if (allowVoid) {
                 root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id + '&allowVoid=' + allowVoid, { headers: { "Authorization": `Bearer ${token}` } })
                     .then(function (response) {
                         debugger;
@@ -403,7 +449,7 @@ export default {
     mounted: function () {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
-        this.GetPayment(this.search, 1);
+        this.GetPayment(this.currentPage);
         this.roleName = localStorage.getItem('RoleName');
 
 

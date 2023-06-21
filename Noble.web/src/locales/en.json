@@ -14,15 +14,15 @@
     "SelectAuthorizePerson": "Select Authorize Person",
     "SelectApprovalPerson": "Select Approval Person",
     "PaymentType": "Select Payment Type",
-    "SelectBenificary": "Select Benificary"
+    "SelectBenificary": "Search By Beneficiary Name or ID"
   },
   "Benificary": {
-    "Benificary": "Benificary",
-    "BenificaryList": "Benificary List",
+    "Benificary": "Beneficiary",
+    "BenificaryList": "Beneficiary List",
     "Name": "Name",
     "PayementIntervalMonths": "Payement Interval Months",
     "AmountPerMonth": "Amount Per Month",
-    "ID": "National ID",
+    "UgamaNo": "Ugama No",
     "Active": "Active",
     "DeActive": "De-Active",
     "ContactNo": "Contact No",
@@ -30,13 +30,18 @@
     "Status": "Status",
     "Register": "Register",
     "UnRegister": "Un-Register",
-    "BenificaryStatus": "Benificary Status",
-    "Note": "Note"
-    
+    "BenificaryStatus": "Beneficiary Status",
+    "Note": "Note",
+    "Search":"Search By Beneficiary Name",
+    "SearchByID":"Search By Beneficiary ID",
+    "SearchByUqamaNo":"Search By Ugama No",
+    "SearchFilter":"Search Filter",
+    "ClearFilter":"Clear Filter",
+    "ID":"ID"
   },
   "AddBenificary": {
-    "AddBenificary": "Add Benificary",
-    "UpdateBenificary": "Update Benificary",
+    "AddBenificary": "Add Beneficiary",
+    "UpdateBenificary": "Update Beneficiary",
     "NameArabic": "Name Arabic",
     "Name": "Name",
     "PassportNo": "Passport No",
@@ -73,22 +78,27 @@
   },
 
   "BenificaryNote": {
-    "BenificaryNote": "Benificary Note",
-    "BenificaryNoteList": "Benificary Note List",
-    "BenificaryName": "Benificary Name",
+    "BenificaryNote": "Beneficiary Note",
+    "BenificaryNoteList": "Beneficiary Note List",
+    "BenificaryName": "Beneficiary Name",
     "Name": "Name",
-    "Date": "Date"
+    "Date": "Date",
+    "Search":"Search By Beneficiary Name",
+    "SearchByBeneficiaryNote":"Search By Beneficiary Note",
+    "SearchFilter":"Search Filter",
+    "ClearFilter":"Clear Filter"
   },
   "AddBenificaryNote": {
-    "AddBenificaryNote": "AddBenificaryNote",
+    "AddBenificaryNote": "Add Beneficiary Note",
     "UpdateBenificaryNote": "Update Beneficiary Note",
-    "Benificary": "Benificary",
+    "Benificary": "Beneficiary",
     "Note": "Note"
   },
   "PaymentType": {
     "PaymentType": "Payment Type",
     "PaymentTypeList":"Payment Type List",
-    "Name": "Name"
+    "Name": "Name",
+    "SearchByName":"Search By Name"
   },
   "AddPaymentType": {
     "AddPaymentType": "Add Payment Type",
@@ -102,7 +112,8 @@
     "ApprovalPerson": "Approval Person",
     "ApprovalPersonList": "Approval Person List",
     "ApprovalPersonId": "Approval Person Id",
-    "Name": "Name"
+    "Name": "Name",
+    "SearchByNameAndId":"Search By Name And Approval Person Id"
   },
   "AddApprovalPerson": {
     "AddApprovalPerson": "Add Approval Person",
@@ -125,7 +136,8 @@
     "Entity": "Entity",
     "DeActive": "De-Active",
     "Status": "Status",
-    "FundsSource": "Funds Source"
+    "FundsSource": "Funds Source",
+    "SearchByNameAndCharityResourcesId":"Search By Name And Charity Resources Id"
   },
   "AddCharityResources": {
     "AddCharityResources": "Add Charity Resources",
@@ -147,9 +159,10 @@
     "Gender": "Gender",
     "Male": "Male",
     "Female": "Female",
-    "ID": "National ID",
+    "ID": "ID",
     "Nationality": "Nationality",
-    "PassportNo": "Passport No"
+    "PassportNo": "Passport No",
+    "SearchByNameAndID":"Search By Name And ID"
   },
   "AddAuthorizedPerson": {
     "AddAuthorizedPerson": "Add Authorized Person",
@@ -170,11 +183,12 @@
     "Funds": "Funds",
     "AddFunds":"Add Funds",
     "FundsList": "Funds List",
-    "CharityResource": "Charity Resource",
+    "CharityResource": "Charity Resource Name",
     "Amount": "Amount",
     "Date": "Date",
     "CharityFundsReports":"Charity Funds Reports",
-    "CharityFundsResource":"Charity Funds Resource"
+    "CharityFundsResource":"Charity Funds Resource",
+    "SearchByCharityResourceNameAndAmount":"Search By Charity Resource Name And Amount"
   },
   "DatePicker": {
     "PickDate": "Pick Date",
@@ -300,11 +314,11 @@
 
   "Payment":{
     "Payment":"Payment",
-    "BenificaryPayment":"Benificary Payment",
-    "BenificaryReports":"Benificary Reports",
+    "BenificaryPayment":"Beneficiary Payment",
+    "BenificaryReports":"Beneficiary Reports",
     "AddPayment":"Add Payment",
     "PaymentList":"Payment List",
-    "BenifcaryName":"BenifcaryName",
+    "BenificaryName":"Beneficiary Name",
     "Amount":"Amount",
     "Cashier":"Cashier",
     "Month":"Month",
@@ -315,13 +329,18 @@
     "Period":"Period",
     "Print":"Print",
     "AllowVoid":"Allow Void",
-    "Date":"Date"
+    "Date":"Date",
+    "Search":"Search By Beneficiary Name",
+    "SearchByCode":"Search By ID",
+    "SearchByAmount":"Search By Amount",
+    "SearchFilter":"Search Filter",
+    "ClearFilter":"Clear Filter"
   },
 
   "AddPayment":{
     "AddPayment":"Add Payment",
-    "Benificary":"Benificary",
-    "BenificaryDetails":"Benificary Details",
+    "Benificary":"Beneficiary",
+    "BenificaryDetails":"Beneficiary Details",
     "Amount":"Amount",
     "Cashier":"Cashier",
     "Month":"Month",
@@ -334,14 +353,14 @@
     "Analytics":"Analytics",
     "Dashboard":"Dashboard",
     "Users":"Users",
-    "Benificary":"Benificary",
-    "RegisterBenificary":"Register Benificary",
-    "Un-RegisterBenificary":"Un-Register Benificary",
-    "OneTimeBenificary":"One Time Benificary",
-    "MonthlyBenificary":"Monthly Benificary",
+    "Benificary":"Beneficiary",
+    "RegisterBenificary":"Register Beneficiary",
+    "Un-RegisterBenificary":"Un-Register Beneficiary",
+    "OneTimeBenificary":"One Time Beneficiary",
+    "MonthlyBenificary":"Monthly Beneficiary",
     "AuthorizePerson":"Authorize Person",
     "Resource":"Resource",
-    "BenificaryType":"Benificary Type",
+    "BenificaryType":"Beneficiary Type",
     "AudienceOverview":"Audience Overview"
   },
   "LedgerReport":{
