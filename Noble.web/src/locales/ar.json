@@ -39,7 +39,8 @@
     "SearchByUqamaNo":"البحث برقم الإقامة",
     "SearchByID":"البحث عن طريق معرف المستفيد",
     "SearchFilter":"تصفية البحث",
-    "ClearFilter":"مرشح واضح"
+    "ClearFilter":"مرشح واضح",
+    "ID":"بطاقة تعريف"
   },
 
   "AddBenificary":{
