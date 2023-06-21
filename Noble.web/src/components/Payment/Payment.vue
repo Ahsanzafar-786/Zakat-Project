@@ -348,7 +348,7 @@ export default {
             this.$router.push({ path: link });
         },
 
-        GetPayment: function (currentPage) {
+        GetPayment: function () {
             debugger;
 
             var root = this;
@@ -356,7 +356,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;

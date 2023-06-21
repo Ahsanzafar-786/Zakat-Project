@@ -35,7 +35,11 @@
     "UnRegister" : "إلغاء التسجيل",
     "BenificaryStatus" : "الحالة المستفيدة",
     "Note": "ملحوظة",
-    "Search":" البحث بالاسم أو الهوية أو رقم الهاتف "
+    "Search":"البحث عن طريق اسم المستفيد",
+    "SearchByUqamaNo":"البحث برقم الإقامة",
+    "SearchByID":"البحث عن طريق معرف المستفيد",
+    "SearchFilter":"تصفية البحث",
+    "ClearFilter":"مرشح واضح"
   },
 
   "AddBenificary":{
@@ -97,7 +101,10 @@
     "BenificaryName":"أسم المستفيد",
     "Name":"اسم",
     "Date":"تاريخ",
-    "Search":" البحث عن طريق اسم المستفيد أو ملاحظة المستفيد "
+    "Search":"البحث عن طريق اسم المستفيد",
+    "SearchByBeneficiaryNote":"البحث عن طريق ملاحظة المستفيد",
+    "SearchFilter":"تصفية البحث",
+    "ClearFilter":"مرشح واضح"
   },
   "AddBenificaryNote":{
     "AddBenificaryNote":"أضف ملاحظة مفيدة",
@@ -109,7 +116,8 @@
   "PaymentType":{
     "PaymentType":"نوع الدفع",
     "PaymentTypeList":"قائمة نوع الدفع",
-    "Name":"اسم"
+    "Name":"اسم",
+    "SearchByName":"البحث عن طريق الإسم"
   },
   "AddPaymentType":{
     "AddPaymentType":"إضافة نوع الدفع",
@@ -123,7 +131,8 @@
     "ApprovalPerson":"شخص الموافقة",
     "ApprovalPersonList":"قائمة أفراد الموافقة",
     "ApprovalPersonId":"هوية شخص الموافقة",
-    "Name":"اسم"
+    "Name":"اسم",
+    "SearchByNameAndId":"البحث بالاسم والموافقة الشخصية"
   },
   "AddApprovalPerson":{
     "AddApprovalPerson":"إضافة شخص الموافقة",
@@ -146,7 +155,8 @@
     "Entity":"كيان",
     "DeActive" : "معطل",
     "Status":"حالة",
-    "FundsSource":"مصدر الأموال"
+    "FundsSource":"مصدر الأموال",
+    "SearchByNameAndCharityResourcesId":"البحث بالاسم ومعرف الموارد الخيرية"
   },
   "AddCharityResources":{
     "AddCharityResources":"أضف الموارد الخيرية",
@@ -169,9 +179,10 @@
     "Gender":"جنس",
     "Male":"ذكر",
     "Female":"أنثى",
-    "ID":"الهوية",
+    "ID":"بطاقة تعريف",
     "Nationality":"جنسية",
-    "PassportNo":"رقم جواز السفر"
+    "PassportNo":"رقم جواز السفر",
+    "SearchByNameAndID":"البحث بالاسم والمعرف"
   },
 
   "AddAuthorizedPerson":{
@@ -194,11 +205,12 @@
     "Funds":"أموال",
     "AddFunds":"إضافة الأموال",
     "FundsList":"قائمة الصناديق",
-    "CharityResource":"الموارد الخيرية",
+    "CharityResource":"اسم المورد الخيرية ",
     "Amount":"كمية",
     "Date":"تاريخ",
     "CharityFundsReports":"تقارير الصناديق الخيرية",
-    "CharityFundsResource":"موارد الصناديق الخيرية"
+    "CharityFundsResource":"موارد الصناديق الخيرية",
+    "SearchByCharityResourceNameAndAmount":"البحث عن طريق اسم المورد الخيرية والمبلغ"
   },
   "AddFunds":{
     "AddFunds" : "إضافة الأموال",

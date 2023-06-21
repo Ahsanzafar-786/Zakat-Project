@@ -31,12 +31,40 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="input-group">
+                    <!-- <div class="input-group">
                         <button class="btn btn-secondary" type="button" id="button-addon1">
                             <i class="fas fa-search"></i>
                         </button>
                         <input v-model="search" type="text" class="form-control" :placeholder="$t('Benificary.Search')"
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
+                    </div> -->
+                    <div class="row">
+                        <div class="col-3">
+                            <input v-model="search" type="text" class="form-control" :placeholder="$t('Benificary.Search')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-3">
+                            <input v-model="beneficiaryId" type="text" class="form-control" :placeholder="$t('Benificary.SearchByID')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-3">
+                            <input v-model="uqamaNo" type="text" class="form-control"
+                                :placeholder="$t('Benificary.SearchByUqamaNo')" aria-label="Example text with button addon"
+                                aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-3">
+                            <a v-on:click="SearchFilter" href="javascript:void(0);"
+                                class="btn btn-sm btn-outline-primary mx-1">
+                                {{ $t('Benificary.SearchFilter') }}
+                            </a>
+                            <a @click="ClearFilter" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">
+                                {{ $t('Benificary.ClearFilter') }}
+                            </a>
+
+                        </div>
+
+
+
                     </div>
 
                 </div>
@@ -46,6 +74,9 @@
                             <thead class="thead-light table-hover">
                                 <tr>
                                     <th>#</th>
+                                    <th class="text-center">
+                                        {{ $t('Benificary.ID') }}
+                                    </th>
                                     <th class="text-center">
                                         {{ $t('Benificary.Name') }}
                                     </th>
@@ -81,11 +112,11 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <!-- <td class="text-center">
+                                    <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)">{{ brand.beneficiaryId }}</a>
                                         </strong>
-                                    </td> -->
+                                    </td>
                                 <td class="text-center">
                                     <strong>
                                         <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{
@@ -241,21 +272,41 @@ export default {
             rowCount: '0',
             arabic: '',
             english: '',
+            benificaryName: '',
+            uqamaNo: '',
+            beneficiaryId:'',
         }
     },
-    watch: {
-        search: function (val) {
-            this.GetBenificaryData(val, 1);
-        }
-    },
+    // watch: {
+    //     search: function (val) {
+    //         this.GetBenificaryData(val, 1);
+    //     }
+    // },
     methods: {
+        ClearFilter() {
+            // Reset the filter conditions here
+            this.search = '';
+            this.uqamaNo = '';
+            this.beneficiaryId = '';
+
+            // Trigger the search or data refresh
+            this.GetBenificaryData(this.currentPage);
+        },
+
+
+        SearchFilter: function () {
+            debugger;
+            this.GetBenificaryData(this.currentPage);
+        },
+
+
         IsSave: function () {
             this.show = false;
             this.GetBenificaryData(this.search, this.currentPage);
         },
 
         getPage: function () {
-            this.GetBenificaryData(this.search, this.currentPage);
+            this.GetBenificaryData(this.currentPage);
         },
 
         GotoPage: function (link) {
@@ -314,7 +365,8 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetBenificaryList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search, {
+            debugger; //eslint-disable-line
+            root.$https.get('Benificary/GetBenificaryList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryId=' + this.beneficiaryId + '&uqamaNo='+ this.uqamaNo , {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -364,7 +416,7 @@ export default {
     mounted: function () {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
-        this.GetBenificaryData(this.search, 1);
+        this.GetBenificaryData(this.currentPage);
         this.roleName = localStorage.getItem('RoleName');
     }
 }

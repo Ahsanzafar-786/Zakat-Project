@@ -32,8 +32,12 @@
     "UnRegister": "Un-Register",
     "BenificaryStatus": "Beneficiary Status",
     "Note": "Note",
-    "Search":"Search By Name, ID or PhoneNo"
-    
+    "Search":"Search By Beneficiary Name",
+    "SearchByID":"Search By Beneficiary ID",
+    "SearchByUqamaNo":"Search By Ugama No",
+    "SearchFilter":"Search Filter",
+    "ClearFilter":"Clear Filter",
+    "ID":"ID"
   },
   "AddBenificary": {
     "AddBenificary": "Add Beneficiary",
@@ -79,7 +83,10 @@
     "BenificaryName": "Beneficiary Name",
     "Name": "Name",
     "Date": "Date",
-    "Search":"Search By Beneficiary Name or Beneficiary Note"
+    "Search":"Search By Beneficiary Name",
+    "SearchByBeneficiaryNote":"Search By Beneficiary Note",
+    "SearchFilter":"Search Filter",
+    "ClearFilter":"Clear Filter"
   },
   "AddBenificaryNote": {
     "AddBenificaryNote": "Add Beneficiary Note",
@@ -90,7 +97,8 @@
   "PaymentType": {
     "PaymentType": "Payment Type",
     "PaymentTypeList":"Payment Type List",
-    "Name": "Name"
+    "Name": "Name",
+    "SearchByName":"Search By Name"
   },
   "AddPaymentType": {
     "AddPaymentType": "Add Payment Type",
@@ -104,7 +112,8 @@
     "ApprovalPerson": "Approval Person",
     "ApprovalPersonList": "Approval Person List",
     "ApprovalPersonId": "Approval Person Id",
-    "Name": "Name"
+    "Name": "Name",
+    "SearchByNameAndId":"Search By Name And Approval Person Id"
   },
   "AddApprovalPerson": {
     "AddApprovalPerson": "Add Approval Person",
@@ -127,7 +136,8 @@
     "Entity": "Entity",
     "DeActive": "De-Active",
     "Status": "Status",
-    "FundsSource": "Funds Source"
+    "FundsSource": "Funds Source",
+    "SearchByNameAndCharityResourcesId":"Search By Name And Charity Resources Id"
   },
   "AddCharityResources": {
     "AddCharityResources": "Add Charity Resources",
@@ -149,9 +159,10 @@
     "Gender": "Gender",
     "Male": "Male",
     "Female": "Female",
-    "ID": "National ID",
+    "ID": "ID",
     "Nationality": "Nationality",
-    "PassportNo": "Passport No"
+    "PassportNo": "Passport No",
+    "SearchByNameAndID":"Search By Name And ID"
   },
   "AddAuthorizedPerson": {
     "AddAuthorizedPerson": "Add Authorized Person",
@@ -172,11 +183,12 @@
     "Funds": "Funds",
     "AddFunds":"Add Funds",
     "FundsList": "Funds List",
-    "CharityResource": "Charity Resource",
+    "CharityResource": "Charity Resource Name",
     "Amount": "Amount",
     "Date": "Date",
     "CharityFundsReports":"Charity Funds Reports",
-    "CharityFundsResource":"Charity Funds Resource"
+    "CharityFundsResource":"Charity Funds Resource",
+    "SearchByCharityResourceNameAndAmount":"Search By Charity Resource Name And Amount"
   },
   "DatePicker": {
     "PickDate": "Pick Date",
