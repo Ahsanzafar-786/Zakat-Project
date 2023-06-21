@@ -31,13 +31,6 @@
 
             <div class="card">
                 <div class="card-header">
-                    <!-- <div class="input-group">
-                        <button class="btn btn-secondary" type="button" id="button-addon1">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <input v-model="search" type="text" class="form-control" :placeholder="$t('Benificary.Search')"
-                            aria-label="Example text with button addon" aria-describedby="button-addon1">
-                    </div> -->
                     <div class="row">
                         <div class="col-3">
                             <input v-model="search" type="text" class="form-control" :placeholder="$t('Benificary.Search')"
@@ -75,9 +68,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
-                                        {{ $t('Payment.Code') }}
-                                    </th>
-                                    <th class="text-center">
                                         {{ $t('Benificary.ID') }}
                                     </th>
                                     <th class="text-center">
@@ -90,7 +80,6 @@
                                         {{ $t('Benificary.AmountPerMonth') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Benificary.UgamaNo') }}
                                         {{ $t('AddBenificary.RecurringAmount') }}
                                     </th>
                                     <th class="text-center">
@@ -114,38 +103,21 @@
                                     </td>
 
                                     <td class="text-center">
-                                    <td class="text-center">
                                         {{ brand.beneficiaryId }}
                                     </td>
-                                    <!-- <td class="text-center">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)">{{ brand.beneficiaryId }}</a>
-                                        </strong>
-                                    </td> -->
+                                    
                                     <td class="text-center">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{
                                                 brand.name == '' ? brand.nameAr : brand.name }}</a>
                                         </strong>
                                     </td>
-                                    <!-- <td class="text-center">
-                                    </td>
-                                <td class="text-center">
-                                    <strong>
-                                        <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{
-                                                brand.name==''?brand.nameAr:brand.name }}</a>
-                                    </strong>
-                                </td>
-                                <!-- <td class="text-center">
-                                    {{ brand.paymentIntervalMonth }}
-                                </td> -->
+                                    
                                     <td class="text-center">
-
                                         <span v-for="item in brand.benificaryAuthorization" :key="item.id" class="mx-2">
                                             {{ item.authorizationPersonName == '' ? item.authorizationPersonNameAr :
                                                 item.authorizationPersonName }}
                                         </span>
-                                        <!-- {{ brand.authorizationPersonName ==''?brand.authorizationPersonNameAr:brand.authorizationPersonName  }} -->
                                     </td>
                                     <td class="text-center">
                                         {{ brand.amountPerMonth }}
@@ -153,9 +125,7 @@
                                     <td class="text-center">
                                         {{ brand.recurringAmount }}
                                     </td>
-                                    <td class="text-center">
-                                        {{ brand.note }}
-                                    </td>
+                                    <td class="text-center" v-html="brand.note"></td>
                                     <td class="text-center">
                                         <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
                                             {{

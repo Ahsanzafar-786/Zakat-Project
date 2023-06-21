@@ -72,6 +72,7 @@ namespace Focus.Business.Benificary.Queries
                             Gender = x.Gender,
                             NameAr = x.NameAr,
                             PassportNo = x.PassportNo,
+                            Note = x.Note,
                             PaymentTypeId = x.PaymentTypeId,
                             RecurringAmount = x.RecurringAmount,
                             BenificaryAuthorization = x.BenificaryAuthorization.Select(y => new BenificaryAuthorizationLookupModel
