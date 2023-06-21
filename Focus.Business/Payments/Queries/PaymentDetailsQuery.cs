@@ -46,7 +46,6 @@ namespace Focus.Business.Payments.Queries
                             Amount = x.Amount,
                             Month = x.Month,
                             Date = x.Date,
-                            PaymentCode = x.PaymentCode,
                             Year = x.Year,
                             Period = x.Period,
                             UserId = x.UserId,
@@ -148,14 +147,14 @@ namespace Focus.Business.Payments.Queries
                     }
                     else
                     {
-                        var query = await Context.Payments.Select(x => new PaymentLookupModel
+                        var query = await Context.Payments.Include(x => x.Beneficiaries).Select(x => new PaymentLookupModel
                         {
                             Id = x.Id,
                             BenificayId = x.BenificayId,
                             Amount = x.Amount,
-                            BenificaryName = x.Beneficiaries.Name,
+                            BenificaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
                             Month = x.Month,
-                            PaymentCode = x.PaymentCode,
+                            PaymentCode = x.Code.ToString(),
                             Year = x.Year,
                             Period = x.Period,
                             Note = x.Note,

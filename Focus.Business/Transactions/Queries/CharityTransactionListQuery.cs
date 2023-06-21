@@ -48,7 +48,7 @@ namespace Focus.Business.Transactions.Queries
                         CharityTransactionDate = x.CharityTransactionDate,
                         DoucmentDate = x.DoucmentDate,
                         Month = x.Month,
-                        benificaryName=benific.FirstOrDefault(z=>z.Id==x.BenificayId)?.Name,
+                        benificaryName=(benific.FirstOrDefault(z=>z.Id==x.BenificayId)?.Name == "" || benific.FirstOrDefault(z => z.Id == x.BenificayId)?.Name == null) ? benific.FirstOrDefault(z => z.Id == x.BenificayId)?.NameAr : benific.FirstOrDefault(z => z.Id == x.BenificayId)?.Name,
                         BenificayId=x.BenificayId,
                         Year = x.Year,
                     }).ToList();

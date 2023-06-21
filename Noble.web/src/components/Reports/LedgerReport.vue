@@ -126,7 +126,6 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            debugger;
             root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate,  {
                     headers: {
                         "Authorization": `Bearer ${token}`
