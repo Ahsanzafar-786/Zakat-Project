@@ -138,11 +138,11 @@
                 debugger;
     
                 if (val) {
-                    this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val
+                    this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + this.authorizationPersonId + '&ApprovalPersonId=' + this.approvalperson + '&Registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val+"&CompanyId="+companyId
                     this.changereportt++;
                     this.show = !this.show;
                 } else {
-                    this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val
+                    this.reportsrc =this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + this.authorizationPersonId + '&ApprovalPersonId=' + this.approvalperson + '&Registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val+"&CompanyId="+companyId
                     this.changereport++;
                 }
             },
