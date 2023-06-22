@@ -154,6 +154,8 @@ namespace Focus.Business.Components
                     EmployeeId = item.User.EmployeeId,
                     IsActive = item.User.IsActive,
                     IsProceed = item.User.IsProceed,
+                    Remarks = item.User.Remarks,
+                    Date = item.User.CreatedDate?.ToString("dd/MM/yyyy"),
                     RoleName = roleName
                 };
 

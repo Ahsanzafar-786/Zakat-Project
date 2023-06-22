@@ -25,6 +25,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net.NetworkInformation;
 using System.Net;
+using Focus.Business.Common;
 
 namespace Noble.Api.Controllers
 {
@@ -441,6 +442,7 @@ namespace Noble.Api.Controllers
                         Email = user.Email,
                         UserName = user.UserName,
                         IsProceed = user.IsProceed,
+                        Remarks = user.Remarks,
                         RoleName= roleName
                     };
                     return Ok(loginUser);
@@ -559,6 +561,9 @@ namespace Noble.Api.Controllers
                         PhoneNumber = loginVm.PhoneNumber,
                         IsActive = loginVm.IsActive,
                         Code = code,
+                        Remarks = loginVm.Remarks,
+                        CreatedDate = DateTime.Now
+                        
                     };
 
                     var user = new ApplicationUser
@@ -570,7 +575,9 @@ namespace Noble.Api.Controllers
                         EmployeeId = loginVm.EmployeeId,
                         CompanyId = User.Identity.CompanyId(),
                         IsActive = register.IsActive,
-                        Code = register.Code
+                        Code = register.Code,
+                        Remarks = register.Remarks,
+                        CreatedDate = register.CreatedDate
 
                     };
 
@@ -610,6 +617,8 @@ namespace Noble.Api.Controllers
                 currentUser.FirstName = loginVm.UserName;
                 currentUser.NormalizedUserName = loginVm.UserName.ToUpper();
                 currentUser.IsActive = loginVm.IsActive;
+                currentUser.Remarks = loginVm.Remarks;
+
                 await _userManager.UpdateAsync(currentUser);
 
                 var role = await _userManager.GetRolesAsync(currentUser);
@@ -657,6 +666,45 @@ namespace Noble.Api.Controllers
 
             }
             return Ok("Already Exists");
+        }
+
+
+        [Route("api/account/DeleteUser")]
+        [HttpGet("DeleteUser")]
+        public async Task<Message> DeleteUser(string userId)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                var userPayment = await _context.Payments.FirstOrDefaultAsync(x => x.UserId == user.Id);
+                if (userPayment == null)
+                {
+                   await _userManager.DeleteAsync(user);
+
+                    return new Message
+                    {
+                        IsSuccess = true,
+                        IsAddUpdate = "User Deleted Successfully",
+                    };
+                }
+                else
+                {
+                    return new Message
+                    {
+                        IsSuccess = false,
+                        IsAddUpdate = "User is used in payments",
+                    };
+                }
+                
+            }
+            catch (Exception)
+            {
+                return new Message
+                {
+                    IsSuccess= false,
+                    IsAddUpdate = "Something Went Wrong",
+                };
+            }
         }
 
         #region For ForgetPassword

@@ -22,6 +22,9 @@ namespace Noble.Api.Models
         
         public bool IsProceed { get; set; }
         public bool IsActive { get; set; }
-        
+        public bool IsStatus { get; set; }
+        public string Remarks { get; set; }
+
+
     }
 }
