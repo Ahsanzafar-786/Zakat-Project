@@ -52,10 +52,10 @@
                                     <th class="text-center">
                                         {{ $t('AuthorizedPerson.Name') }}
                                     </th>
-                                    <!-- <th class="text-center">
-                                        {{ $t('AuthorizedPerson.Gender') }}
-                                    </th>
                                     <th class="text-center">
+                                        {{ $t('AuthorizedPerson.Status') }}
+                                    </th>
+                                    <!-- <th class="text-center">
                                         {{ $t('AuthorizedPerson.ID') }}
                                     </th>
                                     <th class="text-center">
@@ -82,6 +82,18 @@
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditauthorizedPerson(brand.id)"> {{ brand.name }}</a>
                                         </strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
+                                            {{
+                                                $t('Benificary.Active')
+                                            }}
+                                        </span>
+                                        <span v-else class="badge badge-boxed  badge-outline-danger">
+                                            {{
+                                                $t('Benificary.DeActive')
+                                            }}
+                                        </span>
                                     </td>
                                     <!-- <td class="text-center">
                                         {{ brand.gender }}
@@ -165,7 +177,8 @@ export default {
                 passportNo: '',
                 nationality: '',
                 gender: '',
-                iqamaNo: ''
+                iqamaNo: '',
+                isActive:true
             },
             type: '',
             search: '',
@@ -207,7 +220,8 @@ export default {
                 passportNo: '',
                 nationality: '',
                 gender: 'Male',
-                iqamaNo: '' 
+                iqamaNo: '',
+                isActive:true
             }
             this.show = !this.show;
             this.type = "Add";

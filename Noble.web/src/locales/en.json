@@ -113,7 +113,8 @@
     "ApprovalPersonList": "Approval Person List",
     "ApprovalPersonId": "Approval Person Id",
     "Name": "Name",
-    "SearchByNameAndId":"Search By Name And Approval Person Id"
+    "SearchByNameAndId":"Search By Name And Approval Person Id",
+    "Status":"Status"
   },
   "AddApprovalPerson": {
     "AddApprovalPerson": "Add Approval Person",
@@ -162,7 +163,9 @@
     "ID": "ID",
     "Nationality": "Nationality",
     "PassportNo": "Passport No",
-    "SearchByNameAndID":"Search By Name And ID"
+    "SearchByNameAndID":"Search By Name And ID",
+    "Status":"Status"
+
   },
   "AddAuthorizedPerson": {
     "AddAuthorizedPerson": "Add Authorized Person",

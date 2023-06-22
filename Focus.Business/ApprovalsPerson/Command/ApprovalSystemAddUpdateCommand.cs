@@ -40,6 +40,7 @@ namespace Focus.Business.ApprovalsPerson.Command
                             NameAr = request.ApprovalsPerson.NameAr,
                             PhoneNo = request.ApprovalsPerson.PhoneNo,
                             Email = request.ApprovalsPerson.Email,
+                            IsActive = request.ApprovalsPerson.IsActive
                         };
 
                         await Context.ApprovalPersons.AddAsync(approve);
@@ -63,6 +64,8 @@ namespace Focus.Business.ApprovalsPerson.Command
                         approvalPersonDetail.NameAr = request.ApprovalsPerson.NameAr;
                         approvalPersonDetail.PhoneNo = request.ApprovalsPerson.PhoneNo;
                         approvalPersonDetail.Email = request.ApprovalsPerson.Email;
+                        approvalPersonDetail.IsActive = request.ApprovalsPerson.IsActive;
+
 
                         await Context.SaveChangesAsync();
 
