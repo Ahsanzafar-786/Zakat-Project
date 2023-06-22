@@ -105,7 +105,7 @@ namespace Noble.Report.Reports.Invoice
                         {
                             ASPxWebDocumentViewer1.Visible = true;
                             ASPxGridView1.Visible = false;
-                            XtraReport incomeStatementRpt = new Noble.Report.Reports.Invoice.LedgerReport(companyInfo, Charity, fromDate, toDate);
+                            XtraReport incomeStatementRpt = new Noble.Report.Reports.Invoice.benificaryreports(companyInfo, Charity, fromDate, toDate);
                             ASPxWebDocumentViewer1.OpenReport(incomeStatementRpt);
                             incomeStatementRpt.DisplayName = "VatPayableReport";
                         }
