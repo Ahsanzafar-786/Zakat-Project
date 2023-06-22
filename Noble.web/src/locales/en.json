@@ -310,6 +310,7 @@
     "SignUpDetails":"SignUp Details",
     "UserEmail":"User Email",
     "RoleId":"Role Id",
+    "Remarks":"Remarks",
     "UserId":"User Id",
     "Password":"Password",
     "ConfirmPassword":"Confirm Password"   

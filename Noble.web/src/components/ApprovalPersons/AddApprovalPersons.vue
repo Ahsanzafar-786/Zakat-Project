@@ -146,6 +146,7 @@ export default {
              
             this.$https.post('/Benificary/SaveApprovalPersons', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
+                    debugger;
                     if (response.data.isSuccess == true) {
                         if (root.type != "Edit") {
 

@@ -33,7 +33,7 @@ namespace Focus.Business.Transactions.Queries
             {
                 try
                 {
-                    var benific = Context.Beneficiaries.AsNoTracking().Include(x => x.BenificaryAuthorization).ToList();
+                    var benific = Context.Beneficiaries.AsNoTracking().Include(x=>x.BenificaryAuthorization).ToList();
 
                     if (request.AuthorizationPersonId != Guid.Empty && request.AuthorizationPersonId != null)
                     {
@@ -45,11 +45,11 @@ namespace Focus.Business.Transactions.Queries
                     {
                         bool isRegistered = request.Registered == "Register";
 
-                        benific = benific.Where(x => x.IsRegister == isRegistered).ToList();
+                        benific = benific.Where(x => x.IsRegister== isRegistered).ToList();
                     }
                     if (request.ApprovalPersonId != Guid.Empty && request.ApprovalPersonId != null)
                     {
-                        benific = benific.Where(x => x.ApprovalPersonId == request.ApprovalPersonId).ToList();
+                        benific = benific.Where(x => x.ApprovalPersonId== request.ApprovalPersonId).ToList();
                     }
                     if (request.FromDate != null)
                     {
@@ -60,7 +60,7 @@ namespace Focus.Business.Transactions.Queries
                         benific = benific.Where(x => x.StartDate == request.ToDate).ToList();
                     }
 
-                    return benific.Select(x => new BenificariesLookupModel
+                    return benific.Select(x=>new BenificariesLookupModel
                     {
                         Name = string.IsNullOrEmpty(x.Name) ? x.NameAr : x.Name,
                         BeneficiaryId = x.BeneficiaryId,
@@ -84,11 +84,11 @@ namespace Focus.Business.Transactions.Queries
                         RecurringAmount = x.RecurringAmount,
                         BenificaryAuthorization = x.BenificaryAuthorization.Select(y => new BenificaryAuthorizationLookupModel
                         {
-                            AuthorizationPersonName = string.Join(" ", x.BenificaryAuthorization
-                            .Select(y => y.AuthorizedPerson.Name)
-                            .Where(name => !string.IsNullOrEmpty(name))),
+                            Id = y.Id,
+                            AuthorizationPersonName = y.AuthorizedPerson?.AuthorizedPersonCode + " " + y.AuthorizedPerson?.Name,
+                            AuthorizationPersonNameAr = y.AuthorizedPerson?.AuthorizedPersonCode + " " + y.AuthorizedPerson?.NameAr,
 
-                                            }).ToList(),
+                        }).ToList(),
                     }).ToList();
 
                     //return charity;
