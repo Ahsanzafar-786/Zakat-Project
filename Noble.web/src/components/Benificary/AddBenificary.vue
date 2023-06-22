@@ -151,7 +151,7 @@
                         <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" />
 
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6 form-group" v-if="roleName == 'Admin'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
@@ -203,7 +203,7 @@
                         <datepicker v-model="brand.endDate" v-bind:key="randerforempty" :type="'month'" />
 
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6 form-group" v-if="roleName == 'Admin'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
@@ -226,7 +226,7 @@
                                     <th class="text-center"> #</th>
                                     <th class="text-center" >{{
                                         $t('AddBenificary.AuthorizedPerson') }}</th>
-                                    <th class="text-center" >{{ $t('AddBenificary.ApprovedBy')
+                                    <th class="text-center" v-if="roleName == 'Admin'" >{{ $t('AddBenificary.ApprovedBy')
                                     }}</th>
                                     <th class="text-center" >{{ $t('AddBenificary.Date') }}
                                     </th>
@@ -254,11 +254,11 @@
                                         <authorizedperson v-model="person.authorizationPersonId"
                                             :values="person.authorizationPersonId" />
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
+                                    <!-- <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
                                         <approvalperson v-model="person.approvalPersonId"
                                             :values="person.approvalPersonId" :isDisable="'true'"/>
-                                    </td>
-                                    <td class="border-top-0 text-center" v-else>
+                                    </td> -->
+                                    <td class="border-top-0 text-center" v-if="roleName == 'Admin'">
                                         <approvalperson v-model="person.approvalPersonId"
                                             :values="person.approvalPersonId"/>
 
@@ -325,12 +325,20 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' && roleName != 'User'">
-                    {{ $t('Save') }}
+                <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Approved')"
+                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' &&  roleName == 'Admin'">
+                    Save as Approved
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName != 'User'">
+                <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Draft')"
+                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' && roleName != 'User'">
+                    {{ $t('Save') }}1
+                </button>
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Approved')"
+                    v-bind:disabled="$v.brand.$invalid" v-else-if="type == 'Edit' && roleName == 'Admin'">
+                    Approved
+                </button>
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Draft')"
+                    v-bind:disabled="$v.brand.$invalid" v-else-if="type == 'Edit' && roleName != 'User'">
                     {{ $t('Update') }}
                 </button>
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
@@ -509,9 +517,10 @@ export default {
         close: function () {
             this.$emit('close');
         },
-        SaveBenificary: function () {
+        SaveBenificary: function (approvedtype) {
             debugger;
             var root = this;
+            this.brand.approvalStatus=approvedtype;
             var aa = this.brand.beneficiaryId;
             this.brand.beneficiaryId = aa;
             this.loading = true;
@@ -551,7 +560,7 @@ export default {
                 this.brand.advancePayment = advance;
             }
             
-
+           
             this.$https.post('/Benificary/SaveBenificary', this.brand, {
                 headers: {
                     "Authorization": `Bearer ${token}`

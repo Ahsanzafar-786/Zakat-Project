@@ -39,25 +39,25 @@
                             <label class="text  font-weight-bolder">
                                 Approval Person:
                             </label>
-                            <authorizedperson v-model="authorizationPersonId" />
+                            <authorizedperson v-model="approvalPersonId" />
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
                                 Registerd/UnRegistered:
                             </label>
-                            <authorizedperson v-model="authorizationPersonId" />
+                            <authorizedperson v-model="registered" />
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
                                 From Date:
                             </label>
-                            <datepicker v-model="fromDate" :isDisabled="month == '' ? false : true " :key="render" />
+                            <datepicker v-model="fromDate"  :key="render" />
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
                                 To Date:
                             </label>
-                            <datepicker v-model="toDate" :isDisabled="month == '' ? false : true " :key="render" />
+                            <datepicker v-model="toDate"  :key="render" />
                         </div>
                        
                         <div class="col-sm-2 mt-3">
@@ -90,12 +90,13 @@
                 reportsrc1: '',
                 show: false,
                 changereportt: 0,
-                benificaryId: '',
+                authorizationPersonId: '',
+                approvalPersonId: '',
+                registered: '',
                 arabic: '',
                 english: '',
                 fromDate: '',
                 toDate: '',
-                month: '',
                 transactions: '',
                 render: 0
             }
@@ -115,10 +116,11 @@
                 });
             },
             ClearFilter: function () {
-                this.benificaryId = '';
+                this.authorizationPersonId = '';
+                this.approvalPersonId = '';
+                this.registered = '';
                 this.fromDate = '';
                 this.toDate = '';
-                this.month = '';
                 this.render++
             },
             PrintRdlc: function (val) {

@@ -43,6 +43,7 @@ namespace Focus.Business.Benificary.Queries
                             NameAr =x.NameAr,
                             UgamaNo = x.UgamaNo,
                             PhoneNo = x.PhoneNo,
+                            ApprovalStatus = x.ApprovalStatus,
                             BeneficiaryId = x.BeneficiaryId
                         }).ToListAsync();
 
@@ -58,6 +59,7 @@ namespace Focus.Business.Benificary.Queries
                             Id = x.Id,
                             Name = x.Name,
                             BeneficiaryId = x.BeneficiaryId,
+                            ApprovalStatus = x.ApprovalStatus,
                             PaymentIntervalMonth = x.PaymentIntervalMonth,
                             AmountPerMonth = x.AmountPerMonth,
                             UgamaNo = x.UgamaNo,
