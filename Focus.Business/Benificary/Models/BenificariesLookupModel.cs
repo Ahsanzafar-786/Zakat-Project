@@ -3,6 +3,7 @@ using Focus.Business.Payments.Models;
 using Focus.Business.Transactions.Models;
 using System;
 using System.Collections.Generic;
+using Focus.Domain.Enum;
 
 namespace Focus.Business.Benificary.Models
 {
@@ -45,6 +46,8 @@ namespace Focus.Business.Benificary.Models
         public int? FirstMonth { get; set; }
         public int? EndMonth { get; set; }
         public string Reason { get; set; }
+        public ApprovalStatus ApprovalStatus { get; set; }
+
         public List<CharityTransactionLookupModel> CharityTransactions { get; set; }
 
         public bool IsDisable { get; set; }

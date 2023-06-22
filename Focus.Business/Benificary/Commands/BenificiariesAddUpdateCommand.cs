@@ -41,6 +41,7 @@ namespace Focus.Business.Benificary.Commands
                             var benifiary = new Beneficiaries
                             {
                                 BeneficiaryId = request.benificiaries.BeneficiaryId,
+                                ApprovalStatus = request.benificiaries.ApprovalStatus,
                                 Name = request.benificiaries.Name,
                                 PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
                                 AmountPerMonth = request.benificiaries.AmountPerMonth,
@@ -89,6 +90,7 @@ namespace Focus.Business.Benificary.Commands
                             var benifiary = new Beneficiaries
                             {
                                 BeneficiaryId = request.benificiaries.BeneficiaryId,
+                                ApprovalStatus = request.benificiaries.ApprovalStatus,
                                 Name = request.benificiaries.Name,
                                 PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
                                 AmountPerMonth = request.benificiaries.AmountPerMonth,
@@ -143,6 +145,7 @@ namespace Focus.Business.Benificary.Commands
                         if(request.benificiaries.BenificaryAuthorization.Count > 0)
                         {
                             benifiaryDetail.BeneficiaryId = request.benificiaries.BeneficiaryId;
+                            benifiaryDetail.ApprovalStatus = request.benificiaries.ApprovalStatus;
                             benifiaryDetail.Name = request.benificiaries.Name;
                             benifiaryDetail.PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth;
                             benifiaryDetail.AmountPerMonth = request.benificiaries.AmountPerMonth;
@@ -219,6 +222,7 @@ namespace Focus.Business.Benificary.Commands
                         else
                         {
                             benifiaryDetail.BeneficiaryId = request.benificiaries.BeneficiaryId;
+                            benifiaryDetail.ApprovalStatus = request.benificiaries.ApprovalStatus;
                             benifiaryDetail.Name = request.benificiaries.Name;
                             benifiaryDetail.PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth;
                             benifiaryDetail.AmountPerMonth = request.benificiaries.AmountPerMonth;

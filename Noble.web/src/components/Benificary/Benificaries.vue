@@ -82,8 +82,8 @@
                                     <th class="text-center">
                                         {{ $t('AddBenificary.RecurringAmount') }}
                                     </th>
-                                    <th class="text-center">
-                                        {{ $t('Benificary.Note') }}
+                                    <th class="text-center" v-if="roleName=='Admin'">
+                                        Approval Type
                                     </th>
                                     <th class="text-center">
                                         {{ $t('Benificary.Status') }}
@@ -125,14 +125,19 @@
                                     <td class="text-center">
                                         {{ brand.recurringAmount }}
                                     </td>
-                                    <td class="text-center" v-html="brand.note"></td>
+                                    <td class="text-center" v-if="roleName=='Admin'" >
+                                          <span class="badge badge-boxed  badge-outline-danger" v-if="brand.approvalStatus=='4'">Waiting For Approved</span>
+                                          <span class="badge badge-boxed  badge-outline-success" v-if="brand.approvalStatus=='3'">Approved</span>
+                                        </td>
                                     <td class="text-center">
+                                      
                                         <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
                                             {{
                                                 $t('Benificary.Active')
                                             }}
                                         </span>
                                         <span v-else class="badge badge-boxed  badge-outline-danger">
+
                                             {{
                                                 $t('Benificary.DeActive')
                                             }}
@@ -226,6 +231,7 @@ export default {
                 isActive: true,
                 isRegister: true,
                 address: '',
+                approvalStatus: '',
                 passportNo: '',
                 reason: '',
                 nationality: '',
@@ -309,6 +315,7 @@ export default {
                 ugamaNo: '',
                 phoneNo: '',
                 note: '',
+                approvalStatus: '',
                 isDisable: false,
                 authorizedPersonId: '',
                 approvalPersonId: '',
