@@ -53,6 +53,9 @@ import addpayment from '../components/Payment/AddPayment.vue';
 //LedgerReport
 import ledgerreport from '../components/Reports/LedgerReport.vue'
 
+
+
+
 //CompanyProfile
 import companyprofile from '../components/CompanyProfile/CompanyProfile.vue';
 import companyinfo from '../components/CompanyProfile/CompanyInfo.vue';
@@ -188,6 +191,7 @@ const routes = [
                             name: 'ledgerreport',
                             component: ledgerreport
                         },
+                       
                         {
                             path:'/companyprofile',
                             name:'companyprofile',

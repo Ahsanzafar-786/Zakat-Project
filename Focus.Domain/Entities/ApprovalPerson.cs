@@ -10,6 +10,8 @@ namespace Focus.Domain.Entities
         public string Email { get; set; }
         public string PhoneNo { get; set; }
         public int AprovalPersonId { get; set; }
+        public bool IsActive { get; set; }
+
         public virtual ICollection<Beneficiaries> Beneficiaries { get; set; }
         public virtual ICollection<BenificaryAuthorization> BenificaryAuthorization { get; set; }
 

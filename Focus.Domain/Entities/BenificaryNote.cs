@@ -10,6 +10,8 @@ namespace Focus.Domain.Entities
         public string Note { get; set; }
         public DateTime Date { get; set; }
         public Guid? BenificaryId { get; set; }
+        public bool IsActive { get; set; }
+
         public virtual Beneficiaries Beneficiaries { get; set;}
     }
 }
