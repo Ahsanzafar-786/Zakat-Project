@@ -93,6 +93,58 @@ namespace Noble.Report.Reports.Invoice
                         }
 
                     }
+                    else if (formName == "benificaryreports")
+                    {
+                        var benificaryId = Request.QueryString["benificaryId"];
+                        var month = Request.QueryString["month"] == "Invalid date" ? "" : Request.QueryString["month"];
+                        var fromDate = Request.QueryString["fromDate"];
+                        var toDate = Request.QueryString["toDate"];
+                        var Charity = GetCharityLedger.GetCharityLedgerDtl(benificaryId, month, fromDate, toDate, token, serverAddress);
+                        if (Print == "true")
+                        {
+                            ASPxWebDocumentViewer1.Visible = true;
+                            ASPxGridView1.Visible = false;
+                            XtraReport incomeStatementRpt = new Noble.Report.Reports.Invoice.LedgerReport(companyInfo, Charity, fromDate, toDate);
+                            ASPxWebDocumentViewer1.OpenReport(incomeStatementRpt);
+                            incomeStatementRpt.DisplayName = "VatPayableReport";
+                        }
+                        else
+                        {
+                            ASPxWebDocumentViewer1.Visible = false;
+                            ASPxGridView1.Visible = true;
+                            var dt = new DataTable();
+                            dt.Columns.Add("#");
+                            dt.Columns.Add("DocumentCode");
+                            dt.Columns.Add("DocumentDate");
+                            dt.Columns.Add("CharityTransactionDate");
+                            dt.Columns.Add("Month");
+                            dt.Columns.Add("Year");
+                            dt.Columns.Add("BenificaryName");
+                            dt.Columns.Add("Amount");
+
+                            DataRow row;
+                            int i = 1;
+                            foreach (var item in Charity)
+                            {
+                                row = dt.NewRow();
+                                row["#"] = i++;
+                                row["DocumentCode"] = item.DoucmentCode;
+                                row["DocumentDate"] = item.DoucmentDate;
+                                row["CharityTransactionDate"] = item.CharityTransactionDate;
+                                row["Month"] = Convert.ToDateTime(item.Month).ToString("MMMM");
+                                row["Year"] = item.Year;
+                                row["BenificaryName"] = item.benificaryName;
+                                row["Amount"] = item.Amount?.ToString("#.##");
+                                dt.Rows.Add(row);
+                            }
+                            ASPxGridView1.DataSource = dt;
+                            ASPxGridView1.DataBind();
+
+
+                        }
+
+                    }
+
                 }
                 }
             catch (Exception ex)

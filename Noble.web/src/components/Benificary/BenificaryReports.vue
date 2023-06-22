@@ -76,7 +76,6 @@
             </div>
         </div>
         <print :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show=false" @IsSave="IsSave" />
-    
         <iframe :key="changereport" height="1500" width="1000" :src="reportsrc"></iframe>
     </div>
     </template>
@@ -139,11 +138,11 @@
                 debugger;
     
                 if (val) {
-                    this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val
+                    this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val
                     this.changereportt++;
                     this.show = !this.show;
                 } else {
-                    this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val
+                    this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val
                     this.changereport++;
                 }
             },
