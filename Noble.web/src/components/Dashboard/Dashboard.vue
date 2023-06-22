@@ -463,7 +463,11 @@ export default {
             }
             debugger;
 
-
+            if(root.rolename == 'Cashier')
+            {
+                root.userId = localStorage.getItem('UserId');
+            }
+           
 
             root.$https.get(`Benificary/GetDashboardDetail?userId=` + this.userId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
@@ -514,7 +518,7 @@ export default {
         }
 
         this.search = moment().format("DD MMM YYYY");
-        this.userId = localStorage.getItem('UserId');
+       
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
 

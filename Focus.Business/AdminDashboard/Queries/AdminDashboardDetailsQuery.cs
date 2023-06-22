@@ -19,11 +19,12 @@ using System.Collections.Generic;
 using System.Collections;
 using DocumentFormat.OpenXml.Bibliography;
 using Focus.Domain.Entities;
+using MimeKit.Cryptography;
 
 namespace Focus.Business.AdminDashboard.Queries
 {
     public class AdminDashboardDetailsQuery : IRequest<DashboardLookupModel>
-    {
+    { 
         public Guid? UserId { get; set; }
         public class Handler : IRequestHandler<AdminDashboardDetailsQuery, DashboardLookupModel>
         {
@@ -48,6 +49,7 @@ namespace Focus.Business.AdminDashboard.Queries
                     var totalAuthorizePerson = Context.AuthorizedPersons.Count();
                     var funds = await Context.Funds.AsNoTracking().ToListAsync();
                     var charitytransaction = await Context.CharityTransaction.AsNoTracking().ToListAsync();
+                    var payments = await Context.Payments.ToListAsync();
 
                     var totalBenificary = query.Count();
                     var registerBenificary = query.Where(x => x.IsRegister).Count();
@@ -60,7 +62,15 @@ namespace Focus.Business.AdminDashboard.Queries
                     var paymentTypeList = await Context.PaymentTypes.ToListAsync();
                     var totalApprovalPerson = Context.ApprovalPersons.Count();
 
+                    var cashierTotalIncoming = funds.Where(x => x.UserId == request.UserId.ToString()).Sum(x => x.Amount);
+                    var paymentUser = payments.Where(x => x.UserId == request.UserId.ToString()).ToList();
 
+                    decimal CashierTotalOutgoing = 0;
+                    foreach (var item in paymentUser)
+                    {
+                        CashierTotalOutgoing = charitytransaction.Where(x => x.DoucmentId == item.Id).Sum(x => x.Amount);
+                    }
+                    
 
                     var paymentWiseBenificaries = new List<BeneficiariesDurationTypeLookUpModel>();
                     if (paymentTypeList != null)
@@ -133,6 +143,8 @@ namespace Focus.Business.AdminDashboard.Queries
                         MonthList=newList,
                         TotalOutgoing = totalOutgoing,
                         TotalApprovalPerson = totalApprovalPerson,
+                        CashierTotalIncoming = cashierTotalIncoming,
+                        CashierTotalOutgoing = CashierTotalOutgoing,
                         BenificaryPaymentType = paymentWiseBenificaries
 
 
