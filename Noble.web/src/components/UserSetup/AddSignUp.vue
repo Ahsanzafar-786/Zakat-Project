@@ -47,13 +47,15 @@
                            
                         </div>
                         <div class="col-sm-6">
+                            <label>{{ $t('AddSignUp.Remarks')}} :</label>
+                            <textarea rows="1" class="form-control" v-model="loginDetails.remarks" @blur="EmailDuplicate(loginDetails.email)"></textarea>
                         </div>
                         <div class="col-sm-6" v-if="loginDetails.id=='00000000-0000-0000-0000-000000000000'">
                             <label> {{ $t('AddSignUp.Password') }} :<span class="text-danger"> *</span></label>
                             <div v-bind:class="{'has-danger' : $v.loginDetails.password.$error}">
 
                                 <div class="input-group mb-3">
-                                    <input  id="password" v-model="$v.loginDetails.password.$model" name="password" :type="password1" class="form-control" v-bind:placeholder="$t('AddSignUp.Password')" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <input  id="password" v-model="$v.loginDetails.password.$model"  autocomplete="off"  :type="password1" class="form-control" v-bind:placeholder="$t('AddSignUp.Password')" aria-label="Recipient's username" aria-describedby="button-addon2">
                                     <button class="btn btn-secondary" v-on:mousedown="showPassword1" @mouseleave="hidepassword1" type="button" id="button-addon2"><i v-bind:class="eyeValue1?  'fa fa-eye-slash' : 'fas fa-eye'"></i></button>
                                 </div>
                                 <span v-if="$v.loginDetails.password.$error" class="error text-danger">
@@ -68,7 +70,7 @@
                             <div v-bind:class="{'has-danger' : $v.loginDetails.confirmPassword.$error}">
 
                                 <div class="input-group mb-3">
-                                    <input id="password" v-model="$v.loginDetails.confirmPassword.$model" name="password" :type="password" class="form-control" v-bind:placeholder="$t('AddSignUp.Password')" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <input id="password" v-model="$v.loginDetails.confirmPassword.$model" autocomplete="off"  name="password" :type="password" class="form-control" v-bind:placeholder="$t('AddSignUp.Password')" aria-label="Recipient's username" aria-describedby="button-addon2">
                                     <button class="btn btn-secondary" v-on:mousedown="showPassword" @mouseleave="hidepassword" type="button" id="button-addon2"><i v-bind:class="eyeValue?  'fa fa-eye-slash' : 'fas fa-eye'"></i></button>
                                 </div>
                                 <span v-if="$v.loginDetails.confirmPassword.$error" class="error text-danger">
@@ -77,6 +79,13 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="form-group col-sm-12">
+                        <label></label>
+                        <div class="checkbox form-check-inline mx-2">
+                            <input type="checkbox" id="inlineCheckbox1" v-model="loginDetails.isActive">
+                            <label for="inlineCheckbox1"> {{ $t('AddBenificary.Active') }} </label>
+                        </div>
+                    </div>
                     </div>
                 </div>
                
@@ -155,6 +164,8 @@
                     roleName: '',
                     days: 0,
                     limit: 0,
+                    isStatus:true,
+                    remarks:'',
                     touchScreen: ''
                 }
             }
@@ -401,6 +412,7 @@
                     this.loginDetails.userName = this.$route.query.data.userName;
                     this.loginDetails.roleName = this.$route.query.data.roleName;
                     this.loginDetails.isProceed = this.$route.query.data.isProceed;
+                    this.loginDetails.remarks = this.$route.query.data.remarks;
                     this.rander++;
                 }
             }

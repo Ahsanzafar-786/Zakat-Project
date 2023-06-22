@@ -74,7 +74,10 @@
     "Date":"Date",
     "Reason":"Reason",
     "Status":"Status",
-    "Action":"Action"
+    "Action":"Action",
+    "Year":"Year",
+    "Period":"Period",
+    "ByOrder":"By Order"
   },
 
   "BenificaryNote": {
@@ -211,7 +214,8 @@
     "UpdateFunds": "Update Funds",
     "CharityResource": "Charity Resource",
     "Amount": "Amount",
-    "Description": "Description"
+    "Description": "Description",
+    "TypeOfTransaction":"Type Of Transaction"
   },
   "Pagination": {
     "ShowingEntries": "Showing 0 to 0 of 0 entries",
@@ -310,6 +314,7 @@
     "SignUpDetails":"SignUp Details",
     "UserEmail":"User Email",
     "RoleId":"Role Id",
+    "Remarks":"Remarks",
     "UserId":"User Id",
     "Password":"Password",
     "ConfirmPassword":"Confirm Password"   

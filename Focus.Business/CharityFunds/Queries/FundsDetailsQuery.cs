@@ -39,6 +39,7 @@ namespace Focus.Business.CharityFunds.Queries
                         Code = x.Code,
                         CharityResouceId = x.CharityResouceId,
                         UserId = x.UserId,
+                        TypeOfTransaction=x.TypeOfTransaction
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                     if (query == null)

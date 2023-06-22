@@ -182,6 +182,17 @@ namespace Noble.Api.Controllers
             });
             return Ok(benificary);
         }
+        
+        [Route("api/Benificary/DeleteBeneficiaryNote")]
+        [HttpGet("DeleteBeneficiaryNote")]
+        public async Task<IActionResult> DeleteBeneficiaryNote(Guid id)
+        {
+            var benificary = await Mediator.Send(new DeleteBenificaryNoteCommand
+            {
+                Id = id
+            });
+            return Ok(benificary);
+        }
 
         #endregion
 

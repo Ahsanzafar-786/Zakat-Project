@@ -24,6 +24,7 @@ namespace Focus.Business.Models
         public bool IsActive { get; set; }
         public bool IsProceed { get; set; }
         public string FullName { get; set; }
+        public string Remarks { get; set; }
         public string PhoneNumber { get; set; }
         public string ImagePath { get; set; }
         public Guid? EmployeeId { get; set; }
@@ -35,5 +36,7 @@ namespace Focus.Business.Models
         public bool TemporaryCashRequester { get; set; }
         public decimal Days { get; set; }
         public decimal Limit { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string Date { get; set; }
     }
 }

@@ -115,18 +115,47 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group has-label col-sm-12 mb-5">
+                    <div class="form-group has-label col-sm-12 ">
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
-                                <label class="text  font-weight-bolder">
-                                    {{ $t('AddBenificary.Note') }}:
+                                <label class="text  fw-bold">
+                                    {{ $t('AddBenificary.Year') }}:
                                 </label>
                             </div>
-                            <div class="col-sm-7">
-                                <textarea name="" rows="3" class="form-control" v-model="addPayment.note"></textarea>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control"  readonly />
                             </div>
                         </div>
                     </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  fw-bold">
+                                    {{ $t('AddBenificary.Period') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control"  readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  fw-bold">
+                                    {{ $t('AddBenificary.ByOrder') }}:
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="multiselect__tags">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="col-md-5" v-if="addPayment.benificayId != '' && addPayment.benificayId != null">
                     <div class="row">

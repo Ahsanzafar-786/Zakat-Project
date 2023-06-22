@@ -15,7 +15,7 @@
 
             <div class="menu-content h-100" data-simplebar>
                 <ul class="metismenu left-sidenav-menu">
-                    <li>
+                    <li v-if="roleName != 'Cashier' ">
                         <a v-on:click="GoTo('/chartDashboard')" href="javascript:void(0);">
                             <i data-feather="trending-up" class="align-self-center menu-icon"></i><span>{{
                                 $t('Dashboard.Dashboard') }}</span>
@@ -286,7 +286,7 @@
             <!--Page Content-->
             <div class="page-content">
                 <router-view></router-view>
-                <dashboard v-if="dashboard == 'Dashboard'"></dashboard>
+                <dashboard v-if="dashboard == 'Dashboard' && roleName != 'Cashier' "></dashboard>
 
                 <footer class="footer text-center text-sm-start">
                     <span>

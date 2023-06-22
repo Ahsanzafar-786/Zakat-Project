@@ -56,6 +56,9 @@
                                         {{ $t('Funds.Amount') }}
                                     </th>
                                     <th class="text-center">
+                                        {{ $t('Funds.TransactionType') }}
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('Funds.Date') }}
                                     </th>
                                 </tr>
@@ -80,9 +83,10 @@
                                         </strong>
                                     </td>
                                     <td class="text-center">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditFunds(brand.id)"> {{ brand.amount }}</a>
-                                        </strong>
+                                        {{ brand.amount }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ brand.typeOfTransaction }}
                                     </td>
                                     <td class="text-center">
                                         {{ brand.date }}
@@ -155,7 +159,8 @@ export default {
                 amount: '',
                 userId:'',
                 code:'',
-                charityResouceId:''
+                charityResouceId:'',
+                typeOfTransaction:''
             },
             type: '',
             search: '',
@@ -193,7 +198,8 @@ export default {
                 amount: '',
                 userId:'',
                 code:'',
-                charityResouceId:''
+                charityResouceId:'',
+                typeOfTransaction:''
             }
             this.show = !this.show;
             this.type = "Add";
