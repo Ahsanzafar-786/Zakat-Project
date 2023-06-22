@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
-                               {{ $t('Benificary. Register/Un-Register') }}
+                               {{ $t('Benificary.Register/Un-Register') }}
                             </label>
                             <multiselect v-model="registered" 
                             :options="['Register ', 'Un-Register']" :show-labels="false"
@@ -52,13 +52,13 @@
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
-                                From Date:
+                                 {{ $t('Benificary.FromDate') }}
                             </label>
                             <datepicker v-model="fromDate"  :key="render" />
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
-                                To Date:
+                                 {{ $t('Benificary.ToDate') }}
                             </label>
                             <datepicker v-model="toDate"  :key="render" />
                         </div>

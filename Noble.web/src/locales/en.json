@@ -41,7 +41,9 @@
     "ApprovalPerson":"Approval Person",
     "BeneficaryReport":"Beneficary Report",
     "AuthorizedPerson":"Authorized Person",
-    "Register/Un-Register":"Register / Un-Register"
+    "Register/Un-Register":"Register / Un-Register",
+    "FromDate":"From Date",
+    "ToDate":"To Date"
   },
   "AddBenificary": {
     "AddBenificary": "Add Beneficiary",

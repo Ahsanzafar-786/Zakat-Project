@@ -44,7 +44,9 @@
     "ApprovalPerson":"شخص الموافقة",
     "BeneficaryReport":"تقرير المستفيد",
     "AuthorizedPerson":"الشخص المرخص",
-    "Register/Un-Register":"تسجيل / إلغاء التسجيل"
+    "Register/Un-Register":"تسجيل / إلغاء التسجيل",
+    "FromDate":"من التاريخ",
+    "ToDate":"تاريخ "
   },
 
   "AddBenificary":{
