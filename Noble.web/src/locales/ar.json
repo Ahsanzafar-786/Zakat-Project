@@ -133,7 +133,8 @@
     "ApprovalPersonList":"قائمة أفراد الموافقة",
     "ApprovalPersonId":"هوية شخص الموافقة",
     "Name":"اسم",
-    "SearchByNameAndId":"البحث بالاسم والموافقة الشخصية"
+    "SearchByNameAndId":"البحث بالاسم والموافقة الشخصية",
+    "Status":"حالة"
   },
   "AddApprovalPerson":{
     "AddApprovalPerson":"إضافة شخص الموافقة",
@@ -183,7 +184,8 @@
     "ID":"بطاقة تعريف",
     "Nationality":"جنسية",
     "PassportNo":"رقم جواز السفر",
-    "SearchByNameAndID":"البحث بالاسم والمعرف"
+    "SearchByNameAndID":"البحث بالاسم والمعرف",
+    "Status":"حالة"
   },
 
   "AddAuthorizedPerson":{
@@ -363,6 +365,7 @@
     "Analytics":"التحليلات",
     "Dashboard":"لوحة القيادة",
     "Users":"المستخدمون",
+    "Outgoing":"منفتح",
     "Benificary":"المستفيد",
     "RegisterBenificary":"تسجيل المستفيد",
     "Un-RegisterBenificary":"المستفيد غير المسجل",

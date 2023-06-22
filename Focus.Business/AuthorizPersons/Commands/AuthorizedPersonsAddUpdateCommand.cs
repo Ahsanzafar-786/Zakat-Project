@@ -46,6 +46,7 @@ namespace Focus.Business.AuthorizPersons.Commands
                             Gender = request.authorziedPersons.Gender,
                             IqamaNo = request.authorziedPersons.IqamaNo,
                             PassportNo = request.authorziedPersons.PassportNo,
+                            IsActive = request.authorziedPersons.IsActive,
                         };
 
                         await Context.AuthorizedPersons.AddAsync(auth);
@@ -73,6 +74,7 @@ namespace Focus.Business.AuthorizPersons.Commands
                         authorziedPersonDetail.Gender = request.authorziedPersons.Gender;
                         authorziedPersonDetail.IqamaNo = request.authorziedPersons.IqamaNo;
                         authorziedPersonDetail.PassportNo = request.authorziedPersons.PassportNo;
+                        authorziedPersonDetail.IsActive = request.authorziedPersons.IsActive;
 
                         await Context.SaveChangesAsync();
 

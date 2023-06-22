@@ -38,11 +38,9 @@
                         <div class="card report-card">
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col">
+                                    <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Users') }}</p>
                                         <h3 class="m-0">{{ dashboard.totalUser }}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
-                                                    class="mdi mdi-trending-up"></i>8.5%</span> New Sessions Today</p>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -60,15 +58,13 @@
                         <div class="card report-card">
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col">
+                                    <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Benificary') }}</p>
                                         <h3 class="m-0">{{ dashboard.totalBenificary }}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
-                                                    class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="clock" class="align-self-center text-muted icon-sm"></i>
+                                            <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -81,15 +77,14 @@
                         <div class="card report-card">
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col">
+                                    <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.RegisterBenificary') }}</p>
                                         <h3 class="m-0">{{ dashboard.registerBenificary }}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
-                                                    class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
+                                        
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="clock" class="align-self-center text-muted icon-sm"></i>
+                                            <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -102,16 +97,15 @@
                         <div class="card report-card">
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col">
+                                    <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Un-RegisterBenificary') }}
                                         </p>
                                         <h3 class="m-0">{{ dashboard.unRegisterBenificary }}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
-                                                    class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
+                                        
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="clock" class="align-self-center text-muted icon-sm"></i>
+                                            <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -124,58 +118,32 @@
                         <div class="card report-card">
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.OneTimeBenificary') }}</p>
-                                        <h3 class="m-0">{{ dashboard.oneTimeBenificary }}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
-                                                    class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="clock" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end card-body-->
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.MonthlyBenificary') }}</p>
-                                        <h3 class="m-0">{{ dashboard.monthlyBenificary }}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
-                                                    class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
-                                    </div>
-                                    <div class="col-auto align-self-center">
-                                        <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="clock" class="align-self-center text-muted icon-sm"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end card-body-->
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card report-card">
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col">
+                                    <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.AuthorizePerson') }}</p>
                                         <h3 class="m-0">{{ dashboard.totalAuthorizePerson }}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-danger"><i
-                                                    class="mdi mdi-trending-down"></i>35%</span> Bounce Rate Weekly</p>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
-                                            <i data-feather="activity" class="align-self-center text-muted icon-sm"></i>
+                                            <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card report-card">
+                            <div class="card-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="row">
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('ApprovalPerson.ApprovalPerson') }}</p>
+                                        <h3 class="m-0">{{ dashboard.totalApprovalPerson }}</h3>
+                                    </div>
+                                    <div class="col-auto align-self-center">
+                                        <div class="report-main-icon bg-light-alt">
+                                            <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -185,15 +153,33 @@
                         <!--end card-->
                     </div>
                     <!--end col-->
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-3" v-if="rolename == 'Admin'">
                         <div class="card report-card">
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col">
+                                    <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Resource') }}</p>
                                         <h3 class="m-0">{{ dashboard.totalResources }}</h3>
-                                        <p class="mb-0 text-truncate text-muted"><span class="text-success"><i
-                                                    class="mdi mdi-trending-up"></i>10.5%</span> Completions Weekly</p>
+                                        
+                                    </div>
+                                    <div class="col-auto align-self-center">
+                                        <div class="report-main-icon bg-light-alt">
+                                            <i data-feather="briefcase" class="align-self-center text-muted icon-sm"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <div class="col-md-6 col-lg-3" v-if="rolename == 'Admin'">
+                        <div class="card report-card">
+                            <div class="card-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="row">
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Outgoing') }}</p>
+                                        <h3 class="m-0">{{ dashboard.totalOutgoing }}</h3>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -235,8 +221,7 @@
                     <!--end card-header-->
                     <div class="card-body">
                         <div class="text-center">
-                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render">
-                            </apexchart>
+                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render"></apexchart>
                             <!-- <h6 class="bg-light-alt py-3 px-2 mb-0">
                                 <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
                                 01 January 2020 to 31 December 2020
@@ -285,17 +270,15 @@
                                 <h4 class="card-title">{{ $t('Analytics.AudienceOverview') }}</h4>
                             </div>
                             <!--end col-->
-                            <div class="col-auto">
+                            <!-- <div class="col-auto">
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Select Year<i class="las la-angle-down ms-1"></i>
                                     </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript: void(0)" v-for="year in years" :key="year">{{ year }}</a>
-                                    </div>
+                                    
                                 </div>
-                            </div>
+                            </div> -->
                             <!--end col-->
                         </div>
                         <!--end row-->
@@ -329,7 +312,8 @@ export default {
     data: function () {
 
         return {
-            
+            userId:'',
+            rolename:'',
             dashboard: '',
             active: 'Dashboard',
             overView: 'Monthly',
@@ -341,8 +325,6 @@ export default {
             randerDropdown: 0,
             fromDate: moment().format("DD MMM YYYY"),
             toDate: Date(),
-            selectedYear: null,
-            years: [],
             series: [{
                 name: 'Total Amount',
                 data: []
@@ -381,7 +363,7 @@ export default {
                     width: 380,
                     type: 'polarArea'
                 },
-                labels: ['Total', 'Register', 'UnRegister', 'One Time', 'Monthly'],
+                labels: ['Total', 'Register', 'UnRegister'],
                 fill: {
                     opacity: 1
                 },
@@ -431,7 +413,7 @@ export default {
                     width: [0, 4]
                 },
                 title: {
-                    text: 'Traffic Sources'
+                    text: ''
                 },
                 dataLabels: {
                     enabled: false,
@@ -459,16 +441,6 @@ export default {
 
     },
     methods: {
-        // selectYear: function(){
-        //     this.selectYear
-        // },
-        selectYear(year) {
-                this.selectedYear = year;
-                
-            },
-
-
-
         makeActive: function (item) {
 
             this.active = item;
@@ -493,7 +465,7 @@ export default {
 
 
 
-            root.$https.get(`Benificary/GetDashboardDetail`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get(`Benificary/GetDashboardDetail?userId=` + this.userId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.dashboard = response.data;
                     root.series[0].data = [];
@@ -513,7 +485,7 @@ export default {
                         //root.chartOptions3.xaxis.categories.push(result.paymentType);
                     });
 
-                    root.series2.push(response.data.totalBenificary, response.data.registerBenificary, response.data.unRegisterBenificary, response.data.oneTimeBenificary, response.data.monthlyBenificary);
+                    root.series2.push(response.data.totalBenificary, response.data.registerBenificary, response.data.unRegisterBenificary);
                 }
                 root.loading = false;
                 root.render++;
@@ -535,27 +507,20 @@ export default {
         this.fromDate = moment().startOf('month').format("DD MMM YYYY");
 
         if (this.$session.exists()) {
-            this.userID = localStorage.getItem('UserID');
+            this.userID = localStorage.getItem('UserId');
             this.employeeId = localStorage.getItem('EmployeeId');
             this.fromDate = moment().startOf('month').format("DD MMM YYYY");
 
         }
 
-        this.years.push(moment().year());
-        this.years.push(moment().subtract(1, 'year').year());
-        this.years.push(moment().subtract(2, 'year').year());
-        this.years.push(moment().subtract(3, 'year').year());
-        this.years.push(moment().subtract(4, 'year').year());
-        this.years.push(moment().subtract(5, 'year').year());
-
-
         this.search = moment().format("DD MMM YYYY");
-
+        this.userId = localStorage.getItem('UserId');
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
 
+        this.rolename = localStorage.getItem('RoleName')
 
-
+       
 
         const now = new Date();
         this.date = now.toLocaleDateString('en-US', {
