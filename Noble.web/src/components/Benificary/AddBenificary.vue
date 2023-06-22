@@ -325,14 +325,15 @@
 
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Draft')"
+                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' && roleName != 'User'">
+                    {{ $t('Save') }}
+                </button>
                 <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Approved')"
                     v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' &&  roleName == 'Admin'">
                     Save as Approved
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Draft')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' && roleName != 'User'">
-                    {{ $t('Save') }}1
-                </button>
+               
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Approved')"
                     v-bind:disabled="$v.brand.$invalid" v-else-if="type == 'Edit' && roleName == 'Admin'">
                     Approved

@@ -39,13 +39,16 @@
                             <label class="text  font-weight-bolder">
                                 Approval Person:
                             </label>
-                            <authorizedperson v-model="approvalPersonId" />
+                            <approvalperson v-model="approvalPersonId"/>
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
-                                Registerd/UnRegistered:
+                                Register/Un-Register:
                             </label>
-                            <authorizedperson v-model="registered" />
+                            <multiselect v-model="registered" 
+                            :options="['Register ', 'Un-Register']" :show-labels="false"
+                            :placeholder="$t('AddBenificary.SelectType')">
+                        </multiselect>
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
@@ -80,9 +83,14 @@
     
     <script>
     import clickMixin from '@/Mixins/clickMixin'
+    import Multiselect from 'vue-multiselect';
+
     
     export default {
         mixins: [clickMixin],
+        components: {
+        Multiselect,
+    },
         data: function () {
             return {
                 reportsrc: '',
