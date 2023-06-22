@@ -42,12 +42,19 @@
                         </label>
                         <input class="form-control" v-model="$v.brand.amount.$model" type="number" />
                     </div>
+                    <div class="form-group has-label col-sm-3 " v-if="roleName != 'Cashier'">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('Payment.Cashier') }}
+                        </label>
+                        <userdropdown v-model="brand.userId" :values="brand.userId"/>
+                    </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.Description') }}:
                         </label>
                         <VueEditor v-model="brand.description" />
                     </div>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -112,8 +119,12 @@ export default {
         SaveFunds: function () {
 
             var root = this;
-            var aa = localStorage.getItem('UserId');
-            this.brand.userId = aa;
+            if(this.roleName != 'Admin')
+            {
+                var aa = localStorage.getItem('UserId');
+                this.brand.userId = aa;
+            }
+           
             this.loading = true;
             var token = '';
             if (this.$session.exists()) {

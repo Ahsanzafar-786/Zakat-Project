@@ -320,6 +320,7 @@
 
   "AddSignUp":{
     "AddSignUp":"أضف الاشتراك",
+    "Remarks":"ملاحظات",
     "SignUpDetails":"تفاصيل التسجيل",
     "UserEmail":"البريد الالكتروني للمستخدم",
     "RoleId":"معرف الدور",
@@ -369,6 +370,7 @@
     "Analytics":"التحليلات",
     "Dashboard":"لوحة القيادة",
     "Users":"المستخدمون",
+    "Outgoing":"منفتح",
     "Benificary":"المستفيد",
     "RegisterBenificary":"تسجيل المستفيد",
     "Un-RegisterBenificary":"المستفيد غير المسجل",

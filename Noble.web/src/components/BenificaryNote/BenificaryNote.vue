@@ -273,9 +273,58 @@ export default {
                         console.log(error);
                     });
 
+        },
+        deleteBenificaryNote: function(id)
+        {
+            var root = this;
+                var token = '';
+                if (this.$session.exists()) {
+                    token = localStorage.getItem('token');
+                }
+                root.$https.get('/Benificary/DeleteBeneficiaryNote?id=' + id, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                    debugger;
+                    if (response.data.isSuccess == true) {
+                            root.$swal({
+                                title: 'Save',
+                                text: response.data.isAddUpdate,
+                                type: 'success',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: true,
+                            });
+                            root.GetbenificaryNote();
+                    }
+                    else {
+                        root.$swal({
+                            title: 'Error',
+                            text: response.data.isAddUpdate,
+                            type: 'error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            timerProgressBar: true,
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    root.$swal.fire(
+                        {
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Something Went Wrong',
+                            showConfirmButton: false,
+                            timer: 5000,
+                            timerProgressBar: true,
+                        });
+
+                    root.loading = false
+                })
+                .finally(() => root.loading = false);
         }
     },
-
+    
     created: function () {
         this.$emit('input', this.$route.name);
     },

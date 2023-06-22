@@ -121,31 +121,45 @@ namespace Focus.Business.Components
 
         public List<UserDetailDto> ListingUsers()
         {
-
-            var users = _userManager.Users.ToList();
-
             var userList = new List<UserDetailDto>();
 
-            foreach (var user in users)
-            {
-                if (user.CompanyId == _principal.Identity.CompanyId())
+            // Retrieve all users with their associated roles
+            var usersWithRoles = _userManager.Users
+                .Where(user => user.CompanyId == _principal.Identity.CompanyId())
+                .Select(user => new
                 {
-                    if (_context.Companies != null)
-                    {
-                        var userDto = new UserDetailDto
-                        {
-                            Id = user.Id,
-                            FullName = user.UserName,
-                            Email = user.Email,
-                            PhoneNumber = user.PhoneNumber,
-                            ImagePath = user.ImagePath,
-                            EmployeeId = user.EmployeeId,
-                            IsActive = user.IsActive,
-                            IsProceed = user.IsProceed
-                        };
-                        userList.Add(userDto);
-                    }
+                    User = user,
+                    Roles = _userManager.GetRolesAsync(user).Result
+                })
+                .ToList();
+
+            
+
+            // Process each user and their roles
+            foreach (var item in usersWithRoles)
+            {
+                string roleName = "";
+                if (item.Roles.Count > 0)
+                {
+                    roleName = item.Roles[0].ToString();
                 }
+
+                var userDto = new UserDetailDto
+                {
+                    Id = item.User.Id,
+                    FullName = item.User.UserName,
+                    Email = item.User.Email,
+                    PhoneNumber = item.User.PhoneNumber,
+                    ImagePath = item.User.ImagePath,
+                    EmployeeId = item.User.EmployeeId,
+                    IsActive = item.User.IsActive,
+                    IsProceed = item.User.IsProceed,
+                    Remarks = item.User.Remarks,
+                    Date = item.User.CreatedDate?.ToString("dd/MM/yyyy"),
+                    RoleName = roleName
+                };
+
+                userList.Add(userDto);
             }
 
             return userList;

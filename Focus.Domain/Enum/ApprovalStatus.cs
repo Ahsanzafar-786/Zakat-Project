@@ -11,7 +11,7 @@ namespace Focus.Domain.Enum
         [Display(Name = "Approved")]
         Approved = 3,
         [Display(Name = "Draft")]
-        Draft = 3,
+        Draft = 4,
        
     }
 }

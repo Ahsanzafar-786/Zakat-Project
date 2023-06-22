@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Noble.Report.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,6 +32,8 @@ namespace Noble.Report.Models
         public string AuthorizationPersonName { get; set; }
         public string PaymentTypeName { get; set; }
         public string ApprovalPersonName { get; set; }
+
+        public List<BenificaryAuthorizationLookupModel> BenificaryAuthorization { get; set; }
         public List<PaymentLookupModel> PaymentLists { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
@@ -42,5 +45,10 @@ namespace Noble.Report.Models
         public int? FirstMonth { get; set; }
         public int? EndMonth { get; set; }
         public string Reason { get; set; }
+        public ApprovalStatus ApprovalStatus { get; set; }
+
+        public List<CharityTransactionLookupModel> CharityTransactions { get; set; }
+
+        public bool IsDisable { get; set; }
     }
 }

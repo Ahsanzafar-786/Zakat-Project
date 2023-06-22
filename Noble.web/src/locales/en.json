@@ -314,6 +314,7 @@
     "SignUpDetails":"SignUp Details",
     "UserEmail":"User Email",
     "RoleId":"Role Id",
+    "Remarks":"Remarks",
     "UserId":"User Id",
     "Password":"Password",
     "ConfirmPassword":"Confirm Password"   
@@ -360,6 +361,7 @@
     "Analytics":"Analytics",
     "Dashboard":"Dashboard",
     "Users":"Users",
+    "Outgoing":"Outgoing",
     "Benificary":"Beneficiary",
     "RegisterBenificary":"Register Beneficiary",
     "Un-RegisterBenificary":"Un-Register Beneficiary",

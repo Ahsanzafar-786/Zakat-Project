@@ -39,25 +39,28 @@
                             <label class="text  font-weight-bolder">
                                 Approval Person:
                             </label>
-                            <authorizedperson v-model="authorizationPersonId" />
+                            <approvalperson v-model="approvalPersonId"/>
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
-                                Registerd/UnRegistered:
+                                Register/Un-Register:
                             </label>
-                            <authorizedperson v-model="authorizationPersonId" />
+                            <multiselect v-model="registered" 
+                            :options="['Register ', 'Un-Register']" :show-labels="false"
+                            :placeholder="$t('AddBenificary.SelectType')">
+                        </multiselect>
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
                                 From Date:
                             </label>
-                            <datepicker v-model="fromDate" :isDisabled="month == '' ? false : true " :key="render" />
+                            <datepicker v-model="fromDate"  :key="render" />
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
                                 To Date:
                             </label>
-                            <datepicker v-model="toDate" :isDisabled="month == '' ? false : true " :key="render" />
+                            <datepicker v-model="toDate"  :key="render" />
                         </div>
                        
                         <div class="col-sm-2 mt-3">
@@ -73,16 +76,20 @@
             </div>
         </div>
         <print :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show=false" @IsSave="IsSave" />
-    
         <iframe :key="changereport" height="1500" width="1000" :src="reportsrc"></iframe>
     </div>
     </template>
     
     <script>
     import clickMixin from '@/Mixins/clickMixin'
+    import Multiselect from 'vue-multiselect';
+
     
     export default {
         mixins: [clickMixin],
+        components: {
+        Multiselect,
+    },
         data: function () {
             return {
                 reportsrc: '',
@@ -90,12 +97,13 @@
                 reportsrc1: '',
                 show: false,
                 changereportt: 0,
-                benificaryId: '',
+                authorizationPersonId: '',
+                approvalPersonId: '',
+                registered: '',
                 arabic: '',
                 english: '',
                 fromDate: '',
                 toDate: '',
-                month: '',
                 transactions: '',
                 render: 0
             }
@@ -115,10 +123,11 @@
                 });
             },
             ClearFilter: function () {
-                this.benificaryId = '';
+                this.authorizationPersonId = '';
+                this.approvalPersonId = '';
+                this.registered = '';
                 this.fromDate = '';
                 this.toDate = '';
-                this.month = '';
                 this.render++
             },
             PrintRdlc: function (val) {
@@ -129,11 +138,11 @@
                 debugger;
     
                 if (val) {
-                    this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val
+                    this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + this.authorizationPersonId + '&ApprovalPersonId=' + this.approvalperson + '&Registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val+"&CompanyId="+companyId
                     this.changereportt++;
                     this.show = !this.show;
                 } else {
-                    this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val
+                    this.reportsrc =this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + this.authorizationPersonId + '&ApprovalPersonId=' + this.approvalperson + '&Registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val+"&CompanyId="+companyId
                     this.changereport++;
                 }
             },
@@ -144,7 +153,7 @@
                 if (this.$session.exists()) {
                     token = localStorage.getItem('token');
                 }
-                root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate, {
+                root.$https.get('/Benificary/GetBenificaryReport?benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate, {
                         headers: {
                             "Authorization": `Bearer ${token}`
                         }

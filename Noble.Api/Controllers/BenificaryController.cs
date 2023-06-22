@@ -58,9 +58,12 @@ namespace Noble.Api.Controllers
         #region Dashboard
         [Route("api/Benificary/GetDashboardDetail")]
         [HttpGet("GetDashboardDetail")]
-        public async Task<IActionResult> GetDashboardDetail()
+        public async Task<IActionResult> GetDashboardDetail(Guid? userId)
         {
-            var dashboard = await Mediator.Send(new AdminDashboardDetailsQuery {});
+            var dashboard = await Mediator.Send(new AdminDashboardDetailsQuery 
+            {
+
+            });
             return Ok(dashboard);
         }
         #endregion
@@ -174,6 +177,17 @@ namespace Noble.Api.Controllers
         public async Task<IActionResult> GetBenificaryNoteDetail(Guid id)
         {
             var benificary = await Mediator.Send(new GetBenificaryNoteDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(benificary);
+        }
+        
+        [Route("api/Benificary/DeleteBeneficiaryNote")]
+        [HttpGet("DeleteBeneficiaryNote")]
+        public async Task<IActionResult> DeleteBeneficiaryNote(Guid id)
+        {
+            var benificary = await Mediator.Send(new DeleteBenificaryNoteCommand
             {
                 Id = id
             });
@@ -381,6 +395,21 @@ namespace Noble.Api.Controllers
             {
                 BenificayId = benificaryId,
                 Month = month,
+                FromDate = fromDate,
+                ToDate = toDate,
+            });
+            return Ok(charity);
+        }
+
+        [Route("api/Benificary/GetBenificaryReport")]
+        [HttpGet("GetBenificaryReport")]
+        public async Task<IActionResult> GetBenificaryReport(Guid? authorizationPersonId,Guid? approvalPersonId,string registered, DateTime? fromDate, DateTime? toDate)
+        {
+            var charity = await Mediator.Send(new BeneficiaryListQuery
+            {
+                AuthorizationPersonId = authorizationPersonId,
+                ApprovalPersonId = approvalPersonId,
+                Registered = registered,
                 FromDate = fromDate,
                 ToDate = toDate,
             });

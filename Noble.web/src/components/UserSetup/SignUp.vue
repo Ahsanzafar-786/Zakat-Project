@@ -42,7 +42,7 @@
                                     <th>
                                         {{ $t('SignUp.USERNAME') }}
                                     </th>
-                                    <th>
+                                    <th >
                                         {{ $t('SignUp.EMAILID') }}
                                     </th>
                                     <th class="text-center">
@@ -52,10 +52,13 @@
                                         {{ $t('SignUp.Role') }}
                                     </th>
                                     <th class="text-center">
+                                        {{ $t('SignUp.Remarks') }}
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('SignUp.Status') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('SignUp.Remarks') }}
+                                        {{ $t('SignUp.Action') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -69,8 +72,16 @@
                                             <a href="javascript:void(0)" v-on:click="EditInfo(details.id,false)">{{details.fullName}}</a>
                                         </strong>
                                     </td>
-                                    <!-- <td class="text-center">
-                                        <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
+                                    <td>
+                                        <strong>
+                                            <a href="javascript:void(0)" v-on:click="EditInfo(details.id,false)"> {{details.email}}</a>
+                                        </strong>
+                                    </td>
+                                    <td class="text-center">{{details.date}}</td>
+                                    <td class="text-center">{{details.roleName}}</td>
+                                    <td class="text-center">{{details.remarks}}</td>
+                                    <td class="text-center">
+                                        <span v-if="details.isActive" class="badge badge-boxed  badge-outline-success">
                                             {{
                                                 $t('Benificary.Active')
                                             }}
@@ -80,8 +91,10 @@
                                                 $t('Benificary.DeActive')
                                             }}
                                         </span>
-                                    </td> -->
-                                    <td>{{details.email}}</td>
+                                    </td>
+                                    <td class="text-center" v-if="details.roleName != 'Admin'">
+                                        <a class="btn btn-danger" href="javascript:void(0)" v-on:click="DeleteUser(details.id)"> {{ $t('SignUp.Delete') }}</a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -100,6 +113,7 @@
         name: 'signUp',
         data: function () {
             return {
+                roleName:'',
                 searchQuery: '',
                 show: false,
                 loading: false,
@@ -177,7 +191,7 @@
                 if (this.$session.exists()) {
                     token = localStorage.getItem('token');
                 }
-                root.$https.get('/account/UserDelete?Id=' + id, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                root.$https.get('/account/UserDelete?userId=' + id, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                     if (response.data != null) {
                         
                         root.$swal.fire({
@@ -190,6 +204,55 @@
                         root.GetData();
                     }
                 });
+            },
+
+            DeleteUser: function (id) {
+                var root = this;
+                var token = '';
+                if (this.$session.exists()) {
+                    token = localStorage.getItem('token');
+                }
+                root.$https.get('/account/DeleteUser?userId=' + id, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                    debugger;
+                    if (response.data.isSuccess == true) {
+                            root.$swal({
+                                title: 'Save',
+                                text: response.data.isAddUpdate,
+                                type: 'success',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: true,
+                            });
+                            root.GetData();
+                    }
+                    else {
+                        root.$swal({
+                            title: 'Error',
+                            text: response.data.isAddUpdate,
+                            type: 'error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            timerProgressBar: true,
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    root.$swal.fire(
+                        {
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Something Went Wrong',
+                            showConfirmButton: false,
+                            timer: 5000,
+                            timerProgressBar: true,
+                        });
+
+                    root.loading = false
+                })
+                .finally(() => root.loading = false);
             },
 
            
