@@ -69,6 +69,14 @@
                         </label>
                         <textarea class="form-control" v-model="brand.address" rows="3"></textarea>
                     </div>
+                    <div class="form-group col-sm-12">
+                        <label></label>
+                        <div class="checkbox form-check-inline mx-2">
+                            <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
+                            <label for="inlineCheckbox1"> {{ $t('AddBenificary.Active') }} </label>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="modal-footer">
@@ -108,6 +116,7 @@ export default {
             english: '',
             rendar:0,
             loading: false,
+
         }
     },
     validations: {
@@ -122,6 +131,7 @@ export default {
                     return false;
                 }),
             },
+
         }
     },
     methods: {

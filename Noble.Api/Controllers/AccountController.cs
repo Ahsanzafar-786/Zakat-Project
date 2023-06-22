@@ -205,18 +205,18 @@ namespace Noble.Api.Controllers
 
             });
 
-            var current = HttpContext;
-            var permissionList = new ModuleWiseClaimsLookupModel();
-            permissionList.Token = token;
-            permissionList.CompanyId = User.Identity.CompanyId();
-            permissionList.TokenName = current.Request.Scheme + "://" + current.Request.Host + "/api";
-            var reportPath = _configuration.GetSection("ReportServer:Path").Value;
+            //var current = HttpContext;
+            //var permissionList = new ModuleWiseClaimsLookupModel();
+            //permissionList.Token = token;
+            //permissionList.CompanyId = User.Identity.CompanyId();
+            //permissionList.TokenName = current.Request.Scheme + "://" + current.Request.Host + "/api";
+            //var reportPath = _configuration.GetSection("ReportServer:Path").Value;
 
-            using var ping = new Ping();
-            using var httpClient = new HttpClient();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(permissionList), Encoding.UTF8, "application/json");
-            using var response = httpClient.PostAsync(reportPath, content);
-            string errorResponse = response.Result.ToString();
+            //using var ping = new Ping();
+            //using var httpClient = new HttpClient();
+            //StringContent content = new StringContent(JsonConvert.SerializeObject(permissionList), Encoding.UTF8, "application/json");
+            //using var response = httpClient.PostAsync(reportPath, content);
+            //string errorResponse = response.Result.ToString();
 
             return token;
 

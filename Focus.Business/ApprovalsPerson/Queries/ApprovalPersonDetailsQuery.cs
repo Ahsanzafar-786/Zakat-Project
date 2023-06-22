@@ -37,6 +37,7 @@ namespace Focus.Business.ApprovalsPerson.Queries
                         PhoneNo = x.PhoneNo,
                         Email = x.Email,
                         NameAr = x.NameAr,
+                        IsActive = x.IsActive
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                     if (query == null)

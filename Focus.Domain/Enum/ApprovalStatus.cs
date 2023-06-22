@@ -10,6 +10,8 @@ namespace Focus.Domain.Enum
         Rejected  = 2,
         [Display(Name = "Approved")]
         Approved = 3,
+        [Display(Name = "Draft")]
+        Draft = 3,
        
     }
 }

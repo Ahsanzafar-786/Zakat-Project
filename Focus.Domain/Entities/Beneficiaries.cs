@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Focus.Domain.Enum;
 
 namespace Focus.Domain.Entities
 {
@@ -20,6 +21,7 @@ namespace Focus.Domain.Entities
         public decimal RecurringAmount { get; set; }
         public string UgamaNo { get; set; }
         public string PhoneNo { get; set; }
+        public ApprovalStatus ApprovalStatus { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Note { get; set; }

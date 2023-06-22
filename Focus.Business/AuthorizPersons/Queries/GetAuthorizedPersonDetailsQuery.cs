@@ -41,6 +41,7 @@ namespace Focus.Business.AuthorizPersons.Queries
                         PassportNo = x.PassportNo,
                         Gender= x.Gender,
                         IqamaNo = x.IqamaNo,
+                        IsActive = x.IsActive,
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                     if (query == null)

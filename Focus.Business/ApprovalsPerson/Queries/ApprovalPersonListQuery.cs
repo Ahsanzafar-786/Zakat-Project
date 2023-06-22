@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Focus.Business.ApprovalsPerson.Queries
 {
@@ -34,7 +35,7 @@ namespace Focus.Business.ApprovalsPerson.Queries
                 {
                     if (request.IsDropDown)
                     {
-                        var query = await Context.ApprovalPersons.AsNoTracking().Select(x => new ApprovalPersonLookupModel
+                        var query = await Context.ApprovalPersons.AsNoTracking().Where(x => x.IsActive).Select(x => new ApprovalPersonLookupModel
                         {
                             Id = x.Id,
                             Name = x.AprovalPersonId + " - " + x.Name,
@@ -55,6 +56,7 @@ namespace Focus.Business.ApprovalsPerson.Queries
                             NameAr = x.NameAr,
                             AprovalPersonId = x.AprovalPersonId,
                             Email = x.Email,
+                            IsActive = x.IsActive,
                             PhoneNo = x.PhoneNo,
                         }).AsQueryable();
 

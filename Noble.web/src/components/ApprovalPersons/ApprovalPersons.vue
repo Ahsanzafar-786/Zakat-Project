@@ -52,6 +52,9 @@
                                     <th class="text-center">
                                         {{ $t('ApprovalPerson.Name') }}
                                     </th>
+                                    <th class="text-center">
+                                        {{ $t('ApprovalPerson.Status') }}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,6 +80,18 @@
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditapprovalPerson(brand.id)"> {{ brand.nameAr }}</a>
                                         </strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
+                                            {{
+                                                $t('Benificary.Active')
+                                            }}
+                                        </span>
+                                        <span v-else class="badge badge-boxed  badge-outline-danger">
+                                            {{
+                                                $t('Benificary.DeActive')
+                                            }}
+                                        </span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -147,6 +162,7 @@ export default {
                 email: '',
                 aprovalPersonId: 0,
                 phoneNo: '', 
+                isActive:true,
             },
             type: '',
             search: '',
@@ -183,7 +199,8 @@ export default {
                 nameAr: '',
                 email: '',
                 aprovalPersonId: 0,
-                phoneNo: '',  
+                phoneNo: '',
+                isActive:true,  
             }
             this.show = !this.show;
             this.type = "Add";
@@ -216,6 +233,7 @@ export default {
             root.$https.get('/Benificary/GetApprovalPersonsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data) {
+                        debugger; //eslint-disable-line
                         root.newapprovalPerson= response.data;
                         root.show = !root.show;
                         root.type = "Edit"

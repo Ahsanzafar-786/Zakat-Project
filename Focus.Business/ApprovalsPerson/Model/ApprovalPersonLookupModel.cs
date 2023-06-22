@@ -10,5 +10,6 @@ namespace Focus.Business.ApprovalsPerson.Model
         public string Email { get; set; }
         public string PhoneNo { get; set; }
         public int AprovalPersonId { get; set; }
+        public bool IsActive { get; set; }
     }
 }

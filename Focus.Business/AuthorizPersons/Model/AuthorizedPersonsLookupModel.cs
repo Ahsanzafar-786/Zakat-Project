@@ -14,5 +14,6 @@ namespace Focus.Business.AuthorizPersons.Model
         public string Nationality { get; set; }
         public string Gender { get; set; }
         public string IqamaNo { get; set; }
+        public bool IsActive { get; set; }
     }
 }
