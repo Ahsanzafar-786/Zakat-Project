@@ -13,7 +13,7 @@ namespace Noble.Report.NobleDefaultServices
     public static class GetBenificaryReport
     {
 
-        public static List<CharityTransactionLookupModel> GetBenificaryReportDtl(string authorizationPersonId, string approvalperson,string registered, string fromDate,string toDate,string token,string serverName) {
+        public static List<BenificariesLookupModel> GetBenificaryReportDtl(string authorizationPersonId, string approvalperson,string registered, string fromDate,string toDate,string token,string serverName) {
         
             string ipPath = ConfigurationManager.ConnectionStrings["ipAdress"].ConnectionString;
             RestClient client1 = new RestClient(serverName);
@@ -25,7 +25,7 @@ namespace Noble.Report.NobleDefaultServices
             request1.AddHeader("Authorization", "Bearer " + token);
             var response1 = client1.Execute(request1);
             var content1 = response1.Content;
-          var GetBenificaryReport = JsonConvert.DeserializeObject<List<CharityTransactionLookupModel>>(content1);
+          var GetBenificaryReport = JsonConvert.DeserializeObject<List<BenificariesLookupModel>>(content1);
 
             return GetBenificaryReport;
         }
