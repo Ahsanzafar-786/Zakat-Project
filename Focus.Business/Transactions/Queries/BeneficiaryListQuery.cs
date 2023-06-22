@@ -7,9 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Focus.Business.Benificary.Models;
-using Focus.Business.Transactions.Models;
 using Microsoft.EntityFrameworkCore;
-using Focus.Domain.Entities;
 
 namespace Focus.Business.Transactions.Queries
 {
@@ -43,13 +41,9 @@ namespace Focus.Business.Transactions.Queries
                             .Where(x => x.BenificaryAuthorization.All(y => y.AuthorizationPersonId == request.AuthorizationPersonId))
                             .ToList();
                     }
-                    if (request.Registered != null && request.Registered != "")
+                    if (!string.IsNullOrEmpty(request.Registered))
                     {
-                        bool isRegistered = false;
-                        if (request.Registered == "Register")
-                        {
-                            isRegistered = true;
-                        }
+                        bool isRegistered = request.Registered == "Register";
 
                         benific = benific.Where(x => x.IsRegister == isRegistered).ToList();
                     }
@@ -68,7 +62,7 @@ namespace Focus.Business.Transactions.Queries
 
                     return benific.Select(x => new BenificariesLookupModel
                     {
-                        Name = x.Name == null || x.Name == "" ? x.NameAr : x.Name,
+                        Name = string.IsNullOrEmpty(x.Name) ? x.NameAr : x.Name,
                         BeneficiaryId = x.BeneficiaryId,
                         ApprovalStatus = x.ApprovalStatus,
                         PaymentIntervalMonth = x.PaymentIntervalMonth,
