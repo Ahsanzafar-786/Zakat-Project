@@ -27,6 +27,17 @@
                     </div>
                     <div class="form-group has-label col-sm-3 ">
                         <label class="text  font-weight-bolder">
+                            {{ $t('AddFunds.TypeOfTransaction') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <div class="col-sm-12">
+                            <multiselect v-model="brand.durationType" v-on:input="GetDateMonth"
+                            :options="['Monetary ', 'Check']" :show-labels="false"
+                            :placeholder="$t('AddBenificary.SelectType')">
+                        </multiselect>
+                            </div>
+                    </div>
+                    <div class="form-group has-label col-sm-3 ">
+                        <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.Amount') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.amount.$model" type="number" />
@@ -70,6 +81,8 @@ import { required } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { VueEditor } from "vue2-editor";
+import Multiselect from 'vue-multiselect';
+
 
 export default {
     mixins: [clickMixin],
@@ -77,7 +90,8 @@ export default {
     props: ['show', 'brand', 'type'],
     components: {
         Loading,
-        VueEditor
+        VueEditor,
+        Multiselect
     },
     data: function () {
         return {

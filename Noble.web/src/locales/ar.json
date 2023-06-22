@@ -78,7 +78,10 @@
     "BeneficiaryAuthorization":"إذن المستفيد",
     "Date":"تاريخ",
     "Status":"حالة",
-    "Action":"فعل"
+    "Action":"فعل",
+    "Year":"Year",
+    "Period":"Period",
+    "ByOrder":"By Order"
 
   },
   "DateFilter": {
@@ -220,7 +223,8 @@
     "UpdateFunds" : "تحديث الأموال",
     "CharityResource":"الموارد الخيرية",
     "Amount":"كمية",
-    "Description":"وصف"
+    "Description":"وصف",
+    "TypeOfTransaction":"Type Of Transaction"
   },
   "Pagination": {
     "ShowingEntries": "إظهار الإدخالات",
