@@ -235,8 +235,7 @@
                     <!--end card-header-->
                     <div class="card-body">
                         <div class="text-center">
-                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render">
-                            </apexchart>
+                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render"></apexchart>
                             <!-- <h6 class="bg-light-alt py-3 px-2 mb-0">
                                 <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
                                 01 January 2020 to 31 December 2020
@@ -285,17 +284,15 @@
                                 <h4 class="card-title">{{ $t('Analytics.AudienceOverview') }}</h4>
                             </div>
                             <!--end col-->
-                            <div class="col-auto">
+                            <!-- <div class="col-auto">
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Select Year<i class="las la-angle-down ms-1"></i>
                                     </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript: void(0)" v-for="year in years" :key="year">{{ year }}</a>
-                                    </div>
+                                    
                                 </div>
-                            </div>
+                            </div> -->
                             <!--end col-->
                         </div>
                         <!--end row-->
@@ -329,7 +326,7 @@ export default {
     data: function () {
 
         return {
-            
+
             dashboard: '',
             active: 'Dashboard',
             overView: 'Monthly',
@@ -341,8 +338,6 @@ export default {
             randerDropdown: 0,
             fromDate: moment().format("DD MMM YYYY"),
             toDate: Date(),
-            selectedYear: null,
-            years: [],
             series: [{
                 name: 'Total Amount',
                 data: []
@@ -459,16 +454,6 @@ export default {
 
     },
     methods: {
-        // selectYear: function(){
-        //     this.selectYear
-        // },
-        selectYear(year) {
-                this.selectedYear = year;
-                
-            },
-
-
-
         makeActive: function (item) {
 
             this.active = item;
@@ -540,14 +525,6 @@ export default {
             this.fromDate = moment().startOf('month').format("DD MMM YYYY");
 
         }
-
-        this.years.push(moment().year());
-        this.years.push(moment().subtract(1, 'year').year());
-        this.years.push(moment().subtract(2, 'year').year());
-        this.years.push(moment().subtract(3, 'year').year());
-        this.years.push(moment().subtract(4, 'year').year());
-        this.years.push(moment().subtract(5, 'year').year());
-
 
         this.search = moment().format("DD MMM YYYY");
 

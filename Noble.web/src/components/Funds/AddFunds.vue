@@ -12,24 +12,30 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="form-group has-label col-sm-4 ">
+                    <div class="form-group has-label col-sm-3 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('Payment.Code') }}:<span class="text-danger"> *</span>
                         </label>
                         <input type="text" class="form-control" v-model="$v.brand.code.$model" :values="brand.code"
                             disabled />
                     </div>
-                    <div class="form-group has-label col-sm-4 ">
+                    <div class="form-group has-label col-sm-3 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.CharityResource') }}:<span class="text-danger"> *</span>
                         </label>
                         <charityresources v-model="brand.charityResouceId" :values="brand.charityResouceId" />
                     </div>
-                    <div class="form-group has-label col-sm-4 ">
+                    <div class="form-group has-label col-sm-3 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.Amount') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.amount.$model" type="number" />
+                    </div>
+                    <div class="form-group has-label col-sm-3 " v-if="roleName != 'Cashier'">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('Payment.Cashier') }}
+                        </label>
+                        <userdropdown v-model="brand.userId" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
@@ -37,6 +43,7 @@
                         </label>
                         <VueEditor v-model="brand.description" />
                     </div>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -98,6 +105,7 @@ export default {
         SaveFunds: function () {
 
             var root = this;
+            if(this.roleName != 'Admin')
             var aa = localStorage.getItem('UserId');
             this.brand.userId = aa;
             this.loading = true;
