@@ -12,20 +12,31 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="form-group has-label col-sm-4 ">
+                    <div class="form-group has-label col-sm-3 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('Payment.Code') }}:<span class="text-danger"> *</span>
                         </label>
                         <input type="text" class="form-control" v-model="$v.brand.code.$model" :values="brand.code"
                             disabled />
                     </div>
-                    <div class="form-group has-label col-sm-4 ">
+                    <div class="form-group has-label col-sm-3 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.CharityResource') }}:<span class="text-danger"> *</span>
                         </label>
                         <charityresources v-model="brand.charityResouceId" :values="brand.charityResouceId" />
                     </div>
-                    <div class="form-group has-label col-sm-4 ">
+                    <div class="form-group has-label col-sm-3 ">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddFunds.TypeOfTransaction') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <div class="col-sm-12">
+                            <multiselect v-model="brand.durationType" v-on:input="GetDateMonth"
+                            :options="['Monetary ', 'Check']" :show-labels="false"
+                            :placeholder="$t('AddBenificary.SelectType')">
+                        </multiselect>
+                            </div>
+                    </div>
+                    <div class="form-group has-label col-sm-3 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.Amount') }}:<span class="text-danger"> *</span>
                         </label>
@@ -63,6 +74,8 @@ import { required } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { VueEditor } from "vue2-editor";
+import Multiselect from 'vue-multiselect';
+
 
 export default {
     mixins: [clickMixin],
@@ -70,7 +83,8 @@ export default {
     props: ['show', 'brand', 'type'],
     components: {
         Loading,
-        VueEditor
+        VueEditor,
+        Multiselect
     },
     data: function () {
         return {

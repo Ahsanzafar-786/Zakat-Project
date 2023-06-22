@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="openmodel" href="javascript:void(0);"
-                                    class="btn btn-sm btn-outline-primary mx-1" v-if ="roleName != 'User'">
+                                    class="btn btn-sm btn-outline-primary mx-1" v-if="roleName != 'User'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
                                 </a>
@@ -40,11 +40,13 @@
                     </div> -->
                     <div class="row">
                         <div class="col-4">
-                            <input v-model="search" type="text" class="form-control" :placeholder="$t('BenificaryNote.Search')"
-                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <input v-model="search" type="text" class="form-control"
+                                :placeholder="$t('BenificaryNote.Search')" aria-label="Example text with button addon"
+                                aria-describedby="button-addon1">
                         </div>
                         <div class="col-4">
-                            <input v-model="beneficiaryNote" type="text" class="form-control" :placeholder="$t('BenificaryNote.SearchByBeneficiaryNote')"
+                            <input v-model="beneficiaryNote" type="text" class="form-control"
+                                :placeholder="$t('BenificaryNote.SearchByBeneficiaryNote')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
                         <div class="col-4">
@@ -75,6 +77,9 @@
                                     <th class="text-center">
                                         {{ $t('BenificaryNote.Date') }}
                                     </th>
+                                    <th class="text-center">
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,16 +93,23 @@
 
                                     <td class="text-center">
                                         <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)">{{ brand.benificaryName }}</a>
+                                            <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)">{{
+                                                brand.benificaryName }}</a>
                                         </strong>
                                     </td>
                                     <td class="text-center">
                                         <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)"> {{ brand.note }}</a>
+                                            <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)"> {{
+                                                brand.note }}</a>
                                         </strong>
                                     </td>
                                     <td class="text-center">
                                         {{ brand.date }}
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-danger" v-on:click="deleteBenificaryNote(brand.id)">
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -158,7 +170,7 @@ export default {
     mixins: [clickMixin],
     data: function () {
         return {
-        user:'',
+            user: '',
             show: false,
             benificaryNotelist: [],
             newbenificaryNote: {
@@ -174,7 +186,7 @@ export default {
             arabic: '',
             english: '',
             roleName: '',
-            beneficiaryNote:'',
+            beneficiaryNote: '',
         }
     },
     // watch: {
@@ -228,7 +240,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryNote=' +this.beneficiaryNote, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryNote=' + this.beneficiaryNote, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.benificaryNotelist = response.data.results;
                     root.pageCount = response.data.pageCount;
@@ -249,7 +261,7 @@ export default {
             root.$https.get('/Benificary/GetBenificaryNoteDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data) {
-                        root.newbenificaryNote= response.data;
+                        root.newbenificaryNote = response.data;
                         root.show = !root.show;
                         root.type = "Edit"
                     } else {
