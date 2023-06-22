@@ -1,7 +1,5 @@
 ﻿using Focus.Business.AdminDashboard.Model;
-using Focus.Business.Benificary.Models;
-using Focus.Business.Benificary.Queries;
-using Focus.Business.Exceptions;
+
 using Focus.Business.Interface;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -14,11 +12,9 @@ using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Focus.Business.Extensions;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using System.Collections.Generic;
 using System.Collections;
-using DocumentFormat.OpenXml.Bibliography;
-using Focus.Domain.Entities;
+
 
 namespace Focus.Business.AdminDashboard.Queries
 {
@@ -52,8 +48,8 @@ namespace Focus.Business.AdminDashboard.Queries
                     var totalBenificary = query.Count();
                     var registerBenificary = query.Where(x => x.IsRegister).Count();
                     var unRegisterBenificary = query.Where(x => !x.IsRegister).Count();
-                    var oneTimeBenificary = query.Where(x => x.PaymentTypes.Name == "One Time").Count();
-                    var monthlyBenificary = query.Where(x => x.PaymentTypes.Name == "1 Month").Count();
+                    var oneTimeBenificary = query.Where(x => x.PaymentTypes?.Name == "One Time").Count();
+                    var monthlyBenificary = query.Where(x => x.PaymentTypes?.Name == "1 Month").Count();
                     var totalUser = _userManager.Users.Where(x => x.Code != null && x.CompanyId == user.Identity.CompanyId()).Count();
                     decimal totalIncoming = funds.Sum(x => x.Amount);
                     decimal totalOutgoing = charitytransaction.Sum(x => x.Amount);

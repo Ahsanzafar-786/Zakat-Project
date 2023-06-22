@@ -174,7 +174,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0">
+                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -211,7 +211,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0">
+                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 

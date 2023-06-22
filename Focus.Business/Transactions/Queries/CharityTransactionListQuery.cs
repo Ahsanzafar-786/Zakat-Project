@@ -14,6 +14,7 @@ using Focus.Business.Payments.Models;
 using Syncfusion.CompoundFile.Net;
 using Microsoft.EntityFrameworkCore;
 using Focus.Domain.Entities;
+using DocumentFormat.OpenXml.InkML;
 
 namespace Focus.Business.Transactions.Queries
 {
@@ -38,35 +39,51 @@ namespace Focus.Business.Transactions.Queries
             {
                 try
                 {
-                    var benific =  Context.Beneficiaries.AsNoTracking().ToList();
-                    var charity =  Context.CharityTransaction.Where(x => x.DocumentName == null && !x.IsVoid).ToList().Select(x => new CharityTransactionLookupModel()
+                    var query = Context.CharityTransaction
+                         .Where(x => x.DocumentName == null && !x.IsVoid)
+                         .Select(x => new CharityTransactionLookupModel
+                         {
+                             Id = x.Id,
+                             DoucmentId = x.DoucmentId,
+                             DoucmentCode = x.DoucmentCode,
+                             Amount = x.Amount,
+                             CharityTransactionDate = x.CharityTransactionDate,
+                             DoucmentDate = x.DoucmentDate,
+                             Month = x.Month,
+                             BenificayId = x.BenificayId,
+                             Year = x.Year,
+                         });
+
+                    if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
                     {
-                        Id = x.Id,
-                        DoucmentId = x.DoucmentId,
-                        DoucmentCode = x.DoucmentCode,
-                        Amount = x.Amount,
-                        CharityTransactionDate = x.CharityTransactionDate,
-                        DoucmentDate = x.DoucmentDate,
-                        Month = x.Month,
-                        benificaryName=(benific.FirstOrDefault(z=>z.Id==x.BenificayId)?.Name == "" || benific.FirstOrDefault(z => z.Id == x.BenificayId)?.Name == null) ? benific.FirstOrDefault(z => z.Id == x.BenificayId)?.NameAr : benific.FirstOrDefault(z => z.Id == x.BenificayId)?.Name,
-                        BenificayId=x.BenificayId,
-                        Year = x.Year,
-                    }).ToList();
-                    if(request.BenificayId != Guid.Empty && request.BenificayId!=null )
-                    {
-                        charity = charity.Where(x => x.BenificayId == request.BenificayId).ToList();
+                        query = query.Where(x => x.BenificayId == request.BenificayId);
                     }
-                    if(request.Month != null) 
+
+                    if (request.Month.HasValue)
                     {
-                        charity = charity.Where(x => x.Month.Value.Month == request.Month.Value.Month).ToList();
+                        query = query.Where(x => x.Month.Value.Month == request.Month.Value.Month);
                     }
-                    if(request.FromDate != null) 
+
+                    if (request.FromDate.HasValue)
                     {
-                        charity = charity.Where(x => x.Month == request.FromDate).ToList();
+                        query = query.Where(x => x.Month == request.FromDate);
                     }
-                    if(request.ToDate != null) 
+
+                    if (request.ToDate.HasValue)
                     {
-                        charity = charity.Where(x => x.Month == request.ToDate).ToList();
+                        query = query.Where(x => x.Month == request.ToDate);
+                    }
+
+                    var charity = await query.ToListAsync();
+
+                    var benific = await Context.Beneficiaries
+                        .Where(b => charity.Select(c => c.BenificayId).Contains(b.Id))
+                        .ToListAsync();
+
+                    foreach (var transaction in charity)
+                    {
+                        var benificiary = benific.FirstOrDefault(b => b.Id == transaction.BenificayId);
+                        transaction.benificaryName = (string.IsNullOrEmpty(benificiary?.Name) ? benificiary?.NameAr : benificiary?.Name);
                     }
 
                     return charity;
