@@ -6,11 +6,11 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Beneficary Report</h4>
+                                <h4 class="page-title"> {{ $t('Benificary.BeneficaryReport') }}</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Beneficary Report</li>
+                                    <li class="breadcrumb-item active">{{ $t('Benificary.BeneficaryReport') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
@@ -31,19 +31,19 @@
                     <div class="row">
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
-                                Authorized Person:
+                                {{ $t('Benificary.AuthorizedPerson') }}
                             </label>
                             <authorizedperson v-model="authorizationPersonId" />
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
-                                Approval Person:
+                                {{ $t('Benificary.ApprovalPerson') }}
                             </label>
                             <approvalperson v-model="approvalPersonId"/>
                         </div>
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
-                                Register/Un-Register:
+                               {{ $t('Benificary. Register/Un-Register') }}
                             </label>
                             <multiselect v-model="registered" 
                             :options="['Register ', 'Un-Register']" :show-labels="false"
