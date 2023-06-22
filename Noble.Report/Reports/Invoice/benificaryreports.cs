@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using Noble.Report.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Noble.Report.Reports.Invoice
 {
@@ -14,6 +15,14 @@ namespace Noble.Report.Reports.Invoice
         {
             InitializeComponent();
             CompanyInfo.DataSource=companydtl;
+            charity.ForEach(x =>
+            {
+                var authorizationPersonNames = x.BenificaryAuthorization
+                    .Select(z => z.AuthorizationPersonName)
+                    .Where(name => !string.IsNullOrEmpty(name));
+                x.PassportNo = string.Join(",", authorizationPersonNames);
+            });
+
             Beneficries.DataSource=charity;
         }
 

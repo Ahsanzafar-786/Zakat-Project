@@ -35,7 +35,7 @@ namespace Focus.Business.Transactions.Queries
             {
                 try
                 {
-                    var benific = Context.Beneficiaries.AsNoTracking().Include(x=>x.BenificaryAuthorization).ToList();
+                    var benific = Context.Beneficiaries.AsNoTracking().Include(y=>y.ApprovalPersons).Include(x=>x.BenificaryAuthorization).ThenInclude(z=>z.AuthorizedPerson).ToList();
 
                     if (request.AuthorizationPersonId != Guid.Empty && request.AuthorizationPersonId != null)
                     {
@@ -77,7 +77,7 @@ namespace Focus.Business.Transactions.Queries
                         PhoneNo = x.PhoneNo,
                         IsActive = x.IsActive,
                         IsRegister = x.IsRegister,
-                        AuthorizationPersonName = x.AuthorizedPersons?.Name,
+                        ApprovalPersonName = x.ApprovalPersons?.Name,
                         AuthorizedPersonId = x.AuthorizedPersonId,
                         Address = x.Address,
                         ApprovalPersonId = x.ApprovalPersonId,
