@@ -24,6 +24,7 @@ namespace Focus.Business.AdminDashboard.Queries
 {
     public class AdminDashboardDetailsQuery : IRequest<DashboardLookupModel>
     {
+        public Guid? UserId { get; set; }
         public class Handler : IRequestHandler<AdminDashboardDetailsQuery, DashboardLookupModel>
         {
             public readonly IApplicationDbContext Context;
@@ -45,6 +46,8 @@ namespace Focus.Business.AdminDashboard.Queries
                     var user = _httpContextAccessor.HttpContext.User;
                     var query = await Context.Beneficiaries.AsNoTracking().Include(x => x.PaymentTypes).ToListAsync();
                     var totalAuthorizePerson = Context.AuthorizedPersons.Count();
+                    var funds = await Context.Funds.AsNoTracking().ToListAsync();
+                    var charitytransaction = await Context.CharityTransaction.AsNoTracking().ToListAsync();
 
                     var totalBenificary = query.Count();
                     var registerBenificary = query.Where(x => x.IsRegister).Count();
@@ -52,8 +55,13 @@ namespace Focus.Business.AdminDashboard.Queries
                     var oneTimeBenificary = query.Where(x => x.PaymentTypes.Name == "One Time").Count();
                     var monthlyBenificary = query.Where(x => x.PaymentTypes.Name == "1 Month").Count();
                     var totalUser = _userManager.Users.Where(x => x.Code != null && x.CompanyId == user.Identity.CompanyId()).Count();
-                    var totalResources = await Context.Funds.AsNoTracking().Select(x => x.Amount).SumAsync();
+                    decimal totalIncoming = funds.Sum(x => x.Amount);
+                    decimal totalOutgoing = charitytransaction.Sum(x => x.Amount);
                     var paymentTypeList = await Context.PaymentTypes.ToListAsync();
+                    var totalApprovalPerson = Context.ApprovalPersons.Count();
+
+
+
                     var paymentWiseBenificaries = new List<BeneficiariesDurationTypeLookUpModel>();
                     if (paymentTypeList != null)
                     {
@@ -121,9 +129,12 @@ namespace Focus.Business.AdminDashboard.Queries
                         MonthlyBenificary = monthlyBenificary,
                         TotalAuthorizePerson = totalAuthorizePerson,
                         TotalUser = totalUser,
-                        TotalResources = totalResources,
+                        TotalResources = totalIncoming,
                         MonthList=newList,
+                        TotalOutgoing = totalOutgoing,
+                        TotalApprovalPerson = totalApprovalPerson,
                         BenificaryPaymentType = paymentWiseBenificaries
+
 
                     };
                 }

@@ -32,54 +32,65 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-3">
-                            <benificary v-model="benificaryId" :key="render"/>
+                            <benificary v-model="benificaryId" :key="render" />
                         </div>
                         <div class="col-sm-2">
-                            <datepicker :type="'month'" v-model="month" :key="render"/>
+                            <datepicker :type="'month'" v-model="month" :key="render" />
                         </div>
                         <div class="col-sm-2">
-                            <datepicker v-model="fromDate" :isDisabled="month == '' ? false : true " :key="render"/>
+                            <datepicker v-model="fromDate" :isDisabled="month == '' ? false : true" :key="render" />
                         </div>
                         <div class="col-sm-2">
-                            <datepicker v-model="toDate" :isDisabled="month == '' ? false : true " :key="render"/>
+                            <datepicker v-model="toDate" :isDisabled="month == '' ? false : true" :key="render" />
                         </div>
-                        <div class="col-sm-2">
-                            <button class="btn btn-outline-primary me-2"  v-on:click="PrintRdlc(false)">{{ $t('LedgerReport.Filter') }}
+                        <div class="col-sm-3">
+                            <button class="btn btn-outline-primary me-2" v-on:click="PrintRdlc(false)">{{
+                                $t('LedgerReport.Filter') }}
                             </button>
-                            <button class="btn btn-outline-primary" v-on:click="ClearFilter()">{{ $t('LedgerReport.ClearFilters') }}</button>
+                            <button class="btn btn-outline-primary" v-on:click="ClearFilter()">{{
+                                $t('LedgerReport.ClearFilters') }}</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                     
+
                 </div>
             </div>
         </div>
-        <print :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show=false" @IsSave="IsSave" />
+        <print :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show = false"
+            @IsSave="IsSave" />
 
         <iframe :key="changereport" height="1500" width="1000" :src="reportsrc"></iframe>
+        <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
     </div>
 </template>
 <script>
 import clickMixin from '@/Mixins/clickMixin'
+import 'vue-loading-overlay/dist/vue-loading.css';
+import Loading from 'vue-loading-overlay';
 
 export default {
     mixins: [clickMixin],
+    components: {
+        Loading
+    },
     data: function () {
         return {
-            reportsrc:'',
-            changereport:0,
-            reportsrc1:'',
-            show:false,
-            changereportt:0,
+            locals:'',
+            loading: false,
+            reportsrc: '',
+            changereport: 0,
+            reportsrc1: '',
+            show: false,
+            changereportt: 0,
             benificaryId: '',
             arabic: '',
             english: '',
-            fromDate:'',
-            toDate:'',
-            month:'',
+            fromDate: '',
+            toDate: '',
+            month: '',
             transactions: '',
-            render:0
+            render: 0
         }
     },
     watch: {
@@ -88,56 +99,69 @@ export default {
         }
     },
     methods: {
-        IsSave:function(){
-                this.show = !this.show;
-            },
+        IsSave: function () {
+            this.show = !this.show;
+        },
         GotoPage: function (link) {
             this.$router.push({ path: link });
         },
-        ClearFilter: function () 
-        {
-            this.benificaryId =  '';
+        ClearFilter: function () {
+            this.benificaryId = '';
             this.fromDate = '';
             this.toDate = '';
-            this.month =  '';
+            this.month = '';
             this.render++
         },
-        PrintRdlc:function(val) {
-                var companyId = '';
-                    if (this.$session.exists()) {
-                        companyId = localStorage.getItem('CompanyID');
-                    }
-                    debugger;
+        PrintRdlc: function (val) {
+            debugger;
+            if(this.benificaryId == '' && this.fromDate == '' && this.toDate == '' && this.month == '')
+            {
+                return this.$swal.fire({
+                        icon: 'error',
+                        title: this.english == 'en' ? 'Filters' : 'المرشحات',
+                        text: this.english == 'en' ? 'Please Select Filters' : 'يرجى تحديد عوامل التصفية',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        timerProgressBar: true,
+                    });
+            }
+            var companyId = '';
+            if (this.$session.exists()) {
+                companyId = localStorage.getItem('CompanyID');
+            }
+            debugger;
 
-                    if(val){
-                        this.reportsrc1=  this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?companyId='+companyId+'&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate +'&formName=LedgerReport' + "&Print=" + val
-                        this.changereportt++;
-                        this.show = !this.show;
-                    }
-                    else{
-                        this.reportsrc= this.$ReportServer+'/Invoice/A4_DefaultTempletForm.aspx?companyId='+companyId+'&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate +'&formName=LedgerReport' + "&Print=" + val
-                        this.changereport++;
-                    }
-                },
+            if (val) {
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val
+                this.changereportt++;
+                this.show = !this.show;
+                this.loading = false
+
+            }
+            else {
+                this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val
+                this.changereport++;
+            }
+        },
         GetTransactions: function () {
-          
+
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate,  {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
+            root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
                 .then(function (response) {
-                        if (response.data) {
-                            root.transactions = response.data;
-                        } else {
-                            console.log("error: something wrong from db.");
-                        }
-                    },
+                    if (response.data) {
+                        root.transactions = response.data;
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
                     function (error) {
                         this.loading = false;
                         console.log(error);

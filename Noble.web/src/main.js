@@ -130,9 +130,12 @@ Vue.component('charityfundsresource', require('./components/Funds/CharityFundsRe
 //CompanyProfile
 Vue.component('companyprofile-mod' , require('./components/CompanyProfile/CompanyProfile.vue').default);
 Vue.component('companyinfo-mod', require('./components/CompanyProfile/CompanyInfo.vue').default);
+
 //Print
 Vue.component('print', require('./components/Print/Print.vue').default);
 
+//userdropdwon
+Vue.component('userdropdown', require('./components/General/UsersDropdown.vue').default);
 
 
 Vue.prototype.$https = axios;
