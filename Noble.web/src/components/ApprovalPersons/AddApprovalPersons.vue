@@ -43,6 +43,13 @@
                         </label>
                         <input class="form-control" v-model="brand.phoneNo" type="number" />
                     </div>
+                    <div class="form-group col-sm-12">
+                        <label></label>
+                        <div class="checkbox form-check-inline mx-2">
+                            <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
+                            <label for="inlineCheckbox1"> {{ $t('AddBenificary.Active') }} </label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

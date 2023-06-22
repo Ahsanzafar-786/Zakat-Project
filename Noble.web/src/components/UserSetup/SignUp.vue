@@ -45,6 +45,18 @@
                                     <th>
                                         {{ $t('SignUp.EMAILID') }}
                                     </th>
+                                    <th class="text-center">
+                                        {{ $t('SignUp.CreatedOn') }}
+                                    </th>
+                                    <th class="text-center">
+                                        {{ $t('SignUp.Role') }}
+                                    </th>
+                                    <th class="text-center">
+                                        {{ $t('SignUp.Status') }}
+                                    </th>
+                                    <th class="text-center">
+                                        {{ $t('SignUp.Remarks') }}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,6 +69,18 @@
                                             <a href="javascript:void(0)" v-on:click="EditInfo(details.id,false)">{{details.fullName}}</a>
                                         </strong>
                                     </td>
+                                    <!-- <td class="text-center">
+                                        <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
+                                            {{
+                                                $t('Benificary.Active')
+                                            }}
+                                        </span>
+                                        <span v-else class="badge badge-boxed  badge-outline-danger">
+                                            {{
+                                                $t('Benificary.DeActive')
+                                            }}
+                                        </span>
+                                    </td> -->
                                     <td>{{details.email}}</td>
                                 </tr>
                             </tbody>
@@ -79,6 +103,7 @@
                 searchQuery: '',
                 show: false,
                 loading: false,
+                // isActive:true,
                 loginList:[
 
                 ],

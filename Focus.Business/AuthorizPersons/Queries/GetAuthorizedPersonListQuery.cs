@@ -33,7 +33,7 @@ namespace Focus.Business.AuthorizPersons.Queries
                 {
                     if (request.IsDropDown)
                     {
-                        var query = await Context.AuthorizedPersons.AsNoTracking().Select(x => new AuthorizedPersonsLookupModel
+                        var query = await Context.AuthorizedPersons.AsNoTracking().Where(x => x.IsActive).Select(x => new AuthorizedPersonsLookupModel
                         {
                             Id = x.Id,
                             Name = x.AuthorizedPersonCode + " - " + x.Name,
@@ -59,6 +59,7 @@ namespace Focus.Business.AuthorizPersons.Queries
                             PassportNo = x.PassportNo,
                             Gender = x.Gender,
                             IqamaNo = x.IqamaNo,
+                            IsActive=x.IsActive,
                         }).AsQueryable();
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
