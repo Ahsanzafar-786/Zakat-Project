@@ -83,7 +83,7 @@ namespace Noble.Report.Reports.Invoice
                                 row["Month"] = Convert.ToDateTime(item.Month).ToString("MMMM");
                                 row["Year"] = item.Year;
                                 row["BenificaryName"] = item.benificaryName;
-                                row["Amount"] = item.Amount?.ToString("#.##");
+                                row["Amount"] = item.Amount.ToString("N2");
                                 dt.Rows.Add(row);
                             }
                             ASPxGridView1.DataSource = dt;
@@ -95,11 +95,12 @@ namespace Noble.Report.Reports.Invoice
                     }
                     else if (formName == "benificaryreports")
                     {
-                        var benificaryId = Request.QueryString["benificaryId"];
-                        var month = Request.QueryString["month"] == "Invalid date" ? "" : Request.QueryString["month"];
+                        var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"];
+                        var ApprovalPersonId = Request.QueryString["ApprovalPersonId"] == "undefined" ? "" : Request.QueryString["ApprovalPersonId"];
+                        var Registered = Request.QueryString["Registered"];
                         var fromDate = Request.QueryString["fromDate"];
                         var toDate = Request.QueryString["toDate"];
-                        var Charity = GetCharityLedger.GetCharityLedgerDtl(benificaryId, month, fromDate, toDate, token, serverAddress);
+                        var Charity = GetBenificaryReport.GetBenificaryReportDtl(AuthorizationPersonId, ApprovalPersonId, Registered, fromDate, toDate, token, serverAddress);
                         if (Print == "true")
                         {
                             ASPxWebDocumentViewer1.Visible = true;
@@ -127,14 +128,7 @@ namespace Noble.Report.Reports.Invoice
                             foreach (var item in Charity)
                             {
                                 row = dt.NewRow();
-                                row["#"] = i++;
-                                row["DocumentCode"] = item.DoucmentCode;
-                                row["DocumentDate"] = item.DoucmentDate;
-                                row["CharityTransactionDate"] = item.CharityTransactionDate;
-                                row["Month"] = Convert.ToDateTime(item.Month).ToString("MMMM");
-                                row["Year"] = item.Year;
-                                row["BenificaryName"] = item.benificaryName;
-                                row["Amount"] = item.Amount?.ToString("#.##");
+
                                 dt.Rows.Add(row);
                             }
                             ASPxGridView1.DataSource = dt;
