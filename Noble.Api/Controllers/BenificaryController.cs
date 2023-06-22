@@ -63,6 +63,13 @@ namespace Noble.Api.Controllers
             var dashboard = await Mediator.Send(new AdminDashboardDetailsQuery {});
             return Ok(dashboard);
         }
+        [Route("api/Benificary/GetDashboardChartsDetail")]
+        [HttpGet("GetDashboardChartsDetail")]
+        public async Task<IActionResult> GetDashboardChartsDetail()
+        {
+            var dashboard1 = await Mediator.Send(new AdminDashboardChartsDetailsQuery { });
+            return Ok(dashboard1);
+        }
         #endregion
 
         #region Benificary

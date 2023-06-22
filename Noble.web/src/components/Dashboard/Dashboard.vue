@@ -292,7 +292,8 @@
                                         Select Year<i class="las la-angle-down ms-1"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript: void(0)" v-for="year in years" :key="year">{{ year }}</a>
+                                        <a class="dropdown-item" href="javascript: void(0)" v-for="year in years"
+                                            :key="year" v-on:click="year">{{ year }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -329,7 +330,7 @@ export default {
     data: function () {
 
         return {
-            
+            dashboard1: '',
             dashboard: '',
             active: 'Dashboard',
             overView: 'Monthly',
@@ -459,13 +460,21 @@ export default {
 
     },
     methods: {
-        // selectYear: function(){
+        // selectedYear: function(){
         //     this.selectYear
         // },
-        selectYear(year) {
-                this.selectedYear = year;
-                
-            },
+        SelectedYear: function (year) {
+            this.selectedYear = year;
+
+        },
+
+
+        SelectYear: function(val){
+            debugger;
+            this.getDashboardChartsData(val);
+        },
+
+
 
 
 
@@ -490,9 +499,6 @@ export default {
                 token = localStorage.getItem('token');
             }
             debugger;
-
-
-
             root.$https.get(`Benificary/GetDashboardDetail`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.dashboard = response.data;
@@ -514,6 +520,32 @@ export default {
                     });
 
                     root.series2.push(response.data.totalBenificary, response.data.registerBenificary, response.data.unRegisterBenificary, response.data.oneTimeBenificary, response.data.monthlyBenificary);
+                }
+                root.loading = false;
+                root.render++;
+            }).catch(function (error) {
+                console.error(error);
+            });
+        },
+        getDashboardChartsData: function () {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            debugger;
+            root.$https.get(`Benificary/GetDashboardChartsDetail`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                if (response.data != null) {
+                    root.dashboard1 = response.data;
+                    root.series[0].data = [];
+                    root.chartOptions.xaxis.categories = [];
+
+
+                    response.data.monthList.forEach(function (result) {
+                        root.series[0].data.push(result.amount);
+                        root.chartOptions.xaxis.categories.push(result.monthName);
+                    });
+
                 }
                 root.loading = false;
                 root.render++;
@@ -553,6 +585,8 @@ export default {
 
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
+
+        this.getDashboardChartsData();
 
 
 
