@@ -41,6 +41,7 @@ namespace Focus.Business.CharityFunds.Queries
                         Code = x.Code,
                         CharityResouceName = x.CharityResources.Name,
                         Date = x.Date.ToString("dd/MM/yyyy"),
+                        TypeOfTransaction = x.TypeOfTransaction,
                     }).AsQueryable();
 
                     if (!string.IsNullOrEmpty(request.SearchTerm))

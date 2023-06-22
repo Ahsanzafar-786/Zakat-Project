@@ -12,7 +12,6 @@ namespace Focus.Business.CharityFunds.Models
         public string UserId { get; set; }
         public string CharityResouceName { get; set; }
         public Guid? CharityResouceId { get; set; }
-
         public string TypeOfTransaction { get; set; }
     }
 }

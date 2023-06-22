@@ -41,6 +41,8 @@ namespace Focus.Business.CharityFunds.Commands
                            Amount = request.Funds.Amount,
                            CharityResouceId = request.Funds.CharityResouceId,
                            Date = DateTime.Now,
+                           TypeOfTransaction=request.Funds.TypeOfTransaction,
+                           
                         };
 
                         await Context.Funds.AddAsync(fund);
@@ -55,6 +57,8 @@ namespace Focus.Business.CharityFunds.Commands
                             CharityTransactionDate = DateTime.Now,
                             Month = DateTime.Now,
                             Year = DateTime.Now.Year.ToString(),
+                            
+                            
                         };
 
                         await Context.CharityTransaction.AddAsync(charityTransactions);
@@ -80,6 +84,7 @@ namespace Focus.Business.CharityFunds.Commands
                         fund.Amount = request.Funds.Amount;
                         fund.CharityResouceId = request.Funds.CharityResouceId;
                         fund.Date = DateTime.Now;
+                        fund.TypeOfTransaction =request.Funds.TypeOfTransaction;
 
                         await Context.SaveChangesAsync();
 

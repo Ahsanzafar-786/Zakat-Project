@@ -30,7 +30,7 @@
                             {{ $t('AddFunds.TypeOfTransaction') }}:<span class="text-danger"> *</span>
                         </label>
                         <div class="col-sm-12">
-                            <multiselect v-model="brand.durationType" v-on:input="GetDateMonth"
+                            <multiselect v-model="brand.typeOfTransaction"
                             :options="['Monetary ', 'Check']" :show-labels="false"
                             :placeholder="$t('AddBenificary.SelectType')">
                         </multiselect>
