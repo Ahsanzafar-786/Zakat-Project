@@ -35,7 +35,7 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('Payment.Cashier') }}
                         </label>
-                        <userdropdown v-model="brand.userId" />
+                        <userdropdown v-model="brand.userId" :values="brand.userId"/>
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
@@ -106,8 +106,11 @@ export default {
 
             var root = this;
             if(this.roleName != 'Admin')
-            var aa = localStorage.getItem('UserId');
-            this.brand.userId = aa;
+            {
+                var aa = localStorage.getItem('UserId');
+                this.brand.userId = aa;
+            }
+           
             this.loading = true;
             var token = '';
             if (this.$session.exists()) {
