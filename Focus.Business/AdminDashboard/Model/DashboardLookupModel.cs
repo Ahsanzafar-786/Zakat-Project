@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Focus.Business.AdminDashboard.Model
 {
@@ -15,6 +16,8 @@ namespace Focus.Business.AdminDashboard.Model
         public decimal TotalIncoming {get; set; }
         public decimal TotalOutgoing {get; set; }
         public int TotalUser { get; set; }
+
+        public DateTime Year { get; set; }
         public List<TransactionByMonthLookupModel> MonthList { get; set; }
         public  List<BeneficiariesDurationTypeLookUpModel> BenificaryPaymentType { get; set; }
     }

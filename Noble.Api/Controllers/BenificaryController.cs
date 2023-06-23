@@ -68,9 +68,12 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetDashboardChartsDetail")]
         [HttpGet("GetDashboardChartsDetail")]
-        public async Task<IActionResult> GetDashboardChartsDetail()
+        public async Task<IActionResult> GetDashboardChartsDetail(DateTime year )
         {
-            var dashboard1 = await Mediator.Send(new AdminDashboardChartsDetailsQuery { });
+            var dashboard1 = await Mediator.Send(new AdminDashboardChartsDetailsQuery 
+            { 
+                Year = year
+            });
             return Ok(dashboard1);
         }
         #endregion

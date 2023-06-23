@@ -59,7 +59,7 @@ namespace Focus.Business.AdminDashboard.Queries
                     decimal totalOutgoing = charitytransaction.Sum(x => x.Amount);
                     var paymentTypeList = await Context.PaymentTypes.ToListAsync();
                     var totalApprovalPerson = Context.ApprovalPersons.Count();
-
+                    
 
 
                     var paymentWiseBenificaries = new List<BeneficiariesDurationTypeLookUpModel>();
@@ -129,7 +129,7 @@ namespace Focus.Business.AdminDashboard.Queries
                         MonthlyBenificary = monthlyBenificary,
                         TotalAuthorizePerson = totalAuthorizePerson,
                         TotalUser = totalUser,
-                        TotalResources = totalResources,
+                        //TotalResources = totalResources,
                         //MonthList=newList,
                         BenificaryPaymentType = paymentWiseBenificaries
 

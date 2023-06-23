@@ -193,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BenificariesLookupModel.cs" />
+    <Compile Include="Models\BenificaryAuthorizationLookupModel.cs" />
     <Compile Include="Models\CharityTransactionLookupModel.cs" />
     <Compile Include="Models\CompanyLicenceDto.cs" />
     <Compile Include="Models\CompanyDto.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Models\PaymentLookupModel.cs" />
     <Compile Include="Models\ModuleWiseClaimsLookupModel.cs" />
     <Compile Include="Models\PrintSetting.cs" />
+    <Compile Include="NobleDefaultServices\GetBenificaryReport.cs" />
     <Compile Include="NobleDefaultServices\GetCharityLedger.cs" />
     <Compile Include="NobleDefaultServices\GetLedger.cs" />
     <Compile Include="NobleDefaultServices\GetPayment.cs" />
@@ -222,6 +224,12 @@
     </Compile>
     <Compile Include="Reports\Invoice\A4_DefaultTempletForm.aspx.designer.cs">
       <DependentUpon>A4_DefaultTempletForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Invoice\benificaryreports.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\benificaryreports.Designer.cs">
+      <DependentUpon>benificaryreports.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Invoice\LedgerReport.cs">
       <SubType>Component</SubType>
@@ -253,6 +261,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\Invoice\benificaryreports.resx">
+      <DependentUpon>benificaryreports.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\LedgerReport.resx">
       <DependentUpon>LedgerReport.cs</DependentUpon>
     </EmbeddedResource>
