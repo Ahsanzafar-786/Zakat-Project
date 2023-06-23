@@ -95,6 +95,48 @@ namespace Noble.Report.Reports.Invoice
                         }
 
                     }
+                    else if (formName == "PaymentWiseReport")
+                    {
+                        var benificaryId = Request.QueryString["benificaryId"] == null ? "" : Request.QueryString["benificaryId"];
+                        var UserId = Request.QueryString["userId"] == "Invalid date" ? "" : Request.QueryString["userId"];
+                        var fromDate = Request.QueryString["fromDate"];
+                        var toDate = Request.QueryString["toDate"];
+
+                        var PaymantWiseTransection = GetPaymentWiseTransection.GetPaymentWiseTransectionDtl(benificaryId, UserId, fromDate, toDate, token, serverAddress);
+
+                        if (Print == "true")
+                        {
+                            ASPxWebDocumentViewer1.Visible = true;
+                            ASPxGridView1.Visible = false;
+                        }
+                        else
+                        {
+                            ASPxWebDocumentViewer1.Visible = false;
+                            ASPxGridView1.Visible = true;
+                            var dt = new DataTable();
+                            dt.Columns.Add("#");
+                            dt.Columns.Add("DocumentCode");
+                            dt.Columns.Add("DocumentDate");
+                            dt.Columns.Add("CharityTransactionDate");
+                            dt.Columns.Add("Month");
+                            dt.Columns.Add("Year");
+                            dt.Columns.Add("BenificaryName");
+                            dt.Columns.Add("Amount");
+
+                            DataRow row;
+                            int i = 1;
+                            foreach (var item in PaymantWiseTransection)
+                            {
+                                row = dt.NewRow();
+                                dt.Rows.Add(row);
+                            }
+                            ASPxGridView1.DataSource = dt;
+                            ASPxGridView1.DataBind();
+
+
+                        }
+
+                    }
                     else if (formName == "benificaryreports")
                     {
                         var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"]== "null"?"" : Request.QueryString["AuthorizationPersonId"];
