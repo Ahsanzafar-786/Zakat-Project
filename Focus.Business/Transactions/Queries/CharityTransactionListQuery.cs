@@ -64,15 +64,12 @@ namespace Focus.Business.Transactions.Queries
                         query = query.Where(x => x.Month.Value.Month == request.Month.Value.Month);
                     }
 
-                    if (request.FromDate.HasValue)
+                    if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        query = query.Where(x => x.Month == request.FromDate);
+                        query = query.Where(x => x.Month.Value >= request.FromDate.Value && x.Month.Value<= request.ToDate.Value.AddDays(1));
                     }
 
-                    if (request.ToDate.HasValue)
-                    {
-                        query = query.Where(x => x.Month == request.ToDate);
-                    }
+                    
 
                     var charity = await query.ToListAsync();
 
