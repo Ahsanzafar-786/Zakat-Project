@@ -80,7 +80,7 @@
                                     <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.RegisterBenificary') }}</p>
                                         <h3 class="m-0">{{ dashboard.registerBenificary }}</h3>
-                                        
+
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -101,7 +101,7 @@
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Un-RegisterBenificary') }}
                                         </p>
                                         <h3 class="m-0">{{ dashboard.unRegisterBenificary }}</h3>
-                                        
+
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -160,7 +160,7 @@
                                     <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Resource') }}</p>
                                         <h3 class="m-0">{{ dashboard.totalResources }}</h3>
-                                        
+
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -180,7 +180,7 @@
                                     <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Resource') }}</p>
                                         <h3 class="m-0">{{ dashboard.cashierTotalIncoming }}</h3>
-                                        
+
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -233,46 +233,6 @@
                     </div>
                     <!--end col-->
                 </div>
-                <!--end row-->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h4 class="card-title">{{ $t('Analytics.BenificaryType') }}</h4>
-                            </div>
-                            <!--end col-->
-                            <div class="col-auto">
-                                <div class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        All<i class="las la-angle-down ms-1"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">Indefinate</a>
-                                        <a class="dropdown-item" href="#">Customize</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end col-->
-                        </div>
-                        <!--end row-->
-                    </div>
-                    <!--end card-header-->
-                    <div class="card-body">
-                        <div class="text-center">
-                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render"></apexchart>
-                            <!-- <h6 class="bg-light-alt py-3 px-2 mb-0">
-                                <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
-                                01 January 2020 to 31 December 2020
-                            </h6> -->
-                        </div>
-
-                        <!--end /div-->
-                    </div>
-                    <!--end card-body-->
-                </div>
-
-                <!--end card-->
             </div>
             <!--end col-->
             <div class="col-lg-3">
@@ -302,57 +262,109 @@
                 <!--end card-->
             </div>
             <div class="col-lg-9">
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#profile-1" role="tab"
+                            aria-selected="true">Beneficary Type</a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link" data-bs-toggle="tab" href="#home-1" role="tab" aria-selected="false" v-on:click="GetYearWiseTransaction()">Year Wise Payment Outgoing</a>
+                    </li>
+                   
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link" data-bs-toggle="tab" href="#settings-1" role="tab"
+                            aria-selected="false" v-on:click="GetPaymentTypeWiseTransaction()">Payment Types Wise outgoing</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane p-3" id="home-1" role="tabpanel">
+                       <div class="card">
+                        <div class="card-header">
+                            <div class="col-auto">
+                                <label>Select Year:</label>
+                                <datepicker v-model="selectedYear" v-on:input="SelectedYear2(selectedYear)"
+                                    :type="'year'" />
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="reender">
+                            </apexchart>
+                        </div>
+                       </div>
+                    </div>
+                    <div class="tab-pane p-3 active" id="profile-1" role="tabpanel">
+                       <!--end row-->
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">{{ $t('Analytics.AudienceOverview') }}</h4>
+                                <h4 class="card-title">{{ $t('Analytics.BenificaryType') }}</h4>
                             </div>
                             <!--end col-->
-                            <!-- <div class="col-auto">
+                            <div class="col-auto">
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Select Year<i class="las la-angle-down ms-1"></i>
+                                        All<i class="las la-angle-down ms-1"></i>
                                     </a>
-                                    
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="#">Indefinate</a>
+                                        <a class="dropdown-item" href="#">Customize</a>
+                                    </div>
                                 </div>
-                            </div> -->
+                            </div>
                             <!--end col-->
                         </div>
                         <!--end row-->
                     </div>
                     <!--end card-header-->
                     <div class="card-body">
-                        <div class="">
-                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="render">
+                        <div class="text-center">
+                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render">
                             </apexchart>
+                            <!-- <h6 class="bg-light-alt py-3 px-2 mb-0">
+                                <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
+                                01 January 2020 to 31 December 2020
+                            </h6> -->
                         </div>
+
+                        <!--end /div-->
                     </div>
                     <!--end card-body-->
                 </div>
-                <!--end card-->
+                    </div>
+                    <div class="tab-pane p-3" id="settings-1" role="tabpanel">
+                        abc
+                    </div>
+                </div>
+               
             </div>
-            <!--end col-->
         </div>
         <!--end row-->
-
+        <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
     </div>
 </template>
 
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import moment from "moment";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 export default {
 
     mixins: [clickMixin],
-
+    components: {
+        Loading,
+    },
     data: function () {
 
         return {
-            userId:'',
-            rolename:'',
+            dashboard1: '',
+            paymentWiseTransactionList: [],
+            loading: false,
+            userId: '',
+            rolename: '',
             dashboard: '',
             active: 'Dashboard',
             overView: 'Monthly',
@@ -361,9 +373,13 @@ export default {
             income: 0,
             date: '',
             render: 0,
+            reender: 0,
+            reeender:0, 
             randerDropdown: 0,
             fromDate: moment().format("DD MMM YYYY"),
             toDate: Date(),
+            selectedYear: null,
+            years: [],
             series: [{
                 name: 'Total Amount',
                 data: []
@@ -383,7 +399,7 @@ export default {
                     curve: 'straight'
                 },
                 title: {
-                    text: 'All Years Charity',
+                    text: 'Year Wise Payment Outgoing',
                     align: 'left'
                 },
                 grid: {
@@ -480,6 +496,14 @@ export default {
 
     },
     methods: {
+
+        SelectedYear2: function (year) {
+            debugger;
+            this.getDashboardChartsData(year);
+
+
+        },
+
         makeActive: function (item) {
 
             this.active = item;
@@ -492,43 +516,95 @@ export default {
             return moment(date).format('l');
         },
 
+        GetYearWiseTransaction : function ()
+        {
+            var currentDate = moment();
+            var date = currentDate.format('DD MMM YYYY');
+            this.getDashboardChartsData(date);
+        },
 
 
         getDashboardData: function () {
             var root = this;
             var token = '';
+            this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
             debugger;
             this.userId = localStorage.getItem('UserId');
-            
-           
+
+
 
             root.$https.get(`Benificary/GetDashboardDetail?userId=` + this.userId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.dashboard = response.data;
-                    root.series[0].data = [];
-                    root.chartOptions.xaxis.categories = [];
+
                     root.series3[0].data = [];
                     root.series3[1].data = [];
                     root.chartOptions3.xaxis.categories = [];
 
-                    response.data.monthList.forEach(function (result) {
-                        root.series[0].data.push(result.amount);
-                        root.chartOptions.xaxis.categories.push(result.monthName);
-                    });
-
                     response.data.benificaryPaymentType.forEach(function (result) {
                         root.series3[0].data.push(result.indefinate);
                         root.series3[1].data.push(result.customize);
-                        //root.chartOptions3.xaxis.categories.push(result.paymentType);
+                        root.chartOptions3.xaxis.categories.push(result.paymentType);
                     });
 
                     root.series2.push(response.data.totalBenificary, response.data.registerBenificary, response.data.unRegisterBenificary);
                 }
                 root.loading = false;
                 root.render++;
+            }).catch(function (error) {
+                console.error(error);
+            });
+        },
+
+        getDashboardChartsData: function (year) {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            this.loading = true;
+            root.$https.get(`Benificary/GetDashboardChartsDetail?year=` + year, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                if (response.data != null) {
+                    root.dashboard1 = response.data;
+                    root.series[0].data = [];
+                    root.chartOptions.xaxis.categories = [];
+                    response.data.monthList.forEach(function (result) {
+                        root.series[0].data.push(result.amount);
+                        root.chartOptions.xaxis.categories.push(result.monthName);
+                    });
+
+                }
+                root.loading = false;
+                root.reender++;
+            }).catch(function (error) {
+                console.error(error);
+            });
+
+        },
+
+        GetPaymentTypeWiseTransaction: function () {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            this.loading = true;
+            root.$https.get(`Benificary/PaymentTypeWiseTransaction`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                if (response.data != null) {
+                    root.paymentWiseTransactionList = response.data;
+                    // root.series[0].data = [];
+                    // root.chartOptions.xaxis.categories = [];
+                    // response.data.monthList.forEach(function (result) {
+                    //     root.series[0].data.push(result.amount);
+                    //     root.chartOptions.xaxis.categories.push(result.monthName);
+                    // });
+
+                }
+                root.loading = false;
+                root.reeender++;
             }).catch(function (error) {
                 console.error(error);
             });
@@ -554,13 +630,21 @@ export default {
         }
 
         this.search = moment().format("DD MMM YYYY");
-       
+
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
+      
 
         this.rolename = localStorage.getItem('RoleName')
 
-       
+        // this.years.push(moment().year());
+        // this.years.push(moment().subtract(1, 'year').year());
+        // this.years.push(moment().subtract(2, 'year').year());
+        // this.years.push(moment().subtract(3, 'year').year());
+        // this.years.push(moment().subtract(4, 'year').year());
+        // this.years.push(moment().subtract(5, 'year').year());
+
+
 
         const now = new Date();
         this.date = now.toLocaleDateString('en-US', {

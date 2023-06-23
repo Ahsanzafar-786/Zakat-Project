@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Focus.Business.AdminDashboard.Model
+﻿namespace Focus.Business.AdminDashboard.Model
 {
     public class TransactionByMonthLookupModel
     {

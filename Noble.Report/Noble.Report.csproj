@@ -232,7 +232,7 @@
     <Compile Include="Reports\Invoice\benificaryreports.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\Invoice\benificaryreports.designer.cs">
+    <Compile Include="Reports\Invoice\benificaryreports.Designer.cs">
       <DependentUpon>benificaryreports.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Invoice\LedgerReport.cs">
