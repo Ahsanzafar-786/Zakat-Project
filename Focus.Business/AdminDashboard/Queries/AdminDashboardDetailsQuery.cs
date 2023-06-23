@@ -71,10 +71,10 @@ namespace Focus.Business.AdminDashboard.Queries
 
                   
 
-                    decimal CashierTotalOutgoing = 0;
+                    decimal cashierTotalOutgoing = 0;
                     foreach (var item in paymentUser)
                     {
-                        CashierTotalOutgoing = charitytransaction.Where(x => x.DoucmentId == item.Id).Sum(x => x.Amount);
+                        cashierTotalOutgoing = charitytransaction.Where(x => x.DoucmentId == item.Id).Sum(x => x.Amount);
                     }
                     
 
@@ -150,7 +150,7 @@ namespace Focus.Business.AdminDashboard.Queries
                         TotalOutgoing = totalOutgoing,
                         TotalApprovalPerson = totalApprovalPerson,
                         CashierTotalIncoming = cashierTotalIncoming,
-                        CashierTotalOutgoing = CashierTotalOutgoing,
+                        CashierTotalOutgoing = cashierTotalOutgoing,
                         Date = hijriYear.ToString() + hijriMonth.ToString() + hijriDay.ToString(),
                         BenificaryPaymentType = paymentWiseBenificaries
 

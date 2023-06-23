@@ -173,6 +173,26 @@
                         </div>
                         <!--end card-->
                     </div>
+                    <div class="col-md-6 col-lg-3" v-if="rolename == 'Cashier'">
+                        <div class="card report-card">
+                            <div class="card-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="row">
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Resource') }}</p>
+                                        <h3 class="m-0">{{ dashboard.cashierTotalIncoming }}</h3>
+                                        
+                                    </div>
+                                    <div class="col-auto align-self-center">
+                                        <div class="report-main-icon bg-light-alt">
+                                            <i data-feather="briefcase" class="align-self-center text-muted icon-sm"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
                     <div class="col-md-6 col-lg-3" v-if="rolename == 'Admin'">
                         <div class="card report-card">
                             <div class="card-body">
@@ -180,6 +200,25 @@
                                     <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Outgoing') }}</p>
                                         <h3 class="m-0">{{ dashboard.totalOutgoing }}</h3>
+                                    </div>
+                                    <div class="col-auto align-self-center">
+                                        <div class="report-main-icon bg-light-alt">
+                                            <i data-feather="briefcase" class="align-self-center text-muted icon-sm"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <div class="col-md-6 col-lg-3" v-if="rolename == 'Cashier'">
+                        <div class="card report-card">
+                            <div class="card-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="row">
+                                        <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Outgoing') }}</p>
+                                        <h3 class="m-0">{{ dashboard.cashierTotalOutgoing }}</h3>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
