@@ -19,7 +19,7 @@ namespace Focus.Business.Reports.Payments.Queries
     public class PaymentReportQuery : IRequest<List<PaymentWiseListLookupModel>>
     {
         public Guid? BenificayId { get; set; }
-        public Guid? CashierId { get; set; }
+        public Guid? UserId { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
 

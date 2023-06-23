@@ -1,6 +1,6 @@
 <template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options" :multiple="false"  :placeholder="$t('UsersDropdown.SelectUser')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" :preselect-first="true" >
+        <multiselect v-model="DisplayValue" :options="options" :multiple="false"  :placeholder="$t('Select User')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" :preselect-first="true" >
             <p slot="noResult" class="text-danger">{{ $t('UsersDropdown.NoUserFound') }}</p>
             <!-- <span slot="noResult" class="btn btn-primary " v-on:click="AddRole('Add')">Create new Role</span><br /> -->
         </multiselect>
