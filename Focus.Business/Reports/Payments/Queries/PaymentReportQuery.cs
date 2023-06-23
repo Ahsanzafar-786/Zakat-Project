@@ -40,7 +40,6 @@ namespace Focus.Business.Reports.Payments.Queries
             {
                 try
                 {
-                    var users = _userManager.Users.ToList();
                     var query =await Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
                          .Select(x => new PaymentWiseListLookupModel
                          {
@@ -48,8 +47,8 @@ namespace Focus.Business.Reports.Payments.Queries
                              PaymentId = x.Code.ToString(),
                              Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
                              BeneficaryId = x.Beneficiaries != null ? x.Beneficiaries.BeneficiaryId.ToString() : "",
-                             BeneficaryName = x.Beneficiaries == null ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
-                             CashierName = "",
+                             BeneficaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
+                             CashierName = x.UserId != null ? _userManager.Users.FirstOrDefault(ur => ur.Id == x.UserId).UserName: "",
                              UserId = x.UserId != null ? Guid.Parse(x.UserId) : Guid.Empty,
                              Amount = x.Amount,
                              Note = x.Note,

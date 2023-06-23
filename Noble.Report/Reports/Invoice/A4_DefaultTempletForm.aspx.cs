@@ -118,12 +118,12 @@ namespace Noble.Report.Reports.Invoice
                             ASPxGridView1.Visible = true;
                             var dt = new DataTable();
                             dt.Columns.Add("#");
-                            dt.Columns.Add("DocumentCode");
-                            dt.Columns.Add("DocumentDate");
-                            dt.Columns.Add("CharityTransactionDate");
-                            dt.Columns.Add("Month");
-                            dt.Columns.Add("Year");
-                            dt.Columns.Add("BenificaryName");
+                            dt.Columns.Add("PaymentId");
+                            dt.Columns.Add("BeneficaryId");
+                            dt.Columns.Add("BeneficaryName");
+                            dt.Columns.Add("CashierName");
+                            dt.Columns.Add("PaymentType");
+                            dt.Columns.Add("PaymentDate");
                             dt.Columns.Add("Amount");
 
                             DataRow row;
@@ -131,6 +131,14 @@ namespace Noble.Report.Reports.Invoice
                             foreach (var item in PaymantWiseTransection)
                             {
                                 row = dt.NewRow();
+                                row["#"] = i++;
+                                row["PaymentId"] = item.PaymentId;
+                                row["BeneficaryId"] = item.BeneficaryId;
+                                row["BeneficaryName"] = item.BeneficaryName;
+                                row["CashierName"] = item.CashierName;
+                                row["PaymentType"] = item.PaymentType;
+                                row["PaymentDate"] = item.PaymentDate;
+                                row["Amount"] = item.Amount;
                                 dt.Rows.Add(row);
                             }
                             ASPxGridView1.DataSource = dt;

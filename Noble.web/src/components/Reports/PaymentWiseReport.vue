@@ -126,6 +126,7 @@ export default {
                         timerProgressBar: true,
                     });
             }
+            else{
             var companyId = '';
             if (this.$session.exists()) {
                 companyId = localStorage.getItem('CompanyID');
@@ -143,6 +144,7 @@ export default {
                 this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&userId=' + this.userId + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=PaymentWiseReport' + "&Print=" + val
                 this.changereport++;
             }
+        }
         },
        
     },
