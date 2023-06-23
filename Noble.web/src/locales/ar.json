@@ -40,7 +40,13 @@
     "SearchByID":"البحث عن طريق معرف المستفيد",
     "SearchFilter":"تصفية البحث",
     "ClearFilter":"مرشح واضح",
-    "ID":"بطاقة تعريف"
+    "ID":"بطاقة تعريف",
+    "ApprovalPerson":"شخص الموافقة",
+    "BeneficaryReport":"تقرير المستفيد",
+    "AuthorizedPerson":"الشخص المرخص",
+    "Register/Un-Register":"تسجيل / إلغاء التسجيل",
+    "FromDate":"من التاريخ",
+    "ToDate":"تاريخ "
   },
 
   "AddBenificary":{
@@ -108,7 +114,9 @@
     "Search":"البحث عن طريق اسم المستفيد",
     "SearchByBeneficiaryNote":"البحث عن طريق ملاحظة المستفيد",
     "SearchFilter":"تصفية البحث",
-    "ClearFilter":"مرشح واضح"
+    "ClearFilter":"مرشح واضح",
+    "Delete":"يمسح",
+    "Actions":"فعل"
   },
   "AddBenificaryNote":{
     "AddBenificaryNote":"أضف ملاحظة مفيدة",
@@ -216,7 +224,8 @@
     "Date":"تاريخ",
     "CharityFundsReports":"تقارير الصناديق الخيرية",
     "CharityFundsResource":"موارد الصناديق الخيرية",
-    "SearchByCharityResourceNameAndAmount":"البحث عن طريق اسم المورد الخيرية والمبلغ"
+    "SearchByCharityResourceNameAndAmount":"البحث عن طريق اسم المورد الخيرية والمبلغ",
+    "TransactionType":"Transaction Type"
   },
   "AddFunds":{
     "AddFunds" : "إضافة الأموال",
@@ -224,7 +233,7 @@
     "CharityResource":"الموارد الخيرية",
     "Amount":"كمية",
     "Description":"وصف",
-    "TypeOfTransaction":"Type Of Transaction"
+    "TypeOfTransaction":"نوع المعاملة"
   },
   "Pagination": {
     "ShowingEntries": "إظهار الإدخالات",
@@ -315,7 +324,13 @@
     "SearchBYNameAndEmail":"البحث بالاسم والبريد الإلكتروني",
     "USERNAME":"اسم المستخدم",
     "EMAILID":"عنوان الايميل",
-    "Location":"الموقع"
+    "Location":"الموقع",
+    "CreatedOn":"تم إنشاؤها على",
+    "Role":"دور",
+    "Remarks":"ملاحظات",
+    "Status":"حالة",
+    "Action":"فعل",
+    "Delete":"يمسح"
   },
 
   "AddSignUp":{
@@ -363,7 +378,8 @@
     "Month":"الشهر",
     "Year":"السنة",
     "Code":"شفرة",
-    "Period":"فترة"
+    "Period":"فترة",
+    "ByOrder":"بأمر"
   },
 
   "Analytics":{
