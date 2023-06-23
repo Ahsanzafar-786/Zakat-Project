@@ -157,7 +157,8 @@
                                 }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/paymentwisereport')" href="javascript:void(0);">Payment Wise Report</a>
+                                <a v-on:click="GoTo('/paymentwisereport')" href="javascript:void(0);">{{ $t('Payment.PaymentWiseReport')
+                                }}</a>
                             </li>
                         </ul>
                     </li>

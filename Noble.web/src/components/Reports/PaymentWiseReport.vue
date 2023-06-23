@@ -6,11 +6,11 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Payment Wise Report</h4>
+                                <h4 class="page-title">{{ $t('Payment.PaymentWiseReport') }}</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Payment Wise Report</li>
+                                    <li class="breadcrumb-item active">{{ $t('Payment.PaymentWiseReport') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">

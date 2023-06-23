@@ -9,6 +9,7 @@
   "PaidPayments":"Paid Payments",
   "DuePayments":"Due Payments",
   "UnPaidPayments":"UnPaid Payments",
+  "SelectUser":"Select User",
 
   "General": {
     "SelectAuthorizePerson": "Select Authorize Person",
@@ -357,7 +358,8 @@
     "SearchByCode":"Search By ID",
     "SearchByAmount":"Search By Amount",
     "SearchFilter":"Search Filter",
-    "ClearFilter":"Clear Filter"
+    "ClearFilter":"Clear Filter",
+    "PaymentWiseReport":"Payment Wise Report"
   },
 
   "AddPayment":{
@@ -387,7 +389,8 @@
     "Resource":"Resource",
     "BenificaryType":"Beneficiary Type",
     "AudienceOverview":"Audience Overview",
-    "PaymentTypesWiseoutgoing":"Payment Types Wise Outgoing"
+    "PaymentTypesWiseoutgoing":"Payment Types Wise Outgoing",
+    "YearWisePaymentOutgoing":"Year Wise Payment Outgoing"
   },
   "LedgerReport":{
     "LedgerReport": "Ledger Report",
