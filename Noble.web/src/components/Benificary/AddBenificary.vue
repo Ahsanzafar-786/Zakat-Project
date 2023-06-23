@@ -188,7 +188,7 @@
                             {{ $t('AddBenificary.Type') }}:
                         </label>
                         <multiselect v-model="brand.durationType" v-on:input="GetDateMonth"
-                            :options="['Indefinite ', 'Customize']" :show-labels="false"
+                            :options="['Customize','Indefinite ']" :show-labels="false"
                             :placeholder="$t('AddBenificary.SelectType')">
                         </multiselect>
                     </div>
@@ -443,7 +443,7 @@ export default {
                         this.brand.isActive = false;
                     }
                     else {
-                        this.brand.durationType = 'Indefinite';
+                        this.brand.durationType = 'Customize';
                         this.brand.isActive = true;
 
                     }
