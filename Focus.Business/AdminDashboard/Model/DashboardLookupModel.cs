@@ -14,6 +14,8 @@ namespace Focus.Business.AdminDashboard.Model
         public decimal TotalResources {get; set; }
         public decimal TotalIncoming {get; set; }
         public decimal TotalOutgoing {get; set; }
+        public decimal CashierTotalIncoming {get; set; }
+        public decimal CashierTotalOutgoing { get; set; }
         public int TotalUser { get; set; }
         public List<TransactionByMonthLookupModel> MonthList { get; set; }
         public  List<BeneficiariesDurationTypeLookUpModel> BenificaryPaymentType { get; set; }

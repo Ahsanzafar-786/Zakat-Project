@@ -15,7 +15,7 @@
 
             <div class="menu-content h-100" data-simplebar>
                 <ul class="metismenu left-sidenav-menu">
-                    <li v-if="roleName != 'Cashier' ">
+                    <li>
                         <a v-on:click="GoTo('/chartDashboard')" href="javascript:void(0);">
                             <i data-feather="trending-up" class="align-self-center menu-icon"></i><span>{{
                                 $t('Dashboard.Dashboard') }}</span>
