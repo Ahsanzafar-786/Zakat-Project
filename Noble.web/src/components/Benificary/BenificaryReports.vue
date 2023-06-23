@@ -46,7 +46,7 @@
                                {{ $t('Benificary.Register/Un-Register') }}
                             </label>
                             <multiselect v-model="registered" 
-                            :options="['Register ', 'Un-Register']" :show-labels="false"
+                            :options="['Register', 'Un-Register']" :show-labels="false"
                             :placeholder="$t('AddBenificary.SelectType')">
                         </multiselect>
                         </div>

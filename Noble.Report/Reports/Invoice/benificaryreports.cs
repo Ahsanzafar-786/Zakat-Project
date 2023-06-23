@@ -6,6 +6,7 @@ using System.Drawing;
 using Noble.Report.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace Noble.Report.Reports.Invoice
 {
@@ -24,6 +25,13 @@ namespace Noble.Report.Reports.Invoice
             });
 
             Beneficries.DataSource=charity;
+            if (companydtl.Base64Logo != null && companydtl.Base64Logo != "" && companydtl.Base64Logo != string.Empty)
+            {
+                byte[] footerData = Convert.FromBase64String(companydtl.Base64Logo);
+                MemoryStream Footerms = new MemoryStream(footerData);
+                Bitmap FooterImg = new Bitmap(Footerms);
+                xrPictureBox1.Image = FooterImg;
+            }
         }
 
     }

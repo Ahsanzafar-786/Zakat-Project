@@ -44,11 +44,13 @@ namespace Noble.Report.Reports.Invoice
                     }
                     else if (formName == "LedgerReport")
                     {
-                        var benificaryId = Request.QueryString["benificaryId"];
+                        var benificaryId = Request.QueryString["benificaryId"]==null?"": Request.QueryString["benificaryId"];
                         var month = Request.QueryString["month"]== "Invalid date"?"": Request.QueryString["month"];
                         var fromDate = Request.QueryString["fromDate"];
                         var toDate = Request.QueryString["toDate"];
+
                         var Charity = GetCharityLedger.GetCharityLedgerDtl(benificaryId,month,fromDate,toDate, token, serverAddress);
+
                         if (Print == "true")
                         {
                             ASPxWebDocumentViewer1.Visible = true;
@@ -93,6 +95,51 @@ namespace Noble.Report.Reports.Invoice
                         }
 
                     }
+                    else if (formName == "PaymentWiseReport")
+                    {
+                        var benificaryId = Request.QueryString["benificaryId"] == null ? "" : Request.QueryString["benificaryId"];
+                        var UserId = Request.QueryString["userId"] == "Invalid date" ? "" : Request.QueryString["userId"];
+                        var fromDate = Request.QueryString["fromDate"];
+                        var toDate = Request.QueryString["toDate"];
+
+                        var PaymantWiseTransection = GetPaymentWiseTransection.GetPaymentWiseTransectionDtl(benificaryId, UserId, fromDate, toDate, token, serverAddress);
+
+                        if (Print == "true")
+                        {
+                            ASPxWebDocumentViewer1.Visible = true;
+                            ASPxGridView1.Visible = false;
+                            XtraReport report = new Noble.Report.Reports.Invoice.PaymentWiseReport(companyInfo,PaymantWiseTransection);
+                            ASPxWebDocumentViewer1.OpenReport(report);
+                                
+                        }
+                        else
+                        {
+                            ASPxWebDocumentViewer1.Visible = false;
+                            ASPxGridView1.Visible = true;
+                            var dt = new DataTable();
+                            dt.Columns.Add("#");
+                            dt.Columns.Add("DocumentCode");
+                            dt.Columns.Add("DocumentDate");
+                            dt.Columns.Add("CharityTransactionDate");
+                            dt.Columns.Add("Month");
+                            dt.Columns.Add("Year");
+                            dt.Columns.Add("BenificaryName");
+                            dt.Columns.Add("Amount");
+
+                            DataRow row;
+                            int i = 1;
+                            foreach (var item in PaymantWiseTransection)
+                            {
+                                row = dt.NewRow();
+                                dt.Rows.Add(row);
+                            }
+                            ASPxGridView1.DataSource = dt;
+                            ASPxGridView1.DataBind();
+
+
+                        }
+
+                    }
                     else if (formName == "benificaryreports")
                     {
                         var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"]== "null"?"" : Request.QueryString["AuthorizationPersonId"];
@@ -115,20 +162,35 @@ namespace Noble.Report.Reports.Invoice
                             ASPxGridView1.Visible = true;
                             var dt = new DataTable();
                             dt.Columns.Add("#");
-                            dt.Columns.Add("DocumentCode");
-                            dt.Columns.Add("DocumentDate");
-                            dt.Columns.Add("CharityTransactionDate");
-                            dt.Columns.Add("Month");
-                            dt.Columns.Add("Year");
-                            dt.Columns.Add("BenificaryName");
-                            dt.Columns.Add("Amount");
+                            dt.Columns.Add("Id");
+                            dt.Columns.Add("Name");
+                            dt.Columns.Add("Type");
+                            dt.Columns.Add("ApprovedBy");
+                            dt.Columns.Add("AutherizationPerson");
+                            dt.Columns.Add("AmountPerMonth");
+                            dt.Columns.Add("Reg/Un-Reg");
 
                             DataRow row;
                             int i = 1;
+                            Charity.ForEach(x =>
+                            {
+                                var authorizationPersonNames = x.BenificaryAuthorization
+                                    .Select(z => z.AuthorizationPersonName)
+                                    .Where(name => !string.IsNullOrEmpty(name));
+                                x.PassportNo = string.Join(",", authorizationPersonNames);
+                            });
+
                             foreach (var item in Charity)
                             {
                                 row = dt.NewRow();
-
+                                row["#"] = i++;
+                                row["Id"] = item.BeneficiaryId;
+                                row["Name"] = item.Name;
+                                row["Type"] = item.DurationType;
+                                row["ApprovedBy"] = item.ApprovalPersonName;
+                                row["AutherizationPerson"] = item.PassportNo;
+                                row["AmountPerMonth"] = item.AmountPerMonth;
+                                row["Reg/Un-Reg"] = item.IsRegister==true?"Register":"Un-Register";
                                 dt.Rows.Add(row);
                             }
                             ASPxGridView1.DataSource = dt;

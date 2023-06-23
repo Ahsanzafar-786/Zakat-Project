@@ -130,7 +130,6 @@ export default {
                 companyId = localStorage.getItem('CompanyID');
             }
             debugger;
-
             if (val) {
                 this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val
                 this.changereportt++;

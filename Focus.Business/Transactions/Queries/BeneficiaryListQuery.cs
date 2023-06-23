@@ -43,7 +43,7 @@ namespace Focus.Business.Transactions.Queries
                     }
                     if (!string.IsNullOrEmpty(request.Registered))
                     {
-                        bool isRegistered = request.Registered == "Register";
+                        bool isRegistered = request.Registered == "Register"?true:false;
 
                         benific = benific.Where(x => x.IsRegister== isRegistered).ToList();
                     }
@@ -73,6 +73,7 @@ namespace Focus.Business.Transactions.Queries
                         Address = x.Address,
                         ApprovalPersonId = x.ApprovalPersonId,
                         Nationality = x.Nationality,
+                        DurationType = x.DurationType,
                         Gender = x.Gender,
                         NameAr = x.NameAr,
                         PassportNo = x.PassportNo,
