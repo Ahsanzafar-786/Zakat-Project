@@ -336,21 +336,26 @@
             <!--end col-->
         </div>
         <!--end row-->
-
+        <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
     </div>
 </template>
 
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import moment from "moment";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 export default {
 
     mixins: [clickMixin],
-
+    components: {
+        Loading,
+    },
     data: function () {
-
+        
         return {
+            loading: false,
             userId:'',
             rolename:'',
             dashboard: '',
@@ -497,6 +502,7 @@ export default {
         getDashboardData: function () {
             var root = this;
             var token = '';
+            this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
@@ -514,15 +520,15 @@ export default {
                     root.series3[1].data = [];
                     root.chartOptions3.xaxis.categories = [];
 
-                    response.data.monthList.forEach(function (result) {
-                        root.series[0].data.push(result.amount);
-                        root.chartOptions.xaxis.categories.push(result.monthName);
-                    });
+                    // response.data.monthList.forEach(function (result) {
+                    //     root.series[0].data.push(result.amount);
+                    //     root.chartOptions.xaxis.categories.push(result.monthName);
+                    // });
 
                     response.data.benificaryPaymentType.forEach(function (result) {
                         root.series3[0].data.push(result.indefinate);
                         root.series3[1].data.push(result.customize);
-                        //root.chartOptions3.xaxis.categories.push(result.paymentType);
+                        root.chartOptions3.xaxis.categories.push(result.paymentType);
                     });
 
                     root.series2.push(response.data.totalBenificary, response.data.registerBenificary, response.data.unRegisterBenificary);
