@@ -276,9 +276,12 @@
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Select Year<i class="las la-angle-down ms-1"></i>
                                     </a>
-                                    
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="javascript: void(0)" v-for="year in years"
+                                            :key="year" v-on:click="year">{{ year }}</a>
+                                    </div>
                                 </div>
-                            </div> -->
+                            </div>
                             <!--end col-->
                         </div>
                         <!--end row-->
@@ -312,6 +315,7 @@ export default {
     data: function () {
 
         return {
+            dashboard1: '',
             userId:'',
             rolename:'',
             dashboard: '',
@@ -441,6 +445,24 @@ export default {
 
     },
     methods: {
+        // selectedYear: function(){
+        //     this.selectYear
+        // },
+        SelectedYear: function (year) {
+            this.selectedYear = year;
+
+        },
+
+
+        SelectYear: function(val){
+            debugger;
+            this.getDashboardChartsData(val);
+        },
+
+
+
+
+
         makeActive: function (item) {
 
             this.active = item;
@@ -492,6 +514,32 @@ export default {
             }).catch(function (error) {
                 console.error(error);
             });
+        },
+        getDashboardChartsData: function () {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            debugger;
+            root.$https.get(`Benificary/GetDashboardChartsDetail`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                if (response.data != null) {
+                    root.dashboard1 = response.data;
+                    root.series[0].data = [];
+                    root.chartOptions.xaxis.categories = [];
+
+
+                    response.data.monthList.forEach(function (result) {
+                        root.series[0].data.push(result.amount);
+                        root.chartOptions.xaxis.categories.push(result.monthName);
+                    });
+
+                }
+                root.loading = false;
+                root.render++;
+            }).catch(function (error) {
+                console.error(error);
+            });
 
         }
 
@@ -517,6 +565,8 @@ export default {
         this.userId = localStorage.getItem('UserId');
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
+
+        this.getDashboardChartsData();
 
         this.rolename = localStorage.getItem('RoleName')
 
