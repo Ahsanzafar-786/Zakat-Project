@@ -80,7 +80,7 @@
                                     <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.RegisterBenificary') }}</p>
                                         <h3 class="m-0">{{ dashboard.registerBenificary }}</h3>
-                                        
+
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -101,7 +101,7 @@
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Un-RegisterBenificary') }}
                                         </p>
                                         <h3 class="m-0">{{ dashboard.unRegisterBenificary }}</h3>
-                                        
+
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -160,7 +160,7 @@
                                     <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Resource') }}</p>
                                         <h3 class="m-0">{{ dashboard.totalResources }}</h3>
-                                        
+
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -260,7 +260,8 @@
                     <!--end card-header-->
                     <div class="card-body">
                         <div class="text-center">
-                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render"></apexchart>
+                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render">
+                            </apexchart>
                             <!-- <h6 class="bg-light-alt py-3 px-2 mb-0">
                                 <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
                                 01 January 2020 to 31 December 2020
@@ -315,9 +316,20 @@
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Select Year<i class="las la-angle-down ms-1"></i>
                                     </a>
-                                    
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="javascript: void(0)" v-for="year in years"
+                                            :key="year" v-on:click="SelectedYear(year)">{{ year }}</a>
+                                    </div>
                                 </div>
                             </div> -->
+
+                            
+                            <div class="col-auto">
+                                <label>Select Year:</label>
+                                <datepicker v-model="selectedYear"  v-on:input="SelectedYear2(selectedYear)"
+                                    :type="'year'" />
+                            </div>
+
                             <!--end col-->
                         </div>
                         <!--end row-->
@@ -325,7 +337,7 @@
                     <!--end card-header-->
                     <div class="card-body">
                         <div class="">
-                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="render">
+                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="reender">
                             </apexchart>
                         </div>
                     </div>
@@ -355,9 +367,10 @@ export default {
     data: function () {
         
         return {
+            dashboard1: '',
             loading: false,
-            userId:'',
-            rolename:'',
+            userId: '',
+            rolename: '',
             dashboard: '',
             active: 'Dashboard',
             overView: 'Monthly',
@@ -366,9 +379,12 @@ export default {
             income: 0,
             date: '',
             render: 0,
+            reender:0,
             randerDropdown: 0,
             fromDate: moment().format("DD MMM YYYY"),
             toDate: Date(),
+            selectedYear: null,
+            years: [],
             series: [{
                 name: 'Total Amount',
                 data: []
@@ -388,7 +404,7 @@ export default {
                     curve: 'straight'
                 },
                 title: {
-                    text: 'All Years Charity',
+                    text: 'Year Wise Payment Outgoing',
                     align: 'left'
                 },
                 grid: {
@@ -485,6 +501,14 @@ export default {
 
     },
     methods: {
+
+        SelectedYear2: function (year) {
+            debugger;
+          this.getDashboardChartsData(year);
+           
+
+        },
+
         makeActive: function (item) {
 
             this.active = item;
@@ -514,16 +538,10 @@ export default {
             root.$https.get(`Benificary/GetDashboardDetail?userId=` + this.userId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.dashboard = response.data;
-                    root.series[0].data = [];
-                    root.chartOptions.xaxis.categories = [];
+
                     root.series3[0].data = [];
                     root.series3[1].data = [];
                     root.chartOptions3.xaxis.categories = [];
-
-                    // response.data.monthList.forEach(function (result) {
-                    //     root.series[0].data.push(result.amount);
-                    //     root.chartOptions.xaxis.categories.push(result.monthName);
-                    // });
 
                     response.data.benificaryPaymentType.forEach(function (result) {
                         root.series3[0].data.push(result.indefinate);
@@ -535,6 +553,33 @@ export default {
                 }
                 root.loading = false;
                 root.render++;
+            }).catch(function (error) {
+                console.error(error);
+            });
+        },
+
+        getDashboardChartsData: function (year) {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            debugger; //eslint-disabel-line
+            root.$https.get(`Benificary/GetDashboardChartsDetail?year=` + year, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                if (response.data != null) {
+                    root.dashboard1 = response.data;
+                    root.series[0].data = [];
+                    root.chartOptions.xaxis.categories = [];
+
+
+                    response.data.monthList.forEach(function (result) {
+                        root.series[0].data.push(result.amount);
+                        root.chartOptions.xaxis.categories.push(result.monthName);
+                    });
+
+                }
+                root.loading = false;
+                root.reender++;
             }).catch(function (error) {
                 console.error(error);
             });
@@ -563,10 +608,21 @@ export default {
        
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
+        debugger;
+        var currentDate = moment();
+        var date = currentDate.format('DD MMM YYYY');
+        this.getDashboardChartsData(date);
 
         this.rolename = localStorage.getItem('RoleName')
 
-       
+        // this.years.push(moment().year());
+        // this.years.push(moment().subtract(1, 'year').year());
+        // this.years.push(moment().subtract(2, 'year').year());
+        // this.years.push(moment().subtract(3, 'year').year());
+        // this.years.push(moment().subtract(4, 'year').year());
+        // this.years.push(moment().subtract(5, 'year').year());
+
+
 
         const now = new Date();
         this.date = now.toLocaleDateString('en-US', {
