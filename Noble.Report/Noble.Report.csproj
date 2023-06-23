@@ -195,6 +195,7 @@
     <Compile Include="Models\BenificariesLookupModel.cs" />
     <Compile Include="Models\BenificaryAuthorizationLookupModel.cs" />
     <Compile Include="Models\CharityTransactionLookupModel.cs" />
+    <Compile Include="Models\BenificaryAuthorizationLookupModel.cs" />
     <Compile Include="Models\CompanyLicenceDto.cs" />
     <Compile Include="Models\CompanyDto.cs" />
     <Compile Include="Models\SelectedMonthLookupModel.cs" />
