@@ -37,7 +37,13 @@
     "SearchByUqamaNo":"Search By Ugama No",
     "SearchFilter":"Search Filter",
     "ClearFilter":"Clear Filter",
-    "ID":"ID"
+    "ID":"ID",
+    "ApprovalPerson":"Approval Person",
+    "BeneficaryReport":"Beneficary Report",
+    "AuthorizedPerson":"Authorized Person",
+    "Register/Un-Register":"Register / Un-Register",
+    "FromDate":"From Date",
+    "ToDate":"To Date"
   },
   "AddBenificary": {
     "AddBenificary": "Add Beneficiary",
@@ -89,7 +95,9 @@
     "Search":"Search By Beneficiary Name",
     "SearchByBeneficiaryNote":"Search By Beneficiary Note",
     "SearchFilter":"Search Filter",
-    "ClearFilter":"Clear Filter"
+    "ClearFilter":"Clear Filter",
+    "Delete":"Delete",
+    "Actions":"Actions"
   },
   "AddBenificaryNote": {
     "AddBenificaryNote": "Add Beneficiary Note",
@@ -194,7 +202,8 @@
     "Date": "Date",
     "CharityFundsReports":"Charity Funds Reports",
     "CharityFundsResource":"Charity Funds Resource",
-    "SearchByCharityResourceNameAndAmount":"Search By Charity Resource Name And Amount"
+    "SearchByCharityResourceNameAndAmount":"Search By Charity Resource Name And Amount",
+    "TransactionType":"Transaction Type"
   },
   "DatePicker": {
     "PickDate": "Pick Date",
@@ -306,7 +315,13 @@
     "SearchBYNameAndEmail":"Search BY Name And Email",
     "USERNAME":"User Name",
     "EMAILID":"Email Id",
-    "Location":"Location"
+    "Location":"Location",
+    "CreatedOn":"CreatedOn",
+    "Role":"Role",
+    "Remarks":"Remarks",
+    "Status":"Status",
+    "Action":"Action",
+    "Delete":"Delete"
   },
 
   "AddSignUp":{
@@ -354,7 +369,8 @@
     "Month":"Month",
     "Code":"Payment Code",
     "Year":"Year",
-    "Period":"Period"
+    "Period":"Period",
+    "ByOrder":"By Order"
   },
   
   "Analytics":{

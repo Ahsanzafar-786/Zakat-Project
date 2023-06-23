@@ -155,7 +155,7 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
-                        <approvalperson v-model="brand.approvalPersonId" :values="brand.approvalPersonId" />
+                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
                     </div>
 
                     <div class="form-group col-sm-12">
@@ -174,7 +174,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0">
+                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -207,11 +207,11 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
-                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
+                        <approvalperson v-model="brand.approvalPersonId" :values="brand.approvalPersonId" />
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0">
+                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 

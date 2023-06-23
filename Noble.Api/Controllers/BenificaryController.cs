@@ -62,7 +62,7 @@ namespace Noble.Api.Controllers
         {
             var dashboard = await Mediator.Send(new AdminDashboardDetailsQuery 
             {
-
+                UserId = userId,
             });
             return Ok(dashboard);
         }

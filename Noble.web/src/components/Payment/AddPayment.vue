@@ -119,7 +119,7 @@
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  fw-bold">
-                                    {{ $t('AddBenificary.Year') }}:
+                                    {{ $t('AddPayment.Year') }}:
                                 </label>
                             </div>
                             <div class="col-sm-2">
@@ -131,7 +131,7 @@
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  fw-bold">
-                                    {{ $t('AddBenificary.Period') }}:
+                                    {{ $t('AddPayment.Period') }}:
                                 </label>
                             </div>
                             <div class="col-sm-2">
@@ -143,7 +143,7 @@
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  fw-bold">
-                                    {{ $t('AddBenificary.ByOrder') }}:
+                                    {{ $t('AddPayment.ByOrder') }}:
                                 </label>
                             </div>
                             <div class="col-sm-4">

@@ -1,16 +1,13 @@
 ﻿using Focus.Business.Models;
 using System;
-using System.Collections.Generic;
-using System.IO;
+
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MailKit.Net.Smtp;
-using NPOI.OpenXml4Net.OPC;
-using Microsoft.Extensions.Primitives;
+
 
 namespace Focus.Business
 {

@@ -7,9 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Focus.Business.Benificary.Models;
-using Focus.Business.Transactions.Models;
 using Microsoft.EntityFrameworkCore;
-using Focus.Domain.Entities;
 
 namespace Focus.Business.Transactions.Queries
 {
@@ -43,13 +41,9 @@ namespace Focus.Business.Transactions.Queries
                             .Where(x => x.BenificaryAuthorization.All(y => y.AuthorizationPersonId == request.AuthorizationPersonId))
                             .ToList();
                     }
-                    if (request.Registered!=null && request.Registered!="")
+                    if (!string.IsNullOrEmpty(request.Registered))
                     {
-                        bool isRegistered = false;
-                        if(request.Registered== "Register")
-                        {
-                            isRegistered = true;
-                        }
+                        bool isRegistered = request.Registered == "Register"?true:false;
 
                         benific = benific.Where(x => x.IsRegister== isRegistered).ToList();
                     }
@@ -57,18 +51,15 @@ namespace Focus.Business.Transactions.Queries
                     {
                         benific = benific.Where(x => x.ApprovalPersonId== request.ApprovalPersonId).ToList();
                     }
-                    if (request.FromDate != null)
+                    if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        benific.Where(x => x.StartDate == request.FromDate).ToList();
+                        benific = benific.Where(x => x.StartDate.Value >= request.FromDate.Value && x.StartDate.Value <= request.ToDate.Value.AddDays(1)).ToList();
                     }
-                    if (request.ToDate != null)
-                    {
-                        benific = benific.Where(x => x.StartDate == request.ToDate).ToList();
-                    }
+                  
 
                     return benific.Select(x=>new BenificariesLookupModel
                     {
-                        Name = x.Name==null || x.Name==""?x.NameAr:x.Name ,
+                        Name = string.IsNullOrEmpty(x.Name) ? x.NameAr : x.Name,
                         BeneficiaryId = x.BeneficiaryId,
                         ApprovalStatus = x.ApprovalStatus,
                         PaymentIntervalMonth = x.PaymentIntervalMonth,
@@ -82,6 +73,7 @@ namespace Focus.Business.Transactions.Queries
                         Address = x.Address,
                         ApprovalPersonId = x.ApprovalPersonId,
                         Nationality = x.Nationality,
+                        DurationType = x.DurationType,
                         Gender = x.Gender,
                         NameAr = x.NameAr,
                         PassportNo = x.PassportNo,

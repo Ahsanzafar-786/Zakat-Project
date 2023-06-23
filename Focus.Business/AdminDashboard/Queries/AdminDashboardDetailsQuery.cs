@@ -1,7 +1,5 @@
 ﻿using Focus.Business.AdminDashboard.Model;
-using Focus.Business.Benificary.Models;
-using Focus.Business.Benificary.Queries;
-using Focus.Business.Exceptions;
+
 using Focus.Business.Interface;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -14,12 +12,12 @@ using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Focus.Business.Extensions;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using System.Collections.Generic;
 using System.Collections;
 using DocumentFormat.OpenXml.Bibliography;
 using Focus.Domain.Entities;
 using MimeKit.Cryptography;
+using System.Globalization;
 
 namespace Focus.Business.AdminDashboard.Queries
 {
@@ -54,8 +52,8 @@ namespace Focus.Business.AdminDashboard.Queries
                     var totalBenificary = query.Count();
                     var registerBenificary = query.Where(x => x.IsRegister).Count();
                     var unRegisterBenificary = query.Where(x => !x.IsRegister).Count();
-                    var oneTimeBenificary = query.Where(x => x.PaymentTypes.Name == "One Time").Count();
-                    var monthlyBenificary = query.Where(x => x.PaymentTypes.Name == "1 Month").Count();
+                    var oneTimeBenificary = query.Where(x => x.PaymentTypes?.Name == "One Time").Count();
+                    var monthlyBenificary = query.Where(x => x.PaymentTypes?.Name == "1 Month").Count();
                     var totalUser = _userManager.Users.Where(x => x.Code != null && x.CompanyId == user.Identity.CompanyId()).Count();
                     decimal totalIncoming = funds.Sum(x => x.Amount);
                     decimal totalOutgoing = charitytransaction.Sum(x => x.Amount);
@@ -65,10 +63,18 @@ namespace Focus.Business.AdminDashboard.Queries
                     var cashierTotalIncoming = funds.Where(x => x.UserId == request.UserId.ToString()).Sum(x => x.Amount);
                     var paymentUser = payments.Where(x => x.UserId == request.UserId.ToString()).ToList();
 
-                    decimal CashierTotalOutgoing = 0;
+                    HijriCalendar hijriCalendar = new HijriCalendar();
+                    DateTime currentDate = DateTime.Now;
+                    int hijriYear = hijriCalendar.GetYear(currentDate);
+                    int hijriMonth = hijriCalendar.GetMonth(currentDate);
+                    int hijriDay = hijriCalendar.GetDayOfMonth(currentDate);
+
+                  
+
+                    decimal cashierTotalOutgoing = 0;
                     foreach (var item in paymentUser)
                     {
-                        CashierTotalOutgoing = charitytransaction.Where(x => x.DoucmentId == item.Id).Sum(x => x.Amount);
+                        cashierTotalOutgoing = charitytransaction.Where(x => x.DoucmentId == item.Id).Sum(x => x.Amount);
                     }
                     
 
@@ -140,11 +146,12 @@ namespace Focus.Business.AdminDashboard.Queries
                         TotalAuthorizePerson = totalAuthorizePerson,
                         TotalUser = totalUser,
                         TotalResources = totalIncoming,
-                        MonthList=newList,
+                        MonthList = newList,
                         TotalOutgoing = totalOutgoing,
                         TotalApprovalPerson = totalApprovalPerson,
                         CashierTotalIncoming = cashierTotalIncoming,
-                        CashierTotalOutgoing = CashierTotalOutgoing,
+                        CashierTotalOutgoing = cashierTotalOutgoing,
+                        Date = hijriYear.ToString() + hijriMonth.ToString() + hijriDay.ToString(),
                         BenificaryPaymentType = paymentWiseBenificaries
 
 

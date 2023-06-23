@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="DevExpress.Dashboard.v22.2.Web.WebForms, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.Desktop.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v22.2.Drawing, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.ASPxDiagram.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.ASPxGantt.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.ASPxGauges.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -142,6 +143,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\loading.gif" />
+    <Content Include="Assets\loading1.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Designer.aspx" />
@@ -193,6 +196,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BenificariesLookupModel.cs" />
+    <Compile Include="Models\BenificaryAuthorizationLookupModel.cs" />
     <Compile Include="Models\CharityTransactionLookupModel.cs" />
     <Compile Include="Models\BenificaryAuthorizationLookupModel.cs" />
     <Compile Include="Models\CompanyLicenceDto.cs" />
@@ -228,7 +232,7 @@
     <Compile Include="Reports\Invoice\benificaryreports.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\Invoice\benificaryreports.Designer.cs">
+    <Compile Include="Reports\Invoice\benificaryreports.designer.cs">
       <DependentUpon>benificaryreports.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Invoice\LedgerReport.cs">

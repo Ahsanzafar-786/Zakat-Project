@@ -78,7 +78,7 @@
                                         {{ $t('BenificaryNote.Date') }}
                                     </th>
                                     <th class="text-center">
-                                        Actions
+                                        {{ $t('BenificaryNote.Actions') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -108,7 +108,7 @@
                                     </td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-danger" v-on:click="deleteBenificaryNote(brand.id)">
-                                            Delete
+                                            {{ $t('BenificaryNote.Delete') }}
                                         </button>
                                     </td>
                                 </tr>
