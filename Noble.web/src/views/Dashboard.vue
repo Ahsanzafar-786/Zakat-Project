@@ -156,6 +156,9 @@
                                 <a v-on:click="GoTo('/ledgerreport')" href="javascript:void(0);"> {{ $t('LedgerReport.LedgerReport')
                                 }}</a>
                             </li>
+                            <li>
+                                <a v-on:click="GoTo('/paymentwisereport')" href="javascript:void(0);">Payment Wise Report</a>
+                            </li>
                         </ul>
                     </li>
                     <li v-if="roleName != 'Noble Admin' && roleName != 'Cashier'">

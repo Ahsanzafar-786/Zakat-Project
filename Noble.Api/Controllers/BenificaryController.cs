@@ -24,22 +24,16 @@ using Focus.Business.AdminDashboard.Queries;
 using Focus.Business.CharityFunds.Models;
 using Focus.Business.CharityFunds.Commands;
 using Focus.Business.CharityFunds.Queries;
-using Focus.Business.Payments.Models;
 using Focus.Business.Payments.Commands;
 using Focus.Business.Payments.Queries;
 using Focus.Business.Transactions.Queries;
 using System.Collections.Generic;
 using System.Linq;
 using Focus.Domain.Entities;
-using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Office.MetaAttributes;
 using Microsoft.EntityFrameworkCore;
 using Noble.Api.Models;
 using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
-using Org.BouncyCastle.Asn1.Ocsp;
-using Focus.Persistence.Migrations;
-using NPOI.POIFS.Properties;
-using NPOI.SS.Formula.Functions;
+using Focus.Business.Reports.Payments.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -413,6 +407,21 @@ namespace Noble.Api.Controllers
             {
                 BenificayId = benificaryId,
                 Month = month,
+                FromDate = fromDate,
+                ToDate = toDate,
+            });
+            return Ok(charity);
+        } 
+        
+        
+        [Route("api/Benificary/GetPaymentReportQuery")]
+        [HttpGet("GetPaymentReportQuery")]
+        public async Task<IActionResult> GetPaymentReportQuery(Guid? benificaryId, Guid? userId, DateTime? fromDate, DateTime? toDate)
+        {
+            var charity = await Mediator.Send(new PaymentReportQuery
+            {
+                BenificayId = benificaryId,
+                UserId = userId,
                 FromDate = fromDate,
                 ToDate = toDate,
             });

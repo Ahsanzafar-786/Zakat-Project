@@ -24,7 +24,7 @@
         </el-date-picker>
 
     </div>
-    <div v-if="type=='year'">
+    <div v-else-if="type=='year'">
         <el-date-picker v-model="DisplayValue" v-bind:type="type" format=' yyyy ' v-bind:placeholder="'Select Year'" style="width: 100%; ">
         </el-date-picker>
 

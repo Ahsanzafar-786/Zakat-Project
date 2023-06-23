@@ -302,7 +302,7 @@
                             </div>
                             <!--end col-->
                             <div class="col-auto">
-                                <div class="dropdown">
+                                <!-- <div class="dropdown">
                                     <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         All<i class="las la-angle-down ms-1"></i>
@@ -311,7 +311,7 @@
                                         <a class="dropdown-item" href="#">Indefinate</a>
                                         <a class="dropdown-item" href="#">Customize</a>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <!--end col-->
                         </div>
