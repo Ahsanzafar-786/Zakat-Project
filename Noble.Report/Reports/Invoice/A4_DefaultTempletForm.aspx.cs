@@ -95,8 +95,8 @@ namespace Noble.Report.Reports.Invoice
                     }
                     else if (formName == "benificaryreports")
                     {
-                        var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"];
-                        var ApprovalPersonId = Request.QueryString["ApprovalPersonId"] == "undefined" ? "" : Request.QueryString["ApprovalPersonId"];
+                        var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"]== "null"?"" : Request.QueryString["AuthorizationPersonId"];
+                        var ApprovalPersonId = Request.QueryString["ApprovalPersonId"] == "null" ? "" : Request.QueryString["ApprovalPersonId"];
                         var Registered = Request.QueryString["Registered"];
                         var fromDate = Request.QueryString["fromDate"];
                         var toDate = Request.QueryString["toDate"];
