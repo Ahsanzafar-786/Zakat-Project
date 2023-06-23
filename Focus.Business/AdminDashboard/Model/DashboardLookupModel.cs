@@ -22,7 +22,6 @@ namespace Focus.Business.AdminDashboard.Model
 
         public DateTime Year { get; set; }
         public List<TransactionByMonthLookupModel> MonthList { get; set; }
-        public List<TransactionByPaymentTypeLookupModel> TransactionByPaymentTypes { get; set; }
         public  List<BeneficiariesDurationTypeLookUpModel> BenificaryPaymentType { get; set; }
     }
 }

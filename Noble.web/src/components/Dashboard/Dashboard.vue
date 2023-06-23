@@ -180,7 +180,7 @@
                                     <div class="row">
                                         <p class="text-dark mb-0 fw-semibold">{{ $t('Analytics.Resource') }}</p>
                                         <h3 class="m-0">{{ dashboard.cashierTotalIncoming }}</h3>
-                                        
+
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -233,7 +233,67 @@
                     </div>
                     <!--end col-->
                 </div>
-                <!--end row-->
+            </div>
+            <!--end col-->
+            <div class="col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h4 class="card-title">{{ $t('Analytics.BenificaryType') }}</h4>
+                            </div>
+                        </div>
+                        <!--end row-->
+                    </div>
+                    <!--end card-header-->
+                    <div class="card-body">
+                        <div class="text-center">
+                            <apexchart type="polarArea" width="260" :options="chartOptions2" :series="series2"></apexchart>
+                            <h6 class="bg-light-alt py-3 px-2 mb-0">
+                                <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
+                                {{ date }}
+                            </h6>
+                        </div>
+
+                        <!--end /div-->
+                    </div>
+                    <!--end card-body-->
+                </div>
+                <!--end card-->
+            </div>
+            <div class="col-lg-9">
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#profile-1" role="tab"
+                            aria-selected="true">Beneficary Type</a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link" data-bs-toggle="tab" href="#home-1" role="tab" aria-selected="false" v-on:click="GetYearWiseTransaction()">Year Wise Payment Outgoing</a>
+                    </li>
+                   
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link" data-bs-toggle="tab" href="#settings-1" role="tab"
+                            aria-selected="false" v-on:click="GetPaymentTypeWiseTransaction()">Payment Types Wise outgoing</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane p-3" id="home-1" role="tabpanel">
+                       <div class="card">
+                        <div class="card-header">
+                            <div class="col-auto">
+                                <label>Select Year:</label>
+                                <datepicker v-model="selectedYear" v-on:input="SelectedYear2(selectedYear)"
+                                    :type="'year'" />
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="reender">
+                            </apexchart>
+                        </div>
+                       </div>
+                    </div>
+                    <div class="tab-pane p-3 active" id="profile-1" role="tabpanel">
+                       <!--end row-->
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
@@ -272,80 +332,13 @@
                     </div>
                     <!--end card-body-->
                 </div>
-
-                <!--end card-->
-            </div>
-            <!--end col-->
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h4 class="card-title">{{ $t('Analytics.BenificaryType') }}</h4>
-                            </div>
-                        </div>
-                        <!--end row-->
                     </div>
-                    <!--end card-header-->
-                    <div class="card-body">
-                        <div class="text-center">
-                            <apexchart type="polarArea" width="260" :options="chartOptions2" :series="series2"></apexchart>
-                            <h6 class="bg-light-alt py-3 px-2 mb-0">
-                                <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
-                                {{ date }}
-                            </h6>
-                        </div>
-
-                        <!--end /div-->
+                    <div class="tab-pane p-3" id="settings-1" role="tabpanel">
+                        abc
                     </div>
-                    <!--end card-body-->
                 </div>
-                <!--end card-->
+               
             </div>
-            <div class="col-lg-9">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h4 class="card-title">{{ $t('Analytics.AudienceOverview') }}</h4>
-                            </div>
-                            <!--end col-->
-                            <!-- <div class="col-auto">
-                                <div class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Select Year<i class="las la-angle-down ms-1"></i>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript: void(0)" v-for="year in years"
-                                            :key="year" v-on:click="SelectedYear(year)">{{ year }}</a>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            
-                            <div class="col-auto">
-                                <label>Select Year:</label>
-                                <datepicker v-model="selectedYear"  v-on:input="SelectedYear2(selectedYear)"
-                                    :type="'year'" />
-                            </div>
-
-                            <!--end col-->
-                        </div>
-                        <!--end row-->
-                    </div>
-                    <!--end card-header-->
-                    <div class="card-body">
-                        <div class="">
-                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="reender">
-                            </apexchart>
-                        </div>
-                    </div>
-                    <!--end card-body-->
-                </div>
-                <!--end card-->
-            </div>
-            <!--end col-->
         </div>
         <!--end row-->
         <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
@@ -365,9 +358,10 @@ export default {
         Loading,
     },
     data: function () {
-        
+
         return {
             dashboard1: '',
+            paymentWiseTransactionList: [],
             loading: false,
             userId: '',
             rolename: '',
@@ -379,7 +373,8 @@ export default {
             income: 0,
             date: '',
             render: 0,
-            reender:0,
+            reender: 0,
+            reeender:0, 
             randerDropdown: 0,
             fromDate: moment().format("DD MMM YYYY"),
             toDate: Date(),
@@ -504,8 +499,8 @@ export default {
 
         SelectedYear2: function (year) {
             debugger;
-          this.getDashboardChartsData(year);
-           
+            this.getDashboardChartsData(year);
+
 
         },
 
@@ -521,6 +516,12 @@ export default {
             return moment(date).format('l');
         },
 
+        GetYearWiseTransaction : function ()
+        {
+            var currentDate = moment();
+            var date = currentDate.format('DD MMM YYYY');
+            this.getDashboardChartsData(date);
+        },
 
 
         getDashboardData: function () {
@@ -532,8 +533,8 @@ export default {
             }
             debugger;
             this.userId = localStorage.getItem('UserId');
-            
-           
+
+
 
             root.$https.get(`Benificary/GetDashboardDetail?userId=` + this.userId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
@@ -564,14 +565,12 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            debugger; //eslint-disabel-line
+            this.loading = true;
             root.$https.get(`Benificary/GetDashboardChartsDetail?year=` + year, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.dashboard1 = response.data;
                     root.series[0].data = [];
                     root.chartOptions.xaxis.categories = [];
-
-
                     response.data.monthList.forEach(function (result) {
                         root.series[0].data.push(result.amount);
                         root.chartOptions.xaxis.categories.push(result.monthName);
@@ -580,6 +579,32 @@ export default {
                 }
                 root.loading = false;
                 root.reender++;
+            }).catch(function (error) {
+                console.error(error);
+            });
+
+        },
+
+        GetPaymentTypeWiseTransaction: function () {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            this.loading = true;
+            root.$https.get(`Benificary/PaymentTypeWiseTransaction`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                if (response.data != null) {
+                    root.paymentWiseTransactionList = response.data;
+                    // root.series[0].data = [];
+                    // root.chartOptions.xaxis.categories = [];
+                    // response.data.monthList.forEach(function (result) {
+                    //     root.series[0].data.push(result.amount);
+                    //     root.chartOptions.xaxis.categories.push(result.monthName);
+                    // });
+
+                }
+                root.loading = false;
+                root.reeender++;
             }).catch(function (error) {
                 console.error(error);
             });
@@ -605,13 +630,10 @@ export default {
         }
 
         this.search = moment().format("DD MMM YYYY");
-       
+
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
-        debugger;
-        var currentDate = moment();
-        var date = currentDate.format('DD MMM YYYY');
-        this.getDashboardChartsData(date);
+      
 
         this.rolename = localStorage.getItem('RoleName')
 

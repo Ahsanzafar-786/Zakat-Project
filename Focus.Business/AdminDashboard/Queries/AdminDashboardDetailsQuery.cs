@@ -1,5 +1,4 @@
 ﻿using Focus.Business.AdminDashboard.Model;
-
 using Focus.Business.Interface;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -13,12 +12,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Focus.Business.Extensions;
 using System.Collections.Generic;
-using System.Collections;
-using DocumentFormat.OpenXml.Bibliography;
-using Focus.Domain.Entities;
-using MimeKit.Cryptography;
-using System.Globalization;
-using Focus.Business.Benificary.Models;
 
 namespace Focus.Business.AdminDashboard.Queries
 {
@@ -50,22 +43,6 @@ namespace Focus.Business.AdminDashboard.Queries
                     var paymentTypeList = await Context.PaymentTypes.ToListAsync();
                     var charitytransaction = await Context.CharityTransaction.AsNoTracking().ToListAsync();
                     var query = await Context.Beneficiaries.AsNoTracking().ToListAsync();
-
-                    var transactionByPaymentTypes = paymentTypeList.Select(item =>
-                    {
-                        var totalbeneficary = query.Where(x => x.PaymentTypeId == item.Id).ToList();
-                        decimal amount = charitytransaction
-                            .Where(x => totalbeneficary.Any(bene => bene.Id == x.BenificayId))
-                            .Sum(x => x.Amount);
-
-                        return new TransactionByPaymentTypeLookupModel()
-                        {
-                            PaymentTypeName = item.Name,
-                            Amount = amount
-                        };
-                    }).ToList();
-
-
 
 
                     var totalBenificary = query.Count();
@@ -118,7 +95,6 @@ namespace Focus.Business.AdminDashboard.Queries
                         TotalApprovalPerson = totalApprovalPerson,
                         CashierTotalIncoming = cashierTotalIncoming,
                         CashierTotalOutgoing = cashierTotalOutgoing,
-                        TransactionByPaymentTypes = transactionByPaymentTypes,
                         BenificaryPaymentType = paymentWiseBenificaries
 
 

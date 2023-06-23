@@ -76,6 +76,14 @@ namespace Noble.Api.Controllers
             });
             return Ok(dashboard1);
         }
+        
+        [Route("api/Benificary/PaymentTypeWiseTransaction")]
+        [HttpGet("PaymentTypeWiseTransaction")]
+        public async Task<IActionResult> PaymentTypeWiseTransactionQuery()
+        {
+            var dashboard1 = await Mediator.Send(new PaymentTypeWiseTransactionQuery { });
+            return Ok(dashboard1);
+        }
         #endregion
 
         #region Benificary
