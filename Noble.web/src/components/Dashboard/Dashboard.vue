@@ -462,11 +462,8 @@ export default {
                 token = localStorage.getItem('token');
             }
             debugger;
-
-            if(root.rolename == 'Cashier')
-            {
-                root.userId = localStorage.getItem('UserId');
-            }
+            this.userId = localStorage.getItem('UserId');
+            
            
 
             root.$https.get(`Benificary/GetDashboardDetail?userId=` + this.userId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
@@ -511,7 +508,7 @@ export default {
         this.fromDate = moment().startOf('month').format("DD MMM YYYY");
 
         if (this.$session.exists()) {
-            this.userID = localStorage.getItem('UserId');
+            this.userId = localStorage.getItem('UserId');
             this.employeeId = localStorage.getItem('EmployeeId');
             this.fromDate = moment().startOf('month').format("DD MMM YYYY");
 

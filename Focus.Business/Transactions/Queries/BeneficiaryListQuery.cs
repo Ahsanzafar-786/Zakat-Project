@@ -51,14 +51,11 @@ namespace Focus.Business.Transactions.Queries
                     {
                         benific = benific.Where(x => x.ApprovalPersonId== request.ApprovalPersonId).ToList();
                     }
-                    if (request.FromDate != null)
+                    if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        benific.Where(x => x.StartDate == request.FromDate).ToList();
+                        benific = benific.Where(x => x.StartDate.Value >= request.FromDate.Value && x.StartDate.Value <= request.ToDate.Value.AddDays(1)).ToList();
                     }
-                    if (request.ToDate != null)
-                    {
-                        benific = benific.Where(x => x.StartDate == request.ToDate).ToList();
-                    }
+                  
 
                     return benific.Select(x=>new BenificariesLookupModel
                     {

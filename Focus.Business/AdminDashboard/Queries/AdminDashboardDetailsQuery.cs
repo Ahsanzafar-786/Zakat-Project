@@ -17,6 +17,7 @@ using System.Collections;
 using DocumentFormat.OpenXml.Bibliography;
 using Focus.Domain.Entities;
 using MimeKit.Cryptography;
+using System.Globalization;
 
 namespace Focus.Business.AdminDashboard.Queries
 {
@@ -61,6 +62,14 @@ namespace Focus.Business.AdminDashboard.Queries
 
                     var cashierTotalIncoming = funds.Where(x => x.UserId == request.UserId.ToString()).Sum(x => x.Amount);
                     var paymentUser = payments.Where(x => x.UserId == request.UserId.ToString()).ToList();
+
+                    HijriCalendar hijriCalendar = new HijriCalendar();
+                    DateTime currentDate = DateTime.Now;
+                    int hijriYear = hijriCalendar.GetYear(currentDate);
+                    int hijriMonth = hijriCalendar.GetMonth(currentDate);
+                    int hijriDay = hijriCalendar.GetDayOfMonth(currentDate);
+
+                  
 
                     decimal CashierTotalOutgoing = 0;
                     foreach (var item in paymentUser)
@@ -137,11 +146,12 @@ namespace Focus.Business.AdminDashboard.Queries
                         TotalAuthorizePerson = totalAuthorizePerson,
                         TotalUser = totalUser,
                         TotalResources = totalIncoming,
-                        MonthList=newList,
+                        MonthList = newList,
                         TotalOutgoing = totalOutgoing,
                         TotalApprovalPerson = totalApprovalPerson,
                         CashierTotalIncoming = cashierTotalIncoming,
                         CashierTotalOutgoing = CashierTotalOutgoing,
+                        Date = hijriYear.ToString() + hijriMonth.ToString() + hijriDay.ToString(),
                         BenificaryPaymentType = paymentWiseBenificaries
 
 
