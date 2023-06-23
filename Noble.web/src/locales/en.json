@@ -386,7 +386,8 @@
     "AuthorizePerson":"Authorize Person",
     "Resource":"Resource",
     "BenificaryType":"Beneficiary Type",
-    "AudienceOverview":"Audience Overview"
+    "AudienceOverview":"Audience Overview",
+    "PaymentTypesWiseoutgoing":"Payment Types Wise Outgoing"
   },
   "LedgerReport":{
     "LedgerReport": "Ledger Report",

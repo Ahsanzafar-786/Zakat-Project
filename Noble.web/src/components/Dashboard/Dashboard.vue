@@ -294,10 +294,10 @@
                     </div>
                     <div class="tab-pane p-3 active" id="profile-1" role="tabpanel">
                        <!--end row-->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
+                     <div class="card">
+                       <div class="card-header">
+                         <div class="row align-items-center">
+                             <div class="col">
                                 <h4 class="card-title">{{ $t('Analytics.BenificaryType') }}</h4>
                             </div>
                             <!--end col-->
@@ -316,25 +316,54 @@
                             <!--end col-->
                         </div>
                         <!--end row-->
-                    </div>
-                    <!--end card-header-->
-                    <div class="card-body">
+                     </div>
+                     <!--end card-header-->
+                      <div class="card-body">
                         <div class="text-center">
                             <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render">
                             </apexchart>
-                            <!-- <h6 class="bg-light-alt py-3 px-2 mb-0">
-                                <i data-feather="calendar" class="align-self-center icon-xs me-1"></i>
-                                01 January 2020 to 31 December 2020
-                            </h6> -->
                         </div>
 
                         <!--end /div-->
-                    </div>
+                     </div>
                     <!--end card-body-->
                 </div>
                     </div>
                     <div class="tab-pane p-3" id="settings-1" role="tabpanel">
-                        abc
+                        <div class="card">
+                       <div class="card-header">
+                         <div class="row align-items-center">
+                             <div class="col">
+                                <h4 class="card-title">{{ $t('Analytics.PaymentTypesWiseoutgoing') }}</h4>
+                             </div>
+                             <!--end col-->
+                             <!-- <div class="col-auto">
+                                <div class="dropdown">
+                                    <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        All<i class="las la-angle-down ms-1"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="#">Indefinate</a>
+                                        <a class="dropdown-item" href="#">Customize</a>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!--end col-->
+                        </div>
+                        <!--end row-->
+                     </div>
+                     <!--end card-header-->
+                      <div class="card-body">
+                        <div class="text-center">
+                            <apexchart type="line" height="350" :options="chartOptions4" :series="series4" :key="reeender">
+                            </apexchart>
+                        </div>
+
+                        <!--end /div-->
+                     </div>
+                    <!--end card-body-->
+                </div>
                     </div>
                 </div>
                
@@ -482,12 +511,39 @@ export default {
                         text: 'Indefinate',
                     },
 
-                }, {
+                }, 
+                {
                     opposite: true,
                     title: {
                         text: 'Customize',
                     }
                 }]
+            },
+            series4: [{
+                name: 'Total Amount',
+                type: 'column',
+                data: []
+            }],
+            chartOptions4: {
+                chart: {
+                    height: 350,
+                    type: 'line',
+                    
+                },
+                stroke: {
+                    width: [0, 4]
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                
+                title: {
+                    text: 'Payment Type Wise Outgoing',
+                    align: 'left'
+                },
+                xaxis: {
+                    categories: [],
+                }
             },
 
         }
@@ -498,10 +554,7 @@ export default {
     methods: {
 
         SelectedYear2: function (year) {
-            debugger;
             this.getDashboardChartsData(year);
-
-
         },
 
         makeActive: function (item) {
@@ -531,10 +584,8 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            debugger;
+            
             this.userId = localStorage.getItem('UserId');
-
-
 
             root.$https.get(`Benificary/GetDashboardDetail?userId=` + this.userId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
@@ -591,16 +642,19 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
+         
             this.loading = true;
             root.$https.get(`Benificary/PaymentTypeWiseTransaction`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
+            
                     root.paymentWiseTransactionList = response.data;
-                    // root.series[0].data = [];
-                    // root.chartOptions.xaxis.categories = [];
-                    // response.data.monthList.forEach(function (result) {
-                    //     root.series[0].data.push(result.amount);
-                    //     root.chartOptions.xaxis.categories.push(result.monthName);
-                    // });
+                    root.series4[0].data = [];
+                    root.chartOptions4.xaxis.categories = [];
+
+                    root.paymentWiseTransactionList.forEach(function (result) {
+                        root.series4[0].data.push(result.amount);
+                        root.chartOptions4.xaxis.categories.push(result.paymentTypeName);
+                    });
 
                 }
                 root.loading = false;
@@ -643,6 +697,8 @@ export default {
         // this.years.push(moment().subtract(3, 'year').year());
         // this.years.push(moment().subtract(4, 'year').year());
         // this.years.push(moment().subtract(5, 'year').year());
+
+        this.GetPaymentTypeWiseTransaction();
 
 
 

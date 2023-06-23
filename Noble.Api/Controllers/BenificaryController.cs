@@ -75,8 +75,8 @@ namespace Noble.Api.Controllers
         [HttpGet("PaymentTypeWiseTransaction")]
         public async Task<IActionResult> PaymentTypeWiseTransactionQuery()
         {
-            var dashboard1 = await Mediator.Send(new PaymentTypeWiseTransactionQuery { });
-            return Ok(dashboard1);
+            var dashboard2 = await Mediator.Send(new PaymentTypeWiseTransactionQuery { });
+            return Ok(dashboard2);
         }
         #endregion
 

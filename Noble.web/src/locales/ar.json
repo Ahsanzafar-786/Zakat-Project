@@ -395,7 +395,8 @@
     "AuthorizePerson":"الشخص المرخص",
     "Resource":"الموارد",
     "BenificaryType":"نوع المستفيد",
-    "AudienceOverview":"نظرة عامة على الجمهور"
+    "AudienceOverview":"نظرة عامة على الجمهور",
+    "PaymentTypesWiseoutgoing":"Payment Types Wise Outgoing"
   },
   "LedgerReport":{
     "LedgerReport": "تقرير دفتر الأستاذ",
