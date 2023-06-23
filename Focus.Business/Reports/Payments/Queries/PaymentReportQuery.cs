@@ -45,43 +45,35 @@ namespace Focus.Business.Reports.Payments.Queries
                          {
                              Id = x.Id,
                              PaymentId = x.Code,
+                             Beneficary = x.Beneficiaries.Id,
                              BeneficaryId = x.Beneficiaries.BeneficiaryId,
                              BeneficaryName = x.Beneficiaries.Name == null ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
                              CashierName = users.FirstOrDefault(y => y.Id == x.UserId).UserName,
+                             UserId = Guid.Parse(x.UserId),
                              Amount = x.Amount,
                              Note = x.Note,
                              PaymentType = x.Beneficiaries.PaymentTypes.Name,
-
+                             Date = x.Month.Value,
+                             PaymentDate = x.Date.Value.Date.ToString("dd/MM/yy"),
                          }) ;
 
-                    //if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
-                    //{
-                    //    query = query.Where(x => x.BenificayId == request.BenificayId);
-                    //}
+                    if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
+                    {
+                        query = query.Where(x => x.Beneficary == request.BenificayId);
+                    }
+                    
+                    if (request.UserId.HasValue && request.UserId != Guid.Empty)
+                    {
+                        query = query.Where(x => x.UserId == request.UserId);
+                    }
 
-                    //if (request.Month.HasValue)
-                    //{
-                    //    query = query.Where(x => x.Month.Value.Month == request.Month.Value.Month);
-                    //}
-
-                    //if (request.FromDate.HasValue && request.ToDate.HasValue)
-                    //{
-                    //    query = query.Where(x => x.Month.Value >= request.FromDate.Value && x.Month.Value <= request.ToDate.Value.AddDays(1));
-                    //}
+                    if (request.FromDate.HasValue && request.ToDate.HasValue)
+                    {
+                        query = query.Where(x => x.Date >= request.FromDate.Value && x.Date <= request.ToDate.Value.AddDays(1));
+                    }
 
 
 
-                    //var charity = await query.ToListAsync();
-
-                    //var benific = await Context.Beneficiaries
-                    //    .Where(b => charity.Select(c => c.BenificayId).Contains(b.Id))
-                    //    .ToListAsync();
-
-                    //foreach (var transaction in charity)
-                    //{
-                    //    var benificiary = benific.FirstOrDefault(b => b.Id == transaction.BenificayId);
-                    //    transaction.benificaryName = (string.IsNullOrEmpty(benificiary?.Name) ? benificiary?.NameAr : benificiary?.Name);
-                    //}
 
                     return query.ToList();
                 }

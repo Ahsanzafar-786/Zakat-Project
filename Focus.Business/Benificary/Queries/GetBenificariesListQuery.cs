@@ -84,7 +84,7 @@ namespace Focus.Business.Benificary.Queries
                                 AuthorizationPersonNameAr = y.AuthorizedPerson.AuthorizedPersonCode + " " +  y.AuthorizedPerson.NameAr,
 
                             }).ToList(),
-                        }).AsQueryable();
+                        }).OrderByDescending(x => x.BeneficiaryId).AsQueryable();
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
                         {
