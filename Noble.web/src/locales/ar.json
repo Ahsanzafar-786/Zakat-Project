@@ -9,6 +9,7 @@
   "PaidPayments":"المدفوعات المدفوعة",
   "DuePayments":"المدفوعات المستحقة",
   "UnPaidPayments":"المدفوعات غير المدفوعة",
+  "SelectUser":"اختر المستخدم",
 
 
   "General":{
@@ -366,7 +367,8 @@
     "SearchByCode":"البحث بالمعرف",
     "SearchByAmount":"البحث بالمبلغ",
     "SearchFilter":"تصفية البحث",
-    "ClearFilter":"مرشح واضح"
+    "ClearFilter":"مرشح واضح",
+    "PaymentWiseReport":"تقرير الدفع الحكيم"
   },
 
   "AddPayment":{
@@ -396,7 +398,8 @@
     "Resource":"الموارد",
     "BenificaryType":"نوع المستفيد",
     "AudienceOverview":"نظرة عامة على الجمهور",
-    "PaymentTypesWiseoutgoing":"Payment Types Wise Outgoing"
+    "PaymentTypesWiseoutgoing":"أنواع الدفع الصادرة الحكيمة",
+    "YearWisePaymentOutgoing":"السنة الحكيمة الدفع الصادرة"
   },
   "LedgerReport":{
     "LedgerReport": "تقرير دفتر الأستاذ",

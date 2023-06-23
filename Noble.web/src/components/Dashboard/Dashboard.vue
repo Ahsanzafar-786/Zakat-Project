@@ -265,15 +265,15 @@
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item waves-effect waves-light">
                         <a class="nav-link active" data-bs-toggle="tab" href="#profile-1" role="tab"
-                            aria-selected="true">Beneficary Type</a>
+                            aria-selected="true">{{ $t('Analytics.BenificaryType') }}</a>
                     </li>
                     <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link" data-bs-toggle="tab" href="#home-1" role="tab" aria-selected="false" v-on:click="GetYearWiseTransaction()">Year Wise Payment Outgoing</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#home-1" role="tab" aria-selected="false" v-on:click="GetYearWiseTransaction()">{{ $t('Analytics.YearWisePaymentOutgoing') }}</a>
                     </li>
                    
                     <li class="nav-item waves-effect waves-light">
                         <a class="nav-link" data-bs-toggle="tab" href="#settings-1" role="tab"
-                            aria-selected="false" v-on:click="GetPaymentTypeWiseTransaction()">Payment Types Wise outgoing</a>
+                            aria-selected="false" v-on:click="GetPaymentTypeWiseTransaction()">{{ $t('Analytics.PaymentTypesWiseoutgoing') }}</a>
                     </li>
                 </ul>
                 <div class="tab-content">
