@@ -331,7 +331,7 @@ export default {
                 endDate: '',
                 approvedPaymentId: '',
                 advancePayment: 0,
-                durationType: 'Indefinite',
+                durationType: 'Customize',
                 authorizationPersonName: '',
                 benificaryAuthorization: [{
                     id: '',
