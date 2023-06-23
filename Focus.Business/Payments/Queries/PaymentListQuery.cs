@@ -58,7 +58,7 @@ namespace Focus.Business.Payments.Queries
                         IsVoid = x.IsVoid,
                         AllowVoid = x.AllowVoid,
                         Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
-                    }).AsQueryable();
+                    }).OrderByDescending(x => x.PaymentCode).AsQueryable();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
                     //{

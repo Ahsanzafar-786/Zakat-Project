@@ -115,7 +115,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group has-label col-sm-12 ">
+                    <!-- <div class="form-group has-label col-sm-12 ">
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  fw-bold">
@@ -154,7 +154,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     
                 </div>
                 <div class="col-md-5" v-if="addPayment.benificayId != '' && addPayment.benificayId != null">

@@ -34,7 +34,7 @@
                         <div class="col-sm-3">
                             <benificary v-model="benificaryId" :key="render" />
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <userdropdown v-model="userId" />
                         </div>
                         <div class="col-sm-2">
@@ -43,7 +43,7 @@
                         <div class="col-sm-2">
                             <datepicker v-model="toDate" :isDisabled="month == '' ? false : true" :key="render" />
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <button class="btn btn-outline-primary me-2" v-on:click="PrintRdlc(false)">{{
                                 $t('LedgerReport.Filter') }}
                             </button>
