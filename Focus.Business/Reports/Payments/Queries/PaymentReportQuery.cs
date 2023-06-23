@@ -13,6 +13,7 @@ using Focus.Business.Reports.Payments.Models;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
 using Focus.Domain.Entities;
+using Dapper;
 
 namespace Focus.Business.Reports.Payments.Queries
 {
@@ -40,36 +41,36 @@ namespace Focus.Business.Reports.Payments.Queries
                 try
                 {
                     var users = _userManager.Users.ToList();
-                    var query = Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
+                    var query =await Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
                          .Select(x => new PaymentWiseListLookupModel
                          {
                              Id = x.Id,
-                             PaymentId = x.Code,
-                             Beneficary = x.Beneficiaries.Id,
-                             BeneficaryId = x.Beneficiaries.BeneficiaryId,
-                             BeneficaryName = x.Beneficiaries.Name == null ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
-                             CashierName = users.FirstOrDefault(y => y.Id == x.UserId).UserName,
-                             UserId = Guid.Parse(x.UserId),
+                             PaymentId = x.Code.ToString(),
+                             Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
+                             BeneficaryId = x.Beneficiaries != null ? x.Beneficiaries.BeneficiaryId.ToString() : "",
+                             BeneficaryName = x.Beneficiaries == null ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
+                             CashierName = "",
+                             UserId = x.UserId != null ? Guid.Parse(x.UserId) : Guid.Empty,
                              Amount = x.Amount,
                              Note = x.Note,
                              PaymentType = x.Beneficiaries.PaymentTypes.Name,
-                             Date = x.Month.Value,
-                             PaymentDate = x.Date.Value.Date.ToString("dd/MM/yy"),
-                         }) ;
+                             Date = Convert.ToDateTime(x.Month),
+                             PaymentDate = Convert.ToDateTime(x.Month).ToString("dd/MM/yy"),
+                         }).ToListAsync();
 
                     if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
                     {
-                        query = query.Where(x => x.Beneficary == request.BenificayId);
+                        query = query.Where(x => x.Beneficary == request.BenificayId).ToList();
                     }
                     
                     if (request.UserId.HasValue && request.UserId != Guid.Empty)
                     {
-                        query = query.Where(x => x.UserId == request.UserId);
+                        query = query.Where(x => x.UserId == request.UserId).ToList();
                     }
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        query = query.Where(x => x.Date >= request.FromDate.Value && x.Date <= request.ToDate.Value.AddDays(1));
+                        query = query.Where(x => x.Date >= request.FromDate.Value && x.Date <= request.ToDate.Value.AddDays(1)).ToList();
                     }
 
 

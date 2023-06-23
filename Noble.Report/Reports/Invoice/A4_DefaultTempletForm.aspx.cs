@@ -108,6 +108,9 @@ namespace Noble.Report.Reports.Invoice
                         {
                             ASPxWebDocumentViewer1.Visible = true;
                             ASPxGridView1.Visible = false;
+                            XtraReport report = new Noble.Report.Reports.Invoice.PaymentWiseReport(companyInfo,PaymantWiseTransection);
+                            ASPxWebDocumentViewer1.OpenReport(report);
+                                
                         }
                         else
                         {
