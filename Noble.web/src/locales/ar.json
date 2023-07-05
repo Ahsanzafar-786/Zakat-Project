@@ -107,6 +107,7 @@
   },
 
   "BenificaryNote":{
+    "ID":"رقم التعريف",
     "BenificaryNote":"ملاحظة المستفيد",
     "BenificaryNoteList":"قائمة الملاحظات المفيدة",
     "BenificaryName":"أسم المستفيد",
@@ -346,6 +347,7 @@
   },
 
   "Payment":{
+    "ID":"رقم التعريف",
     "Payment":"المدفوعات",
     "Action":"فعل",
     "IsVoid":"هو الفراغ",

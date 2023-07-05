@@ -74,6 +74,9 @@
                                         {{ $t('Payment.Code') }}
                                     </th>
                                     <th class="text-center">
+                                        {{ $t('Payment.ID') }}
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('Payment.BenificaryName') }}
                                     </th>
                                     <th class="text-center">
@@ -125,6 +128,7 @@
                                     <td class="text-center text-danger" v-else-if="brand.isVoid">{{ brand.code }}</td>
 
                                     <td class="text-center" v-else>{{ brand.code }}</td>
+                                    <td class="text-center" >{{ brand.benificaryCode }}</td>
 
                                     <td class="text-center text-danger" v-if="brand.isVoid">Payment Voided</td>
                                     <td class="text-center" v-else-if="roleName != 'Cashier'">

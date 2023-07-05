@@ -88,6 +88,7 @@
   },
 
   "BenificaryNote": {
+    "ID":"ID",
     "BenificaryNote": "Beneficiary Note",
     "BenificaryNoteList": "Beneficiary Note List",
     "BenificaryName": "Beneficiary Name",
@@ -344,6 +345,7 @@
     "PaymentList":"Payment List",
     "BenificaryName":"Beneficiary Name",
     "Amount":"Amount",
+    "ID":"ID",
     "Cashier":"Cashier",
     "Month":"Month",
     "Year":"Year",

@@ -4,7 +4,14 @@
         <div class="left-sidenav">
             <!-- LOGO -->
             <div class="brand text-start ms-2">
-                <a v-on:click="GoTo('/dashboard')" href="javascript: void()" class="logo">
+                <a v-on:click="GoTo('/dashboard')" href="javascript: void()" class="logo" v-if="roleName == 'Noble Admin'">
+                    <span>
+                        <img src="msFakhry.png" alt="logo-small" class="logo-sm"
+                            style="width:100px;height:auto; max-height:45px;">
+                    </span>
+
+                </a>
+                <a href="javascript: void()" class="logo" v-else>
                     <span>
                         <img src="msFakhry.png" alt="logo-small" class="logo-sm"
                             style="width:100px;height:auto; max-height:45px;">
@@ -15,7 +22,7 @@
 
             <div class="menu-content h-100" data-simplebar>
                 <ul class="metismenu left-sidenav-menu">
-                    <li>
+                    <li v-if="roleName == 'Noble Admin'">
                         <a v-on:click="GoTo('/chartDashboard')" href="javascript:void(0);">
                             <i data-feather="trending-up" class="align-self-center menu-icon"></i><span>{{
                                 $t('Dashboard.Dashboard') }}</span>

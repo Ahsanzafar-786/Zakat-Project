@@ -53,7 +53,8 @@ namespace Focus.Business.BenificiariesNotes.Queries
                         {
                             Id = x.Id,
                             Note = x.Note,
-                            BenificaryName = x.Beneficiaries.BeneficiaryId.ToString() + " " + (x.Beneficiaries.NameAr == null ? x.Beneficiaries.Name : x.Beneficiaries.NameAr),
+                            BenificaryCode = x.Beneficiaries==null?"":x.Beneficiaries.BeneficiaryId.ToString(),
+                            BenificaryName = (x.Beneficiaries.NameAr == null ? x.Beneficiaries.Name : x.Beneficiaries.NameAr),
                             Date = x.Date.ToString("dd/MM/yyyy"),
                         }).ToListAsync();
 

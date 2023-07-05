@@ -69,6 +69,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
+                                        {{ $t('BenificaryNote.ID') }}
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('BenificaryNote.BenificaryName') }}
                                     </th>
                                     <th class="text-center">
@@ -90,6 +93,9 @@
                                     <td v-else>
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
+                                    <td class="text-center">
+                                        {{ brand.benificaryCode }}
+                                    </td>
 
                                     <td class="text-center">
                                         <strong>
@@ -106,7 +112,7 @@
                                     <td class="text-center">
                                         {{ brand.date }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" v-if="roleName != 'Cashier'">
                                         <button class="btn btn-sm btn-danger" v-on:click="deleteBenificaryNote(brand.id)">
                                             {{ $t('BenificaryNote.Delete') }}
                                         </button>
