@@ -24,6 +24,8 @@ namespace Focus.Business.Payments.Queries
         public int? Code { get; set; }
         public decimal? Amount { get; set; }
 
+        public int? BenificaryCode { get; set; }
+
         public class Handler : IRequestHandler<PaymentListQuery, PagedResult<List<PaymentLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
@@ -83,6 +85,10 @@ namespace Focus.Business.Payments.Queries
                      if (request.Code != null && request.Code > 0)
                     {
                         query = query.Where(x => x.Code == request.Code);
+                    }
+                     if(request.BenificaryCode != null && request.BenificaryCode > 0)
+                    {
+                        query = query.Where(x => x.BenificaryCode == request.BenificaryCode);
                     }
 
 

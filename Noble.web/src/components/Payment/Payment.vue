@@ -36,11 +36,15 @@
                             <input v-model="search" type="text" class="form-control" :placeholder="$t('Payment.Search')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
+                            <input v-model="benificaryCode" type="text" class="form-control" :placeholder="$t('Payment.SearchByID')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-2">
                             <input v-model="code" type="text" class="form-control" :placeholder="$t('Payment.SearchByCode')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
                             <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Payment.SearchByAmount')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
@@ -288,6 +292,7 @@ export default {
             benificaryName: '',
             code: '',
             amount: '',
+            benificaryCode:'',
         }
     },
     // watch: {
@@ -303,6 +308,7 @@ export default {
             this.search = '';
             this.amount = '';
             this.code = '';
+            this.benificaryCode = '';
 
             // Trigger the search or data refresh
             this.GetPayment(this.currentPage);
@@ -360,7 +366,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode , { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;
