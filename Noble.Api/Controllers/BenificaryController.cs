@@ -171,7 +171,7 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetBenificaryNoteList")]
         [HttpGet("GetBenificaryNoteList")]
-        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown, string beneficiaryName,string beneficiaryNote)
+        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown, string beneficiaryName,string beneficiaryNote, string benificaryCode)
      {
             var benificary = await Mediator.Send(new GetBenificaryNoteListQuery
             {
@@ -179,7 +179,8 @@ namespace Noble.Api.Controllers
                 IsDropDown = isDropDown,
                 PageNumber = pageNumber ?? 1,
                 BeneficiaryName= beneficiaryName,
-                BeneficiaryNote = beneficiaryNote
+                BeneficiaryNote = beneficiaryNote,
+                BenificaryCode= benificaryCode
             });
             return Ok(benificary);
         }

@@ -20,6 +20,8 @@ namespace Focus.Business.BenificiariesNotes.Queries
         public string SearchTerm { get; set; }
         public string BeneficiaryName { get; set; }
         public string BeneficiaryNote { get; set; }
+
+        public string BenificaryCode { get; set; }
         public class Handler : IRequestHandler<GetBenificaryNoteListQuery, PagedResult<List<BenificaryNoteLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
@@ -67,9 +69,13 @@ namespace Focus.Business.BenificiariesNotes.Queries
                         {
                             query = query.Where(x => x.Note == request.BeneficiaryNote).ToList();
                         }
+                        if (!string.IsNullOrEmpty(request.BenificaryCode))
+                        {
+                            query = query.Where(x => x.BenificaryCode == request.BenificaryCode).ToList();
+                        }
 
 
-                            var count =  query.Count();
+                        var count =  query.Count();
                         query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize).ToList();
 
                         //var queryList = await query.ToListAsync();
