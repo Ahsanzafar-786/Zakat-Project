@@ -71,10 +71,10 @@
                                     <th class="text-center">
                                         {{ $t('BenificaryNote.ID') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-start">
                                         {{ $t('BenificaryNote.BenificaryName') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-start">
                                         {{ $t('BenificaryNote.Name') }}
                                     </th>
                                     <th class="text-center">
@@ -97,13 +97,13 @@
                                         {{ brand.benificaryCode }}
                                     </td>
 
-                                    <td class="text-center">
+                                    <td class="text-start">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)">{{
                                                 brand.benificaryName }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-start">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)"> {{
                                                 brand.note }}</a>

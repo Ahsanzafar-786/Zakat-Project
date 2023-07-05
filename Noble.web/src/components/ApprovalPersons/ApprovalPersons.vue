@@ -49,7 +49,7 @@
                                     <th class="text-center">
                                         {{ $t('ApprovalPerson.ApprovalPersonId') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-start">
                                         {{ $t('ApprovalPerson.Name') }}
                                     </th>
                                     <th class="text-center">
@@ -66,17 +66,17 @@
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <td class="text-center">
+                                    <td class="text-start">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditapprovalPerson(brand.id)">{{ brand.aprovalPersonId }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center" v-if="brand.name != ''">
+                                    <td class="text-start" v-if="brand.name != ''">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditapprovalPerson(brand.id)"> {{ brand.name }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center" v-else>
+                                    <td class="text-start" v-else>
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditapprovalPerson(brand.id)"> {{ brand.nameAr }}</a>
                                         </strong>

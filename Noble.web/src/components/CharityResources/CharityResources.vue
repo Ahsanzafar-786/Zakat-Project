@@ -49,7 +49,7 @@
                                     <th class="text-center">
                                         {{ $t('CharityResources.CharityResourcesId') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-start">
                                         {{ $t('CharityResources.Name') }}
                                     </th>
                                     <!-- <th class="text-center">
@@ -77,7 +77,7 @@
                                             <a href="javascript:void(0)" v-on:click="EditCharityResources(brand.id)">{{ brand.chartiyId }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-start">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditCharityResources(brand.id)"> {{ brand.name }}</a>
                                         </strong>
