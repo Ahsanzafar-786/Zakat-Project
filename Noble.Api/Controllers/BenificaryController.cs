@@ -171,7 +171,7 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetBenificaryNoteList")]
         [HttpGet("GetBenificaryNoteList")]
-        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown, string beneficiaryName,string beneficiaryNote)
+        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown, string beneficiaryName,string beneficiaryNote, string benificaryCode)
      {
             var benificary = await Mediator.Send(new GetBenificaryNoteListQuery
             {
@@ -179,7 +179,8 @@ namespace Noble.Api.Controllers
                 IsDropDown = isDropDown,
                 PageNumber = pageNumber ?? 1,
                 BeneficiaryName= beneficiaryName,
-                BeneficiaryNote = beneficiaryNote
+                BeneficiaryNote = beneficiaryNote,
+                BenificaryCode= benificaryCode
             });
             return Ok(benificary);
         }
@@ -369,7 +370,7 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetPaymentsList")]
         [HttpGet("GetPaymentsList")]
-        public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber , string beneficiaryName, int? code, decimal? amount)
+        public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber , string beneficiaryName, int? code, decimal? amount, int? benificaryCode)
         {
             var payment = await Mediator.Send(new PaymentListQuery
             {
@@ -377,7 +378,8 @@ namespace Noble.Api.Controllers
                 PageNumber = pageNumber ?? 1,
                 BeneficiaryName = beneficiaryName,
                 Code=code,
-                Amount=amount
+                Amount=amount,
+                BenificaryCode=benificaryCode
 
             });
             return Ok(payment);
