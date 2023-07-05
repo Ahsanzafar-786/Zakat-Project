@@ -76,7 +76,7 @@
                                     <th class="text-center">
                                         {{ $t('Payment.ID') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-start">
                                         {{ $t('Payment.BenificaryName') }}
                                     </th>
                                     <th class="text-center">
@@ -131,14 +131,14 @@
                                     <td class="text-center" >{{ brand.benificaryCode }}</td>
 
                                     <td class="text-center text-danger" v-if="brand.isVoid">Payment Voided</td>
-                                    <td class="text-center" v-else-if="roleName != 'Cashier'">
+                                    <td class="text-start" v-else-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">
                                                 {{ brand.benificaryNameAr ==
                                                     '' ? brand.benificaryName : brand.benificaryNameAr }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center" v-else>{{
+                                    <td class="text-start" v-else>{{
                                         brand.benificaryName == '' ? brand.benificaryNameAr : brand.benificaryName }}</td>
 
 

@@ -65,7 +65,7 @@
                                 </label>
                             </div>
                             <div class="col-sm-7">
-                                <input type="number" class="form-control" v-model="addPayment.amount" readonly />
+                                <input type="number" class="form-control" v-model="addPayment.amount"  />
                             </div>
                         </div>
                     </div>

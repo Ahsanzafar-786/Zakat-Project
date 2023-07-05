@@ -70,10 +70,10 @@
                                     <th class="text-center">
                                         {{ $t('Benificary.ID') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-start">
                                         {{ $t('Benificary.Name') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-start">
                                         {{ $t('Benificary.AuthorizePersonName') }}
                                     </th>
                                     <th class="text-center">
@@ -106,14 +106,14 @@
                                         {{ brand.beneficiaryId }}
                                     </td>
                                     
-                                    <td class="text-center">
+                                    <td class="text-start">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{
                                                 brand.name == '' ? brand.nameAr : brand.name }}</a>
                                         </strong>
                                     </td>
                                     
-                                    <td class="text-center">
+                                    <td class="text-start">
                                         <span v-for="item in brand.benificaryAuthorization" :key="item.id" class="mx-2">
                                             {{ item.authorizationPersonName == '' ? item.authorizationPersonNameAr :
                                                 item.authorizationPersonName }}
