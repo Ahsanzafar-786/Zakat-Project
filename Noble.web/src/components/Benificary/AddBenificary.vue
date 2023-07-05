@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.Name') }}:<span class="text-danger"> *</span>
+                            {{ $t('AddBenificary.Name') }}:<span class="text-danger"> </span>
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                     </div>
@@ -45,12 +45,12 @@
                             <span v-if="!$v.brand.ugamaNo.maxLength ">يجب أن يكون طول الهوية 10 أحرف</span>
                         </span>
                     </div>
-                    <div class="col-md-6 form-group">
+                    <!-- <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.PassportNo') }}:
                         </label>
                         <input class="form-control" v-model="brand.passportNo" type="text" />
-                    </div>
+                    </div> -->
 
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">

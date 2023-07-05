@@ -77,7 +77,7 @@
                                     <th class="text-center">
                                         {{ $t('BenificaryNote.Date') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-center" v-if="roleName != 'Cashier'">
                                         {{ $t('BenificaryNote.Actions') }}
                                     </th>
                                 </tr>
