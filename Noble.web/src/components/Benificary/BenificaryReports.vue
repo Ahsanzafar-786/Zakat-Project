@@ -31,6 +31,28 @@
                     <div class="row">
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.Search') }}
+                            </label>
+                            <input  type="text" class="form-control" :placeholder="$t('Benificary.Search')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.SearchByID') }}
+                            </label>
+                            <input  type="text" class="form-control" :placeholder="$t('Benificary.SearchByID')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.SearchByUqamaNo') }}
+                            </label>
+                            <input  type="text" class="form-control"
+                                :placeholder="$t('Benificary.SearchByUqamaNo')" aria-label="Example text with button addon"
+                                aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="text  font-weight-bolder">
                                 {{ $t('Benificary.AuthorizedPerson') }}
                             </label>
                             <authorizedperson v-model="authorizationPersonId" />
