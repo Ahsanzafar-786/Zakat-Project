@@ -34,6 +34,7 @@ using Microsoft.EntityFrameworkCore;
 using Noble.Api.Models;
 using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
 using Focus.Business.Reports.Payments.Queries;
+using Focus.Persistence.Migrations;
 
 namespace Noble.Api.Controllers
 {
@@ -93,7 +94,7 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetBenificaryList")]
         [HttpGet("GetBenificaryList")]
-        public async Task<IActionResult> GetBenificaryList(string searchTerm, int? pageNumber, bool isDropDown,string beneficiaryName, string uqamaNo, string beneficiaryId)
+        public async Task<IActionResult> GetBenificaryList(string searchTerm, int? pageNumber, bool isDropDown,string beneficiaryName, string uqamaNo, string beneficiaryId, Guid? authorizationPersonId, Guid? approvalPersonId, string registered)
         {
             var benificary = await Mediator.Send(new GetBenificariesListQuery
             {
@@ -102,7 +103,10 @@ namespace Noble.Api.Controllers
                 PageNumber = pageNumber ?? 1,
                 BeneficiaryName= beneficiaryName,
                 UqamaNo= uqamaNo,
-                BenificiaryId = beneficiaryId
+                BenificiaryId = beneficiaryId,
+                AuthorizedPersonId = authorizationPersonId,
+                ApprovalPersonId = approvalPersonId,
+                Registered = registered,
             });
             return Ok(benificary);
         }

@@ -30,6 +30,10 @@ export default {
         }
     },
     methods: {
+        Remove: function () {
+            this.value='';
+
+        },
         getData: function () {
             var root = this;
             var token = '';

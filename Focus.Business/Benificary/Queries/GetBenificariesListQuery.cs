@@ -19,6 +19,9 @@ namespace Focus.Business.Benificary.Queries
         public string BeneficiaryName { get; set; }
         public string UqamaNo { get; set; }
         public string BenificiaryId { get; set; }
+        public Guid? AuthorizedPersonId { get; set; }
+        public Guid? ApprovalPersonId { get; set; }
+        public string Registered { get; set; }
 
         public class Handler : IRequestHandler<GetBenificariesListQuery, PagedResult<List<BenificariesLookupModel>>>
         {
@@ -70,6 +73,7 @@ namespace Focus.Business.Benificary.Queries
                             AuthorizedPersonId = x.AuthorizedPersonId,
                             Address = x.Address,
                             ApprovalPersonId = x.ApprovalPersonId,
+                            ApprovedPaymentId = x.ApprovedPaymentId,
                             Nationality = x.Nationality,
                             Gender = x.Gender,
                             NameAr = x.NameAr,
@@ -80,6 +84,7 @@ namespace Focus.Business.Benificary.Queries
                             BenificaryAuthorization = x.BenificaryAuthorization.Select(y => new BenificaryAuthorizationLookupModel
                             {
                                 Id = y.Id,
+                                AuthorizationPersonId = y.AuthorizationPersonId,
                                 AuthorizationPersonName = y.AuthorizedPerson.AuthorizedPersonCode + " " + y.AuthorizedPerson.Name,
                                 AuthorizationPersonNameAr = y.AuthorizedPerson.AuthorizedPersonCode + " " +  y.AuthorizedPerson.NameAr,
 
@@ -99,6 +104,23 @@ namespace Focus.Business.Benificary.Queries
                         if (!string.IsNullOrEmpty(request.BenificiaryId)  )
                         {
                             query = query.Where(x => x.BeneficiaryId.ToString() == request.BenificiaryId);
+                        }
+
+                        //var benific = Context.Beneficiaries.AsNoTracking().Include(y => y.ApprovalPersons).Include(x => x.BenificaryAuthorization).ThenInclude(z => z.AuthorizedPerson).ToList();
+
+                        if (request.AuthorizedPersonId != Guid.Empty && request.AuthorizedPersonId != null)
+                        {
+                            query = query.Where(x => x.BenificaryAuthorization.Any(y => y.AuthorizationPersonId == request.AuthorizedPersonId));
+                        }
+                        if (!string.IsNullOrEmpty(request.Registered))
+                        {
+                            bool isRegistered = request.Registered == "Register" ? true : false;
+
+                            query = query.Where(x => x.IsRegister == isRegistered);
+                        }
+                        if (request.ApprovalPersonId != Guid.Empty && request.ApprovalPersonId != null)
+                        {
+                            query = query.Where(x => x.ApprovedPaymentId == request.ApprovalPersonId);
                         }
 
                         var count = await query.CountAsync();

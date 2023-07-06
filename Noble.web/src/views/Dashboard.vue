@@ -59,10 +59,7 @@
                                 <a v-on:click="GoTo('/addpayment')" href="javascript:void(0);"> {{ $t('Payment.AddPayment')
                                 }}</a>
                             </li> -->
-                            <li>
-                                <a v-on:click="GoTo('/benificaryreports')" href="javascript:void(0);"> {{ $t('Payment.BenificaryReports')
-                                }}</a>
-                            </li>
+                            
                         </ul>
                     </li>
                     <li v-if="roleName != 'Noble Admin'">
@@ -79,6 +76,10 @@
                             </li>
                             <li>
                                 <a v-on:click="GoTo('/benificarynote')" href="javascript:void(0);"> {{ $t('BenificaryNote.BenificaryNote')
+                                }}</a>
+                            </li>
+                            <li>
+                                <a v-on:click="GoTo('/benificaryreports')" href="javascript:void(0);"> {{ $t('Payment.BenificaryReports')
                                 }}</a>
                             </li>
                         </ul>

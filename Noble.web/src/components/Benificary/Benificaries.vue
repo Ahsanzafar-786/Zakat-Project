@@ -32,18 +32,39 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-4">
                             <input v-model="search" type="text" class="form-control" :placeholder="$t('Benificary.Search')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <input v-model="beneficiaryId" type="text" class="form-control" :placeholder="$t('Benificary.SearchByID')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <input v-model="uqamaNo" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByUqamaNo')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.AuthorizedPerson') }}
+                            </label>
+                            <authorizedperson v-model="authorizationPersonId" ref="AuthorizedDropdown" />
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.ApprovalPerson') }}
+                            </label>
+                            <approvalperson v-model="approvalPersonId"/>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label class="text  font-weight-bolder">
+                               {{ $t('Benificary.Register/Un-Register') }}
+                            </label>
+                            <multiselect v-model="registered" 
+                            :options="['Register', 'Un-Register']" :show-labels="false"
+                            :placeholder="$t('AddBenificary.SelectType')">
+                        </multiselect>
                         </div>
                         <div class="col-3">
                             <a v-on:click="SearchFilter" href="javascript:void(0);"
@@ -204,9 +225,17 @@
 </template>
 
 <script>
+    
 import clickMixin from '@/Mixins/clickMixin'
+import Multiselect from 'vue-multiselect';
+
 export default {
+    
+        
     mixins: [clickMixin],
+    components: {
+        Multiselect,
+    },
     data: function () {
         return {
             user: '',
@@ -262,6 +291,9 @@ export default {
             benificaryName: '',
             uqamaNo: '',
             beneficiaryId:'',
+            authorizationPersonId: '',
+                approvalPersonId: '',
+                registered: '',
         }
     },
     // watch: {
@@ -271,10 +303,17 @@ export default {
     // },
     methods: {
         ClearFilter() {
+            debugger;
+
             // Reset the filter conditions here
             this.search = '';
             this.uqamaNo = '';
             this.beneficiaryId = '';
+            this.authorizationPersonId = '';
+            if(this.$refs.AuthorizedDropdown!=undefined)
+            this.$refs.AuthorizedDropdown.Remove();
+                this.approvalPersonId = '';
+                this.registered = '';
 
             // Trigger the search or data refresh
             this.GetBenificaryData(this.currentPage);
@@ -354,7 +393,7 @@ export default {
                 token = localStorage.getItem('token');
             }
             debugger; //eslint-disable-line
-            root.$https.get('Benificary/GetBenificaryList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryId=' + this.beneficiaryId + '&uqamaNo='+ this.uqamaNo , {
+            root.$https.get('Benificary/GetBenificaryList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryId=' + this.beneficiaryId + '&uqamaNo='+ this.uqamaNo + '&authorizationPersonId='+ this.authorizationPersonId + '&approvalPersonId='+ this.approvalPersonId + '&registered='+ this.registered  , {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
