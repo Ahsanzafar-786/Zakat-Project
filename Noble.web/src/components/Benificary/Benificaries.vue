@@ -55,7 +55,7 @@
                             <label class="text  font-weight-bolder">
                                 {{ $t('Benificary.ApprovalPerson') }}
                             </label>
-                            <approvalperson v-model="approvalPersonId"/>
+                            <approvalperson v-model="approvalPersonId"  ref="approvalPersonId"/>
                         </div>
                         <div class="col-md-3 form-group">
                             <label class="text  font-weight-bolder">
@@ -312,6 +312,8 @@ export default {
             this.authorizationPersonId = '';
             if(this.$refs.AuthorizedDropdown!=undefined)
             this.$refs.AuthorizedDropdown.Remove();
+            if(this.$refs.approvalPersonId!=undefined)
+            this.$refs.approvalPersonId.Remove();
                 this.approvalPersonId = '';
                 this.registered = '';
 

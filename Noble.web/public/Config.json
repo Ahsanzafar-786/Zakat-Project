@@ -1,6 +1,6 @@
 {
-  "ServerIP": "https://localhost:44318/api",
+  "ServerIP":"https://91.205.173.234:8031/api",
   "ClientIP": "http://localhost:805",
-  "ReportServer":"http://localhost:64319//Reports/",
+  "ReportServer":"https://91.205.173.234:8051/Reports/",
   "SystemType": "Local"
 }
