@@ -38,7 +38,7 @@
     "Search":"Search By Beneficiary Name",
     "SearchByID":"Search By Beneficiary ID",
     "SearchByUqamaNo":"Search By Ugama No",
-    "SearchFilter":"Search Filter",
+    "SearchFilter":"Apply Filter",
     "ClearFilter":"Clear Filter",
     "ID":"ID",
     "ApprovalPerson":"Approval Person",
@@ -49,7 +49,20 @@
     "ToDate":"To Date",
     "BeneficiaryName":"Beneficiary Name",
     "BeneficiaryID":"Beneficiary ID",
-    "UqamaNo":"Uqama No"
+    "UqamaNo":"Uqama No",
+    "Amount":"Amount",
+    "Nationality":"Nationality",
+    "Gender":"Gender",
+    "Contact":"Contact",
+    "SearchByAmount":"Search By Amount",
+    "SearchByNationality":"Search By Nationality",
+    "SearchByGender":"Search By Gender",
+    "SearchByContact":"Search By Contact No",
+    "AdvanceFilter":"Advance Filter",
+    "Action":"Action",
+    "View":"View",
+    "PDF":"PDF"
+
   },
   "AddBenificary": {
     "AddBenificary": "Add Beneficiary",

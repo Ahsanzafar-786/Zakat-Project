@@ -26,6 +26,8 @@ namespace Focus.Business.Payments.Queries
         public int? BenificaryCode { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+        public DateTime? Month { get; set; }
+        public DateTime? Year { get; set; }
         public class Handler : IRequestHandler<PaymentListQuery, PagedResult<List<PaymentLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
@@ -94,7 +96,14 @@ namespace Focus.Business.Payments.Queries
                     {
                         query = query.Where(x => x.Date.Value >= request.FromDate.Value && x.Date.Value <= request.ToDate.Value.AddDays(1));
                     }
-
+                    if(request.Month != null)
+                    {
+                        query = query.Where(x => x.Date.Value.Month == request.Month.Value.Month);
+                    }
+                    if (request.Year != null)
+                    {
+                        query = query.Where(x => x.Date.Value.Year == request.Year.Value.Year);
+                    }
 
                     var count =  query.Count();
                     query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);

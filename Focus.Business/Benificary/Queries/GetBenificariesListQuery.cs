@@ -24,6 +24,13 @@ namespace Focus.Business.Benificary.Queries
         public string Registered { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+        public DateTime? StartMonth {get; set;}
+        public DateTime? Year { get; set;}
+        public decimal? Amount { get; set; }
+        public string Nationality { get; set; }
+        public string Contact { get; set; }
+        public string Gender { get; set; }
+        public string Status { get; set; }
 
         public class Handler : IRequestHandler<GetBenificariesListQuery, PagedResult<List<BenificariesLookupModel>>>
         {
@@ -129,6 +136,37 @@ namespace Focus.Business.Benificary.Queries
                         {
                             query = query.Where(x => x.StartMonth.Value >= request.FromDate.Value && x.StartMonth.Value <= request.ToDate.Value.AddDays(1));
                         }
+                        if (request.StartMonth != null)
+                        {
+                            query = query.Where(x => x.StartMonth.Value.Month == request.StartMonth.Value.Month);
+                        }
+                        if(request.Year != null)
+                        {
+                            query = query.Where(x => x.StartMonth.Value.Year == request.Year.Value.Year);
+                        }
+                        if(request.Amount != null)
+                        {
+                            query = query.Where(x => x.AmountPerMonth.Equals(request.Amount));
+                        }
+                        if(request.Contact != null)
+                        {
+                            query = query.Where(x => x.PhoneNo == request.Contact);
+                        }
+                        if(request.Nationality != null)
+                        {
+                            query = query.Where(x => x.Nationality == request.Nationality);
+                        }
+                        if(request.Gender != null)
+                        {
+                            query = query.Where(x => x.Gender == request.Gender);
+                        }
+                        if (!string.IsNullOrEmpty(request.Status))
+                        {
+                            bool isActive = request.Status == "Active" ? true : false;
+
+                            query = query.Where(x => x.IsActive == isActive);
+                        }
+
 
                         var count = await query.CountAsync();
                         query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);

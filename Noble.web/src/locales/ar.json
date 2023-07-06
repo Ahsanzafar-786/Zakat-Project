@@ -41,7 +41,7 @@
     "Search":"البحث عن طريق اسم المستفيد",
     "SearchByUqamaNo":"البحث برقم الإقامة",
     "SearchByID":"البحث عن طريق معرف المستفيد",
-    "SearchFilter":"تصفية البحث",
+    "SearchFilter":" تطبيق مرشح",
     "ClearFilter":"مرشح واضح",
     "ID":" رقم التعريف ",
     "ApprovalPerson":"شخص الموافقة",
@@ -52,7 +52,19 @@
     "ToDate":"تاريخ ",
     "BeneficiaryName":"أسم المستفيد",
     "BeneficiaryID":"معرف المستفيد",
-    "UqamaNo":"رقم الإقامة"
+    "UqamaNo":"رقم الإقامة",
+    "Amount":"كمية",
+    "Nationality":"جنسية",
+    "Gender":"جنس",
+    "Contact":"رقم الاتصال",
+    "SearchByAmount":"البحث بالمبلغ",
+    "SearchByNationality":"البحث بالجنسية",
+    "SearchByGender":"البحث حسب الجنس",
+    "SearchByContact":"البحث عن طريق رقم الاتصال",
+    "AdvanceFilter":"تصفية متقدم",
+    "Action":"فعل",
+    "View":"منظر",
+    "PDF":"بي دي إف"
 
   },
 
