@@ -49,7 +49,11 @@
     "AuthorizedPerson":"الشخص المرخص",
     "Register/Un-Register":"تسجيل / إلغاء التسجيل",
     "FromDate":"من التاريخ",
-    "ToDate":"تاريخ "
+    "ToDate":"تاريخ ",
+    "BeneficiaryName":"أسم المستفيد",
+    "BeneficiaryID":"معرف المستفيد",
+    "UqamaNo":"رقم الإقامة"
+
   },
 
   "AddBenificary":{

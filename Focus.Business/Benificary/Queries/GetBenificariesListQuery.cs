@@ -22,6 +22,8 @@ namespace Focus.Business.Benificary.Queries
         public Guid? AuthorizedPersonId { get; set; }
         public Guid? ApprovalPersonId { get; set; }
         public string Registered { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
         public class Handler : IRequestHandler<GetBenificariesListQuery, PagedResult<List<BenificariesLookupModel>>>
         {
@@ -74,6 +76,7 @@ namespace Focus.Business.Benificary.Queries
                             Address = x.Address,
                             ApprovalPersonId = x.ApprovalPersonId,
                             ApprovedPaymentId = x.ApprovedPaymentId,
+                            StartMonth = x.StartMonth,
                             Nationality = x.Nationality,
                             Gender = x.Gender,
                             NameAr = x.NameAr,
@@ -121,6 +124,10 @@ namespace Focus.Business.Benificary.Queries
                         if (request.ApprovalPersonId != Guid.Empty && request.ApprovalPersonId != null)
                         {
                             query = query.Where(x => x.ApprovedPaymentId == request.ApprovalPersonId);
+                        }
+                        if (request.FromDate.HasValue && request.ToDate.HasValue)
+                        {
+                            query = query.Where(x => x.StartMonth.Value >= request.FromDate.Value && x.StartMonth.Value <= request.ToDate.Value.AddDays(1));
                         }
 
                         var count = await query.CountAsync();

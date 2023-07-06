@@ -32,24 +32,48 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-4">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.BeneficiaryName') }}
+                            </label>
                             <input v-model="search" type="text" class="form-control" :placeholder="$t('Payment.Search')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-2">
+                        <div class="col-4">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.BeneficiaryID') }}
+                            </label>
                             <input v-model="benificaryCode" type="text" class="form-control" :placeholder="$t('Payment.SearchByID')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-2">
+                        <div class="col-4">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Payment.Code') }}
+                            </label>
                             <input v-model="code" type="text" class="form-control" :placeholder="$t('Payment.SearchByCode')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-2">
+                        <div class="col-4">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Payment.Amount') }}
+                            </label>
                             <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Payment.SearchByAmount')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-4 form-group">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.FromDate') }}
+                            </label>
+                            <datepicker v-model="fromDate" :key="render" />
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.ToDate') }}
+                            </label>
+                            <datepicker v-model="toDate" :key="render" />
+                        </div>
+                        <div class="col-4">
                             <a v-on:click="SearchFilter" href="javascript:void(0);"
                                 class="btn btn-sm btn-outline-primary mx-1">
                                 {{ $t('Payment.SearchFilter') }}
@@ -293,6 +317,8 @@ export default {
             code: '',
             amount: '',
             benificaryCode:'',
+            fromDate: '',
+            toDate: '',
         }
     },
     // watch: {
@@ -309,6 +335,9 @@ export default {
             this.amount = '';
             this.code = '';
             this.benificaryCode = '';
+            this.fromDate = '';
+            this.toDate = '';
+            this.render++
 
             // Trigger the search or data refresh
             this.GetPayment(this.currentPage);
@@ -366,7 +395,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode , { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate , { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;

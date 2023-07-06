@@ -23,9 +23,9 @@ namespace Focus.Business.Payments.Queries
         public string BeneficiaryName { get; set; }
         public int? Code { get; set; }
         public decimal? Amount { get; set; }
-
         public int? BenificaryCode { get; set; }
-
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
         public class Handler : IRequestHandler<PaymentListQuery, PagedResult<List<PaymentLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
@@ -89,6 +89,10 @@ namespace Focus.Business.Payments.Queries
                      if(request.BenificaryCode != null && request.BenificaryCode > 0)
                     {
                         query = query.Where(x => x.BenificaryCode == request.BenificaryCode);
+                    }
+                    if (request.FromDate.HasValue && request.ToDate.HasValue)
+                    {
+                        query = query.Where(x => x.Date.Value >= request.FromDate.Value && x.Date.Value <= request.ToDate.Value.AddDays(1));
                     }
 
 

@@ -46,7 +46,10 @@
     "AuthorizedPerson":"Authorized Person",
     "Register/Un-Register":"Register / Un-Register",
     "FromDate":"From Date",
-    "ToDate":"To Date"
+    "ToDate":"To Date",
+    "BeneficiaryName":"Beneficiary Name",
+    "BeneficiaryID":"Beneficiary ID",
+    "UqamaNo":"Uqama No"
   },
   "AddBenificary": {
     "AddBenificary": "Add Beneficiary",
