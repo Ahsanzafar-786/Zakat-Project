@@ -310,12 +310,13 @@ export default {
             this.uqamaNo = '';
             this.beneficiaryId = '';
             this.authorizationPersonId = '';
+            this.approvalPersonId = '';
+            this.registered = '';
+
             if(this.$refs.AuthorizedDropdown!=undefined)
             this.$refs.AuthorizedDropdown.Remove();
             if(this.$refs.approvalPersonId!=undefined)
             this.$refs.approvalPersonId.Remove();
-                this.approvalPersonId = '';
-                this.registered = '';
 
             // Trigger the search or data refresh
             this.GetBenificaryData(this.currentPage);
