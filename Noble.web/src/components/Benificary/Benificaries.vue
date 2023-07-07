@@ -97,11 +97,14 @@
                             <datepicker v-model="toDate" :key="render" />
                         </div>
                         <div class="col-md-12">
-                                <a href="#" class="btn btn-sm btn-outline-primary" @click="AdvanceFilterFor">{{ $t('Benificary.AdvanceFilter') }}</a>
+                                <!-- <a href="#" class="btn btn-sm btn-outline-primary" @click="AdvanceFilterFor">{{ $t('Benificary.AdvanceFilter') }}</a> -->
+                                <a class="btn btn btn-soft-primary" v-on:click="AdvanceFilterFor" id="button-addon2">
+                                    <i class="fa fa-filter"></i>
+                                </a>
                             </div>
                         <div class="row" v-if="advanceFilters">
                            
-                            <div class="col-xs-12  col-lg-3">
+                            <div class="col-xs-12  col-lg-4">
                                 <div class="form-group">
                                     <label>{{ $t('Benificary.Amount') }}</label>
                                     <input v-model="amount" type="text" class="form-control"
@@ -109,7 +112,7 @@
                                 aria-describedby="button-addon1">
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>{{ $t('Benificary.Nationality') }}</label>
                                     <input v-model="nationality" type="text" class="form-control"
@@ -117,23 +120,26 @@
                                 aria-describedby="button-addon1">
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>{{ $t('Benificary.Gender') }}</label>
-                                    <input v-model="gender" type="text" class="form-control"
+                                    <!-- <input v-model="gender" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByGender')" aria-label="Example text with button addon"
-                                aria-describedby="button-addon1">
+                                aria-describedby="button-addon1"> -->
+                                <multiselect v-model="gender" :options="['Male', 'Female']" :show-labels="false"
+                                :placeholder="$t('AddBenificary.SelectType')">
+                            </multiselect>
                                 </div>
                             </div>
 
-                            <div class="col-xs-12  col-lg-3 ">
+                            <div class="col-xs-12  col-lg-4 ">
                                 <label class="text  font-weight-bolder"> {{ $t('Benificary.Contact') }}</label>
                                 <input v-model="contact" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByContact')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
 
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <label class="text  font-weight-bolder"> {{ $t('Benificary.Status') }}</label>
                                 <multiselect v-model="status" :options="['Active', 'De-Active']" :show-labels="false"
                                 :placeholder="$t('AddBenificary.SelectType')">
@@ -285,6 +291,14 @@
                                         </div>
                                         </div>
                                     </td>
+                                    <!-- <td class="text-center">
+                                        <span v-if="brand.gender" class="badge badge-boxed  badge-outline-success">
+                                            {{ $t('Benificary.Male') }}
+                                        </span>
+                                        <span v-else class="badge badge-boxed  badge-outline-danger">
+                                            {{ $t('Benificary.Female') }}
+                                        </span>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>

@@ -98,14 +98,14 @@
 
                     </div>
 
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-4 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.PaymentType') }}
                         </label>
                         <paymenttype v-model="brand.paymentTypeId" v-on:input="GetRecord" ref="ChlidDropdown"
                             :values="brand.paymentTypeId" />
                     </div>
-                    <div class="col-md-6 form-group" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0 ">
+                    <div class="col-md-4 form-group" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.RecurringAmount') }}:
                         </label>
@@ -118,17 +118,7 @@
                             <span v-if="!$v.brand.recurringAmount.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
                         </span>
                     </div>
-                    <div class="col-md-6 form-group" v-if="paymentType != 0">
-
-                        <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.AdvancePayment') }}:
-                        </label>
-                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth"
-                            :options="['1 Month', '2 Months', '3 Months', '4 Months', '5 Months', '6 Months', '7 Months', '8 Months', '9 Months', '10 Months', '11 Months', '12 Months']" :show-labels="false"
-                            :placeholder="$t('AddBenificary.SelectType')" >
-                        </multiselect>
-                    </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-4 form-group">
                         <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 ">
                             {{ $t('AddBenificary.AmountPerMonth') }}:
                         </label>
@@ -146,12 +136,23 @@
                             <span v-if="!$v.brand.amountPerMonth.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
                         </span>
                     </div>
-                    <div class="col-md-6 form-group" v-if="paymentType != 0 ">
+                    <div class="col-md-4 form-group" v-if="paymentType != 0">
+
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.AdvancePayment') }}:
+                        </label>
+                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth"
+                            :options="['1 Month', '2 Months', '3 Months', '4 Months', '5 Months', '6 Months', '7 Months', '8 Months', '9 Months', '10 Months', '11 Months', '12 Months']" :show-labels="false"
+                            :placeholder="$t('AddBenificary.SelectType')" >
+                        </multiselect>
+                    </div>
+                    
+                    <div class="col-md-4 form-group" v-if="paymentType != 0 ">
                         <label>{{ $t('AddBenificary.StartFrom') }}:</label>
                         <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" />
 
                     </div>
-                    <div class="col-md-6 form-group" v-if="roleName == 'Admin'">
+                    <div class="col-md-4 form-group" v-if="roleName == 'Admin'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
