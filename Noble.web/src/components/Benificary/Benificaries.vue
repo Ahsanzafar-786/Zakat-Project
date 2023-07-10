@@ -76,12 +76,12 @@
                             </multiselect>
                         </div>
                         <div class="col-md-4 form-group">
-                            <label class="text  font-weight-bolder">{{ $t('AddBenificary.StartFrom') }}</label>
+                            <label class="text  font-weight-bolder">{{ $t('Benificary.SelectMonth') }}</label>
                             <datepicker v-model="startMonth" :type="'month'" :key="render" />
 
                         </div>
                         <div class="col-md-4 form-group">
-                            <label>Select Year:</label>
+                            <label>{{ $t('Benificary.SelectYear') }}</label>
                             <datepicker v-model="year" :type="'year'" :key="render" />
                         </div>
                         <div class="col-md-4 form-group">

@@ -61,7 +61,9 @@
     "AdvanceFilter":"Advance Filter",
     "Action":"Action",
     "View":"View",
-    "PDF":"PDF"
+    "PDF":"PDF",
+    "SelectMonth":"Select Month",
+    "SelectYear":"Select Year"
 
   },
   "AddBenificary": {
