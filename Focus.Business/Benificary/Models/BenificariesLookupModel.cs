@@ -32,6 +32,7 @@ namespace Focus.Business.Benificary.Models
         public Guid? PaymentTypeId { get; set; }
         public string AuthorizationPersonName { get; set; }
         public string PaymentTypeName { get; set; }
+        public string PaymentTypeNameAr { get; set; }
         public string ApprovalPersonName { get; set; }
 
         public List<BenificaryAuthorizationLookupModel> BenificaryAuthorization { get; set; }

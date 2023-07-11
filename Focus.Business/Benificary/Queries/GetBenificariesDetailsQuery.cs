@@ -119,7 +119,12 @@ namespace Focus.Business.Benificary.Queries
                             isDisable = true;
                         }
 
-                        var query = await Context.Beneficiaries.AsNoTracking().Include(x=>x.PaymentTypes).Select(x => new BenificariesLookupModel
+                        var query = await Context.Beneficiaries.AsNoTracking()
+                            .Include(x=>x.BenificaryAuthorization)
+                            .ThenInclude(x=>x.ApprovalPerson)
+                            .Include(x => x.BenificaryAuthorization)
+                            .ThenInclude(x => x.AuthorizedPerson)
+                            .Include(x=>x.PaymentTypes).Select(x => new BenificariesLookupModel
                         {
                             Id = x.Id,
                             Name = x.Name,
@@ -151,6 +156,7 @@ namespace Focus.Business.Benificary.Queries
                             DurationType = x.DurationType,
                             AdvancePayment = x.AdvancePayment,
                             PaymentTypeName = x.PaymentTypes.Name,
+                            PaymentTypeNameAr = x.PaymentTypes.NameAr,
                             ApprovalPersonName = x.ApprovalPersons.Name,
                             Reason = x.Reason,
                             IsDisable = isDisable,
@@ -159,9 +165,11 @@ namespace Focus.Business.Benificary.Queries
                                 Id= x.Id,
                                 BenficaryId = x.BenficaryId,
                                 ApprovalPersonId= x.ApprovalPersonId,
+                                ApprovalPersonName=x.ApprovalPerson.Name==null || x.ApprovalPerson.Name==""? x.ApprovalPerson.NameAr: x.ApprovalPerson.Name,
                                 AuthorizationPersonId= x.AuthorizationPersonId,
+                                AuthorizationPersonName=x.ApprovalPerson.Name==null||x.AuthorizedPerson.Name==""?x.AuthorizedPerson.NameAr:x.AuthorizedPerson.Name,
                                 IsActive = x.IsActive,
-                                Date = x.Date.ToString(),
+                                Date = Convert.ToDateTime(x.Date).ToString("mm/dd/yyyy"),
                                 Description = x.Description,
                             }).ToList(),
                         }).FirstOrDefaultAsync(x => x.Id == request.Id);

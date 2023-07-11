@@ -35,7 +35,7 @@
                             <label class="text  font-weight-bolder">
                                 {{ $t('Benificary.BeneficiaryName') }}
                             </label>
-                            <input v-model="search" type="text" class="form-control" :placeholder="$t('Benificary.Search')"
+                            <input v-model="BeneficiaryName" type="text" class="form-control" :placeholder="$t('Benificary.Search')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
                         <div class="col-md-4 form-group">
@@ -101,7 +101,7 @@
         </div>
         <print :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show = false"
             @IsSave="IsSave" />
-        <iframe :key="changereport" height="1500" width="1000" :src="reportsrc"></iframe>
+        <iframe :key="changereport" height="1080" width="1080" :src="reportsrc"></iframe>
     </div>
 </template>
     
@@ -133,7 +133,7 @@ export default {
             render: 0,
             uqamaNo: '',
             beneficiaryId: '',
-            search: '',
+            BeneficiaryName: '',
         }
     },
     watch: {
@@ -174,11 +174,11 @@ export default {
             debugger;
 
             if (val) {
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + this.authorizationPersonId + '&ApprovalPersonId=' + this.approvalPersonId + '&Registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val + "&CompanyId=" + companyId
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + this.authorizationPersonId + '&ApprovalPersonId=' + this.approvalPersonId + '&Registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + '&Print=' + val + '&CompanyId=' + companyId+'&uqamaNo='+this.uqamaNo+'&BeneficiaryID='+this.beneficiaryId+'&searchTerm='+this.BeneficiaryName
                 this.changereportt++;
                 this.show = !this.show;
             } else {
-                this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + this.authorizationPersonId + '&ApprovalPersonId=' + this.approvalPersonId + '&Registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + "&Print=" + val + "&CompanyId=" + companyId
+                this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + this.authorizationPersonId + '&ApprovalPersonId=' + this.approvalPersonId + '&Registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=benificaryreports' + '&Print=' + val + '&CompanyId=' + companyId+'&uqamaNo='+this.uqamaNo+'&BeneficiaryID='+this.beneficiaryId+'&searchTerm='+this.BeneficiaryName
                 this.changereport++;
             }
         },
