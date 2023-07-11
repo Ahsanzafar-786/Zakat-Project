@@ -267,28 +267,14 @@
                                     </td>
                                     <td class="text-center d-flex align-items-baseline justify-content-center"
                                         v-if="roleName != 'User'">
-                                        <button type="button" class="btn btn-light dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
-                                                class="mdi mdi-chevron-down"></i></button>
+                                        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                             {{ $t('Payment.Action') }} <i class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
-                                            <div>
-                                            <strong>
-                                                <a href="javascript:void(0)" > {{
-                                                    $t('Benificary.View') }}</a>
-                                            </strong>
-                                        </div>
-                                        <div>
-                                            <strong>
-                                                <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
-                                                    $t('Payment.Print') }}</a>
-                                            </strong>
-                                        </div>
-                                            <div>
-                                            <strong>
-                                                <a href="javascript:void(0)"> {{
-                                                    $t('Benificary.PDF') }}</a>
-                                            </strong>
-                                        </div>
+                                            <a class="dropdown-item" href="javascript:void(0)"  >{{ $t('Benificary.View') }}</a>
+                                            <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)" >{{$t('Payment.Print') }}</a>
+                                            <a class="dropdown-item" href="javascript:void(0)"  >{{ $t('Benificary.PDF') }}</a>
+
+                                            
                                         </div>
                                     </td>
                                     <!-- <td class="text-center">

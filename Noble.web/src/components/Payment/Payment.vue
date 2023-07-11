@@ -327,7 +327,8 @@ export default {
             fromDate: '',
             toDate: '',
             month:'',
-            year: ''
+            year: '',
+            render:0
 
         }
     },
