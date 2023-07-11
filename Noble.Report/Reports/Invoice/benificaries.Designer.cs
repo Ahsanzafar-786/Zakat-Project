@@ -124,6 +124,7 @@
             this.PaymentTypeNameAr = new DevExpress.XtraReports.UI.CalculatedField();
             this.CompanyInfo = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.Beneficries = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.xrLabel29 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.federationDataSource1)).BeginInit();
@@ -233,13 +234,14 @@
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPanel1});
-            this.ReportHeader.HeightF = 184.2061F;
+            this.ReportHeader.HeightF = 169.6783F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // xrPanel1
             // 
             this.xrPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.xrPanel1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel29,
             this.xrLabel13,
             this.xrLabel12,
             this.xrLabel11,
@@ -256,7 +258,7 @@
             this.xrLabel1});
             this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPanel1.Name = "xrPanel1";
-            this.xrPanel1.SizeF = new System.Drawing.SizeF(791F, 174.8624F);
+            this.xrPanel1.SizeF = new System.Drawing.SizeF(791F, 160.9735F);
             this.xrPanel1.StylePriority.UseBackColor = false;
             // 
             // xrLabel13
@@ -431,13 +433,13 @@
             // 
             // xrLabel1
             // 
-            this.xrLabel1.Font = new DevExpress.Drawing.DXFont("Calibri", 22F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrLabel1.Font = new DevExpress.Drawing.DXFont("Calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(169.6967F, 114.3084F);
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(221.3192F, 114.3084F);
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
             this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(243.2592F, 35.97062F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(191.6367F, 35.97062F);
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UseForeColor = false;
             this.xrLabel1.Text = "Benificary Reports";
@@ -1417,6 +1419,19 @@
             this.Beneficries.DataSource = typeof(Noble.Report.Models.BenificariesLookupModel);
             this.Beneficries.Name = "Beneficries";
             // 
+            // xrLabel29
+            // 
+            this.xrLabel29.Font = new DevExpress.Drawing.DXFont("Calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrLabel29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.xrLabel29.LocationFloat = new DevExpress.Utils.PointFloat(412.9559F, 114.3084F);
+            this.xrLabel29.Multiline = true;
+            this.xrLabel29.Name = "xrLabel29";
+            this.xrLabel29.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel29.SizeF = new System.Drawing.SizeF(151.4711F, 35.97062F);
+            this.xrLabel29.StylePriority.UseFont = false;
+            this.xrLabel29.StylePriority.UseForeColor = false;
+            this.xrLabel29.Text = "التقارير المفيدة";
+            // 
             // benificaries
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1539,5 +1554,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel65;
         private DevExpress.XtraReports.UI.XRLabel xrLabel28;
         private DevExpress.XtraReports.UI.CalculatedField PaymentTypeNameAr;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel29;
     }
 }

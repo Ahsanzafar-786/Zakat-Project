@@ -272,7 +272,7 @@
                                         <div class="dropdown-menu text-center">
                                             <a class="dropdown-item" href="javascript:void(0)"  >{{ $t('Benificary.View') }}</a>
                                             <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)" >{{$t('Payment.Print') }}</a>
-                                            <a class="dropdown-item" href="javascript:void(0)"  >{{ $t('Benificary.PDF') }}</a>
+                                            <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)" >{{ $t('Benificary.PDF') }}</a>
 
                                             
                                         </div>
