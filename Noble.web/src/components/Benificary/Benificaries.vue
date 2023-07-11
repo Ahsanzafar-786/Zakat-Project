@@ -76,12 +76,12 @@
                             </multiselect>
                         </div>
                         <div class="col-md-4 form-group">
-                            <label class="text  font-weight-bolder">{{ $t('AddBenificary.StartFrom') }}</label>
+                            <label class="text  font-weight-bolder">{{ $t('Benificary.SelectMonth') }}</label>
                             <datepicker v-model="startMonth" :type="'month'" :key="render" />
 
                         </div>
                         <div class="col-md-4 form-group">
-                            <label>Select Year:</label>
+                            <label>{{ $t('Benificary.SelectYear') }}</label>
                             <datepicker v-model="year" :type="'year'" :key="render" />
                         </div>
                         <div class="col-md-4 form-group">
@@ -267,28 +267,14 @@
                                     </td>
                                     <td class="text-center d-flex align-items-baseline justify-content-center"
                                         v-if="roleName != 'User'">
-                                        <button type="button" class="btn btn-light dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
-                                                class="mdi mdi-chevron-down"></i></button>
+                                        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                             {{ $t('Payment.Action') }} <i class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
-                                            <div>
-                                            <strong>
-                                                <a href="javascript:void(0)" > {{
-                                                    $t('Benificary.View') }}</a>
-                                            </strong>
-                                        </div>
-                                        <div>
-                                            <strong>
-                                                <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
-                                                    $t('Payment.Print') }}</a>
-                                            </strong>
-                                        </div>
-                                            <div>
-                                            <strong>
-                                                <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
-                                                    $t('Benificary.PDF') }}</a>
-                                            </strong>
-                                        </div>
+                                            <a class="dropdown-item" href="javascript:void(0)"  >{{ $t('Benificary.View') }}</a>
+                                            <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)" >{{$t('Payment.Print') }}</a>
+                                            <a class="dropdown-item" href="javascript:void(0)"  >{{ $t('Benificary.PDF') }}</a>
+
+                                            
                                         </div>
                                     </td>
                                     <!-- <td class="text-center">

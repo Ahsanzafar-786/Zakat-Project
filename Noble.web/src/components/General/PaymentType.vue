@@ -43,7 +43,7 @@ export default {
                         root.options.push({
                             id: cat.id,
                             code: cat.code,
-                            name: cat.name == '' ? cat.nameAr : cat.name,
+                            name: root.$i18n.locale == 'en'? cat.name:cat.nameAr
                         })
                     })
                 }

@@ -64,7 +64,9 @@
     "AdvanceFilter":"تصفية متقدم",
     "Action":"فعل",
     "View":"منظر",
-    "PDF":"بي دي إف"
+    "PDF":"بي دي إف",
+    "SelectMonth":"اختر الشهر",
+    "SelectYear":"حدد السنة"
 
   },
 
@@ -428,8 +430,8 @@
   "LedgerReport":{
     "LedgerReport": "تقرير دفتر الأستاذ",
     "ReportsManagement":"إدارة التقارير",
-    "Filter":"منقي",
-    "ClearFilters":"مرشحات واضحة"
+    "Filter":"تصفية البحث",
+    "ClearFilters":" مرشح واضح"
   },
   "SystemManagement":{
     "SystemManagement":"ادارة النظام",

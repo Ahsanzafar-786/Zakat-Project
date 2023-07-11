@@ -85,11 +85,11 @@
                             <datepicker v-model="toDate" :key="render" />
                         </div>
 
-                        <div class="col-sm-2 mt-3">
+                        <div class="col-sm-4 mt-3">
                             <button class="btn btn-outline-primary me-2" v-on:click="PrintRdlc(false)">{{
                                 $t('LedgerReport.Filter') }}
                             </button>
-                            <button class="btn btn-outline-primary" v-on:click="ClearFilter()">{{
+                            <button class="btn btn-outline-primary btn-outline-danger" v-on:click="ClearFilter()">{{
                                 $t('LedgerReport.ClearFilters') }}</button>
                         </div>
                     </div>
