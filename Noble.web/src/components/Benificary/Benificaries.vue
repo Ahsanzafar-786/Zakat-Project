@@ -285,7 +285,7 @@
                                         </div>
                                             <div>
                                             <strong>
-                                                <a href="javascript:void(0)"> {{
+                                                <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
                                                     $t('Benificary.PDF') }}</a>
                                             </strong>
                                         </div>
@@ -344,7 +344,8 @@
                     </div>
                 </div>
             </div>
-
+            <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"
+            @IsSave="IsSaveRpt" />
             <benificary-mod :brand="newBenificary" :show="show" v-if="show" @close="IsSave" :type="type" />
         </div>
 
@@ -370,6 +371,9 @@ export default {
             user: '',
             show: false,
             roleName: '',
+            changereport: 0,
+            reportsrc: '',
+            show1: false,
             benificarylist: [],
             newBenificary: {
                 id: '',
@@ -579,7 +583,25 @@ export default {
                 root.loading = false;
             });
         },
+        IsSaveRpt: function () {
+            this.show1 = !this.show1;
+        },
+        PrintRdlc: function (val) {
+            var companyId = '';
+            if (this.$session.exists()) {
+                companyId = localStorage.getItem('CompanyID');
+            }
+            debugger;
 
+            // if (val) {
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale
+                this.changereportt++;
+                this.show1 = !this.show1;
+            // } else {
+            //     this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId
+            //     this.changereport++;
+            // }
+        },
         EditBenificary: function (Id) {
 
             var root = this;
