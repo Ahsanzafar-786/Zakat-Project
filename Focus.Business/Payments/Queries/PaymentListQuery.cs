@@ -47,7 +47,7 @@ namespace Focus.Business.Payments.Queries
                 {
                     var userList = _userManager.Users.ToList();
 
-                    var query = Context.Payments.AsNoTracking().Include(x => x.Beneficiaries).Select(x => new PaymentLookupModel
+                    var query = Context.Payments.AsNoTracking().Include(x => x.Beneficiaries).ToList().Select(x => new PaymentLookupModel
                     {
                         Id = x.Id,
                         BenificayId = x.BenificayId,
@@ -63,7 +63,7 @@ namespace Focus.Business.Payments.Queries
                         Code = x.Code,
                         IsVoid = x.IsVoid,
                         AllowVoid = x.AllowVoid,
-                        Cashier = x.UserId!=null || x.UserId!=""?  userList.FirstOrDefault(y => y.Id == x.UserId)!=null? userList.FirstOrDefault(y => y.Id == x.UserId).FirstName:"" + " ":"" ,
+                        Cashier = userList.FirstOrDefault(y => y.Id == x.UserId) != null ? userList.FirstOrDefault(y => y.Id == x.UserId).FirstName : "",
                     }).OrderByDescending(x => x.PaymentCode).ToList();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
