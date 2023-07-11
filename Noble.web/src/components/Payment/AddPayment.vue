@@ -224,7 +224,7 @@
 
                 <div class="col-lg-12 invoice-btn-fixed-bottom">
                     <div class="button-items">
-                        <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-if="rollName != 'User'">
+                        <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User'">
                             <i class="far fa-save"></i>
                             <span>
                                 {{ $t('Save') }}
@@ -289,6 +289,9 @@
 
 <script>
 import moment from 'moment';
+import {
+    required
+} from "vuelidate/lib/validators"
 
 export default {
 
@@ -438,6 +441,14 @@ export default {
                 period: '',
                 selectedMonth: ''
             }
+        }
+    },
+    validations: {
+        addPayment: {
+            benificayId: {
+                required,
+            },
+           
         }
     },
     watch: {
