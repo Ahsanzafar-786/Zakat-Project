@@ -5,8 +5,11 @@
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
                     {{ $t('AddBenificary.UpdateBenificary') }}
                 </h6>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
+                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'Add'">
                     {{ $t('AddBenificary.AddBenificary') }}
+                </h6>
+                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'View'">
+                   {{ $t('AddBenificary.ViewBenificary') }}
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -327,20 +330,20 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Draft')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' && roleName != 'User'">
+                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' && roleName != 'User'">
                     {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Approved')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' &&  roleName == 'Admin'">
+                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' &&  roleName == 'Admin'">
                     {{ $t('SaveasApproved') }} 
                 </button>
                
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Approved')"
-                    v-bind:disabled="$v.brand.$invalid" v-else-if="type == 'Edit' && roleName == 'Admin'">
+                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName == 'Admin'">
                     {{ $t('Approved') }} 
                                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Draft')"
-                    v-bind:disabled="$v.brand.$invalid" v-else-if="type == 'Edit' && roleName != 'User'">
+                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName != 'User'">
                     {{ $t('Update') }}
                 </button>
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">

@@ -66,7 +66,9 @@
     "View":"منظر",
     "PDF":"بي دي إف",
     "SelectMonth":"اختر الشهر",
-    "SelectYear":"حدد السنة"
+    "SelectYear":"حدد السنة",
+    "WaitingForApproved":"بانتظار الموافقة",
+    "Approved":"موافقة"
 
   },
 
@@ -106,9 +108,10 @@
     "Date":"تاريخ",
     "Status":"حالة",
     "Action":"فعل",
-    "Year":"Year",
-    "Period":"Period",
-    "ByOrder":"By Order"
+    "Year":"سنة",
+    "Period":"فترة",
+    "ByOrder":"بأمر",
+    "ViewBenificary":"عرض المستفيد"
 
   },
   "DateFilter": {
@@ -394,7 +397,8 @@
     "SearchByAmount":"البحث بالمبلغ",
     "SearchFilter":"تصفية البحث",
     "ClearFilter":"مرشح واضح",
-    "PaymentWiseReport":"تقرير الدفع الحكيم"
+    "PaymentWiseReport":"تقرير الدفع الحكيم",
+    "ApprovalType":"نوع الموافقة"
   },
 
   "AddPayment":{

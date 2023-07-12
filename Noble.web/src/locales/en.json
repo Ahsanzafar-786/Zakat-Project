@@ -63,7 +63,9 @@
     "View":"View",
     "PDF":"PDF",
     "SelectMonth":"Select Month",
-    "SelectYear":"Select Year"
+    "SelectYear":"Select Year",
+    "WaitingForApproved":"Waiting For Approved",
+    "Approved":"Approved"
 
   },
   "AddBenificary": {
@@ -104,7 +106,8 @@
     "Action":"Action",
     "Year":"Year",
     "Period":"Period",
-    "ByOrder":"By Order"
+    "ByOrder":"By Order",
+    "ViewBenificary":"View Benificary"
   },
 
   "BenificaryNote": {
@@ -385,7 +388,8 @@
     "SearchByAmount":"Search By Amount",
     "SearchFilter":"Search Filter",
     "ClearFilter":"Clear Filter",
-    "PaymentWiseReport":"Payment Wise Report"
+    "PaymentWiseReport":"Payment Wise Report",
+    "ApprovalType":"Approval Type"
   },
 
   "AddPayment":{
