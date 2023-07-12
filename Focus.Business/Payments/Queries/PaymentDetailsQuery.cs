@@ -155,6 +155,7 @@ namespace Focus.Business.Payments.Queries
                             BenificaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
                             Month = x.Month,
                             PaymentCode = x.Code.ToString(),
+                            Code = x.Code,
                             Year = x.Year,
                             Period = x.Period,
                             Note = x.Note,
