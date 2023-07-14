@@ -55,10 +55,9 @@
                                 <a v-on:click="GoTo('/payment')" href="javascript:void(0);"> {{ $t('Payment.BenificaryPayment')
                                 }}</a>
                             </li>
-                            <!-- <li>
-                                <a v-on:click="GoTo('/addpayment')" href="javascript:void(0);"> {{ $t('Payment.AddPayment')
-                                }}</a>
-                            </li> -->
+                            <li>
+                                <a v-on:click="GoTo('/dailyPayment')" href="javascript:void(0);"> Daily Payments</a>
+                            </li>
                             
                         </ul>
                     </li>

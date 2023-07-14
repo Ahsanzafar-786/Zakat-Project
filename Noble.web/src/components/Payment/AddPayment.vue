@@ -229,12 +229,17 @@
                             <span>
                                 {{ $t('Save') }}
                             </span>
-                        </button>
-                        <button class="btn btn-danger mr-2" v-on:click="GotoPage('/payment')">
+                        </button>   
+                        <button type="button" class="btn btn-outline-primary mr-2"   v-on:click="PrintRdlc(addPayment.id) && GotoPage('/payment')"
+                    v-bind:disabled="$v.addPayment.$invalid" >
+                    {{ $t('SaveasPrint') }} </button>
+                    <button class="btn btn-danger mr-2" v-on:click="GotoPage('/payment')">
                             {{ $t('Close') }}
                         </button>
                     </div>
                 </div>
+                <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"
+            @IsSave="IsSaveRpt" />
                 <div class="offcanvas offcanvas-end p-0" tabindex="-1" id="offcanvasRight"
                     aria-labelledby="offcanvasRightLabel" style="width: 500px !important;">
                     <div class="offcanvas-header">
@@ -297,6 +302,7 @@ export default {
 
     data: function () {
         return {
+            show1: false,
             rollName: '',
             rendar: 0,
             year: '',
@@ -457,6 +463,9 @@ export default {
         },
     },
     methods: {
+        IsSaveRpt: function () {
+            this.show1 = !this.show1;
+        },
         GetMonth: function (link) {
             if (link != undefined) {
                 return moment(link).format('MMMM');
@@ -464,6 +473,22 @@ export default {
             } else {
                 return '';
             }
+        },
+        PrintRdlc: function (val) {
+            var companyId = '';
+            if (this.$session.exists()) {
+                companyId = localStorage.getItem('CompanyID');
+            }
+            debugger;
+
+            // if (val) {
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale
+                this.changereportt++;
+                this.show1 = !this.show1;
+            // } else {
+            //     this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId
+            //     this.changereport++;
+            // }
         },
         MonthSelection: function () {
 

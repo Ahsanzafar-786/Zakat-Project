@@ -1,9 +1,12 @@
 ﻿
+using DocumentFormat.OpenXml.Wordprocessing;
 using Focus.Business.Benificary.Models;
 using Focus.Business.Common;
 using Focus.Business.Exceptions;
 using Focus.Business.Interface;
+using Focus.Business.Payments.Queries;
 using Focus.Domain.Entities;
+using Focus.Domain.Interface;
 using ICSharpCode.SharpZipLib.Zip;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -22,11 +25,15 @@ namespace Focus.Business.Benificary.Commands
         {
             public readonly IApplicationDbContext Context;
             public readonly ILogger Logger;
+            private readonly IMediator _mediator;
+            private readonly IUserHttpContextProvider _contextProvider;
 
-            public Handler(IApplicationDbContext context, ILogger<BenificiariesAddUpdateCommand> logger)
+            public Handler(IApplicationDbContext context, ILogger<BenificiariesAddUpdateCommand> logger, IMediator mediator, IUserHttpContextProvider contextProvider)
             {
                 Context = context;
                 Logger = logger;
+                _mediator = mediator;
+                _contextProvider = contextProvider;
             }
 
 
@@ -125,6 +132,48 @@ namespace Focus.Business.Benificary.Commands
                             };
 
                             await Context.Beneficiaries.AddAsync(benifiary);
+                            if (request.benificiaries.DocumentType == "dailyPayment")
+                            {
+                                var autoNo = await _mediator.Send(new AutoCodeGenerateQuery
+                                {
+                                    Name = "",
+                                });
+
+
+
+                                var payment = new Payment
+                                {
+                                    BenificayId = benifiary.Id,
+                                    Amount = benifiary.AmountPerMonth,
+                                    Month = DateTime.Now,
+                                    Code = Convert.ToInt32(autoNo),
+                                    Note = benifiary.Note,
+                                    PaymentCode = autoNo,
+                                    Year = DateTime.Now.Year.ToString(),
+                                    Period = DateTime.Now.Year.ToString(),
+                                    Date = DateTime.Now,
+                                    UserId = _contextProvider.GetUserId().ToString(),
+                                };
+
+                                Context.Payments.Add(payment);
+
+                                var charityTransaction = new CharityTransaction
+                                {
+                                    DoucmentId = payment.Id,
+                                    CharityTransactionDate = payment.Date,
+                                    DoucmentDate = DateTime.Now,
+                                    DoucmentCode = payment.PaymentCode,
+                                    BenificayId = payment.BenificayId,
+                                    Month = payment.Date,
+                                    Amount = payment.Amount,
+                                    Year = payment.Year,
+                                };
+
+                                await Context.CharityTransaction.AddAsync(charityTransaction);
+
+
+                            }
+
                             await Context.SaveChangesAsync();
 
                             return new Message
