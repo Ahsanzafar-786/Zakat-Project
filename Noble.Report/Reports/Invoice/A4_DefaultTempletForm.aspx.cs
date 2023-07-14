@@ -46,7 +46,7 @@ namespace Noble.Report.Reports.Invoice
                     {
                         var benificaryId = Request.QueryString["benificaryId"]==null?"": Request.QueryString["benificaryId"];
                         var month = Request.QueryString["month"]== "Invalid date"?"": Request.QueryString["month"];
-                        var fromDate = Request.QueryString["fromDate"];
+                        var fromDate = Request.QueryString["fromDate"] == "Invalid date" ? "" : Request.QueryString["fromDate"];
                         var toDate = Request.QueryString["toDate"];
 
                         var Charity = GetCharityLedger.GetCharityLedgerDtl(benificaryId,month,fromDate,toDate, token, serverAddress);
@@ -138,7 +138,7 @@ namespace Noble.Report.Reports.Invoice
                                 row["CashierName"] = item.CashierName;
                                 row["PaymentType"] = item.PaymentType;
                                 row["PaymentDate"] = item.PaymentDate;
-                                row["Amount"] = item.Amount;
+                                row["Amount"] = item.Amount.ToString("N2");
                                 dt.Rows.Add(row);
                             }
                             ASPxGridView1.DataSource = dt;
@@ -200,7 +200,7 @@ namespace Noble.Report.Reports.Invoice
                                 row["Type"] = item.DurationType;
                                 row["ApprovedBy"] = item.ApprovalPersonName;
                                 row["AutherizationPerson"] = item.PassportNo;
-                                row["AmountPerMonth"] = item.AmountPerMonth;
+                                row["AmountPerMonth"] = item.AmountPerMonth.ToString("N2");
                                 row["Reg/Un-Reg"] = item.IsRegister==true?"Register":"Un-Register";
                                 dt.Rows.Add(row);
                             }
