@@ -35,19 +35,23 @@ namespace Focus.Business.AdminDashboard.Queries
                 try
                 {
                     var paymentTypeList = await Context.PaymentTypes.ToListAsync();
-                    var charitytransaction = await Context.CharityTransaction.AsNoTracking().ToListAsync();
-                    var query = await Context.Beneficiaries.AsNoTracking().ToListAsync();
+                    var paymentTypeIds = paymentTypeList.Select(pt => pt.Id).ToList();
 
-                    var transactionByPaymentTypes = paymentTypeList.Select(item =>
+                    var transactionByPaymentTypes = paymentTypeIds.Select(paymentTypeId =>
                     {
-                        var totalbeneficary = query.Where(x => x.PaymentTypeId == item.Id).ToList();
-                        decimal amount = charitytransaction
-                            .Where(x => totalbeneficary.Any(bene => bene.Id == x.BenificayId))
-                            .Sum(x => x.Amount);
+                        var amount = Context.Beneficiaries
+                            .Join(
+                                Context.CharityTransaction,
+                                beneficiary => beneficiary.Id,
+                                charityTransaction => charityTransaction.BenificayId,
+                                (beneficiary, charityTransaction) => new { Beneficiary = beneficiary, CharityTransaction = charityTransaction }
+                            )
+                            .Where(joinResult => joinResult.Beneficiary.PaymentTypeId == paymentTypeId)
+                            .Sum(joinResult => joinResult.CharityTransaction.Amount);
 
                         return new TransactionByPaymentTypeLookupModel()
                         {
-                            PaymentTypeName = item.Name,
+                            PaymentTypeName = paymentTypeList.FirstOrDefault(pt => pt.Id == paymentTypeId)?.Name,
                             Amount = amount
                         };
                     }).ToList();
@@ -59,6 +63,8 @@ namespace Focus.Business.AdminDashboard.Queries
                     _logger.LogError(exception.Message);
                     throw new ApplicationException("Something Went Wrong.");
                 }
+
+
             }
         }
     }

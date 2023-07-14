@@ -1,31 +1,22 @@
 <template>
-    <modal :show="show" :modalLarge="true">
-        <div class="modal-content">
-            <div class="modal-header" v-if="brand.documentType=='dailyPayment'">
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    {{ $t('AddBenificary.UpdateBenificary') }}
-                </h6>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'Add'">
-                    Add Daily Payment
-                </h6>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'View'">
-                   {{ $t('AddBenificary.ViewBenificary') }}
-                </h6>
-                <button type="button" class="btn-close" v-on:click="close()"></button>
-            </div>
-            <div class="modal-header" v-else>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    {{ $t('AddBenificary.UpdateBenificary') }}
-                </h6>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'Add'">
-                    {{ $t('AddBenificary.AddBenificary') }}
-                </h6>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'View'">
-                   {{ $t('AddBenificary.ViewBenificary') }}
-                </h6>
-                <button type="button" class="btn-close" v-on:click="close()"></button>
-            </div>
-            <div class="modal-body">
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">Add Daily Payment</h4>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Add Daily Payment</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            <div class="modal-body card">
                 <div class="row">
                     <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'" >
                         <label class="text  font-weight-bolder">
@@ -392,7 +383,7 @@
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' &&  roleName == 'Admin' && brand.documentType!='dailyPayment'">
                     {{ $t('SaveasApproved') }} 
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm"   v-on:click="PrintRdlc(brand.id)"
+                <button type="button" class="btn btn-soft-primary btn-sm"   v-on:click="PrintRdlc(brand.id) && GotoPage('/payment')"
                     v-bind:disabled="$v.brand.$invalid" v-else>
                     {{ $t('SaveasPrint') }} 
                 </button>
@@ -404,7 +395,7 @@
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName != 'User'">
                     {{ $t('Update') }}
                 </button>
-                <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
+                <button type="button" class="btn btn-soft-secondary btn-sm"  v-on:click="GotoPage('/payment')">
                     {{ $t('Close') }}
                 </button>
             </div>
@@ -412,8 +403,8 @@
             @IsSave="IsSaveRpt" />
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
-    </modal>
-</template>
+    </div>
+    </template>
 
 <script>
 import clickMixin from '@/Mixins/clickMixin'
@@ -433,7 +424,6 @@ import moment from 'moment'
 export default {
     mixins: [clickMixin],
     name: 'AddBenificary',
-    props: ['show', 'brand', 'type'],
     components: {
         Loading,
         Multiselect,
@@ -442,6 +432,47 @@ export default {
     data: function () {
         return {
             show1: false,
+            brand : {
+                id: '00000000-0000-0000-0000-000000000000',
+                documentType: 'dailyPayment',
+                name: '',
+                nameAr: '',
+                gender: 'Male',
+                beneficiaryId: 0,
+                paymentIntervalMonth: 0,
+                amountPerMonth: 0,
+                recurringAmount: 0,
+                ugamaNo: '',
+                phoneNo: '',
+                note: '',
+                approvalStatus: '',
+                isDisable: false,
+                authorizedPersonId: '',
+                approvalPersonId: '',
+                paymentTypeId: '',
+                isActive: true,
+                isRegister: true,
+                address: '',
+                passportNo: '',
+                reason: '',
+                nationality: '',
+                startMonth: '',
+                startDate: '',
+                endDate: '',
+                approvedPaymentId: '',
+                advancePayment: 0,
+                durationType: 'Customize',
+                authorizationPersonName: '',
+                benificaryAuthorization: [{
+                    id: '',
+                    benficaryId: '',
+                    authorizationPersonId: '',
+                    approvalPersonId: '',
+                    date: '',
+                    description: '',
+                    isActive: true
+                }],
+            },
 
             advancePaymentvalue:'',
             giveReason:false,
@@ -499,6 +530,11 @@ export default {
         },
         GiveReason: function(){
             this.giveReason = true;
+        },
+        GotoPage: function (link) {
+            this.$router.push({
+                path: link
+            });
         },
         GetRecord: function () {
             var root = this;
@@ -749,10 +785,7 @@ export default {
     },
     mounted: function () {
         this.roleName = localStorage.getItem('RoleName');
-        if (this.type == 'Edit') {
-            this.paymentType = this.brand.paymentType;
-            this.advancePaymentvalue = `${this.brand.advancePayment} Months`;
-        }
+       
         this.english = localStorage.getItem('locales');
         this.arabic = localStorage.getItem('locales');
 

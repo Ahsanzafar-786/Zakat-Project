@@ -19,6 +19,11 @@
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
                                 </a>
+                                <a v-on:click="openmodel('dailyPayment')" href="javascript:void(0);"
+                                    class="btn btn-sm btn-outline-primary mx-1" v-if="roleName != 'User'">
+                                    <i class="align-self-center icon-xs ti-plus"></i>
+                                    Add Daily Payment
+                                </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
                                     {{ $t('Close') }}
@@ -190,7 +195,7 @@
                                         {{ $t('AddBenificary.RecurringAmount') }}
                                     </th>
                                     <th class="text-center" v-if="roleName == 'Admin'">
-                                        Approval Type
+                                        {{ $t('Payment.ApprovalType') }}
                                     </th>
                                     <th class="text-center">
                                         {{ $t('Benificary.Status') }}
@@ -218,7 +223,7 @@
 
                                     <td class="text-start">
                                         <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id)"> {{
+                                            <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id,'Edit')"> {{
                                                 brand.name == '' ? brand.nameAr : brand.name }}</a>
                                         </strong>
                                     </td>
@@ -239,9 +244,9 @@
                                     </td>
                                     <td class="text-center" v-if="roleName == 'Admin'">
                                         <span class="badge badge-boxed  badge-outline-danger"
-                                            v-if="brand.approvalStatus == '4'">Waiting For Approved</span>
+                                            v-if="brand.approvalStatus == '4'">{{$t('Benificary.WaitingForApproved')}}</span>
                                         <span class="badge badge-boxed  badge-outline-success"
-                                            v-if="brand.approvalStatus == '3'">Approved</span>
+                                            v-if="brand.approvalStatus == '3'">{{$t('Benificary.Approved')}}</span>
                                     </td>
                                     <td class="text-center">
 
@@ -270,7 +275,7 @@
                                         <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                              {{ $t('Payment.Action') }} <i class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
-                                            <a class="dropdown-item" href="javascript:void(0)"  >{{ $t('Benificary.View') }}</a>
+                                            <a class="dropdown-item" href="javascript:void(0)" v-on:click="EditBenificary(brand.id,'View') " >{{ $t('Benificary.View') }}</a>
                                             <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)" >{{$t('Payment.Print') }}</a>
                                             <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)" >{{ $t('Benificary.PDF') }}</a>
 
@@ -426,6 +431,7 @@ export default {
             contact:'',
 
         }
+        
     },
     // watch: {
     //     search: function (val) {
@@ -504,9 +510,10 @@ export default {
             });
         },
 
-        openmodel: function () {
+        openmodel: function (documentType) {
             this.newBenificary = {
                 id: '00000000-0000-0000-0000-000000000000',
+                documentType: documentType,
                 name: '',
                 nameAr: '',
                 gender: 'Male',
@@ -588,7 +595,7 @@ export default {
             //     this.changereport++;
             // }
         },
-        EditBenificary: function (Id) {
+        EditBenificary: function (Id,type) {
 
             var root = this;
             var token = '';
@@ -604,7 +611,7 @@ export default {
                     if (response.data) {
                         root.newBenificary = response.data;
                         root.show = !root.show;
-                        root.type = "Edit"
+                        root.type = type;
                     } else {
                         console.log("error: something wrong from db.");
                     }

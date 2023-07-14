@@ -53,7 +53,7 @@
     "BeneficiaryName":"أسم المستفيد",
     "BeneficiaryID":"معرف المستفيد",
     "UqamaNo":"رقم الإقامة",
-    "Amount":"كمية",
+    "Amount":"المبلغ",
     "Nationality":"جنسية",
     "Gender":"جنس",
     "Contact":"رقم الاتصال",
@@ -66,7 +66,9 @@
     "View":"منظر",
     "PDF":"بي دي إف",
     "SelectMonth":"اختر الشهر",
-    "SelectYear":"حدد السنة"
+    "SelectYear":"حدد السنة",
+    "WaitingForApproved":"بانتظار الموافقة",
+    "Approved":"موافقة"
 
   },
 
@@ -106,9 +108,10 @@
     "Date":"تاريخ",
     "Status":"حالة",
     "Action":"فعل",
-    "Year":"Year",
-    "Period":"Period",
-    "ByOrder":"By Order"
+    "Year":"سنة",
+    "Period":"فترة",
+    "ByOrder":"بأمر",
+    "ViewBenificary":"عرض المستفيد"
 
   },
   "DateFilter": {
@@ -243,7 +246,7 @@
     "AddFunds":"إضافة الأموال",
     "FundsList":"قائمة الصناديق",
     "CharityResource":"اسم المورد الخيرية ",
-    "Amount":"كمية",
+    "Amount":"المبلغ",
     "Date":"تاريخ",
     "CharityFundsReports":"تقارير الصناديق الخيرية",
     "CharityFundsResource":"موارد الصناديق الخيرية",
@@ -254,7 +257,7 @@
     "AddFunds" : "إضافة الأموال",
     "UpdateFunds" : "تحديث الأموال",
     "CharityResource":"الموارد الخيرية",
-    "Amount":"كمية",
+    "Amount":"المبلغ",
     "Description":"وصف",
     "TypeOfTransaction":"نوع المعاملة"
   },
@@ -394,7 +397,8 @@
     "SearchByAmount":"البحث بالمبلغ",
     "SearchFilter":"تصفية البحث",
     "ClearFilter":"مرشح واضح",
-    "PaymentWiseReport":"تقرير الدفع الحكيم"
+    "PaymentWiseReport":"تقرير الدفع الحكيم",
+    "ApprovalType":"نوع الموافقة"
   },
 
   "AddPayment":{

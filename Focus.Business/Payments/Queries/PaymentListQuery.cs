@@ -45,7 +45,6 @@ namespace Focus.Business.Payments.Queries
             {
                 try
                 {
-                    var userList = _userManager.Users.ToList();
 
                     var query = Context.Payments.AsNoTracking().Include(x => x.Beneficiaries).Select(x => new PaymentLookupModel
                     {
@@ -56,15 +55,15 @@ namespace Focus.Business.Payments.Queries
                         Year = x.Year,
                         Date = x.Date,
                         Period = x.Period,
-                        PaymentCode =x.PaymentCode,
-                        BenificaryName = x.Beneficiaries != null ? x.Beneficiaries.Name : "",
-                        BenificaryCode = x.Beneficiaries != null ? x.Beneficiaries.BeneficiaryId : 0,
-                        BenificaryNameAr = x.Beneficiaries != null ? x.Beneficiaries.NameAr : "",
+                        PaymentCode = x.PaymentCode,
+                        BenificaryName = x.Beneficiaries.Name,
+                        BenificaryCode = x.Beneficiaries.BeneficiaryId,
+                        BenificaryNameAr = x.Beneficiaries.NameAr,
                         Code = x.Code,
                         IsVoid = x.IsVoid,
                         AllowVoid = x.AllowVoid,
-                        Cashier = x.UserId!=null || x.UserId!=""?  userList.FirstOrDefault(y => y.Id == x.UserId)!=null? userList.FirstOrDefault(y => y.Id == x.UserId).FirstName:"" + " ":"" ,
-                    }).OrderByDescending(x => x.PaymentCode).ToList();
+                        Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
+                    }).OrderByDescending(x => x.PaymentCode).AsQueryable();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
                     //{
@@ -73,50 +72,51 @@ namespace Focus.Business.Payments.Queries
                     //                          || x.BenificaryName.Contains(searchTerm) || x.BenificayId.ToString().Contains(searchTerm) || x.Code.ToString().Contains(searchTerm));
 
                     //}
-                    
-                     if (!string.IsNullOrEmpty(request.SearchTerm))
+
+                    if (!string.IsNullOrEmpty(request.SearchTerm))
                     {
                         var searchTerm = request.SearchTerm.ToLower();
                         query = query.Where(x => x.BenificaryNameAr.Contains(searchTerm)
-                                              || x.BenificaryName.Contains(searchTerm)).ToList(); 
+                                              || x.BenificaryName.Contains(searchTerm));
 
                     }
-                     if (request.Amount!=null && request.Amount > 0)
+                    if (request.Amount != null && request.Amount > 0)
                     {
-                        query = query.Where(x => x.Amount == request.Amount).ToList(); ;
+                        query = query.Where(x => x.Amount == request.Amount);
                     }
-                     if (request.Code != null && request.Code > 0)
+                    if (request.Code != null && request.Code > 0)
                     {
-                        query = query.Where(x => x.Code == request.Code).ToList(); ;
+                        query = query.Where(x => x.Code == request.Code);
                     }
-                     if(request.BenificaryCode != null && request.BenificaryCode > 0)
+                    if (request.BenificaryCode != null && request.BenificaryCode > 0)
                     {
-                        query = query.Where(x => x.BenificaryCode == request.BenificaryCode).ToList(); 
+                        query = query.Where(x => x.BenificaryCode == request.BenificaryCode);
                     }
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        query = query.Where(x => x.Date.Value >= request.FromDate.Value && x.Date.Value <= request.ToDate.Value.AddDays(1)).ToList(); 
+                        query = query.Where(x => x.Date.Value >= request.FromDate.Value && x.Date.Value <= request.ToDate.Value.AddDays(1));
                     }
-                    if(request.Month != null)
+                    if (request.Month != null)
                     {
-                        query = query.Where(x => x.Date.Value.Month == request.Month.Value.Month).ToList();
+                        query = query.Where(x => x.Date.Value.Month == request.Month.Value.Month);
                     }
                     if (request.Year != null)
                     {
-                        query = query.Where(x => x.Date.Value.Year == request.Year.Value.Year).ToList();
+                        query = query.Where(x => x.Date.Value.Year == request.Year.Value.Year);
                     }
 
                     var count = query.Count();
-                    query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize).ToList(); ;
+                    query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);
 
+                    var queryList = await query.ToListAsync();
 
                     return new PagedResult<List<PaymentLookupModel>>
                     {
-                        Results = query,
+                        Results = queryList,
                         RowCount = count,
                         PageSize = request.PageSize,
                         CurrentPage = request.PageNumber,
-                        PageCount = query.Count / request.PageSize
+                        PageCount = queryList.Count / request.PageSize
                     };
 
                 }

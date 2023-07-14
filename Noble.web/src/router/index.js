@@ -47,6 +47,7 @@ import charityfundsreports from '../components/Funds/CharityFundsReports.vue'
 import charityfundsresource from '../components/Funds/CharityFundsResource.vue'
 
 //Payment
+import dailyPayment from '../components/Payment/DailyPayment.vue';
 import payment from '../components/Payment/Payment.vue';
 import addpayment from '../components/Payment/AddPayment.vue';
 
@@ -137,6 +138,11 @@ const routes = [
                             path: '/benificaries',
                             name: 'benificaries',
                             component: benificaries
+                        },
+                        {
+                            path: '/dailyPayment',
+                            name: 'dailyPayment',
+                            component: dailyPayment
                         },
                         {
                             path: '/Imports',
