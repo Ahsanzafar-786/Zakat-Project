@@ -276,8 +276,8 @@
                                              {{ $t('Payment.Action') }} <i class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
                                             <a class="dropdown-item" href="javascript:void(0)" v-on:click="EditBenificary(brand.id,'View') " >{{ $t('Benificary.View') }}</a>
-                                            <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)" >{{$t('Payment.Print') }}</a>
-                                            <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)" >{{ $t('Benificary.PDF') }}</a>
+                                            <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id,false)" >{{$t('Payment.Print') }}</a>
+                                            <a class="dropdown-item" href="javascript:void(0)" v-on:click="PrintRdlc(brand.id,true)" >{{ $t('Benificary.PDF') }}</a>
 
                                             
                                         </div>
@@ -335,6 +335,7 @@
                     </div>
                 </div>
             </div>
+            <loading :active.sync="loading" :can-cancel="true" :is-full-page="false"></loading>  
             <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"
             @IsSave="IsSaveRpt" />
             <benificary-mod :brand="newBenificary" :show="show" v-if="show" @close="IsSave" :type="type" />
@@ -348,6 +349,8 @@
 import clickMixin from '@/Mixins/clickMixin'
 import Multiselect from 'vue-multiselect';
 import moment from 'moment'
+import Loading from 'vue-loading-overlay';
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
 
@@ -356,9 +359,11 @@ export default {
     props: ['brand'],
     components: {
         Multiselect,
+        Loading,
     },
     data: function () {
         return {
+            loading:false,
             user: '',
             show: false,
             roleName: '',
@@ -579,21 +584,34 @@ export default {
         IsSaveRpt: function () {
             this.show1 = !this.show1;
         },
-        PrintRdlc: function (val) {
+        PrintRdlc: function (val,isDownload) {
             var companyId = '';
             if (this.$session.exists()) {
                 companyId = localStorage.getItem('CompanyID');
             }
-            debugger;
+            var root=this;
+            if (isDownload) {
+                this.loading=true;
+                this.$https.get(this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale + '&isDownload=' + isDownload
+                , {  responseType: 'blob' } ) .then(function (response) {
+                       debugger;
+                        root.loading=false;
+                        const url = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        var date = moment().format('DD MMM YYYY');
+                        link.setAttribute('download','benificary ' + date + '.pdf');
+                        document.body.appendChild(link);
+                        link.click();
 
-            // if (val) {
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale
+                    })
+            }
+
+           else{
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale + '&isDownload=' + isDownload
                 this.changereportt++;
                 this.show1 = !this.show1;
-            // } else {
-            //     this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId
-            //     this.changereport++;
-            // }
+           }
         },
         EditBenificary: function (Id,type) {
 

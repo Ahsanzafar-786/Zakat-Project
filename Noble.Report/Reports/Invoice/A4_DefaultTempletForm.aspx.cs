@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.Web;
 using System.Globalization;
+using DevExpress.Office.NumberConverters;
+using System.IO;
 
 namespace Noble.Report.Reports.Invoice
 {
@@ -33,6 +35,7 @@ namespace Noble.Report.Reports.Invoice
                     var pageNumber = Request.QueryString["pageNumber"];
                     var id = Request.QueryString["id"];
                     var searchTerm = Request.QueryString["searchTerm"];
+                    string isDownload = Request.QueryString["isDownload"] == null || Request.QueryString["isDownload"] == "undefined" ? null : Request.QueryString["isDownload"];
                     var Print = Request.QueryString["Print"];
                     if (formName == "Payment")
                     {
@@ -159,56 +162,58 @@ namespace Noble.Report.Reports.Invoice
                         var fromDate = Request.QueryString["fromDate"];
                         var toDate = Request.QueryString["toDate"];
                         var Charity = GetBenificaryReport.GetBenificaryReportDtl(AuthorizationPersonId, ApprovalPersonId, Registered, uqamaNo, BeneficiaryID, searchTerm1, fromDate, toDate, token, serverAddress);
-                        if (Print == "true")
-                        {
-                            ASPxWebDocumentViewer1.Visible = true;
-                            ASPxGridView1.Visible = false;
-                            XtraReport incomeStatementRpt = new Noble.Report.Reports.Invoice.benificaryreports(companyInfo, Charity, fromDate, toDate);
-                            ASPxWebDocumentViewer1.OpenReport(incomeStatementRpt);
-                            incomeStatementRpt.DisplayName = "VatPayableReport";
-                        }
-                        else
-                        {
-                            ASPxWebDocumentViewer1.Visible = false;
-                            ASPxGridView1.Visible = true;
-                            var dt = new DataTable();
-                            dt.Columns.Add("#");
-                            dt.Columns.Add("Id");
-                            dt.Columns.Add("Name");
-                            dt.Columns.Add("Type");
-                            dt.Columns.Add("ApprovedBy");
-                            dt.Columns.Add("AutherizationPerson");
-                            dt.Columns.Add("AmountPerMonth");
-                            dt.Columns.Add("Reg/Un-Reg");
 
-                            DataRow row;
-                            int i = 1;
-                            Charity.ForEach(x =>
+                            if (Print == "true")
                             {
-                                var authorizationPersonNames = x.BenificaryAuthorization
-                                    .Select(z => z.AuthorizationPersonName)
-                                    .Where(name => !string.IsNullOrEmpty(name));
-                                x.PassportNo = string.Join(",", authorizationPersonNames);
-                            });
-
-                            foreach (var item in Charity)
-                            {
-                                row = dt.NewRow();
-                                row["#"] = i++;
-                                row["Id"] = item.BeneficiaryId;
-                                row["Name"] = item.Name;
-                                row["Type"] = item.DurationType;
-                                row["ApprovedBy"] = item.ApprovalPersonName;
-                                row["AutherizationPerson"] = item.PassportNo;
-                                row["AmountPerMonth"] = item.AmountPerMonth.ToString("N2");
-                                row["Reg/Un-Reg"] = item.IsRegister==true?"Register":"Un-Register";
-                                dt.Rows.Add(row);
+                                ASPxWebDocumentViewer1.Visible = true;
+                                ASPxGridView1.Visible = false;
+                                XtraReport incomeStatementRpt = new Noble.Report.Reports.Invoice.benificaryreports(companyInfo, Charity, fromDate, toDate);
+                                ASPxWebDocumentViewer1.OpenReport(incomeStatementRpt);
+                                incomeStatementRpt.DisplayName = "VatPayableReport";
                             }
-                            ASPxGridView1.DataSource = dt;
-                            ASPxGridView1.DataBind();
+                            else
+                            {
+                                ASPxWebDocumentViewer1.Visible = false;
+                                ASPxGridView1.Visible = true;
+                                var dt = new DataTable();
+                                dt.Columns.Add("#");
+                                dt.Columns.Add("Id");
+                                dt.Columns.Add("Name");
+                                dt.Columns.Add("Type");
+                                dt.Columns.Add("ApprovedBy");
+                                dt.Columns.Add("AutherizationPerson");
+                                dt.Columns.Add("AmountPerMonth");
+                                dt.Columns.Add("Reg/Un-Reg");
+
+                                DataRow row;
+                                int i = 1;
+                                Charity.ForEach(x =>
+                                {
+                                    var authorizationPersonNames = x.BenificaryAuthorization
+                                        .Select(z => z.AuthorizationPersonName)
+                                        .Where(name => !string.IsNullOrEmpty(name));
+                                    x.PassportNo = string.Join(",", authorizationPersonNames);
+                                });
+
+                                foreach (var item in Charity)
+                                {
+                                    row = dt.NewRow();
+                                    row["#"] = i++;
+                                    row["Id"] = item.BeneficiaryId;
+                                    row["Name"] = item.Name;
+                                    row["Type"] = item.DurationType;
+                                    row["ApprovedBy"] = item.ApprovalPersonName;
+                                    row["AutherizationPerson"] = item.PassportNo;
+                                    row["AmountPerMonth"] = item.AmountPerMonth.ToString("N2");
+                                    row["Reg/Un-Reg"] = item.IsRegister == true ? "Register" : "Un-Register";
+                                    dt.Rows.Add(row);
+                                }
+                                ASPxGridView1.DataSource = dt;
+                                ASPxGridView1.DataBind();
 
 
-                        }
+                            }
+                        
 
                     }
                    else if (formName == "benificary")
@@ -216,10 +221,31 @@ namespace Noble.Report.Reports.Invoice
                         var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"] == "null" ? "" : Request.QueryString["AuthorizationPersonId"];
                         var Language = Request.QueryString["Language"] == "null" ? "" : Request.QueryString["Language"];
                         var Charity = GetBenificary.GetBenificaryDtl(AuthorizationPersonId, token, serverAddress);
+                        if (Convert.ToBoolean(isDownload))
+                        {
+                            // Enable CORS
+                            HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
+
+                            XtraReport report1 = new Noble.Report.Reports.Invoice.benificaries(companyInfo, Charity, Language);
+                            report1.CreateDocument();
+                            using (var stream = new MemoryStream())
+                            {
+                                report1.ExportToPdf(stream);
+                                byte[] bytes = stream.ToArray();
+                                Response.Clear();
+                                Response.ContentType = "application/pdf";
+                                Response.AppendHeader("Content-Disposition", "attachment; filename=Invoice.pdf");
+                                Response.BinaryWrite(bytes);
+                            }
+                        }
+                        else
+                        {
+
                             ASPxWebDocumentViewer1.Visible = true;
                             ASPxGridView1.Visible = false;
-                        XtraReport report = new Noble.Report.Reports.Invoice.benificaries(companyInfo, Charity, Language);
-                        ASPxWebDocumentViewer1.OpenReport(report);
+                            XtraReport report = new Noble.Report.Reports.Invoice.benificaries(companyInfo, Charity, Language);
+                            ASPxWebDocumentViewer1.OpenReport(report);
+                        }
                     }
                 }
                 }
