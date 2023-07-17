@@ -210,11 +210,7 @@ namespace Noble.Report.Reports.Invoice
                                 }
                                 ASPxGridView1.DataSource = dt;
                                 ASPxGridView1.DataBind();
-
-
                             }
-                        
-
                     }
                    else if (formName == "benificary")
                     {
