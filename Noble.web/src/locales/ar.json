@@ -12,6 +12,7 @@
   "DuePayments":"المدفوعات المستحقة",
   "UnPaidPayments":"المدفوعات غير المدفوعة",
   "SelectUser":"اختر المستخدم",
+  "SaveasPrint":"حفظ كطباعة",
 
 
   "General":{
@@ -398,7 +399,9 @@
     "SearchFilter":"تصفية البحث",
     "ClearFilter":"مرشح واضح",
     "PaymentWiseReport":"تقرير الدفع الحكيم",
-    "ApprovalType":"نوع الموافقة"
+    "ApprovalType":"نوع الموافقة",
+    "DailyPayments":"المدفوعات اليومية",
+    "AddDailyPayment":"أضف الدفع اليومي"
   },
 
   "AddPayment":{

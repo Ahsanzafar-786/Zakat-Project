@@ -12,6 +12,7 @@
   "DuePayments":"Due Payments",
   "UnPaidPayments":"UnPaid Payments",
   "SelectUser":"Select User",
+  "SaveasPrint":"Save as Print",
 
   "General": {
     "SelectAuthorizePerson": "Select Authorize Person",
@@ -389,7 +390,9 @@
     "SearchFilter":"Search Filter",
     "ClearFilter":"Clear Filter",
     "PaymentWiseReport":"Payment Wise Report",
-    "ApprovalType":"Approval Type"
+    "ApprovalType":"Approval Type",
+    "DailyPayments":"Daily Payments",
+    "AddDailyPayment":"Add Daily Payment"
   },
 
   "AddPayment":{

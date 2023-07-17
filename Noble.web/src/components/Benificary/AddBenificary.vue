@@ -1,19 +1,7 @@
 <template>
     <modal :show="show" :modalLarge="true">
         <div class="modal-content">
-            <div class="modal-header" v-if="brand.documentType=='dailyPayment'">
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    {{ $t('AddBenificary.UpdateBenificary') }}
-                </h6>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'Add'">
-                    Add Daily Payment
-                </h6>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'View'">
-                   {{ $t('AddBenificary.ViewBenificary') }}
-                </h6>
-                <button type="button" class="btn-close" v-on:click="close()"></button>
-            </div>
-            <div class="modal-header" v-else>
+            <div class="modal-header">
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
                     {{ $t('AddBenificary.UpdateBenificary') }}
                 </h6>
@@ -27,19 +15,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'" >
+                    <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
-                            {{ $t('Payment.Code') }}:<span class="text-danger"> </span>
+                            {{ $t('Payment.Code') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="brand.beneficiaryId" type="text" disabled/>
                     </div>
-                    <div class="col-md-6 form-group" v-else>
-                        <label class="text  font-weight-bolder">
-                            {{ $t('Payment.ID') }}:
-                        </label>
-                        <input class="form-control" v-model="brand.beneficiaryId" type="text" disabled/>
-                    </div>
-                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Name') }}:<span class="text-danger"> </span>
                         </label>
@@ -52,7 +34,7 @@
                         <input class="form-control" v-model="$v.brand.nameAr.$model" type="text" />
                     </div>
 
-                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Ids') }}:<span class="text-danger"> *</span>
                         </label>
@@ -73,13 +55,13 @@
                         <input class="form-control" v-model="brand.passportNo" type="text" />
                     </div> -->
 
-                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Nationality') }}:
                         </label>
                         <input class="form-control" v-model="brand.nationality" type="text" />
                     </div>
-                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Gender') }}:
                         </label>
@@ -89,7 +71,7 @@
                         </select>
                     </div>
 
-                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ContactNo') }}:
                         </label>
@@ -105,36 +87,21 @@
                             <span v-if="!$v.brand.phoneNo.numeric ">فقط استخدم الأرقام</span>
                         </span>
                     </div>
-                    <div class="col-md-6 form-group" v-else>
-                        <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.ContactNo') }}:
-                        </label>
-                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" type="text" />
-                        <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
-                            <span v-if="!$v.brand.phoneNo.minLength ">Contact Number length should be 10 characters.</span>
-                            <span v-if="!$v.brand.phoneNo.maxLength ">Contact Number length should be 10 characters.</span>
-                            <span v-if="!$v.brand.phoneNo.numeric ">Only use numbers</span>
-                        </span>
-                        <span v-else class="error text-danger">
-                            <span v-if="!$v.brand.phoneNo.minLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
-                            <span v-if="!$v.brand.phoneNo.maxLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
-                            <span v-if="!$v.brand.phoneNo.numeric ">فقط استخدم الأرقام</span>
-                        </span>
-                    </div>
-                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Address') }}:
                         </label>
                         <input class="form-control" v-model="brand.address" type="text" />
                     </div>
-                    <div class="col-md-12" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-12">
                         <h4 style="color:black !important;">
                             {{ $t('AddBenificary.PaymentDetail') }}
+
                         </h4>
 
                     </div>
 
-                    <div class="col-md-4 form-group" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-4 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.PaymentType') }}
                         </label>
@@ -154,7 +121,7 @@
                             <span v-if="!$v.brand.recurringAmount.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
                         </span>
                     </div>
-                    <div class="col-md-4 form-group" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-4 form-group">
                         <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 ">
                             {{ $t('AddBenificary.AmountPerMonth') }}:
                         </label>
@@ -172,25 +139,7 @@
                             <span v-if="!$v.brand.amountPerMonth.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
                         </span>
                     </div>
-                    <div class="col-md-6 form-group" v-else >
-                        <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 ">
-                            {{ $t('AddBenificary.AmountPerMonth') }}:
-                        </label>
-                        <label class="text  font-weight-bolder" v-else>
-                            {{ $t('AddBenificary.Amount') }}:<span class="text-danger"> *</span>
-                        </label>
-                        <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
-                            type="text" />
-                        <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-else
-                            type="text" v-on:change="FloatValue()"/>
-                            <span v-if="$v.brand.amountPerMonth.$error && english == 'en'" class="error text-danger">
-                            <span v-if="!$v.brand.amountPerMonth.decimal ">Amount should be in number</span>
-                        </span>
-                        <span v-else class="error text-danger">
-                            <span v-if="!$v.brand.amountPerMonth.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
-                        </span>
-                    </div>
-                    <div class="col-md-4 form-group" v-if="paymentType != 0 && brand.documentType!='dailyPayment'">
+                    <div class="col-md-4 form-group" v-if="paymentType != 0">
 
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.AdvancePayment') }}:
@@ -199,26 +148,21 @@
                             :options="['1 Month', '2 Months', '3 Months', '4 Months', '5 Months', '6 Months', '7 Months', '8 Months', '9 Months', '10 Months', '11 Months', '12 Months']" :show-labels="false"
                             :placeholder="$t('AddBenificary.SelectType')" >
                         </multiselect>
-                    </div> 
-                    <div class="col-md-4 form-group" v-if="paymentType != 0 && brand.documentType!='dailyPayment'">
+                    </div>
+                    
+                    <div class="col-md-4 form-group" v-if="paymentType != 0 ">
                         <label>{{ $t('AddBenificary.StartFrom') }}:</label>
                         <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" />
 
                     </div>
-                    <div class="col-md-4 form-group" v-if="roleName == 'Admin' && brand.documentType!='dailyPayment'">
+                    <div class="col-md-4 form-group" v-if="roleName == 'Admin'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
                         <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
                     </div>
-                    <div class="col-md-6 form-group" v-else>
-                        <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.ApprovedBy') }}:<span class="text-danger"> *</span>
-                        </label>
-                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
-                    </div>
 
-                    <div class="form-group col-sm-12" v-if="brand.documentType!='dailyPayment'">
+                    <div class="form-group col-sm-12">
                         <label></label>
                         <div class="checkbox form-check-inline mx-2">
                             <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
@@ -234,7 +178,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0 && roleName == 'Admin' && brand.documentType!='dailyPayment'">
+                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -271,7 +215,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0 && roleName == 'Admin' && brand.documentType!='dailyPayment'">
+                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -379,7 +323,8 @@
                         </label>
                         <VueEditor v-model="brand.note" />
                     </div>
-                 </div>
+
+                </div>
 
 
             </div>
@@ -389,13 +334,10 @@
                     {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Approved')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' &&  roleName == 'Admin' && brand.documentType!='dailyPayment'">
+                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' &&  roleName == 'Admin'">
                     {{ $t('SaveasApproved') }} 
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm"   v-on:click="PrintRdlc(brand.id)"
-                    v-bind:disabled="$v.brand.$invalid" v-else>
-                    {{ $t('SaveasPrint') }} 
-                </button>
+               
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Approved')"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName == 'Admin'">
                     {{ $t('Approved') }} 
@@ -408,8 +350,6 @@
                     {{ $t('Close') }}
                 </button>
             </div>
-            <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"
-            @IsSave="IsSaveRpt" />
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
     </modal>
@@ -419,7 +359,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import {
-     requiredIf, minLength, maxLength,numeric,decimal
+    required, requiredIf, minLength, maxLength,numeric,decimal
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -441,8 +381,6 @@ export default {
     },
     data: function () {
         return {
-            show1: false,
-
             advancePaymentvalue:'',
             giveReason:false,
             randerforempty: 0,
@@ -475,11 +413,7 @@ export default {
                 }),
             },
             ugamaNo: {
-                required: requiredIf((x) => {
-                    if (x.documentType == '' || x.documentType == null)
-                        return true;
-                    return false;
-                }),
+                required,
                 minLength: minLength(10),
                 maxLength: maxLength(10),
             },
@@ -494,9 +428,6 @@ export default {
         }
     },
     methods: {
-        IsSaveRpt: function () {
-            this.show1 = !this.show1;
-        },
         GiveReason: function(){
             this.giveReason = true;
         },
@@ -591,22 +522,6 @@ export default {
         close: function () {
             this.$emit('close');
         },
-        PrintRdlc: function (val) {
-            var companyId = '';
-            if (this.$session.exists()) {
-                companyId = localStorage.getItem('CompanyID');
-            }
-            debugger;
-
-            // if (val) {
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale
-                this.changereportt++;
-                this.show1 = !this.show1;
-            // } else {
-            //     this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId
-            //     this.changereport++;
-            // }
-        },
         SaveBenificary: function (approvedtype) {
             debugger;
             var root = this;
@@ -657,15 +572,9 @@ export default {
                 }
             })
                 .then(function (response) {
-                  debugger;
-
-                    if (response.data.isSuccess == true) {
-
-                       
                   
-
-
-
+                    if (response.data.isSuccess == true) {
+                  
                         if (root.type != "Edit") {
                             root.$swal({
                                 title: 'Save',
@@ -676,8 +585,7 @@ export default {
                                 timer: 1500,
                                 timerProgressBar: true,
                             });
-                            root.PrintRdlc(response.data.id);
-                            
+
                             root.close();
                         } else {
 
