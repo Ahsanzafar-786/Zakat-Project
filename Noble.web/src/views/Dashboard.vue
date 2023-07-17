@@ -65,13 +65,13 @@
                     <li v-if="roleName != 'Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('Benificary.Benificary') }}
+                                {{ $t('Dashboard.Benificary') }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/benificaries')" href="javascript:void(0);"> {{ $t('Benificary.Benificary')
+                                <a v-on:click="GoTo('/benificaries')" href="javascript:void(0);"> {{ $t('Dashboard.BenificaryRegistration')
                                 }}</a>
                             </li>
                             <li>

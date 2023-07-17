@@ -109,6 +109,8 @@ Vue.component('benificarynote-mod', require('./components/BenificaryNote/AddBeni
 Vue.component('charityresources-mod', require('./components/CharityResources/AddCharityResources.vue').default);
 Vue.component('charityresources', require('./components/General/CharityResourcesDropdown.vue').default);
 
+Vue.component('decimaltofix', require('./components/General/DecimalToFix.vue').default);
+
 // Approval Person
 Vue.component('approvalperson-mod', require('./components/ApprovalPersons/AddApprovalPersons.vue').default);
 Vue.component('approvalperson', require('./components/General/ApprovalPersonDropdown.vue').default);
