@@ -19,11 +19,6 @@
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
                                 </a>
-                                <a v-on:click="openmodel('dailyPayment')" href="javascript:void(0);"
-                                    class="btn btn-sm btn-outline-primary mx-1" v-if="roleName != 'User'">
-                                    <i class="align-self-center icon-xs ti-plus"></i>
-                                    Add Daily Payment
-                                </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
                                     {{ $t('Close') }}
@@ -515,10 +510,9 @@ export default {
             });
         },
 
-        openmodel: function (documentType) {
+        openmodel: function () {
             this.newBenificary = {
                 id: '00000000-0000-0000-0000-000000000000',
-                documentType: documentType,
                 name: '',
                 nameAr: '',
                 gender: 'Male',

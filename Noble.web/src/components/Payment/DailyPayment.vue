@@ -5,11 +5,11 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Add Daily Payment</h4>
+                                <h4 class="page-title">{{ $t('Payment.AddDailyPayment') }}</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Add Daily Payment</li>
+                                    <li class="breadcrumb-item active">{{ $t('Payment.AddDailyPayment') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -376,30 +376,21 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Draft')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' && roleName != 'User'">
+                    v-bind:disabled="$v.brand.$invalid" >
                     {{ $t('Save') }}
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Approved')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' &&  roleName == 'Admin' && brand.documentType!='dailyPayment'">
-                    {{ $t('SaveasApproved') }} 
-                </button>
-                <button type="button" class="btn btn-soft-primary btn-sm"   v-on:click="PrintRdlc(brand.id) && GotoPage('/payment')"
-                    v-bind:disabled="$v.brand.$invalid" v-else>
+                
+              
+                <button type="button" class="btn btn-soft-primary btn-sm"   v-on:click="SaveBenificary('Draft',true)"
+                    v-bind:disabled="$v.brand.$invalid" >
                     {{ $t('SaveasPrint') }} 
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Approved')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName == 'Admin'">
-                    {{ $t('Approved') }} 
-                                </button>
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Draft')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName != 'User'">
-                    {{ $t('Update') }}
-                </button>
+               
                 <button type="button" class="btn btn-soft-secondary btn-sm"  v-on:click="GotoPage('/payment')">
                     {{ $t('Close') }}
                 </button>
             </div>
-            <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"
+            <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="IsSaveRpt"
             @IsSave="IsSaveRpt" />
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
@@ -527,6 +518,10 @@ export default {
     methods: {
         IsSaveRpt: function () {
             this.show1 = !this.show1;
+            this.$router.push({
+                path: '/payment',
+               
+            })
         },
         GiveReason: function(){
             this.giveReason = true;
@@ -625,7 +620,10 @@ export default {
 
         },
         close: function () {
-            this.$emit('close');
+            this.$router.push({
+                                    path: '/payment',
+                                
+                                })
         },
         PrintRdlc: function (val) {
             var companyId = '';
@@ -634,16 +632,14 @@ export default {
             }
             debugger;
 
-            // if (val) {
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' + val + '&pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&CompanyID=' + companyId + '&formName=Payment'
+
                 this.changereportt++;
                 this.show1 = !this.show1;
-            // } else {
-            //     this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId
-            //     this.changereport++;
-            // }
+               
+           
         },
-        SaveBenificary: function (approvedtype) {
+        SaveBenificary: function (approvedtype,isPrint) {
             debugger;
             var root = this;
             this.brand.approvalStatus=approvedtype;
@@ -702,7 +698,7 @@ export default {
 
 
 
-                        if (root.type != "Edit") {
+                         {
                             root.$swal({
                                 title: 'Save',
                                 text: response.data.isAddUpdate,
@@ -712,23 +708,20 @@ export default {
                                 timer: 1500,
                                 timerProgressBar: true,
                             });
-                            root.PrintRdlc(response.data.id);
+                            if(isPrint==true)
+                            {
+                                root.PrintRdlc(response.data.paymentId);
+
+                            }
+                            else
+                            {
+                                root.$router.push({
+                                    path: '/payment',
+                                
+                                })
+                            }
                             
-                            root.close();
-                        } else {
-
-                            root.$swal({
-                                title: 'Update',
-                                text: response.data.isAddUpdate,
-                                type: 'success',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                timerProgressBar: true,
-                            });
-                            root.close();
-
-                        }
+                        } 
                     } else {
                         root.$swal({
                             title: 'Error',

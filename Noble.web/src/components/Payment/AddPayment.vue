@@ -230,9 +230,9 @@
                                 {{ $t('Save') }}
                             </span>
                         </button>   
-                        <button type="button" class="btn btn-outline-primary mr-2"   v-on:click="PrintRdlc(addPayment.id) && GotoPage('/payment')"
+                        <!-- <button type="button" class="btn btn-outline-primary mr-2"   v-on:click="PrintRdlc(addPayment.id) && GotoPage('/payment')"
                     v-bind:disabled="$v.addPayment.$invalid" >
-                    {{ $t('SaveasPrint') }} </button>
+                    {{ $t('SaveasPrint') }} </button> -->
                     <button class="btn btn-danger mr-2" v-on:click="GotoPage('/payment')">
                             {{ $t('Close') }}
                         </button>

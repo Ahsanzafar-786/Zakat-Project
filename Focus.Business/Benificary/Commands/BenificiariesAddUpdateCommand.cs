@@ -10,6 +10,7 @@ using Focus.Domain.Interface;
 using ICSharpCode.SharpZipLib.Zip;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using NPOI.POIFS.Properties;
 using System;
 using System.Linq;
 using System.Threading;
@@ -20,6 +21,7 @@ namespace Focus.Business.Benificary.Commands
     public class BenificiariesAddUpdateCommand : IRequest<Message>
     {
         public BenificariesLookupModel benificiaries { get; set; }
+        public Guid? PaymentId { get; set; }
 
         public class Handler : IRequestHandler<BenificiariesAddUpdateCommand, Message>
         {
@@ -156,6 +158,7 @@ namespace Focus.Business.Benificary.Commands
                                 };
 
                                 Context.Payments.Add(payment);
+                                request.PaymentId = payment.Id;
 
                                 var charityTransaction = new CharityTransaction
                                 {
@@ -179,6 +182,7 @@ namespace Focus.Business.Benificary.Commands
                             return new Message
                             {
                                 Id = benifiary.Id,
+                                PaymentId = request.PaymentId.Value,
                                 IsSuccess = true,
                                 IsAddUpdate = "Data has been Added successfully." + "BenificaryID is " + " " + benifiary.BeneficiaryId
                             };

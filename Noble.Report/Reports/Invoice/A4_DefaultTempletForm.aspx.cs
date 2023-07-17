@@ -214,7 +214,7 @@ namespace Noble.Report.Reports.Invoice
                     }
                    else if (formName == "benificary")
                     {
-                        var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"] == "null" ? "" : Request.QueryString["AuthorizationPersonId"];
+                        var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"] == "null"|| Request.QueryString["AuthorizationPersonId"] == "00000000-0000-0000-0000-000000000000" ? "" : Request.QueryString["AuthorizationPersonId"];
                         var Language = Request.QueryString["Language"] == "null" ? "" : Request.QueryString["Language"];
                         var Charity = GetBenificary.GetBenificaryDtl(AuthorizationPersonId, token, serverAddress);
                         if (Convert.ToBoolean(isDownload))
