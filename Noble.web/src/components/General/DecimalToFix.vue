@@ -1,6 +1,6 @@
 ﻿<template>
     
-    <input type="text" v-bind:disabled="disable" v-shortkey.avoid class="form-control RemovePadding" v-bind:class="textAlignLeft? 'text-start ' : 'text-center '" v-model="displayValue" @blur="isInputActive = false" @focus="isInputActive=true" @click="$event.target.select()" />
+    <input type="text" v-bind:disabled="disable" v-shortkey.avoid class="form-control RemovePadding" v-bind:class="textAlignLeft? 'text-start ' : 'tex-end '" v-model="displayValue" @blur="isInputActive = false" @focus="isInputActive=true" @click="$event.target.select()" />
 
 </template>
 <script>

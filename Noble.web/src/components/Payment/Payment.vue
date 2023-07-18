@@ -197,6 +197,9 @@
                                     <th class="text-start">
                                         {{ $t('Payment.LastPayment') }}
                                     </th>
+                                    <th class="text-center">
+                                        {{ $t('Payment.Note') }}
+                                    </th>
                                     
                                     <th class="text-center">
                                         {{ $t('Payment.Cashier') }}
@@ -276,7 +279,7 @@
                                     <td>
                                         {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }}
                                     </td>
-                                    
+                                    <td class="text-center">{{ brand.note }}</td>
                                     <td class="text-center">{{ brand.cashier }}</td>
                                     <td class="text-center" v-if="brand.isVoid">--</td>
                                     <td class="text-center" v-else>{{ brand.amount.toFixed(2) }}</td>

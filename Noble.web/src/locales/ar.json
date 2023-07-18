@@ -99,7 +99,7 @@
     "AuthorizedPerson" : "الشخص المرخص",
     "RecurringAmount" : "المبلغ متكرر",
     "PaymentIntervalMonths" : "أشهر الفاصل الزمني للدفع",
-    "AmountPerMonth" : "المبلغ في الشهر",
+    "AmountPerMonth" : " المبلغ الشهري ",
     "Active" : "نشيط",
     "Address" : "عنوان",
     "Reason":"سبب",
@@ -393,24 +393,24 @@
   "Payment":{
     "LastPayment":"الدفعة الأخيرة",
     "NextPayment":" الدفعة التالية",
-    "ID":"رقم التعريف",
-    "Payment":"سجل المستـفـيد المدفوعات",
+    "ID":" رقم المعاملة",
+    "Payment":" المستـفـيد المدفوعات",
     "Action":"فعل",
     "IsVoid":"هو الفراغ",
     "BenificaryPayment":"أضف دفع",
-    "BenificaryReports":"التقارير المفيدة",
+    "BenificaryReports":" الـتـقـارير المستـفـيد",
     "AddPayment":"إضافة الدفع",
     "PaymentList":"قائمة الدفع",
     "BenificaryName":"أسم المستفيد",
-    "Amount":"المبلغ",
+    "Amount":"المبلغ المدفوع",
     "Cashier":"أمين الصندوق",
     "Month":"الشهر",
     "Year":"السنة",
-    "Code":"الرمز",
+    "Code":"الـكـود",
     "Period":"فترة",
     "AllowVoid":"السماح باطل",
     "Print":"مطبعة",
-    "Date":"تاريخ",
+    "Date":"التاريخ",
     "Search":"البحث عن طريق اسم المستفيد",
     "SearchByCode":" البحث عن طريق الكود",
     "SearchByID":"البحث بالمعرف",
@@ -420,7 +420,8 @@
     "PaymentWiseReport":"تقرير الدفع الحكيم",
     "ApprovalType":"نوع الموافقة",
     "DailyPayments":"المدفوعات اليومية",
-    "AddDailyPayment":"أضف الدفع اليومي"
+    "AddDailyPayment":"أضف الدفع اليومي",
+    "Note":"ملاحظة"
   },
 
   "AddPayment":{
@@ -456,8 +457,8 @@
   "LedgerReport":{
     "LedgerReport": "تقرير دفتر الأستاذ",
     "ReportsManagement":"إدارة التقارير",
-    "Filter":"تصفية البحث",
-    "ClearFilters":" مرشح واضح"
+    "Filter":" البحث",
+    "ClearFilters":" إلـغـاء"
   },
   "SystemManagement":{
     "SystemManagement":"ادارة النظام",

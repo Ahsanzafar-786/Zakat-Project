@@ -411,7 +411,8 @@
     "PaymentWiseReport":"Payment Wise Report",
     "ApprovalType":"Approval Type",
     "DailyPayments":"Daily Payments",
-    "AddDailyPayment":"Add Daily Payment"
+    "AddDailyPayment":"Add Daily Payment",
+    "Note":"Note"
   },
 
   "AddPayment":{
