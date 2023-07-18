@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.PaymentType')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
+        <multiselect v-bind:disabled="isDisable" v-model="DisplayValue" :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.PaymentType')" track-by="name" :clear-on-select="false" :show-labels="false" label="name"   v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'" >
 
         </multiselect>      
     </div>
@@ -9,7 +9,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import Multiselect from 'vue-multiselect';
 export default {
-    props: ["values", "isTemporary", 'isMultiple'],
+    props: ["values", "isTemporary", 'isMultiple','isDisable'],
     mixins: [clickMixin],
 
     components: {
@@ -27,6 +27,10 @@ export default {
         }
     },
     methods: {
+        Remove: function () {
+            this.value='';
+
+        },
         GetSalaryOfSelected: function () {
                     return this.value;
             },
@@ -43,7 +47,7 @@ export default {
                         root.options.push({
                             id: cat.id,
                             code: cat.code,
-                            name: cat.name == '' ? cat.nameAr : cat.name,
+                            name: root.$i18n.locale == 'en'? cat.name:cat.nameAr
                         })
                     })
                 }
@@ -89,3 +93,12 @@ export default {
     },
 }
 </script>
+<style  >
+.multiselect__placeholder12 >.multiselect__tags {
+    text-align: right !important;
+}
+
+.multiselect__placeholder12 >.multiselect__content-wrapper>.multiselect__content {
+    text-align: right !important;
+}
+</style>

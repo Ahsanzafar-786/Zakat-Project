@@ -370,7 +370,7 @@
             </div>
         </div>
         <!--end row-->
-        <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
+        <loading :active.sync="loading" :can-cancel="true" :is-full-page="false"></loading>
     </div>
 </template>
 
@@ -390,7 +390,7 @@ export default {
 
         return {
             dashboard1: '',
-            paymentWiseTransactionList: [],
+            paymentWiseTransactionList: '',
             loading: false,
             userId: '',
             rolename: '',
@@ -589,6 +589,9 @@ export default {
 
             root.$https.get(`Benificary/GetDashboardDetail?userId=` + this.userId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
+                    debugger;
+                    root.loading = false;
+
                     root.dashboard = response.data;
 
                     root.series3[0].data = [];
@@ -619,6 +622,8 @@ export default {
             this.loading = true;
             root.$https.get(`Benificary/GetDashboardChartsDetail?year=` + year, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
+                    root.loading = false;
+
                     root.dashboard1 = response.data;
                     root.series[0].data = [];
                     root.chartOptions.xaxis.categories = [];
@@ -628,7 +633,6 @@ export default {
                     });
 
                 }
-                root.loading = false;
                 root.reender++;
             }).catch(function (error) {
                 console.error(error);
@@ -646,6 +650,7 @@ export default {
             this.loading = true;
             root.$https.get(`Benificary/PaymentTypeWiseTransaction`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
+                    root.loading = false;
             
                     root.paymentWiseTransactionList = response.data;
                     root.series4[0].data = [];
@@ -657,7 +662,7 @@ export default {
                     });
 
                 }
-                root.loading = false;
+                
                 root.reeender++;
             }).catch(function (error) {
                 console.error(error);

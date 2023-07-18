@@ -1,27 +1,36 @@
 <template>
-    <modal :show="show" :modalLarge="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    {{ $t('AddBenificary.UpdateBenificary') }}
-                </h6>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'Add'">
-                    {{ $t('AddBenificary.AddBenificary') }}
-                </h6>
-                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'View'">
-                   {{ $t('AddBenificary.ViewBenificary') }}
-                </h6>
-                <button type="button" class="btn-close" v-on:click="close()"></button>
-            </div>
-            <div class="modal-body">
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">{{ $t('Payment.AddDailyPayment') }}</h4>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">{{ $t('Payment.AddDailyPayment') }}</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            <div class="modal-body card">
                 <div class="row">
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'" >
                         <label class="text  font-weight-bolder">
-                            {{ $t('Payment.Code') }}:<span class="text-danger"> *</span>
+                            {{ $t('Payment.Code') }}:<span class="text-danger"> </span>
                         </label>
                         <input class="form-control" v-model="brand.beneficiaryId" type="text" disabled/>
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6 form-group" v-else>
+                        <label class="text  font-weight-bolder">
+                            {{ $t('Payment.ID') }}:
+                        </label>
+                        <input class="form-control" v-model="brand.beneficiaryId" type="text" disabled/>
+                    </div>
+                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Name') }}:<span class="text-danger"> </span>
                         </label>
@@ -34,9 +43,9 @@
                         <input class="form-control" v-model="$v.brand.nameAr.$model" type="text" />
                     </div>
 
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.Ids') }}12:<span class="text-danger"> *</span>
+                            {{ $t('AddBenificary.Ids') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.ugamaNo.$model" placeholder="XXXXXXXXXX" type="text" />
                         <span v-if="$v.brand.ugamaNo.$error && english == 'en'" class="error text-danger">
@@ -55,13 +64,13 @@
                         <input class="form-control" v-model="brand.passportNo" type="text" />
                     </div> -->
 
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Nationality') }}:
                         </label>
                         <input class="form-control" v-model="brand.nationality" type="text" />
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Gender') }}:
                         </label>
@@ -71,11 +80,11 @@
                         </select>
                     </div>
 
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ContactNo') }}:
                         </label>
-                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" type="text" maxlength="10"/>
+                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" type="text" />
                         <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.phoneNo.minLength ">Contact Number length should be 10 characters.</span>
                             <span v-if="!$v.brand.phoneNo.maxLength ">Contact Number length should be 10 characters.</span>
@@ -87,34 +96,48 @@
                             <span v-if="!$v.brand.phoneNo.numeric ">فقط استخدم الأرقام</span>
                         </span>
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6 form-group" v-else>
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.ContactNo') }}:
+                        </label>
+                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" type="text" />
+                        <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
+                            <span v-if="!$v.brand.phoneNo.minLength ">Contact Number length should be 10 characters.</span>
+                            <span v-if="!$v.brand.phoneNo.maxLength ">Contact Number length should be 10 characters.</span>
+                            <span v-if="!$v.brand.phoneNo.numeric ">Only use numbers</span>
+                        </span>
+                        <span v-else class="error text-danger">
+                            <span v-if="!$v.brand.phoneNo.minLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
+                            <span v-if="!$v.brand.phoneNo.maxLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
+                            <span v-if="!$v.brand.phoneNo.numeric ">فقط استخدم الأرقام</span>
+                        </span>
+                    </div>
+                    <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Address') }}:
                         </label>
                         <input class="form-control" v-model="brand.address" type="text" />
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" v-if="brand.documentType!='dailyPayment'">
                         <h4 style="color:black !important;">
                             {{ $t('AddBenificary.PaymentDetail') }}
-
                         </h4>
 
                     </div>
 
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.PaymentType') }}
                         </label>
                         <paymenttype v-model="brand.paymentTypeId" v-on:input="GetRecord" ref="ChlidDropdown"
-                            :values="brand.paymentTypeId" :isDisable="isDisableValue"/>
+                            :values="brand.paymentTypeId" />
                     </div>
                     <div class="col-md-4 form-group" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.RecurringAmount') }}:
                         </label>
-
                         <input class="form-control" v-on:change="GetValueOfRecurring"
-                            v-model="$v.brand.recurringAmount.$model" @click="$event.target.select()" type="text" v-bind:disabled="isDisableValue" />
+                            v-model="$v.brand.recurringAmount.$model" @click="$event.target.select()" type="text" />
                             <span v-if="$v.brand.recurringAmount.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.recurringAmount.decimal ">Amount should be in number</span>
                         </span>
@@ -122,19 +145,17 @@
                             <span v-if="!$v.brand.recurringAmount.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
                         </span>
                     </div>
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 ">
                             {{ $t('AddBenificary.AmountPerMonth') }}:
                         </label>
                         <label class="text  font-weight-bolder" v-else>
                             {{ $t('AddBenificary.Amount') }}:
                         </label>
-                        <decimaltofix v-model="$v.brand.amountPerMonth.$model" v-bind:disabled="isDisableValue"> </decimaltofix>
-
-                        <!-- <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
+                        <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
                             type="text" />
                         <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-else
-                            type="text" v-on:change="FloatValue()"/> -->
+                            type="text" v-on:change="FloatValue()"/>
                             <span v-if="$v.brand.amountPerMonth.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.amountPerMonth.decimal ">Amount should be in number</span>
                         </span>
@@ -142,36 +163,55 @@
                             <span v-if="!$v.brand.amountPerMonth.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
                         </span>
                     </div>
-                    <div class="col-md-4 form-group" v-if="paymentType != 0">
+                    <div class="col-md-6 form-group" v-else >
+                        <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 ">
+                            {{ $t('AddBenificary.AmountPerMonth') }}:
+                        </label>
+                        <label class="text  font-weight-bolder" v-else>
+                            {{ $t('AddBenificary.Amount') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
+                            type="text" />
+                        <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-else
+                            type="text" v-on:change="FloatValue()"/>
+                            <span v-if="$v.brand.amountPerMonth.$error && english == 'en'" class="error text-danger">
+                            <span v-if="!$v.brand.amountPerMonth.decimal ">Amount should be in number</span>
+                        </span>
+                        <span v-else class="error text-danger">
+                            <span v-if="!$v.brand.amountPerMonth.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
+                        </span>
+                    </div>
+                    <div class="col-md-4 form-group" v-if="paymentType != 0 && brand.documentType!='dailyPayment'">
 
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.AdvancePayment') }}:
                         </label>
-                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth" v-if="$i18n.locale == 'en'" v-bind:disabled="isDisableValue"
+                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth"
                             :options="['1 Month', '2 Months', '3 Months', '4 Months', '5 Months', '6 Months', '7 Months', '8 Months', '9 Months', '10 Months', '11 Months', '12 Months']" :show-labels="false"
-                            :placeholder="$t('AddBenificary.SelectType')" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'" >
+                            :placeholder="$t('AddBenificary.SelectType')" >
                         </multiselect>
-                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth" v-bind:disabled="isDisableValue" v-else
-                            :options="['شهر واحد', 'شهرين', 'ثلاثة أشهر', 'أربعة أشهر', 'خمسة أشهر', 'ستة أشهر', 'سبعة اشهر', 'ثمانية اشهر', 'تسعة أشهر', 'عشرة أشهر', 'أحد عشر شهرا', 'سنة']" :show-labels="false"
-                            :placeholder="$t('AddBenificary.SelectType')" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
-                        </multiselect>
-                    </div>
-                    
-                    <div class="col-md-4 form-group" v-if="paymentType != 0 ">
+                    </div> 
+                    <div class="col-md-4 form-group" v-if="paymentType != 0 && brand.documentType!='dailyPayment'">
                         <label>{{ $t('AddBenificary.StartFrom') }}:</label>
-                        <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" :isDisable="isDisableValue"/>
+                        <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" />
 
                     </div>
-                    <div class="col-md-4 form-group" v-if="roleName == 'Admin'">
+                    <div class="col-md-4 form-group" v-if="roleName == 'Admin' && brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
-                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" :isDisable="isDisableValue" />
+                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
+                    </div>
+                    <div class="col-md-6 form-group" v-else>
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.ApprovedBy') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
                     </div>
 
-                    <div class="form-group col-sm-12">
+                    <div class="form-group col-sm-12" v-if="brand.documentType!='dailyPayment'">
                         <label></label>
-                        <div class="checkbox form-check-inline mx-2"  v-if="roleName != 'Cashier' && type != 'Add'">
+                        <div class="checkbox form-check-inline mx-2">
                             <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
                             <label for="inlineCheckbox1"> {{ $t('AddBenificary.Active') }} </label>
                         </div>
@@ -185,7 +225,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
+                <div class="row" v-if="paymentType != 0 && roleName == 'Admin' && brand.documentType!='dailyPayment'">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -204,13 +244,13 @@
                         </multiselect>
                     </div>
                     <div class="col-md-3 form-group" v-if="brand.durationType == 'Customize'">
-                        <label>{{ $t('AddBenificary.StartMonth') }}:</label>
+                        <label>Start Month:</label>
                         <datepicker v-model="brand.startDate" v-bind:isDisable="true" v-bind:key="randerforempty"
                             :type="'month'" />
 
                     </div>
                     <div class="col-md-3 form-group" v-if="brand.durationType == 'Customize'">
-                        <label>{{ $t('AddBenificary.EndMonth') }}:</label>
+                        <label>End Month:</label>
                         <datepicker v-model="brand.endDate" v-bind:key="randerforempty" :type="'month'" />
 
                     </div>
@@ -222,7 +262,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
+                <div class="row" v-if="paymentType != 0 && roleName == 'Admin' && brand.documentType!='dailyPayment'">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -326,54 +366,48 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.Note') }}:<span class="text-danger"> *</span>
+                            {{ $t('AddBenificary.Note') }}:
                         </label>
-                        <textarea v-model="brand.note" class="form-control"  rows="4"></textarea>
-                        <!-- <VueEditor v-model="brand.note" /> -->
+                        <VueEditor v-model="brand.note" />
                     </div>
-
-                </div>
+                 </div>
 
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Draft')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' && roleName != 'User'">
+                    v-bind:disabled="$v.brand.$invalid" >
                     {{ $t('Save') }}
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Approved')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' &&  roleName == 'Admin'">
-                    {{ $t('SaveasApproved') }} 
+                
+              
+                <button type="button" class="btn btn-soft-primary btn-sm"   v-on:click="SaveBenificary('Draft',true)"
+                    v-bind:disabled="$v.brand.$invalid" >
+                    {{ $t('SaveasPrint') }} 
                 </button>
                
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Approved')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName == 'Admin'">
-                    {{ $t('Approved') }} 
-                                </button>
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Draft')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName != 'User'">
-                    {{ $t('Update') }}
-                </button>
-                <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">
+                <button type="button" class="btn btn-soft-secondary btn-sm"  v-on:click="GotoPage('/payment')">
                     {{ $t('Close') }}
                 </button>
             </div>
+            <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="IsSaveRpt"
+            @IsSave="IsSaveRpt" />
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
-    </modal>
-</template>
+    </div>
+    </template>
 
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import {
-    required, requiredIf, minLength, maxLength,numeric,decimal
+     requiredIf, minLength, maxLength,numeric,decimal
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-// import {
-//     VueEditor
-// } from "vue2-editor";
+import {
+    VueEditor
+} from "vue2-editor";
 
 import Multiselect from 'vue-multiselect';
 import moment from 'moment'
@@ -381,24 +415,64 @@ import moment from 'moment'
 export default {
     mixins: [clickMixin],
     name: 'AddBenificary',
-    props: ['show', 'brand', 'type'],
     components: {
         Loading,
         Multiselect,
+        VueEditor
     },
     data: function () {
         return {
+            show1: false,
+            brand : {
+                id: '00000000-0000-0000-0000-000000000000',
+                documentType: 'dailyPayment',
+                name: '',
+                nameAr: '',
+                gender: 'Male',
+                beneficiaryId: 0,
+                paymentIntervalMonth: 0,
+                amountPerMonth: 0,
+                recurringAmount: 0,
+                ugamaNo: '',
+                phoneNo: '',
+                note: '',
+                approvalStatus: '',
+                isDisable: false,
+                authorizedPersonId: '',
+                approvalPersonId: '',
+                paymentTypeId: '',
+                isActive: true,
+                isRegister: true,
+                address: '',
+                passportNo: '',
+                reason: '',
+                nationality: '',
+                startMonth: '',
+                startDate: '',
+                endDate: '',
+                approvedPaymentId: '',
+                advancePayment: 0,
+                durationType: 'Customize',
+                authorizationPersonName: '',
+                benificaryAuthorization: [{
+                    id: '',
+                    benficaryId: '',
+                    authorizationPersonId: '',
+                    approvalPersonId: '',
+                    date: '',
+                    description: '',
+                    isActive: true
+                }],
+            },
+
             advancePaymentvalue:'',
             giveReason:false,
-            isDisableValue:false,
             randerforempty: 0,
             paymentType: null,
             arabic: '',
             english: '',
             loading: false,
-            roleName : '',
-            isDisable:false,
-            
+            roleName : ''
         }
     },
     validations: {
@@ -423,7 +497,11 @@ export default {
                 }),
             },
             ugamaNo: {
-                required,
+                required: requiredIf((x) => {
+                    if (x.documentType == '' || x.documentType == null)
+                        return true;
+                    return false;
+                }),
                 minLength: minLength(10),
                 maxLength: maxLength(10),
             },
@@ -432,26 +510,26 @@ export default {
                 minLength: minLength(10),
                 maxLength: maxLength(10),
             },
-            reason:{
-                required:requiredIf ((x) => {
-                    if (x.type == 'Add') {
-                        return false;
-                    } else if (x.type == 'Edit') {
-                        return true;
-                    }
-               }),
-            },
             recurringAmount: {
                 decimal,
-            },
-            note: {
-               
-}
+            }
         }
     },
     methods: {
+        IsSaveRpt: function () {
+            this.show1 = !this.show1;
+            this.$router.push({
+                path: '/payment',
+               
+            })
+        },
         GiveReason: function(){
             this.giveReason = true;
+        },
+        GotoPage: function (link) {
+            this.$router.push({
+                path: link
+            });
         },
         GetRecord: function () {
             var root = this;
@@ -542,9 +620,26 @@ export default {
 
         },
         close: function () {
-            this.$emit('close');
+            this.$router.push({
+                                    path: '/payment',
+                                
+                                })
         },
-        SaveBenificary: function (approvedtype) {
+        PrintRdlc: function (val) {
+            var companyId = '';
+            if (this.$session.exists()) {
+                companyId = localStorage.getItem('CompanyID');
+            }
+            debugger;
+
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' + val + '&pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&CompanyID=' + companyId + '&formName=Payment'
+
+                this.changereportt++;
+                this.show1 = !this.show1;
+               
+           
+        },
+        SaveBenificary: function (approvedtype,isPrint) {
             debugger;
             var root = this;
             this.brand.approvalStatus=approvedtype;
@@ -583,33 +678,8 @@ export default {
 
             if(this.advancePaymentvalue != '' && this.advancePaymentvalue != null)
             {
-                alert("Ok");
-                debugger;
-                if(this.$i18n.locale == 'en'){
-                    var advance = parseInt(this.advancePaymentvalue.match(/\d+/)[0], 10); 
-                    this.brand.advancePayment = advance;
-                }
-                else
-                {
-                    let intValue;
-                    const arabicToIntMap = {
-                            'شهر واحد': 1,
-                            'شهرين': 2,
-                            'ثلاثة أشهر': 3,
-                            'أربعة أشهر': 4,
-                            'خمسة أشهر': 5,
-                            'ستة أشهر': 6,
-                            'سبعة اشهر': 7,
-                            'ثمانية اشهر': 8,
-                            'تسعة أشهر': 9,
-                            'عشرة أشهر': 10,
-                            'أحد عشر شهرا': 11,
-                            'سنة': 12
-                            };
-                    intValue = arabicToIntMap[this.advancePaymentvalue];
-                    this.brand.advancePayment = intValue;
-                }
-               
+                var advance = parseInt(this.advancePaymentvalue.match(/\d+/)[0], 10); 
+                this.brand.advancePayment = advance;
             }
             
            
@@ -619,10 +689,16 @@ export default {
                 }
             })
                 .then(function (response) {
-                  
+                  debugger;
+
                     if (response.data.isSuccess == true) {
+
+                       
                   
-                        if (root.type != "Edit") {
+
+
+
+                         {
                             root.$swal({
                                 title: 'Save',
                                 text: response.data.isAddUpdate,
@@ -632,22 +708,20 @@ export default {
                                 timer: 1500,
                                 timerProgressBar: true,
                             });
+                            if(isPrint==true)
+                            {
+                                root.PrintRdlc(response.data.paymentId);
 
-                            root.close();
-                        } else {
-
-                            root.$swal({
-                                title: 'Update',
-                                text: response.data.isAddUpdate,
-                                type: 'success',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                timerProgressBar: true,
-                            });
-                            root.close();
-
-                        }
+                            }
+                            else
+                            {
+                                root.$router.push({
+                                    path: '/payment',
+                                
+                                })
+                            }
+                            
+                        } 
                     } else {
                         root.$swal({
                             title: 'Error',
@@ -704,10 +778,7 @@ export default {
     },
     mounted: function () {
         this.roleName = localStorage.getItem('RoleName');
-        if (this.type == 'Edit') {
-            this.paymentType = this.brand.paymentType;
-            this.advancePaymentvalue = `${this.brand.advancePayment} Months`;
-        }
+       
         this.english = localStorage.getItem('locales');
         this.arabic = localStorage.getItem('locales');
 
@@ -715,7 +786,6 @@ export default {
         {
             this.GetAutoCode();
         }
-        this.isDisableValue=this.roleName == 'Cashier' && this.type == 'Edit'?true:false;
     }
 }
 </script>

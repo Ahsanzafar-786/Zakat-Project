@@ -28,5 +28,7 @@ namespace Focus.Domain.Entities
         public bool IsActive { get; set; }
 
         public virtual ICollection<SelectedMonth> SelectedMonth { get; set; }
+
+       
     }
 }

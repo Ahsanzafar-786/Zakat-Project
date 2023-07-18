@@ -151,11 +151,14 @@ namespace Noble.Report.Reports.Invoice
                     else if (formName == "benificaryreports")
                     {
                         var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"]== "null"?"" : Request.QueryString["AuthorizationPersonId"];
+                        var BeneficiaryID = Request.QueryString["BeneficiaryID"] == "null"?"" : Request.QueryString["BeneficiaryID"];
+                        var searchTerm1 = Request.QueryString["searchTerm"] == "null"?"" : Request.QueryString["searchTerm"];
+                        var uqamaNo = Request.QueryString["uqamaNo"] == "null"?"" : Request.QueryString["uqamaNo"];
                         var ApprovalPersonId = Request.QueryString["ApprovalPersonId"] == "null" ? "" : Request.QueryString["ApprovalPersonId"];
                         var Registered = Request.QueryString["Registered"];
                         var fromDate = Request.QueryString["fromDate"];
                         var toDate = Request.QueryString["toDate"];
-                        var Charity = GetBenificaryReport.GetBenificaryReportDtl(AuthorizationPersonId, ApprovalPersonId, Registered, fromDate, toDate, token, serverAddress);
+                        var Charity = GetBenificaryReport.GetBenificaryReportDtl(AuthorizationPersonId, ApprovalPersonId, Registered, uqamaNo, BeneficiaryID, searchTerm1, fromDate, toDate, token, serverAddress);
                         if (Print == "true")
                         {
                             ASPxWebDocumentViewer1.Visible = true;
@@ -208,7 +211,16 @@ namespace Noble.Report.Reports.Invoice
                         }
 
                     }
-
+                   else if (formName == "benificary")
+                    {
+                        var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"] == "null"|| Request.QueryString["AuthorizationPersonId"] == "00000000-0000-0000-0000-000000000000" ? "" : Request.QueryString["AuthorizationPersonId"];
+                        var Language = Request.QueryString["Language"] == "null" ? "" : Request.QueryString["Language"];
+                        var Charity = GetBenificary.GetBenificaryDtl(AuthorizationPersonId, token, serverAddress);
+                            ASPxWebDocumentViewer1.Visible = true;
+                            ASPxGridView1.Visible = false;
+                        XtraReport report = new Noble.Report.Reports.Invoice.benificaries(companyInfo, Charity, Language);
+                        ASPxWebDocumentViewer1.OpenReport(report);
+                    }
                 }
                 }
             catch (Exception ex)

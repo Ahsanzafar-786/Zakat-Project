@@ -20,6 +20,10 @@ namespace Focus.Business.BenificiariesNotes.Queries
         public string SearchTerm { get; set; }
         public string BeneficiaryName { get; set; }
         public string BeneficiaryNote { get; set; }
+        public string BenificaryCode { get; set; }
+        public string NationalId { get; set; }
+        public string ContactNo { get; set; }
+
         public class Handler : IRequestHandler<GetBenificaryNoteListQuery, PagedResult<List<BenificaryNoteLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
@@ -53,8 +57,12 @@ namespace Focus.Business.BenificiariesNotes.Queries
                         {
                             Id = x.Id,
                             Note = x.Note,
-                            BenificaryName = x.Beneficiaries.BeneficiaryId.ToString() + " " + (x.Beneficiaries.NameAr == null ? x.Beneficiaries.Name : x.Beneficiaries.NameAr),
+                            BenificaryCode = x.Beneficiaries==null?"":x.Beneficiaries.BeneficiaryId.ToString(),
+                            BenificaryName = (x.Beneficiaries.NameAr == null ? x.Beneficiaries.Name : x.Beneficiaries.NameAr),
                             Date = x.Date.ToString("dd/MM/yyyy"),
+                            NationalId=x.Beneficiaries.UgamaNo,
+                            ContactNo=x.Beneficiaries.PhoneNo,
+                            Nationality=x.Beneficiaries.Nationality,
                         }).ToListAsync();
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
@@ -66,9 +74,20 @@ namespace Focus.Business.BenificiariesNotes.Queries
                         {
                             query = query.Where(x => x.Note == request.BeneficiaryNote).ToList();
                         }
+                        if (!string.IsNullOrEmpty(request.BenificaryCode))
+                        {
+                            query = query.Where(x => x.BenificaryCode == request.BenificaryCode).ToList();
+                        }
+                        if (!string.IsNullOrEmpty(request.NationalId))
+                        {
+                            query = query.Where(x => x.NationalId == request.NationalId).ToList();
+                        }
+                        if (!string.IsNullOrEmpty(request.ContactNo))
+                        {
+                            query = query.Where(x => x.ContactNo == request.ContactNo).ToList();
+                        }
 
-
-                            var count =  query.Count();
+                        var count =  query.Count();
                         query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize).ToList();
 
                         //var queryList = await query.ToListAsync();

@@ -143,8 +143,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\loading.gif" />
-    <Content Include="Assets\loading1.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Designer.aspx" />
@@ -201,15 +199,18 @@
     <Compile Include="Models\BenificaryAuthorizationLookupModel.cs" />
     <Compile Include="Models\CompanyLicenceDto.cs" />
     <Compile Include="Models\CompanyDto.cs" />
+    <Compile Include="Models\PaymentWiseListLookupModel.cs" />
     <Compile Include="Models\SelectedMonthLookupModel.cs" />
     <Compile Include="Models\PaymentLookupModel.cs" />
     <Compile Include="Models\ModuleWiseClaimsLookupModel.cs" />
     <Compile Include="Models\PrintSetting.cs" />
+    <Compile Include="NobleDefaultServices\GetBenificary.cs" />
     <Compile Include="NobleDefaultServices\GetBenificaryReport.cs" />
     <Compile Include="NobleDefaultServices\GetCharityLedger.cs" />
     <Compile Include="NobleDefaultServices\GetLedger.cs" />
     <Compile Include="NobleDefaultServices\GetPayment.cs" />
     <Compile Include="NobleDefaultServices\GetCompanyInfo.cs" />
+    <Compile Include="NobleDefaultServices\GetPaymentWiseTransection.cs" />
     <Compile Include="NobleDefaultServices\GetToken.cs" />
     <Compile Include="PredefinedReports\ReportsFactory.cs" />
     <Compile Include="PredefinedReports\TestReport.cs">
@@ -229,6 +230,12 @@
     <Compile Include="Reports\Invoice\A4_DefaultTempletForm.aspx.designer.cs">
       <DependentUpon>A4_DefaultTempletForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Invoice\benificaries.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\benificaries.Designer.cs">
+      <DependentUpon>benificaries.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Invoice\benificaryreports.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -246,6 +253,12 @@
     </Compile>
     <Compile Include="Reports\Invoice\PaymentReport.Designer.cs">
       <DependentUpon>PaymentReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Invoice\PaymentWiseReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\PaymentWiseReport.Designer.cs">
+      <DependentUpon>PaymentWiseReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\CustomReportStorageWebExtension.cs" />
     <Compile Include="Site.master.cs">
@@ -265,6 +278,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\Invoice\benificaries.resx">
+      <DependentUpon>benificaries.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\benificaryreports.resx">
       <DependentUpon>benificaryreports.cs</DependentUpon>
     </EmbeddedResource>
@@ -273,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\PaymentReport.resx">
       <DependentUpon>PaymentReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Invoice\PaymentWiseReport.resx">
+      <DependentUpon>PaymentWiseReport.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

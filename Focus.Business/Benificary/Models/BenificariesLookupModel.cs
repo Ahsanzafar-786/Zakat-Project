@@ -12,6 +12,7 @@ namespace Focus.Business.Benificary.Models
         public Guid Id { get; set; }
         public int BeneficiaryId { get; set; }
         public string Name { get; set; }
+        public string DocumentType { get; set; }
         public string NameAr { get; set; }
         public string PassportNo { get; set; }
         public string Address { get; set; }
@@ -32,6 +33,7 @@ namespace Focus.Business.Benificary.Models
         public Guid? PaymentTypeId { get; set; }
         public string AuthorizationPersonName { get; set; }
         public string PaymentTypeName { get; set; }
+        public string PaymentTypeNameAr { get; set; }
         public string ApprovalPersonName { get; set; }
 
         public List<BenificaryAuthorizationLookupModel> BenificaryAuthorization { get; set; }

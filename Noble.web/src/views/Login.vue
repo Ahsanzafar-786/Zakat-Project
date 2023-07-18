@@ -31,11 +31,10 @@
                                             <!--end form-group-->
 
                                             <div class="form-group mb-2">
-                                                <label class="form-label">{{ $t('login.RegisterUser_Password')
-                                                    }}</label>
+                                                <label class="form-label">{{ $t('login.RegisterUser_Password')}}</label>
                                                 <div class="input-group ">
                                                     <input v-model="$v.login.password.$model" :type="password" class="form-control" @keyup.enter="userlogin" :placeholder="$t('login.EnteryourPassword')">
-                                                    <div style=" position: absolute; top: 24%; " @click="showPassword" v-bind:style="($i18n.locale == 'en' || $i18n.locale == 'ar' ) ? 'left: 94%' : 'left: 11px'">
+                                                    <div style=" position: absolute; top: 24%; " @click="showPassword" v-bind:style="$i18n.locale == 'en' ? 'left: 94%' : 'left: 11px'">
                                                         <i class="fas fa-eye" v-if="eyeValue == false"></i>
                                                         <i class="fas fa-eye-slash" v-if="eyeValue == true"></i>
                                                     </div>
@@ -81,11 +80,9 @@
                                             <h6 class="mb-3 " style="color:transparent;">-</h6>
                                         </div>
                                         <div class="btn-group w-100">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Support</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Contact
-                                                Us</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Visit
-                                                Us</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">{{ $t('login.Support')}}</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">{{ $t('login.ContactUs')}}</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">{{ $t('login.VisitUs')}}</button>
                                         </div>
                                     </div>
                                 </div>

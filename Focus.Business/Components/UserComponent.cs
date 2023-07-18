@@ -9,6 +9,7 @@ using Focus.Business.Interface;
 using Focus.Business.Models;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Focus.Business.Components
@@ -117,45 +118,38 @@ namespace Focus.Business.Components
             throw new NotImplementedException();
         }
 
-       
+
 
         public List<UserDetailDto> ListingUsers()
         {
             var userList = new List<UserDetailDto>();
 
-            // Retrieve all users with their associated roles
-            var usersWithRoles = _userManager.Users
+            var users = _userManager.Users
                 .Where(user => user.CompanyId == _principal.Identity.CompanyId())
-                .Select(user => new
-                {
-                    User = user,
-                    Roles = _userManager.GetRolesAsync(user).Result
-                })
                 .ToList();
 
-            
-
-            // Process each user and their roles
-            foreach (var item in usersWithRoles)
+            foreach (var user in users)
             {
+                var roles = _userManager.GetRolesAsync(user).Result;
+
                 string roleName = "";
-                if (item.Roles.Count > 0)
+                if (roles.Count > 0)
                 {
-                    roleName = item.Roles[0].ToString();
+                    roleName = roles[0];
                 }
 
                 var userDto = new UserDetailDto
                 {
-                    Id = item.User.Id,
-                    FullName = item.User.UserName,
-                    Email = item.User.Email,
-                    PhoneNumber = item.User.PhoneNumber,
-                    ImagePath = item.User.ImagePath,
-                    EmployeeId = item.User.EmployeeId,
-                    IsActive = item.User.IsActive,
-                    IsProceed = item.User.IsProceed,
-                    Remarks = item.User.Remarks,
-                    Date = item.User.CreatedDate?.ToString("dd/MM/yyyy"),
+                    Id = user.Id,
+                    FullName = user.UserName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    ImagePath = user.ImagePath,
+                    EmployeeId = user.EmployeeId,
+                    IsActive = user.IsActive,
+                    IsProceed = user.IsProceed,
+                    Remarks = user.Remarks,
+                    Date = user.CreatedDate?.ToString("dd/MM/yyyy"),
                     RoleName = roleName
                 };
 

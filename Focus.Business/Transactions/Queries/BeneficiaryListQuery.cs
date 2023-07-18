@@ -18,6 +18,9 @@ namespace Focus.Business.Transactions.Queries
         public string Registered { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+        public string SearchTerm { get; set; }
+        public string UqamaNo { get; set; }
+        public string BenificiaryId { get; set; }
 
         public class Handler : IRequestHandler<BeneficiaryListQuery, List<BenificariesLookupModel>>
         {
@@ -55,7 +58,21 @@ namespace Focus.Business.Transactions.Queries
                     {
                         benific = benific.Where(x => x.StartDate.Value >= request.FromDate.Value && x.StartDate.Value <= request.ToDate.Value.AddDays(1)).ToList();
                     }
-                  
+                    if (!string.IsNullOrEmpty(request.SearchTerm))
+                    {
+                        var searchTerm = request.SearchTerm.ToLower();
+                        benific = benific.Where(x => x.Name.ToLower().Contains(searchTerm)
+                                              || x.NameAr.Contains(searchTerm)).ToList();
+                    }
+                    if (request.UqamaNo != null)
+                    {
+                        benific = benific.Where(x => x.UgamaNo == request.UqamaNo).ToList();
+                    }
+                    if (!string.IsNullOrEmpty(request.BenificiaryId))
+                    {
+                        benific = benific.Where(x => x.BeneficiaryId.ToString() == request.BenificiaryId).ToList();
+                    }
+
 
                     return benific.Select(x=>new BenificariesLookupModel
                     {

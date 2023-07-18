@@ -58,13 +58,16 @@ namespace Focus.Business.AdminDashboard.Queries
                     var paymentUser = payments.Where(x => x.UserId == request.UserId.ToString()).ToList();
 
 
-                    decimal cashierTotalOutgoing = 0;
-                    foreach (var item in paymentUser)
-                    {
-                       var cashierTotalOutgoing1 = charitytransaction.Where(x => x.DoucmentId == item.Id).Sum(x => x.Amount);
-                       cashierTotalOutgoing = cashierTotalOutgoing + cashierTotalOutgoing1;
-                    }
-                    
+                    //decimal cashierTotalOutgoing = 0;
+                    //foreach (var item in paymentUser)
+                    //{
+                    //   var cashierTotalOutgoing1 = charitytransaction.Where(x => x.DoucmentId == item.Id).Sum(x => x.Amount);
+                    //   cashierTotalOutgoing = cashierTotalOutgoing + cashierTotalOutgoing1;
+                    //}
+                    decimal cashierTotalOutgoing = charitytransaction
+    .Join(paymentUser, ct => ct.DoucmentId, pu => pu.Id, (ct, pu) => ct.Amount)
+    .Sum();
+
 
                     var paymentWiseBenificaries = new List<BeneficiariesDurationTypeLookUpModel>();
                     if (paymentTypeList != null)

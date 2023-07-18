@@ -23,7 +23,11 @@ namespace Focus.Business.Payments.Queries
         public string BeneficiaryName { get; set; }
         public int? Code { get; set; }
         public decimal? Amount { get; set; }
-
+        public int? BenificaryCode { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public DateTime? Month { get; set; }
+        public DateTime? Year { get; set; }
         public class Handler : IRequestHandler<PaymentListQuery, PagedResult<List<PaymentLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
@@ -51,9 +55,10 @@ namespace Focus.Business.Payments.Queries
                         Year = x.Year,
                         Date = x.Date,
                         Period = x.Period,
-                        PaymentCode =x.PaymentCode,
-                        BenificaryName = x.Beneficiaries.BeneficiaryId + " " + x.Beneficiaries.Name,
-                        BenificaryNameAr = x.Beneficiaries.BeneficiaryId + " " + x.Beneficiaries.NameAr,
+                        PaymentCode = x.PaymentCode,
+                        BenificaryName = x.Beneficiaries.Name,
+                        BenificaryCode = x.Beneficiaries.BeneficiaryId,
+                        BenificaryNameAr = x.Beneficiaries.NameAr,
                         Code = x.Code,
                         IsVoid = x.IsVoid,
                         AllowVoid = x.AllowVoid,
@@ -67,25 +72,40 @@ namespace Focus.Business.Payments.Queries
                     //                          || x.BenificaryName.Contains(searchTerm) || x.BenificayId.ToString().Contains(searchTerm) || x.Code.ToString().Contains(searchTerm));
 
                     //}
-                    
-                     if (!string.IsNullOrEmpty(request.SearchTerm))
+
+                    if (!string.IsNullOrEmpty(request.SearchTerm))
                     {
                         var searchTerm = request.SearchTerm.ToLower();
                         query = query.Where(x => x.BenificaryNameAr.Contains(searchTerm)
                                               || x.BenificaryName.Contains(searchTerm));
 
                     }
-                     if (request.Amount!=null && request.Amount > 0)
+                    if (request.Amount != null && request.Amount > 0)
                     {
                         query = query.Where(x => x.Amount == request.Amount);
                     }
-                     if (request.Code != null && request.Code > 0)
+                    if (request.Code != null && request.Code > 0)
                     {
                         query = query.Where(x => x.Code == request.Code);
                     }
+                    if (request.BenificaryCode != null && request.BenificaryCode > 0)
+                    {
+                        query = query.Where(x => x.BenificaryCode == request.BenificaryCode);
+                    }
+                    if (request.FromDate.HasValue && request.ToDate.HasValue)
+                    {
+                        query = query.Where(x => x.Date.Value >= request.FromDate.Value && x.Date.Value <= request.ToDate.Value.AddDays(1));
+                    }
+                    if (request.Month != null)
+                    {
+                        query = query.Where(x => x.Date.Value.Month == request.Month.Value.Month);
+                    }
+                    if (request.Year != null)
+                    {
+                        query = query.Where(x => x.Date.Value.Year == request.Year.Value.Year);
+                    }
 
-
-                    var count =  query.Count();
+                    var count = query.Count();
                     query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);
 
                     var queryList = await query.ToListAsync();

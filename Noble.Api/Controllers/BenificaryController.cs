@@ -34,6 +34,9 @@ using Microsoft.EntityFrameworkCore;
 using Noble.Api.Models;
 using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
 using Focus.Business.Reports.Payments.Queries;
+using Focus.Persistence.Migrations;
+using MailKit.Search;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace Noble.Api.Controllers
 {
@@ -93,7 +96,8 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetBenificaryList")]
         [HttpGet("GetBenificaryList")]
-        public async Task<IActionResult> GetBenificaryList(string searchTerm, int? pageNumber, bool isDropDown,string beneficiaryName, string uqamaNo, string beneficiaryId)
+        public async Task<IActionResult> GetBenificaryList(string searchTerm, int? pageNumber, bool isDropDown,string beneficiaryName, string uqamaNo, string beneficiaryId, Guid? authorizationPersonId, Guid? approvalPersonId, string registered, DateTime? fromDate, DateTime? toDate, DateTime? startMonth, DateTime? year,
+            decimal? amount,string nationality,string gender,string contact,string status)
         {
             var benificary = await Mediator.Send(new GetBenificariesListQuery
             {
@@ -102,7 +106,19 @@ namespace Noble.Api.Controllers
                 PageNumber = pageNumber ?? 1,
                 BeneficiaryName= beneficiaryName,
                 UqamaNo= uqamaNo,
-                BenificiaryId = beneficiaryId
+                BenificiaryId = beneficiaryId,
+                AuthorizedPersonId = authorizationPersonId,
+                ApprovalPersonId = approvalPersonId,
+                Registered = registered,
+                FromDate = fromDate,
+                ToDate = toDate,
+                StartMonth = startMonth,
+                Year = year,
+                Amount = amount,
+                Nationality = nationality,
+                Gender = gender,
+                Contact = contact,
+                Status = status,
             });
             return Ok(benificary);
         }
@@ -171,7 +187,7 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetBenificaryNoteList")]
         [HttpGet("GetBenificaryNoteList")]
-        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown, string beneficiaryName,string beneficiaryNote)
+        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown, string beneficiaryName,string beneficiaryNote, string benificaryCode, string nationalId, string contactNo)
      {
             var benificary = await Mediator.Send(new GetBenificaryNoteListQuery
             {
@@ -179,7 +195,10 @@ namespace Noble.Api.Controllers
                 IsDropDown = isDropDown,
                 PageNumber = pageNumber ?? 1,
                 BeneficiaryName= beneficiaryName,
-                BeneficiaryNote = beneficiaryNote
+                BeneficiaryNote = beneficiaryNote,
+                BenificaryCode= benificaryCode,
+                NationalId= nationalId,
+                ContactNo= contactNo,
             });
             return Ok(benificary);
         }
@@ -369,7 +388,8 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetPaymentsList")]
         [HttpGet("GetPaymentsList")]
-        public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber , string beneficiaryName, int? code, decimal? amount)
+        public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber , string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
+            , DateTime? year)
         {
             var payment = await Mediator.Send(new PaymentListQuery
             {
@@ -377,7 +397,12 @@ namespace Noble.Api.Controllers
                 PageNumber = pageNumber ?? 1,
                 BeneficiaryName = beneficiaryName,
                 Code=code,
-                Amount=amount
+                Amount=amount,
+                BenificaryCode=benificaryCode,
+                FromDate = fromDate,
+                ToDate = toDate,
+                Month = month,
+                Year = year,
 
             });
             return Ok(payment);
@@ -430,7 +455,7 @@ namespace Noble.Api.Controllers
 
         [Route("api/Benificary/GetBenificaryReport")]
         [HttpGet("GetBenificaryReport")]
-        public async Task<IActionResult> GetBenificaryReport(Guid? authorizationPersonId,Guid? approvalPersonId,string registered, DateTime? fromDate, DateTime? toDate)
+        public async Task<IActionResult> GetBenificaryReport(Guid? authorizationPersonId,Guid? approvalPersonId,string registered, DateTime? fromDate, DateTime? toDate, string searchTerm, string uqamaNo, string beneficiaryId)
         {
             var charity = await Mediator.Send(new BeneficiaryListQuery
             {
@@ -439,6 +464,9 @@ namespace Noble.Api.Controllers
                 Registered = registered,
                 FromDate = fromDate,
                 ToDate = toDate,
+                SearchTerm = searchTerm,
+                UqamaNo = uqamaNo,
+                BenificiaryId = beneficiaryId,
             });
             return Ok(charity);
         }

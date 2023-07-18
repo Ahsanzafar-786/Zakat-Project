@@ -4,7 +4,14 @@
         <div class="left-sidenav">
             <!-- LOGO -->
             <div class="brand text-start ms-2">
-                <a v-on:click="GoTo('/dashboard')" href="javascript: void()" class="logo">
+                <a v-on:click="GoTo('/dashboard')" href="javascript: void()" class="logo" v-if="roleName == 'Noble Admin'">
+                    <span>
+                        <img src="msFakhry.png" alt="logo-small" class="logo-sm"
+                            style="width:100px;height:auto; max-height:45px;">
+                    </span>
+
+                </a>
+                <a href="javascript: void()" class="logo" v-else>
                     <span>
                         <img src="msFakhry.png" alt="logo-small" class="logo-sm"
                             style="width:100px;height:auto; max-height:45px;">
@@ -15,7 +22,7 @@
 
             <div class="menu-content h-100" data-simplebar>
                 <ul class="metismenu left-sidenav-menu">
-                    <li>
+                    <li v-if="roleName == 'Noble Admin'">
                         <a v-on:click="GoTo('/chartDashboard')" href="javascript:void(0);">
                             <i data-feather="trending-up" class="align-self-center menu-icon"></i><span>{{
                                 $t('Dashboard.Dashboard') }}</span>
@@ -48,30 +55,31 @@
                                 <a v-on:click="GoTo('/payment')" href="javascript:void(0);"> {{ $t('Payment.BenificaryPayment')
                                 }}</a>
                             </li>
-                            <!-- <li>
-                                <a v-on:click="GoTo('/addpayment')" href="javascript:void(0);"> {{ $t('Payment.AddPayment')
-                                }}</a>
-                            </li> -->
                             <li>
-                                <a v-on:click="GoTo('/benificaryreports')" href="javascript:void(0);"> {{ $t('Payment.BenificaryReports')
+                                <a v-on:click="GoTo('/dailyPayment')" href="javascript:void(0);"> {{ $t('Payment.DailyPayments')
                                 }}</a>
                             </li>
+                            
                         </ul>
                     </li>
                     <li v-if="roleName != 'Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('Benificary.Benificary') }}
+                                {{ $t('Dashboard.Benificary') }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/benificaries')" href="javascript:void(0);"> {{ $t('Benificary.Benificary')
+                                <a v-on:click="GoTo('/benificaries')" href="javascript:void(0);"> {{ $t('Dashboard.BenificaryRegistration')
                                 }}</a>
                             </li>
                             <li>
                                 <a v-on:click="GoTo('/benificarynote')" href="javascript:void(0);"> {{ $t('BenificaryNote.BenificaryNote')
+                                }}</a>
+                            </li>
+                            <li>
+                                <a v-on:click="GoTo('/benificaryreports')" href="javascript:void(0);"> {{ $t('Payment.BenificaryReports')
                                 }}</a>
                             </li>
                         </ul>

@@ -49,7 +49,7 @@
                                     <th class="text-center">
                                         {{ $t('AuthorizedPerson.ID') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-start">
                                         {{ $t('AuthorizedPerson.Name') }}
                                     </th>
                                     <th class="text-center">
@@ -78,7 +78,7 @@
                                             <a href="javascript:void(0)" v-on:click="EditauthorizedPerson(brand.id)">{{ brand.authorizedPersonCode }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-start">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditauthorizedPerson(brand.id)"> {{ brand.name }}</a>
                                         </strong>

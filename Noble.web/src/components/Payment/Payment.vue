@@ -33,19 +33,56 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-3">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.BeneficiaryName') }}
+                            </label>
                             <input v-model="search" type="text" class="form-control" :placeholder="$t('Payment.Search')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
                         <div class="col-3">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.BeneficiaryID') }}
+                            </label>
+                            <input v-model="benificaryCode" type="text" class="form-control" :placeholder="$t('Payment.SearchByID')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-3">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Payment.Code') }}
+                            </label>
                             <input v-model="code" type="text" class="form-control" :placeholder="$t('Payment.SearchByCode')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
                         <div class="col-3">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Payment.Amount') }}
+                            </label>
                             <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Payment.SearchByAmount')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 form-group">
+                            <label class="text  font-weight-bolder">{{ $t('AddBenificary.StartFrom') }}</label>
+                            <datepicker v-model="month" :type="'month'" :key="render"  />
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                                <label>Select Year:</label>
+                                <datepicker v-model="year" :type="'year'" :key="render" />
+                            </div>
+                        <div class="col-md-3 form-group">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.FromDate') }}
+                            </label>
+                            <datepicker v-model="fromDate" :key="render" />
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.ToDate') }}
+                            </label>
+                            <datepicker v-model="toDate" :key="render" />
+                        </div>
+                        <div class="col-sm-2 mt-3">
                             <a v-on:click="SearchFilter" href="javascript:void(0);"
                                 class="btn btn-sm btn-outline-primary mx-1">
                                 {{ $t('Payment.SearchFilter') }}
@@ -55,8 +92,6 @@
                             </a>
 
                         </div>
-
-
 
                     </div>
 
@@ -74,6 +109,9 @@
                                         {{ $t('Payment.Code') }}
                                     </th>
                                     <th class="text-center">
+                                        {{ $t('Payment.ID') }}
+                                    </th>
+                                    <th class="text-start">
                                         {{ $t('Payment.BenificaryName') }}
                                     </th>
                                     <th class="text-center">
@@ -125,16 +163,17 @@
                                     <td class="text-center text-danger" v-else-if="brand.isVoid">{{ brand.code }}</td>
 
                                     <td class="text-center" v-else>{{ brand.code }}</td>
+                                    <td class="text-center" >{{ brand.benificaryCode }}</td>
 
                                     <td class="text-center text-danger" v-if="brand.isVoid">Payment Voided</td>
-                                    <td class="text-center" v-else-if="roleName != 'Cashier'">
+                                    <td class="text-start" v-else-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">
                                                 {{ brand.benificaryNameAr ==
                                                     '' ? brand.benificaryName : brand.benificaryNameAr }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center" v-else>{{
+                                    <td class="text-start" v-else>{{
                                         brand.benificaryName == '' ? brand.benificaryNameAr : brand.benificaryName }}</td>
 
 
@@ -284,6 +323,13 @@ export default {
             benificaryName: '',
             code: '',
             amount: '',
+            benificaryCode:'',
+            fromDate: '',
+            toDate: '',
+            month:'',
+            year: '',
+            render:0
+
         }
     },
     // watch: {
@@ -299,6 +345,12 @@ export default {
             this.search = '';
             this.amount = '';
             this.code = '';
+            this.benificaryCode = '';
+            this.fromDate = '';
+            this.toDate = '';
+            this.render++
+            this.month = '';
+            this.year = '';
 
             // Trigger the search or data refresh
             this.GetPayment(this.currentPage);
@@ -356,7 +408,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;

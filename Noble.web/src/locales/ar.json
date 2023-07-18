@@ -5,53 +5,84 @@
   "Search": "بحث",
   "Save" : "يحفظ",
   "Update": "تحديث",
+  "SaveasApproved": "حفظ باسم معتمد",
+  "Approved": "موافقة",
   "Arabic":"العربية", 
   "PaidPayments":"المدفوعات المدفوعة",
   "DuePayments":"المدفوعات المستحقة",
   "UnPaidPayments":"المدفوعات غير المدفوعة",
   "SelectUser":"اختر المستخدم",
+  "SaveasPrint":"حفظ كطباعة",
 
 
   "General":{
     "SelectAuthorizePerson":"حدد تخويل الشخص",
     "SelectApprovalPerson":"حدد شخص الموافقة",
-    "PaymentType":"نوع الدفع",
+    "PaymentType":"الـنـوع الـدفـة ",
     "SelectBenificary":"حدد المستفيد  /البحث بالاسم أو المعرف"
 
   },
  
   "Benificary":{
-    "Benificary" : "المستفيد",
+    "Benificary" : "سجل المستـفـيد",
     "BenificaryList" : "قائمة المستفيدين",
-    "Name" : "اسم",
+    "Name" : "أسم المستـفـيد",
     "PayementIntervalMonths" : "الأشهر الفاصلة بين السداد",
-    "AmountPerMonth" : "المبلغ في الشهر",
+    "AmountPerMonth" : "المبلغ الشهري  ",
     "UgamaNo": "رقم الإقامة",
     "ContactNo" : "رقم الاتصال",
     "AuthorizePersonName" : " اسم الوكيل",
     "Status" : "حالة",
     "Active" : "نشيط",
     "DeActive" : "معطل",
-    "Register" : "يسجل",
-    "UnRegister" : "إلغاء التسجيل",
-    "BenificaryStatus" : "الحالة المستفيدة",
+    "Register" : "يسجـل",
+    "UnRegister" : "غير مسجل ",
+    "BenificaryStatus" : "حالـة المستـفـيد ",
     "Note": "ملحوظة",
     "Search":"البحث عن طريق اسم المستفيد",
     "SearchByUqamaNo":"البحث برقم الإقامة",
-    "SearchByID":"البحث عن طريق معرف المستفيد",
-    "SearchFilter":"تصفية البحث",
-    "ClearFilter":"مرشح واضح",
-    "ID":"بطاقة تعريف",
+    "SearchByCode":"البحث عن طريق كود مفيد",
+    "SearchFilter":" الـبحث ",
+    "ClearFilter":"إلـغـاء",
+    "ID":" الـكـود",
     "ApprovalPerson":"شخص الموافقة",
-    "BeneficaryReport":"تقرير المستفيد",
+    "BeneficaryReport":"الـتـقـارير المستفيد",
     "AuthorizedPerson":"الشخص المرخص",
-    "Register/Un-Register":"تسجيل / إلغاء التسجيل",
+    "Register/Un-Register":"مسجل /  غير مسجل",
     "FromDate":"من التاريخ",
-    "ToDate":"تاريخ "
+    "ToDate":"تاريخ ",
+    "BeneficiaryName":"أسم المستفيد",
+    "BeneficiaryID":"معرف المستفيد",
+    "UqamaNo":"رقم الإقامة",
+    "Amount":"المبلغ",
+    "Nationality":"جنسية",
+    "Gender":"جنس",
+    "Contact":"رقم الاتصال",
+    "SearchByAmount":"البحث بالمبلغ",
+    "SearchByNationality":"البحث بالجنسية",
+    "SearchByGender":"البحث حسب الجنس",
+    "SearchByContact":"البحث عن طريق رقم الاتصال",
+    "AdvanceFilter":"تصفية متقدم",
+    "Action":"فعل",
+    "View":"منظر",
+    "PDF":"بي دي إف",
+    "SelectMonth":"اختر الشهر",
+    "SelectYear":" اختر السنة",
+    "WaitingForApproved":"بانتظار الموافقة",
+    "Approved":"موافقة",
+    "Date":"تاريخ التسجيل",
+    "RecurringAmount":"المبلغ متكرر",
+    "PaymentType":"الـنـوع الـدفـة",
+    "ApprovedBy":"معـتمدة من",
+    "Notes":"ملحوظات",
+    "AccountStatus": "حالـة الحساب",
+    "NationalID":"National ID",
+    "SearchByNationalId":"Search By National ID"
+
   },
 
   "AddBenificary":{
-    "AddBenificary" : "إضافة مستفيد",
+    "AddBenificary" : "سجل المستـفـيد ",
     "UpdateBenificary" : "تحديث المستفيد",
     "NameArabic" : "الاسم عربي",
     "Name" : "اسم",
@@ -62,7 +93,7 @@
     "Female" : "أنثى",
     "ContactNo" : "رقم الاتصال",
     "PaymentDetail" : "تفاصيل الدفع",
-    "PaymentType" : "نوع الدفع",
+    "PaymentType" : " الـنـوع الـدفـة",
     "ApprovalPersons" : "الموافقة على الأشخاص",
     "AuthorizedPerson" : "الشخص المرخص",
     "RecurringAmount" : "المبلغ متكرر",
@@ -71,7 +102,7 @@
     "Active" : "نشيط",
     "Address" : "عنوان",
     "Reason":"سبب",
-    "Amount": "رقم",
+    "Amount": "المبلغ",
     "Note" : "ملحوظة",
     "Ids": "هوية وطنية",
     "StartMonth":"شهر البدء",
@@ -79,16 +110,18 @@
     "SelectType": "اختر صنف",
     "AdvancePayment":"دفعه مقدمه",
     "StartFrom":"يبدأ من",
-    "ApprovedBy":"تمت الموافقة عليه من قبل",
+    "ApprovedBy":" معـتمدة من ",
     "PaymentDuration":"مدة الدفع",
     "Type":"يكتب",
     "BeneficiaryAuthorization":"إذن المستفيد",
     "Date":"تاريخ",
     "Status":"حالة",
     "Action":"فعل",
-    "Year":"Year",
-    "Period":"Period",
-    "ByOrder":"By Order"
+    "Year":"سنة",
+    "Period":"فترة",
+    "ByOrder":"بأمر",
+    "ViewBenificary":"عرض المستفيد",
+    "EndMonth":"نهاية الشهر"
 
   },
   "DateFilter": {
@@ -107,27 +140,29 @@
   },
 
   "BenificaryNote":{
-    "BenificaryNote":"ملاحظة المستفيد",
+    "Code":" الـكـود",
+    "BenificaryNote":"ملاحظات المستفيد",
     "BenificaryNoteList":"قائمة الملاحظات المفيدة",
     "BenificaryName":"أسم المستفيد",
-    "Name":"اسم",
+    "BenificiaryNotes":"ملاحظات المستفيد",
     "Date":"تاريخ",
     "Search":"البحث عن طريق اسم المستفيد",
+    "SearchByID":"البحث بالمعرف",
     "SearchByBeneficiaryNote":"البحث عن طريق ملاحظة المستفيد",
-    "SearchFilter":"تصفية البحث",
-    "ClearFilter":"مرشح واضح",
+    "SearchFilter":" البحث",
+    "ClearFilter":"إلـغـاء ",
     "Delete":"يمسح",
     "Actions":"فعل"
   },
   "AddBenificaryNote":{
-    "AddBenificaryNote":"أضف ملاحظة مفيدة",
+    "AddBenificaryNote":"إضافة ملاحظة المستفيد  ",
     "UpdateBenificaryNote":"تحديث ملاحظة المستفيد",
     "Benificary":"المستفيد",
     "Note":"ملحوظة"
   },
 
   "PaymentType":{
-    "PaymentType":"نوع الدفع",
+    "PaymentType":"الـنـوع الـدفـة ",
     "PaymentTypeList":"قائمة نوع الدفع",
     "Name":"اسم",
     "SearchByName":"البحث عن طريق الإسم"
@@ -221,7 +256,7 @@
     "AddFunds":"إضافة الأموال",
     "FundsList":"قائمة الصناديق",
     "CharityResource":"اسم المورد الخيرية ",
-    "Amount":"كمية",
+    "Amount":"المبلغ",
     "Date":"تاريخ",
     "CharityFundsReports":"تقارير الصناديق الخيرية",
     "CharityFundsResource":"موارد الصناديق الخيرية",
@@ -232,7 +267,7 @@
     "AddFunds" : "إضافة الأموال",
     "UpdateFunds" : "تحديث الأموال",
     "CharityResource":"الموارد الخيرية",
-    "Amount":"كمية",
+    "Amount":"المبلغ",
     "Description":"وصف",
     "TypeOfTransaction":"نوع المعاملة"
   },
@@ -259,6 +294,8 @@
     "Login1":"تسجيل الدخول",
     "Support":"يدعم",
     "ContactUs":"اتصل بنا",
+    "EnteryourPassword":"ادخل رقمك السري",
+    "Enteryourusernameoremail":"أدخل اسم المستخدم أو البريد الإلكتروني الخاص بك",
     "VisitUS":"زورنا"
   },
   "Dashboard":{
@@ -270,7 +307,9 @@
     "AddAuthorizedPerson":"أضف الوكيل",
     "AddApprovalPerson":"إضافة شخص الموافقة",
     "AddPaymentType":"إضافة نوع الدفع",
-    "AddCharityFundsResources":"أضف موارد الصناديق الخيرية"
+    "AddCharityFundsResources":"أضف موارد الصناديق الخيرية",
+    "Benificary":"المستفيد",
+    "BenificaryRegistration":"تسجيل المستـفـيد"
   },
 
   "Company":{
@@ -346,6 +385,7 @@
   },
 
   "Payment":{
+    "ID":"رقم التعريف",
     "Payment":"المدفوعات",
     "Action":"فعل",
     "IsVoid":"هو الفراغ",
@@ -358,17 +398,21 @@
     "Cashier":"أمين الصندوق",
     "Month":"الشهر",
     "Year":"السنة",
-    "Code":"شفرة",
+    "Code":"الرمز",
     "Period":"فترة",
     "AllowVoid":"السماح باطل",
     "Print":"مطبعة",
     "Date":"تاريخ",
     "Search":"البحث عن طريق اسم المستفيد",
-    "SearchByCode":"البحث بالمعرف",
+    "SearchByCode":" البحث عن طريق الكود",
+    "SearchByID":"البحث بالمعرف",
     "SearchByAmount":"البحث بالمبلغ",
-    "SearchFilter":"تصفية البحث",
-    "ClearFilter":"مرشح واضح",
-    "PaymentWiseReport":"تقرير الدفع الحكيم"
+    "SearchFilter":" البحث",
+    "ClearFilter":"إلـغـاء ",
+    "PaymentWiseReport":"تقرير الدفع الحكيم",
+    "ApprovalType":"نوع الموافقة",
+    "DailyPayments":"المدفوعات اليومية",
+    "AddDailyPayment":"أضف الدفع اليومي"
   },
 
   "AddPayment":{
@@ -379,7 +423,7 @@
     "Cashier":"أمين الصندوق",
     "Month":"الشهر",
     "Year":"السنة",
-    "Code":"شفرة",
+    "Code":"رقم التعريف ",
     "Period":"فترة",
     "ByOrder":"بأمر"
   },
@@ -404,8 +448,8 @@
   "LedgerReport":{
     "LedgerReport": "تقرير دفتر الأستاذ",
     "ReportsManagement":"إدارة التقارير",
-    "Filter":"منقي",
-    "ClearFilters":"مرشحات واضحة"
+    "Filter":"تصفية البحث",
+    "ClearFilters":" مرشح واضح"
   },
   "SystemManagement":{
     "SystemManagement":"ادارة النظام",

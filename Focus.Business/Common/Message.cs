@@ -9,7 +9,7 @@ namespace Focus.Business.Common
         public string IsAddUpdate { get; set; }
         public bool IsSuccess { get; set; }
         public string IsDeleted { get; set; }
-        public Guid SaleId { get; set; }
+        public Guid PaymentId { get; set; }
         public bool IsDoublePrint { get; set; }
 
     }

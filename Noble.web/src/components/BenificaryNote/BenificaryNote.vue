@@ -39,17 +39,32 @@
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
                     </div> -->
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-md-3 form-group">
+                            <input v-model="benificaryCode" type="text" class="form-control"
+                                :placeholder="$t('BenificaryNote.SearchByID')" aria-label="Example text with button addon"
+                                aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-md-3 form-group">
                             <input v-model="search" type="text" class="form-control"
                                 :placeholder="$t('BenificaryNote.Search')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-3 form-group">
                             <input v-model="beneficiaryNote" type="text" class="form-control"
                                 :placeholder="$t('BenificaryNote.SearchByBeneficiaryNote')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-3 form-group">
+                            <input v-model="nationalId" type="text" class="form-control"
+                                :placeholder="$t('BenificaryNote.SearchByNationalID')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input v-model="contactNo" type="text" class="form-control"
+                                :placeholder="$t('BenificaryNote.SearchByContactNo')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-md-3 form-group">
                             <a v-on:click="SearchFilter" href="javascript:void(0);"
                                 class="btn btn-sm btn-outline-primary mx-1">
                                 {{ $t('BenificaryNote.SearchFilter') }}
@@ -69,15 +84,27 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
+                                        {{ $t('BenificaryNote.Code') }}
+                                    </th>
+                                    <th class="text-start">
                                         {{ $t('BenificaryNote.BenificaryName') }}
                                     </th>
-                                    <th class="text-center">
-                                        {{ $t('BenificaryNote.Name') }}
+                                    <th class="text-start">
+                                        {{ $t('BenificaryNote.BenificiaryNotes') }}
+                                    </th>
+                                    <th class="text-start">
+                                        NationalID
+                                    </th>
+                                    <th class="text-start">
+                                        Nationality
+                                    </th>
+                                    <th class="text-start">
+                                        Contact No
                                     </th>
                                     <th class="text-center">
                                         {{ $t('BenificaryNote.Date') }}
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-center" v-if="roleName != 'Cashier'">
                                         {{ $t('BenificaryNote.Actions') }}
                                     </th>
                                 </tr>
@@ -90,23 +117,35 @@
                                     <td v-else>
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
-
                                     <td class="text-center">
+                                        {{ brand.benificaryCode }}
+                                    </td>
+
+                                    <td class="text-start">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)">{{
                                                 brand.benificaryName }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-start">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)"> {{
                                                 brand.note }}</a>
                                         </strong>
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.date }}
+                                        {{ brand.nationalId }}
                                     </td>
                                     <td class="text-center">
+                                        {{ brand.nationality }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ brand.contactNo }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ brand.date }}
+                                    </td>
+                                    <td class="text-center" v-if="roleName != 'Cashier'">
                                         <button class="btn btn-sm btn-danger" v-on:click="deleteBenificaryNote(brand.id)">
                                             {{ $t('BenificaryNote.Delete') }}
                                         </button>
@@ -187,6 +226,10 @@ export default {
             english: '',
             roleName: '',
             beneficiaryNote: '',
+            benificaryCode:'',
+            nationalId:'',
+            contactNo:'',
+            
         }
     },
     // watch: {
@@ -199,6 +242,9 @@ export default {
             // Reset the filter conditions here
             this.search = '';
             this.beneficiaryNote = '';
+            this.benificaryCode = '';
+            this.nationalId='';
+            this.contactNo='';
 
             // Trigger the search or data refresh
             this.GetbenificaryNote(this.currentPage);
@@ -240,7 +286,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryNote=' + this.beneficiaryNote, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryNote=' + this.beneficiaryNote + '&benificaryCode=' + this.benificaryCode + '&nationalId=' + this.nationalId + '&contactNo=' + this.contactNo, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.benificaryNotelist = response.data.results;
                     root.pageCount = response.data.pageCount;
