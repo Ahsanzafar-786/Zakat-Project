@@ -97,7 +97,7 @@ namespace Noble.Api.Controllers
         [Route("api/Benificary/GetBenificaryList")]
         [HttpGet("GetBenificaryList")]
         public async Task<IActionResult> GetBenificaryList(string searchTerm, int? pageNumber, bool isDropDown,string beneficiaryName, string uqamaNo, string beneficiaryId, Guid? authorizationPersonId, Guid? approvalPersonId, string registered, DateTime? fromDate, DateTime? toDate, DateTime? startMonth, DateTime? year,
-            decimal? amount,string nationality,string gender,string contact,string status)
+            decimal? amount,string nationality,string gender,string contact,string status, Guid? paymentType)
         {
             var benificary = await Mediator.Send(new GetBenificariesListQuery
             {
@@ -119,6 +119,7 @@ namespace Noble.Api.Controllers
                 Gender = gender,
                 Contact = contact,
                 Status = status,
+                PaymentType = paymentType,
             });
             return Ok(benificary);
         }

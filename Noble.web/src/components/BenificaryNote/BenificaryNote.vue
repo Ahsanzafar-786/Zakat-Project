@@ -93,13 +93,13 @@
                                         {{ $t('BenificaryNote.BenificiaryNotes') }}
                                     </th>
                                     <th class="text-start">
-                                        NationalID
+                                        {{ $t('BenificaryNote.NationalID') }}
                                     </th>
                                     <th class="text-start">
-                                        Nationality
+                                        {{ $t('BenificaryNote.Nationality') }}
                                     </th>
                                     <th class="text-start">
-                                        Contact No
+                                        {{ $t('BenificaryNote.ContactNo') }}
                                     </th>
                                     <th class="text-center">
                                         {{ $t('BenificaryNote.Date') }}
@@ -133,12 +133,15 @@
                                                 brand.note }}</a>
                                         </strong>
                                     </td>
+                                    
                                     <td class="text-center">
                                         {{ brand.nationalId }}
                                     </td>
+
                                     <td class="text-center">
                                         {{ brand.nationality }}
                                     </td>
+
                                     <td class="text-center">
                                         {{ brand.contactNo }}
                                     </td>

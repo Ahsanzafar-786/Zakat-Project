@@ -133,7 +133,12 @@
     "SearchFilter":"Search Filter",
     "ClearFilter":"Clear Filter",
     "Delete":"Delete",
-    "Actions":"Actions"
+    "Actions":"Actions",
+    "SearchByNationalID":"Search By National ID",
+    "SearchByContactNo":"Search By Contact No",
+    "NationalID":"National ID",
+    "Nationality":"Nationality",
+    "ContactNo":"Contact No"
   },
   "AddBenificaryNote": {
     "AddBenificaryNote": "Add Beneficiary Note",

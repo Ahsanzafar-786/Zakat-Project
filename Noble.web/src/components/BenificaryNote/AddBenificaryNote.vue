@@ -16,7 +16,7 @@
                         <label class="text  font-weight-bolder">
                            {{ $t('AddBenificaryNote.Benificary') }}:
                         </label>
-                        <benificary v-model="brand.benificaryId" :values="brand.benificaryId" />
+                        <benificary v-model="brand.benificaryId" :values="brand.benificaryId" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'" />
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">

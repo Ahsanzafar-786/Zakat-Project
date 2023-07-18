@@ -68,7 +68,8 @@ namespace Focus.Business.BenificiariesNotes.Queries
                         if (!string.IsNullOrEmpty(request.SearchTerm))
                         {
                             var searchTerm = request.SearchTerm.ToLower();
-                            query = query.Where(x => x.BenificaryName.Contains(searchTerm)).ToList();
+
+                            query = query.Where(x => x.BenificaryName== searchTerm).ToList();
                         }
                         if (!string.IsNullOrEmpty(request.BeneficiaryNote))
                         {
