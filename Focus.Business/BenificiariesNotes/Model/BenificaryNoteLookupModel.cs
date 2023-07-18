@@ -14,5 +14,8 @@ namespace Focus.Business.BenificiariesNotes.Model
         public string BenificaryCode { get; set; }
         public Guid? BenificaryId { get; set; }
         public string BenificaryName { get; set; }
+        public string NationalId { get; set; }
+        public string Nationality { get; set; }
+        public string ContactNo { get; set; }
     }
 }

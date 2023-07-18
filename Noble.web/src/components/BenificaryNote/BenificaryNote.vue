@@ -55,12 +55,12 @@
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
                         <div class="col-md-3 form-group">
-                            <input v-model="beneficiaryNote" type="text" class="form-control"
+                            <input v-model="nationalId" type="text" class="form-control"
                                 :placeholder="$t('BenificaryNote.SearchByNationalID')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
                         <div class="col-md-3 form-group">
-                            <input v-model="beneficiaryNote" type="text" class="form-control"
+                            <input v-model="contactNo" type="text" class="form-control"
                                 :placeholder="$t('BenificaryNote.SearchByContactNo')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
@@ -134,13 +134,13 @@
                                         </strong>
                                     </td>
                                     <td class="text-center">
-                                        --
+                                        {{ brand.nationalId }}
                                     </td>
                                     <td class="text-center">
-                                        --
+                                        {{ brand.nationality }}
                                     </td>
                                     <td class="text-center">
-                                       --
+                                        {{ brand.contactNo }}
                                     </td>
                                     <td class="text-center">
                                         {{ brand.date }}
@@ -227,6 +227,9 @@ export default {
             roleName: '',
             beneficiaryNote: '',
             benificaryCode:'',
+            nationalId:'',
+            contactNo:'',
+            
         }
     },
     // watch: {
@@ -240,6 +243,8 @@ export default {
             this.search = '';
             this.beneficiaryNote = '';
             this.benificaryCode = '';
+            this.nationalId='';
+            this.contactNo='';
 
             // Trigger the search or data refresh
             this.GetbenificaryNote(this.currentPage);
@@ -281,7 +286,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryNote=' + this.beneficiaryNote + '&benificaryCode=' + this.benificaryCode, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryNote=' + this.beneficiaryNote + '&benificaryCode=' + this.benificaryCode + '&nationalId=' + this.nationalId + '&contactNo=' + this.contactNo, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.benificaryNotelist = response.data.results;
                     root.pageCount = response.data.pageCount;
