@@ -41,6 +41,7 @@ namespace Focus.Business.Payments.Queries
                     {
                         var query = await Context.Payments.Select(x => new Payment
                         {
+                            
                             Id = x.Id,
                             BenificayId = x.BenificayId,
                             Amount = x.Amount,
@@ -129,7 +130,6 @@ namespace Focus.Business.Payments.Queries
                             Year = x.Year,
                             Period = x.Period,
                             UserId = x.UserId,
-                            SelectedMonth = x.SelectedMonth,
                             Note = x.Note,
                             IsVoid = x.IsVoid,
                         }).FirstOrDefaultAsync(x => x.Id == request.Id);
@@ -147,15 +147,24 @@ namespace Focus.Business.Payments.Queries
                     }
                     else
                     {
-                        var query = await Context.Payments.Include(x => x.Beneficiaries).Select(x => new PaymentLookupModel
+                        var query = await Context.Payments
+                            .Include(x=>x.SelectedMonth).Include(x => x.Beneficiaries)
+                            .ThenInclude(y=>y.BenificaryAuthorization).ThenInclude(z=>z.AuthorizedPerson).Select(x => new PaymentLookupModel
                         {
                             Id = x.Id,
                             BenificayId = x.BenificayId,
+                            
+                            Date = x.Date,
                             Amount = x.Amount,
+                            SelectedMonth = x.SelectedMonth.Select(y => new SelectedMonthLookupModel
+                            {
+                                SelectedMonth = y.SelectMonth,
+                            }).ToList(),
                             BenificaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
                             Month = x.Month,
+                            AuthorizePerson = x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name,
                             PaymentCode = x.Code.ToString(),
-                            Code = x.Code,
+                            Code = x.Beneficiaries.BeneficiaryId,
                             Year = x.Year,
                             Period = x.Period,
                             Note = x.Note,

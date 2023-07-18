@@ -100,7 +100,7 @@ namespace Noble.Report.Reports.Invoice
                     }
                     else if (formName == "PaymentWiseReport")
                     {
-                        var benificaryId = Request.QueryString["benificaryId"] == null ? "" : Request.QueryString["benificaryId"];
+                        var benificaryId = Request.QueryString["benificaryId"] == null|| Request.QueryString["benificaryId"] == "null" ? "" : Request.QueryString["benificaryId"];
                         var UserId = Request.QueryString["userId"] == "Invalid date" ? "" : Request.QueryString["userId"];
                         var fromDate = Request.QueryString["fromDate"];
                         var toDate = Request.QueryString["toDate"];

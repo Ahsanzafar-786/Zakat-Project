@@ -24,6 +24,7 @@ namespace Focus.Business.Payments.Models
         public string HijriYear { get; set; }
         public string HijriMonth { get; set; }
         public string Cashier { get; set; }
+        public string AuthorizePerson { get; set; }
         public bool AllowVoid { get; set; }
         public List<SelectedMonthLookupModel> SelectedMonth { get; set; }
     }
