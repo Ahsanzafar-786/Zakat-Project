@@ -493,7 +493,6 @@ export default {
     // },
     methods: {
         ClearFilter() {
-
             // Reset the filter conditions here
             this.search = '';
             this.uqamaNo = '';

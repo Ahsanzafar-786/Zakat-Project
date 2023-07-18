@@ -235,8 +235,7 @@
                             <thead class="thead-light table-hover">
                                 <tr>
                                     <th class="text-center"> #</th>
-                                    <th class="text-center" >{{
-                                        $t('AddBenificary.AuthorizedPerson') }}</th>
+                                    <th class="text-center" >{{$t('AddBenificary.AuthorizedPerson') }}</th>
                                     <th class="text-center" v-if="roleName == 'Admin'" >{{ $t('AddBenificary.ApprovedBy')
                                     }}</th>
                                     <th class="text-center" >{{ $t('AddBenificary.Date') }}

@@ -385,8 +385,10 @@
   },
 
   "Payment":{
+    "LastPayment":"الدفعة الأخيرة",
+    "NextPayment":" الدفعة التالية",
     "ID":"رقم التعريف",
-    "Payment":"المدفوعات",
+    "Payment":"سجل المستـفـيد المدفوعات",
     "Action":"فعل",
     "IsVoid":"هو الفراغ",
     "BenificaryPayment":"أضف دفع",
