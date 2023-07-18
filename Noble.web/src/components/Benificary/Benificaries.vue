@@ -55,8 +55,7 @@
                         </div>
                         <div class="col-3 form-group">
                             <label>Payment Type</label>
-                            <paymenttype v-model="paymentTypeId" v-on:input="GetRecord" ref="PaymentType"
-                             />
+                            <paymenttype v-model="paymentType"  ref="PaymentType"/>
                         </div>
                         <!-- <div class="col-4 form-group">
                             <label class="text  font-weight-bolder">
@@ -410,7 +409,7 @@ export default {
     },
     data: function () {
         return {
-            paymentType: null,
+            paymentType: '',
             user: '',
             show: false,
             roleName: '',
@@ -619,7 +618,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetBenificaryList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryId=' + this.beneficiaryId + '&uqamaNo=' + this.uqamaNo + '&authorizationPersonId=' + this.authorizationPersonId + '&approvalPersonId=' + this.approvalPersonId + '&registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&startMonth=' + this.startMonth + '&year=' + this.year + '&amount=' + this.amount + '&nationality=' + this.nationality + '&gender=' + this.gender + '&contact=' + this.contact + '&status=' + this.status+ '&nationalId=' + this.nationalId, {
+            root.$https.get('Benificary/GetBenificaryList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryId=' + this.beneficiaryId + '&uqamaNo=' + this.uqamaNo + '&authorizationPersonId=' + this.authorizationPersonId + '&approvalPersonId=' + this.approvalPersonId + '&registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&startMonth=' + this.startMonth + '&year=' + this.year + '&amount=' + this.amount + '&nationality=' + this.nationality + '&gender=' + this.gender + '&contact=' + this.contact + '&status=' + this.status+ '&nationalId=' + this.nationalId + '&paymentType=' + this.paymentType, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

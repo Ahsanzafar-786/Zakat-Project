@@ -32,6 +32,7 @@ namespace Focus.Business.Benificary.Queries
         public string Contact { get; set; }
         public string Gender { get; set; }
         public string Status { get; set; }
+        public Guid? PaymentType { get; set; }
 
         public class Handler : IRequestHandler<GetBenificariesListQuery, PagedResult<List<BenificariesLookupModel>>>
         {
@@ -174,7 +175,12 @@ namespace Focus.Business.Benificary.Queries
 
                             query = query.Where(x => x.IsActive == isActive);
                         }
-                        
+                        if (request.PaymentType != null && request.PaymentType!=Guid.Empty)
+                        {
+                            query = query.Where(x => x.PaymentTypeId== request.PaymentType);
+                        }
+
+
 
                         var count = await query.CountAsync();
                         query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);

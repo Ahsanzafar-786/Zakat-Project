@@ -36,7 +36,7 @@
 
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.Ids') }}12:<span class="text-danger"> *</span>
+                            {{ $t('AddBenificary.Ids') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.ugamaNo.$model" placeholder="XXXXXXXXXX" type="text" />
                         <span v-if="$v.brand.ugamaNo.$error && english == 'en'" class="error text-danger">
@@ -582,7 +582,6 @@ export default {
 
             if(this.advancePaymentvalue != '' && this.advancePaymentvalue != null)
             {
-                alert("Ok");
                 debugger;
                 if(this.$i18n.locale == 'en'){
                     var advance = parseInt(this.advancePaymentvalue.match(/\d+/)[0], 10); 
