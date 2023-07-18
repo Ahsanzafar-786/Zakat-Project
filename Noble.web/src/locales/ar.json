@@ -85,6 +85,7 @@
     "AddBenificary" : "سجل المستـفـيد ",
     "UpdateBenificary" : "تحديث المستفيد",
     "NameArabic" : "الاسم عربي",
+    "AuthorizedPersonId": "هوية الشخص المرخص له",
     "Name" : "اسم",
     "PassportNo" : "رقم جواز السفر",
     "Nationality" : "جنسية",

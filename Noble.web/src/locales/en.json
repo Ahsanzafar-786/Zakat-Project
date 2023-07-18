@@ -92,6 +92,7 @@
     "PaymentType": "Payment Type",
     "ApprovalPersons": "Approval Persons",
     "AuthorizedPerson": "Authorized Person",
+    "AuthorizedPersonId": "Authorized Person ID",
     "RecurringAmount": "Recurring Amount",
     "PaymentIntervalMonths": "Payment Interval Months",
     "AmountPerMonth": "Amount Per Month",

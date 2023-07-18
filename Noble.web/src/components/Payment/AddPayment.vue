@@ -238,8 +238,8 @@
                         </button>
                     </div>
                 </div>
-                <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"
-            @IsSave="IsSaveRpt" />
+                <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"  @IsSave="IsSaveRpt" />
+                
                 <div class="offcanvas offcanvas-end p-0" tabindex="-1" id="offcanvasRight"
                     aria-labelledby="offcanvasRightLabel" style="width: 500px !important;">
                     <div class="offcanvas-header">
@@ -251,37 +251,63 @@
                         <div class="row">
                             <div class="col-lg-12 form-group">
                                 <label> {{ $t('AddBenificary.Name') }}:</label>
-                                <input type="text" class="form-control" v-model="brand.name" />
+                                <input type="text" class="form-control" v-model="brand.name" readonly />
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label>{{ $t('AddBenificary.NameArabic') }} :</label>
-                                <input type="text" class="form-control" v-model="brand.nameAr" />
+                                <input type="text" class="form-control" v-model="brand.nameAr" readonly />
                             </div>
                             <div class="col-lg-12 form-group">
-                                <label>{{ $t('AddBenificary.ID') }} :</label>
-                                <input type="text" class="form-control" v-model="brand.ugamaNo" />
+                                <label>{{ $t('AddBenificary.Ids') }} :</label>
+                                <input type="text" class="form-control" v-model="brand.ugamaNo" readonly />
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label>{{ $t('AddBenificary.PassportNo') }} :</label>
-                                <input type="text" class="form-control" v-model="brand.passportNo" />
+                                <input type="text" class="form-control" v-model="brand.passportNo" readonly />
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label>{{ $t('AddBenificary.Nationality') }} :</label>
-                                <input type="text" class="form-control" v-model="brand.nationality" />
+                                <input type="text" class="form-control" v-model="brand.nationality" readonly/>
                             </div>
 
                             <div class="col-lg-12 form-group">
                                 <label>{{ $t('AddBenificary.Gender') }} :</label>
-                                <input type="text" class="form-control" v-model="brand.gender" />
+                                <input type="text" class="form-control" v-model="brand.gender" readonly />
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label>{{ $t('AddBenificary.ContactNo') }} :</label>
-                                <input type="text" class="form-control" v-model="brand.phoneNo" />
+                                <input type="text" class="form-control" v-model="brand.phoneNo" readonly />
                             </div>
 
                             <div class="col-lg-12 form-group">
                                 <label>{{ $t('AddBenificary.Address') }} :</label>
-                                <textarea rows="3" class="form-control" v-model="brand.address">  </textarea>
+                                <textarea rows="3" class="form-control" v-model="brand.address" readonly>  </textarea>
+                            </div>
+                            <div v-for="item in brand.benificaryAuthorization" :key="item.id">
+                                <div class="col-lg-12 form-group">
+                                    <label>{{$t('AddBenificary.AuthorizedPersonId') }} :</label>
+                                    <input class="form-control" v-model="item.authorizationPersonCode" readonly />  
+                                </div>
+                                <div class="col-lg-12 form-group">
+                                    <label>{{$t('AddBenificary.AuthorizedPerson') }} :</label>
+                                    <input class="form-control" v-model="item.authorizationPersonName" readonly />  
+                                </div>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.ApprovedBy') }} :</label>
+                                <input class="form-control" v-model="brand.approvalPersonName" readonly />  
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.PaymentType') }} :</label>
+                                <input class="form-control" v-model="brand.paymentTypeName" readonly />  
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.AdvancePayment') }} :</label>
+                                <input class="form-control" v-model="brand.advancePayment" readonly />  
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label>{{ $t('AddBenificary.StartFrom') }} :</label>
+                                <input class="form-control" v-model="brand.startMonthAndYear" readonly />  
                             </div>
 
                         </div>

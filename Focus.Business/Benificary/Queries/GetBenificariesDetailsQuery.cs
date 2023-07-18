@@ -87,6 +87,7 @@ namespace Focus.Business.Benificary.Queries
                             ApprovalPersonName = x.ApprovalPersons.Name,
                             Reason = x.Reason,
                             CharityTransactions = charity,
+                            StartMonthAndYear = x.StartDate.Value.Month.ToString() + " - " + x.StartDate.Value.Year.ToString(),
                             BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
                             {
                                 Id = x.Id,
@@ -160,6 +161,7 @@ namespace Focus.Business.Benificary.Queries
                             ApprovalPersonName = x.ApprovalPersons.Name,
                             Reason = x.Reason,
                             IsDisable = isDisable,
+                            StartMonthAndYear = x.StartDate.Value.Month.ToString() + " - " + x.StartDate.Value.Year.ToString(),
                             BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
                             {
                                 Id= x.Id,
@@ -167,7 +169,8 @@ namespace Focus.Business.Benificary.Queries
                                 ApprovalPersonId= x.ApprovalPersonId,
                                 ApprovalPersonName=x.ApprovalPerson.Name==null || x.ApprovalPerson.Name==""? x.ApprovalPerson.NameAr: x.ApprovalPerson.Name,
                                 AuthorizationPersonId= x.AuthorizationPersonId,
-                                AuthorizationPersonName=x.ApprovalPerson.Name==null||x.AuthorizedPerson.Name==""?x.AuthorizedPerson.NameAr:x.AuthorizedPerson.Name,
+                                AuthorizationPersonCode = x.AuthorizedPerson.AuthorizedPersonCode,
+                                AuthorizationPersonName =x.ApprovalPerson.Name==null||x.AuthorizedPerson.Name==""?x.AuthorizedPerson.NameAr:x.AuthorizedPerson.Name,
                                 IsActive = x.IsActive,
                                 Date = Convert.ToDateTime(x.Date).ToString("mm/dd/yyyy"),
                                 Description = x.Description,

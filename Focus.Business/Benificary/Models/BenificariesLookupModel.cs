@@ -48,6 +48,7 @@ namespace Focus.Business.Benificary.Models
         public int? FirstMonth { get; set; }
         public int? EndMonth { get; set; }
         public string Reason { get; set; }
+        public string StartMonthAndYear { get; set; }
         public ApprovalStatus ApprovalStatus { get; set; }
 
         public List<CharityTransactionLookupModel> CharityTransactions { get; set; }
