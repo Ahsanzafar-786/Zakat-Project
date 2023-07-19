@@ -946,22 +946,19 @@ export default {
 
                                     } else {
                                         root.selectedMonth = [];
-                                        // for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
-                                        //     let month;
-                                        //     month = moment(response.data.startMonth).format('DD MMMM YYYY')
+                                        var month = moment(response.data.startMonth).format('DD MMMM YYYY')
+                                        for (var i = response.data.firstMonth; i <= root.brand.paymentType ; i++) {
+                                            
 
-                                        //     root.selectedMonth.push({
-                                        //         selectedMonth: month
-                                        //     });
+                                            root.selectedMonth.push({
+                                                selectedMonth: month
+                                            });
+                                            month=moment(this.currentDate).add(1, 'months')
 
-                                        //     month.
+                                        }
 
-                                        // }
-
-                                        root.selectedMonth.push({
-                                            selectedMonth: moment(response.data.startMonth).format('DD MMMM YYYY')
-                                        });
-                                        root.addPayment.month = response.data.startMonth;
+                                      
+                                        root.addPayment.month = month;
                                         root.randerDate++;
 
                                     }
