@@ -12,8 +12,6 @@ using Focus.Domain.Entities;
 
 using System.Linq;
 using System.Collections.Generic;
-using DocumentFormat.OpenXml.Spreadsheet;
-using NPOI.SS.Formula.Functions;
 
 namespace Focus.Business.Payments.Commands
 {

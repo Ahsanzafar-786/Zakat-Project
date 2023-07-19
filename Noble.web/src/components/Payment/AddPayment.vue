@@ -194,7 +194,7 @@
                         </div>
                     </div>
                     <div class="row mt-2" v-if="brand.paymentType != 0">
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <p class="text-primary"><b>{{ $t('PaidPayments') }}</b></p>
                             <div v-for="(month) in months" v-bind:key="month.id"
                                 :class="month.year == '' ? '' : 'col-sm-12'">
@@ -218,7 +218,7 @@
                                 <span v-if="month.color == ''" class="text-danger"><b>{{ month.name }}
                                         {{ month.year }}</b></span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -960,81 +960,81 @@ export default {
 
                         root.addPayment.amount = response.data.amountPerMonth;
                         root.addPayment.amountPerMonth = response.data.amountPerMonth;
-                        var paymentMonths = response.data.charityTransactions;
+                        // var paymentMonths = response.data.charityTransactions;
                         if (response.data.durationType == 'Indefinite') {
-                            root.months.map(auth => {
+                            // root.months.map(auth => {
 
-                                {
-                                    auth.color = 'green';
-                                    auth.active = true;
-                                    auth.year = response.data.year;
-                                }
-                                return auth;
-                            });
-                            if (paymentMonths.length > 0) {
+                            //     {
+                            //         auth.color = 'green';
+                            //         auth.active = true;
+                            //         auth.year = response.data.year;
+                            //     }
+                            //     return auth;
+                            // });
+                            // if (paymentMonths.length > 0) {
 
-                                for (var k = 0; k < paymentMonths.length; k++) {
+                            //     for (var k = 0; k < paymentMonths.length; k++) {
 
-                                    root.months.map(auth => {
+                            //         root.months.map(auth => {
 
-                                        if (auth.id === paymentMonths[k].paymentMonths) {
-                                            auth.color = 'red';
-                                            auth.active = false;
-                                            auth.year = paymentMonths[k].year;
+                            //             if (auth.id === paymentMonths[k].paymentMonths) {
+                            //                 auth.color = 'red';
+                            //                 auth.active = false;
+                            //                 auth.year = paymentMonths[k].year;
 
-                                        }
-                                        return auth;
-                                    });
+                            //             }
+                            //             return auth;
+                            //         });
 
-                                }
-                            }
+                            //     }
+                            // }
 
                         } else if (response.data.firstMonth != null && response.data.endMonth != null) {
 
-                            {
-                                for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
-                                    if (i <= response.data.endMonth) {
-                                        root.months.map(auth => {
+                            // {
+                            //     for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
+                            //         if (i <= response.data.endMonth) {
+                            //             root.months.map(auth => {
 
-                                            if (auth.id === i) {
-                                                auth.color = 'green';
-                                                auth.active = true;
-                                                auth.year = response.data.year;
-                                            }
-                                            return auth;
-                                        })
-                                    }
+                            //                 if (auth.id === i) {
+                            //                     auth.color = 'green';
+                            //                     auth.active = true;
+                            //                     auth.year = response.data.year;
+                            //                 }
+                            //                 return auth;
+                            //             })
+                            //         }
 
-                                }
-                                if (paymentMonths.length > 0) {
-                                    for (var j = 0; j < paymentMonths.length; j++) {
+                            //     }
+                            //     if (paymentMonths.length > 0) {
+                            //         for (var j = 0; j < paymentMonths.length; j++) {
 
-                                        root.months.map(auth => {
+                            //             root.months.map(auth => {
 
-                                            if (auth.id === paymentMonths[j].paymentMonths) {
-                                                auth.color = 'red';
-                                                auth.active = false;
-                                                auth.year = paymentMonths[j].year;
+                            //                 if (auth.id === paymentMonths[j].paymentMonths) {
+                            //                     auth.color = 'red';
+                            //                     auth.active = false;
+                            //                     auth.year = paymentMonths[j].year;
 
-                                            }
-                                            return auth;
-                                        });
+                            //                 }
+                            //                 return auth;
+                            //             });
 
-                                    }
+                            //         }
 
-                                }
+                            //     }
 
-                            }
+                            // }
 
                         }
                         root.selectedMonth = [];
-                        root.months.forEach(element => {
-                            if (element.color == 'green') {
-                                root.selectedMonth.push({
-                                    selectedMonth: '01' + ' ' + element.name + ' ' + element.year
-                                });
-                            }
-                        });
+                        // root.months.forEach(element => {
+                        //     if (element.color == 'green') {
+                        //         root.selectedMonth.push({
+                        //             selectedMonth: '01' + ' ' + element.name + ' ' + element.year
+                        //         });
+                        //     }
+                        // });
                         root.rander++;
                     } else {
                         console.log("error: something wrong from db.");
