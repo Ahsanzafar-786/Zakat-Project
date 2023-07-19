@@ -927,12 +927,30 @@ export default {
                                 if (paymentMonths.length > 0) {
 
                                     if (response.data.currentPaymentMonth != null && response.data.currentPaymentMonth != undefined) {
-                                        root.selectedMonth = [];
-                                        root.selectedMonth.push({
-                                            selectedMonth: moment(response.data.currentPaymentMonth).add(1, 'months').format('DD MMMM YYYY')
-                                        });
-                                        root.addPayment.month = moment(response.data.currentPaymentMonth).add(1, 'months').format('DD MMMM YYYY');
-                                        root.randerDate++;
+                                        if (root.brand.paymentType == 1) {
+                                            root.selectedMonth = [];
+                                            root.selectedMonth.push({
+                                                selectedMonth: moment(response.data.currentPaymentMonth).add(1, 'months').format('DD MMMM YYYY')
+                                            });
+                                            root.addPayment.month = moment(response.data.currentPaymentMonth).add(1, 'months').format('DD MMMM YYYY');
+                                            root.randerDate++;
+
+                                        } else {
+                                            root.selectedMonth = [];
+                                            var month12 = moment(response.data.currentPaymentMonth).add(1, 'months').format('DD MMMM YYYY')
+                                            for (var j = 1; j <= root.brand.paymentType; j++) {
+
+                                                root.selectedMonth.push({
+                                                    selectedMonth: month12
+                                                });
+                                                month12 = moment(month12).add(1, 'months').format('DD MMMM YYYY')
+
+                                            }
+
+                                            root.randerDate++;
+
+                                        }
+
                                     }
 
                                 } else {
@@ -946,19 +964,32 @@ export default {
 
                                     } else {
                                         root.selectedMonth = [];
+                                        if(response.data.startMonth==null && response.data.startMonth==undefined  ){
+
+                                            root.$swal({
+                                                title: 'Error',
+                                                text: 'Not Select Start Month Date',
+                                                type: 'error',
+                                                icon: 'error',
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                timerProgressBar: true,
+                                            });
+                                            root.onlyOneTime = true;
+                                           
+                                            return;
+
+                                        }
                                         var month = moment(response.data.startMonth).format('DD MMMM YYYY')
-                                        for (var i = response.data.firstMonth; i <= root.brand.paymentType ; i++) {
-                                            
+                                        for (var i = 1; i <= root.brand.paymentType; i++) {
 
                                             root.selectedMonth.push({
                                                 selectedMonth: month
                                             });
-                                            month=moment(this.currentDate).add(1, 'months')
+                                            month = moment(month).add(1, 'months').format('DD MMMM YYYY')
 
                                         }
 
-                                      
-                                        root.addPayment.month = month;
                                         root.randerDate++;
 
                                     }
@@ -1029,10 +1060,32 @@ export default {
                                 } else {
                                     if (response.data.startMonth != null && response.data.startMonth != undefined) {
                                         root.selectedMonth = [];
-                                        root.selectedMonth.push({
-                                            selectedMonth: moment(response.data.startMonth).format('DD MMMM YYYY')
-                                        });
-                                        root.addPayment.month = response.data.startMonth;
+                                        if(response.data.startMonth==null && response.data.startMonth==undefined  ){
+
+                                            root.$swal({
+                                                title: 'Error',
+                                                text: 'Not Select Start Month Date',
+                                                type: 'error',
+                                                icon: 'error',
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                timerProgressBar: true,
+                                            });
+                                            root.onlyOneTime = true;
+                                           
+                                            return;
+
+                                        }
+                                        var month3 = moment(response.data.startMonth).format('DD MMMM YYYY')
+                                        for (var z = 1; z <= root.brand.paymentType; z++) {
+
+                                            root.selectedMonth.push({
+                                                selectedMonth: month3
+                                            });
+                                            month3 = moment(month3).add(1, 'months').format('DD MMMM YYYY')
+
+                                        }
+
                                         root.randerDate++;
 
                                     }
