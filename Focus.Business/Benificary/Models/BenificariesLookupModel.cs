@@ -28,6 +28,7 @@ namespace Focus.Business.Benificary.Models
         public string Note { get; set; }
         public bool IsActive { get; set; }
         public bool IsRegister { get; set; }
+        public bool IsCustomize { get; set; }
         public Guid? AuthorizedPersonId { get; set; }
         public Guid? ApprovalPersonId { get; set; }
         public Guid? PaymentTypeId { get; set; }
@@ -39,6 +40,8 @@ namespace Focus.Business.Benificary.Models
         public List<BenificaryAuthorizationLookupModel> BenificaryAuthorization { get; set; }
         public List<PaymentLookupModel> PaymentLists { get; set; }
         public DateTime? StartDate { get; set; }
+        public DateTime? CurrentPaymentMonth { get; set; }
+
         public DateTime? EndDate { get; set; }
         public DateTime? StartMonth { get; set; }
         public Guid? ApprovedPaymentId { get; set; }

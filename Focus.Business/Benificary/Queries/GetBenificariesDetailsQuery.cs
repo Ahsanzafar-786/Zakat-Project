@@ -86,6 +86,7 @@ namespace Focus.Business.Benificary.Queries
                             PaymentTypeName = x.PaymentTypes.Name,
                             ApprovalPersonName = x.ApprovalPersons.Name,
                             Reason = x.Reason,
+                            CurrentPaymentMonth = x.CurrentPaymentMonth,
                             CharityTransactions = charity,
                             StartMonthAndYear = x.StartDate.Value.Month.ToString() + " - " + x.StartDate.Value.Year.ToString(),
                             BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
@@ -105,6 +106,27 @@ namespace Focus.Business.Benificary.Queries
 
                         if (query == null)
                             throw new NotFoundException("Benificary Not Found", "");
+                        if (query != null)
+                        {
+                            if (query.CurrentPaymentMonth != null && query.EndDate != null)
+                            {
+                                if (query.DurationType == "Customize")
+                                {
+                                    if (query.EndDate.Value.Date.Year == query.CurrentPaymentMonth.Value.Date.Year)
+                                    {
+                                        if (query.EndDate.Value.Date.Month <= query.CurrentPaymentMonth.Value.Date.Month)
+                                        {
+                                            query.IsCustomize = true;
+
+
+                                        }
+
+
+
+                                    }
+                                }
+                            }
+                        }
 
 
                         return query;
