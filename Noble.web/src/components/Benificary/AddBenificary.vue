@@ -199,7 +199,7 @@
                             {{ $t('AddBenificary.Type') }}:
                         </label>
                         <multiselect v-model="brand.durationType" v-on:input="GetDateMonth"
-                            :options="['Customize','Indefinite ']" :show-labels="false"
+                            :options="['Customize','Indefinite']" :show-labels="false"
                             :placeholder="$t('AddBenificary.SelectType')">
                         </multiselect>
                     </div>

@@ -96,7 +96,7 @@ namespace Focus.Business.Payments.Queries
                                     AuthorizePersonId = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizationPersonId : null,
                                     AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
                                     Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
-                                }).OrderByDescending(x => x.PaymentCode).AsQueryable();
+                                }).OrderByDescending(x => x.Code).AsQueryable();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
                     //{

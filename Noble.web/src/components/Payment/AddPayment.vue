@@ -224,15 +224,16 @@
 
                 <div class="col-lg-12 invoice-btn-fixed-bottom">
                     <div class="button-items">
-                        <button type="button" class="btn btn-outline-primary  mr-2"   v-on:click="SavePayment(true) && PrintRdlc(addPayment.id)">
-                    {{ $t('SaveasPrint') }} 
-                </button>
                         <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User'">
                             <i class="far fa-save"></i>
                             <span>
                                 {{ $t('Save') }}
                             </span>
-                        </button>   
+                        </button>
+                        <button type="button" class="btn btn-outline-primary  mr-2"  v-bind:disabled="$v.addPayment.$invalid" v-on:click="SavePayment(true) && PrintRdlc(addPayment.id)">
+                          {{ $t('SaveasPrint') }} 
+                         </button>
+                           
                         <!-- <button type="button" class="btn btn-outline-primary mr-2"   v-on:click="PrintRdlc(addPayment.id) && GotoPage('/payment')"
                     v-bind:disabled="$v.addPayment.$invalid" >
                     {{ $t('SaveasPrint') }} </button> -->
@@ -317,20 +318,27 @@
                     </div>
                 </div>
             </div>
+            <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
     </div>
 </template>
 
 <script>
 import moment from 'moment';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import {
     required
 } from "vuelidate/lib/validators"
 
 export default {
+    components:{
+        Loading,
+    },
 
     data: function () {
         return {
+            loading: false,
             show1: false,
             rollName: '',
             rendar: 0,
