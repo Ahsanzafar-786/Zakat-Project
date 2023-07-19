@@ -944,6 +944,26 @@ export default {
                                         root.addPayment.month = response.data.startMonth;
                                         root.randerDate++;
 
+                                    } else {
+                                        root.selectedMonth = [];
+                                        // for (var i = response.data.firstMonth; i <= response.data.endMonth; i++) {
+                                        //     let month;
+                                        //     month = moment(response.data.startMonth).format('DD MMMM YYYY')
+
+                                        //     root.selectedMonth.push({
+                                        //         selectedMonth: month
+                                        //     });
+
+                                        //     month.
+
+                                        // }
+
+                                        root.selectedMonth.push({
+                                            selectedMonth: moment(response.data.startMonth).format('DD MMMM YYYY')
+                                        });
+                                        root.addPayment.month = response.data.startMonth;
+                                        root.randerDate++;
+
                                     }
 
                                 }
@@ -955,7 +975,6 @@ export default {
                                     if (response.data.endMonth != null && response.data.endMonth != undefined && response.data.startDate != null && response.data.startDate != undefined)
 
                                     {
-                                       
 
                                         if (response.data.isCustomize) {
                                             root.$swal({
@@ -967,7 +986,7 @@ export default {
                                                 timer: 3000,
                                                 timerProgressBar: true,
                                             });
-                                            root.onlyOneTime=true;
+                                            root.onlyOneTime = true;
                                             if (root.onlyOneTime) {
                                                 root.onlyOneTimeDes = 'Customize';
                                             }
@@ -984,19 +1003,34 @@ export default {
                                             root.randerDate++;
                                         }
                                     } else {
-                                        root.$swal({
-                                            title: 'Error',
-                                            text: 'Not Select The  Month Start Date and End Date',
-                                            type: 'error',
-                                            icon: 'error',
-                                            showConfirmButton: false,
-                                            timer: 3000,
-                                            timerProgressBar: true,
-                                        });
+                                        if (root.brand.paymentType == 0) {
+                                            root.$swal({
+                                                title: 'Error',
+                                                text: 'You have also add this Payment Before',
+                                                type: 'error',
+                                                icon: 'error',
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                timerProgressBar: true,
+                                            });
+
+                                        } else {
+                                            root.$swal({
+                                                title: 'Error',
+                                                text: 'Not Select The  Month Start Date and End Date',
+                                                type: 'error',
+                                                icon: 'error',
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                timerProgressBar: true,
+                                            });
+
+                                        }
+
                                     }
 
                                 } else {
-                                    if ( response.data.startMonth != null && response.data.startMonth != undefined) {
+                                    if (response.data.startMonth != null && response.data.startMonth != undefined) {
                                         root.selectedMonth = [];
                                         root.selectedMonth.push({
                                             selectedMonth: moment(response.data.startMonth).format('DD MMMM YYYY')
