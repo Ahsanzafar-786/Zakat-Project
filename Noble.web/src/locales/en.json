@@ -412,16 +412,17 @@
     "ApprovalType":"Approval Type",
     "DailyPayments":"Daily Payments",
     "AddDailyPayment":"Add Daily Payment",
-    "Note":"Note"
+    "Note":"Note",
+    "AuthorizedPerson":"Authorized Person"
   },
 
   "AddPayment":{
     "AddPayment":"Add Payment",
-    "Benificary":"Beneficiary",
+    "Benificary":"Beneficiary Name",
     "BenificaryDetails":"Beneficiary Details",
     "Amount":"Amount",
     "Cashier":"Cashier",
-    "Month":"Month",
+    "Month":"Month(s)",
     "Code":"Payment Code",
     "Year":"Year",
     "Period":"Period",

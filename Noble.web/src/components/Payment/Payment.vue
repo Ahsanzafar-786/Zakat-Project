@@ -186,7 +186,7 @@
                                         {{ $t('Benificary.NationalID') }}
                                     </th>
                                     <th class="text-start">
-                                        {{$t('AddBenificary.AuthorizedPerson') }}
+                                        {{$t('Payment.AuthorizedPerson') }}
                                     </th>
                                     <th class="text-start">
                                         {{ $t('AddBenificary.ApprovedBy') }}

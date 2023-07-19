@@ -91,7 +91,7 @@
                             <div class="col-sm-7">
                                 <datepicker :type="'month'" v-model="addPayment.month" v-bind:key="randerDate"
                                     v-on:input="MonthSelection" />
-                                <div class="row mt-2">
+                                <!-- <div class="row mt-2">
                                     <div style="text-align: right !important;" v-if="selectedMonth.length > 0">
                                         <button class="btn  btn-danger btn-round btn-sm btn-icon" @click="RemoveAll()"
                                             style="font-size: .4rem;  padding: 0.2rem 0.35rem;">
@@ -110,7 +110,7 @@
                                         </span>
                                     </div>
 
-                                </div>
+                                </div> -->
 
                             </div>
                         </div>
@@ -224,6 +224,9 @@
 
                 <div class="col-lg-12 invoice-btn-fixed-bottom">
                     <div class="button-items">
+                        <button type="button" class="btn btn-outline-primary  mr-2"   v-on:click="SavePayment(true) && PrintRdlc(addPayment.id)">
+                    {{ $t('SaveasPrint') }} 
+                </button>
                         <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User'">
                             <i class="far fa-save"></i>
                             <span>
@@ -238,7 +241,7 @@
                         </button>
                     </div>
                 </div>
-                <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"  @IsSave="IsSaveRpt" />
+                <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="IsSaveRpt"  @IsSave="IsSaveRpt" />
                 
                 <div class="offcanvas offcanvas-end p-0" tabindex="-1" id="offcanvasRight"
                     aria-labelledby="offcanvasRightLabel" style="width: 500px !important;">
@@ -491,6 +494,10 @@ export default {
     methods: {
         IsSaveRpt: function () {
             this.show1 = !this.show1;
+            this.$router.push({
+                path: '/payment',
+               
+            })
         },
         GetMonth: function (link) {
             if (link != undefined) {
@@ -499,22 +506,6 @@ export default {
             } else {
                 return '';
             }
-        },
-        PrintRdlc: function (val) {
-            var companyId = '';
-            if (this.$session.exists()) {
-                companyId = localStorage.getItem('CompanyID');
-            }
-            debugger;
-
-            // if (val) {
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale
-                this.changereportt++;
-                this.show1 = !this.show1;
-            // } else {
-            //     this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId
-            //     this.changereport++;
-            // }
         },
         MonthSelection: function () {
 
@@ -1071,7 +1062,27 @@ export default {
                     });
 
         },
-        SavePayment: function () {
+        close: function () {
+            this.$router.push({
+                                    path: '/payment',
+                                
+                                })
+        },
+        PrintRdlc: function (val) {
+            var companyId = '';
+            if (this.$session.exists()) {
+                companyId = localStorage.getItem('CompanyID');
+            }
+            debugger;
+
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' + val + '&pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&CompanyID=' + companyId + '&formName=Payment'
+
+                this.changereportt++;
+                this.show1 = !this.show1;
+               
+           
+        },
+        SavePayment: function (isPrint) {
 
             var root = this;
             this.loading = true;
@@ -1100,8 +1111,20 @@ export default {
                                 timer: 3000,
                                 timerProgressBar: true,
                             });
+                            if(isPrint==true)
+                            {
+                                root.PrintRdlc(response.data.paymentId);
 
-                            root.GotoPage('/payment');
+                            }
+                            else
+                            {
+                                root.$router.push({
+                                    path: '/payment',
+                                
+                                })
+                            }
+
+                         //   root.GotoPage('/payment');
                         } else {
 
                             root.$swal({
@@ -1113,7 +1136,7 @@ export default {
                                 timer: 3000,
                                 timerProgressBar: true,
                             });
-                            root.GotoPage('/payment');
+                          //  root.GotoPage('/payment');
 
                         }
                     } else {

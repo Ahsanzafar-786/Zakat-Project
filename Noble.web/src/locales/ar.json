@@ -421,7 +421,8 @@
     "ApprovalType":"نوع الموافقة",
     "DailyPayments":"المدفوعات اليومية",
     "AddDailyPayment":"أضف الدفع اليومي",
-    "Note":"ملاحظة"
+    "Note":"ملاحظة",
+    "AuthorizedPerson":"اسم الوكيل"
   },
 
   "AddPayment":{

@@ -166,8 +166,7 @@
 
                         </div>
                         <div class="col-sm-2 mt-3">
-                            <a v-on:click="SearchFilter" href="javascript:void(0);"
-                                class="btn btn-sm btn-outline-primary mx-1">
+                            <a v-on:click="SearchFilter" href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1">
                                 {{ $t('Benificary.SearchFilter') }}
                             </a>
                             <a @click="ClearFilter" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">

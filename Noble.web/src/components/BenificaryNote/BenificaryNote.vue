@@ -117,15 +117,21 @@
                                     <td v-else>
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td v-if="brand.benificaryCode != null">
                                         {{ brand.benificaryCode }}
                                     </td>
+                                    <td v-else>
+                                        ---
+                                    </td>
 
-                                    <td class="text-start">
+                                    <td v-if="brand.benificaryName != null">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)">{{
                                                 brand.benificaryName }}</a>
                                         </strong>
+                                    </td>
+                                    <td v-else>
+                                        ---
                                     </td>
                                     <td class="text-start">
                                         <strong>
@@ -134,16 +140,25 @@
                                         </strong>
                                     </td>
                                     
-                                    <td class="text-center">
+                                    <td v-if="brand.nationalId != null">
                                         {{ brand.nationalId }}
                                     </td>
-
-                                    <td class="text-center">
-                                        {{ brand.nationality }}
+                                    <td v-else>
+                                        ---
                                     </td>
 
-                                    <td class="text-center">
+                                    <td v-if="brand.nationality != null">
+                                        {{ brand.nationality }}
+                                    </td>
+                                    <td v-else>
+                                        ---
+                                    </td>
+
+                                    <td v-if="brand.nationality != null">
                                         {{ brand.contactNo }}
+                                    </td>
+                                    <td v-else>
+                                        ---
                                     </td>
                                     <td class="text-center">
                                         {{ brand.date }}
