@@ -693,11 +693,6 @@ export default {
 
                     if (response.data.isSuccess == true) {
 
-                       
-                  
-
-
-
                          {
                             root.$swal({
                                 title: 'Save',

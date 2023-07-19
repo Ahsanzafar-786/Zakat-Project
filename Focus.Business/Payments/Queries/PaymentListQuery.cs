@@ -79,6 +79,7 @@ namespace Focus.Business.Payments.Queries
                                     BenificaryName = x.Beneficiaries.Name,
                                     BenificaryCode = x.Beneficiaries.BeneficiaryId,
                                     BenificaryNameAr = x.Beneficiaries.NameAr,
+                                    Note =x.Note,
                                     Code = x.Code,
                                     IsVoid = x.IsVoid,
                                     AllowVoid = x.AllowVoid,

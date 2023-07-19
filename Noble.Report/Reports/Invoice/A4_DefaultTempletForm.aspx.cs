@@ -31,7 +31,7 @@ namespace Noble.Report.Reports.Invoice
                     var companyInfo = GetCompanyInfo.GetCompanyInfodetials(CompanyId, token, serverAddress);
                     var formName = Request.QueryString["formName"];
                     var pageNumber = Request.QueryString["pageNumber"];
-                    var id = Request.QueryString["id"];
+                    var id = Request.QueryString["id"] == "00000000-0000-0000-0000-000000000000" || Request.QueryString["id"] == null?"": Request.QueryString["id"];
                     var searchTerm = Request.QueryString["searchTerm"];
                     var Print = Request.QueryString["Print"];
                     if (formName == "Payment")

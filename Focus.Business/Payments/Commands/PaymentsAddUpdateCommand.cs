@@ -18,6 +18,7 @@ namespace Focus.Business.Payments.Commands
     public class PaymentsAddUpdateCommand : IRequest<Message>
     {
         public PaymentLookupModel Payment { get; set; }
+        public Guid? PaymentId { get; set; }
         public class Handler : IRequestHandler<PaymentsAddUpdateCommand, Message>
         {
             public readonly IApplicationDbContext Context;
@@ -65,6 +66,8 @@ namespace Focus.Business.Payments.Commands
 
                             Context.Payments.Add(payment);
 
+                            request.PaymentId= payment.Id;
+
                             var charityTransaction = new CharityTransaction
                             {
                                 DoucmentId = payment.Id,
@@ -96,6 +99,7 @@ namespace Focus.Business.Payments.Commands
                             };
 
                             Context.Payments.Add(payment);
+                            request.PaymentId = payment.Id;
 
                             var selectedMonth = new List<SelectedMonth>();
                             foreach (var item in request.Payment.SelectedMonth)
@@ -135,6 +139,7 @@ namespace Focus.Business.Payments.Commands
                         {
                             Id = Guid.Empty,
                             IsSuccess = true,
+                            PaymentId = request.PaymentId==null?Guid.Empty: request.PaymentId.Value,
                             IsAddUpdate = "Data has been Added successfully"
                         };
                     }
