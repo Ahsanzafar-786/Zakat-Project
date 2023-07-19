@@ -54,7 +54,7 @@ namespace Focus.Business.Payments.Commands
                             {
                                 BenificayId = request.Payment.BenificayId,
                                 Amount = request.Payment.Amount,
-                                Month = DateTime.Now,
+                                Month = request.Payment.Month,
                                 Code = request.Payment.Code,
                                 Note = request.Payment.Note,
                                 PaymentCode = request.Payment.PaymentCode,
@@ -65,6 +65,26 @@ namespace Focus.Business.Payments.Commands
                             };
 
                             Context.Payments.Add(payment);
+
+                            var selectedMonth = new List<SelectedMonth>();
+                            
+                                selectedMonth.Add(new SelectedMonth
+                                {
+                                    PaymentId = payment.Id,
+                                    SelectMonth = request.Payment.Month
+                                });
+                            
+
+                            await Context.SelectedMonths.AddRangeAsync(selectedMonth);
+
+                            var beneficary = Context.Beneficiaries.AsNoTracking()
+                                .FirstOrDefault(x => x.Id == request.Payment.BenificayId);
+                            if (beneficary != null)
+                            {
+                                beneficary.CurrentPaymentMonth = request.Payment.Month;
+                                Context.Beneficiaries.Update(beneficary);
+
+                            }
 
                             request.PaymentId= payment.Id;
 
@@ -112,6 +132,31 @@ namespace Focus.Business.Payments.Commands
                             }
 
                             await Context.SelectedMonths.AddRangeAsync(selectedMonth);
+                            if (request.Payment.SelectedMonth.Count > 0)
+                            {
+                                var beneficary = Context.Beneficiaries.AsNoTracking()
+                                    .FirstOrDefault(x => x.Id == request.Payment.BenificayId);
+                                if (beneficary != null)
+                                {
+                                    beneficary.CurrentPaymentMonth =
+                                        request.Payment.SelectedMonth.LastOrDefault()?.SelectedMonth;
+
+                                     Context.Beneficiaries.Update(beneficary);
+
+                                }
+                            }
+                            else
+                            {
+                                var beneficary = Context.Beneficiaries.AsNoTracking()
+                                    .FirstOrDefault(x => x.Id == request.Payment.BenificayId);
+                                if (beneficary != null)
+                                {
+                                    beneficary.CurrentPaymentMonth = request.Payment.Month;
+                                    Context.Beneficiaries.Update(beneficary);
+
+                                }
+
+                            }
 
                             foreach (var item in request.Payment.SelectedMonth)
                             {

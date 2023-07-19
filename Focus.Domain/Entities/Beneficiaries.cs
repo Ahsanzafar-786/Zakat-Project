@@ -39,6 +39,7 @@ namespace Focus.Domain.Entities
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime? StartMonth { get; set; }
+        public DateTime? CurrentPaymentMonth { get; set; }
         public Guid? ApprovedPaymentId { get; set; }
         public int AdvancePayment { get; set; }
         public string DurationType { get; set; }
