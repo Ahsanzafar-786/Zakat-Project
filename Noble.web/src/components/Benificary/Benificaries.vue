@@ -49,9 +49,10 @@
                         </div>
                         <div class="col-3 form-group">
                             <label>{{ $t('Benificary.Amount') }}</label>
-                            <input v-model="amount" type="text" class="form-control"
+                            <!-- <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByAmount')" aria-label="Example text with button addon"
-                                aria-describedby="button-addon1">
+                                aria-describedby="button-addon1"> -->
+                                <decimaltofix type="number" v-model="amount" :placeholder="$t('Benificary.SearchByAmount')"  > </decimaltofix>
                         </div>
                         <div class="col-3 form-group">
                             <label>Payment Type</label>
@@ -258,13 +259,15 @@
                                    
 
                                     <td class="text-center">
-                                        {{ brand.amountPerMonth }}
+                                        {{ parseFloat(brand.amountPerMonth).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}
                                     </td>
                                     <td class="text-center">
                                        {{ $i18n.locale== 'en' ? brand.paymentTypeName:brand.paymentTypeNameAr }}
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.recurringAmount }}
+                                        
+                                        {{ parseFloat(brand.recurringAmount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}
+                        
                                     </td>
                                 
                                     <td class="text-start">
