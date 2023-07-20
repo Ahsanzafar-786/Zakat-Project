@@ -43,7 +43,7 @@
                             </label>
                         </div>
                         <div class="col-sm-7">
-                            <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId"  v-on:input="EditBenificary(addPayment.benificayId, true)" />
+                            <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" v-on:input="EditBenificary(addPayment.benificayId, true)" />
                             <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails')}}</a>
                             <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">{{ $t('AddPayment.BenificaryDetails')}}</a>
                         </div>
@@ -645,50 +645,10 @@ export default {
                 }
             }
 
-            const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
-            if (record != null) {
-                if (record.active == true) {
-                    debugger;
-                    var str = moment(this.addPayment.month).format('DD MMMM YYYY');
-                    console.log(this.selectedMonth);
-                    var res = this.selectedMonth.some(item => item.selectedMonth === str);
-                    console.log(this.addPayment.month);
-
-                    if (res) {
-                        root.$swal({
-                            title: 'Error',
-                            text: 'You have no Permission to Select Same Month',
-                            type: 'error',
-                            icon: 'error',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                        });
-                    } else {
-                        this.selectedMonth.push({
-                            selectedMonth: this.addPayment.month
-                        });
-                    }
-
-                    if (this.selectedMonth.length > this.brand.advancePayment) {
-                        root.$swal({
-                            title: 'Error',
-                            text: 'You can Only Take' + this.brand.advancePayment + ' Month Payment in Advance',
-                            type: 'error',
-                            icon: 'error',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                        });
-                        return;
-                    }
-
-                } else {
-                    this.selectedMonth.push({
-                        selectedMonth: this.addPayment.month
-                    });
-
-                }
+            // const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
+            this.selectedMonth.push({
+                    selectedMonth: this.addPayment.month
+                });
                 if (root.selectedMonth.length != 0) {
                     this.amountValue = root.addPayment.amount * root.selectedMonth.length;
 
@@ -697,13 +657,18 @@ export default {
 
                 }
 
-            }
-
         },
         RemoveEffect: function (value) {
             const index = this.selectedMonth.indexOf(value);
             if (index !== -1) {
                 this.selectedMonth.splice(index, 1);
+            }
+            if (this.selectedMonth.length != 0) {
+                this.amountValue = this.addPayment.amount * this.selectedMonth.length;
+
+            } else {
+                this.addPayment.amount = this.addPayment.amountPerMonth;
+
             }
 
         },
@@ -999,12 +964,11 @@ export default {
                             }
 
                             if (root.selectedMonth.length != 0) {
-                            
+
                                 root.amountValue = root.addPayment.amount * root.selectedMonth.length;
 
                             } else {
                                 root.amountValue = root.addPayment.amountPerMonth;
-
 
                             }
 
