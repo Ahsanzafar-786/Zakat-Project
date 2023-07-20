@@ -502,26 +502,27 @@ export default {
             }
         },
         MonthSelection: function () {
+            debugger;
 
             var root = this;
 
             debugger;
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
-                // const record1 = this.selectedMonth.some(x => x.selectedMonth == (moment(this.addPayment.month).format('MMMM')));
-                // if(record1)
-                // {
-                //     root.$swal({
-                //                     title: 'Error',
-                //                     text: 'You cannot Add Duplicate Month',
-                //                     type: 'error',
-                //                     icon: 'error',
-                //                     showConfirmButton: false,
-                //                     timer: 3000,
-                //                     timerProgressBar: true,
-                //                 });
-                //                 return;
+                const record1 = this.selectedMonth.some(x => x.selectedMonth == (moment(this.addPayment.month).format('DD MMMM YYYY')));
+                if(record1)
+                {
+                    root.$swal({
+                                    title: 'Error',
+                                    text: 'You cannot Add Duplicate Month',
+                                    type: 'error',
+                                    icon: 'error',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                return;
 
-                // }
+                }
                 if (this.brand.advancePayment == 0) {
                     if (this.brand.paymentType != null) {
                         if (this.brand.paymentType == 1) {
@@ -954,13 +955,34 @@ export default {
                                     }
 
                                 } else {
-                                    if (root.brand.paymentType == 1 && response.data.startMonth != null && response.data.startMonth != undefined) {
+                                    if ( response.data.startMonth != null && response.data.startMonth != undefined) {
                                         root.selectedMonth = [];
-                                        root.selectedMonth.push({
+                                        if (root.brand.paymentType == 1) {
+                                            root.selectedMonth.push({
                                             selectedMonth: moment(response.data.startMonth).format('DD MMMM YYYY')
                                         });
                                         root.addPayment.month = response.data.startMonth;
                                         root.randerDate++;
+
+                                        }
+                                        else
+                                        {
+                                            root.selectedMonth = [];
+                                            var month14 = moment(response.data.startMonth).format('DD MMMM YYYY')
+                                            for (var o = 1; o <= root.brand.paymentType; o++) {
+
+                                                root.selectedMonth.push({
+                                                    selectedMonth: month14
+                                                });
+                                                month14 = moment(month14).add(1, 'months').format('DD MMMM YYYY')
+
+                                            }
+
+                                            root.randerDate++;
+
+                                        }
+
+                                      
 
                                     } else {
                                         root.selectedMonth = [];
