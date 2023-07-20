@@ -152,10 +152,11 @@
                         <label class="text  font-weight-bolder" v-else>
                             {{ $t('AddBenificary.Amount') }}:
                         </label>
-                        <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
+                        <decimaltofix v-model="$v.brand.amountPerMonth.$model" > </decimaltofix>
+                        <!-- <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
                             type="text" />
                         <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-else
-                            type="text" v-on:change="FloatValue()"/>
+                            type="text" v-on:change="FloatValue()"/> -->
                             <span v-if="$v.brand.amountPerMonth.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.amountPerMonth.decimal ">Amount should be in number</span>
                         </span>
@@ -170,10 +171,11 @@
                         <label class="text  font-weight-bolder" v-else>
                             {{ $t('AddBenificary.Amount') }}:<span class="text-danger"> *</span>
                         </label>
-                        <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
+                        <decimaltofix v-model="$v.brand.amountPerMonth.$model" > </decimaltofix>
+                        <!-- <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
                             type="text" />
                         <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-else
-                            type="text" v-on:change="FloatValue()"/>
+                            type="text" v-on:change="FloatValue()"/> -->
                             <span v-if="$v.brand.amountPerMonth.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.amountPerMonth.decimal ">Amount should be in number</span>
                         </span>

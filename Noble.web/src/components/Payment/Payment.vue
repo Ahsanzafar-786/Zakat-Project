@@ -194,7 +194,7 @@
                                     <th class="text-start">
                                         {{ $t('AddBenificary.PaymentType') }}
                                     </th>
-                                    <th class="text-start">
+                                    <th class="text-center">
                                         {{ $t('Payment.LastPayment') }}
                                     </th>
                                     <th class="text-center">
@@ -252,31 +252,31 @@
                                     <td class="text-start" v-else>{{
                                         brand.benificaryName == '' ? brand.benificaryNameAr : brand.benificaryName }}
                                     </td>
-                                    <td v-if="brand.ugamaNo != null">
+                                    <td class="text-center" v-if="brand.ugamaNo != null">
                                         {{ brand.ugamaNo }}
                                     </td>
-                                    <td v-else>
+                                    <td class="text-center" v-else>
                                         ---
                                     </td>
-                                    <td v-if=" brand.authorizePersonName != null">
+                                    <td class="text-center" v-if="brand.authorizePersonName != null">
                                         {{ brand.authorizePersonName }}
                                     </td>
-                                    <td v-else>
+                                    <td class="text-center" v-else>
                                         ---
                                     </td>
-                                    <td v-if=" brand.approvalPersonName != null">
+                                    <td class="text-center" v-if="brand.approvalPersonName != null">
                                         {{ brand.approvalPersonName }}
                                     </td>
-                                    <td v-else>
+                                    <td class="text-center" v-else>
                                         ---
                                     </td>
-                                    <td v-if=" brand.paymentType != null">
+                                    <td class="text-center" v-if="brand.paymentType != null">
                                         {{ brand.paymentType }}
                                     </td>
                                     <td v-else>
                                         ---
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }}
                                     </td>
                                     <td class="text-center">{{ brand.note }}</td>

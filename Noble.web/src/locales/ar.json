@@ -28,7 +28,7 @@
     "BenificaryList" : "قائمة المستفيدين",
     "Name" : "أسم المستـفـيد",
     "PayementIntervalMonths" : "الأشهر الفاصلة بين السداد",
-    "AmountPerMonth" : "المبلغ الشهري  ",
+    "AmountPerMonth" : "المبلغ",
     "UgamaNo": "رقم الإقامة",
     "ContactNo" : "رقم الاتصال",
     "AuthorizePersonName" : " اسم الوكيل",
@@ -44,6 +44,7 @@
     "SearchByCode":"البحث عن طريق كود مفيد",
     "SearchFilter":" الـبحث ",
     "ClearFilter":"إلـغـاء",
+    "SearchByID":"البحث بالمعرف",
     "ID":" الـكـود",
     "ApprovalPerson":"شخص الموافقة",
     "BeneficaryReport":"الـتـقـارير المستفيد",
@@ -267,7 +268,7 @@
     "CharityFundsReports":"تقارير الصناديق الخيرية",
     "CharityFundsResource":"موارد الصناديق الخيرية",
     "SearchByCharityResourceNameAndAmount":"البحث عن طريق اسم المورد الخيرية والمبلغ",
-    "TransactionType":"Transaction Type"
+    "TransactionType":"نوع المعاملة"
   },
   "AddFunds":{
     "AddFunds" : "إضافة الأموال",
@@ -427,7 +428,7 @@
 
   "AddPayment":{
     "AddPayment":"إضافة الدفع",
-    "Benificary":"المستفيد",
+    "Benificary":"أسم المستـفـيد",
     "BenificaryDetails":"تفاصيل مفيدة",
     "Amount":"المبلغ",
     "Cashier":"أمين الصندوق",

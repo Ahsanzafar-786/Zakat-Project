@@ -44,9 +44,8 @@
                         </div>
                         <div class="col-sm-7">
                             <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander" v-on:input="EditBenificary(addPayment.benificayId, true)" />
-                            <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails')
-                                    }}</a>
-                            <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Benificary Details</a>
+                            <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails')}}</a>
+                            <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">{{ $t('AddPayment.BenificaryDetails')}}</a>
                         </div>
                     </div>
                 </div>
@@ -59,7 +58,8 @@
                             </label>
                         </div>
                         <div class="col-sm-7">
-                            <input type="number" class="form-control" v-model="addPayment.amount" readonly />
+                            <!-- <input type="number" class="form-control" v-model="addPayment.amount" /> -->
+                            <decimaltofix type="number" v-model="addPayment.amount" > </decimaltofix>
                         </div>
                     </div>
                 </div>
@@ -152,18 +152,19 @@
                 
             </div>
 
-            <div class="col-lg-12 invoice-btn-fixed-bottom">
-                <div class="button-items">
-                    <button type="button" class="btn btn-outline-primary  mr-2" v-on:click="SavePayment(true) && PrintRdlc(addPayment.id)" v-if="!onlyOneTime">
-                        {{ $t('SaveasPrint') }}
-                    </button>
-                    <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User' && !onlyOneTime">
-                        <i class="far fa-save"></i>
-                        <span>
-                            {{ $t('Save') }}
-                        </span>
-                    </button>
-                    <!-- <button type="button" class="btn btn-outline-primary mr-2"   v-on:click="PrintRdlc(addPayment.id) && GotoPage('/payment')"
+                <div class="col-lg-12 invoice-btn-fixed-bottom">
+                    <div class="button-items">
+                        <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User' && onlyOneTime">
+                            <i class="far fa-save"></i>
+                            <span>
+                                {{ $t('Save') }}
+                            </span>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary  mr-2"  v-bind:disabled="$v.addPayment.$invalid" v-if="!onlyOneTime" v-on:click="SavePayment(true) && PrintRdlc(addPayment.id)">
+                          {{ $t('SaveasPrint') }} 
+                         </button>
+                           
+                        <!-- <button type="button" class="btn btn-outline-primary mr-2"   v-on:click="PrintRdlc(addPayment.id) && GotoPage('/payment')"
                     v-bind:disabled="$v.addPayment.$invalid" >
                     {{ $t('SaveasPrint') }} </button> -->
                     <button class="btn btn-danger mr-2" v-on:click="GotoPage('/payment')">
@@ -241,24 +242,31 @@
                             <input class="form-control" v-model="brand.startMonthAndYear" readonly />
                         </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
+            <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
     </div>
-</div>
 </template>
 
 <script>
 import moment from 'moment';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import {
     required
 } from "vuelidate/lib/validators"
 
 export default {
+    components:{
+        Loading,
+    },
 
     data: function () {
         return {
+            loading: false,
             show1: false,
             onlyOneTime: false,
             onlyOneTimeDes: '',

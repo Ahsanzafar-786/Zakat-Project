@@ -49,9 +49,10 @@
                         </div>
                         <div class="col-3 form-group">
                             <label>{{ $t('Benificary.Amount') }}</label>
-                            <input v-model="amount" type="text" class="form-control"
+                            <!-- <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByAmount')" aria-label="Example text with button addon"
-                                aria-describedby="button-addon1">
+                                aria-describedby="button-addon1"> -->
+                                <decimaltofix type="number" v-model="amount" :placeholder="$t('Benificary.SearchByAmount')"  > </decimaltofix>
                         </div>
                         <div class="col-3 form-group">
                             <label>Payment Type</label>
@@ -258,17 +259,17 @@
                                    
 
                                     <td class="text-center">
-                                        {{ brand.amountPerMonth }}
+                                        {{ parseFloat(brand.amountPerMonth).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}
                                     </td>
                                     <td class="text-center">
                                        {{ $i18n.locale== 'en' ? brand.paymentTypeName:brand.paymentTypeNameAr }}
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.recurringAmount }}
+                                        
+                                        {{ parseFloat(brand.recurringAmount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}
+                        
                                     </td>
-
-
-                                    
+                                
                                     <td class="text-start">
                                         <span v-for="item in brand.benificaryAuthorization" :key="item.id" class="mx-2">
                                             {{ item.authorizationPersonName == '' ? item.authorizationPersonNameAr :
@@ -276,7 +277,14 @@
                                         </span>
                                     </td>
                                     <td class="text-center">{{ GetDate(brand.startMonth) }}</td>
-                                    <td class="text-center">{{brand.approvalPersonName}}</td>
+
+                                    <td class="text-center" v-if="brand.approvalPersonName != null">
+                                        {{brand.approvalPersonName}}
+                                    </td>
+                                    <td class="text-center" v-else>
+                                        ---
+                                    </td>
+
                                     <td class="text-center">
 
                                         <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">
@@ -298,7 +306,12 @@
                                         <span class="badge badge-boxed  badge-outline-success"
                                             v-if="brand.approvalStatus == '3'">{{ $t('Benificary.Approved') }}</span>
                                     </td>
-                                    <td class="text-center">{{brand.note}}</td>
+                                    <td v-if="brand.note != null">
+                                        {{brand.note}}
+                                    </td>
+                                    <td  v-else>
+                                        ---
+                                    </td>
 
                                     
                                     <td class="text-center">

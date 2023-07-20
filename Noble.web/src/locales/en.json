@@ -35,6 +35,7 @@
     "Status":"Status",
     "Register": "Register",
     "UnRegister": "Un-Register",
+    "SearchByID":"Search By ID",
     "BenificaryStatus": "Beneficiary Status",
     "Note": "Note",
     "Search":"Search By Beneficiary Name",
@@ -382,7 +383,7 @@
   },
 
   "Payment":{
-    "Payment":"Benificary Payement",
+    "Payment":"Beneficiary Payment",
     "BenificaryPayment":"Beneficiary Payment",
     "BenificaryReports":"Beneficiary Reports",
     "AddPayment":"Add Payment",
