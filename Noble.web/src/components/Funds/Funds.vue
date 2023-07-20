@@ -83,7 +83,7 @@
                                         </strong>
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.amount }}
+                                        {{ parseFloat(brand.amount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}
                                     </td>
                                     <td class="text-center">
                                         {{ brand.typeOfTransaction }}
