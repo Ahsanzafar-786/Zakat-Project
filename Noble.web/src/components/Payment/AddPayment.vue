@@ -509,18 +509,17 @@ export default {
             debugger;
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
                 const record1 = this.selectedMonth.some(x => x.selectedMonth == (moment(this.addPayment.month).format('DD MMMM YYYY')));
-                if(record1)
-                {
+                if (record1) {
                     root.$swal({
-                                    title: 'Error',
-                                    text: 'You cannot Add Duplicate Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
+                        title: 'Error',
+                        text: 'You cannot Add Duplicate Month',
+                        type: 'error',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                    });
+                    return;
 
                 }
                 if (this.brand.advancePayment == 0) {
@@ -938,6 +937,16 @@ export default {
 
                                         } else {
                                             root.selectedMonth = [];
+
+                                            // var month12 = moment(response.data.currentPaymentMonth).add(1, 'months').format('DD MMMM YYYY')
+                                            // root.selectedMonth.push({
+                                            //     selectedMonth: month12
+                                            // });
+                                            // root.addPayment.month = moment(response.data.currentPaymentMonth).add(1, 'months').format('DD MMMM YYYY');
+
+                                            // root.randerDate++
+
+                                            //for Multiple
                                             var month12 = moment(response.data.currentPaymentMonth).add(1, 'months').format('DD MMMM YYYY')
                                             for (var j = 1; j <= root.brand.paymentType; j++) {
 
@@ -955,19 +964,26 @@ export default {
                                     }
 
                                 } else {
-                                    if ( response.data.startMonth != null && response.data.startMonth != undefined) {
+                                    if (response.data.startMonth != null && response.data.startMonth != undefined) {
                                         root.selectedMonth = [];
                                         if (root.brand.paymentType == 1) {
                                             root.selectedMonth.push({
-                                            selectedMonth: moment(response.data.startMonth).format('DD MMMM YYYY')
-                                        });
-                                        root.addPayment.month = response.data.startMonth;
-                                        root.randerDate++;
+                                                selectedMonth: moment(response.data.startMonth).format('DD MMMM YYYY')
+                                            });
+                                            root.addPayment.month = response.data.startMonth;
+                                            root.randerDate++;
 
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             root.selectedMonth = [];
+
+                                            // var month14 = moment(response.data.startMonth).format('DD MMMM YYYY')
+                                            // root.selectedMonth.push({
+                                            //     selectedMonth: month14
+                                            // });
+                                            // root.addPayment.month = response.data.startMonth;
+
+                                            // root.randerDate++
+
                                             var month14 = moment(response.data.startMonth).format('DD MMMM YYYY')
                                             for (var o = 1; o <= root.brand.paymentType; o++) {
 
@@ -982,11 +998,9 @@ export default {
 
                                         }
 
-                                      
-
                                     } else {
                                         root.selectedMonth = [];
-                                        if(response.data.startMonth==null && response.data.startMonth==undefined  ){
+                                        if (response.data.startMonth == null && response.data.startMonth == undefined) {
 
                                             root.$swal({
                                                 title: 'Error',
@@ -998,7 +1012,7 @@ export default {
                                                 timerProgressBar: true,
                                             });
                                             root.onlyOneTime = true;
-                                           
+
                                             return;
 
                                         }
@@ -1082,7 +1096,7 @@ export default {
                                 } else {
                                     if (response.data.startMonth != null && response.data.startMonth != undefined) {
                                         root.selectedMonth = [];
-                                        if(response.data.startMonth==null && response.data.startMonth==undefined  ){
+                                        if (response.data.startMonth == null && response.data.startMonth == undefined) {
 
                                             root.$swal({
                                                 title: 'Error',
@@ -1094,22 +1108,42 @@ export default {
                                                 timerProgressBar: true,
                                             });
                                             root.onlyOneTime = true;
-                                           
+
                                             return;
 
                                         }
-                                        var month3 = moment(response.data.startMonth).format('DD MMMM YYYY')
-                                        for (var z = 1; z <= root.brand.paymentType; z++) {
+                                        var month3 = moment(response.data.startMonth).format('DD MMMM YYYY');
+                                        root.selectedMonth.push({
+                                            selectedMonth: month3
+                                        });
+                                        // for (var z = 1; z <= root.brand.paymentType; z++) {
 
-                                            root.selectedMonth.push({
-                                                selectedMonth: month3
-                                            });
-                                            month3 = moment(month3).add(1, 'months').format('DD MMMM YYYY')
+                                        //     root.selectedMonth.push({
+                                        //         selectedMonth: month3
+                                        //     });
+                                        //     month3 = moment(month3).add(1, 'months').format('DD MMMM YYYY')
 
-                                        }
+                                        // }
 
                                         root.randerDate++;
 
+                                    } else {
+                                        if (response.data.startMonth == null && response.data.startMonth == undefined) {
+
+                                            root.$swal({
+                                                title: 'Error',
+                                                text: 'Not Select Start Month Date',
+                                                type: 'error',
+                                                icon: 'error',
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                timerProgressBar: true,
+                                            });
+                                            root.onlyOneTime = true;
+
+                                            return;
+
+                                        }
                                     }
 
                                 }

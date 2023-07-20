@@ -469,6 +469,7 @@ export default {
                     }
                     else {
                         this.brand.durationType = 'Customize';
+                        this.GetDateMonth();
                         this.brand.isActive = true;
 
                     }
