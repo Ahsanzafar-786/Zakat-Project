@@ -277,12 +277,13 @@
                                         ---
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }}
+                                        <!-- {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }} -->
+                                        {{ parseFloat(brand.lastPaymentAmount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }} - {{ GetDate(brand.lastPaymentDate) }}
                                     </td>
                                     <td class="text-center">{{ brand.note }}</td>
                                     <td class="text-center">{{ brand.cashier }}</td>
                                     <td class="text-center" v-if="brand.isVoid">--</td>
-                                    <td class="text-center" v-else>{{ brand.amount.toFixed(2) }}</td>
+                                    <td class="text-center" v-else>{{ parseFloat(brand.amount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}</td>
                                     
                                     <td class="text-center d-flex align-items-baseline justify-content-center"
                                         v-if="roleName != 'User'">
