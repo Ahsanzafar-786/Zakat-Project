@@ -1,4 +1,5 @@
-﻿
+﻿using Focus.Business.BenificiariesNotes.Model;
+using Focus.Business.BenificiariesNotes.Queries;
 using Focus.Business.Common;
 using Focus.Business.Interface;
 using Focus.Business.Payments.Models;
@@ -12,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
+using Focus.Domain.Entities;
+using Focus.Business.Transactions.Models;
 
 namespace Focus.Business.Payments.Queries
 {
@@ -51,7 +54,13 @@ namespace Focus.Business.Payments.Queries
             {
                 try
                 {
-                    var userList = _userManager.Users.ToList();
+                    var charityTransaction = Context.CharityTransaction.AsNoTracking().Select(x => new CharityTransactionLookupModel
+                    {
+                        Id = x.Id,
+                        DoucmentId = x.DoucmentId,
+                        Amount = x.Amount,
+                        CharityTransactionDate = x.CharityTransactionDate,
+                    }).AsQueryable();
 
                     var query = Context.Payments.AsNoTracking()
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.BenificaryAuthorization).ThenInclude(x => x.AuthorizedPerson)
@@ -70,7 +79,7 @@ namespace Focus.Business.Payments.Queries
                                     BenificaryName = x.Beneficiaries.Name,
                                     BenificaryCode = x.Beneficiaries.BeneficiaryId,
                                     BenificaryNameAr = x.Beneficiaries.NameAr,
-                                    Note =x.Note,
+                                    Note = x.Note,
                                     Code = x.Code,
                                     IsVoid = x.IsVoid,
                                     AllowVoid = x.AllowVoid,
@@ -79,13 +88,14 @@ namespace Focus.Business.Payments.Queries
                                     UgamaNo = x.Beneficiaries.UgamaNo,
                                     Gender = x.Beneficiaries.Gender,
                                     ContactNo = x.Beneficiaries.PhoneNo,
-                                    LastPaymentAmount = x.Amount,
-                                    LastPaymentDate =  x.Beneficiaries.CurrentPaymentMonth,
+                                    LastPaymentAmount = charityTransaction.OrderBy(charity => charity.CharityTransactionDate).LastOrDefault(charity => charity.DoucmentId == x.Id).Amount,
+                                    LastPaymentDate = charityTransaction.OrderBy(charity => charity.CharityTransactionDate).LastOrDefault(charity => charity.DoucmentId == x.Id).CharityTransactionDate != null ? charityTransaction.OrderBy(charity => charity.CharityTransactionDate).LastOrDefault(charity => charity.DoucmentId == x.Id).CharityTransactionDate : null,
+                                    ApprovalPersonId = x.Beneficiaries.ApprovedPaymentId,
                                     ApprovalPersonName = x.Beneficiaries.ApprovalPersons.Name,
                                     PaymentType = x.Beneficiaries.PaymentTypes.Name != null ? x.Beneficiaries.PaymentTypes.Name : x.Beneficiaries.PaymentTypes.NameAr,
                                     AuthorizePersonId = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizationPersonId : null,
                                     AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
-                                    Cashier = userList.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + userList.FirstOrDefault(y => y.Id == x.UserId).LastName,
+                                    Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
                                 }).OrderByDescending(x => x.Code).AsQueryable();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
@@ -127,7 +137,7 @@ namespace Focus.Business.Payments.Queries
                     {
                         query = query.Where(x => x.Date.Value.Year == request.Year.Value.Year);
                     }
-                    if(request.Register == "Register")
+                    if (request.Register == "Register")
                     {
                         query = query.Where(x => x.IsRegister);
                     }
@@ -135,29 +145,29 @@ namespace Focus.Business.Payments.Queries
                     {
                         query = query.Where(x => !x.IsRegister);
                     }
-                    if(request.UqamaNo != null)
+                    if (request.UqamaNo != null)
                     {
                         query = query.Where(x => x.UgamaNo == request.UqamaNo);
                     }
-                    if(request.Nationality != null)
+                    if (request.Nationality != null)
                     {
                         query = query.Where(x => x.Nationality == request.Nationality);
                     }
-                    if(request.Gender != null)
+                    if (request.Gender != null)
                     {
                         query = query.Where(x => x.Gender == request.Gender);
                     }
-                    if(request.ContactNo != null)
+                    if (request.ContactNo != null)
                     {
                         query = query.Where(x => x.ContactNo == request.ContactNo);
                     }
-                    if(request.ApprovalPersonId != null)
+                    if (request.ApprovalPersonId != null)
                     {
-                        query = query.Where(x => x.ApprovalPersonId == request.ApprovalPersonId);   
+                        query = query.Where(x => x.ApprovalPersonId == request.ApprovalPersonId);
                     }
-                    if(request.AuthorizationPersonId != null)
+                    if (request.AuthorizationPersonId != null)
                     {
-                        query = query.Where(x => x.AuthorizePersonId == request.AuthorizationPersonId);   
+                        query = query.Where(x => x.AuthorizePersonId == request.AuthorizationPersonId);
                     }
 
 

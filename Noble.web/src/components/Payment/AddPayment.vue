@@ -144,10 +144,11 @@
                 </div>
                 <div class="row mt-2" v-if="onlyOneTime">
                     <p class="text-danger" v-if="onlyOneTimeDes=='OneTime'"><b> This Beneficary has one time Payment</b></p>
-                    <p class="text-danger" v-if="brand.currentPaymentMonth!=undefined && brand.currentPaymentMonth!=null"><b> Last Month Payment {{ GetDate(brand.currentPaymentMonth) }}</b></p>
                     <p class="text-danger" v-if="onlyOneTimeDes=='Customize'"><b> Not Select Another Payment ,Your Customize Period End</b></p>
 
                 </div>
+                <p class="text-danger" v-if="brand.currentPaymentMonth!=undefined && brand.currentPaymentMonth!=null"><b> Last Month Payment {{ GetDate(brand.currentPaymentMonth) }}</b></p>
+
 
             </div>
 
@@ -348,7 +349,7 @@ export default {
                 if (record1) {
                     root.$swal({
                         title: 'Error',
-                        text: this.english == 'en' ? 'You cannot Add Duplicate Month' : 'لا يمكنك إضافة شهر مكرر',
+                        text: root.$i18n.locale == 'en'? 'You cannot Add Duplicate Month' : 'لا يمكنك إضافة شهر مكرر',
                         type: 'error',
                         icon: 'error',
                         showConfirmButton: false,
@@ -366,7 +367,7 @@ export default {
                             if (this.brand.endMonth < parseInt(month12)) {
                                 root.$swal({
                                     title: 'Error',
-                                    text: this.english == 'en' ? 'Not Select Another Payment ,Your Customize Period End' : 'لا تحدد دفعة أخرى ، قم بتخصيص نهاية الفترة',
+                                    text: root.$i18n.locale == 'en'? 'Not Select Another Payment ,Your Customize Period End' : 'لا تحدد دفعة أخرى ، قم بتخصيص نهاية الفترة',
                                     type: 'error',
                                     icon: 'error',
                                     showConfirmButton: false,
@@ -387,7 +388,7 @@ export default {
                         if (moment(this.addPayment.month).format('MMMM') != moment().format('MMMM')) {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -406,7 +407,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -424,7 +425,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -443,7 +444,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -463,7 +464,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -484,7 +485,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -506,7 +507,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -529,7 +530,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -553,7 +554,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -578,7 +579,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -604,7 +605,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -631,7 +632,7 @@ export default {
                         } else {
                             root.$swal({
                                 title: 'Error',
-                                text: this.english == 'en' ? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
+                                text: root.$i18n.locale == 'en'? 'You can Only Rceive Payment of Current Month' : 'يمكنك فقط تلقي مدفوعات الشهر الحالي',
                                 type: 'error',
                                 icon: 'error',
                                 showConfirmButton: false,
@@ -809,7 +810,7 @@ export default {
 
                                             root.$swal({
                                                 title: 'Error',
-                                                text: this.english == 'en' ? 'Not Select Start Month Date' : ' لم تحدد تاريخ شهر البدء',
+                                                text: root.$i18n.locale == 'en'? 'Not Select Start Month Date' : ' لم تحدد تاريخ شهر البدء',
                                                 type: 'error',
                                                 icon: 'error',
                                                 showConfirmButton: false,
@@ -848,7 +849,7 @@ export default {
                                         if (response.data.isCustomize) {
                                             root.$swal({
                                                 title: 'Error',
-                                                text: this.english == 'en' ? 'Not Select Another Payment ,Your Customize Period End' : 'لا تحدد دفعة أخرى ، قم بتخصيص نهاية الفترة',
+                                                text: root.$i18n.locale == 'en'? 'Not Select Another Payment ,Your Customize Period End' : 'لا تحدد دفعة أخرى ، قم بتخصيص نهاية الفترة',
                                                 type: 'error',
                                                 icon: 'error',
                                                 showConfirmButton: false,
@@ -886,7 +887,7 @@ export default {
                                         if (root.brand.paymentType == 0) {
                                             root.$swal({
                                                 title: 'Error',
-                                                text: this.english == 'en' ? 'This Beneficary has one time Payment' : 'هذا المستفيد لديه دفعة واحدة',
+                                                text: root.$i18n.locale == 'en'? 'This Beneficary has one time Payment' : 'هذا المستفيد لديه دفعة واحدة',
                                                 type: 'error',
                                                 icon: 'error',
                                                 showConfirmButton: false,
@@ -897,7 +898,7 @@ export default {
                                         } else {
                                             root.$swal({
                                                 title: 'Error',
-                                                text: this.english == 'en' ? 'Not Select The Month Start Date and End Date' : 'لم تحدد الشهر تاريخ البدء وتاريخ الانتهاء',
+                                                text: root.$i18n.locale == 'en'? 'Not Select The Month Start Date and End Date' : 'لم تحدد الشهر تاريخ البدء وتاريخ الانتهاء',
                                                 type: 'error',
                                                 icon: 'error',
                                                 showConfirmButton: false,
@@ -916,7 +917,7 @@ export default {
 
                                             root.$swal({
                                                 title: 'Error',
-                                                text: this.english == 'en' ? 'Not Select Start Month Date' : 'لم تحدد تاريخ شهر البدء',
+                                                text: root.$i18n.locale == 'en'? 'Not Select Start Month Date' : 'لم تحدد تاريخ شهر البدء',
                                                 type: 'error',
                                                 icon: 'error',
                                                 showConfirmButton: false,
@@ -947,7 +948,7 @@ export default {
 
                                                 root.$swal({
                                                     title: 'Error',
-                                                    text: this.english == 'en' ? 'Not Select Start Month Date' : 'لم تحدد تاريخ شهر البدء',
+                                                    text: root.$i18n.locale == 'en'? 'Not Select Start Month Date' : 'لم تحدد تاريخ شهر البدء',
                                                     type: 'error',
                                                     icon: 'error',
                                                     showConfirmButton: false,
