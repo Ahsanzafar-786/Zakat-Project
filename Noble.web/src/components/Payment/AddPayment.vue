@@ -523,6 +523,29 @@ export default {
 
                 }
                 if (this.brand.advancePayment == 0) {
+                    // if (this.brand.durationType == 'Customize') {
+                        if (this.brand.endMonth != null && this.brand.endMonth != undefined && this.brand.firstMonth != null && this.brand.firstMonth != undefined) {
+
+                            var month12 = moment(this.addPayment.month, 'MMMM').format('M');
+                            if(this.brand.endMonth <parseInt(month12))
+                              {
+                                root.$swal({
+                                    title: 'Error',
+                                    text: 'Not Select Another Payment ,Your Customize Period End',
+                                    type: 'error',
+                                    icon: 'error',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                return;
+
+                              }
+                            root.randerDate++;
+
+                        }
+
+                    }
                     if (this.brand.paymentType != null) {
                         if (this.brand.paymentType == 1) {
                             if (moment(this.addPayment.month).format('MMMM') != moment().format('MMMM')) {
@@ -851,7 +874,7 @@ export default {
 
                 }
 
-            }
+            
 
         },
         RemoveEffect: function (value) {
