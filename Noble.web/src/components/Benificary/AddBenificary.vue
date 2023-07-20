@@ -112,15 +112,16 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.RecurringAmount') }}:
                         </label>
+                        <decimaltofix v-model="$v.brand.recurringAmount.$model" v-on:input="GetValueOfRecurring" v-bind:disabled="isDisableValue"> </decimaltofix>
 
-                        <input class="form-control" v-on:change="GetValueOfRecurring"
+                        <!-- <input class="form-control" 
                             v-model="$v.brand.recurringAmount.$model" @click="$event.target.select()" type="text" v-bind:disabled="isDisableValue" />
                             <span v-if="$v.brand.recurringAmount.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.recurringAmount.decimal ">Amount should be in number</span>
                         </span>
                         <span v-else class="error text-danger">
                             <span v-if="!$v.brand.recurringAmount.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-4 form-group">
                         <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 ">
@@ -483,13 +484,14 @@ export default {
         
         GetValueOfRecurring: function () {
           debugger;
+        //   alert(this.brand.recurringAmount);
             if (this.brand.recurringAmount > 0) {
                 if (this.paymentType == null || this.paymentType == 0) {
                     this.brand.amountPerMonth = 0
                    
                 } else {
-                    this.brand.amountPerMonth = parseFloat(this.brand.recurringAmount / this.paymentType).toFixed(3).slice(0, -1);
-                    this.brand.recurringAmount = parseFloat(this.brand.recurringAmount).toFixed(3).slice(0, -1);
+                    this.brand.amountPerMonth = parseFloat(this.brand.recurringAmount / this.paymentType);
+                    this.brand.recurringAmount = parseFloat(this.brand.recurringAmount);
                 }
 
             } else {
