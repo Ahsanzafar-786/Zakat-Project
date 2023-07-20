@@ -44,9 +44,8 @@
                         </div>
                         <div class="col-sm-7">
                             <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander" v-on:input="EditBenificary(addPayment.benificayId, true)" />
-                            <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails')
-                                    }}</a>
-                            <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Benificary Details</a>
+                            <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails')}}</a>
+                            <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">{{ $t('AddPayment.BenificaryDetails')}}</a>
                         </div>
                     </div>
                 </div>
@@ -59,7 +58,8 @@
                             </label>
                         </div>
                         <div class="col-sm-7">
-                            <input type="number" class="form-control" v-model="addPayment.amount" />
+                            <!-- <input type="number" class="form-control" v-model="addPayment.amount" /> -->
+                            <decimaltofix type="number" v-model="addPayment.amount" > </decimaltofix>
                         </div>
                     </div>
                 </div>
