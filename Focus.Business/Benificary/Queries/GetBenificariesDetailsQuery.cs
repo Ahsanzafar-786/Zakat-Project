@@ -1,15 +1,12 @@
 ﻿using Focus.Business.Benificary.Models;
 using Focus.Business.Exceptions;
 using Focus.Business.Interface;
-using Focus.Business.Payments.Models;
 using Focus.Business.Transactions.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
