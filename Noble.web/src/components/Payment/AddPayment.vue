@@ -59,7 +59,7 @@
                         </div>
                         <div class="col-sm-7">
                             <!-- <input type="number" class="form-control" v-model="addPayment.amount" /> -->
-                            <decimaltofix type="number" v-model="addPayment.amount" > </decimaltofix>
+                            <decimaltofix v-model="addPayment.amount" > </decimaltofix>
                         </div>
                     </div>
                 </div>

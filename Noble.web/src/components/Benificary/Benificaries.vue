@@ -52,7 +52,7 @@
                             <!-- <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByAmount')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1"> -->
-                                <decimaltofix type="number" v-model="amount" :placeholder="$t('Benificary.SearchByAmount')"  > </decimaltofix>
+                                <decimaltofix v-model="amount" :placeholder="$t('Benificary.SearchByAmount')"  > </decimaltofix>
                         </div>
                         <div class="col-3 form-group">
                             <label>Payment Type</label>
