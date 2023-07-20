@@ -522,359 +522,356 @@ export default {
                     return;
 
                 }
+                if (this.brand.endMonth != null && this.brand.endMonth != undefined && this.brand.firstMonth != null && this.brand.firstMonth != undefined) {
+
+                    var month12 = moment(this.addPayment.month, 'MMMM').format('M');
+                    if (this.brand.endMonth < parseInt(month12)) {
+                        root.$swal({
+                            title: 'Error',
+                            text: 'Not Select Another Payment ,Your Customize Period End',
+                            type: 'error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                        return;
+
+                    }
+                    root.randerDate++;
+
+                }
                 if (this.brand.advancePayment == 0) {
                     // if (this.brand.durationType == 'Customize') {
-                        if (this.brand.endMonth != null && this.brand.endMonth != undefined && this.brand.firstMonth != null && this.brand.firstMonth != undefined) {
 
-                            var month12 = moment(this.addPayment.month, 'MMMM').format('M');
-                            if(this.brand.endMonth <parseInt(month12))
-                              {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'Not Select Another Payment ,Your Customize Period End',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-
-                              }
-                            root.randerDate++;
-
-                        }
-
-                    }
-                    if (this.brand.paymentType != null) {
-                        if (this.brand.paymentType == 1) {
-                            if (moment(this.addPayment.month).format('MMMM') != moment().format('MMMM')) {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-
-                            }
-
-                        } else if (this.brand.paymentType == 2) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 3) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 4) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 5) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 6) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 7) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 8) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 9) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(8, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 10) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(8, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(9, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 11) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(8, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(9, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(10, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        } else if (this.brand.paymentType == 12) {
-                            if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(8, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(9, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(10, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().add(11, 'months').format('MMMM') ||
-                                moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
-                                console.log("");
-                            } else {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: 'You can Only Rceive Payment of Current Month',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                            }
-
-                        }
-                    }
                 }
+                // if (this.brand.paymentType != null) {
+                //     if (this.brand.paymentType == 1) {
+                //         if (moment(this.addPayment.month).format('MMMM') != moment().format('MMMM')) {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
 
-                const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
-                if (record != null) {
-                    if (record.active == true) {
-                        debugger;
-                        var str = moment(this.addPayment.month).format('DD MMMM YYYY');
-                        console.log(this.selectedMonth);
-                        var res = this.selectedMonth.some(item => item.selectedMonth === str);
-                        console.log(this.addPayment.month);
+                //         }
 
-                        if (res) {
-                            root.$swal({
-                                title: 'Error',
-                                text: 'You have no Permission to Select Same Month',
-                                type: 'error',
-                                icon: 'error',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                            });
-                        } else {
-                            this.selectedMonth.push({
-                                selectedMonth: this.addPayment.month
-                            });
-                        }
+                //     } else if (this.brand.paymentType == 2) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
 
-                        if (this.selectedMonth.length > this.brand.advancePayment) {
-                            root.$swal({
-                                title: 'Error',
-                                text: 'You can Only Take' + this.brand.advancePayment + ' Month Payment in Advance',
-                                type: 'error',
-                                icon: 'error',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                            });
-                            return;
-                        }
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
 
-                        if (root.selectedMonth.length != 0) {
-                            root.addPayment.amount = root.addPayment.amount * root.selectedMonth.length;
+                //     } else if (this.brand.paymentType == 3) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
 
-                        } else {
-                            root.addPayment.amount = root.addPayment.amountPerMonth;
+                //     } else if (this.brand.paymentType == 4) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
 
-                        }
+                //     } else if (this.brand.paymentType == 5) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
 
+                //     } else if (this.brand.paymentType == 6) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
+
+                //     } else if (this.brand.paymentType == 7) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
+
+                //     } else if (this.brand.paymentType == 8) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
+
+                //     } else if (this.brand.paymentType == 9) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(8, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
+
+                //     } else if (this.brand.paymentType == 10) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(8, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(9, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
+
+                //     } else if (this.brand.paymentType == 11) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(8, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(9, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(10, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
+
+                //     } else if (this.brand.paymentType == 12) {
+                //         if (moment(this.addPayment.month).format('MMMM') == moment().add(1, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(2, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(3, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(4, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(5, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(6, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(7, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(8, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(9, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(10, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().add(11, 'months').format('MMMM') ||
+                //             moment(this.addPayment.month).format('MMMM') == moment().format('MMMM')) {
+                //             console.log("");
+                //         } else {
+                //             root.$swal({
+                //                 title: 'Error',
+                //                 text: 'You can Only Rceive Payment of Current Month',
+                //                 type: 'error',
+                //                 icon: 'error',
+                //                 showConfirmButton: false,
+                //                 timer: 3000,
+                //                 timerProgressBar: true,
+                //             });
+                //             return;
+                //         }
+
+                //     }
+                // }
+            }
+
+            const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
+            if (record != null) {
+                if (record.active == true) {
+                    debugger;
+                    var str = moment(this.addPayment.month).format('DD MMMM YYYY');
+                    console.log(this.selectedMonth);
+                    var res = this.selectedMonth.some(item => item.selectedMonth === str);
+                    console.log(this.addPayment.month);
+
+                    if (res) {
+                        root.$swal({
+                            title: 'Error',
+                            text: 'You have no Permission to Select Same Month',
+                            type: 'error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
                     } else {
                         this.selectedMonth.push({
                             selectedMonth: this.addPayment.month
                         });
-                        // this.addPayment.month = null;
-                        // this.randerDate++;
-                        // root.$swal({
-                        //     title: 'Error',
-                        //     text: 'You have no Permission to Select another Month',
-                        //     type: 'error',
-                        //     icon: 'error',
-                        //     showConfirmButton: false,
-                        //     timer: 3000,
-                        //     timerProgressBar: true,
-                        // });
                     }
 
+                    if (this.selectedMonth.length > this.brand.advancePayment) {
+                        root.$swal({
+                            title: 'Error',
+                            text: 'You can Only Take' + this.brand.advancePayment + ' Month Payment in Advance',
+                            type: 'error',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                        return;
+                    }
+
+                    if (root.selectedMonth.length != 0) {
+                        root.addPayment.amount = root.addPayment.amount * root.selectedMonth.length;
+
+                    } else {
+                        root.addPayment.amount = root.addPayment.amountPerMonth;
+
+                    }
+
+                } else {
+                    this.selectedMonth.push({
+                        selectedMonth: this.addPayment.month
+                    });
+                    // this.addPayment.month = null;
+                    // this.randerDate++;
+                    // root.$swal({
+                    //     title: 'Error',
+                    //     text: 'You have no Permission to Select another Month',
+                    //     type: 'error',
+                    //     icon: 'error',
+                    //     showConfirmButton: false,
+                    //     timer: 3000,
+                    //     timerProgressBar: true,
+                    // });
                 }
 
-            
+            }
 
         },
         RemoveEffect: function (value) {
