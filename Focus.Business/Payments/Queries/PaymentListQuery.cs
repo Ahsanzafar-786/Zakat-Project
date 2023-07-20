@@ -1,5 +1,4 @@
-﻿using Focus.Business.BenificiariesNotes.Model;
-using Focus.Business.BenificiariesNotes.Queries;
+﻿
 using Focus.Business.Common;
 using Focus.Business.Interface;
 using Focus.Business.Payments.Models;
@@ -13,8 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
-using Focus.Domain.Entities;
-using Focus.Business.Transactions.Models;
 
 namespace Focus.Business.Payments.Queries
 {
@@ -54,13 +51,7 @@ namespace Focus.Business.Payments.Queries
             {
                 try
                 {
-                    var charityTransaction = Context.CharityTransaction.AsNoTracking().Select(x => new CharityTransactionLookupModel
-                    {
-                        Id = x.Id,
-                        DoucmentId = x.DoucmentId,
-                        Amount = x.Amount,
-                        CharityTransactionDate= x.CharityTransactionDate,
-                    }).AsQueryable();
+                    var userList = _userManager.Users.ToList();
 
                     var query = Context.Payments.AsNoTracking()
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.BenificaryAuthorization).ThenInclude(x => x.AuthorizedPerson)
@@ -88,14 +79,13 @@ namespace Focus.Business.Payments.Queries
                                     UgamaNo = x.Beneficiaries.UgamaNo,
                                     Gender = x.Beneficiaries.Gender,
                                     ContactNo = x.Beneficiaries.PhoneNo,
-                                    LastPaymentAmount = charityTransaction.OrderBy(charity => charity.CharityTransactionDate).LastOrDefault(charity => charity.DoucmentId == x.Id).Amount ,
-                                    LastPaymentDate = charityTransaction.OrderBy(charity => charity.CharityTransactionDate).LastOrDefault(charity => charity.DoucmentId == x.Id).CharityTransactionDate != null ? charityTransaction.OrderBy(charity => charity.CharityTransactionDate).LastOrDefault(charity => charity.DoucmentId == x.Id).CharityTransactionDate : null ,
-                                    ApprovalPersonId = x.Beneficiaries.ApprovedPaymentId,
+                                    LastPaymentAmount = x.Amount,
+                                    LastPaymentDate =  x.Beneficiaries.CurrentPaymentMonth,
                                     ApprovalPersonName = x.Beneficiaries.ApprovalPersons.Name,
                                     PaymentType = x.Beneficiaries.PaymentTypes.Name != null ? x.Beneficiaries.PaymentTypes.Name : x.Beneficiaries.PaymentTypes.NameAr,
                                     AuthorizePersonId = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizationPersonId : null,
                                     AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
-                                    Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
+                                    Cashier = userList.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + userList.FirstOrDefault(y => y.Id == x.UserId).LastName,
                                 }).OrderByDescending(x => x.Code).AsQueryable();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))

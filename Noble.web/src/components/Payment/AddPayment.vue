@@ -647,15 +647,15 @@ export default {
 
             // const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
             this.selectedMonth.push({
-                    selectedMonth: this.addPayment.month
-                });
-                if (root.selectedMonth.length != 0) {
-                    this.amountValue = root.addPayment.amount * root.selectedMonth.length;
+                selectedMonth: this.addPayment.month
+            });
+            if (root.selectedMonth.length != 0) {
+                this.amountValue = root.addPayment.amount * root.selectedMonth.length;
 
-                } else {
-                    this.addPayment.amount = root.addPayment.amountPerMonth;
+            } else {
+                this.addPayment.amount = root.addPayment.amountPerMonth;
 
-                }
+            }
 
         },
         RemoveEffect: function (value) {
@@ -868,11 +868,16 @@ export default {
                                             var month123 = moment(response.data.currentPaymentMonth).add(1, 'months').format('DD MMMM YYYY')
 
                                             for (var ui = 1; ui <= root.brand.paymentType; ui++) {
+                                               
+                                                const monthComp = moment(month123, 'MMMM').format('M');
 
-                                                root.selectedMonth.push({
-                                                    selectedMonth: month123
-                                                });
-                                                month123 = moment(month123).add(1, 'months').format('DD MMMM YYYY')
+                                                if (root.brand.endMonth >= parseInt(monthComp)) {
+                                                    root.selectedMonth.push({
+                                                        selectedMonth: month123
+                                                    });
+                                                    month123 = moment(month123).add(1, 'months').format('DD MMMM YYYY')
+
+                                                }
 
                                             }
 
@@ -1137,6 +1142,7 @@ export default {
     },
 
     created: function () {
+        debugger;
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
         this.addPayment.userId = localStorage.getItem('UserId');
