@@ -195,7 +195,7 @@ export default {
             this.newFunds = {
                 id: '00000000-0000-0000-0000-000000000000',
                 description: '',
-                amount: '',
+                amount: 0,
                 userId:'',
                 code:'',
                 charityResouceId:'',

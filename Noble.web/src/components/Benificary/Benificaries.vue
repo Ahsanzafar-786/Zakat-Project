@@ -49,10 +49,10 @@
                         </div>
                         <div class="col-3 form-group">
                             <label>{{ $t('Benificary.Amount') }}</label>
-                            <input v-model="amount" type="text" class="form-control"
+                            <!-- <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByAmount')" aria-label="Example text with button addon"
-                                aria-describedby="button-addon1">
-                                <!-- <decimaltofix v-model="amount" :key="rander" :placeholder="$t('Benificary.SearchByAmount')"  > </decimaltofix> -->
+                                aria-describedby="button-addon1"> -->
+                                <decimaltofix v-model="amount" :placeholder="$t('Benificary.SearchByAmount')"  > </decimaltofix>
                         </div>
                         <div class="col-3 form-group">
                             <label>Payment Type</label>
@@ -175,9 +175,6 @@
                             </a>
 
                         </div>
-
-
-
                     </div>
 
                 </div>
