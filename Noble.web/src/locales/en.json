@@ -427,7 +427,10 @@
     "Code":"Payment Code",
     "Year":"Year",
     "Period":"Period",
-    "ByOrder":"By Order"
+    "ByOrder":"By Order",
+    "ThisBeneficaryhasonetimePayment":"This Beneficary has one time Payment",
+    "NotSelectAnotherPaymentYourCustomizePeriodEnd":"Not Select Another Payment, Your Customize Period End",
+    "LastMonthPayment":"Last Month Payment"
   },
   
   "Analytics":{

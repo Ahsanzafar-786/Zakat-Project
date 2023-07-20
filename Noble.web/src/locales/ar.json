@@ -436,7 +436,10 @@
     "Year":"السنة",
     "Code":"رقم التعريف ",
     "Period":"فترة",
-    "ByOrder":"بأمر"
+    "ByOrder":"بأمر",
+    "NotSelectAnotherPaymentYourCustomizePeriodEnd":"لا تحدد دفعة أخرى ، قم بتخصيص نهاية الفترة",
+    "LastMonthPayment":"دفع الشهر الماضي",
+    "ThisBeneficaryhasonetimePayment":"هذا المستفيد لديه دفعة واحدة"
   },
 
   "Analytics":{

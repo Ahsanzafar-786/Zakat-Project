@@ -143,11 +143,11 @@
                     </div>
                 </div>
                 <div class="row mt-2" v-if="onlyOneTime">
-                    <p class="text-danger" v-if="onlyOneTimeDes=='OneTime'"><b> This Beneficary has one time Payment</b></p>
-                    <p class="text-danger" v-if="onlyOneTimeDes=='Customize'"><b> Not Select Another Payment ,Your Customize Period End</b></p>
+                    <p class="text-danger" v-if="onlyOneTimeDes=='OneTime'"><b>{{ $t('AddPayment.ThisBeneficaryhasonetimePayment') }} </b></p>
+                    <p class="text-danger" v-if="onlyOneTimeDes=='Customize'"><b>{{ $t('AddPayment.NotSelectAnotherPaymentYourCustomizePeriodEnd') }} </b></p>
 
                 </div>
-                <p class="text-danger" v-if="brand.currentPaymentMonth!=undefined && brand.currentPaymentMonth!=null"><b> Last Month Payment {{ GetDate(brand.currentPaymentMonth) }}</b></p>
+                <p class="text-danger" v-if="brand.currentPaymentMonth!=undefined && brand.currentPaymentMonth!=null"><b> {{ $t('AddPayment.LastMonthPayment') }} {{ GetDate(brand.currentPaymentMonth) }}</b></p>
 
 
             </div>
