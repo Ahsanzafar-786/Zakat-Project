@@ -43,7 +43,7 @@
                             </label>
                         </div>
                         <div class="col-sm-7">
-                            <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId" :key="rander" v-on:input="EditBenificary(addPayment.benificayId, true)" />
+                            <benificary v-model="addPayment.benificayId" :values="addPayment.benificayId"  v-on:input="EditBenificary(addPayment.benificayId, true)" />
                             <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null" href="javascript:void()" class="text-secondary">{{ $t('AddPayment.BenificaryDetails')}}</a>
                             <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas" ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">{{ $t('AddPayment.BenificaryDetails')}}</a>
                         </div>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="col-sm-7">
                             <!-- <input type="number" class="form-control" v-model="addPayment.amount" /> -->
-                            <decimaltofix  v-model="addPayment.amount" :disable="true" > </decimaltofix>
+                            <decimaltofix v-model="amountValue" :key="rander" :disable="true"> </decimaltofix>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,6 @@
                         </div>
                     </div>
                 </div>
-            
 
             </div>
             <div class="col-md-5" v-if="addPayment.benificayId != '' && addPayment.benificayId != null">
@@ -149,22 +148,22 @@
                     <p class="text-danger" v-if="onlyOneTimeDes=='Customize'"><b> Not Select Another Payment ,Your Customize Period End</b></p>
 
                 </div>
-                
+
             </div>
 
-                <div class="col-lg-12 invoice-btn-fixed-bottom">
-                    <div class="button-items">
-                        <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User' && onlyOneTime">
-                            <i class="far fa-save"></i>
-                            <span>
-                                {{ $t('Save') }}
-                            </span>
-                        </button>
-                        <button type="button" class="btn btn-outline-primary  mr-2"  v-bind:disabled="$v.addPayment.$invalid" v-if="!onlyOneTime" v-on:click="SavePayment(true) && PrintRdlc(addPayment.id)">
-                          {{ $t('SaveasPrint') }} 
-                         </button>
-                           
-                        <!-- <button type="button" class="btn btn-outline-primary mr-2"   v-on:click="PrintRdlc(addPayment.id) && GotoPage('/payment')"
+            <div class="col-lg-12 invoice-btn-fixed-bottom">
+                <div class="button-items">
+                    <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2" v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User' && !onlyOneTime">
+                        <i class="far fa-save"></i>
+                        <span>
+                            {{ $t('Save') }}
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-outline-primary  mr-2" v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User' && !onlyOneTime" v-on:click="SavePayment(true) && PrintRdlc(addPayment.id)">
+                        {{ $t('SaveasPrint') }}
+                    </button>
+
+                    <!-- <button type="button" class="btn btn-outline-primary mr-2"   v-on:click="PrintRdlc(addPayment.id) && GotoPage('/payment')"
                     v-bind:disabled="$v.addPayment.$invalid" >
                     {{ $t('SaveasPrint') }} </button> -->
                     <button class="btn btn-danger mr-2" v-on:click="GotoPage('/payment')">
@@ -242,13 +241,13 @@
                             <input class="form-control" v-model="brand.startMonthAndYear" readonly />
                         </div>
 
-                        </div>
                     </div>
                 </div>
             </div>
-            <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
+        <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
     </div>
+</div>
 </template>
 
 <script>
@@ -260,7 +259,7 @@ import {
 } from "vuelidate/lib/validators"
 
 export default {
-    components:{
+    components: {
         Loading,
     },
 
@@ -272,6 +271,7 @@ export default {
             onlyOneTimeDes: '',
             rollName: '',
             rendar: 0,
+            amountValue: 0,
             year: '',
             randerDate: 0,
             selectedMonth: [],
@@ -316,12 +316,9 @@ export default {
     },
     methods: {
         GetDate: function (val) {
-            if(val==null || val==undefined )
-            {
+            if (val == null || val == undefined) {
                 return '';
-            }
-            else
-            {
+            } else {
                 return moment(val).format('MMMM YYYY');
             }
         },
@@ -686,29 +683,18 @@ export default {
                         return;
                     }
 
-                    if (root.selectedMonth.length != 0) {
-                        root.addPayment.amount = root.addPayment.amount * root.selectedMonth.length;
-
-                    } else {
-                        root.addPayment.amount = root.addPayment.amountPerMonth;
-
-                    }
-
                 } else {
                     this.selectedMonth.push({
                         selectedMonth: this.addPayment.month
                     });
-                    // this.addPayment.month = null;
-                    // this.randerDate++;
-                    // root.$swal({
-                    //     title: 'Error',
-                    //     text: 'You have no Permission to Select another Month',
-                    //     type: 'error',
-                    //     icon: 'error',
-                    //     showConfirmButton: false,
-                    //     timer: 3000,
-                    //     timerProgressBar: true,
-                    // });
+
+                }
+                if (root.selectedMonth.length != 0) {
+                    this.amountValue = root.addPayment.amount * root.selectedMonth.length;
+
+                } else {
+                    this.addPayment.amount = root.addPayment.amountPerMonth;
+
                 }
 
             }
@@ -738,7 +724,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-           
+
             root.$https.get('/Benificary/GetBenificaryDetail?Id=' + Id + '&isPayment=' + val, {
                     headers: {
                         "Authorization": `Bearer ${token}`
@@ -1009,6 +995,16 @@ export default {
                                     }
 
                                 }
+
+                            }
+
+                            if (root.selectedMonth.length != 0) {
+                            
+                                root.amountValue = root.addPayment.amount * root.selectedMonth.length;
+
+                            } else {
+                                root.amountValue = root.addPayment.amountPerMonth;
+
 
                             }
 
