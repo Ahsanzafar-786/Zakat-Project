@@ -372,7 +372,7 @@
 
             <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show = false"
                 @IsSave="IsSave" />
-
+                <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
 
     </div>
@@ -381,13 +381,17 @@
 
 <script>
 import clickMixin from '@/Mixins/clickMixin'
+import 'vue-loading-overlay/dist/vue-loading.css';
 import Multiselect from 'vue-multiselect';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import moment from 'moment'
 
 export default {
     mixins: [clickMixin],
     components: {
         Multiselect,
+        Loading,
     },
     data: function () {
         return {
@@ -426,7 +430,7 @@ export default {
             code: '',
             amount: '',
             benificaryCode: '',
-           
+            loading: false,
             
 
         }
@@ -532,6 +536,7 @@ export default {
 
             var root = this;
             var token = '';
+            this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }

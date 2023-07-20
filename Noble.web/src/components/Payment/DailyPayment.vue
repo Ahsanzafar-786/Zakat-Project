@@ -84,7 +84,7 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ContactNo') }}:
                         </label>
-                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" type="text" />
+                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" maxlength="10" type="text" />
                         <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.phoneNo.minLength ">Contact Number length should be 10 characters.</span>
                             <span v-if="!$v.brand.phoneNo.maxLength ">Contact Number length should be 10 characters.</span>
@@ -100,7 +100,7 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ContactNo') }}:
                         </label>
-                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" type="text" />
+                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" maxlength="10" type="text" />
                         <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.phoneNo.minLength ">Contact Number length should be 10 characters.</span>
                             <span v-if="!$v.brand.phoneNo.maxLength ">Contact Number length should be 10 characters.</span>
