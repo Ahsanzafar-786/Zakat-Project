@@ -103,7 +103,7 @@
                                             <a class="dropdown-item" href="javascript:void(0)"
                                                 v-on:click="PrintRdlc(brand.id,false)">{{ $t('Payment.Print') }}</a>
                                             <a class="dropdown-item" href="javascript:void(0)"
-                                                v-on:click="PrintRdlc(brand.id,true)">{{ $t('PDF') }}</a>
+                                                v-on:click="PrintRdlc(brand.id,true)">{{ $t('Benificary.PDF') }}</a>
                                         </div>
                                     </td>
                                 </tr>

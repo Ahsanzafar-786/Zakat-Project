@@ -161,8 +161,10 @@
                             $t('AddPayment.NotSelectAnotherPaymentYourCustomizePeriodEnd') }} </b></p>
 
                     </div>
-                    <p class="text-danger" v-if="brand.currentPaymentMonth != undefined && brand.currentPaymentMonth != null">
-                        <b> {{ $t('AddPayment.LastMonthPayment') }} {{ GetDate(brand.currentPaymentMonth) }}</b></p>
+                    <p class="text-danger"
+                        v-if="brand.currentPaymentMonth != undefined && brand.currentPaymentMonth != null">
+                        <b> {{ $t('AddPayment.LastMonthPayment') }} {{ GetDate(brand.currentPaymentMonth) }}</b>
+                    </p>
 
 
                 </div>
@@ -364,12 +366,12 @@ export default {
             debugger;
 
             var root = this;
-           
+
             debugger;
             if (this.addPayment.month == null && this.addPayment.month == undefined) {
                 return;
             }
- 
+
             if (this.addPayment.month != null && this.addPayment.month != undefined) {
                 const record1 = this.selectedMonth.some(x => x.selectedMonth == (moment(this.addPayment.month).format('DD MMMM YYYY')));
                 if (record1) {
@@ -391,9 +393,9 @@ export default {
                     if (this.brand.durationType == 'Customize') {
 
                         if (this.brand.endMonth != null && this.brand.endMonth != undefined && this.brand.firstMonth != null && this.brand.firstMonth != undefined) {
-                            
 
-                         
+
+
                             if (this.brand.endMonth < parseInt(month12)) {
                                 root.$swal({
                                     title: 'Error',
@@ -407,153 +409,147 @@ export default {
                                 return;
 
                             }
-                           
-                            if(year >= this.brand.year && year <= this.brand.endYear)
-                            {
+
+                            if (year >= this.brand.year && year <= this.brand.endYear) {
                                 {
-                            if (this.brand.firstMonth > parseInt(month12)) {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
+                                    if (this.brand.firstMonth > parseInt(month12)) {
+                                        root.$swal({
+                                            title: 'Error',
+                                            text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
+                                            type: 'error',
+                                            icon: 'error',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                        });
+                                        return;
 
-                            }
-                        }
-
-                            }
-                            else
-                            {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-
-                            }
-                    
-                       
-                       
-                            
-
-                        
-                    
-                            
-
-                        }
-                    }
-                    else
-                    {
-
-                        if(this.isTransaction){
-                            var currentMonth = moment( this.brand.currentPaymentMonth).format('YYYY');
-
-                            if(year >= currentMonth)
-                        {
-                        if(year==currentMonth)
-                        {
-                            if (this.brand.firstMonth > parseInt(month12)) {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-
-                            }
-                        }
-                       
-                            
-
-                        
-                    }
-                    else
-                    {
-                        root.$swal({
-                                    title: 'Error',
-                                    text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-                    }
-
-                           
-
-                        }
-                        else
-                        {
-                            if(year <= this.brand.year)
-                        {
-                        if(year==this.brand.year)
-                        {
-                            if (this.brand.firstMonth > parseInt(month12)) {
-                                root.$swal({
-                                    title: 'Error',
-                                    text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
-                                    type: 'error',
-                                    icon: 'error',
-                                    showConfirmButton: false,
-                                    timer: 3000,
-                                    timerProgressBar: true,
-                                });
-                                return;
-
-                            }
-                        }
-                       
-                            
-
-                        
-                    }
-
-                        }
-
-
-
-                        
-
-                    }
-                    
-                    
-                            const record1 = this.selectedMonth.some(x => x.selectedMonth != (moment(this.addPayment.month).format('DD MMMM YYYY')));
-                            if (record1) {
-                                this.selectedMonth.push({
-                                    selectedMonth: this.addPayment.month
-                                });
-                                if (root.selectedMonth.length != 0) {
-                                    this.amountValue = root.addPayment.amount * root.selectedMonth.length;
-
-                                } else {
-                                    this.addPayment.amount = root.addPayment.amountPerMonth;
-
+                                    }
                                 }
+
+                            }
+                            else {
+                                root.$swal({
+                                    title: 'Error',
+                                    text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
+                                    type: 'error',
+                                    icon: 'error',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
                                 return;
 
                             }
-                            root.randerDate++;
+
+
+
+
+
+
+
+
+
+                        }
+                    }
+                    else {
+
+                        if (this.isTransaction) {
+                            var currentMonth = moment(this.brand.currentPaymentMonth).add(1, 'months').format('YYYY');
+
+                            if (year >= currentMonth) {
+                                if (year == currentMonth) {
+
+                                  var compareMonth = moment(this.brand.currentPaymentMonth, 'YYYY-MM-DD'); // Parse the startMonth date
+                                 var month123 = moment(this.addPayment.month, 'YYYY-MM-DD');
+                                 if (month123.isAfter(compareMonth)) {
+                                        root.$swal({
+                                            title: 'Error',
+                                            text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
+                                            type: 'error',
+                                            icon: 'error',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                        });
+                                        return;
+
+                                    }
+                                }
+
+
+
+
+                            }
+                            else {
+                                root.$swal({
+                                    title: 'Error',
+                                    text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
+                                    type: 'error',
+                                    icon: 'error',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                return;
+                            }
+
+
+
+                        }
+                        else {
+                            if (year <= this.brand.year) {
+                                if (year == this.brand.year) {
+                                    if (this.brand.firstMonth > parseInt(month12)) {
+                                        root.$swal({
+                                            title: 'Error',
+                                            text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
+                                            type: 'error',
+                                            icon: 'error',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                        });
+                                        return;
+
+                                    }
+                                }
+
+
+
+
+                            }
+
+                        }
+
+
+
+
+
+                    }
+
+
+                    const record1 = this.selectedMonth.some(x => x.selectedMonth != (moment(this.addPayment.month).format('DD MMMM YYYY')));
+                    if (record1) {
+                        this.selectedMonth.push({
+                            selectedMonth: this.addPayment.month
+                        });
+                        if (root.selectedMonth.length != 0) {
+                            this.amountValue = root.addPayment.amount * root.selectedMonth.length;
+
+                        } else {
+                            this.addPayment.amount = root.addPayment.amountPerMonth;
+
+                        }
+                        return;
+
+                    }
+                    root.randerDate++;
 
 
 
                 }
-               
+
             }
 
             // const record = this.months.find(x => x.name == (moment(this.addPayment.month).format('MMMM')));
@@ -638,7 +634,7 @@ export default {
                         root.addPayment.amount = response.data.amountPerMonth;
                         root.addPayment.amountPerMonth = response.data.amountPerMonth;
                         var paymentMonths = response.data.charityTransactions;
-                        root.isTransaction=response.data.charityTransactions.length>0?true:false;
+                        root.isTransaction = response.data.charityTransactions.length > 0 ? true : false;
                         if (response.data.durationType == 'Indefinite') {
 
                             if (paymentMonths.length > 0) {
@@ -898,7 +894,7 @@ export default {
                     });
 
         },
-        
+
         close: function () {
             this.$router.push({
                 path: '/payment',

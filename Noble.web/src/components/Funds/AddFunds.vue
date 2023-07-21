@@ -116,7 +116,8 @@ export default {
         brand: {
             amount: {
                 required,
-                minValue: minValue(0.01)            },
+                minValue: minValue(0.01)
+                        },
             code: {
                 required
             }
