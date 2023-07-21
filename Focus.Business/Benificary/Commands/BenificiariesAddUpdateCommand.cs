@@ -182,7 +182,7 @@ namespace Focus.Business.Benificary.Commands
                             return new Message
                             {
                                 Id = benifiary.Id,
-                                PaymentId = request.PaymentId.Value,
+                                PaymentId = request.PaymentId==null?Guid.Empty: request.PaymentId.Value,
                                 IsSuccess = true,
                                 IsAddUpdate = "Data has been Added successfully." + "BenificaryID is " + " " + benifiary.BeneficiaryId
                             };

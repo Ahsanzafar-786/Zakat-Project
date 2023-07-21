@@ -17,7 +17,7 @@
                                 <a v-on:click="GotoPage('/addpayment')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1" v-if="roleName != 'User'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('AddNew') }}
+                                    {{ $t('AddPayment.AddPayment') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -32,28 +32,21 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-3">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('Benificary.BeneficiaryName') }}
-                            </label>
-                            <input v-model="search" type="text" class="form-control" :placeholder="$t('Payment.Search')"
-                                aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        </div>
-                        <div class="col-3">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('Benificary.BeneficiaryID') }}
-                            </label>
-                            <input v-model="benificaryCode" type="text" class="form-control" :placeholder="$t('Payment.SearchByID')"
-                                aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        </div>
-                        <div class="col-3">
+                        <div class="col-md-4">
                             <label class="text  font-weight-bolder">
                                 {{ $t('Payment.Code') }}
                             </label>
                             <input v-model="code" type="text" class="form-control" :placeholder="$t('Payment.SearchByCode')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-4">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.BeneficiaryName') }}
+                            </label>
+                            <input v-model="search" type="text" class="form-control" :placeholder="$t('Payment.Search')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-md-4">
                             <label class="text  font-weight-bolder">
                                 {{ $t('Payment.Amount') }}
                             </label>
@@ -61,15 +54,52 @@
                                 :placeholder="$t('Payment.SearchByAmount')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
                         </div>
+
+                        <div class="col-md-12 mt-2">
+                            <a class="btn btn btn-soft-primary" v-on:click="AdvanceFilterFor" id="button-addon2">
+                                <i class="fa fa-filter"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" v-if="advanceFilters">
+                        <div class="col-xs-12  col-lg-3">
+                            <div class="form-group">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('Benificary.AuthorizedPerson') }}
+                                </label>
+                                <authorizedperson v-model="authorizationPersonId" ref="AuthorizedDropdown" />
+                            </div>
+                        </div>
                         <div class="col-md-3 form-group">
-                            <label class="text  font-weight-bolder">{{ $t('AddBenificary.StartFrom') }}</label>
-                            <datepicker v-model="month" :type="'month'" :key="render"  />
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.ApprovalPerson') }}
+                            </label>
+                            <approvalperson v-model="approvalPersonId" ref="approvalPersonId" />
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label class="text  font-weight-bolder">
+                                {{ $t('Benificary.Register/Un-Register') }}
+                            </label>
+                            <multiselect v-model="registered" :options="['Register', 'Un-Register']" :show-labels="false"
+                                :placeholder="$t('AddBenificary.SelectType')">
+                            </multiselect>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <label class="text  font-weight-bolder"> {{ $t('Benificary.Status') }}</label>
+                            <multiselect v-model="status" :options="['Active', 'De-Active']" :show-labels="false"
+                                :placeholder="$t('AddBenificary.SelectType')">
+                            </multiselect>
 
                         </div>
                         <div class="col-md-3 form-group">
-                                <label>Select Year:</label>
-                                <datepicker v-model="year" :type="'year'" :key="render" />
-                            </div>
+                            <label class="text  font-weight-bolder">{{ $t('Benificary.SelectMonth') }}</label>
+                            <datepicker v-model="month" :type="'month'" :key="render" />
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>{{ $t('Benificary.SelectYear') }}</label>
+                            <datepicker v-model="year" :type="'year'" :key="render" />
+                        </div>
                         <div class="col-md-3 form-group">
                             <label class="text  font-weight-bolder">
                                 {{ $t('Benificary.FromDate') }}
@@ -82,17 +112,52 @@
                             </label>
                             <datepicker v-model="toDate" :key="render" />
                         </div>
-                        <div class="col-sm-2 mt-3">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>{{ $t('Benificary.NationalID') }}</label>
+                                <input v-model="uqamaNo" type="text" class="form-control"
+                                    :placeholder="$t('Benificary.SearchByNationalId')"
+                                    aria-label="Example text with button addon" aria-describedby="button-addon1">
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>{{ $t('Benificary.Nationality') }}</label>
+                                <input v-model="nationality" type="text" class="form-control"
+                                    :placeholder="$t('Benificary.SearchByNationality')"
+                                    aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>{{ $t('Benificary.Gender') }}</label>
+                                <multiselect v-model="gender" :options="['Male', 'Female']" :show-labels="false"
+                                    :placeholder="$t('AddBenificary.SelectType')">
+                                </multiselect>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12  col-lg-3 ">
+                            <label class="text  font-weight-bolder"> {{ $t('Benificary.Contact') }}</label>
+                            <input v-model="contact" type="text" class="form-control"
+                                :placeholder="$t('Benificary.SearchByContact')" aria-label="Example text with button addon"
+                                aria-describedby="button-addon1">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 mt-2">
                             <a v-on:click="SearchFilter" href="javascript:void(0);"
                                 class="btn btn-sm btn-outline-primary mx-1">
-                                {{ $t('Payment.SearchFilter') }}
+                                {{ $t('Benificary.SearchFilter') }}
                             </a>
                             <a @click="ClearFilter" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">
-                                {{ $t('Payment.ClearFilter') }}
+                                {{ $t('Benificary.ClearFilter') }}
                             </a>
 
                         </div>
-
                     </div>
 
                 </div>
@@ -106,35 +171,44 @@
                                         ID
                                     </th> -->
                                     <th class="text-center">
-                                        {{ $t('Payment.Code') }}
+                                        {{ $t('Payment.ID') }}
+                                    </th>
+                                     <th class="text-center">
+                                        {{ $t('Payment.Date') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Payment.ID') }}
+                                        {{ $t('Payment.Code') }}
                                     </th>
                                     <th class="text-start">
                                         {{ $t('Payment.BenificaryName') }}
+                                    </th>
+                                    <th class="text-start">
+                                        {{ $t('Benificary.NationalID') }}
+                                    </th>
+                                    <th class="text-start">
+                                        {{$t('Payment.AuthorizedPerson') }}
+                                    </th>
+                                    <th class="text-start">
+                                        {{ $t('AddBenificary.ApprovedBy') }}
+                                    </th>
+                                    <th class="text-start">
+                                        {{ $t('AddBenificary.PaymentType') }}
+                                    </th>
+                                    <th class="text-center">
+                                        {{ $t('Payment.LastPayment') }}
+                                    </th>
+                                    <th class="text-center">
+                                        {{ $t('Payment.Note') }}
+                                    </th>
+                                    
+                                    <th class="text-center">
+                                        {{ $t('Payment.Cashier') }}
                                     </th>
                                     <th class="text-center">
                                         {{ $t('Payment.Amount') }}
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Payment.Cashier') }}
-                                    </th>
-                                    <th class="text-center">
-
-                                        {{ $t('Payment.Date') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Payment.Month') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Payment.Year') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Payment.Period') }}
-                                    </th>
-                                    <th class="text-center">
-
+                                        {{ $t('Payment.Action') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -163,7 +237,9 @@
                                     <td class="text-center text-danger" v-else-if="brand.isVoid">{{ brand.code }}</td>
 
                                     <td class="text-center" v-else>{{ brand.code }}</td>
-                                    <td class="text-center" >{{ brand.benificaryCode }}</td>
+                                    <td class="text-center">{{ GetDate(brand.date) }}</td>
+
+                                    <td class="text-center">{{ brand.benificaryCode }}</td>
 
                                     <td class="text-center text-danger" v-if="brand.isVoid">Payment Voided</td>
                                     <td class="text-start" v-else-if="roleName != 'Cashier'">
@@ -174,36 +250,41 @@
                                         </strong>
                                     </td>
                                     <td class="text-start" v-else>{{
-                                        brand.benificaryName == '' ? brand.benificaryNameAr : brand.benificaryName }}</td>
-
-
-                                    <td class="text-center" v-if="brand.isVoid">--</td>
-                                    <td class="text-center" v-else>{{ brand.amount }}</td>
+                                        brand.benificaryName == '' ? brand.benificaryNameAr : brand.benificaryName }}
+                                    </td>
+                                    <td class="text-center" v-if="brand.ugamaNo != null">
+                                        {{ brand.ugamaNo }}
+                                    </td>
+                                    <td class="text-center" v-else>
+                                        ---
+                                    </td>
+                                    <td class="text-center" v-if="brand.authorizePersonName != null">
+                                        {{ brand.authorizePersonName }}
+                                    </td>
+                                    <td class="text-center" v-else>
+                                        ---
+                                    </td>
+                                    <td class="text-center" v-if="brand.approvalPersonName != null">
+                                        {{ brand.approvalPersonName }}
+                                    </td>
+                                    <td class="text-center" v-else>
+                                        ---
+                                    </td>
+                                    <td class="text-center" v-if="brand.paymentType != null">
+                                        {{ brand.paymentType }}
+                                    </td>
+                                    <td v-else>
+                                        ---
+                                    </td>
+                                    <td class="text-center">
+                                        <!-- {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }} -->
+                                        {{ parseFloat(Math.round(brand.lastPaymentAmount)).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }} - {{ GetDate(brand.lastPaymentDate) }}
+                                    </td>
+                                    <td class="text-center">{{ brand.note }}</td>
                                     <td class="text-center">{{ brand.cashier }}</td>
-                                    <td class="text-center">{{ GetDate(brand.date) }}</td>
-
-                                    <td class="text-center" v-if="brand.isVoid">
-                                        --
-                                    </td>
-                                    <td class="text-center" v-else-if="brand.month != null">
-                                        {{ GetMonth(brand.month) }}
-                                    </td>
-
-                                    <td class="text-center" v-else>
-                                        {{ GetMonth(brand.date) }}
-                                    </td>
-                                    <td class="text-center" v-if="brand.isVoid">
-                                        --
-                                    </td>
-                                    <td class="text-center" v-else>
-                                        {{ brand.year }}
-                                    </td>
-                                    <td class="text-center" v-if="brand.isVoid">
-                                        --
-                                    </td>
-                                    <td class="text-center" v-else>
-                                        {{ brand.period }}
-                                    </td>
+                                    <td class="text-center" v-if="brand.isVoid">--</td>
+                                    <td class="text-center" v-else>{{ parseFloat(brand.amount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}</td>
+                                    
                                     <td class="text-center d-flex align-items-baseline justify-content-center"
                                         v-if="roleName != 'User'">
                                         <button type="button" class="btn btn-light dropdown-toggle"
@@ -291,7 +372,7 @@
 
             <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show = false"
                 @IsSave="IsSave" />
-
+                <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
 
     </div>
@@ -300,12 +381,37 @@
 
 <script>
 import clickMixin from '@/Mixins/clickMixin'
+import 'vue-loading-overlay/dist/vue-loading.css';
+import Multiselect from 'vue-multiselect';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import moment from 'moment'
 
 export default {
     mixins: [clickMixin],
+    components: {
+        Multiselect,
+        Loading,
+    },
     data: function () {
         return {
+            advanceFilters: false,
+            authorizationPersonId: '',
+            approvalPersonId: '',
+            registered: '',
+            fromDate: '',
+            toDate: '',
+            startMonth: '',
+            month:'',
+            year: '',
+            render: 0,
+            nationalId: '',
+            nationality: '',
+            gender: '',
+            status: '',
+            contact: '',
+            uqamaNo:'',
+
             show: false,
             reportsrc: '',
             changereport: 0,
@@ -323,12 +429,9 @@ export default {
             benificaryName: '',
             code: '',
             amount: '',
-            benificaryCode:'',
-            fromDate: '',
-            toDate: '',
-            month:'',
-            year: '',
-            render:0
+            benificaryCode: '',
+            loading: false,
+            
 
         }
     },
@@ -342,24 +445,52 @@ export default {
     methods: {
         ClearFilter() {
             // Reset the filter conditions here
-            this.search = '';
-            this.amount = '';
             this.code = '';
-            this.benificaryCode = '';
+            this.search = '';
+            this.uqamaNo = '';
+            this.beneficiaryId = '';
+            this.authorizationPersonId = '';
+            this.approvalPersonId = '';
+            this.registered = '';
             this.fromDate = '';
             this.toDate = '';
             this.render++
+            this.startMonth = '';
             this.month = '';
             this.year = '';
+            this.amount = '';
+            this.nationalId = '';
+            this.nationality = '';
+            this.contact = '';
+            this.gender = '';
+            this.status = '';
+            this.paymentType='';
+
+            if (this.$refs.AuthorizedDropdown != undefined)
+                this.$refs.AuthorizedDropdown.Remove();
+            if (this.$refs.approvalPersonId != undefined)
+                this.$refs.approvalPersonId.Remove();
+
+            if (this.$refs.DatePicker != undefined)
+                this.$refs.DatePicker.Remove();
+
+                if (this.$refs.PaymentType != undefined)
+                this.$refs.PaymentType.Remove();
+
 
             // Trigger the search or data refresh
             this.GetPayment(this.currentPage);
         },
 
+        AdvanceFilterFor: function () {
+            this.advanceFilters = !this.advanceFilters;
+            // if (this.advanceFilters == false) {
+            //     this.FilterRecord(false);
+            // }
+        },
 
         SearchFilter: function () {
-            debugger;
-            this.GetPayment(this.currentPage);
+            this.GetPayment();
         },
         IsSave: function () {
             this.show = false;
@@ -405,10 +536,11 @@ export default {
 
             var root = this;
             var token = '';
+            this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender='+ this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId  , { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;

@@ -12,14 +12,13 @@ using Focus.Domain.Entities;
 
 using System.Linq;
 using System.Collections.Generic;
-using DocumentFormat.OpenXml.Spreadsheet;
-using NPOI.SS.Formula.Functions;
 
 namespace Focus.Business.Payments.Commands
 {
     public class PaymentsAddUpdateCommand : IRequest<Message>
     {
         public PaymentLookupModel Payment { get; set; }
+        public Guid? PaymentId { get; set; }
         public class Handler : IRequestHandler<PaymentsAddUpdateCommand, Message>
         {
             public readonly IApplicationDbContext Context;
@@ -55,7 +54,7 @@ namespace Focus.Business.Payments.Commands
                             {
                                 BenificayId = request.Payment.BenificayId,
                                 Amount = request.Payment.Amount,
-                                Month = DateTime.Now,
+                                Month = request.Payment.Month,
                                 Code = request.Payment.Code,
                                 Note = request.Payment.Note,
                                 PaymentCode = request.Payment.PaymentCode,
@@ -66,6 +65,28 @@ namespace Focus.Business.Payments.Commands
                             };
 
                             Context.Payments.Add(payment);
+
+                            var selectedMonth = new List<SelectedMonth>();
+                            
+                                selectedMonth.Add(new SelectedMonth
+                                {
+                                    PaymentId = payment.Id,
+                                    SelectMonth = request.Payment.Month
+                                });
+                            
+
+                            await Context.SelectedMonths.AddRangeAsync(selectedMonth);
+
+                            var beneficary = Context.Beneficiaries.AsNoTracking()
+                                .FirstOrDefault(x => x.Id == request.Payment.BenificayId);
+                            if (beneficary != null)
+                            {
+                                beneficary.CurrentPaymentMonth = request.Payment.Month;
+                                Context.Beneficiaries.Update(beneficary);
+
+                            }
+
+                            request.PaymentId= payment.Id;
 
                             var charityTransaction = new CharityTransaction
                             {
@@ -98,6 +119,7 @@ namespace Focus.Business.Payments.Commands
                             };
 
                             Context.Payments.Add(payment);
+                            request.PaymentId = payment.Id;
 
                             var selectedMonth = new List<SelectedMonth>();
                             foreach (var item in request.Payment.SelectedMonth)
@@ -110,6 +132,31 @@ namespace Focus.Business.Payments.Commands
                             }
 
                             await Context.SelectedMonths.AddRangeAsync(selectedMonth);
+                            if (request.Payment.SelectedMonth.Count > 0)
+                            {
+                                var beneficary = Context.Beneficiaries.AsNoTracking()
+                                    .FirstOrDefault(x => x.Id == request.Payment.BenificayId);
+                                if (beneficary != null)
+                                {
+                                    beneficary.CurrentPaymentMonth =
+                                        request.Payment.SelectedMonth.LastOrDefault()?.SelectedMonth;
+
+                                     Context.Beneficiaries.Update(beneficary);
+
+                                }
+                            }
+                            else
+                            {
+                                var beneficary = Context.Beneficiaries.AsNoTracking()
+                                    .FirstOrDefault(x => x.Id == request.Payment.BenificayId);
+                                if (beneficary != null)
+                                {
+                                    beneficary.CurrentPaymentMonth = request.Payment.Month;
+                                    Context.Beneficiaries.Update(beneficary);
+
+                                }
+
+                            }
 
                             foreach (var item in request.Payment.SelectedMonth)
                             {
@@ -137,6 +184,7 @@ namespace Focus.Business.Payments.Commands
                         {
                             Id = Guid.Empty,
                             IsSuccess = true,
+                            PaymentId = request.PaymentId==null?Guid.Empty: request.PaymentId.Value,
                             IsAddUpdate = "Data has been Added successfully"
                         };
                     }

@@ -1,15 +1,12 @@
 ﻿using Focus.Business.Benificary.Models;
 using Focus.Business.Exceptions;
 using Focus.Business.Interface;
-using Focus.Business.Payments.Models;
 using Focus.Business.Transactions.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -86,7 +83,9 @@ namespace Focus.Business.Benificary.Queries
                             PaymentTypeName = x.PaymentTypes.Name,
                             ApprovalPersonName = x.ApprovalPersons.Name,
                             Reason = x.Reason,
+                            CurrentPaymentMonth = x.CurrentPaymentMonth,
                             CharityTransactions = charity,
+                            StartMonthAndYear = x.StartDate.Value.Month.ToString() + " - " + x.StartDate.Value.Year.ToString(),
                             BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
                             {
                                 Id = x.Id,
@@ -104,6 +103,27 @@ namespace Focus.Business.Benificary.Queries
 
                         if (query == null)
                             throw new NotFoundException("Benificary Not Found", "");
+                        if (query != null)
+                        {
+                            if (query.CurrentPaymentMonth != null && query.EndDate != null)
+                            {
+                                if (query.DurationType == "Customize")
+                                {
+                                    if (query.EndDate.Value.Date.Year == query.CurrentPaymentMonth.Value.Date.Year)
+                                    {
+                                        if (query.EndDate.Value.Date.Month <= query.CurrentPaymentMonth.Value.Date.Month)
+                                        {
+                                            query.IsCustomize = true;
+
+
+                                        }
+
+
+
+                                    }
+                                }
+                            }
+                        }
 
 
                         return query;
@@ -160,6 +180,7 @@ namespace Focus.Business.Benificary.Queries
                             ApprovalPersonName = x.ApprovalPersons.Name,
                             Reason = x.Reason,
                             IsDisable = isDisable,
+                            StartMonthAndYear = x.StartDate.Value.Month.ToString() + " - " + x.StartDate.Value.Year.ToString(),
                             BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
                             {
                                 Id= x.Id,
@@ -167,7 +188,8 @@ namespace Focus.Business.Benificary.Queries
                                 ApprovalPersonId= x.ApprovalPersonId,
                                 ApprovalPersonName=x.ApprovalPerson.Name==null || x.ApprovalPerson.Name==""? x.ApprovalPerson.NameAr: x.ApprovalPerson.Name,
                                 AuthorizationPersonId= x.AuthorizationPersonId,
-                                AuthorizationPersonName=x.ApprovalPerson.Name==null||x.AuthorizedPerson.Name==""?x.AuthorizedPerson.NameAr:x.AuthorizedPerson.Name,
+                                AuthorizationPersonCode = x.AuthorizedPerson.AuthorizedPersonCode,
+                                AuthorizationPersonName =x.ApprovalPerson.Name==null||x.AuthorizedPerson.Name==""?x.AuthorizedPerson.NameAr:x.AuthorizedPerson.Name,
                                 IsActive = x.IsActive,
                                 Date = Convert.ToDateTime(x.Date).ToString("mm/dd/yyyy"),
                                 Description = x.Description,

@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options"  :multiple="false" :placeholder="$t('General.SelectBenificary')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
+        <multiselect v-model="DisplayValue" :options="options"  :multiple="false" :placeholder="$t('General.SelectBenificary')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
 
         </multiselect>      
     </div>

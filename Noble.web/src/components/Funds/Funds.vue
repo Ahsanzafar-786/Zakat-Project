@@ -83,7 +83,7 @@
                                         </strong>
                                     </td>
                                     <td class="text-center">
-                                        {{ brand.amount }}
+                                        {{ parseFloat(brand.amount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}
                                     </td>
                                     <td class="text-center">
                                         {{ brand.typeOfTransaction }}
@@ -195,7 +195,7 @@ export default {
             this.newFunds = {
                 id: '00000000-0000-0000-0000-000000000000',
                 description: '',
-                amount: '',
+                amount: 0,
                 userId:'',
                 code:'',
                 charityResouceId:'',

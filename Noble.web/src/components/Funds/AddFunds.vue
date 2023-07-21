@@ -40,7 +40,8 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.Amount') }}:<span class="text-danger"> *</span>
                         </label>
-                        <input class="form-control" v-model="$v.brand.amount.$model" type="number" />
+                        <!-- <input class="form-control" v-model="$v.brand.amount.$model" type="number" /> -->
+                        <decimaltofix v-model="brand.amount"  > </decimaltofix>
                     </div>
                     <div class="form-group has-label col-sm-3 " v-if="roleName != 'Cashier'">
                         <label class="text  font-weight-bolder">
@@ -100,6 +101,7 @@ export default {
             english: '',
             roleName: '',
             loading: false,
+            
         }
     },
     validations: {

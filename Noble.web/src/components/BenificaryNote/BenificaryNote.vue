@@ -39,22 +39,32 @@
                             aria-label="Example text with button addon" aria-describedby="button-addon1">
                     </div> -->
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-md-3 form-group">
                             <input v-model="benificaryCode" type="text" class="form-control"
                                 :placeholder="$t('BenificaryNote.SearchByID')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 form-group">
                             <input v-model="search" type="text" class="form-control"
                                 :placeholder="$t('BenificaryNote.Search')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 form-group">
                             <input v-model="beneficiaryNote" type="text" class="form-control"
                                 :placeholder="$t('BenificaryNote.SearchByBeneficiaryNote')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3 form-group">
+                            <input v-model="nationalId" type="text" class="form-control"
+                                :placeholder="$t('BenificaryNote.SearchByNationalID')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <input v-model="contactNo" type="text" class="form-control"
+                                :placeholder="$t('BenificaryNote.SearchByContactNo')"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-md-3 form-group">
                             <a v-on:click="SearchFilter" href="javascript:void(0);"
                                 class="btn btn-sm btn-outline-primary mx-1">
                                 {{ $t('BenificaryNote.SearchFilter') }}
@@ -74,13 +84,22 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
-                                        {{ $t('BenificaryNote.ID') }}
+                                        {{ $t('BenificaryNote.Code') }}
                                     </th>
                                     <th class="text-start">
                                         {{ $t('BenificaryNote.BenificaryName') }}
                                     </th>
                                     <th class="text-start">
                                         {{ $t('BenificaryNote.BenificiaryNotes') }}
+                                    </th>
+                                    <th class="text-start">
+                                        {{ $t('BenificaryNote.NationalID') }}
+                                    </th>
+                                    <th class="text-start">
+                                        {{ $t('BenificaryNote.Nationality') }}
+                                    </th>
+                                    <th class="text-start">
+                                        {{ $t('BenificaryNote.ContactNo') }}
                                     </th>
                                     <th class="text-center">
                                         {{ $t('BenificaryNote.Date') }}
@@ -98,21 +117,48 @@
                                     <td v-else>
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td v-if="brand.benificaryCode != null">
                                         {{ brand.benificaryCode }}
                                     </td>
+                                    <td v-else>
+                                        ---
+                                    </td>
 
-                                    <td class="text-start">
+                                    <td v-if="brand.benificaryName != null">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)">{{
                                                 brand.benificaryName }}</a>
                                         </strong>
+                                    </td>
+                                    <td v-else>
+                                        ---
                                     </td>
                                     <td class="text-start">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)"> {{
                                                 brand.note }}</a>
                                         </strong>
+                                    </td>
+                                    
+                                    <td v-if="brand.nationalId != null">
+                                        {{ brand.nationalId }}
+                                    </td>
+                                    <td v-else>
+                                        ---
+                                    </td>
+
+                                    <td v-if="brand.nationality != null">
+                                        {{ brand.nationality }}
+                                    </td>
+                                    <td v-else>
+                                        ---
+                                    </td>
+
+                                    <td v-if="brand.nationality != null">
+                                        {{ brand.contactNo }}
+                                    </td>
+                                    <td v-else>
+                                        ---
                                     </td>
                                     <td class="text-center">
                                         {{ brand.date }}
@@ -199,6 +245,9 @@ export default {
             roleName: '',
             beneficiaryNote: '',
             benificaryCode:'',
+            nationalId:'',
+            contactNo:'',
+            
         }
     },
     // watch: {
@@ -212,6 +261,8 @@ export default {
             this.search = '';
             this.beneficiaryNote = '';
             this.benificaryCode = '';
+            this.nationalId='';
+            this.contactNo='';
 
             // Trigger the search or data refresh
             this.GetbenificaryNote(this.currentPage);
@@ -253,7 +304,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryNote=' + this.beneficiaryNote + '&benificaryCode=' + this.benificaryCode, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetBenificaryNoteList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryNote=' + this.beneficiaryNote + '&benificaryCode=' + this.benificaryCode + '&nationalId=' + this.nationalId + '&contactNo=' + this.contactNo, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.benificaryNotelist = response.data.results;
                     root.pageCount = response.data.pageCount;

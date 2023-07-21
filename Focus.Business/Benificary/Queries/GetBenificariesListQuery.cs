@@ -15,6 +15,7 @@ namespace Focus.Business.Benificary.Queries
     public class GetBenificariesListQuery : PagedRequest, IRequest<PagedResult<List<BenificariesLookupModel>>>
     {
         public string SearchTerm { get; set; }
+        public string NationalId { get; set; }
         public bool IsDropDown { get; set; }
         public string BeneficiaryName { get; set; }
         public string UqamaNo { get; set; }
@@ -31,6 +32,7 @@ namespace Focus.Business.Benificary.Queries
         public string Contact { get; set; }
         public string Gender { get; set; }
         public string Status { get; set; }
+        public Guid? PaymentType { get; set; }
 
         public class Handler : IRequestHandler<GetBenificariesListQuery, PagedResult<List<BenificariesLookupModel>>>
         {
@@ -66,7 +68,11 @@ namespace Focus.Business.Benificary.Queries
                     }
                     else
                     {
-                        var query = Context.Beneficiaries.AsNoTracking().Include(x => x.AuthorizedPersons).Select(x => new BenificariesLookupModel
+                        var query = Context.Beneficiaries.AsNoTracking()
+                            .Include(x => x.AuthorizedPersons)
+                            .Include(x=>x.PaymentTypes)
+                            .Include(x=>x.ApprovalPersons)
+                            .Select(x => new BenificariesLookupModel
                         {
                             Id = x.Id,
                             Name = x.Name,
@@ -75,6 +81,9 @@ namespace Focus.Business.Benificary.Queries
                             PaymentIntervalMonth = x.PaymentIntervalMonth,
                             AmountPerMonth = x.AmountPerMonth,
                             UgamaNo = x.UgamaNo,
+                            PaymentTypeName = x.PaymentTypes.Name,
+                            PaymentTypeNameAr = x.PaymentTypes.NameAr,
+                            ApprovalPersonName = x.ApprovalPersons.Name==null || x.ApprovalPersons.Name == ""? x.ApprovalPersons.NameAr: x.ApprovalPersons.Name,
                             PhoneNo = x.PhoneNo,
                             IsActive = x.IsActive,
                             IsRegister = x.IsRegister,
@@ -166,6 +175,11 @@ namespace Focus.Business.Benificary.Queries
 
                             query = query.Where(x => x.IsActive == isActive);
                         }
+                        if (request.PaymentType != null && request.PaymentType!=Guid.Empty)
+                        {
+                            query = query.Where(x => x.PaymentTypeId== request.PaymentType);
+                        }
+
 
 
                         var count = await query.CountAsync();
