@@ -44,22 +44,11 @@
 
                 root.$https.get('/account/UserList', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                     if (response.data != null) {
-                        if (root.cashallocation) {
+                        
+                         {
                             response.data.forEach(function (result) {
                                 debugger;
-                                if (result.temporaryCashReceiver) {
-                                    root.options.push({
-                                        id: result.id,
-                                        name: result.fullName
-                                    })
-                                }
-                                
-                            })
-                        }
-                        else {
-                            response.data.forEach(function (result) {
-                                debugger;
-                                if(result.roleName == 'Cashier')
+                               
                                 {
                                     root.options.push({
                                         id: result.id,

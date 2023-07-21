@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group has-label col-sm-3 ">
                         <label class="text  font-weight-bolder">
-                            {{ $t('AddFunds.CharityResource') }}:<span class="text-danger"> *</span>
+                            {{ $t('AddFunds.CharityResource') }}:
                         </label>
                         <charityresources v-model="brand.charityResouceId" :values="brand.charityResouceId" />
                     </div>
@@ -31,7 +31,7 @@
                         </label>
                         <div class="col-sm-12">
                             <multiselect v-model="brand.typeOfTransaction"
-                            :options="['Monetary ', 'Check']" :show-labels="false"
+                            :options="['Cash', 'Check']" :show-labels="false"
                             :placeholder="$t('AddBenificary.SelectType')">
                         </multiselect>
                             </div>
@@ -226,6 +226,12 @@ export default {
 
         if (this.brand.id == '00000000-0000-0000-0000-000000000000') {
             this.GetAutoCode('Funds');
+        }
+    },
+    created:function(){
+        if (this.brand.id == '00000000-0000-0000-0000-000000000000') {
+            this.brand.userId=localStorage.getItem('UserId');
+
         }
     }
 }
