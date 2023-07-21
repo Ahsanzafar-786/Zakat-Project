@@ -243,6 +243,47 @@ namespace Noble.Report.Reports.Invoice
                             ASPxWebDocumentViewer1.OpenReport(report);
                         }
                     }
+                    else if (formName == "Funds")
+                    {
+                        var Id = Request.QueryString["id"] == "null" || Request.QueryString["id"] == "00000000-0000-0000-0000-000000000000" ? "" : Request.QueryString["id"];
+                        var funds = GetFunds.GetFundsDtl(Id, token, serverAddress);
+                        if (Print=="true") {
+                            ASPxWebDocumentViewer1.Visible = true;
+                            ASPxGridView1.Visible = false;
+                            XtraReport report1 = new Noble.Report.Reports.Invoice.Funds(companyInfo, funds);
+                            ASPxWebDocumentViewer1.OpenReport(report1);
+                            report1.DisplayName = "FundReport";
+                        }
+                        else
+                        {
+
+                            if (Convert.ToBoolean(isDownload))
+                            {
+                                // Enable CORS
+                                HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
+
+                                XtraReport report1 = new Noble.Report.Reports.Invoice.Funds(companyInfo, funds);
+                                report1.CreateDocument();
+                                using (var stream = new MemoryStream())
+                                {
+                                    report1.ExportToPdf(stream);
+                                    byte[] bytes = stream.ToArray();
+                                    Response.Clear();
+                                    Response.ContentType = "application/pdf";
+                                    Response.AppendHeader("Content-Disposition", "attachment; filename=Invoice.pdf");
+                                    Response.BinaryWrite(bytes);
+                                }
+                            }
+                            else
+                            {
+
+                                ASPxWebDocumentViewer1.Visible = true;
+                                ASPxGridView1.Visible = false;
+                                XtraReport report = new Noble.Report.Reports.Invoice.Funds(companyInfo, funds);
+                                ASPxWebDocumentViewer1.OpenReport(report);
+                            }
+                        }
+                    }
                 }
                 }
             catch (Exception ex)

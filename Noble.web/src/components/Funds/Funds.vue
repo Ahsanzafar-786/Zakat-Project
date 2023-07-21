@@ -61,6 +61,9 @@
                                     <th class="text-center">
                                         {{ $t('Funds.Date') }}
                                     </th>
+                                    <th class="text-center">
+                                        {{ $t('Benificary.Action') }}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -90,6 +93,18 @@
                                     </td>
                                     <td class="text-center">
                                         {{ brand.date }}
+                                    </td>
+                                    <td class="text-center d-flex align-items-baseline justify-content-center"
+                                        v-if="roleName != 'User'">
+                                        <button type="button" class="btn btn-light dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            {{ $t('Payment.Action') }} <i class="mdi mdi-chevron-down"></i></button>
+                                        <div class="dropdown-menu text-center">
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                v-on:click="PrintRdlc(brand.id,false)">{{ $t('Payment.Print') }}</a>
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                v-on:click="PrintRdlc(brand.id,true)">{{ $t('PDF') }}</a>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -136,7 +151,8 @@
                     </div>
                 </div>
             </div>
-
+            <print :show="show1" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"
+                @IsSave="IsSaveRpt" />
             <funds-mod :brand="newFunds" :show="show" v-if="show" @close="IsSave" :type="type" />
         </div>
 
@@ -146,10 +162,14 @@
 
 <script>
 import clickMixin from '@/Mixins/clickMixin'
+import moment from 'moment'
 export default {
     mixins: [clickMixin],
     data: function () {
         return {
+            changereport: 0,
+            reportsrc: '',
+            show1: false,
         user:'',
             show: false,
             fundslist: [],
@@ -204,7 +224,39 @@ export default {
             this.show = !this.show;
             this.type = "Add";
         },
+        IsSaveRpt: function () {
+            this.show1 = !this.show1;
+        },
+        PrintRdlc: function (val,isDownload) {
+            debugger;
+            var companyId = '';
+            if (this.$session.exists()) {
+                companyId = localStorage.getItem('CompanyID');
+            }
+            var root=this;
+            if (isDownload) {
+                this.loading=true;
+                this.$https.get(this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Funds'+ '&isDownload=' + isDownload
+                , {  responseType: 'blob' } ) .then(function (response) {
+                       debugger;
+                        root.loading=false;
+                        const url = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        var date = moment().format('DD MMM YYYY');
+                        link.setAttribute('download','benificary ' + date + '.pdf');
+                        document.body.appendChild(link);
+                        link.click();
 
+                    })
+            }
+
+           else{
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Funds'+ '&isDownload=' + isDownload
+                this.changereportt++;
+                this.show1 = !this.show1;
+           }
+        },
         GetFunds: function () {
             var root = this;
             var token = '';

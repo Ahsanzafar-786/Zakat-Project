@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace Focus.Business.CharityFunds.Models
+namespace Noble.Report.Models
 {
     public class FundsLookupModel
     {
