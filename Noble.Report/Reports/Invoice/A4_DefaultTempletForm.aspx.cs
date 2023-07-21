@@ -253,6 +253,7 @@ namespace Noble.Report.Reports.Invoice
                             XtraReport report1 = new Noble.Report.Reports.Invoice.Funds(companyInfo, funds);
                             ASPxWebDocumentViewer1.OpenReport(report1);
                             report1.DisplayName = "FundReport";
+                            ASPxWebDocumentViewer1.OpenReport(report1);
                         }
                         else
                         {

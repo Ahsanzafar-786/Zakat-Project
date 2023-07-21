@@ -370,7 +370,8 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Note') }}:
                         </label>
-                        <VueEditor v-model="brand.note" />
+                        <!-- <VueEditor v-model="brand.note" /> -->
+                        <textarea v-model="brand.note" class="form-control"  rows="4"></textarea>
                     </div>
                  </div>
 
@@ -407,9 +408,7 @@ import {
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import {
-    VueEditor
-} from "vue2-editor";
+
 
 import Multiselect from 'vue-multiselect';
 import moment from 'moment'
@@ -420,7 +419,6 @@ export default {
     components: {
         Loading,
         Multiselect,
-        VueEditor
     },
     data: function () {
         return {

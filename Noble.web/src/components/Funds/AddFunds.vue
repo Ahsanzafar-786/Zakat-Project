@@ -53,7 +53,8 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.Description') }}:
                         </label>
-                        <VueEditor v-model="brand.description" />
+                        <!-- <VueEditor v-model="brand.description" /> -->
+                        <textarea v-model="brand.description" class="form-control"  rows="4"></textarea>
                     </div>
 
                 </div>
@@ -63,6 +64,10 @@
                     v-bind:disabled="$v.brand.$invalid" v-if="type != 'Edit' && roleName != 'User'">
                     {{ $t('Save') }}
                 </button>
+                <button type="button" class="btn btn-soft-primary btn-sm" v-bind:disabled="$v.brand.$invalid"
+                v-if="type != 'Edit' && roleName != 'User'" v-on:click="SaveFunds(true)">
+                            {{ $t('SaveasPrint') }}
+                        </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveFunds"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName != 'User'">
                     {{ $t('Update') }}
@@ -72,16 +77,17 @@
                 </button>
             </div>
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
+            <print :show="show1" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="IsSaveRpt"
+                @IsSave="IsSaveRpt" />
         </div>
     </modal>
 </template>
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
-import { required } from "vuelidate/lib/validators"
+import { required,minValue } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import { VueEditor } from "vue2-editor";
 import Multiselect from 'vue-multiselect';
 
 
@@ -91,7 +97,6 @@ export default {
     props: ['show', 'brand', 'type'],
     components: {
         Loading,
-        VueEditor,
         Multiselect
     },
     data: function () {
@@ -101,24 +106,50 @@ export default {
             english: '',
             roleName: '',
             loading: false,
+            changereport: 0,
+            reportsrc1: '',
+            show1: false,
             
         }
     },
     validations: {
         brand: {
             amount: {
-                required
-            },
+                required,
+                minValue: minValue(0.01)            },
             code: {
                 required
             }
         }
     },
     methods: {
+        IsSaveRpt: function () {
+            this.show1 = !this.show1;
+            this.$emit('close');
+
+            
+        },
         close: function () {
             this.$emit('close');
         },
-        SaveFunds: function () {
+  
+        PrintRdlc: function (val,printReport) {
+            debugger;
+
+            var companyId = '';
+            if (this.$session.exists()) {
+                companyId = localStorage.getItem('CompanyID');
+            }
+            this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Funds'+ '&Print=' + printReport
+
+
+
+            this.changereport++;
+            this.show1 = !this.show1;
+
+
+        },
+        SaveFunds: function (isPrint) {
 
             var root = this;
             if(this.roleName != 'Admin')
@@ -136,6 +167,7 @@ export default {
             this.$https.post('/Benificary/SaveFunds', this.brand, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(function (response) {
                     if (response.data.isSuccess == true) {
+
                         if (root.type != "Edit") {
 
                             root.$swal({
@@ -148,7 +180,7 @@ export default {
                                 timerProgressBar: true,
                             });
 
-                            root.close();
+                          
                         }
                         else {
 
@@ -161,9 +193,16 @@ export default {
                                 timer: 1500,
                                 timerProgressBar: true,
                             });
-                            root.close();
 
                         }
+                        if (isPrint == true) {
+                                root.PrintRdlc(response.data.id,true);
+
+                            } 
+                            else
+                            {
+                                root.close();
+                            }
                     }
                     else {
                         root.$swal({

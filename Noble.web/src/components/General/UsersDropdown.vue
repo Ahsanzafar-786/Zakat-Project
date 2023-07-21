@@ -47,8 +47,6 @@
                         
                          {
                             response.data.forEach(function (result) {
-                                debugger;
-                               
                                 {
                                     root.options.push({
                                         id: result.id,
