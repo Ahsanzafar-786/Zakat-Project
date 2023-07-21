@@ -227,7 +227,7 @@ export default {
         IsSaveRpt: function () {
             this.show1 = !this.show1;
         },
-        PrintRdlc: function (val,isDownload,print) {
+        PrintRdlc: function (val,isDownload) {
             debugger;
             var companyId = '';
             if (this.$session.exists()) {
@@ -252,7 +252,7 @@ export default {
             }
 
            else{
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Funds'+ '&isDownload=' + isDownload+'&Print='+print
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Funds'+ '&isDownload=' + isDownload
                 this.changereportt++;
                 this.show1 = !this.show1;
            }
