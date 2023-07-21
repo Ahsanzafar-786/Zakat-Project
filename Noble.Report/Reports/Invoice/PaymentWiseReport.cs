@@ -16,13 +16,13 @@ namespace Noble.Report.Reports.Invoice
             InitializeComponent();
             CompanyInfo.DataSource = companyDtl;
             PaymentTransection.DataSource=paymentDtl;
-            if (companyDtl.Base64Logo != null && companyDtl.Base64Logo != "" && companyDtl.Base64Logo != string.Empty)
-            {
-                byte[] footerData = Convert.FromBase64String(companyDtl.Base64Logo);
-                MemoryStream Footerms = new MemoryStream(footerData);
-                Bitmap FooterImg = new Bitmap(Footerms);
-                xrPictureBox1.Image = FooterImg;
-            }
+            //if (companyDtl.Base64Logo != null && companyDtl.Base64Logo != "" && companyDtl.Base64Logo != string.Empty)
+            //{
+            //    byte[] footerData = Convert.FromBase64String(companyDtl.Base64Logo);
+            //    MemoryStream Footerms = new MemoryStream(footerData);
+            //    Bitmap FooterImg = new Bitmap(Footerms);
+            //    xrPictureBox1.Image = FooterImg;
+            //}
         }
 
     }

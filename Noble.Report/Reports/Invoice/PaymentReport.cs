@@ -17,15 +17,15 @@ namespace Noble.Report.Reports.Invoice
 
             PaymentDtl.DataSource = Payments;
             CompanyDtl.DataSource = companyDetail;
-            xrLabel17.Text=Convert.ToDateTime(Payments.Month).ToString("MMMM");
+            //xrLabel17.Text=Convert.ToDateTime(Payments.Month).ToString("MMMM");
 
-            if (companyDetail.Base64Logo != null && companyDetail.Base64Logo != "" && companyDetail.Base64Logo != string.Empty)
-            {
-                byte[] footerData = Convert.FromBase64String(companyDetail.Base64Logo);
-                MemoryStream Footerms = new MemoryStream(footerData);
-                Bitmap FooterImg = new Bitmap(Footerms);
-                xrPictureBox1.Image = FooterImg;
-            }
+            //if (companyDetail.Base64Logo != null && companyDetail.Base64Logo != "" && companyDetail.Base64Logo != string.Empty)
+            //{
+            //    byte[] footerData = Convert.FromBase64String(companyDetail.Base64Logo);
+            //    MemoryStream Footerms = new MemoryStream(footerData);
+            //    Bitmap FooterImg = new Bitmap(Footerms);
+            //    xrPictureBox1.Image = FooterImg;
+            //}
         }
 
     }
