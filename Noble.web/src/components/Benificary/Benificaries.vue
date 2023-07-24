@@ -394,7 +394,7 @@
                     </div>
                 </div>
             </div>
-            <loading :active.sync="loading" :can-cancel="true" :is-full-page="false"></loading>  
+            <!-- <loading :active.sync="loading" :can-cancel="true" :is-full-page="false"></loading>   -->
             <print :show="show1" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"
                 @IsSave="IsSaveRpt" />
             <benificary-mod :brand="newBenificary" :show="show" v-if="show" @close="IsSave" :type="type" />
