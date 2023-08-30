@@ -212,7 +212,6 @@ namespace Noble.Api.Controllers
             //permissionList.CompanyId = User.Identity.CompanyId();
             //permissionList.TokenName = current.Request.Scheme + "://" + current.Request.Host + "/api";
             //var reportPath = _configuration.GetSection("ReportServer:Path").Value;
-
             //using var ping = new Ping();
             //using var httpClient = new HttpClient();
             //StringContent content = new StringContent(JsonConvert.SerializeObject(permissionList), Encoding.UTF8, "application/json");
@@ -222,9 +221,6 @@ namespace Noble.Api.Controllers
             return token;
 
         }
-
-
-
         [Route("api/account/DuplicateEmail")]
         [HttpGet("DuplicateEmail")]
         public async Task<IActionResult> DuplicateEmail(string email)
