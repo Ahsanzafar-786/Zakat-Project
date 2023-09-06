@@ -423,7 +423,8 @@
     "DailyPayments":"المدفوعات اليومية",
     "AddDailyPayment":"أضف الدفع اليومي",
     "Note":"ملاحظة",
-    "AuthorizedPerson":"اسم الوكيل"
+    "AuthorizedPerson":"اسم الوكيل",
+    "NextPaymentDate":"تاريخ الدفع التالي"
   },
 
   "AddPayment":{

@@ -11,7 +11,7 @@
   "PaidPayments":"Paid Payments",
   "DuePayments":"Due Payments",
   "UnPaidPayments":"UnPaid Payments",
-  "SelectUser":"Select User",
+  "SelectUser":"Select User", 
   "SaveasPrint":"Save as Print",
 
   "General": {
@@ -414,7 +414,8 @@
     "DailyPayments":"Daily Payments",
     "AddDailyPayment":"Add Daily Payment",
     "Note":"Note",
-    "AuthorizedPerson":"Authorized Person"
+    "AuthorizedPerson":"Authorized Person",
+    "NextPaymentDate":"Next Payment Date"
   },
 
   "AddPayment":{

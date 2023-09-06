@@ -119,7 +119,7 @@ namespace Focus.Business.Payments.Queries
                     }
                     if (request.Code != null && request.Code > 0)
                     {
-                        query = query.Where(x => x.Code == request.Code);
+                        query = query.Where(x => x.BenificaryCode == request.Code);
                     }
                     if (request.BenificaryCode != null && request.BenificaryCode > 0)
                     {

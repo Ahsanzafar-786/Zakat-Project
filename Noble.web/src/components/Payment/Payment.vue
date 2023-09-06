@@ -198,6 +198,9 @@
                                         {{ $t('Payment.LastPayment') }}
                                     </th>
                                     <th class="text-center">
+                                        {{ $t('Payment.NextPaymentDate') }}
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('Payment.Note') }}
                                     </th>
                                     
@@ -279,6 +282,9 @@
                                     <td class="text-center">
                                         <!-- {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }} -->
                                         {{ parseFloat(Math.round(brand.lastPaymentAmount)).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }} - {{ GetDate(brand.lastPaymentDate) }}
+                                    </td>
+                                    <td class ="text-center" >
+                                        {{ GetDate2(brand.lastPaymentDate) }}
                                     </td>
                                     <td class="text-center">{{ brand.note }}</td>
                                     <td class="text-center">{{ brand.cashier }}</td>
@@ -513,6 +519,14 @@ export default {
                 return '';
             }
         },
+        GetDate2:function(date){
+        if(date!=undefined){
+            return moment(date).add(1,'months').format('MMMM Do YYYY');
+        }
+        else {
+            return '';
+        }
+        },
         PrintRdlc: function (Id) {
             var companyId = '';
             if (this.$session.exists()) {
@@ -533,7 +547,7 @@ export default {
 
         GetPayment: function () {
             debugger;
-
+ 
             var root = this;
             var token = '';
             this.loading = true;
