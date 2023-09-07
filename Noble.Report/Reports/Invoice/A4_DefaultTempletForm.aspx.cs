@@ -12,6 +12,7 @@ using System.Web;
 using System.Globalization;
 using DevExpress.Office.NumberConverters;
 using System.IO;
+using DevExpress.Data;
 
 namespace Noble.Report.Reports.Invoice
 {
@@ -93,6 +94,13 @@ namespace Noble.Report.Reports.Invoice
                             }
                             ASPxGridView1.DataSource = dt;
                             ASPxGridView1.DataBind();
+                            ASPxGridView1.TotalSummary.Clear();
+                            ASPxSummaryItem Amount = new ASPxSummaryItem();
+                            Amount.FieldName = "Amount";
+                            Amount.DisplayFormat = "{0:#,0.00}";
+                            Amount.SummaryType = SummaryItemType.Sum;
+                            Amount.ShowInColumn = "Amount";
+                            ASPxGridView1.TotalSummary.Add(Amount);
 
 
                         }
@@ -146,6 +154,13 @@ namespace Noble.Report.Reports.Invoice
                             }
                             ASPxGridView1.DataSource = dt;
                             ASPxGridView1.DataBind();
+                            ASPxGridView1.TotalSummary.Clear();
+                            ASPxSummaryItem Amount = new ASPxSummaryItem();
+                            Amount.FieldName = "Amount";
+                            Amount.DisplayFormat = "{0:#,0.00}";
+                            Amount.SummaryType = SummaryItemType.Sum;
+                            Amount.ShowInColumn = "Amount";
+                            ASPxGridView1.TotalSummary.Add(Amount);
 
 
                         }
