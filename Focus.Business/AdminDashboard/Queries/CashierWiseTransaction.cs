@@ -52,7 +52,7 @@ namespace Focus.Business.AdminDashboard.Queries
                        Id = x.Id,
                     }).ToListAsync();
 
-                    var charityTransaction = await Context.CharityTransaction.AsNoTracking().Where(x => x.CharityTransactionDate.Value >= request.FromDate.Value && x.CharityTransactionDate.Value <= request.ToDate.Value.AddDays(1)).Select(x => new CharityTransactionLookupModel
+                    var charityTransaction = await Context.CharityTransaction.AsNoTracking().Where(x => x.CharityTransactionDate.Value.Date >= request.FromDate.Value.Date && x.CharityTransactionDate.Value.Date <= request.ToDate.Value.Date).Select(x => new CharityTransactionLookupModel
                     {
                         Id = x.Id,
                         DoucmentId= x.DoucmentId,
