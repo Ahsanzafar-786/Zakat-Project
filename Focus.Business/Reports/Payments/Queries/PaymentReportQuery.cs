@@ -69,7 +69,7 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        query = query.Where(x => x.Date >= request.FromDate.Value && x.Date <= request.ToDate.Value.AddDays(1)).ToList();
+                        query = query.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
                     }
 
 
