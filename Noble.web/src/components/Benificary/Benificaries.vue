@@ -48,14 +48,14 @@
                                 aria-describedby="button-addon1">
                         </div>
                         <div class="col-3 form-group">
-                            <label>{{ $t('Benificary.Amount') }}</label>
+                            <label></label>
                             <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByAmount')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
                                 <!-- <decimaltofix v-model="amount" :placeholder="$t('Benificary.SearchByAmount')"  > </decimaltofix> -->
                         </div>
                         <div class="col-3 form-group">
-                            <label>Payment Type</label>
+                            <label>{{ $t('Benificary.PaymentType') }}</label>
                             <paymenttype v-model="paymentType"  ref="PaymentType"/>
                         </div>
                         <!-- <div class="col-4 form-group">

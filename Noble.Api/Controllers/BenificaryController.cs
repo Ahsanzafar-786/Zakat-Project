@@ -37,6 +37,7 @@ using Focus.Business.Reports.Payments.Queries;
 using Focus.Persistence.Migrations;
 using MailKit.Search;
 using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.InkML;
 
 namespace Noble.Api.Controllers
 {
@@ -49,7 +50,7 @@ namespace Noble.Api.Controllers
 
         public BenificaryController(ApplicationDbContext context)
         {
-            _Context = context;        
+            _Context = context;
         }
 
         #region Dashboard
@@ -57,7 +58,7 @@ namespace Noble.Api.Controllers
         [HttpGet("GetDashboardDetail")]
         public async Task<IActionResult> GetDashboardDetail(Guid? userId)
         {
-            var dashboard = await Mediator.Send(new AdminDashboardDetailsQuery 
+            var dashboard = await Mediator.Send(new AdminDashboardDetailsQuery
             {
                 UserId = userId,
             });
@@ -65,15 +66,15 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetDashboardChartsDetail")]
         [HttpGet("GetDashboardChartsDetail")]
-        public async Task<IActionResult> GetDashboardChartsDetail(DateTime year )
+        public async Task<IActionResult> GetDashboardChartsDetail(DateTime year)
         {
-            var dashboard1 = await Mediator.Send(new AdminDashboardChartsDetailsQuery 
-            { 
+            var dashboard1 = await Mediator.Send(new AdminDashboardChartsDetailsQuery
+            {
                 Year = year
             });
             return Ok(dashboard1);
         }
-        
+
         [Route("api/Benificary/PaymentTypeWiseTransaction")]
         [HttpGet("PaymentTypeWiseTransaction")]
         public async Task<IActionResult> PaymentTypeWiseTransactionQuery()
@@ -96,16 +97,16 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetBenificaryList")]
         [HttpGet("GetBenificaryList")]
-        public async Task<IActionResult> GetBenificaryList(string searchTerm, int? pageNumber, bool isDropDown,string beneficiaryName, string uqamaNo, string beneficiaryId, Guid? authorizationPersonId, Guid? approvalPersonId, string registered, DateTime? fromDate, DateTime? toDate, DateTime? startMonth, DateTime? year,
-            decimal? amount,string nationality,string gender,string contact,string status, Guid? paymentType)
+        public async Task<IActionResult> GetBenificaryList(string searchTerm, int? pageNumber, bool isDropDown, string beneficiaryName, string uqamaNo, string beneficiaryId, Guid? authorizationPersonId, Guid? approvalPersonId, string registered, DateTime? fromDate, DateTime? toDate, DateTime? startMonth, DateTime? year,
+            decimal? amount, string nationality, string gender, string contact, string status, Guid? paymentType)
         {
             var benificary = await Mediator.Send(new GetBenificariesListQuery
             {
                 SearchTerm = searchTerm,
                 IsDropDown = isDropDown,
                 PageNumber = pageNumber ?? 1,
-                BeneficiaryName= beneficiaryName,
-                UqamaNo= uqamaNo,
+                BeneficiaryName = beneficiaryName,
+                UqamaNo = uqamaNo,
                 BenificiaryId = beneficiaryId,
                 AuthorizedPersonId = authorizationPersonId,
                 ApprovalPersonId = approvalPersonId,
@@ -188,18 +189,18 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetBenificaryNoteList")]
         [HttpGet("GetBenificaryNoteList")]
-        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown, string beneficiaryName,string beneficiaryNote, string benificaryCode, string nationalId, string contactNo)
-     {
+        public async Task<IActionResult> GetBenificaryNoteList(string searchTerm, int? pageNumber, bool isDropDown, string beneficiaryName, string beneficiaryNote, string benificaryCode, string nationalId, string contactNo)
+        {
             var benificary = await Mediator.Send(new GetBenificaryNoteListQuery
             {
                 SearchTerm = searchTerm,
                 IsDropDown = isDropDown,
                 PageNumber = pageNumber ?? 1,
-                BeneficiaryName= beneficiaryName,
+                BeneficiaryName = beneficiaryName,
                 BeneficiaryNote = beneficiaryNote,
-                BenificaryCode= benificaryCode,
-                NationalId= nationalId,
-                ContactNo= contactNo,
+                BenificaryCode = benificaryCode,
+                NationalId = nationalId,
+                ContactNo = contactNo,
             });
             return Ok(benificary);
         }
@@ -214,7 +215,7 @@ namespace Noble.Api.Controllers
             });
             return Ok(benificary);
         }
-        
+
         [Route("api/Benificary/DeleteBeneficiaryNote")]
         [HttpGet("DeleteBeneficiaryNote")]
         public async Task<IActionResult> DeleteBeneficiaryNote(Guid id)
@@ -389,17 +390,17 @@ namespace Noble.Api.Controllers
         }
         [Route("api/Benificary/GetPaymentsList")]
         [HttpGet("GetPaymentsList")]
-        public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber , string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
-            , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender,string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId)
+        public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
+            , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender, string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId)
         {
             var payment = await Mediator.Send(new PaymentListQuery
             {
                 SearchTerm = searchTerm,
                 PageNumber = pageNumber ?? 1,
                 BeneficiaryName = beneficiaryName,
-                Code=code,
-                Amount=amount,
-                BenificaryCode=benificaryCode,
+                Code = code,
+                Amount = amount,
+                BenificaryCode = benificaryCode,
                 FromDate = fromDate,
                 ToDate = toDate,
                 Month = month,
@@ -444,9 +445,9 @@ namespace Noble.Api.Controllers
                 ToDate = toDate,
             });
             return Ok(charity);
-        } 
-        
-        
+        }
+
+
         [Route("api/Benificary/GetPaymentReportQuery")]
         [HttpGet("GetPaymentReportQuery")]
         public async Task<IActionResult> GetPaymentReportQuery(Guid? benificaryId, Guid? userId, DateTime? fromDate, DateTime? toDate)
@@ -463,7 +464,7 @@ namespace Noble.Api.Controllers
 
         [Route("api/Benificary/GetBenificaryReport")]
         [HttpGet("GetBenificaryReport")]
-        public async Task<IActionResult> GetBenificaryReport(Guid? authorizationPersonId,Guid? approvalPersonId,string registered, DateTime? fromDate, DateTime? toDate, string searchTerm, string uqamaNo, string beneficiaryId)
+        public async Task<IActionResult> GetBenificaryReport(Guid? authorizationPersonId, Guid? approvalPersonId, string registered, DateTime? fromDate, DateTime? toDate, string searchTerm, string uqamaNo, string beneficiaryId)
         {
             var charity = await Mediator.Send(new BeneficiaryListQuery
             {
@@ -495,32 +496,32 @@ namespace Noble.Api.Controllers
 
         #region Imports
 
-      
+
         [Route("api/Benificary/UploadFilesForImportAuthorize")]
         [HttpPost("UploadFilesForImportAuthorize")]
         public async Task<IActionResult> UploadFilesForImportAuthorize([FromBody] List<AuthorizeVm> rows)
         {
             try
             {
-                var list=new List<AuthorizedPerson>();
-            foreach (var request in rows)
-            {
-                 list.Add( new AuthorizedPerson
+                var list = new List<AuthorizedPerson>();
+                foreach (var request in rows)
                 {
-                    Name = request.Name,
-                    AuthorizedPersonCode = Int32.Parse(request.Id),
-                    NameAr = request.NameAr,
-                    PhoneNo = request.Phone,
-                    Address = request.Address,
-                    Nationality = request.Nationality,
-                    Gender = request.Gender,
-                    IqamaNo = request.IqamaNo,
-                    PassportNo = request.PassportNo,
-                });
+                    list.Add(new AuthorizedPerson
+                    {
+                        Name = request.Name,
+                        AuthorizedPersonCode = Int32.Parse(request.Id),
+                        NameAr = request.NameAr,
+                        PhoneNo = request.Phone,
+                        Address = request.Address,
+                        Nationality = request.Nationality,
+                        Gender = request.Gender,
+                        IqamaNo = request.IqamaNo,
+                        PassportNo = request.PassportNo,
+                    });
 
-            }
-            await _Context.AuthorizedPersons.AddRangeAsync(list);
-            await _Context.SaveChangesAsync();
+                }
+                await _Context.AuthorizedPersons.AddRangeAsync(list);
+                await _Context.SaveChangesAsync();
             }
             catch (Exception e)
             {
@@ -529,7 +530,7 @@ namespace Noble.Api.Controllers
             }
 
             var message = "done";
-            return Ok(message); 
+            return Ok(message);
         }
 
 
@@ -580,7 +581,7 @@ namespace Noble.Api.Controllers
                     }
 
 
-                   
+
 
                     list.Add(new Beneficiaries
                     {
@@ -592,7 +593,7 @@ namespace Noble.Api.Controllers
                         UgamaNo = request.Iqama_no,
                         PhoneNo = request.Phone,
                         Note = "",
-                        IsActive = request.Isactive == "true"?true:false,
+                        IsActive = request.Isactive == "true" ? true : false,
                         ApprovalPersonId = null,
                         Address = request.Address,
                         PaymentTypeId = payment.FirstOrDefault(x => x.Code == paymentInterval)?.Id,
@@ -629,7 +630,7 @@ namespace Noble.Api.Controllers
         {
             try
             {
-              
+
                 var Beneficiaries = _Context.Beneficiaries.AsNoTracking().ToList();
                 var list = new List<BenificaryNote>();
 
@@ -638,11 +639,11 @@ namespace Noble.Api.Controllers
                     list.Add(new BenificaryNote
                     {
                         Note = request.Note,
-                        Date=Convert.ToDateTime(request.Stamp_date),
-                        BenificaryId=Beneficiaries.FirstOrDefault(x=>x.BeneficiaryId==Convert.ToInt32(request.Beneficiary_id))?.Id,
-                        
+                        Date = Convert.ToDateTime(request.Stamp_date),
+                        BenificaryId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == Convert.ToInt32(request.Beneficiary_id))?.Id,
 
-                    }) ;
+
+                    });
 
                 }
                 await _Context.BenificaryNotes.AddRangeAsync(list);
@@ -672,9 +673,9 @@ namespace Noble.Api.Controllers
                 {
                     list.Add(new Funds
                     {
-                        Date=Convert.ToDateTime(request.Stamp_date),
-                        Amount=Convert.ToDecimal(request.Amount),
-                        Description=request.Check_No,
+                        Date = Convert.ToDateTime(request.Stamp_date),
+                        Amount = Convert.ToDecimal(request.Amount),
+                        Description = request.Check_No,
 
 
                     });
@@ -729,7 +730,7 @@ namespace Noble.Api.Controllers
 
                     //});
 
-                  var payment = new Payment()
+                    var payment = new Payment()
                     {
                         Code = Convert.ToInt32(request.Id),
                         BenificayId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == beneficiary_id)?.Id,
@@ -756,13 +757,22 @@ namespace Noble.Api.Controllers
                         Month = payment.Date,
                         Amount = payment.Amount,
                         Year = payment.Year,
-                        HijriYear= payment.HijriYear,
+                        HijriYear = payment.HijriYear,
                     };
 
-                     _Context.CharityTransaction.Add(charityTransaction);
+                    _Context.CharityTransaction.Add(charityTransaction);
+
+                    var query = _Context.Beneficiaries.AsNoTracking().FirstOrDefault(x => x.Id == charityTransaction.BenificayId);
+                    if (query != null)
+                    {
+                        query.StartMonth = charityTransaction.Month;
+                        _Context.Beneficiaries.Update(query);
+                    }
+
+
 
                 }
-               // await _Context.Payments.AddRangeAsync(list);
+                // await _Context.Payments.AddRangeAsync(list);
                 await _Context.SaveChangesAsync();
 
             }

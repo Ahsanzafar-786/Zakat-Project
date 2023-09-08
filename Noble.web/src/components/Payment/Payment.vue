@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label class="text  font-weight-bolder">
-                                {{ $t('Payment.Code') }}
+                                {{ $t('Payment.BeneficiaryCode') }}
                             </label>
                             <input v-model="code" type="text" class="form-control" :placeholder="$t('Payment.SearchByCode')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
