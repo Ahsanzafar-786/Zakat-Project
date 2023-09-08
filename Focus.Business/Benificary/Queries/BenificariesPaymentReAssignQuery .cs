@@ -1,7 +1,9 @@
 ﻿using Focus.Business.Benificary.Models;
+using Focus.Business.Common;
 using Focus.Business.Exceptions;
 using Focus.Business.Interface;
 using Focus.Business.Transactions.Models;
+using Focus.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,208 +14,68 @@ using System.Threading.Tasks;
 
 namespace Focus.Business.Benificary.Queries
 {
-    public class BenificariesPaymentReAssignQuery  : IRequest<BenificariesLookupModel>
+    public class BenificariesPaymentReAssignQuery  : IRequest<Message>
     {
-        public bool IsPayment { get; set; }
-        public Guid Id { get; set; }
 
-        public class Handler : IRequestHandler<BenificariesPaymentReAssignQuery , BenificariesLookupModel>
+
+        public class Handler : IRequestHandler<BenificariesPaymentReAssignQuery, Message>
         {
             public readonly IApplicationDbContext Context;
             private readonly ILogger _logger;
 
-            public Handler(IApplicationDbContext context, ILogger<BenificariesPaymentReAssignQuery > logger)
+            public Handler(IApplicationDbContext context, ILogger<BenificariesPaymentReAssignQuery> logger)
             {
                 Context = context;
                 _logger = logger;
             }
-            public async Task<BenificariesLookupModel> Handle(BenificariesPaymentReAssignQuery  request, CancellationToken cancellationToken)
+            public async Task<Message> Handle(BenificariesPaymentReAssignQuery request, CancellationToken cancellationToken)
             {
                 try
                 {
-                    if(request.IsPayment)
+                    
+                    var charityTransactions = await Context.CharityTransaction.AsNoTracking().ToListAsync();
+
+                    
+                    var beneficiaries = await Context.Beneficiaries.AsNoTracking().ToListAsync();
+
+                    
+
+                    foreach (var beneficiary in beneficiaries)
                     {
-                        var charity = await Context.CharityTransaction.Where(x => x.BenificayId == request.Id).Select(x => new CharityTransactionLookupModel()
+                        if (beneficiary != null && beneficiary.CurrentPaymentMonth == null)
                         {
-                            Id = x.Id,
-                            DoucmentId = x.DoucmentId,
-                            DoucmentCode = x.DoucmentCode,
-                            Amount = x.Amount,
-                            CharityTransactionDate = x.CharityTransactionDate,
-                            DoucmentDate = x.DoucmentDate,
-                            Month = x.Month,
-                            Years = x.Month.Value.Year.ToString(),
-                            PaymentMonths = x.Month.Value.Month,
-                            Year = x.Year,
-                        }).ToListAsync();
 
-                        var query = await Context.Beneficiaries.AsNoTracking().Include(x => x.PaymentTypes).Select(x => new BenificariesLookupModel
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            BeneficiaryId = x.BeneficiaryId,
-                            ApprovalStatus = x.ApprovalStatus,
-                            PaymentIntervalMonth = x.PaymentIntervalMonth,
-                            AmountPerMonth = x.AmountPerMonth,
-                            UgamaNo = x.UgamaNo,
-                            PhoneNo = x.PhoneNo,
-                            PaymentType = x.PaymentTypes.Code,
-                            Note = x.Note,
-                            IsActive = x.IsActive,
-                            IsRegister = x.IsRegister,
-                            AuthorizedPersonId = x.AuthorizedPersonId,
-                            Address = x.Address,
-                            ApprovalPersonId = x.ApprovalPersonId,
-                            Nationality = x.Nationality,
-                            Gender = x.Gender,
-                            NameAr = x.NameAr,
-                            PassportNo = x.PassportNo,
-                            PaymentTypeId = x.PaymentTypeId,
-                            RecurringAmount = x.RecurringAmount,
-                            StartDate = x.StartDate,
-                            FirstMonth = x.StartDate.Value.Month,
-                            EndMonth = x.EndDate.Value.Month,
-                            EndDate = x.EndDate,
-                            Year = x.StartMonth.Value.Year.ToString(),
-                            EndYear = x.EndDate.Value.Year.ToString(),
-                            StartMonth = x.StartMonth,
-                            ApprovedPaymentId = x.ApprovedPaymentId,
-                            DurationType = x.DurationType,
-                            AdvancePayment = x.AdvancePayment,
-                            PaymentTypeName = x.PaymentTypes.Name,
-                            ApprovalPersonName = x.ApprovalPersons.Name,
-                            Reason = x.Reason,
-                            CurrentPaymentMonth = x.CurrentPaymentMonth,
-                            CharityTransactions = charity,
-                            StartMonthAndYear = x.StartDate.Value.Month.ToString() + " - " + x.StartDate.Value.Year.ToString(),
-                            BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
+                            var records = charityTransactions.Where(x => x.BenificayId == beneficiary.Id).LastOrDefault();
+
+                            if (records != null)
                             {
-                                Id = x.Id,
-                                BenficaryId = x.BenficaryId,
-                                ApprovalPersonId = x.ApprovalPersonId,
-                                AuthorizationPersonId = x.AuthorizationPersonId,
-                                IsActive = x.IsActive,
-                                Date = x.Date.ToString(),
-                                ApprovalPersonName = x.ApprovalPerson.Name,
-                                AuthorizationPersonCode = x.AuthorizedPerson.AuthorizedPersonCode,
-                                AuthorizationPersonName = x.AuthorizedPerson.Name,
-                                Description = x.Description,
-                            }).ToList(),
-                        }).FirstOrDefaultAsync(x => x.Id == request.Id);
-
-                        if (query == null)
-                            throw new NotFoundException("Benificary Not Found", "");
-                        if (query != null)
-                        {
-                            if (query.CurrentPaymentMonth != null && query.EndDate != null)
-                            {
-                                if (query.DurationType == "Customize")
-                                {
-                                    if (query.EndDate.Value.Date.Year == query.CurrentPaymentMonth.Value.Date.Year)
-                                    {
-                                        if (query.EndDate.Value.Date.Month <= query.CurrentPaymentMonth.Value.Date.Month)
-                                        {
-                                            query.IsCustomize = true;
-
-
-                                        }
-
-
-
-                                    }
-                                }
+                                beneficiary.CurrentPaymentMonth = records.Month;
+                                // beneficiary.Total = records.Amount;
                             }
                         }
-
-
-                        return query;
+                      
                     }
-                    else
+                     Context.Beneficiaries.UpdateRange(beneficiaries);
+                    
+                  //  await Context.SaveChangesAsync(cancellationToken);
+
+                    
+                    return new Message
                     {
-                        var charityTransaction = await Context.CharityTransaction.Where(x => x.BenificayId == request.Id).ToListAsync();
-
-                        bool isDisable = false;
-
-                        if (charityTransaction.Count > 0)
-                        {
-                            isDisable = true;
-                        }
-                        
-
-                        var query = await Context.Beneficiaries.AsNoTracking()
-                            .Include(x=>x.BenificaryAuthorization)
-                            .ThenInclude(x=>x.ApprovalPerson)
-                            .Include(x => x.BenificaryAuthorization)
-                            .ThenInclude(x => x.AuthorizedPerson)
-                            .Include(x=>x.PaymentTypes).Select(x => new BenificariesLookupModel
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            BeneficiaryId = x.BeneficiaryId,
-                            ApprovalStatus = x.ApprovalStatus,
-                            PaymentType = x.PaymentTypes.Code,
-                            PaymentIntervalMonth = x.PaymentIntervalMonth,
-                            AmountPerMonth = x.AmountPerMonth,
-                            UgamaNo = x.UgamaNo,
-                            PhoneNo = x.PhoneNo,
-                            Note = x.Note,
-                            IsActive = x.IsActive,
-                            IsRegister = x.IsRegister,
-                            AuthorizedPersonId = x.AuthorizedPersonId,
-                            Address= x.Address,
-                            ApprovalPersonId = x.ApprovalPersonId,
-                            Nationality = x.Nationality,
-                            Gender = x.Gender,
-                            NameAr = x.NameAr,
-                            PassportNo= x.PassportNo,
-                            PaymentTypeId= x.PaymentTypeId,
-                            RecurringAmount= x.RecurringAmount,
-                            StartDate = x.StartDate,
-                            FirstMonth=x.StartDate.Value.Month,
-                            EndMonth = x.EndDate.Value.Month,
-                            EndDate = x.EndDate,
-                            StartMonth = x.StartMonth,
-                            ApprovedPaymentId= x.ApprovedPaymentId,
-                            DurationType = x.DurationType,
-                            AdvancePayment = x.AdvancePayment,
-                            PaymentTypeName = x.PaymentTypes.Name,
-                            PaymentTypeNameAr = x.PaymentTypes.NameAr,
-                            ApprovalPersonName = x.ApprovalPersons.Name,
-                            Reason = x.Reason,
-                            IsDisable = isDisable,
-                            StartMonthAndYear = x.StartDate.Value.Month.ToString() + " - " + x.StartDate.Value.Year.ToString(),
-                            BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
-                            {
-                                Id= x.Id,
-                                BenficaryId = x.BenficaryId,
-                                ApprovalPersonId= x.ApprovalPersonId,
-                                ApprovalPersonName=x.ApprovalPerson.Name==null || x.ApprovalPerson.Name==""? x.ApprovalPerson.NameAr: x.ApprovalPerson.Name,
-                                AuthorizationPersonId= x.AuthorizationPersonId,
-                                AuthorizationPersonCode = x.AuthorizedPerson.AuthorizedPersonCode,
-                                AuthorizationPersonName =x.ApprovalPerson.Name==null||x.AuthorizedPerson.Name==""?x.AuthorizedPerson.NameAr:x.AuthorizedPerson.Name,
-                                IsActive = x.IsActive,
-                                Date = Convert.ToDateTime(x.Date).ToString("mm/dd/yyyy"),
-                                Description = x.Description,
-                            }).ToList(),
-                        }).FirstOrDefaultAsync(x => x.Id == request.Id);
-
-
-                        //CurrentPaymentMonth = y.CharityTransaction
-                        //  .Where(ct => ct.PaymentMonth.HasValue) // Filter out transactions with null PaymentMonth
-                        //  .Max(ct => ct.PaymentMonth) ?? DateTime.Now.AddMonths(-1).Month;
-
-                        if (query == null)
-                            throw new NotFoundException("Benificary Not Found", "");
-
-
-                        return query;
-                    }
+                        Id = Guid.Empty, 
+                        IsSuccess = true,
+                        IsAddUpdate = "Data has been Added successfully"
+                    };
                 }
+                
                 catch (Exception exception)
                 {
+                    // Handle other exceptions
                     _logger.LogError(exception.Message);
                     throw new ApplicationException("Something Went Wrong.");
                 }
+
+               
             }
         }
     }

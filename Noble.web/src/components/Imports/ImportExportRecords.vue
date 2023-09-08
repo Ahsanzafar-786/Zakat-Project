@@ -24,6 +24,10 @@
                         <a v-on:click="GotoPage('/StartScreen')" href="javascript:void(0);" class="btn btn-sm btn-outline-danger ">
                             {{ $t('Import.colorNameEnglish') }}
                         </a>
+
+                        <a v-on:click="GetBenificaryData" href="javascript:void(0);" class="btn btn-sm btn-outline-primary ">
+                            ReAssign 
+                        </a>
                     </div>
                 </div>
             </div>
@@ -142,6 +146,25 @@ export default {
         GotoPage: function (link) {
             this.$router.push({
                 path: link
+            });
+        },
+        GetBenificaryData: function () {
+            var root = this;
+            var token = '';
+            this.loading = true;
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('Benificary/BeneficaryPaymentUpdate' , {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }).then(function (response) {
+                if (response.data != null) {
+                    
+                    root.loading = false;
+                }
+                root.loading = false;
             });
         },
         onCancel: function () {

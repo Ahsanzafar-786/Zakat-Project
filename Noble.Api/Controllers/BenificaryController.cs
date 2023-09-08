@@ -788,6 +788,17 @@ namespace Noble.Api.Controllers
             //return Ok(message);
         }
 
+        [Route("api/Benificary/BeneficaryPaymentUpdate")]
+        [HttpGet("BeneficaryPaymentUpdate")]
+        public async Task<IActionResult> BeneficaryPaymentUpdate()
+        {
+            var fund = await Mediator.Send(new BenificariesPaymentReAssignQuery
+            {
+                
+            });
+            return Ok(fund);
+        }
+
 
         #endregion
     }
