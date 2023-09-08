@@ -143,7 +143,7 @@ namespace Focus.Business.Benificary.Queries
                         }
                         if (request.FromDate.HasValue && request.ToDate.HasValue)
                         {
-                            query = query.Where(x => x.StartMonth.Value >= request.FromDate.Value && x.StartMonth.Value <= request.ToDate.Value.AddDays(1));
+                            query = query.Where(x => x.StartMonth.Value.Date >= request.FromDate.Value.Date && x.StartMonth.Value.Date <= request.ToDate.Value.Date);
                         }
                         if (request.StartMonth != null)
                         {

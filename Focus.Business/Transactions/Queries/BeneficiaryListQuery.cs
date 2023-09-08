@@ -56,7 +56,7 @@ namespace Focus.Business.Transactions.Queries
                     }
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        benific = benific.Where(x => x.StartDate.Value >= request.FromDate.Value && x.StartDate.Value <= request.ToDate.Value.AddDays(1)).ToList();
+                        benific = benific.Where(x => x.StartDate.Value.Date >= request.FromDate.Value.Date && x.StartDate.Value.Date <= request.ToDate.Value.Date).ToList();
                     }
                     if (!string.IsNullOrEmpty(request.SearchTerm))
                     {

@@ -127,7 +127,7 @@ namespace Focus.Business.Payments.Queries
                     }
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        query = query.Where(x => x.Date.Value >= request.FromDate.Value && x.Date.Value <= request.ToDate.Value.AddDays(1));
+                        query = query.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date);
                     }
                     if (request.Month != null)
                     {

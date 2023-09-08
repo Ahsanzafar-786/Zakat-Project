@@ -66,7 +66,7 @@ namespace Focus.Business.Transactions.Queries
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        query = query.Where(x => x.Month.Value >= request.FromDate.Value && x.Month.Value<= request.ToDate.Value.AddDays(1));
+                        query = query.Where(x => x.Month.Value.Date >= request.FromDate.Value.Date && x.Month.Value.Date <= request.ToDate.Value.Date);
                     }
 
                     
