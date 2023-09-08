@@ -13,6 +13,7 @@ namespace Focus.Domain.Entities
         public int Code { get; set; }
         public string PaymentCode { get; set; }
         public decimal Amount { get; set; }
+        public decimal TotalAmount { get; set; }
         public string UserId { get; set; }
         public DateTime? Month { get; set; }
         public DateTime? Date { get; set; }

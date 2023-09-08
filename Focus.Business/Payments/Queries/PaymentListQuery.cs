@@ -91,7 +91,7 @@ namespace Focus.Business.Payments.Queries
                                     //LastPaymentAmount = charityTransaction.OrderBy(charity => charity.CharityTransactionDate).LastOrDefault(charity => charity.DoucmentId == x.Id).Amount,
                                     //LastPaymentDate = charityTransaction.OrderBy(charity => charity.CharityTransactionDate).LastOrDefault(charity => charity.DoucmentId == x.Id).CharityTransactionDate != null ? charityTransaction.OrderBy(charity => charity.CharityTransactionDate).LastOrDefault(charity => charity.DoucmentId == x.Id).CharityTransactionDate : null,
                                     ApprovalPersonId = x.Beneficiaries.ApprovedPaymentId,
-                                    LastPaymentAmount=x.Amount,
+                                    LastPaymentAmount=x.TotalAmount,
                                     LastPaymentDate=x.Beneficiaries.CurrentPaymentMonth,
                                     ApprovalPersonName = x.Beneficiaries.ApprovalPersons.Name,
                                     PaymentType = x.Beneficiaries.PaymentTypes.Name != null ? x.Beneficiaries.PaymentTypes.Name : x.Beneficiaries.PaymentTypes.NameAr,
