@@ -62,6 +62,7 @@ namespace Focus.Business.Payments.Commands
                                 Period = DateTime.Now.Year.ToString(),
                                 Date = DateTime.Now,
                                 UserId = request.Payment.UserId,
+                                TotalAmount=request.Payment.Amount
                             };
 
                             Context.Payments.Add(payment);
@@ -71,7 +72,10 @@ namespace Focus.Business.Payments.Commands
                                 selectedMonth.Add(new SelectedMonth
                                 {
                                     PaymentId = payment.Id,
-                                    SelectMonth = request.Payment.Month
+                                    SelectMonth = request.Payment.Month,
+                                    Amount=request.Payment.Amount
+                                    
+                                    
                                 });
                             
 
@@ -82,6 +86,7 @@ namespace Focus.Business.Payments.Commands
                             if (beneficary != null)
                             {
                                 beneficary.CurrentPaymentMonth = request.Payment.Month;
+                                beneficary.LastPaymentAmount= request.Payment.Amount;
                                 Context.Beneficiaries.Update(beneficary);
 
                             }
@@ -116,6 +121,7 @@ namespace Focus.Business.Payments.Commands
                                 Period = DateTime.Now.Year.ToString(),
                                 UserId = request.Payment.UserId,
                                 Date = DateTime.Now,
+                                TotalAmount = request.Payment.Amount * request.Payment.SelectedMonth.Count
                             };
 
                             Context.Payments.Add(payment);
@@ -128,6 +134,7 @@ namespace Focus.Business.Payments.Commands
                                 {
                                     PaymentId = payment.Id,
                                     SelectMonth = item.SelectedMonth,
+                                    Amount=request.Payment.Amount,
                                 });
                             }
 
@@ -140,6 +147,8 @@ namespace Focus.Business.Payments.Commands
                                 {
                                     beneficary.CurrentPaymentMonth =
                                         request.Payment.SelectedMonth.LastOrDefault()?.SelectedMonth;
+                                        beneficary.LastPaymentAmount =
+                                        request.Payment.Amount * request.Payment.SelectedMonth.Count;
 
                                      Context.Beneficiaries.Update(beneficary);
 

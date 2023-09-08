@@ -163,7 +163,7 @@
                         <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" :isDisable="isDisableValue"/>
 
                     </div>
-                    <div class="col-md-4 form-group" v-if="roleName == 'Admin'">
+                    <div class="col-md-4 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
@@ -186,7 +186,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
+                <div class="row" v-if="paymentType != 0">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -215,7 +215,7 @@
                         <datepicker v-model="brand.endDate" v-bind:key="randerforempty" :type="'month'" />
 
                     </div>
-                    <div class="col-md-6 form-group" v-if="roleName == 'Admin'">
+                    <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
@@ -223,7 +223,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0 && roleName == 'Admin'">
+                <div class="row" v-if="paymentType != 0 ">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -237,15 +237,14 @@
                                 <tr>
                                     <th class="text-center"> #</th>
                                     <th class="text-center" >{{$t('AddBenificary.AuthorizedPerson') }}</th>
-                                    <th class="text-center" v-if="roleName == 'Admin'" >{{ $t('AddBenificary.ApprovedBy')
+                                    <th class="text-center"  >{{ $t('AddBenificary.ApprovedBy')
                                     }}</th>
                                     <th class="text-center" >{{ $t('AddBenificary.Date') }}
                                     </th>
-                                    <th class="text-center"  v-if="roleName != 'Admin'">{{ $t('AddBenificary.Status') }}
+                                    
+                                    <th class="text-center" >{{ $t('AddBenificary.Status') }}
                                     </th>
-                                    <th class="text-center" v-if="roleName == 'Admin'">{{ $t('AddBenificary.Status') }}
-                                    </th>
-                                    <th class="text-center"  v-if="roleName == 'Admin' && giveReason">{{ $t('AddBenificary.Reason') }}
+                                    <th class="text-center"  v-if="giveReason">{{ $t('AddBenificary.Reason') }}
                                     </th>
                                     <th class="text-center" >{{ $t('AddBenificary.Action') }}
                                     </th>
@@ -257,7 +256,7 @@
                                     <td class="border-top-0 text-center">
                                         {{ index + 1 }}
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable">
                                         <authorizedperson v-model="person.authorizationPersonId"
                                             :values="person.authorizationPersonId" :isDisable="'true'"/>
                                     </td>
@@ -269,18 +268,18 @@
                                         <approvalperson v-model="person.approvalPersonId"
                                             :values="person.approvalPersonId" :isDisable="'true'"/>
                                     </td> -->
-                                    <td class="border-top-0 text-center" v-if="roleName == 'Admin'">
+                                    <td class="border-top-0 text-center">
                                         <approvalperson v-model="person.approvalPersonId"
                                             :values="person.approvalPersonId"/>
 
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable">
                                         <datepicker v-model="person.date" :isDisable="true" />
                                     </td>
                                     <td class="border-top-0 text-center" v-else>
                                         <datepicker v-model="person.date"  />
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="brand.isDisable">
                                         <div class="checkbox form-check-inline">
                                             <input v-bind:id="index + 1" type="checkbox" disabled v-model="person.isActive">
                                             <label v-bind:for="index + 1"></label>
@@ -292,7 +291,7 @@
                                             <label v-bind:for="index + 1"></label>
                                         </div>
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="giveReason && roleName == 'Admin'">
+                                    <td class="border-top-0 text-center" v-if="giveReason">
                                         <div class="checkbox form-check-inline">
                                            <textarea  class="form-control" v-model="person.dec" rows="1"></textarea>
                                         </div>

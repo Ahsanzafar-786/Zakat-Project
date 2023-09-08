@@ -18,6 +18,7 @@ namespace Focus.Domain.Entities
         public string Reason { get; set; }
         public int PaymentIntervalMonth { get; set; }
         public decimal AmountPerMonth { get; set; }
+        public decimal LastPaymentAmount { get; set; }
         public decimal RecurringAmount { get; set; }
         public string UgamaNo { get; set; }
         public string PhoneNo { get; set; }
@@ -45,6 +46,7 @@ namespace Focus.Domain.Entities
         public string DurationType { get; set; }
         public virtual ICollection<BenificaryAuthorization> BenificaryAuthorization { get;set; }
         public virtual ICollection<Payment> Payments { get;set; }
+       
 
     }
 }
