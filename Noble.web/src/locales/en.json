@@ -396,6 +396,7 @@
     "Cashier":"Cashier",
     "Month":"Month",
     "Year":"Year",
+    "Code":"Code",
     "BeneficiaryCode":"Beneficiary Code",
     "Action":"Action",
     "IsVoid":"Void",
