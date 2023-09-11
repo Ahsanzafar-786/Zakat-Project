@@ -23,6 +23,7 @@ namespace Focus.Business.Benificary.Models
         public int PaymentIntervalMonth { get; set; }
         public decimal AmountPerMonth { get; set; }
         public decimal RecurringAmount { get; set; }
+        public decimal OpeningBalance { get; set; }
         public string UgamaNo { get; set; }
         public string PhoneNo { get; set; }
         public string Note { get; set; }

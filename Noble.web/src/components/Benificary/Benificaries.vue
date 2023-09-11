@@ -52,11 +52,11 @@
                             <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByAmount')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
-                                <!-- <decimaltofix v-model="amount" :placeholder="$t('Benificary.SearchByAmount')"  > </decimaltofix> -->
+                            <!-- <decimaltofix v-model="amount" :placeholder="$t('Benificary.SearchByAmount')"  > </decimaltofix> -->
                         </div>
                         <div class="col-3 form-group">
                             <label>{{ $t('Benificary.PaymentType') }}</label>
-                            <paymenttype v-model="paymentType"  ref="PaymentType"/>
+                            <paymenttype v-model="paymentType" ref="PaymentType" />
                         </div>
                         <!-- <div class="col-4 form-group">
                             <label class="text  font-weight-bolder">
@@ -84,55 +84,55 @@
                                     <authorizedperson v-model="authorizationPersonId" ref="AuthorizedDropdown" />
                                 </div>
                             </div>
-                             <div class="col-md-3 form-group">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('Benificary.ApprovalPerson') }}
-                            </label>
-                            <approvalperson v-model="approvalPersonId" ref="approvalPersonId" />
-                        </div>
-                        <div class="col-md-3 form-group">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('Benificary.Register/Un-Register') }}
-                            </label>
-                            <multiselect v-model="registered" :options="['Register', 'Un-Register']" :show-labels="false"
-                                :placeholder="$t('AddBenificary.SelectType')">
-                            </multiselect>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <!-- <div class="col-md-3 form-group">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('Benificary.ApprovalPerson') }}
+                                </label>
+                                <approvalperson v-model="approvalPersonId" ref="approvalPersonId" />
+                            </div> -->
+                            <div class="col-md-3 form-group">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('Benificary.Register/Un-Register') }}
+                                </label>
+                                <multiselect v-model="registered" :options="['Register', 'Un-Register']"
+                                    :show-labels="false" :placeholder="$t('AddBenificary.SelectType')">
+                                </multiselect>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                                 <label class="text  font-weight-bolder"> {{ $t('Benificary.Status') }}</label>
                                 <multiselect v-model="status" :options="['Active', 'De-Active']" :show-labels="false"
                                     :placeholder="$t('AddBenificary.SelectType')">
                                 </multiselect>
 
                             </div>
-                        <div class="col-md-3 form-group">
-                            <label class="text  font-weight-bolder">{{ $t('Benificary.SelectMonth') }}</label>
-                            <datepicker v-model="startMonth" :type="'month'" :key="render" />
+                            <div class="col-md-3 form-group">
+                                <label class="text  font-weight-bolder">{{ $t('Benificary.SelectMonth') }}</label>
+                                <datepicker v-model="startMonth" :type="'month'" :key="render" />
 
-                        </div>
-                        <div class="col-md-3 form-group">
-                            <label>{{ $t('Benificary.SelectYear') }}</label>
-                            <datepicker v-model="year" :type="'year'" :key="render" />
-                        </div>
-                        <div class="col-md-3 form-group">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('Benificary.FromDate') }}
-                            </label>
-                            <datepicker v-model="fromDate" :key="render" />
-                        </div>
-                        <div class="col-md-3 form-group">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('Benificary.ToDate') }}
-                            </label>
-                            <datepicker v-model="toDate" :key="render" />
-                        </div>
-                        <div class="col-lg-3">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label>{{ $t('Benificary.SelectYear') }}</label>
+                                <datepicker v-model="year" :type="'year'" :key="render" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('Benificary.FromDate') }}
+                                </label>
+                                <datepicker v-model="fromDate" :key="render" />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('Benificary.ToDate') }}
+                                </label>
+                                <datepicker v-model="toDate" :key="render" />
+                            </div>
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>{{ $t('Benificary.NationalID') }}</label>
                                     <input v-model="uqamaNo" type="text" class="form-control"
-                                :placeholder="$t('Benificary.SearchByNationalId')" aria-label="Example text with button addon"
-                                aria-describedby="button-addon1">
-                                    
+                                        :placeholder="$t('Benificary.SearchByNationalId')"
+                                        aria-label="Example text with button addon" aria-describedby="button-addon1">
+
                                 </div>
                             </div>
 
@@ -163,11 +163,12 @@
                                     aria-label="Example text with button addon" aria-describedby="button-addon1">
 
                             </div>
-                            
+
 
                         </div>
                         <div class="col-sm-2 mt-3">
-                            <a v-on:click="SearchFilter" href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1">
+                            <a v-on:click="SearchFilter" href="javascript:void(0);"
+                                class="btn btn-sm btn-outline-primary mx-1">
                                 {{ $t('Benificary.SearchFilter') }}
                             </a>
                             <a @click="ClearFilter" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">
@@ -210,9 +211,9 @@
                                         {{ $t('Benificary.Date') }}
                                     </th>
 
-                                    <th class="text-center">
+                                    <!-- <th class="text-center">
                                         {{ $t('Benificary.ApprovedBy') }}
-                                    </th>
+                                    </th> -->
                                     <th class="text-center">
                                         {{ $t('Benificary.BenificaryStatus') }}
                                     </th>
@@ -225,13 +226,13 @@
                                     <th class="text-center">
                                         {{ $t('Benificary.AccountStatus') }}
                                     </th>
-                                    
+
                                     <th class="text-center">
                                         {{ $t('Benificary.Action') }}
                                     </th>
-                                    
-                                    
-                                    
+
+
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -253,20 +254,22 @@
                                                 brand.name == '' ? brand.nameAr : brand.name }}</a>
                                         </strong>
                                     </td>
-                                   
+
 
                                     <td class="text-center">
-                                        {{ parseFloat(brand.amountPerMonth).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}
+                                        {{ parseFloat(brand.amountPerMonth).toFixed(3).slice(0,
+                                            -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}
                                     </td>
                                     <td class="text-center">
-                                       {{ $i18n.locale== 'en' ? brand.paymentTypeName:brand.paymentTypeNameAr }}
+                                        {{ $i18n.locale == 'en' ? brand.paymentTypeName : brand.paymentTypeNameAr }}
                                     </td>
                                     <td class="text-center">
-                                        
-                                        {{ parseFloat(brand.recurringAmount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}
-                        
+
+                                        {{ parseFloat(brand.recurringAmount).toFixed(3).slice(0,
+                                            -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}
+
                                     </td>
-                                
+
                                     <td class="text-start">
                                         <span v-for="item in brand.benificaryAuthorization" :key="item.id" class="mx-2">
                                             {{ item.authorizationPersonName == '' ? item.authorizationPersonNameAr :
@@ -275,12 +278,12 @@
                                     </td>
                                     <td class="text-center">{{ GetDate(brand.startMonth) }}</td>
 
-                                    <td class="text-center" v-if="brand.approvalPersonName != null">
-                                        {{brand.approvalPersonName}}
-                                    </td>
-                                    <td class="text-center" v-else>
+                                    <!-- <td class="text-center" v-if="brand.approvalPersonName != null">
+                                        {{ brand.approvalPersonName }}
+                                    </td> -->
+                                    <!-- <td class="text-center" v-else>
                                         ---
-                                    </td>
+                                    </td> -->
 
                                     <td class="text-center">
 
@@ -295,22 +298,23 @@
                                                 $t('Benificary.DeActive')
                                             }}
                                         </span>
-                                        </td>
+                                    </td>
 
                                     <td class="text-center" v-if="roleName == 'Admin'">
                                         <span class="badge badge-boxed  badge-outline-danger"
-                                            v-if="brand.approvalStatus == '4'">{{ $t('Benificary.WaitingForApproved') }}</span>
+                                            v-if="brand.approvalStatus == '4'">{{ $t('Benificary.WaitingForApproved')
+                                            }}</span>
                                         <span class="badge badge-boxed  badge-outline-success"
                                             v-if="brand.approvalStatus == '3'">{{ $t('Benificary.Approved') }}</span>
                                     </td>
                                     <td v-if="brand.note != null">
-                                        {{brand.note}}
+                                        {{ brand.note }}
                                     </td>
-                                    <td  v-else>
+                                    <td v-else>
                                         ---
                                     </td>
 
-                                    
+
                                     <td class="text-center">
                                         <span v-if="brand.isRegister" class="badge badge-boxed  badge-outline-success">
                                             {{ $t('Benificary.Register') }}
@@ -326,16 +330,17 @@
                                             {{ $t('Payment.Action') }} <i class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
                                             <a class="dropdown-item" href="javascript:void(0)"
-                                                v-on:click="EditBenificary(brand.id, 'View')">{{ $t('Benificary.View') }}</a>
+                                                v-on:click="EditBenificary(brand.id, 'View')">{{ $t('Benificary.View')
+                                                }}</a>
                                             <a class="dropdown-item" href="javascript:void(0)"
-                                                v-on:click="PrintRdlc(brand.id,false)">{{ $t('Payment.Print') }}</a>
+                                                v-on:click="PrintRdlc(brand.id, false)">{{ $t('Payment.Print') }}</a>
                                             <a class="dropdown-item" href="javascript:void(0)"
-                                                v-on:click="PrintRdlc(brand.id,true)">{{ $t('Benificary.PDF') }}</a>
+                                                v-on:click="PrintRdlc(brand.id, true)">{{ $t('Benificary.PDF') }}</a>
 
 
                                         </div>
                                     </td>
-                                   
+
                                     <!-- <td class="border-top-0 text-center">
                                         <approvalperson v-model="person.approvalPersonId"
                                             :values="person.approvalPersonId"/>
@@ -527,7 +532,7 @@ export default {
             this.contact = '';
             this.gender = '';
             this.status = '';
-            this.paymentType='';
+            this.paymentType = '';
 
             if (this.$refs.AuthorizedDropdown != undefined)
                 this.$refs.AuthorizedDropdown.Remove();
@@ -537,7 +542,7 @@ export default {
             if (this.$refs.DatePicker != undefined)
                 this.$refs.DatePicker.Remove();
 
-                if (this.$refs.PaymentType != undefined)
+            if (this.$refs.PaymentType != undefined)
                 this.$refs.PaymentType.Remove();
 
 
@@ -636,7 +641,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetBenificaryList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryId=' + this.beneficiaryId + '&uqamaNo=' + this.uqamaNo + '&authorizationPersonId=' + this.authorizationPersonId + '&approvalPersonId=' + this.approvalPersonId + '&registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&startMonth=' + this.startMonth + '&year=' + this.year + '&amount=' + this.amount + '&nationality=' + this.nationality + '&gender=' + this.gender + '&contact=' + this.contact + '&status=' + this.status+ '&nationalId=' + this.nationalId + '&paymentType=' + this.paymentType, {
+            root.$https.get('Benificary/GetBenificaryList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&beneficiaryId=' + this.beneficiaryId + '&uqamaNo=' + this.uqamaNo + '&authorizationPersonId=' + this.authorizationPersonId + '&approvalPersonId=' + this.approvalPersonId + '&registered=' + this.registered + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&startMonth=' + this.startMonth + '&year=' + this.year + '&amount=' + this.amount + '&nationality=' + this.nationality + '&gender=' + this.gender + '&contact=' + this.contact + '&status=' + this.status + '&nationalId=' + this.nationalId + '&paymentType=' + this.paymentType, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -653,34 +658,34 @@ export default {
         IsSaveRpt: function () {
             this.show1 = !this.show1;
         },
-        PrintRdlc: function (val,isDownload) {
+        PrintRdlc: function (val, isDownload) {
             var companyId = '';
             if (this.$session.exists()) {
                 companyId = localStorage.getItem('CompanyID');
             }
-            var root=this;
+            var root = this;
             if (isDownload) {
-                this.loading=true;
-                this.$https.get(this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale + '&isDownload=' + isDownload
-                , {  responseType: 'blob' } ) .then(function (response) {
-                       debugger;
-                        root.loading=false;
+                this.loading = true;
+                this.$https.get(this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + val + '&CompanyID=' + companyId + '&formName=benificary' + '&Language=' + this.$i18n.locale + '&isDownload=' + isDownload
+                    , { responseType: 'blob' }).then(function (response) {
+                        debugger;
+                        root.loading = false;
                         const url = window.URL.createObjectURL(new Blob([response.data]));
                         const link = document.createElement('a');
                         link.href = url;
                         var date = moment().format('DD MMM YYYY');
-                        link.setAttribute('download','benificary ' + date + '.pdf');
+                        link.setAttribute('download', 'benificary ' + date + '.pdf');
                         document.body.appendChild(link);
                         link.click();
 
                     })
             }
 
-           else{
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' +val+'&CompanyID='+companyId+'&formName=benificary'+'&Language='+this.$i18n.locale + '&isDownload=' + isDownload
+            else {
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?AuthorizationPersonId=' + val + '&CompanyID=' + companyId + '&formName=benificary' + '&Language=' + this.$i18n.locale + '&isDownload=' + isDownload
                 this.changereportt++;
                 this.show1 = !this.show1;
-           }
+            }
         },
         EditBenificary: function (Id, type) {
 

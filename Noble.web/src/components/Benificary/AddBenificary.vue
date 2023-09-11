@@ -9,7 +9,7 @@
                     {{ $t('AddBenificary.AddBenificary') }}
                 </h6>
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else-if="type == 'View'">
-                   {{ $t('AddBenificary.ViewBenificary') }}
+                    {{ $t('AddBenificary.ViewBenificary') }}
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -19,7 +19,7 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('Payment.Code') }}:<span class="text-danger"> *</span>
                         </label>
-                        <input class="form-control" v-model="brand.beneficiaryId" type="text" disabled/>
+                        <input class="form-control" v-model="brand.beneficiaryId" type="text" disabled />
                     </div>
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
@@ -38,14 +38,15 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Ids') }}:<span class="text-danger"> *</span>
                         </label>
-                        <input class="form-control" v-model="$v.brand.ugamaNo.$model" placeholder="XXXXXXXXXX" maxlength="10" type="text" />
+                        <input class="form-control" v-model="$v.brand.ugamaNo.$model" placeholder="XXXXXXXXXX"
+                            maxlength="10" type="text" />
                         <span v-if="$v.brand.ugamaNo.$error && english == 'en'" class="error text-danger">
-                            <span v-if="!$v.brand.ugamaNo.minLength ">ID length should be 10 characters.</span>
-                            <span v-if="!$v.brand.ugamaNo.maxLength ">ID length should be 10 characters.</span>
+                            <span v-if="!$v.brand.ugamaNo.minLength">ID length should be 10 characters.</span>
+                            <span v-if="!$v.brand.ugamaNo.maxLength">ID length should be 10 characters.</span>
                         </span>
                         <span v-else class="error text-danger">
-                            <span v-if="!$v.brand.ugamaNo.minLength ">يجب أن يكون طول الهوية 10 أحرف</span>
-                            <span v-if="!$v.brand.ugamaNo.maxLength ">يجب أن يكون طول الهوية 10 أحرف</span>
+                            <span v-if="!$v.brand.ugamaNo.minLength">يجب أن يكون طول الهوية 10 أحرف</span>
+                            <span v-if="!$v.brand.ugamaNo.maxLength">يجب أن يكون طول الهوية 10 أحرف</span>
                         </span>
                     </div>
                     <!-- <div class="col-md-6 form-group">
@@ -75,16 +76,17 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ContactNo') }}:
                         </label>
-                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx"  type="text" maxlength="10"/>
+                        <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" type="text"
+                            maxlength="10" />
                         <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
-                            <span v-if="!$v.brand.phoneNo.minLength ">Contact Number length should be 10 characters.</span>
-                            <span v-if="!$v.brand.phoneNo.maxLength ">Contact Number length should be 10 characters.</span>
-                            <span v-if="!$v.brand.phoneNo.numeric ">Only use numbers</span>
+                            <span v-if="!$v.brand.phoneNo.minLength">Contact Number length should be 10 characters.</span>
+                            <span v-if="!$v.brand.phoneNo.maxLength">Contact Number length should be 10 characters.</span>
+                            <span v-if="!$v.brand.phoneNo.numeric">Only use numbers</span>
                         </span>
                         <span v-else class="error text-danger">
-                            <span v-if="!$v.brand.phoneNo.minLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
-                            <span v-if="!$v.brand.phoneNo.maxLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
-                            <span v-if="!$v.brand.phoneNo.numeric ">فقط استخدم الأرقام</span>
+                            <span v-if="!$v.brand.phoneNo.minLength">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
+                            <span v-if="!$v.brand.phoneNo.maxLength">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
+                            <span v-if="!$v.brand.phoneNo.numeric">فقط استخدم الأرقام</span>
                         </span>
                     </div>
                     <div class="col-md-6 form-group">
@@ -103,16 +105,18 @@
 
                     <div class="col-md-4 form-group">
                         <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.PaymentType') }}
+                            {{ $t('AddBenificary.PaymentType') }}<span class="text-danger"> *</span>
                         </label>
                         <paymenttype v-model="brand.paymentTypeId" v-on:input="GetRecord" ref="ChlidDropdown"
-                            :values="brand.paymentTypeId" :isDisable="isDisableValue"/>
+                            :values="brand.paymentTypeId" :isDisable="isDisableValue" />
                     </div>
-                    <div class="col-md-4 form-group" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0 ">
+                    <div class="col-md-4 form-group"
+                        v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.RecurringAmount') }}:
                         </label>
-                        <decimaltofix v-model="$v.brand.recurringAmount.$model" v-on:input="GetValueOfRecurring" v-bind:disabled="isDisableValue"> </decimaltofix>
+                        <decimaltofix v-model="$v.brand.recurringAmount.$model" v-on:input="GetValueOfRecurring"
+                            v-bind:disabled="isDisableValue"> </decimaltofix>
 
                         <!-- <input class="form-control" 
                             v-model="$v.brand.recurringAmount.$model" @click="$event.target.select()" type="text" v-bind:disabled="isDisableValue" />
@@ -124,23 +128,25 @@
                         </span> -->
                     </div>
                     <div class="col-md-4 form-group">
-                        <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 ">
+                        <label class="text  font-weight-bolder"
+                            v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0">
                             {{ $t('AddBenificary.AmountPerMonth') }}:
                         </label>
                         <label class="text  font-weight-bolder" v-else>
                             {{ $t('AddBenificary.Amount') }}:
                         </label>
-                        <decimaltofix v-model="$v.brand.amountPerMonth.$model" v-bind:disabled="isDisableValue"> </decimaltofix>
+                        <decimaltofix v-model="$v.brand.amountPerMonth.$model" v-bind:disabled="isDisableValue">
+                        </decimaltofix>
 
                         <!-- <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-if="paymentType != 0"
                             type="text" />
                         <input class="form-control" v-model="$v.brand.amountPerMonth.$model" @click="$event.target.select()" v-else
                             type="text" v-on:change="FloatValue()"/> -->
-                            <span v-if="$v.brand.amountPerMonth.$error && english == 'en'" class="error text-danger">
-                            <span v-if="!$v.brand.amountPerMonth.decimal ">Amount should be in number</span>
+                        <span v-if="$v.brand.amountPerMonth.$error && english == 'en'" class="error text-danger">
+                            <span v-if="!$v.brand.amountPerMonth.decimal">Amount should be in number</span>
                         </span>
                         <span v-else class="error text-danger">
-                            <span v-if="!$v.brand.amountPerMonth.decimal ">يجب أن يكون المبلغ عبارة عن رقم</span>
+                            <span v-if="!$v.brand.amountPerMonth.decimal">يجب أن يكون المبلغ عبارة عن رقم</span>
                         </span>
                     </div>
                     <div class="col-md-4 form-group" v-if="paymentType != 0">
@@ -148,31 +154,37 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.AdvancePayment') }}:
                         </label>
-                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth" v-if="$i18n.locale == 'en'" v-bind:disabled="isDisableValue"
-                            :options="['1 Month', '2 Months', '3 Months', '4 Months', '5 Months', '6 Months', '7 Months', '8 Months', '9 Months', '10 Months', '11 Months', '12 Months']" :show-labels="false"
-                            :placeholder="$t('AddBenificary.SelectType')" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'" >
+                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth" v-if="$i18n.locale == 'en'"
+                            v-bind:disabled="isDisableValue"
+                            :options="['1 Month', '2 Months', '3 Months', '4 Months', '5 Months', '6 Months', '7 Months', '8 Months', '9 Months', '10 Months', '11 Months', '12 Months']"
+                            :show-labels="false" :placeholder="$t('AddBenificary.SelectType')"
+                            v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
                         </multiselect>
-                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth" v-bind:disabled="isDisableValue" v-else
-                            :options="['شهر واحد', 'شهرين', 'ثلاثة أشهر', 'أربعة أشهر', 'خمسة أشهر', 'ستة أشهر', 'سبعة اشهر', 'ثمانية اشهر', 'تسعة أشهر', 'عشرة أشهر', 'أحد عشر شهرا', 'سنة']" :show-labels="false"
-                            :placeholder="$t('AddBenificary.SelectType')" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
+                        <multiselect v-model="advancePaymentvalue" v-on:input="GetDateMonth"
+                            v-bind:disabled="isDisableValue" v-else
+                            :options="['شهر واحد', 'شهرين', 'ثلاثة أشهر', 'أربعة أشهر', 'خمسة أشهر', 'ستة أشهر', 'سبعة اشهر', 'ثمانية اشهر', 'تسعة أشهر', 'عشرة أشهر', 'أحد عشر شهرا', 'سنة']"
+                            :show-labels="false" :placeholder="$t('AddBenificary.SelectType')"
+                            v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
                         </multiselect>
                     </div>
-                    
-                    <div class="col-md-4 form-group" v-if="paymentType != 0 ">
-                        <label>{{ $t('AddBenificary.StartFrom') }}:</label>
-                        <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" :isDisable="isDisableValue"/>
+
+                    <div class="col-md-4 form-group" v-if="paymentType != 0">
+                        <label>{{ $t('AddBenificary.StartFrom') }}:</label><span class="text-danger"> *</span>
+                        <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'"
+                            :isDisable="isDisableValue" />
 
                     </div>
-                    <div class="col-md-4 form-group">
+                    <!-- <div class="col-md-4 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
-                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" :isDisable="isDisableValue" />
-                    </div>
+                        <approvalperson v-model="brand.approvalPersonId" :values="brand.approvalPersonId"
+                            :isDisable="isDisableValue" />
+                    </div> -->
 
                     <div class="form-group col-sm-12">
                         <label></label>
-                        <div class="checkbox form-check-inline mx-2"  v-if="roleName != 'Cashier' && type != 'Add'">
+                        <div class="checkbox form-check-inline mx-2" v-if="roleName != 'Cashier' && type != 'Add'">
                             <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
                             <label for="inlineCheckbox1"> {{ $t('AddBenificary.Active') }} </label>
                         </div>
@@ -200,7 +212,7 @@
                             {{ $t('AddBenificary.Type') }}:
                         </label>
                         <multiselect v-model="brand.durationType" v-on:input="GetDateMonth"
-                            :options="['Customize','Indefinite']" :show-labels="false"
+                            :options="['Customize', 'Indefinite']" :show-labels="false"
                             :placeholder="$t('AddBenificary.SelectType')">
                         </multiselect>
                     </div>
@@ -215,15 +227,15 @@
                         <datepicker v-model="brand.endDate" v-bind:key="randerforempty" :type="'month'" />
 
                     </div>
-                    <div class="col-md-6 form-group">
+                    <!-- <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
                         <approvalperson v-model="brand.approvalPersonId" :values="brand.approvalPersonId" />
-                    </div>
+                    </div> -->
 
                 </div>
-                <div class="row" v-if="paymentType != 0 ">
+                <div class="row" v-if="paymentType != 0">
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -236,17 +248,17 @@
                             <thead class="thead-light table-hover">
                                 <tr>
                                     <th class="text-center"> #</th>
-                                    <th class="text-center" >{{$t('AddBenificary.AuthorizedPerson') }}</th>
-                                    <th class="text-center"  >{{ $t('AddBenificary.ApprovedBy')
+                                    <th class="text-center">{{ $t('AddBenificary.AuthorizedPerson') }}</th>
+                                    <th class="text-center">{{ $t('AddBenificary.ApprovedBy')
                                     }}</th>
-                                    <th class="text-center" >{{ $t('AddBenificary.Date') }}
+                                    <th class="text-center">{{ $t('AddBenificary.Date') }}
                                     </th>
-                                    
-                                    <th class="text-center" >{{ $t('AddBenificary.Status') }}
+
+                                    <th class="text-center">{{ $t('AddBenificary.Status') }}
                                     </th>
-                                    <th class="text-center"  v-if="giveReason">{{ $t('AddBenificary.Reason') }}
+                                    <th class="text-center" v-if="giveReason">{{ $t('AddBenificary.Reason') }}
                                     </th>
-                                    <th class="text-center" >{{ $t('AddBenificary.Action') }}
+                                    <th class="text-center">{{ $t('AddBenificary.Action') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -258,7 +270,7 @@
                                     </td>
                                     <td class="border-top-0 text-center" v-if="brand.isDisable">
                                         <authorizedperson v-model="person.authorizationPersonId"
-                                            :values="person.authorizationPersonId" :isDisable="'true'"/>
+                                            :values="person.authorizationPersonId" :isDisable="'true'" />
                                     </td>
                                     <td class="border-top-0 text-center" v-else>
                                         <authorizedperson v-model="person.authorizationPersonId"
@@ -268,16 +280,16 @@
                                         <approvalperson v-model="person.approvalPersonId"
                                             :values="person.approvalPersonId" :isDisable="'true'"/>
                                     </td> -->
-                                    <td class="border-top-0 text-center">
+                                    <!-- <td class="border-top-0 text-center">
                                         <approvalperson v-model="person.approvalPersonId"
-                                            :values="person.approvalPersonId"/>
+                                            :values="person.approvalPersonId" />
 
-                                    </td>
+                                    </td> -->
                                     <td class="border-top-0 text-center" v-if="brand.isDisable">
                                         <datepicker v-model="person.date" :isDisable="true" />
                                     </td>
                                     <td class="border-top-0 text-center" v-else>
-                                        <datepicker v-model="person.date"  />
+                                        <datepicker v-model="person.date" />
                                     </td>
                                     <td class="border-top-0 text-center" v-if="brand.isDisable">
                                         <div class="checkbox form-check-inline">
@@ -287,13 +299,14 @@
                                     </td>
                                     <td class="border-top-0 text-center" v-else>
                                         <div class="checkbox form-check-inline">
-                                            <input v-bind:id="index + 1" type="checkbox" v-model="person.isActive" v-on:input="GiveReason()">
+                                            <input v-bind:id="index + 1" type="checkbox" v-model="person.isActive"
+                                                v-on:input="GiveReason()">
                                             <label v-bind:for="index + 1"></label>
                                         </div>
                                     </td>
                                     <td class="border-top-0 text-center" v-if="giveReason">
                                         <div class="checkbox form-check-inline">
-                                           <textarea  class="form-control" v-model="person.dec" rows="1"></textarea>
+                                            <textarea class="form-control" v-model="person.dec" rows="1"></textarea>
                                         </div>
                                     </td>
                                     <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
@@ -327,7 +340,7 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Note') }}:<span class="text-danger"> *</span>
                         </label>
-                        <textarea v-model="brand.note" class="form-control"  rows="4"></textarea>
+                        <textarea v-model="brand.note" class="form-control" rows="4"></textarea>
                         <!-- <VueEditor v-model="brand.note" /> -->
                     </div>
 
@@ -336,19 +349,19 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Draft')"
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Draft')"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' && roleName != 'User'">
                     {{ $t('Save') }}
                 </button>
-                <button type="button" class="btn btn-soft-primary btn-sm"  v-on:click="SaveBenificary('Approved')"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' &&  roleName == 'Admin'">
-                    {{ $t('SaveasApproved') }} 
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Approved')"
+                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Add' && roleName == 'Admin'">
+                    {{ $t('SaveasApproved') }}
                 </button>
-               
+
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Approved')"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName == 'Admin'">
-                    {{ $t('Approved') }} 
-                                </button>
+                    {{ $t('Approved') }}
+                </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Draft')"
                     v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName != 'User'">
                     {{ $t('Update') }}
@@ -366,7 +379,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import {
-    required, requiredIf, minLength, maxLength,numeric,decimal
+    required, requiredIf, minLength, maxLength, numeric, decimal
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -387,17 +400,17 @@ export default {
     },
     data: function () {
         return {
-            advancePaymentvalue:'',
-            giveReason:false,
-            isDisableValue:false,
+            advancePaymentvalue: '',
+            giveReason: false,
+            isDisableValue: false,
             randerforempty: 0,
             paymentType: null,
             arabic: '',
             english: '',
             loading: false,
-            roleName : '',
-            isDisable:false,
-            
+            roleName: '',
+            isDisable: false,
+
         }
     },
     validations: {
@@ -431,25 +444,30 @@ export default {
                 minLength: minLength(10),
                 maxLength: maxLength(10),
             },
-            reason:{
-                required:requiredIf ((x) => {
+            reason: {
+                required: requiredIf((x) => {
                     if (x.type == 'Add') {
                         return false;
                     } else if (x.type == 'Edit') {
                         return true;
                     }
-               }),
+                }),
             },
             recurringAmount: {
                 decimal,
             },
-            note: {
-               
-}
+            paymentTypeId: {
+                required,
+
+            },
+            startMonth: {
+                required,
+
+            }
         }
     },
     methods: {
-        GiveReason: function(){
+        GiveReason: function () {
             this.giveReason = true;
         },
         GetRecord: function () {
@@ -457,7 +475,7 @@ export default {
             debugger;
 
             if (root.$refs.ChlidDropdown != undefined) {
-              
+
                 var value = this.$refs.ChlidDropdown.GetSalaryOfSelected();
                 if (value == '' || value == null) {
                     this.paymentType = null;
@@ -480,14 +498,14 @@ export default {
                 this.paymentType = null;
             }
         },
-        
+
         GetValueOfRecurring: function () {
-          debugger;
-        //   alert(this.brand.recurringAmount);
+            debugger;
+            //   alert(this.brand.recurringAmount);
             if (this.brand.recurringAmount > 0) {
                 if (this.paymentType == null || this.paymentType == 0) {
                     this.brand.amountPerMonth = 0
-                   
+
                 } else {
                     this.brand.amountPerMonth = parseFloat(this.brand.recurringAmount / this.paymentType);
                     this.brand.recurringAmount = parseFloat(this.brand.recurringAmount);
@@ -495,7 +513,7 @@ export default {
 
             } else {
                 this.brand.amountPerMonth = 0;
-                
+
             }
 
         },
@@ -519,7 +537,7 @@ export default {
 
         },
         GetDateMonth: function () {
-          
+
 
             if (this.brand.durationType != undefined && this.brand.durationType != '' && this.brand.durationType != null) {
                 if (this.brand.durationType != 'Indefinite') {
@@ -548,16 +566,16 @@ export default {
         SaveBenificary: function (approvedtype) {
             debugger;
             var root = this;
-            this.brand.approvalStatus=approvedtype;
+            this.brand.approvalStatus = approvedtype;
             var aa = this.brand.beneficiaryId;
             this.brand.beneficiaryId = aa;
             this.loading = true;
             var token = '';
-            
+
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-          
+
             if (this.brand.id != '00000000-0000-0000-0000-000000000000' && this.brand.isActive == false && this.brand.advancePayment != 0 && this.brand.reason == null) {
                 this.loading = false;
                 return this.$swal({
@@ -582,46 +600,44 @@ export default {
                 root.brand.benificaryAuthorization.splice(prd, 1)
             }
 
-            if(this.advancePaymentvalue != '' && this.advancePaymentvalue != null)
-            {
+            if (this.advancePaymentvalue != '' && this.advancePaymentvalue != null) {
                 debugger;
-                if(this.$i18n.locale == 'en'){
-                    var advance = parseInt(this.advancePaymentvalue.match(/\d+/)[0], 10); 
+                if (this.$i18n.locale == 'en') {
+                    var advance = parseInt(this.advancePaymentvalue.match(/\d+/)[0], 10);
                     this.brand.advancePayment = advance;
                 }
-                else
-                {
+                else {
                     let intValue;
                     const arabicToIntMap = {
-                            'شهر واحد': 1,
-                            'شهرين': 2,
-                            'ثلاثة أشهر': 3,
-                            'أربعة أشهر': 4,
-                            'خمسة أشهر': 5,
-                            'ستة أشهر': 6,
-                            'سبعة اشهر': 7,
-                            'ثمانية اشهر': 8,
-                            'تسعة أشهر': 9,
-                            'عشرة أشهر': 10,
-                            'أحد عشر شهرا': 11,
-                            'سنة': 12
-                            };
+                        'شهر واحد': 1,
+                        'شهرين': 2,
+                        'ثلاثة أشهر': 3,
+                        'أربعة أشهر': 4,
+                        'خمسة أشهر': 5,
+                        'ستة أشهر': 6,
+                        'سبعة اشهر': 7,
+                        'ثمانية اشهر': 8,
+                        'تسعة أشهر': 9,
+                        'عشرة أشهر': 10,
+                        'أحد عشر شهرا': 11,
+                        'سنة': 12
+                    };
                     intValue = arabicToIntMap[this.advancePaymentvalue];
                     this.brand.advancePayment = intValue;
                 }
-               
+
             }
-            
-           
+
+
             this.$https.post('/Benificary/SaveBenificary', this.brand, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
             })
                 .then(function (response) {
-                  
+
                     if (response.data.isSuccess == true) {
-                  
+
                         if (root.type != "Edit") {
                             root.$swal({
                                 title: 'Save',
@@ -683,19 +699,19 @@ export default {
                 token = localStorage.getItem('token');
             }
             root.$https.get('/Benificary/AutoCodeGenerate?name=Benificaries', {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
                 .then(function (response) {
-                        if (response.data) {
-                            debugger;
-                            root.brand.beneficiaryId = parseInt(response.data);
-                            root.rendar++;
-                        } else {
-                            console.log("error: something wrong from db.");
-                        }
-                    },
+                    if (response.data) {
+                        debugger;
+                        root.brand.beneficiaryId = parseInt(response.data);
+                        root.rendar++;
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
                     function (error) {
                         this.loading = false;
                         console.log(error);
@@ -711,11 +727,10 @@ export default {
         this.english = localStorage.getItem('locales');
         this.arabic = localStorage.getItem('locales');
 
-        if(this.brand.id == '00000000-0000-0000-0000-000000000000')
-        {
+        if (this.brand.id == '00000000-0000-0000-0000-000000000000') {
             this.GetAutoCode();
         }
-        this.isDisableValue=this.roleName == 'Cashier' && this.type == 'Edit'?true:false;
+        this.isDisableValue = this.roleName == 'Cashier' && this.type == 'Edit' ? true : false;
     }
 }
 </script>

@@ -41,5 +41,6 @@ namespace Focus.Business.Payments.Models
         public Guid? ApprovalPersonId { get; set; }
         public Guid? AuthorizePersonId { get; set; }
         public List<SelectedMonthLookupModel> SelectedMonth { get; set; }
+        public string PaymentTypeAr { get;  set; }
     }
 }

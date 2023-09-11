@@ -25,9 +25,9 @@
                             {{ $t('Import.colorNameEnglish') }}
                         </a>
 
-                        <a v-on:click="GetBenificaryData" href="javascript:void(0);" class="btn btn-sm btn-outline-primary ">
+                        <!-- <a v-on:click="GetBenificaryData" href="javascript:void(0);" class="btn btn-sm btn-outline-primary ">
                             ReAssign 
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>

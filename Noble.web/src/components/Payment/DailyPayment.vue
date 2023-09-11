@@ -125,14 +125,14 @@
 
                     </div>
 
-                    <div class="col-md-4 form-group" v-if="brand.documentType!='dailyPayment'">
+                    <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.PaymentType') }}
-                        </label>
+                            {{ $t('AddBenificary.PaymentType') }}:
+                        </label><span class="text-danger"> *</span>
                         <paymenttype v-model="brand.paymentTypeId" v-on:input="GetRecord" ref="ChlidDropdown"
                             :values="brand.paymentTypeId" />
                     </div>
-                    <div class="col-md-4 form-group" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0 ">
+                    <div class="col-md-6 form-group" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0 && brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.RecurringAmount') }}:
                         </label>
@@ -165,7 +165,7 @@
                         </span>
                     </div>
                     <div class="col-md-6 form-group" v-else >
-                        <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 ">
+                        <label class="text  font-weight-bolder" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null  && paymentType != 0 && brand.documentType!='dailyPayment' ">
                             {{ $t('AddBenificary.AmountPerMonth') }}:
                         </label>
                         <label class="text  font-weight-bolder" v-else>
@@ -193,12 +193,12 @@
                             :placeholder="$t('AddBenificary.SelectType')" >
                         </multiselect>
                     </div> 
-                    <div class="col-md-4 form-group" v-if="paymentType != 0 && brand.documentType!='dailyPayment'">
-                        <label>{{ $t('AddBenificary.StartFrom') }}:</label>
+                    <div class="col-md-6 form-group" v-if="paymentType != 0">
+                        <label>{{ $t('AddBenificary.StartFrom') }}:</label><span class="text-danger"> *</span>
                         <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" />
 
                     </div>
-                    <div class="col-md-4 form-group" v-if="roleName == 'Admin' && brand.documentType!='dailyPayment'">
+                    <!-- <div class="col-md-4 form-group" v-if="roleName == 'Admin' && brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
@@ -208,8 +208,8 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:<span class="text-danger"> *</span>
                         </label>
-                        <approvalperson v-model="brand.approvedPaymentId" :values="brand.approvedPaymentId" />
-                    </div>
+                        <approvalperson v-model="brand.approvalPersonId" :values="brand.approvalPersonId" />
+                    </div> -->
 
                     <div class="form-group col-sm-12" v-if="brand.documentType!='dailyPayment'">
                         <label></label>
@@ -256,12 +256,12 @@
                         <datepicker v-model="brand.endDate" v-bind:key="randerforempty" :type="'month'" />
 
                     </div>
-                    <div class="col-md-6 form-group" v-if="roleName == 'Admin'">
+                    <!-- <div class="col-md-6 form-group" v-if="roleName == 'Admin'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ApprovedBy') }}:
                         </label>
                         <approvalperson v-model="brand.approvalPersonId" :values="brand.approvalPersonId" />
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="row" v-if="paymentType != 0 && roleName == 'Admin' && brand.documentType!='dailyPayment'">
@@ -311,11 +311,11 @@
                                         <approvalperson v-model="person.approvalPersonId"
                                             :values="person.approvalPersonId" :isDisable="'true'"/>
                                     </td> -->
-                                    <td class="border-top-0 text-center" v-if="roleName == 'Admin'">
+                                    <!-- <td class="border-top-0 text-center" v-if="roleName == 'Admin'">
                                         <approvalperson v-model="person.approvalPersonId"
                                             :values="person.approvalPersonId"/>
 
-                                    </td>
+                                    </td> -->
                                     <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
                                         <datepicker v-model="person.date" :isDisable="true" />
                                     </td>
@@ -404,7 +404,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import {
-     requiredIf, minLength, maxLength,numeric,decimal
+    required, requiredIf, minLength, maxLength,numeric,decimal
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -512,6 +512,14 @@ export default {
             },
             recurringAmount: {
                 decimal,
+            },
+            paymentTypeId: {
+                required,
+
+            },
+            startMonth: {
+                required,
+
             }
         }
     },

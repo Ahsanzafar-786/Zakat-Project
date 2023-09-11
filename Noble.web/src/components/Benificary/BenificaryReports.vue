@@ -58,12 +58,12 @@
                             </label>
                             <authorizedperson v-model="authorizationPersonId" ref="AuthorizedDropdown" />
                         </div>
-                        <div class="col-md-4 form-group">
+                        <!-- <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
                                 {{ $t('Benificary.ApprovalPerson') }}
                             </label>
                             <approvalperson v-model="approvalPersonId" ref="approvalPersonId" />
-                        </div>
+                        </div> -->
                         <div class="col-md-4 form-group">
                             <label class="text  font-weight-bolder">
                                 {{ $t('Benificary.Register/Un-Register') }}

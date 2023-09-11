@@ -33,12 +33,15 @@ namespace Focus.Business.Benificary.Queries
                 {
                     if(request.IsPayment)
                     {
-                        var charity = await Context.CharityTransaction.Where(x => x.BenificayId == request.Id).Select(x => new CharityTransactionLookupModel()
+                        
+
+                        var charity = await Context.CharityTransaction.Select(x => new CharityTransactionLookupModel()
                         {
                             Id = x.Id,
                             DoucmentId = x.DoucmentId,
                             DoucmentCode = x.DoucmentCode,
                             Amount = x.Amount,
+                            BenificayId= x.BenificayId,
                             CharityTransactionDate = x.CharityTransactionDate,
                             DoucmentDate = x.DoucmentDate,
                             Month = x.Month,
@@ -46,6 +49,24 @@ namespace Focus.Business.Benificary.Queries
                             PaymentMonths = x.Month.Value.Month,
                             Year = x.Year,
                         }).ToListAsync();
+                        var openingBalance = charity.Where(x => x.BenificayId == null).Sum(x => x.Amount) - charity.Where(x => x.BenificayId != null).Sum(x => x.Amount);
+
+                      var  charityPayment= charity.Where(x=>x.BenificayId==request.Id).Select(x => new CharityTransactionLookupModel()
+                      {
+                          Id = x.Id,
+                          DoucmentId = x.DoucmentId,
+                          DoucmentCode = x.DoucmentCode,
+                          Amount = x.Amount,
+                          BenificayId = x.BenificayId,
+                          CharityTransactionDate = x.CharityTransactionDate,
+                          DoucmentDate = x.DoucmentDate,
+                          Month = x.Month,
+                          Years = x.Month.Value.Year.ToString(),
+                          PaymentMonths = x.Month.Value.Month,
+                          Year = x.Year,
+                      }).ToList();
+
+
 
                         var query = await Context.Beneficiaries.AsNoTracking().Include(x => x.PaymentTypes).Select(x => new BenificariesLookupModel
                         {
@@ -84,8 +105,9 @@ namespace Focus.Business.Benificary.Queries
                             ApprovalPersonName = x.ApprovalPersons.Name,
                             Reason = x.Reason,
                             CurrentPaymentMonth = x.CurrentPaymentMonth,
-                            CharityTransactions = charity,
+                            CharityTransactions = charityPayment,
                             StartMonthAndYear = x.StartDate.Value.Month.ToString() + " - " + x.StartDate.Value.Year.ToString(),
+                            OpeningBalance = openingBalance,
                             BenificaryAuthorization = x.BenificaryAuthorization.Select(x => new BenificaryAuthorizationLookupModel()
                             {
                                 Id = x.Id,
@@ -100,6 +122,9 @@ namespace Focus.Business.Benificary.Queries
                                 Description = x.Description,
                             }).ToList(),
                         }).FirstOrDefaultAsync(x => x.Id == request.Id);
+
+                        //if (openingBalance == null)
+                        //    throw new NotFoundException("Funds not Available", "");
 
                         if (query == null)
                             throw new NotFoundException("Benificary Not Found", "");

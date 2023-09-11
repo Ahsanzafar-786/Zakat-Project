@@ -1,9 +1,9 @@
 ﻿<template>
     <div>
-        <multiselect v-model="DisplayValue" v-if="isDisable == 'true'"  disabled :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectAuthorizePerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
+        <multiselect v-model="DisplayValue" v-if="isDisable == 'true'"  disabled :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectAuthorizePerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
 
         </multiselect>      
-        <multiselect v-model="DisplayValue" v-else :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectAuthorizePerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name">
+        <multiselect v-model="DisplayValue" v-else :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectAuthorizePerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
         </multiselect>      
     </div>
 </template>
@@ -45,7 +45,9 @@ export default {
                     response.data.results.forEach(function (cat) {
                         root.options.push({
                             id: cat.id,
-                            name: cat.name == '' ? cat.nameAr : cat.name,
+                            name: cat.name == '' ? cat.nameAr : cat.name || root.$i18n.locale == 'en'? cat.name:cat.nameAr,
+                           // name: root.$i18n.locale == 'en'? cat.name:cat.nameAr
+                           // name: cat.name == '' ? cat.nameAr : cat.name
                         })
                     })
                 }

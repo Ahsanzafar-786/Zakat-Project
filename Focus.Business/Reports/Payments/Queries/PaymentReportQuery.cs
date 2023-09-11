@@ -17,14 +17,15 @@ using Dapper;
 
 namespace Focus.Business.Reports.Payments.Queries
 {
-    public class PaymentReportQuery : IRequest<List<PaymentWiseListLookupModel>>
+    public class PaymentReportQuery : IRequest<PaymentWiseOpeningClosingModel>
     {
         public Guid? BenificayId { get; set; }
         public Guid? UserId { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+        public DateTime? SelectedDate { get; set; }
 
-        public class Handler : IRequestHandler<PaymentReportQuery, List<PaymentWiseListLookupModel>>
+        public class Handler : IRequestHandler<PaymentReportQuery, PaymentWiseOpeningClosingModel>
         {
             public readonly IApplicationDbContext Context;
             private readonly UserManager<ApplicationUser> _userManager;
@@ -36,12 +37,18 @@ namespace Focus.Business.Reports.Payments.Queries
                 _logger = logger;
                 _userManager = userManager;
             }
-            public async Task<List<PaymentWiseListLookupModel>> Handle(PaymentReportQuery request, CancellationToken cancellationToken)
+            public async Task<PaymentWiseOpeningClosingModel> Handle(PaymentReportQuery request, CancellationToken cancellationToken)
             {
                 try
                 {
+
+                    //DateTime openingBalanceDate = request.SelectedDate?.AddDays(-1) ?? DateTime.Now.AddDays(-1);
+                    decimal openingBalance = await Context.Payments.Where(x => x.Date.Value.Date < request.SelectedDate.Value.Date).SumAsync(x => x.Amount);
+                    
+
+
                     var query =await Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
-                         .Select(x => new PaymentWiseListLookupModel
+                         .Select(x => new PaymentWiseListLookupModel()
                          {
                              Id = x.Id,
                              PaymentId = x.Code.ToString(),
@@ -70,12 +77,21 @@ namespace Focus.Business.Reports.Payments.Queries
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
                         query = query.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
+
                     }
 
 
 
 
-                    return query.ToList();
+                    return new PaymentWiseOpeningClosingModel
+                    {
+                        OpeningBalance= openingBalance,
+                        PaymentList = query.ToList(),
+                        ClosingBalance= openingBalance - query.Sum(x =>x.Amount)
+
+                    };
+
+                    
                 }
                 catch (Exception exception)
                 {

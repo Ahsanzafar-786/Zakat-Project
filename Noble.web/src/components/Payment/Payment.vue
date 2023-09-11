@@ -70,12 +70,12 @@
                                 <authorizedperson v-model="authorizationPersonId" ref="AuthorizedDropdown" />
                             </div>
                         </div>
-                        <div class="col-md-3 form-group">
+                        <!-- <div class="col-md-3 form-group">
                             <label class="text  font-weight-bolder">
                                 {{ $t('Benificary.ApprovalPerson') }}
                             </label>
                             <approvalperson v-model="approvalPersonId" ref="approvalPersonId" />
-                        </div>
+                        </div> -->
                         <div class="col-md-3 form-group">
                             <label class="text  font-weight-bolder">
                                 {{ $t('Benificary.Register/Un-Register') }}
@@ -188,9 +188,9 @@
                                     <th class="text-start">
                                         {{$t('Payment.AuthorizedPerson') }}
                                     </th>
-                                    <th class="text-start">
+                                    <!-- <th class="text-start">
                                         {{ $t('AddBenificary.ApprovedBy') }}
-                                    </th>
+                                    </th> -->
                                     <th class="text-start">
                                         {{ $t('AddBenificary.PaymentType') }}
                                     </th>
@@ -267,14 +267,14 @@
                                     <td class="text-center" v-else>
                                         ---
                                     </td>
-                                    <td class="text-center" v-if="brand.approvalPersonName != null">
+                                    <!-- <td class="text-center" v-if="brand.approvalPersonName != null">
                                         {{ brand.approvalPersonName }}
                                     </td>
                                     <td class="text-center" v-else>
                                         ---
-                                    </td>
+                                    </td> -->
                                     <td class="text-center" v-if="brand.paymentType != null">
-                                        {{ brand.paymentType }}
+                                     {{ $i18n.locale== 'en' ? brand.paymentType:brand.paymentTypeAr }}
                                     </td>
                                     <td v-else>
                                         ---

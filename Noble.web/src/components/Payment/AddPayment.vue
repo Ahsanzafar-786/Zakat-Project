@@ -145,10 +145,10 @@
                                 </span>
                             </label>
                         </div>
-                        <div class=" col-sm-6 mt-1">
+                        <!-- <div class=" col-sm-6 mt-1">
                             <label class="rounded text-white bg-primary px-2">{{ $t('AddBenificary.ApprovalPersons') }}: {{
                                 brand.approvalPersonName }}</label>
-                        </div>
+                        </div> -->
                         <div class=" col-sm-6 mt-1">
                             <label class="rounded text-white bg-primary px-2">{{ $t('AddBenificary.StartMonth') }}: &nbsp;
                                 &nbsp;{{ GetMonth(brand.startMonth) }}</label>
@@ -248,10 +248,10 @@
                                     <input class="form-control" v-model="item.authorizationPersonName" readonly />
                                 </div>
                             </div>
-                            <div class="col-lg-12 form-group">
+                            <!-- <div class="col-lg-12 form-group">
                                 <label>{{ $t('AddBenificary.ApprovedBy') }} :</label>
                                 <input class="form-control" v-model="brand.approvalPersonName" readonly />
-                            </div>
+                            </div> -->
                             <div class="col-lg-12 form-group">
                                 <label>{{ $t('AddBenificary.PaymentType') }} :</label>
                                 <input class="form-control" v-model="brand.paymentTypeName" readonly />
@@ -310,6 +310,7 @@ export default {
             advancePayment: '',
             transactions: [],
             cashierName: '',
+            openingBalance:0,
             addPayment: {
                 Id: '',
                 benificayId: '',
@@ -322,7 +323,8 @@ export default {
                 year: '',
                 code: 0,
                 period: '',
-                selectedMonth: ''
+                selectedMonth: '',
+                openingBalance:0,
             }
         }
     },
@@ -460,9 +462,9 @@ export default {
                             if (year >= currentMonth) {
                                 if (year == currentMonth) {
 
-                                  var compareMonth = moment(this.brand.currentPaymentMonth, 'YYYY-MM-DD'); // Parse the startMonth date
-                                 var month123 = moment(this.addPayment.month, 'YYYY-MM-DD');
-                                 if (month123.isAfter(compareMonth)) {
+                                    var compareMonth = moment(this.brand.currentPaymentMonth, 'YYYY-MM-DD'); // Parse the startMonth date
+                                    var month123 = moment(this.addPayment.month, 'YYYY-MM-DD');
+                                    if (month123.isAfter(compareMonth)) {
                                         root.$swal({
                                             title: 'Error',
                                             text: root.$i18n.locale == 'en' ? 'Not Select Another Month' : 'لا تحدد دفعة أخرى',
@@ -916,7 +918,29 @@ export default {
         },
         SavePayment: function (isPrint) {
 
+
+            debugger;
+
             var root = this;
+            this.addPayment.openingBalance = this.brand.openingBalance;
+            
+        alert(this.addPayment.openingBalance);
+        alert(this.addPayment.amount);
+       
+
+            if (this.addPayment.amount > this.addPayment.openingBalance) {
+                this.$swal({
+                    title: 'Error',
+                    text: root.$i18n.locale == 'en' ? 'Insufficient funds' : 'رصيد غير كاف',
+                    type: 'error',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                })
+                .finally(() => root.loading = false);
+                return ;
+            }
             this.loading = true;
             var token = '';
             var userId = localStorage.getItem('UserId');
@@ -924,7 +948,11 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            this.addPayment.selectedMonth = this.selectedMonth;
+
+
+             {
+
+                this.addPayment.selectedMonth = this.selectedMonth;
             this.$https.post('/Benificary/SavePayments', this.addPayment, {
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -995,6 +1023,12 @@ export default {
                     root.loading = false
                 })
                 .finally(() => root.loading = false);
+
+            } 
+          
+
+
+            
         },
         GetAutoCode: function () {
             var root = this;
