@@ -480,8 +480,8 @@ namespace Noble.Api.Controllers
             return Ok(charity);
         }
 
-        [Route("api/Benificary/GetBenificaryReport")]
-        [HttpGet("GetBenificaryReport")]
+        [Route("api/Benificary/GetTransactionReport")]
+        [HttpGet("GetTransactionReport")]
         public async Task<IActionResult> GetTransactionReport(Guid? userId, Guid? benificayId, DateTime? fromDate, DateTime? toDate,DateTime? selectedDate)
         {
             var charity = await Mediator.Send(new TransactionReportQuery

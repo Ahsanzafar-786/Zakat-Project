@@ -43,53 +43,70 @@ namespace Focus.Business.Reports.Payments.Queries
                 {
 
                     //DateTime openingBalanceDate = request.SelectedDate?.AddDays(-1) ?? DateTime.Now.AddDays(-1);
-                    decimal openingBalance = await Context.CharityTransaction.Where(x => x.CharityTransactionDate.Value.Date < request.SelectedDate.Value.Date && x.BenificayId == null).SumAsync(x => x.Amount);
-                    
+                    var Transaction =  Context.CharityTransaction;
 
+                    var funds = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId == null).SumAsync(x => x.Amount);
+                    var charity = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId != null).SumAsync(x => x.Amount);
 
-                    var query =await Context.CharityTransaction.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
+                    var openingBalance = funds - charity;
+
+                    var fundslist = await Transaction.Where(j=> j.BenificayId == null).Include(x => x.Beneficiaries.PaymentTypes)
                          .Select(x => new PaymentWiseListLookupModel()
                          {
-                             Id = x.Id,
-                          
-                             Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
-                             BeneficaryId = x.Beneficiaries != null ? x.Beneficiaries.BeneficiaryId.ToString() : "",
-                             BeneficaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
-                             PaymentIntervalMonth = x.Beneficiaries.PaymentIntervalMonth,
-                             IsRegistered = x.Beneficiaries.IsRegister ? "Registered" : "Not Registered",
-                             Amount = x.Amount,
-                       
-                             PaymentType = x.Beneficiaries.PaymentTypes.Name,
-                             Date = Convert.ToDateTime(x.Month),
-                             PaymentDate = Convert.ToDateTime(x.Month).ToString("dd/MM/yy"),
-                             PaymentMonth = Convert.ToDateTime(x.Month).ToString("MMMM"),
+                             Id = x.Id,                       
+                             Amount = x.Amount,                    
+                             Date = Convert.ToDateTime(x.CharityTransactionDate),
+                             PaymentDate = Convert.ToDateTime(x.CharityTransactionDate).ToString("dd/MM/yy"),
+                             PaymentMonth = Convert.ToDateTime(x.CharityTransactionDate).ToString("MMMM"),
 
                          }).ToListAsync();
 
-                    if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
-                    {
-                        query = query.Where(x => x.Beneficary == request.BenificayId).ToList();
-                    }
+                    var charitylist = await Transaction.Where(j => j.BenificayId != null).Include(x => x.Beneficiaries.PaymentTypes)
+                        .Select(x => new PaymentWiseListLookupModel()
+                        {
+                            Id = x.Id,
+
+                            Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
+                            BeneficaryId = x.Beneficiaries != null ? x.Beneficiaries.BeneficiaryId.ToString() : "",
+                            BeneficaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
+                            PaymentIntervalMonth = x.Beneficiaries.PaymentIntervalMonth,
+                            IsRegistered = x.Beneficiaries.IsRegister ? "Registered" : "Not Registered",
+                            Amount = x.Amount,
+                            PaymentType = x.Beneficiaries.PaymentTypes.Name,
+                            Date = Convert.ToDateTime(x.CharityTransactionDate),
+                            PaymentDate = Convert.ToDateTime(x.CharityTransactionDate).ToString("dd/MM/yy"),
+                            PaymentMonth = Convert.ToDateTime(x.CharityTransactionDate).ToString("MMMM"),
+
+                        }).ToListAsync();
+
+                    //if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
+                    //{
+                    //    query = query.Where(x => x.Beneficary == request.BenificayId).ToList();
+                    //}
                     
-                    if (request.UserId.HasValue && request.UserId != Guid.Empty)
-                    {
-                        query = query.Where(x => x.UserId == request.UserId).ToList();
-                    }
+                    //if (request.UserId.HasValue && request.UserId != Guid.Empty)
+                    //{
+                    //    query = query.Where(x => x.UserId == request.UserId).ToList();
+                    //}
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        query = query.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
+                        charitylist = charitylist.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
+                        fundslist = fundslist.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
 
                     }
 
-
+                
 
 
                     return new PaymentWiseOpeningClosingModel
                     {
                         OpeningBalance= openingBalance,
-                        PaymentList = query.ToList(),
-                        ClosingBalance= openingBalance - query.Sum(x =>x.Amount)
+                        Charitylist = charitylist,
+                        PaymentList = fundslist,
+                        TransactionTotal= charitylist.Sum(x => x.Amount),
+                        FundsTotal= fundslist.Sum(x => x.Amount),
+                        ClosingBalance = openingBalance + fundslist.Sum(x => x.Amount) - charitylist.Sum(x => x.Amount) 
 
                     };
 
