@@ -43,7 +43,7 @@ namespace Focus.Business.Reports.Payments.Queries
                 {
 
                     //DateTime openingBalanceDate = request.SelectedDate?.AddDays(-1) ?? DateTime.Now.AddDays(-1);
-                    decimal openingBalance = await Context.Payments.Where(x => x.Date.Value.Date < request.SelectedDate.Value.Date).SumAsync(x => x.Amount);
+                    decimal openingBalance = await Context.Payments.Where(x => x.Date.Value.Date < request.ToDate).SumAsync(x => x.Amount);
                     
 
 
