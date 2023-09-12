@@ -249,8 +249,8 @@
                                 <tr>
                                     <th class="text-center"> #</th>
                                     <th class="text-center">{{ $t('AddBenificary.AuthorizedPerson') }}</th>
-                                    <th class="text-center">{{ $t('AddBenificary.ApprovedBy')
-                                    }}</th>
+                                    <!-- <th class="text-center">{{ $t('AddBenificary.ApprovedBy')
+                                    }}</th> -->
                                     <th class="text-center">{{ $t('AddBenificary.Date') }}
                                     </th>
 

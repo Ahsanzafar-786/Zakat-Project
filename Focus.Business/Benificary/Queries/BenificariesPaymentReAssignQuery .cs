@@ -47,7 +47,7 @@ namespace Focus.Business.Benificary.Queries
 
                             var records = charityTransactions.Where(x => x.BenificayId == beneficiary.Id).LastOrDefault();
 
-                            if (records != null)
+                            if (records != null && beneficiary.CurrentPaymentMonth == null)
                             {
                                 beneficiary.CurrentPaymentMonth = records.Month;
                                 // beneficiary.Total = records.Amount;
