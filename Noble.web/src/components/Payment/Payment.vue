@@ -173,7 +173,7 @@
                                     <th class="text-center">
                                         {{ $t('Payment.ID') }}
                                     </th>
-                                     <th class="text-center">
+                                    <th class="text-center">
                                         {{ $t('Payment.Date') }}
                                     </th>
                                     <th class="text-center">
@@ -186,7 +186,7 @@
                                         {{ $t('Benificary.NationalID') }}
                                     </th>
                                     <th class="text-start">
-                                        {{$t('Payment.AuthorizedPerson') }}
+                                        {{ $t('Payment.AuthorizedPerson') }}
                                     </th>
                                     <!-- <th class="text-start">
                                         {{ $t('AddBenificary.ApprovedBy') }}
@@ -203,7 +203,7 @@
                                     <th class="text-center">
                                         {{ $t('Payment.Note') }}
                                     </th>
-                                    
+
                                     <th class="text-center">
                                         {{ $t('Payment.Cashier') }}
                                     </th>
@@ -274,23 +274,26 @@
                                         ---
                                     </td> -->
                                     <td class="text-center" v-if="brand.paymentType != null">
-                                     {{ $i18n.locale== 'en' ? brand.paymentType:brand.paymentTypeAr }}
+                                        {{ $i18n.locale == 'en' ? brand.paymentType : brand.paymentTypeAr }}
                                     </td>
                                     <td v-else>
                                         ---
                                     </td>
                                     <td class="text-center">
                                         <!-- {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }} -->
-                                        {{ parseFloat(Math.round(brand.lastPaymentAmount)).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }} - {{ GetDate(brand.lastPaymentDate) }}
+                                        {{ parseFloat(Math.round(brand.lastPaymentAmount)).toFixed(3).slice(0,
+                                            -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }} - {{
+        GetDate(brand.lastPaymentDate) }}
                                     </td>
-                                    <td class ="text-center" >
+                                    <td class="text-center">
                                         {{ GetDate2(brand.lastPaymentDate) }}
                                     </td>
                                     <td class="text-center">{{ brand.note }}</td>
                                     <td class="text-center">{{ brand.cashier }}</td>
                                     <td class="text-center" v-if="brand.isVoid">--</td>
-                                    <td class="text-center" v-else>{{ parseFloat(brand.amount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}</td>
-                                    
+                                    <td class="text-center" v-else>{{ parseFloat(brand.amount).toFixed(3).slice(0,
+                                        -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
+
                                     <td class="text-center d-flex align-items-baseline justify-content-center"
                                         v-if="roleName != 'User'">
                                         <button type="button" class="btn btn-light dropdown-toggle"
@@ -378,7 +381,7 @@
 
             <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show = false"
                 @IsSave="IsSave" />
-                <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
+            <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
 
     </div>
@@ -409,7 +412,7 @@ export default {
             fromDate: '',
             toDate: '',
             startMonth: '',
-            month:'',
+            month: '',
             year: '',
             render: 0,
             nationalId: '',
@@ -417,7 +420,7 @@ export default {
             gender: '',
             status: '',
             contact: '',
-            uqamaNo:'',
+            uqamaNo: '',
             show: false,
             reportsrc: '',
             changereport: 0,
@@ -437,7 +440,7 @@ export default {
             amount: '',
             benificaryCode: '',
             loading: false,
-            
+
 
         }
     },
@@ -470,7 +473,7 @@ export default {
             this.contact = '';
             this.gender = '';
             this.status = '';
-            this.paymentType='';
+            this.paymentType = '';
 
             if (this.$refs.AuthorizedDropdown != undefined)
                 this.$refs.AuthorizedDropdown.Remove();
@@ -480,7 +483,7 @@ export default {
             if (this.$refs.DatePicker != undefined)
                 this.$refs.DatePicker.Remove();
 
-                if (this.$refs.PaymentType != undefined)
+            if (this.$refs.PaymentType != undefined)
                 this.$refs.PaymentType.Remove();
 
 
@@ -513,25 +516,25 @@ export default {
         GetDate: function (link) {
             if (link != undefined && link != null && link != '') {
 
-const date = moment(link);
-const arabicMonth = date.locale('ar').format('MMMM');
-return `${arabicMonth} ${date.format('Do YYYY')}`;
+                const date = moment(link);
+                const arabicMonth = date.locale('ar').format('MMMM');
+                return `${arabicMonth} ${date.format('Do YYYY')}`;
 
-}
+            }
             else {
                 return '';
             }
         },
-        GetDate2:function(date){
-        if(date!=undefined){
+        GetDate2: function (date) {
+            if (date != undefined) {
 
-           // moment.locale('ar');
+                // moment.locale('ar');
 
-            return moment(date).add(1,'months').format('MMMM Do YYYY');
-        }
-        else {
-            return '';
-        }
+                return moment(date).add(1, 'months').format('MMMM Do YYYY');
+            }
+            else {
+                return '';
+            }
         },
         PrintRdlc: function (Id) {
             var companyId = '';
@@ -553,14 +556,14 @@ return `${arabicMonth} ${date.format('Do YYYY')}`;
 
         GetPayment: function () {
             debugger;
- 
+
             var root = this;
             var token = '';
             this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender='+ this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId  , { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender=' + this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;

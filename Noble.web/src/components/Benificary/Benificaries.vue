@@ -276,7 +276,7 @@
                                                 item.authorizationPersonName }}
                                         </span>
                                     </td>
-                                    <td class="text-center">{{ GetDate(brand.startMonth) }}</td>
+                                    <td class="text-center">{{ GetArabicDate(brand.startMonth) }}</td>
 
                                     <!-- <td class="text-center" v-if="brand.approvalPersonName != null">
                                         {{ brand.approvalPersonName }}
@@ -564,8 +564,22 @@ export default {
         getPage: function () {
             this.GetBenificaryData(this.currentPage);
         },
+        GetArabicDate: function (link) {
+      
+            if (link != undefined && link != null && link != '') {
+
+                const date = moment(link);
+                const arabicMonth = date.locale('ar').format('MMMM');
+                return `${arabicMonth} ${date.format('Do YYYY')}`;
+
+            }
+            else {
+                return '';
+            }
+        },
         GetDate: function (link) {
             if (link != undefined) {
+
                 return moment(link).format('MMMM Do YYYY');
 
             }
@@ -724,6 +738,9 @@ export default {
         this.arabic = localStorage.getItem('Arabic');
         this.GetBenificaryData(this.currentPage);
         this.roleName = localStorage.getItem('RoleName');
+
+
+
     }
 }
 </script>
