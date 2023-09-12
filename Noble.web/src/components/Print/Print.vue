@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
             <div class="modal-body text-center">
-                <iframe :key="changereport" height="700" width="1000" :src="reportsrc"></iframe>
+                <iframe :key="changereport" height="1500" width="1000" :src="reportsrc" :scrolling="false"></iframe>
             </div>
             
         </div>
