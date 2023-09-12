@@ -1,6 +1,6 @@
-﻿using System;
-using Focus.Domain.Enum;
+﻿using Focus.Domain.Enum;
 using Focus.Domain.Interface;
+using System;
 
 namespace Focus.Domain.Entities
 {

@@ -13,6 +13,8 @@ namespace Focus.Persistence.Configurations
             builder.HasOne(x => x.Beneficiaries)
                   .WithMany(x => x.Payments)
                   .HasForeignKey(x => x.BenificayId);
+
+          
         }
     }
 }

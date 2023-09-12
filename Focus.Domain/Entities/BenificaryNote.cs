@@ -12,6 +12,6 @@ namespace Focus.Domain.Entities
         public Guid? BenificaryId { get; set; }
         public bool IsActive { get; set; }
 
-        public virtual Beneficiaries Beneficiaries { get; set;}
+        public virtual Beneficiaries Beneficiaries { get; set; }
     }
 }

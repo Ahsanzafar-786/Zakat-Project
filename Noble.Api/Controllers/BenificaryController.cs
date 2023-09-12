@@ -479,6 +479,23 @@ namespace Noble.Api.Controllers
             });
             return Ok(charity);
         }
+
+        [Route("api/Benificary/GetBenificaryReport")]
+        [HttpGet("GetBenificaryReport")]
+        public async Task<IActionResult> GetTransactionReport(Guid? userId, Guid? benificayId, DateTime? fromDate, DateTime? toDate,DateTime? selectedDate)
+        {
+            var charity = await Mediator.Send(new TransactionReportQuery
+            {
+                
+                FromDate = fromDate,
+                ToDate = toDate,
+                BenificayId = benificayId,
+                UserId = userId,
+                SelectedDate = selectedDate,
+
+            });
+            return Ok(charity);
+        }
         #endregion
 
         #region AutoCode
