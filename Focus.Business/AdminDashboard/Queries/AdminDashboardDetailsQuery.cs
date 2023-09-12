@@ -16,7 +16,7 @@ using System.Collections.Generic;
 namespace Focus.Business.AdminDashboard.Queries
 {
     public class AdminDashboardDetailsQuery : IRequest<DashboardLookupModel>
-    {
+    { 
         public Guid? UserId { get; set; }
         public class Handler : IRequestHandler<AdminDashboardDetailsQuery, DashboardLookupModel>
         {
@@ -51,7 +51,7 @@ namespace Focus.Business.AdminDashboard.Queries
                     var totalUser = _userManager.Users.Where(x => x.Code != null && x.CompanyId == user.Identity.CompanyId()).Count();
                     decimal totalIncoming = funds.Sum(x => x.Amount);
                     decimal totalOutgoing = charitytransaction.Sum(x => x.Amount);
-
+                  
                     var totalApprovalPerson = Context.ApprovalPersons.Count();
 
                     var cashierTotalIncoming = funds.Where(x => x.UserId == request.UserId.ToString()).Sum(x => x.Amount);
@@ -72,7 +72,7 @@ namespace Focus.Business.AdminDashboard.Queries
                     var paymentWiseBenificaries = new List<BeneficiariesDurationTypeLookUpModel>();
                     if (paymentTypeList != null)
                     {
-                        foreach (var paymentType in paymentTypeList)
+                        foreach( var paymentType in paymentTypeList)
                         {
                             paymentWiseBenificaries.Add(new BeneficiariesDurationTypeLookUpModel()
                             {
@@ -83,8 +83,7 @@ namespace Focus.Business.AdminDashboard.Queries
                         }
                     }
 
-                 //   decimal openingBalance = await Context.Payments.Where(x => x.Date.Value.Date < request.SelectedDate.Value.Date).SumAsync(x => x.Amount);
-
+                    
 
 
                     return new DashboardLookupModel

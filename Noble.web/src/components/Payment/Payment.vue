@@ -392,6 +392,7 @@ import Multiselect from 'vue-multiselect';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import moment from 'moment'
+// import 'moment/locale/ar'; // Import Arabic locale
 
 export default {
     mixins: [clickMixin],
@@ -417,7 +418,6 @@ export default {
             status: '',
             contact: '',
             uqamaNo:'',
-
             show: false,
             reportsrc: '',
             changereport: 0,
@@ -511,16 +511,22 @@ export default {
             }
         },
         GetDate: function (link) {
-            if (link != undefined) {
-                return moment(link).format('MMMM Do YYYY');
+            if (link != undefined && link != null && link != '') {
 
-            }
+const date = moment(link);
+const arabicMonth = date.locale('ar').format('MMMM');
+return `${arabicMonth} ${date.format('Do YYYY')}`;
+
+}
             else {
                 return '';
             }
         },
         GetDate2:function(date){
         if(date!=undefined){
+
+           // moment.locale('ar');
+
             return moment(date).add(1,'months').format('MMMM Do YYYY');
         }
         else {
@@ -649,6 +655,8 @@ export default {
         this.arabic = localStorage.getItem('Arabic');
         this.GetPayment(this.currentPage);
         this.roleName = localStorage.getItem('RoleName');
+
+        //moment.locale('ar');
 
 
     }

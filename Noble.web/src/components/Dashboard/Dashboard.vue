@@ -231,6 +231,7 @@
                         </div>
                         <!--end card-->
                     </div>
+
                     <!--end col-->
                 </div>
             </div>
@@ -261,48 +262,54 @@
                 </div>
                 <!--end card-->
             </div>
+          
             <div class="col-lg-9">
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#profile-1" role="tab"
-                            aria-selected="true">{{ $t('Analytics.BenificaryType') }}</a>
+                        <a class="nav-link active" data-bs-toggle="tab" href="#profile-1" role="tab" aria-selected="true">{{
+                            $t('Analytics.BenificaryType') }}</a>
                     </li>
                     <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link" data-bs-toggle="tab" href="#home-1" role="tab" aria-selected="false" v-on:click="GetYearWiseTransaction()">{{ $t('Analytics.YearWisePaymentOutgoing') }}</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#home-1" role="tab" aria-selected="false"
+                            v-on:click="GetYearWiseTransaction()">{{ $t('Analytics.YearWisePaymentOutgoing') }}</a>
                     </li>
-                   
+
                     <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link" data-bs-toggle="tab" href="#settings-1" role="tab"
-                            aria-selected="false" v-on:click="GetPaymentTypeWiseTransaction()">{{ $t('Analytics.PaymentTypesWiseoutgoing') }}</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#settings-1" role="tab" aria-selected="false"
+                            v-on:click="GetPaymentTypeWiseTransaction()">{{ $t('Analytics.PaymentTypesWiseoutgoing') }}</a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link" data-bs-toggle="tab" href="#settings-2" role="tab" aria-selected="false"
+                            >Opening Balance</a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane p-3" id="home-1" role="tabpanel">
-                       <div class="card">
-                        <div class="card-header">
-                            <div class="col-auto">
-                                <label>Select Year:</label>
-                                <datepicker v-model="selectedYear" v-on:input="SelectedYear2(selectedYear)"
-                                    :type="'year'" />
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="col-auto">
+                                    <label>Select Year:</label>
+                                    <datepicker v-model="selectedYear" v-on:input="SelectedYear2(selectedYear)"
+                                        :type="'year'" />
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="reender">
+                                </apexchart>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <apexchart type="line" height="350" :options="chartOptions" :series="series" :key="reender">
-                            </apexchart>
-                        </div>
-                       </div>
                     </div>
                     <div class="tab-pane p-3 active" id="profile-1" role="tabpanel">
-                       <!--end row-->
-                     <div class="card">
-                       <div class="card-header">
-                         <div class="row align-items-center">
-                             <div class="col">
-                                <h4 class="card-title">{{ $t('Analytics.BenificaryType') }}</h4>
-                            </div>
-                            <!--end col-->
-                            <div class="col-auto">
-                                <!-- <div class="dropdown">
+                        <!--end row-->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4 class="card-title">{{ $t('Analytics.BenificaryType') }}</h4>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-auto">
+                                        <!-- <div class="dropdown">
                                     <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         All<i class="las la-angle-down ms-1"></i>
@@ -312,32 +319,33 @@
                                         <a class="dropdown-item" href="#">Customize</a>
                                     </div>
                                 </div> -->
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
                             </div>
-                            <!--end col-->
-                        </div>
-                        <!--end row-->
-                     </div>
-                     <!--end card-header-->
-                      <div class="card-body">
-                        <div class="text-center">
-                            <apexchart type="line" height="350" :options="chartOptions3" :series="series3" :key="render">
-                            </apexchart>
-                        </div>
+                            <!--end card-header-->
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <apexchart type="line" height="350" :options="chartOptions3" :series="series3"
+                                        :key="render">
+                                    </apexchart>
+                                </div>
 
-                        <!--end /div-->
-                     </div>
-                    <!--end card-body-->
-                </div>
+                                <!--end /div-->
+                            </div>
+                            <!--end card-body-->
+                        </div>
                     </div>
                     <div class="tab-pane p-3" id="settings-1" role="tabpanel">
                         <div class="card">
-                       <div class="card-header">
-                         <div class="row align-items-center">
-                             <div class="col">
-                                <h4 class="card-title">{{ $t('Analytics.PaymentTypesWiseoutgoing') }}</h4>
-                             </div>
-                             <!--end col-->
-                             <!-- <div class="col-auto">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4 class="card-title">{{ $t('Analytics.PaymentTypesWiseoutgoing') }}</h4>
+                                    </div>
+                                    <!--end col-->
+                                    <!-- <div class="col-auto">
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-sm btn-outline-light dropdown-toggle"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -349,25 +357,159 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <!--end col-->
-                        </div>
-                        <!--end row-->
-                     </div>
-                     <!--end card-header-->
-                      <div class="card-body">
-                        <div class="text-center">
-                            <apexchart type="line" height="350" :options="chartOptions4" :series="series4" :key="reeender">
-                            </apexchart>
-                        </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+                            </div>
+                            <!--end card-header-->
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <apexchart type="line" height="350" :options="chartOptions4" :series="series4"
+                                        :key="reeender">
+                                    </apexchart>
+                                </div>
 
-                        <!--end /div-->
-                     </div>
-                    <!--end card-body-->
-                </div>
+                                <!--end /div-->
+                            </div>
+                            <!--end card-body-->
+                        </div>
                     </div>
-                </div>
-               
+                    <div class="tab-pane p-3 " id="settings-2" role="tabpanel">
+                      <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+
+
+                                    <div class="card">
+
+                                        <div class="row">
+                                            <div class="col-lg-5 pl-2 mt-3 form-group">
+                                                <label class="text  font-weight-bolder">
+                                                    {{ $t('Benificary.FromDate') }}
+                                                </label>
+                                                <datepicker v-model="fromDate1" :key="render" />
+
+                                            </div>
+                                            <div class="col-lg-5  mt-3 form-group">
+                                                <label class="text  font-weight-bolder">
+                                                    {{ $t('Benificary.ToDate') }}
+                                                </label>
+                                                <datepicker v-model="toDate1" :key="render" />
+                                            </div>
+
+                                            <div class="col-lg-2 pt-2 mt-4 form-group">
+                                                <button class="btn btn-primary" @click="GetOpeningBalanceQuery">Fetch Data</button>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6 col-lg-3">
+                                                    <div class="card report-card">
+                                                        <div class="card-body">
+                                                            <div class="row d-flex justify-content-center">
+                                                                <div class="row">
+                                                                    <p class="text-dark mb-0 fw-semibold">
+                                                                        Opening Balnece</p>
+                                                                    <h3 class="m-0">{{ dashboard3.openingBalance }}</h3>
+                                                                </div>
+                                                                <div class="col-auto align-self-center">
+                                                                    <div class="report-main-icon bg-light-alt">
+                                                                        <i data-feather="users"
+                                                                            class="align-self-center text-muted icon-sm"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end card-body-->
+                                                    </div>
+                                                    <!--end card-->
+                                                </div>
+                                                <div class="col-md-6 col-lg-3">
+                                                    <div class="card report-card">
+                                                        <div class="card-body">
+                                                            <div class="row d-flex justify-content-center">
+                                                                <div class="row">
+                                                                    <p class="text-dark mb-0 fw-semibold">
+                                                                        Funds Recevied</p>
+                                                                    <h3 class="m-0">{{ dashboard3.totalFunds }}</h3>
+
+                                                                </div>
+                                                                <div class="col-auto align-self-center">
+                                                                    <div class="report-main-icon bg-light-alt">
+                                                                        <i data-feather="users"
+                                                                            class="align-self-center text-muted icon-sm"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end card-body-->
+                                                    </div>
+                                                    <!--end card-->
+                                                </div>
+                                                <div class="col-md-6 col-lg-3">
+                                                    <div class="card report-card">
+                                                        <div class="card-body">
+                                                            <div class="row d-flex justify-content-center">
+                                                                <div class="row">
+                                                                    <p class="text-dark mb-0 fw-semibold">
+                                                                        beneficiary payment
+                                                                    </p>
+                                                                    <h3 class="m-0">{{ dashboard3.beneficiaryPayment }}</h3>
+
+                                                                </div>
+                                                                <div class="col-auto align-self-center">
+                                                                    <div class="report-main-icon bg-light-alt">
+                                                                        <i data-feather="users"
+                                                                            class="align-self-center text-muted icon-sm"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end card-body-->
+                                                    </div>
+                                                    <!--end card-->
+                                                </div>
+                                                <div class="col-md-6 col-lg-3">
+                                                    <div class="card report-card">
+                                                        <div class="card-body">
+                                                            <div class="row d-flex justify-content-center">
+                                                                <div class="row">
+                                                                    <p class="text-dark mb-0 fw-semibold">
+                                                                        Closing Balnce</p>
+                                                                    <h3 class="m-0">{{ dashboard3.closingBalance }}</h3>
+                                                                </div>
+                                                                <div class="col-auto align-self-center">
+                                                                    <div class="report-main-icon bg-light-alt">
+                                                                        <i data-feather="users"
+                                                                            class="align-self-center text-muted icon-sm"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end card-body-->
+                                                    </div>
+                                                    <!--end card-->
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div>
+                    </div>
             </div>
+            </div>
+
+           
         </div>
         <!--end row-->
         <loading :active.sync="loading" :can-cancel="true" :is-full-page="false"></loading>
@@ -377,6 +519,8 @@
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import moment from "moment";
+//import 'moment/locale/en'; // Import Arabic locale
+
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
@@ -390,6 +534,7 @@ export default {
 
         return {
             dashboard1: '',
+            dashboard3: '',
             paymentWiseTransactionList: '',
             loading: false,
             userId: '',
@@ -403,10 +548,12 @@ export default {
             date: '',
             render: 0,
             reender: 0,
-            reeender:0, 
+            reeender: 0,
             randerDropdown: 0,
             fromDate: moment().format("DD MMM YYYY"),
             toDate: Date(),
+            fromDate1: '',
+            toDate1: '',
             selectedYear: null,
             years: [],
             series: [{
@@ -511,7 +658,7 @@ export default {
                         text: 'Indefinate',
                     },
 
-                }, 
+                },
                 {
                     opposite: true,
                     title: {
@@ -528,7 +675,7 @@ export default {
                 chart: {
                     height: 350,
                     type: 'line',
-                    
+
                 },
                 stroke: {
                     width: [0, 4]
@@ -536,7 +683,7 @@ export default {
                 dataLabels: {
                     enabled: false
                 },
-                
+
                 title: {
                     text: 'Payment Type Wise Outgoing',
                     align: 'left'
@@ -569,12 +716,13 @@ export default {
             return moment(date).format('l');
         },
 
-        GetYearWiseTransaction : function ()
-        {
+        GetYearWiseTransaction: function () {
             var currentDate = moment();
             var date = currentDate.format('DD MMM YYYY');
             this.getDashboardChartsData(date);
         },
+
+        
 
 
         getDashboardData: function () {
@@ -584,12 +732,11 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            
+
             this.userId = localStorage.getItem('UserId');
 
             root.$https.get(`Benificary/GetDashboardDetail?userId=` + this.userId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
-                    debugger;
                     root.loading = false;
 
                     root.dashboard = response.data;
@@ -646,12 +793,12 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-         
+
             this.loading = true;
             root.$https.get(`Benificary/PaymentTypeWiseTransaction`, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.loading = false;
-            
+
                     root.paymentWiseTransactionList = response.data;
                     root.series4[0].data = [];
                     root.chartOptions4.xaxis.categories = [];
@@ -662,13 +809,48 @@ export default {
                     });
 
                 }
-                
+
+                root.reeender++;
+            }).catch(function (error) {
+                console.error(error);
+            });
+
+        },
+
+
+       
+
+        GetOpeningBalanceQuery: function () {
+            debugger;
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            this.loading = true;
+           
+            if (this.fromDate1 && this.toDate1) {
+            root.$https.get('Benificary/OpeningBalanceQuery?fromDate1=' + this.fromDate1 + '&toDate1=' + this.toDate1, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                if (response.data != null) {
+                    root.loading = false;
+                    debugger;
+
+                    root.dashboard3 = response.data;
+
+
+
+                }
+
                 root.reeender++;
             }).catch(function (error) {
                 console.error(error);
             });
 
         }
+
+        }
+    
+ 
 
     },
 
@@ -680,6 +862,8 @@ export default {
         this.currency = localStorage.getItem('currency');
 
         this.fromDate = moment().startOf('month').format("DD MMM YYYY");
+        this.fromDate1 = moment().subtract(1, 'months').format("DD MMM YYYY");
+        this.toDate1=  moment().format("DD MMM YYYY");
 
         if (this.$session.exists()) {
             this.userId = localStorage.getItem('UserId');
@@ -692,7 +876,8 @@ export default {
 
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
-      
+       
+        this.GetOpeningBalanceQuery();
 
         this.rolename = localStorage.getItem('RoleName')
 

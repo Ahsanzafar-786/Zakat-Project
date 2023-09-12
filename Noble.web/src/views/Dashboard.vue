@@ -131,13 +131,13 @@
                                 }}</a>
                             </li>
                         </ul>
-                        <ul class="nav-second-level" aria-expanded="false">
+                        <!-- <ul class="nav-second-level" aria-expanded="false">
                             <li>
                                 <a v-on:click="GoTo('/approvalpersons')" href="javascript:void(0);"> 
                                     {{ $t('Dashboard.AddApprovalPerson') }}
                                 </a>
                             </li>
-                        </ul>
+                        </ul> -->
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
                                 <a v-on:click="GoTo('/paymenttype')" href="javascript:void(0);"> {{ $t('Dashboard.AddPaymentType')

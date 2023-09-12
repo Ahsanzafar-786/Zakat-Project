@@ -82,6 +82,19 @@ namespace Noble.Api.Controllers
             var dashboard2 = await Mediator.Send(new PaymentTypeWiseTransactionQuery { });
             return Ok(dashboard2);
         }
+
+        [Route("api/Benificary/OpeningBalanceQuery")]
+        [HttpGet("OpeningBalanceQuery")]
+        public async Task<IActionResult> OpeningBalanceQuery(DateTime? fromDate1, DateTime? toDate1)
+        {
+            var dashboard3 = await Mediator.Send(new AdminOpeningClosingQuery {
+
+                FromDate1 = fromDate1,
+                ToDate1 = toDate1,
+
+            });
+            return Ok(dashboard3);
+        }
         #endregion
 
         #region Benificary
