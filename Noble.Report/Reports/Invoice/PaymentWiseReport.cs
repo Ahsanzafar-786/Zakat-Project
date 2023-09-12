@@ -11,7 +11,7 @@ namespace Noble.Report.Reports.Invoice
 {
     public partial class PaymentWiseReport : DevExpress.XtraReports.UI.XtraReport
     {
-        public PaymentWiseReport(CompanyDto companyDtl,List<PaymentWiseListLookupModel> paymentDtl)
+        public PaymentWiseReport(CompanyDto companyDtl, PaymentWiseOpeningClosingModel paymentDtl)
         {
             InitializeComponent();
             CompanyInfo.DataSource = companyDtl;
