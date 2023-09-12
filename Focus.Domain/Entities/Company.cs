@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Focus.Domain.Entities
 {
-    public class Company: BaseEntity
+    public class Company : BaseEntity
     {
         public DateTime CreatedDate { get; set; }
         public bool Blocked { get; set; }
@@ -33,7 +32,7 @@ namespace Focus.Domain.Entities
         public Guid ParentId { get; set; }
         public Guid? ClientParentId { get; set; }
         public Guid? BusinessParentId { get; set; }
-     
+
         public bool IsMultiUnit { get; set; }
         public bool IsProduction { get; set; }
         public bool InvoiceWoInventory { get; set; }

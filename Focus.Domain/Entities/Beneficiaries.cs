@@ -1,8 +1,8 @@
-﻿using Focus.Domain.Interface;
+﻿using Focus.Domain.Enum;
+using Focus.Domain.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Focus.Domain.Enum;
 
 namespace Focus.Domain.Entities
 {
@@ -26,11 +26,11 @@ namespace Focus.Domain.Entities
 
         [Column(TypeName = "ntext")]
         public string Note { get; set; }
-       
+
         public bool IsActive { get; set; }
         public bool IsRegister { get; set; }
         public Guid? AuthorizedPersonId { get; set; }
-        public virtual AuthorizedPerson AuthorizedPersons { get; set; }  
+        public virtual AuthorizedPerson AuthorizedPersons { get; set; }
         public Guid? ApprovalPersonId { get; set; }
         public virtual ApprovalPerson ApprovalPersons { get; set; }
         public virtual ICollection<BenificaryNote> BenificaryNotes { get; set; }
@@ -44,9 +44,10 @@ namespace Focus.Domain.Entities
         public Guid? ApprovedPaymentId { get; set; }
         public int AdvancePayment { get; set; }
         public string DurationType { get; set; }
-        public virtual ICollection<BenificaryAuthorization> BenificaryAuthorization { get;set; }
-        public virtual ICollection<Payment> Payments { get;set; }
-       
+        public virtual ICollection<BenificaryAuthorization> BenificaryAuthorization { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<CharityTransaction> CharityTransactions { get; set; }
+
 
     }
 }

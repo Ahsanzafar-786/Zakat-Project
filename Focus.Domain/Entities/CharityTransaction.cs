@@ -9,6 +9,7 @@ namespace Focus.Domain.Entities
         public string DoucmentCode { get; set; }
         public string DocumentName { get; set; }
         public Guid? BenificayId { get; set; }
+        public virtual Beneficiaries Beneficiaries { get; set; }
         public decimal Amount { get; set; }
         public DateTime? DoucmentDate { get; set; }
         public DateTime? Month { get; set; }

@@ -9,8 +9,8 @@ namespace Focus.Business.Reports.Payments.Models
         public decimal OpeningBalance { get; set; }
         public decimal ClosingBalance { get; set; }
         public List<PaymentWiseListLookupModel> PaymentList { get; set; }
-
-
-
+        public List<PaymentWiseListLookupModel> Charitylist { get; set; }
+        public decimal TransactionTotal { get;  set; }
+        public decimal FundsTotal { get;  set; }
     }
 }

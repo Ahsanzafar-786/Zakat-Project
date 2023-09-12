@@ -1,4 +1,6 @@
 ﻿using System;
+using Focus.Domain.Entities;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace Focus.Business.Users
@@ -20,6 +22,7 @@ namespace Focus.Business.Users
         public DateTime? CreatedDate { get; set; }
         public string Remarks { get; set; }
         public string RoleName { get; set; }
+  
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Focus.Domain.Interface;
 using System.Collections.Generic;
 
-namespace Focus.Domain.Entities 
+namespace Focus.Domain.Entities
 {
     public class ApprovalPerson : BaseEntity, ITenant, IAuditedEntityBase, ITenantFilterableEntity
     {

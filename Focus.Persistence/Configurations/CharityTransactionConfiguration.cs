@@ -9,6 +9,9 @@ namespace Focus.Persistence.Configurations
         public void Configure(EntityTypeBuilder<CharityTransaction> builder)
         {
             builder.Property(x => x.Amount).HasColumnType("decimal(18,4)");
+            builder.HasOne(x => x.Beneficiaries)
+                 .WithMany(x => x.CharityTransactions)
+                 .HasForeignKey(x => x.BenificayId);
         }
     }
 }

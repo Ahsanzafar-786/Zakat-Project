@@ -57,7 +57,8 @@ import ledgerreport from '../components/Reports/LedgerReport.vue'
 //LedgerReport
 import paymentwisereport from '../components/Reports/PaymentWiseReport.vue'
 
-
+//LedgerReport
+import transactionreport from '../components/Reports/TransactionReport.vue'
 
 
 //CompanyProfile
@@ -204,6 +205,11 @@ const routes = [
                             path: '/paymentwisereport',
                             name: 'paymentwisereport',
                             component: paymentwisereport
+                        },
+                        {
+                            path: '/transactionreport',
+                            name: 'transactionreport',
+                            component: transactionreport
                         },
                        
                         {

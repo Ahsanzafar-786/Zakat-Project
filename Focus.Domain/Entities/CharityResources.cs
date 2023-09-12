@@ -6,7 +6,7 @@ namespace Focus.Domain.Entities
 {
     public class CharityResources : BaseEntity, ITenant, IAuditedEntityBase, ITenantFilterableEntity
     {
-        public int ChartiyId { get;set; }
+        public int ChartiyId { get; set; }
         public string Name { get; set; }
         public string NameAr { get; set; }
         public string City { get; set; }
@@ -18,4 +18,3 @@ namespace Focus.Domain.Entities
 
     }
 }
- 
