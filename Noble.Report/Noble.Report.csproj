@@ -201,6 +201,7 @@
     <Compile Include="Models\CompanyLicenceDto.cs" />
     <Compile Include="Models\CompanyDto.cs" />
     <Compile Include="Models\PaymentWiseListLookupModel.cs" />
+    <Compile Include="Models\PaymentWiseOpeningClosingModel.cs" />
     <Compile Include="Models\SelectedMonthLookupModel.cs" />
     <Compile Include="Models\PaymentLookupModel.cs" />
     <Compile Include="Models\ModuleWiseClaimsLookupModel.cs" />

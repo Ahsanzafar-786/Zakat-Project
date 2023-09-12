@@ -139,7 +139,7 @@ namespace Noble.Report.Reports.Invoice
 
                             DataRow row;
                             int i = 1;
-                            foreach (var item in PaymantWiseTransection)
+                            foreach (var item in PaymantWiseTransection.PaymentList)
                             {
                                 row = dt.NewRow();
                                 row["#"] = i++;
