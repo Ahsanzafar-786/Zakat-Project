@@ -34,6 +34,126 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="row justify-content-center">
+                    
+
+                        <div class="row">
+                            <div class="col-lg-5   form-group">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('Benificary.FromDate') }}
+                                </label>
+                                <datepicker v-model="fromDate1" :key="render" />
+
+                            </div>
+                            <div class="col-lg-5   form-group">
+                                <label class="text  font-weight-bolder">
+                                    {{ $t('Benificary.ToDate') }}
+                                </label>
+                                <datepicker v-model="toDate1" :key="render" />
+                            </div>
+
+                            <div class="col-lg-2 pt-2 mt-2 form-group">
+                                <button class="btn btn-primary" @click="GetOpeningBalanceQuery">Fetch Data</button>
+                            </div>
+                        </div>
+
+
+                        
+                           
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card report-card">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="row">
+                                                    <p class="text-dark mb-0 fw-semibold">
+                                                        Opening Balnece</p>
+                                                    <h3 class="m-0">{{ dashboard3.openingBalance }}</h3>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="users"
+                                                            class="align-self-center text-muted icon-sm"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end card-->
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card report-card">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="row">
+                                                    <p class="text-dark mb-0 fw-semibold">
+                                                        Funds Recevied</p>
+                                                    <h3 class="m-0">{{ dashboard3.totalFunds }}</h3>
+
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="users" class="align-self-center text-muted icon-sm"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end card-->
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card report-card">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="row">
+                                                    <p class="text-dark mb-0 fw-semibold">
+                                                        beneficiary payment
+                                                    </p>
+                                                    <h3 class="m-0">{{ dashboard3.beneficiaryPayment }}</h3>
+
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="users"
+                                                            class="align-self-center text-muted icon-sm"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end card-->
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card report-card">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="row">
+                                                    <p class="text-dark mb-0 fw-semibold">
+                                                        Closing Balnce</p>
+                                                    <h3 class="m-0">{{ dashboard3.closingBalance }}</h3>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                    <div class="report-main-icon bg-light-alt">
+                                                        <i data-feather="users"
+                                                            class="align-self-center text-muted icon-sm"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end card-->
+                                </div>
+
+
+
+                            
+                        
+
+                    
+
+
                     <div class="col-md-6 col-lg-3">
                         <div class="card report-card">
                             <div class="card-body">
@@ -138,8 +258,9 @@
                             <div class="card-body">
                                 <div class="row d-flex justify-content-center">
                                     <div class="row">
-                                        <p class="text-dark mb-0 fw-semibold">{{ $t('ApprovalPerson.ApprovalPerson') }}</p>
-                                        <h3 class="m-0">{{ dashboard.totalApprovalPerson }}</h3>
+                                        <!-- <p class="text-dark mb-0 fw-semibold">{{ $t('ApprovalPerson.ApprovalPerson') }}</p> -->
+                                        <p class="text-dark mb-0 fw-semibold">InComing </p>
+                                        <h3 class="m-0">{{ dashboard.cashierTotalIncoming }}</h3>
                                     </div>
                                     <div class="col-auto align-self-center">
                                         <div class="report-main-icon bg-light-alt">
@@ -262,7 +383,7 @@
                 </div>
                 <!--end card-->
             </div>
-          
+
             <div class="col-lg-9">
                 <ul class="nav nav-pills nav-justified" role="tablist">
                     <li class="nav-item waves-effect waves-light">
@@ -278,10 +399,10 @@
                         <a class="nav-link" data-bs-toggle="tab" href="#settings-1" role="tab" aria-selected="false"
                             v-on:click="GetPaymentTypeWiseTransaction()">{{ $t('Analytics.PaymentTypesWiseoutgoing') }}</a>
                     </li>
-                    <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link" data-bs-toggle="tab" href="#settings-2" role="tab" aria-selected="false"
-                            >Opening Balance</a>
-                    </li>
+                    <!-- <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link" data-bs-toggle="tab" href="#settings-2" role="tab" aria-selected="false">Opening
+                            Balance</a>
+                    </li> -->
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane p-3" id="home-1" role="tabpanel">
@@ -375,141 +496,143 @@
                         </div>
                     </div>
                     <div class="tab-pane p-3 " id="settings-2" role="tabpanel">
-                      <div class="row mt-3">
-                        <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-lg-12">
+                        <div class="row mt-3">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
 
 
-                                    <div class="card">
+                                        <div class="card">
 
-                                        <div class="row">
-                                            <div class="col-lg-5 pl-2 mt-3 form-group">
-                                                <label class="text  font-weight-bolder">
-                                                    {{ $t('Benificary.FromDate') }}
-                                                </label>
-                                                <datepicker v-model="fromDate1" :key="render" />
-
-                                            </div>
-                                            <div class="col-lg-5  mt-3 form-group">
-                                                <label class="text  font-weight-bolder">
-                                                    {{ $t('Benificary.ToDate') }}
-                                                </label>
-                                                <datepicker v-model="toDate1" :key="render" />
-                                            </div>
-
-                                            <div class="col-lg-2 pt-2 mt-4 form-group">
-                                                <button class="btn btn-primary" @click="GetOpeningBalanceQuery">Fetch Data</button>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-6 col-lg-3">
-                                                    <div class="card report-card">
-                                                        <div class="card-body">
-                                                            <div class="row d-flex justify-content-center">
-                                                                <div class="row">
-                                                                    <p class="text-dark mb-0 fw-semibold">
-                                                                        Opening Balnece</p>
-                                                                    <h3 class="m-0">{{ dashboard3.openingBalance }}</h3>
-                                                                </div>
-                                                                <div class="col-auto align-self-center">
-                                                                    <div class="report-main-icon bg-light-alt">
-                                                                        <i data-feather="users"
-                                                                            class="align-self-center text-muted icon-sm"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--end card-body-->
-                                                    </div>
-                                                    <!--end card-->
-                                                </div>
-                                                <div class="col-md-6 col-lg-3">
-                                                    <div class="card report-card">
-                                                        <div class="card-body">
-                                                            <div class="row d-flex justify-content-center">
-                                                                <div class="row">
-                                                                    <p class="text-dark mb-0 fw-semibold">
-                                                                        Funds Recevied</p>
-                                                                    <h3 class="m-0">{{ dashboard3.totalFunds }}</h3>
+                                                <div class="col-lg-5 pl-2 mt-3 form-group">
+                                                    <label class="text  font-weight-bolder">
+                                                        {{ $t('Benificary.FromDate') }}
+                                                    </label>
+                                                    <datepicker v-model="fromDate1" :key="render" />
 
-                                                                </div>
-                                                                <div class="col-auto align-self-center">
-                                                                    <div class="report-main-icon bg-light-alt">
-                                                                        <i data-feather="users"
-                                                                            class="align-self-center text-muted icon-sm"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--end card-body-->
-                                                    </div>
-                                                    <!--end card-->
                                                 </div>
-                                                <div class="col-md-6 col-lg-3">
-                                                    <div class="card report-card">
-                                                        <div class="card-body">
-                                                            <div class="row d-flex justify-content-center">
-                                                                <div class="row">
-                                                                    <p class="text-dark mb-0 fw-semibold">
-                                                                        beneficiary payment
-                                                                    </p>
-                                                                    <h3 class="m-0">{{ dashboard3.beneficiaryPayment }}</h3>
-
-                                                                </div>
-                                                                <div class="col-auto align-self-center">
-                                                                    <div class="report-main-icon bg-light-alt">
-                                                                        <i data-feather="users"
-                                                                            class="align-self-center text-muted icon-sm"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--end card-body-->
-                                                    </div>
-                                                    <!--end card-->
-                                                </div>
-                                                <div class="col-md-6 col-lg-3">
-                                                    <div class="card report-card">
-                                                        <div class="card-body">
-                                                            <div class="row d-flex justify-content-center">
-                                                                <div class="row">
-                                                                    <p class="text-dark mb-0 fw-semibold">
-                                                                        Closing Balnce</p>
-                                                                    <h3 class="m-0">{{ dashboard3.closingBalance }}</h3>
-                                                                </div>
-                                                                <div class="col-auto align-self-center">
-                                                                    <div class="report-main-icon bg-light-alt">
-                                                                        <i data-feather="users"
-                                                                            class="align-self-center text-muted icon-sm"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--end card-body-->
-                                                    </div>
-                                                    <!--end card-->
+                                                <div class="col-lg-5  mt-3 form-group">
+                                                    <label class="text  font-weight-bolder">
+                                                        {{ $t('Benificary.ToDate') }}
+                                                    </label>
+                                                    <datepicker v-model="toDate1" :key="render" />
                                                 </div>
 
-
-
+                                                <div class="col-lg-2 pt-2 mt-4 form-group">
+                                                    <button class="btn btn-primary" @click="GetOpeningBalanceQuery">Fetch
+                                                        Data</button>
+                                                </div>
                                             </div>
+
+
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-lg-3">
+                                                        <div class="card report-card">
+                                                            <div class="card-body">
+                                                                <div class="row d-flex justify-content-center">
+                                                                    <div class="row">
+                                                                        <p class="text-dark mb-0 fw-semibold">
+                                                                            Opening Balnece</p>
+                                                                        <h3 class="m-0">{{ dashboard3.openingBalance }}</h3>
+                                                                    </div>
+                                                                    <div class="col-auto align-self-center">
+                                                                        <div class="report-main-icon bg-light-alt">
+                                                                            <i data-feather="users"
+                                                                                class="align-self-center text-muted icon-sm"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end card-body-->
+                                                        </div>
+                                                        <!--end card-->
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-3">
+                                                        <div class="card report-card">
+                                                            <div class="card-body">
+                                                                <div class="row d-flex justify-content-center">
+                                                                    <div class="row">
+                                                                        <p class="text-dark mb-0 fw-semibold">
+                                                                            Funds Recevied</p>
+                                                                        <h3 class="m-0">{{ dashboard3.totalFunds }}</h3>
+
+                                                                    </div>
+                                                                    <div class="col-auto align-self-center">
+                                                                        <div class="report-main-icon bg-light-alt">
+                                                                            <i data-feather="users"
+                                                                                class="align-self-center text-muted icon-sm"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end card-body-->
+                                                        </div>
+                                                        <!--end card-->
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-3">
+                                                        <div class="card report-card">
+                                                            <div class="card-body">
+                                                                <div class="row d-flex justify-content-center">
+                                                                    <div class="row">
+                                                                        <p class="text-dark mb-0 fw-semibold">
+                                                                            beneficiary payment
+                                                                        </p>
+                                                                        <h3 class="m-0">{{ dashboard3.beneficiaryPayment }}
+                                                                        </h3>
+
+                                                                    </div>
+                                                                    <div class="col-auto align-self-center">
+                                                                        <div class="report-main-icon bg-light-alt">
+                                                                            <i data-feather="users"
+                                                                                class="align-self-center text-muted icon-sm"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end card-body-->
+                                                        </div>
+                                                        <!--end card-->
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-3">
+                                                        <div class="card report-card">
+                                                            <div class="card-body">
+                                                                <div class="row d-flex justify-content-center">
+                                                                    <div class="row">
+                                                                        <p class="text-dark mb-0 fw-semibold">
+                                                                            Closing Balnce</p>
+                                                                        <h3 class="m-0">{{ dashboard3.closingBalance }}</h3>
+                                                                    </div>
+                                                                    <div class="col-auto align-self-center">
+                                                                        <div class="report-main-icon bg-light-alt">
+                                                                            <i data-feather="users"
+                                                                                class="align-self-center text-muted icon-sm"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end card-body-->
+                                                        </div>
+                                                        <!--end card-->
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+
                                         </div>
-
+                                        <!--end row-->
                                     </div>
-                                    <!--end row-->
                                 </div>
-                            </div>
-                        </div><!--end col-->
+                            </div><!--end col-->
+                        </div>
                     </div>
-                    </div>
-            </div>
+                </div>
             </div>
 
-           
+
         </div>
         <!--end row-->
         <loading :active.sync="loading" :can-cancel="true" :is-full-page="false"></loading>
@@ -722,7 +845,7 @@ export default {
             this.getDashboardChartsData(date);
         },
 
-        
+
 
 
         getDashboardData: function () {
@@ -818,7 +941,7 @@ export default {
         },
 
 
-       
+
 
         GetOpeningBalanceQuery: function () {
             debugger;
@@ -828,29 +951,29 @@ export default {
                 token = localStorage.getItem('token');
             }
             this.loading = true;
-           
+
             if (this.fromDate1 && this.toDate1) {
-            root.$https.get('Benificary/OpeningBalanceQuery?fromDate1=' + this.fromDate1 + '&toDate1=' + this.toDate1, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
-                if (response.data != null) {
-                    root.loading = false;
-                    debugger;
+                root.$https.get('Benificary/OpeningBalanceQuery?fromDate1=' + this.fromDate1 + '&toDate1=' + this.toDate1, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                    if (response.data != null) {
+                        root.loading = false;
+                        debugger;
 
-                    root.dashboard3 = response.data;
+                        root.dashboard3 = response.data;
 
 
 
-                }
+                    }
 
-                root.reeender++;
-            }).catch(function (error) {
-                console.error(error);
-            });
+                    root.reeender++;
+                }).catch(function (error) {
+                    console.error(error);
+                });
+
+            }
 
         }
 
-        }
-    
- 
+
 
     },
 
@@ -863,7 +986,7 @@ export default {
 
         this.fromDate = moment().startOf('month').format("DD MMM YYYY");
         this.fromDate1 = moment().subtract(1, 'months').format("DD MMM YYYY");
-        this.toDate1=  moment().format("DD MMM YYYY");
+        this.toDate1 = moment().format("DD MMM YYYY");
 
         if (this.$session.exists()) {
             this.userId = localStorage.getItem('UserId');
@@ -876,7 +999,7 @@ export default {
 
         this.chartbymonth = moment().format("DD MMM YYYY");
         this.getDashboardData();
-       
+
         this.GetOpeningBalanceQuery();
 
         this.rolename = localStorage.getItem('RoleName')

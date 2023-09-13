@@ -64,9 +64,7 @@ namespace Focus.Business.AdminDashboard.Queries
                     //   var cashierTotalOutgoing1 = charitytransaction.Where(x => x.DoucmentId == item.Id).Sum(x => x.Amount);
                     //   cashierTotalOutgoing = cashierTotalOutgoing + cashierTotalOutgoing1;
                     //}
-                    decimal cashierTotalOutgoing = charitytransaction
-    .Join(paymentUser, ct => ct.DoucmentId, pu => pu.Id, (ct, pu) => ct.Amount)
-    .Sum();
+                    decimal cashierTotalOutgoing = charitytransaction.Join(paymentUser, ct => ct.DoucmentId, pu => pu.Id, (ct, pu) => ct.Amount).Sum();
 
 
                     var paymentWiseBenificaries = new List<BeneficiariesDurationTypeLookUpModel>();
