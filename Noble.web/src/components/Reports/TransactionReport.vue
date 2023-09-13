@@ -6,7 +6,7 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">transaction Report</h4>
+                                <h4 class="page-title">Transaction Report</h4>
                                
                             </div>
                             
@@ -19,13 +19,13 @@
                     <div class="row">
                        
                        
-                        <div class="col-sm-2">
+                        <div class="col-lg-4">
                             <datepicker v-model="fromDate" :key="render" />
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-lg-4">
                             <datepicker v-model="toDate"  :key="render" />
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <button class="btn btn-outline-primary me-2" v-on:click="GetTransactions()">{{
                                 $t('LedgerReport.Filter') }}
                             </button>

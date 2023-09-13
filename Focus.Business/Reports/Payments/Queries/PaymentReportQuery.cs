@@ -43,9 +43,9 @@ namespace Focus.Business.Reports.Payments.Queries
                 {
 
                     //DateTime openingBalanceDate = request.SelectedDate?.AddDays(-1) ?? DateTime.Now.AddDays(-1);
-                    decimal openingBalance = await Context.Payments.Where(x => x.Date.Value.Date < request.SelectedDate.Value.Date).SumAsync(x => x.Amount);
-                    
 
+
+                    decimal openingBalance = await Context.Payments.Where(x => x.Date.Value.Date < request.ToDate).SumAsync(x => x.Amount);
 
                     var query =await Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
                          .Select(x => new PaymentWiseListLookupModel()
@@ -63,6 +63,7 @@ namespace Focus.Business.Reports.Payments.Queries
                              Date = Convert.ToDateTime(x.Month),
                              PaymentDate = Convert.ToDateTime(x.Month).ToString("dd/MM/yy"),
                          }).ToListAsync();
+
 
                     if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
                     {

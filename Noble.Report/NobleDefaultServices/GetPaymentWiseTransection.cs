@@ -13,7 +13,7 @@ namespace Noble.Report.NobleDefaultServices
     public static class GetPaymentWiseTransection
     {
 
-        public static List<PaymentWiseListLookupModel> GetPaymentWiseTransectionDtl(string benificaryId, string userId,string fromdate,string todate, string token,string serverName) {
+        public static PaymentWiseOpeningClosingModel GetPaymentWiseTransectionDtl(string benificaryId, string userId,string fromdate,string todate, string token,string serverName) {
         
             string ipPath = ConfigurationManager.ConnectionStrings["ipAdress"].ConnectionString;
             RestClient client1 = new RestClient(serverName);
@@ -23,7 +23,7 @@ namespace Noble.Report.NobleDefaultServices
             request1.AddHeader("Authorization", "Bearer " + token);
             var response1 = client1.Execute(request1);
             var content1 = response1.Content;
-          var Payment = JsonConvert.DeserializeObject<List<PaymentWiseListLookupModel>>(content1);
+          var Payment = JsonConvert.DeserializeObject<PaymentWiseOpeningClosingModel>(content1);
 
             return Payment;
         }

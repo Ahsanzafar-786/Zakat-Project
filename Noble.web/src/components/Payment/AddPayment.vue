@@ -923,9 +923,7 @@ export default {
 
             var root = this;
             this.addPayment.openingBalance = this.brand.openingBalance;
-            
-        alert(this.addPayment.openingBalance);
-        alert(this.addPayment.amount);
+       
        
 
             if (this.addPayment.amount > this.addPayment.openingBalance) {

@@ -17,6 +17,10 @@ namespace Focus.Business.AdminDashboard.Model
         public decimal TotalOutgoing {get; set; }
         public decimal CashierTotalIncoming {get; set; }
         public decimal CashierTotalOutgoing { get; set; }
+        public decimal OpeningBalance { get; set; }
+        public decimal ClosingBalance { get; set; }
+        public decimal TotalFunds { get; set; }
+        public decimal BeneficiaryPayment { get; set; }
         public string Date { get; set; }
         public int TotalUser { get; set; }
 
