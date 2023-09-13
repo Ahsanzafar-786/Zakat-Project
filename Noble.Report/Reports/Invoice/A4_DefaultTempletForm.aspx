@@ -3,6 +3,7 @@
 
 
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server" Visible="False">
+    <asp:Label ID="Label1" runat="server" Text="Label" asp:Label>
     <dx:ASPxGridView ID="ASPxGridView1" runat="server"  EnableTheming="True" Theme="Office365" Width="100%" >
         <SettingsDetail ShowDetailButtons="False" />
         <SettingsPager PageSize="15">

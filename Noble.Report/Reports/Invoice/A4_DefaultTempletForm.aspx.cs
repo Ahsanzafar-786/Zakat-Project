@@ -125,8 +125,21 @@ namespace Noble.Report.Reports.Invoice
                         }
                         else
                         {
+                            ASPxLabel Closing = new ASPxLabel();
+                            Closing.Text = "Closing Balance";
+                            Closing.Visible = true;
+                            Closing.Font.Bold = true;
+                            this.Controls.Add(Closing);
+
+                            ASPxLabel total = new ASPxLabel();
+                            total.Text = PaymantWiseTransection.ClosingBalance.ToString("N2");
+                            total.Visible = true;
+                            total.Style["text-align"] = "right";
+                            total.Font.Bold = true;
+                            this.Controls.Add(total);
                             ASPxWebDocumentViewer1.Visible = false;
                             ASPxGridView1.Visible = true;
+
                             var dt = new DataTable();
                             dt.Columns.Add("#");
                             dt.Columns.Add("PaymentId");
@@ -152,6 +165,9 @@ namespace Noble.Report.Reports.Invoice
                                 row["Amount"] = item.Amount.ToString("N2");
                                 dt.Rows.Add(row);
                             }
+
+
+
                             ASPxGridView1.DataSource = dt;
                             ASPxGridView1.DataBind();
                             ASPxGridView1.TotalSummary.Clear();
@@ -164,6 +180,21 @@ namespace Noble.Report.Reports.Invoice
 
 
                         }
+
+                    }
+                    else if (formName == "transactionreport")
+                    {
+
+                        var fromDate = Request.QueryString["fromDate"];
+                        var toDate = Request.QueryString["toDate"];
+
+                        var Transection = GetTransection.GetTransectionDtl(fromDate, toDate, token, serverAddress);
+
+                            ASPxWebDocumentViewer1.Visible = true;
+                            ASPxGridView1.Visible = false;
+                         XtraReport report = new Noble.Report.Reports.Invoice.transectionReport(companyInfo, Transection,Convert.ToDateTime(fromDate),Convert.ToDateTime(toDate));
+                          ASPxWebDocumentViewer1.OpenReport(report);
+
 
                     }
                     else if (formName == "benificaryreports")

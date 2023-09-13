@@ -213,6 +213,7 @@
     <Compile Include="NobleDefaultServices\GetLedger.cs" />
     <Compile Include="NobleDefaultServices\GetPayment.cs" />
     <Compile Include="NobleDefaultServices\GetCompanyInfo.cs" />
+    <Compile Include="NobleDefaultServices\GetTransection.cs" />
     <Compile Include="NobleDefaultServices\GetPaymentWiseTransection.cs" />
     <Compile Include="NobleDefaultServices\GetToken.cs" />
     <Compile Include="PredefinedReports\ReportsFactory.cs" />
@@ -269,6 +270,12 @@
     <Compile Include="Reports\Invoice\PaymentWiseReport.Designer.cs">
       <DependentUpon>PaymentWiseReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Invoice\transectionReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\transectionReport.Designer.cs">
+      <DependentUpon>transectionReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\CustomReportStorageWebExtension.cs" />
     <Compile Include="Site.master.cs">
       <DependentUpon>Site.master</DependentUpon>
@@ -304,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\PaymentWiseReport.resx">
       <DependentUpon>PaymentWiseReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Invoice\transectionReport.resx">
+      <DependentUpon>transectionReport.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
