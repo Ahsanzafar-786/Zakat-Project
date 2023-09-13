@@ -246,6 +246,12 @@
     <Compile Include="Reports\Invoice\benificaryreports.Designer.cs">
       <DependentUpon>benificaryreports.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Invoice\charityfundsreports.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\charityfundsreports.Designer.cs">
+      <DependentUpon>charityfundsreports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Invoice\Funds.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -299,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\benificaryreports.resx">
       <DependentUpon>benificaryreports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Invoice\charityfundsreports.resx">
+      <DependentUpon>charityfundsreports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\Funds.resx">
       <DependentUpon>Funds.cs</DependentUpon>
