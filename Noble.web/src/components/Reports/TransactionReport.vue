@@ -57,9 +57,7 @@
                                         <th >
                                             PERIOD
                                         </th>
-                                        <th >
-                                            BY ORDER
-                                        </th>
+                                       
                                         <th width="200px"  >
                                             PAYMENT INTERVAL IN MONTHS
                                         </th>
@@ -86,7 +84,7 @@
                                     <td >  </td>
                                     <td >  </td>
                                     <td >  </td>
-                                    <td >  </td>
+                               
                                     <td >  </td>
                                         <td>{{transactions.openingBalance}}</td>
                                         <td >  </td>
@@ -94,10 +92,10 @@
                                     <tr v-for="(item,index) in transactions.paymentList" v-bind:key="index">
                                         <td > {{item.paymentDate}} </td>
                                     <td ></td>
-                                    <td ></td>
+                                    <td >{{item.cashierName}} </td>
+                                    <td >     </td>
                                     <td >  </td>
-                                    <td >  </td>
-                                    <td >  </td>
+                                    
                                     <td >  </td>
                                     <td >  </td>
                                         <td>{{item.amount}}</td>
@@ -110,7 +108,7 @@
                                     <td ><b>TOTAL</b></td>
                                     <td >  </td>
                                     <td >  </td>
-                                    <td >  </td>
+                                   
                                     <td >  </td>
                                     <td >  </td>
                                         <td>{{transactions.fundsTotal}}</td>
@@ -136,9 +134,7 @@
                                         <td>
                                             {{item.paymentMonth}}    
                                         </td>
-                                        <td>
-                                           
-                                        </td>
+                                       
                                         <td>
                                             {{item.paymentIntervalMonth}}
                                         </td>
@@ -159,7 +155,7 @@
                                     <td ><b>TRANSACTION TOTAL</b></td>
                                     <td >  </td>
                                     <td >  </td>
-                                    <td >  </td>
+                                   
                                     <td >  </td>
                                     <td >{{transactions.transactionTotal}}  </td>
                                         <td></td>
@@ -173,7 +169,7 @@
                                     <td >  </td>
                                     <td >  </td>
                                     <td >  </td>
-                                    <td >  </td>
+                                  
                                     <td >  </td>
                                         <td>{{transactions.closingBalance}}</td>
                                         <td >  </td>
