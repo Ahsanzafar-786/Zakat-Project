@@ -213,6 +213,7 @@
     <Compile Include="NobleDefaultServices\GetLedger.cs" />
     <Compile Include="NobleDefaultServices\GetPayment.cs" />
     <Compile Include="NobleDefaultServices\GetCompanyInfo.cs" />
+    <Compile Include="NobleDefaultServices\GetTransection.cs" />
     <Compile Include="NobleDefaultServices\GetPaymentWiseTransection.cs" />
     <Compile Include="NobleDefaultServices\GetToken.cs" />
     <Compile Include="PredefinedReports\ReportsFactory.cs" />
@@ -245,6 +246,12 @@
     <Compile Include="Reports\Invoice\benificaryreports.Designer.cs">
       <DependentUpon>benificaryreports.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Invoice\charityfundsreports.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\charityfundsreports.Designer.cs">
+      <DependentUpon>charityfundsreports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Invoice\Funds.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -268,6 +275,12 @@
     </Compile>
     <Compile Include="Reports\Invoice\PaymentWiseReport.Designer.cs">
       <DependentUpon>PaymentWiseReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Invoice\transectionReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\transectionReport.Designer.cs">
+      <DependentUpon>transectionReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\CustomReportStorageWebExtension.cs" />
     <Compile Include="Site.master.cs">
@@ -293,6 +306,9 @@
     <EmbeddedResource Include="Reports\Invoice\benificaryreports.resx">
       <DependentUpon>benificaryreports.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Invoice\charityfundsreports.resx">
+      <DependentUpon>charityfundsreports.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\Funds.resx">
       <DependentUpon>Funds.cs</DependentUpon>
     </EmbeddedResource>
@@ -304,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\PaymentWiseReport.resx">
       <DependentUpon>PaymentWiseReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Invoice\transectionReport.resx">
+      <DependentUpon>transectionReport.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

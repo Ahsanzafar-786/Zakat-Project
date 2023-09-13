@@ -57,7 +57,7 @@ namespace Focus.Business.CharityFunds.Commands
                             CharityTransactionDate = DateTime.Now,
                             Month = DateTime.Now,
                             Year = DateTime.Now.Year.ToString(),
-                            
+                            UserId=request.Funds.UserId,
                             
                         };
 

@@ -12,5 +12,6 @@ namespace Focus.Business.Reports.Payments.Models
         public List<PaymentWiseListLookupModel> Charitylist { get; set; }
         public decimal TransactionTotal { get;  set; }
         public decimal FundsTotal { get;  set; }
+        public decimal Closing { get;  set; }
     }
 }
