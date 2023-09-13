@@ -42,6 +42,6 @@ namespace Focus.Business.Payments.Models
         public Guid? AuthorizePersonId { get; set; }
         public List<SelectedMonthLookupModel> SelectedMonth { get; set; }
         public string PaymentTypeAr { get;  set; }
-        public decimal TotalAmount { get; internal set; }
+        public decimal TotalAmount { get;  set; }
     }
 }

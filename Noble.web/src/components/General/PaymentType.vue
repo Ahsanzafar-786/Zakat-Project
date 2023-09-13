@@ -57,7 +57,7 @@ export default {
                 { debugger;
                     root.value = root.options.find(function (x) {
                      
-                     return x.name == 'Daily Payment';
+                     return x.code == 13;
                     });
                     root.$emit('input',  root.value.id);
 
