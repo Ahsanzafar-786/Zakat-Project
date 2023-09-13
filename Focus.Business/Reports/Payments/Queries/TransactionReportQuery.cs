@@ -14,6 +14,7 @@ using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
 using Focus.Domain.Entities;
 using Dapper;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Focus.Business.Reports.Payments.Queries
 {
@@ -50,16 +51,24 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     var openingBalance = funds - charity;
 
-                    var fundslist = await Transaction.Where(j=> j.BenificayId == null).Include(x => x.Beneficiaries.PaymentTypes)
-                         .Select(x => new PaymentWiseListLookupModel()
-                         {
-                             Id = x.Id,                       
-                             Amount = x.Amount,                    
-                             Date = Convert.ToDateTime(x.CharityTransactionDate),
-                             PaymentDate = Convert.ToDateTime(x.CharityTransactionDate).ToString("dd/MM/yy"),
-                             PaymentMonth = Convert.ToDateTime(x.CharityTransactionDate).ToString("MMMM"),
+                     var fundList = await Transaction
+                    .Where(j => j.BenificayId == null)
+                    .Include(x => x.Beneficiaries.PaymentTypes)
+                    .ToListAsync();
 
-                         }).ToListAsync();
+          
+                    var cashiers = await _userManager.Users.ToListAsync();    
+
+                    var fundslist = fundList.Select(x => new PaymentWiseListLookupModel
+                    {
+                        Id = x.Id,
+                        Amount = x.Amount,
+                        Date = Convert.ToDateTime(x.CharityTransactionDate),
+                        PaymentDate = Convert.ToDateTime(x.CharityTransactionDate).ToString("dd/MM/yy"),
+                        PaymentMonth = Convert.ToDateTime(x.CharityTransactionDate).ToString("MMMM"),
+                        CashierName = cashiers.FirstOrDefault(c => c.Id == x.UserId)?.UserName ?? ""
+                    }).ToList();
+
 
                     var charitylist = await Transaction.Where(j => j.BenificayId != null).Include(x => x.Beneficiaries.PaymentTypes)
                         .Select(x => new PaymentWiseListLookupModel()
@@ -106,7 +115,8 @@ namespace Focus.Business.Reports.Payments.Queries
                         PaymentList = fundslist,
                         TransactionTotal= charitylist.Sum(x => x.Amount),
                         FundsTotal= fundslist.Sum(x => x.Amount),
-                        ClosingBalance = openingBalance + fundslist.Sum(x => x.Amount) - charitylist.Sum(x => x.Amount) 
+                        ClosingBalance = openingBalance + fundslist.Sum(x => x.Amount) - charitylist.Sum(x => x.Amount) ,
+                        Closing = openingBalance - charitylist.Sum(x => x.Amount)
 
                     };
 
