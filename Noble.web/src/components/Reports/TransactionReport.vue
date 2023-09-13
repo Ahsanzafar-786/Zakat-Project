@@ -52,7 +52,7 @@
                                             DESCRIPTION
                                         </th>
                                         <th width="100px" >
-                                            IS REGISTERED
+                                           STATUS
                                         </th>
                                         <th >
                                             PERIOD
