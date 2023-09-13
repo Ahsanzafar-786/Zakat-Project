@@ -59,7 +59,10 @@
         </div>
         <print :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show = false"
             @IsSave="IsSave" />
-
+<!-- <div class="col-md-8">
+    <td width="100px" class="fw-bold">Total</td>
+    <td style="text-align: right;" class="fw-bold">500</td>
+</div> -->
         <iframe :key="changereport" height="1500" width="1000" :src="reportsrc"></iframe>
         <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
     </div>

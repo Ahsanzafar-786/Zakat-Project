@@ -3,7 +3,7 @@
 
 
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server" Visible="False">
-    <dx:ASPxGridView ID="ASPxGridView1" runat="server"  EnableTheming="True" Theme="Office365" Width="100%" >
+    <dx:ASPxGridView ID="ASPxGridView1" runat="server"  EnableTheming="True" Theme="Office365" Width="100%"  OnHtmlRowPrepared="ASPxGridView1_HtmlRowPrepared"  >
         <SettingsDetail ShowDetailButtons="False" />
         <SettingsPager PageSize="15">
         </SettingsPager>

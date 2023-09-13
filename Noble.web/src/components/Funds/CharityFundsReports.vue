@@ -6,7 +6,7 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">transaction Report</h4>
+                                <h4 class="page-title">Payment Summary</h4>
                                
                             </div>
                             
@@ -25,12 +25,14 @@
                         <div class="col-sm-2">
                             <datepicker v-model="toDate"  :key="render" />
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-md-8">
                             <button class="btn btn-outline-primary me-2" v-on:click="GetTransactions()">{{
                                 $t('LedgerReport.Filter') }}
                             </button>
                             <button class="btn btn-outline-primary" v-on:click="ClearFilter()">{{
                                 $t('LedgerReport.ClearFilters') }}</button>
+                            <button style="float: right;" class="btn btn-outline-primary " v-on:click="PrintRdlc()">{{ $t('Print') }}</button>
+
                         </div>
                     </div>
                 </div>
@@ -146,7 +148,8 @@
                 </div>
             </div>
         </div>
-       
+        <print :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show = false"
+            @IsSave="IsSave" />
     </div>
 </template>
 <script>
@@ -221,6 +224,31 @@ export default {
                         console.log(error);
                     });
                 },
+                PrintRdlc: function () {
+            debugger;
+            if(this.fromDate == '' && this.toDate == '' )
+            {
+                return this.$swal.fire({
+                        icon: 'error',
+                        title: this.english == 'en' ? 'Filters' : 'المرشحات',
+                        text: this.english == 'en' ? 'Please Select Filters' : 'يرجى تحديد عوامل التصفية',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        timerProgressBar: true,
+                    });
+            }
+            else{
+            var companyId = '';
+            if (this.$session.exists()) {
+                companyId = localStorage.getItem('CompanyID');
+            }
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId +  '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=charityfundsreports' 
+                this.changereportt++;
+                this.show = !this.show;
+                this.loading = false
+
+        }
+        },
     },
 
     created: function () {
