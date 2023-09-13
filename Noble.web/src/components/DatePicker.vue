@@ -143,7 +143,12 @@ export default {
     },
     mounted: function () {
         this.dropdownDatecss = this.dropdowndatecss;
-        this.inputValue = this.value;
+        debugger;
+        if(this.value != null && this.value != undefined){
+            this.DisplayValue = this.value;
+            this.inputValue = this.value;
+        }
+        
     },
     // updated: function () {
     //     var input = "";

@@ -88,6 +88,7 @@
     "NameArabic" : "الاسم عربي",
     "AuthorizedPersonId": "هوية الشخص المرخص له",
     "Name" : "اسم",
+    "PaymentDate" : "تاريخ الدفع",
     "PassportNo" : "رقم جواز السفر",
     "Nationality" : "جنسية",
     "Gender" : "جنس",

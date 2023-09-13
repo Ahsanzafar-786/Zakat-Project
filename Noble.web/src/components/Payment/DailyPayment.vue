@@ -79,7 +79,18 @@
                             <option value="Female">{{ $t('AddBenificary.Female') }}</option>
                         </select>
                     </div>
-
+                    <div class="col-md-6 form-group">
+                        <label class="text  font-weight-bolder">
+                            {{ $t('AddBenificary.Ids') }}:<span class="text-danger"> *</span>
+                        </label>
+                        <input class="form-control" v-model="$v.brand.ugamaNo.$model" placeholder="XXXXXXXXXX"
+                            maxlength="10" type="text" />
+                        <span v-if="$v.brand.ugamaNo.$error" class="error text-danger">
+                            <span v-if="!$v.brand.ugamaNo.minLength">ID length should be 10 characters.</span>
+                            <span v-if="!$v.brand.ugamaNo.maxLength">ID length should be 10 characters.</span>
+                        </span>
+                       
+                    </div>
                     <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ContactNo') }}:
@@ -97,6 +108,7 @@
                         </span>
                     </div>
                     <div class="col-md-6 form-group" v-else>
+                        
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.ContactNo') }}:
                         </label>
@@ -129,7 +141,7 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.PaymentType') }}:
                         </label><span class="text-danger"> *</span>
-                        <paymenttype v-model="brand.paymentTypeId" v-on:input="GetRecord" ref="ChlidDropdown"
+                        <paymenttype :isDisable="true" v-model="brand.paymentTypeId" :dailyPayment="true" v-on:input="GetRecord" ref="ChlidDropdown"
                             :values="brand.paymentTypeId" />
                     </div>
                     <div class="col-md-6 form-group" v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0 && brand.documentType!='dailyPayment'">
@@ -193,9 +205,9 @@
                             :placeholder="$t('AddBenificary.SelectType')" >
                         </multiselect>
                     </div> 
-                    <div class="col-md-6 form-group" v-if="paymentType != 0">
-                        <label>{{ $t('AddBenificary.StartFrom') }}:</label><span class="text-danger"> *</span>
-                        <datepicker v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" />
+                    <div class="col-md-6 form-group" >
+                        <label>{{ $t('AddBenificary.PaymentDate') }}:</label><span class="text-danger"> *</span>
+                        <datepicker :isDisable="true" v-model="brand.startMonth" v-on:input="GetDateMonth" :type="'month'" />
 
                     </div>
                     <!-- <div class="col-md-4 form-group" v-if="roleName == 'Admin' && brand.documentType!='dailyPayment'">
@@ -450,6 +462,7 @@ export default {
                 startMonth: '',
                 startDate: '',
                 endDate: '',
+                
                 approvedPaymentId: '',
                 advancePayment: 0,
                 durationType: 'Customize',
@@ -497,11 +510,7 @@ export default {
                 }),
             },
             ugamaNo: {
-                required: requiredIf((x) => {
-                    if (x.documentType == '' || x.documentType == null)
-                        return true;
-                    return false;
-                }),
+                required,
                 minLength: minLength(10),
                 maxLength: maxLength(10),
             },
@@ -517,6 +526,7 @@ export default {
                 required,
 
             },
+           
             startMonth: {
                 required,
 
@@ -779,11 +789,17 @@ export default {
                     });
         },
     },
+    created:function(){
+        this.brand.startMonth = new Date();
+    },
     mounted: function () {
+        debugger;
+       
         this.roleName = localStorage.getItem('RoleName');
        
         this.english = localStorage.getItem('locales');
         this.arabic = localStorage.getItem('locales');
+       
 
         if(this.brand.id == '00000000-0000-0000-0000-000000000000')
         {
