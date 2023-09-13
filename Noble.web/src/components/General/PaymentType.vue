@@ -9,7 +9,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import Multiselect from 'vue-multiselect';
 export default {
-    props: ["values", "isTemporary", 'isMultiple','isDisable'],
+    props: ["values", "isTemporary", 'isMultiple','isDisable','dailyPayment'],
     mixins: [clickMixin],
 
     components: {
@@ -41,6 +41,7 @@ export default {
                 token = localStorage.getItem('token');
             }
             root.options = [];
+            debugger;
             this.$https.get('/Benificary/GetPaymentTypeList?isDropDown=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     response.data.results.forEach(function (cat) {
@@ -52,10 +53,23 @@ export default {
                     })
                 }
             }).then(function () {
-                root.value = root.options.find(function (x) {
+                if(root.dailyPayment)
+                { debugger;
+                    root.value = root.options.find(function (x) {
                      
-                    return x.id == root.values;
-                })
+                     return x.code == 13;
+                    });
+                    root.$emit('input',  root.value.id);
+
+                }
+                else
+                {
+                    root.value = root.options.find(function (x) {
+                     
+                     return x.id == root.values;
+                 })
+                }
+                
             });
         },
     },

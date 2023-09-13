@@ -182,9 +182,11 @@
                             :isDisable="isDisableValue" />
                     </div> -->
 
-                    <div class="form-group col-sm-12">
+                    <div class="form-group col-sm-12" >
+
                         <label></label>
                         <div class="checkbox form-check-inline mx-2" v-if="roleName != 'Cashier' && type != 'Add'">
+                          
                             <input type="checkbox" id="inlineCheckbox1" v-model="brand.isActive">
                             <label for="inlineCheckbox1"> {{ $t('AddBenificary.Active') }} </label>
                         </div>
@@ -198,7 +200,7 @@
                     </div>
 
                 </div>
-                <div class="row" v-if="paymentType != 0">
+                <div class="row" v-if="paymentType != 0 && roleName != 'Cashier'" >
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -235,7 +237,7 @@
                     </div> -->
 
                 </div>
-                <div class="row" v-if="paymentType != 0">
+                <div class="row" v-if="paymentType != 0 && roleName != 'Cashier'" >
                     <div class="col-md-12 form-group">
                         <h4 style="color:black !important;">
 
@@ -336,7 +338,7 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" v-if="roleName != 'Cashier'">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Note') }}:<span class="text-danger"> *</span>
                         </label>

@@ -58,7 +58,7 @@
                                      
                                        
                                         <th width="100px" >
-                                            REGISTERED
+                                          STATUS
                                         </th>
                                         <th >
                                             PERIOD(MONTH)

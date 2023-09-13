@@ -285,13 +285,15 @@
                                             -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }} - {{
         GetDate(brand.lastPaymentDate) }}
                                     </td>
-                                    <td class="text-center">
-                                        {{ GetDate2(brand.lastPaymentDate) }}
+                                   
+                                    <td class="text-center" >
+                                        {{ GetDate(brand.lastPaymentDate) }}
                                     </td>
+
                                     <td class="text-center">{{ brand.note }}</td>
                                     <td class="text-center">{{ brand.cashier }}</td>
                                     <td class="text-center" v-if="brand.isVoid">--</td>
-                                    <td class="text-center" v-else>{{ parseFloat(brand.amount).toFixed(3).slice(0,
+                                    <td class="text-center" v-else>{{ parseFloat(brand.lastPaymentAmount).toFixed(3).slice(0,
                                         -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
 
                                     <td class="text-center d-flex align-items-baseline justify-content-center"
@@ -419,6 +421,7 @@ export default {
             nationality: '',
             gender: '',
             status: '',
+            language:'',
             contact: '',
             uqamaNo: '',
             show: false,
@@ -658,8 +661,7 @@ export default {
         this.arabic = localStorage.getItem('Arabic');
         this.GetPayment(this.currentPage);
         this.roleName = localStorage.getItem('RoleName');
-
-        //moment.locale('ar');
+       
 
 
     }

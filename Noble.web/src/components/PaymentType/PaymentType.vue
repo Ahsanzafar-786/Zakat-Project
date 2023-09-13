@@ -14,11 +14,11 @@
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
-                                <!-- <a v-on:click="openmodel" href="javascript:void(0);"
+                                <a v-on:click="openmodel" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1" v-if ="roleName != 'User'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
                                     {{ $t('AddNew') }}
-                                </a> -->
+                                </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
                                     {{ $t('Close') }}
@@ -150,7 +150,7 @@ export default {
                 id: '',
                 name: '',
                 nameAr: '',
-                code:'',
+                code:0,
                 description: '',
                 isActive: true
             },
@@ -187,7 +187,7 @@ export default {
                 id: '00000000-0000-0000-0000-000000000000',
                 name: '',
                 nameAr: '',
-                code:'',
+                code:0,
                 description: '',
                 isActive: true  
             }

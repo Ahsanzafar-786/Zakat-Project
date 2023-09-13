@@ -60,7 +60,10 @@ namespace Focus.Business.Payments.Queries
                     //    DoucmentId = x.DoucmentId,
                     //    Amount = x.Amount,
                     //    CharityTransactionDate = x.CharityTransactionDate,
+
                     //}).AsQueryable();
+
+                    var Users =  await _userManager.Users.ToListAsync();
 
                     var query = Context.Payments.AsNoTracking()
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.BenificaryAuthorization).ThenInclude(x => x.AuthorizedPerson)
@@ -82,6 +85,7 @@ namespace Focus.Business.Payments.Queries
                                     Note = x.Note,
                                     Code = x.Code,
                                     IsVoid = x.IsVoid,
+                                    TotalAmount=x.TotalAmount,
                                     AllowVoid = x.AllowVoid,
                                     IsRegister = x.Beneficiaries.IsRegister,
                                     Nationality = x.Beneficiaries.Nationality,
@@ -98,7 +102,7 @@ namespace Focus.Business.Payments.Queries
                                     PaymentTypeAr = x.Beneficiaries.PaymentTypes.NameAr,
                                     AuthorizePersonId = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizationPersonId : null,
                                     AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
-                                    //Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
+                                    Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
                                 }).OrderByDescending(x => x.Code).ToList();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
@@ -117,7 +121,7 @@ namespace Focus.Business.Payments.Queries
                     }
                     if (request.Amount != null && request.Amount > 0)
                     {
-                        query = query.Where(x => x.Amount == request.Amount).ToList();
+                        query = query.Where(x => x.TotalAmount == request.Amount).ToList();
                     }
                     if (request.Code != null && request.Code > 0)
                     {
