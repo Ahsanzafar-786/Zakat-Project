@@ -13,18 +13,21 @@ using System.Globalization;
 using DevExpress.Office.NumberConverters;
 using System.IO;
 using DevExpress.Data;
+using static iTextSharp.text.pdf.AcroFields;
+using DevExpress.XtraRichEdit.Import.Doc;
 
 namespace Noble.Report.Reports.Invoice
 {
 
     public partial class A4_DefaultTempletForm : System.Web.UI.Page
     {
-   
+        public bool flag = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+
                 var CompanyId = Request.QueryString["CompanyID"];
                 if (Session["CompanyId"] == null && Session["CompanyId"] != CompanyId)
                 {
@@ -125,18 +128,27 @@ namespace Noble.Report.Reports.Invoice
                         }
                         else
                         {
+                            flag = true;
+                            ASPxLabel padding = new ASPxLabel();
+                            padding.Text = "";
+                            padding.Visible = true;
+                            padding.Width = 50;
+                            this.Controls.Add(padding);
                             ASPxLabel Closing = new ASPxLabel();
-                            Closing.Text = "Closing Balance";
+                            Closing.Text = "Balance";
                             Closing.Visible = true;
+                            Closing.Width = 900;
                             Closing.Font.Bold = true;
+                            Closing.ForeColor = System.Drawing.ColorTranslator.FromHtml("#666");
                             this.Controls.Add(Closing);
-
                             ASPxLabel total = new ASPxLabel();
                             total.Text = PaymantWiseTransection.ClosingBalance.ToString("N2");
+                            total.ForeColor = System.Drawing.ColorTranslator.FromHtml("#666");
                             total.Visible = true;
-                            total.Style["text-align"] = "right";
                             total.Font.Bold = true;
                             this.Controls.Add(total);
+
+
                             ASPxWebDocumentViewer1.Visible = false;
                             ASPxGridView1.Visible = true;
 
@@ -152,6 +164,16 @@ namespace Noble.Report.Reports.Invoice
 
                             DataRow row;
                             int i = 1;
+                            row = dt.NewRow();
+                            row["#"] = "";
+                            row["PaymentId"] = "Opening Balance";
+                            row["BeneficaryId"] = " - ";
+                            row["BeneficaryName"] = " - ";
+                            row["CashierName"] = " - ";
+                            row["PaymentType"] = " - ";
+                            row["PaymentDate"] = " - ";
+                            row["Amount"] = PaymantWiseTransection.OpeningBalance.ToString("N2");
+                            dt.Rows.Add(row);
                             foreach (var item in PaymantWiseTransection.PaymentList)
                             {
                                 row = dt.NewRow();
@@ -170,6 +192,16 @@ namespace Noble.Report.Reports.Invoice
 
                             ASPxGridView1.DataSource = dt;
                             ASPxGridView1.DataBind();
+                            //for (int j = 0; j < ASPxGridView1.VisibleRowCount; j++)
+                            //{
+                            //    string paymentId = ASPxGridView1.GetRowValues(j, "PaymentId") as string;
+
+                            //    if (paymentId == "Opening Balance")
+                            //    {
+                            //        ASPxGridView1.Columns["Amount"].CellStyle.Font.Bold = true;
+                            //    }
+                               
+                            //}
                             ASPxGridView1.TotalSummary.Clear();
                             ASPxSummaryItem Amount = new ASPxSummaryItem();
                             Amount.FieldName = "Amount";
@@ -194,6 +226,21 @@ namespace Noble.Report.Reports.Invoice
                             ASPxGridView1.Visible = false;
                          XtraReport report = new Noble.Report.Reports.Invoice.transectionReport(companyInfo, Transection,Convert.ToDateTime(fromDate),Convert.ToDateTime(toDate));
                           ASPxWebDocumentViewer1.OpenReport(report);
+
+
+                    }
+                    else if (formName == "charityfundsreports")
+                    {
+
+                        var fromDate = Request.QueryString["fromDate"];
+                        var toDate = Request.QueryString["toDate"];
+
+                        var Transection = GetTransection.GetTransectionDtl(fromDate, toDate, token, serverAddress);
+
+                        ASPxWebDocumentViewer1.Visible = true;
+                        ASPxGridView1.Visible = false;
+                        XtraReport report = new Noble.Report.Reports.Invoice.charityfundsreports(companyInfo, Transection, Convert.ToDateTime(fromDate), Convert.ToDateTime(toDate));
+                        ASPxWebDocumentViewer1.OpenReport(report);
 
 
                     }
@@ -338,6 +385,23 @@ namespace Noble.Report.Reports.Invoice
                 throw ex;
             }
         }
+        protected void ASPxGridView1_HtmlRowPrepared(object sender, ASPxGridViewTableRowEventArgs e)
+        {
+            if (flag == true)
+            {
+                if (e.RowType == DevExpress.Web.GridViewRowType.Data)
+                {
+                    string paymentId = e.GetValue("PaymentId") as string;
 
+                    if (paymentId == "Opening Balance")
+                    {
+                        e.Row.BackColor = System.Drawing.Color.WhiteSmoke;
+                        e.Row.BorderWidth = 0;
+                        e.Row.BorderColor = System.Drawing.Color.White;
+                        e.Row.Font.Bold = true;
+                    }
+                }
+            }
+        }
     }
 }
