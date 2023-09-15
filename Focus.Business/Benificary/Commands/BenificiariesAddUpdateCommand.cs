@@ -5,13 +5,16 @@ using Focus.Business.Common;
 using Focus.Business.Exceptions;
 using Focus.Business.Interface;
 using Focus.Business.Payments.Queries;
+using Focus.Business.Transactions.Models;
 using Focus.Domain.Entities;
 using Focus.Domain.Interface;
 using ICSharpCode.SharpZipLib.Zip;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NPOI.POIFS.Properties;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,7 +48,7 @@ namespace Focus.Business.Benificary.Commands
                 {
                     if(request.benificiaries.Id == Guid.Empty)
                     {
-                        if(request.benificiaries.BenificaryAuthorization.Count > 0)
+                        if (request.benificiaries.BenificaryAuthorization.Count > 0)
                         {
                             var benifiary = new Beneficiaries
                             {
@@ -77,9 +80,9 @@ namespace Focus.Business.Benificary.Commands
                                 BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
                                 {
                                     ApprovalPersonId = x.ApprovalPersonId,
-                                    AuthorizationPersonId= x.AuthorizationPersonId,
+                                    AuthorizationPersonId = x.AuthorizationPersonId,
                                     IsActive = x.IsActive,
-                                    Description= x.Description,
+                                    Description = x.Description,
                                     Date = DateTime.Now,
                                 }).ToList()
                             };
@@ -96,96 +99,140 @@ namespace Focus.Business.Benificary.Commands
                         }
                         else
                         {
-                            var benifiary = new Beneficiaries
+
+
+                            var charity = await Context.CharityTransaction.Select(x => new CharityTransactionLookupModel()
                             {
-                                BeneficiaryId = request.benificiaries.BeneficiaryId,
-                                ApprovalStatus = request.benificiaries.ApprovalStatus,
-                                Name = request.benificiaries.Name,
-                                PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
-                                AmountPerMonth = request.benificiaries.AmountPerMonth,
-                                RecurringAmount = request.benificiaries.RecurringAmount,
-                                UgamaNo = request.benificiaries.UgamaNo,
-                                PhoneNo = request.benificiaries.PhoneNo,
-                                Note = request.benificiaries.Note,
-                                IsActive = request.benificiaries.IsActive,
-                                ApprovalPersonId = request.benificiaries.ApprovalPersonId,
-                                Address = request.benificiaries.Address,
-                                AuthorizedPersonId = request.benificiaries.AuthorizedPersonId,
-                                PaymentTypeId = request.benificiaries.PaymentTypeId,
-                                NameAr = request.benificiaries.NameAr,
-                                Nationality = request.benificiaries.Nationality,
-                                Gender = request.benificiaries.Gender,
-                                PassportNo = request.benificiaries.PassportNo,
-                                AdvancePayment = request.benificiaries.AdvancePayment,
-                                DurationType = request.benificiaries.DurationType,
-                                ApprovedPaymentId = request.benificiaries.ApprovedPaymentId,
-                                StartDate = request.benificiaries.StartDate,
-                                EndDate = request.benificiaries.EndDate == null ? null : request.benificiaries.EndDate.Value.AddDays(6),
-                                StartMonth = request.benificiaries.StartMonth,
-                                IsRegister = false,
-                                BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
-                                {
-                                    ApprovalPersonId = x.ApprovalPersonId,
-                                    AuthorizationPersonId = x.AuthorizationPersonId,
-                                    IsActive = x.IsActive,
-                                    Description = x.Description,
-                                    Date = DateTime.Now,
-                                }).ToList()
-                            };
 
-                            await Context.Beneficiaries.AddAsync(benifiary);
-                            if (request.benificiaries.DocumentType == "dailyPayment")
+                                BenificayId = x.BenificayId,
+                                Amount = x.Amount,
+
+                            }).ToListAsync();
+                            var openingBalance = charity.Where(x => x.BenificayId == null).Sum(x => x.Amount) - charity.Where(x => x.BenificayId != null).Sum(x => x.Amount);
+
+                            if (openingBalance < request.benificiaries.AmountPerMonth)
                             {
-                                var autoNo = await _mediator.Send(new AutoCodeGenerateQuery
+                                return new Message
                                 {
-                                    Name = "",
-                                });
-
-
-
-                                var payment = new Payment
-                                {
-                                    BenificayId = benifiary.Id,
-                                    Amount = benifiary.AmountPerMonth,
-                                    Month = DateTime.Now,
-                                    Code = Convert.ToInt32(autoNo),
-                                    Note = benifiary.Note,
-                                    PaymentCode = autoNo,
-                                    Year = DateTime.Now.Year.ToString(),
-                                    Period = DateTime.Now.Year.ToString(),
-                                    Date = DateTime.Now,
-                                    UserId = _contextProvider.GetUserId().ToString(),
+                                    Id = Guid.Empty,
+                                    IsSuccess = false,
+                                    IsAddUpdate = "Insufficient funds"
                                 };
-
-                                Context.Payments.Add(payment);
-                                request.PaymentId = payment.Id;
-
-                                var charityTransaction = new CharityTransaction
-                                {
-                                    DoucmentId = payment.Id,
-                                    CharityTransactionDate = payment.Date,
-                                    DoucmentDate = DateTime.Now,
-                                    DoucmentCode = payment.PaymentCode,
-                                    BenificayId = payment.BenificayId,
-                                    Month = payment.Date,
-                                    Amount = payment.Amount,
-                                    Year = payment.Year,
-                                };
-
-                                await Context.CharityTransaction.AddAsync(charityTransaction);
-
 
                             }
 
-                            await Context.SaveChangesAsync();
-
-                            return new Message
+                            else
                             {
-                                Id = benifiary.Id,
-                                PaymentId = request.PaymentId==null?Guid.Empty: request.PaymentId.Value,
-                                IsSuccess = true,
-                                IsAddUpdate = "Data has been Added successfully." + "BenificaryID is " + " " + benifiary.BeneficiaryId
-                            };
+                                var benifiary = new Beneficiaries
+                                {
+                                    BeneficiaryId = request.benificiaries.BeneficiaryId,
+                                    ApprovalStatus = request.benificiaries.ApprovalStatus,
+                                    Name = request.benificiaries.Name,
+                                    PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
+                                    AmountPerMonth = request.benificiaries.AmountPerMonth,
+                                    LastPaymentAmount = request.benificiaries.AmountPerMonth,
+                                    CurrentPaymentMonth = DateTime.Now,
+                                    RecurringAmount = request.benificiaries.RecurringAmount,
+                                    UgamaNo = request.benificiaries.UgamaNo,
+                                    PhoneNo = request.benificiaries.PhoneNo,
+                                    Note = request.benificiaries.Note,
+                                    IsActive = request.benificiaries.IsActive,
+                                    ApprovalPersonId = request.benificiaries.ApprovalPersonId,
+                                    Address = request.benificiaries.Address,
+                                    AuthorizedPersonId = request.benificiaries.AuthorizedPersonId,
+                                    PaymentTypeId = request.benificiaries.PaymentTypeId,
+                                    NameAr = request.benificiaries.NameAr,
+                                    Nationality = request.benificiaries.Nationality,
+                                    Gender = request.benificiaries.Gender,
+                                    PassportNo = request.benificiaries.PassportNo,
+                                    AdvancePayment = request.benificiaries.AdvancePayment,
+                                    DurationType = request.benificiaries.DurationType,
+                                    ApprovedPaymentId = request.benificiaries.ApprovedPaymentId,
+                                    StartDate = request.benificiaries.StartDate,
+                                    EndDate = request.benificiaries.EndDate == null ? null : request.benificiaries.EndDate.Value.AddDays(6),
+                                    StartMonth = request.benificiaries.StartMonth,
+                                    IsRegister = false,
+                                    BenificaryAuthorization = request.benificiaries.BenificaryAuthorization.Select(x => new BenificaryAuthorization()
+                                    {
+                                        ApprovalPersonId = x.ApprovalPersonId,
+                                        AuthorizationPersonId = x.AuthorizationPersonId,
+                                        IsActive = x.IsActive,
+                                        Description = x.Description,
+                                        Date = DateTime.Now,
+                                    }).ToList()
+                                };
+
+
+
+                                await Context.Beneficiaries.AddAsync(benifiary);
+                                if (request.benificiaries.DocumentType == "dailyPayment")
+                                {
+                                    var autoNo = await _mediator.Send(new AutoCodeGenerateQuery
+                                    {
+                                        Name = "",
+                                    });
+
+
+
+                                    var payment = new Payment
+                                    {
+                                        BenificayId = benifiary.Id,
+                                        Amount = benifiary.AmountPerMonth,
+                                        TotalAmount = benifiary.AmountPerMonth,
+                                        Month = DateTime.Now,
+                                        Code = Convert.ToInt32(autoNo),
+                                        Note = benifiary.Note,
+                                        PaymentCode = autoNo,
+                                        Year = DateTime.Now.Year.ToString(),
+                                        Period = DateTime.Now.Year.ToString(),
+                                        Date = DateTime.Now,
+                                        UserId = _contextProvider.GetUserId().ToString(),
+                                    };
+
+                                    Context.Payments.Add(payment);
+                                    var selectedMonth = new List<SelectedMonth>();
+
+                                    selectedMonth.Add(new SelectedMonth
+                                    {
+                                        PaymentId = payment.Id,
+                                        SelectMonth = payment.Month,
+                                        Amount = payment.Amount
+
+
+                                    });
+
+
+                                    await Context.SelectedMonths.AddRangeAsync(selectedMonth);
+                                    request.PaymentId = payment.Id;
+
+
+                                    var charityTransaction = new CharityTransaction
+                                    {
+                                        DoucmentId = payment.Id,
+                                        CharityTransactionDate = payment.Date,
+                                        DoucmentDate = DateTime.Now,
+                                        DoucmentCode = payment.PaymentCode,
+                                        BenificayId = payment.BenificayId,
+                                        Month = payment.Date,
+                                        Amount = payment.Amount,
+                                        Year = payment.Year,
+                                    };
+
+                                    await Context.CharityTransaction.AddAsync(charityTransaction);
+
+
+                                }
+
+                                await Context.SaveChangesAsync();
+
+                                return new Message
+                                {
+                                    Id = benifiary.Id,
+                                    PaymentId = request.PaymentId == null ? Guid.Empty : request.PaymentId.Value,
+                                    IsSuccess = true,
+                                    IsAddUpdate = "Data has been Added successfully." + "BenificaryID is " + " " + benifiary.BeneficiaryId
+                                };
+                            }
                         }
                         
                     }

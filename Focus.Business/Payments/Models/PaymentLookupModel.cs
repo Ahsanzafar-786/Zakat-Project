@@ -43,5 +43,7 @@ namespace Focus.Business.Payments.Models
         public List<SelectedMonthLookupModel> SelectedMonth { get; set; }
         public string PaymentTypeAr { get;  set; }
         public decimal TotalAmount { get;  set; }
+        public DateTime? EndMonth { get;  set; }
+        public DateTime? NextMonth { get;  set; }
     }
 }
