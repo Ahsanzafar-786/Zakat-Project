@@ -1,4 +1,5 @@
-﻿using Focus.Domain.Interface;
+﻿using Focus.Business.Users;
+using Focus.Domain.Interface;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ namespace Focus.Domain.Entities
         public decimal Amount { get; set; }
         public decimal TotalAmount { get; set; }
         public string UserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
-       
         public DateTime? Month { get; set; }
         public DateTime? Date { get; set; }
         [Column(TypeName = "ntext")]

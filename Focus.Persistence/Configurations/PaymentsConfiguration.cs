@@ -14,7 +14,11 @@ namespace Focus.Persistence.Configurations
                   .WithMany(x => x.Payments)
                   .HasForeignKey(x => x.BenificayId);
 
-          
+            builder.HasOne(x => x.ApplicationUser)
+                 .WithMany(x => x.Payments)
+                 .HasForeignKey(x => x.UserId);
+
+
         }
     }
 }

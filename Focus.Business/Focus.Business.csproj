@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminDashboard\Commands\" />
+    <Folder Include="Users\" />
   </ItemGroup>
 
 </Project>

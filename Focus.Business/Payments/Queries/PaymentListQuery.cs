@@ -63,7 +63,7 @@ namespace Focus.Business.Payments.Queries
 
                 //    }).AsQueryable();
 
-                    var Users =  await _userManager.Users.ToListAsync();
+              
 
                     var query = Context.Payments.AsNoTracking()
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.BenificaryAuthorization).ThenInclude(x => x.AuthorizedPerson)
@@ -103,7 +103,8 @@ namespace Focus.Business.Payments.Queries
                                     PaymentTypeAr = x.Beneficiaries.PaymentTypes.NameAr,
                                     AuthorizePersonId = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizationPersonId : null,
                                     AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
-                                    Cashier = _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).FirstName + " " + _userManager.Users.FirstOrDefault(y => y.Id == x.UserId).LastName,
+                                 
+                                    Cashier = x.ApplicationUser.UserName,
                                 }).OrderByDescending(x => x.Code).ToList();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
