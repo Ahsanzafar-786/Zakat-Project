@@ -93,22 +93,11 @@
                                 <datepicker :type="'month'" v-model="addPayment.month" v-bind:key="randerDate"
                                     v-on:input="MonthSelection" />
                                 <div class="row mt-2" v-if="brand.paymentType != 0">
-                                    <div style="text-align: right !important;" v-if="selectedMonth.length > 0">
-                                        <button class="btn  btn-danger btn-round btn-sm btn-icon" @click="RemoveAll()"
-                                            style="font-size: .4rem;  padding: 0.2rem 0.35rem;">
-                                            Close All
-                                        </button>
-                                    </div>
+                                    
                                     <div class="badge bg-success col-sm-4 me-3 mt-2" v-for="(val) in selectedMonth"
                                         v-bind:key="val + 1" style="position: relative;font-size: 13px !important;">
                                         <span>{{ val.selectedMonth }}</span>
-                                        <span style="position:absolute; right: -12px; top: -8px;">
-                                            <button class="btn  btn-danger btn-round btn-sm btn-icon"
-                                                style="font-size: .4rem;  padding: 0.2rem 0.35rem;"
-                                                @click="RemoveEffect(val)">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </span>
+                                      
                                     </div>
 
                                 </div>

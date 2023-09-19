@@ -25,7 +25,7 @@
                         <div class="col-lg-4">
                             <datepicker v-model="toDate"  :key="render" />
                         </div>
-                        <div class="col-sm-3 col-md-8">
+                        <div class="col-sm-3 col-md-8 mt-2" >
                             <button class="btn btn-outline-primary me-2" v-on:click="GetTransactions()">{{
                                 $t('LedgerReport.Filter') }}
                             </button>

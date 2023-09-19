@@ -286,7 +286,11 @@
         GetDate(brand.lastPaymentDate) }}
                                     </td>
                                     <td class="text-center"  v-if="brand.paymentType =='daily payment' ">
-                                        <span>"No"</span>
+                                        <span>----</span>
+                                       
+                                    </td>
+                                    <td class="text-center"  v-else-if="brand.paymentType =='One Time' ">
+                                        <span>----</span>
                                        
                                     </td>
                                      <td class="text-center"  v-else-if="brand.durationType =='Indefinite' ">
