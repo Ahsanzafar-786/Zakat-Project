@@ -38,6 +38,8 @@ using Focus.Persistence.Migrations;
 using MailKit.Search;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.InkML;
+using NPOI.SS.Formula.Functions;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Noble.Api.Controllers
 {
@@ -635,7 +637,8 @@ namespace Noble.Api.Controllers
                         EndDate = null,
                         StartMonth = DateTime.Parse(request.Stamp_date),
                         BenificaryAuthorization = benificaryAuthorization,
-                        IsRegister = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode) != null
+                        IsRegister = authorizedPerson.FirstOrDefault(x => x.AuthorizedPersonCode == authorizedPersonCode) != null,
+                     
 
                     });
 
@@ -698,18 +701,64 @@ namespace Noble.Api.Controllers
             {
 
                 var list = new List<Funds>();
+                var autoNo12 = await Mediator.Send(new AutoCodeGenerateQuery
+                {
+                    Name = "Funds",
+                });
+
+                int i = 0;
+                string number = autoNo12;
+
 
                 foreach (var request in rows)
                 {
+                    if (i != 0)
+                    {
+                        string fetchNo = autoNo12.Substring(3);
+                        Int32 autoNo = Convert.ToInt32((fetchNo));
+                        var format = "00000";
+                        autoNo++;
+                        string prefix;
+                        {
+                            prefix = "FU-";
+                        }
+                        var newCode = prefix + autoNo.ToString(format);
+                        autoNo12 = newCode;
+                    }
+                    i++;
+                 
+
                     list.Add(new Funds
                     {
                         Date = Convert.ToDateTime(request.Stamp_date),
                         Amount = Convert.ToDecimal(request.Amount),
                         Description = request.Check_No,
+                        Code=autoNo12,
+                        UserId = request.Created_by_id,
 
 
                     });
 
+                    var charityTransactions = new CharityTransaction
+                    {
+                      
+                        //DoucmentId = Guid.Parse( request.Id),
+                        DoucmentCode  = autoNo12,
+                      
+                        DocumentName = "Funds",
+                   
+                        Amount =Convert.ToDecimal( request.Amount),
+                        DoucmentDate = DateTime.Parse(request.Stamp_date),
+                        CharityTransactionDate = DateTime.Parse(request.Stamp_date),
+                        Month = DateTime.Parse(request.Stamp_date),
+                        Year = DateTime.Parse(request.Stamp_date).Year.ToString(),
+                        UserId = request.Created_by_id,
+                      
+
+                    };
+
+                    await _Context.CharityTransaction.AddAsync(charityTransactions);
+                 
                 }
                 await _Context.Funds.AddRangeAsync(list);
                 await _Context.SaveChangesAsync();
@@ -729,7 +778,7 @@ namespace Noble.Api.Controllers
         [Route("api/Benificary/PaymentsBeneficry")]
         [HttpPost("PaymentsBeneficry")]
         public async Task<IActionResult> PaymentsBeneficry([FromBody] List<AuthorizeVm> rows)
-        {
+       {
             var Beneficiaries = _Context.Beneficiaries.AsNoTracking().ToList();
             try
             {
@@ -771,7 +820,7 @@ namespace Noble.Api.Controllers
                         Amount = Convert.ToDecimal(request.Amount),
                         Date = Convert.ToDateTime(request.Stamp_date),
                         Period = request.Period,
-
+                        TotalAmount= Convert.ToDecimal(request.Amount)
 
                     };
 
@@ -792,11 +841,13 @@ namespace Noble.Api.Controllers
 
                     _Context.CharityTransaction.Add(charityTransaction);
 
-                    var query = _Context.Beneficiaries.AsNoTracking().FirstOrDefault(x => x.Id == charityTransaction.BenificayId);
+                    var query = _Context.Beneficiaries.AsNoTracking().FirstOrDefault(x => x.Id == payment.BenificayId);
                     if (query != null)
                     {
-                        query.StartMonth = charityTransaction.Month;
+                        query.CurrentPaymentMonth = payment.Month;
+                        query.LastPaymentAmount = payment.Amount;
                         _Context.Beneficiaries.Update(query);
+                        
                     }
 
 

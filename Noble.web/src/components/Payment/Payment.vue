@@ -286,8 +286,13 @@
         GetDate(brand.lastPaymentDate) }}
                                     </td>
                                    
-                                    <td class="text-center" >
-                                        {{ GetDate(brand.lastPaymentDate) }}
+                                    <td class="text-center" v-if=" brand.nextMonth> brand.endMonth">
+                                        <span>----</span>
+                                       
+                                    </td>
+                                    <td class="text-center" v-else>
+                                    
+                                        {{ GetDate2(brand.lastPaymentDate) }}
                                     </td>
 
                                     <td class="text-center">{{ brand.note }}</td>
@@ -528,12 +533,13 @@ export default {
                 return '';
             }
         },
-        GetDate2: function (date) {
-            if (date != undefined) {
+        GetDate2: function (link) {
+            if (link != undefined) {
 
-                // moment.locale('ar');
+                const date = moment(link);
+                const arabicMonth = date.locale('ar').add(1, 'months').format('MMMM');
+                return `${arabicMonth} ${date.format('Do YYYY')}`;
 
-                return moment(date).add(1, 'months').format('MMMM Do YYYY');
             }
             else {
                 return '';

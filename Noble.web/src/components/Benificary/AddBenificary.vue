@@ -463,7 +463,13 @@ export default {
 
             },
             startMonth: {
-                required,
+                required: requiredIf((x) => {
+                    if (x.paymentTypeId == "42d23cb7-560f-4d30-18c4-08dbb5b41e3f") {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }),
 
             }
         }
@@ -573,6 +579,22 @@ export default {
             this.brand.beneficiaryId = aa;
             this.loading = true;
             var token = '';
+
+            if (this.brand.recurringAmount === 0 && this.brand.amountPerMonth ===0 ) {
+                this.loading = false;
+                return this.$swal({
+                    title: 'Error',
+                    text: this.english == 'en' ? 'amount cannot be zero' : 'المبلغ لا يمكن أن يكون صفرًا',
+                    type: 'error',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                });
+                
+            }
+
+
 
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
