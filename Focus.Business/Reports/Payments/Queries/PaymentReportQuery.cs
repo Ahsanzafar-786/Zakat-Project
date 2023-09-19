@@ -1,10 +1,8 @@
 ﻿using Focus.Business.Interface;
 using Focus.Business.Payments.Models;
-using Focus.Business.Transactions.Queries;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
@@ -12,8 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Focus.Business.Reports.Payments.Models;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
-using Focus.Domain.Entities;
-using Dapper;
+using Focus.Business.Reports.Payments.Models;
 
 namespace Focus.Business.Reports.Payments.Queries
 {
@@ -47,7 +44,7 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     decimal openingBalance = await Context.Payments.Where(x => x.Date.Value.Date < request.ToDate).SumAsync(x => x.Amount);
 
-                    var query =await Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
+                    var query = Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes).Include(x=> x.SelectedMonth)
                          .Select(x => new PaymentWiseListLookupModel()
                          {
                              Id = x.Id,
@@ -57,12 +54,12 @@ namespace Focus.Business.Reports.Payments.Queries
                              BeneficaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
                              CashierName = x.UserId != null ? _userManager.Users.FirstOrDefault(ur => ur.Id == x.UserId).UserName: "",
                              UserId = x.UserId != null ? Guid.Parse(x.UserId) : Guid.Empty,
-                             Amount = x.Amount,
+                             Amount = x.TotalAmount,
                              Note = x.Note,
+                             SelectedMonth = x.SelectedMonth.Select(y=>y.SelectMonth).ToList(),
                              PaymentType = x.Beneficiaries.PaymentTypes.Name,
                              Date = Convert.ToDateTime(x.Month),
-                             PaymentDate = Convert.ToDateTime(x.Month).ToString("dd/MM/yy"),
-                         }).ToListAsync();
+                         }).ToList();
 
 
                     if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
