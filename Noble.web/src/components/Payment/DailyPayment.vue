@@ -462,6 +462,7 @@ export default {
                 startMonth: '',
                 startDate: '',
                 endDate: '',
+                isDailyPayment:true,
                 
                 approvedPaymentId: '',
                 advancePayment: 0,

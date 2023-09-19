@@ -19,12 +19,7 @@
                         <input type="text" class="form-control" v-model="$v.brand.code.$model" :values="brand.code"
                             disabled />
                     </div>
-                    <div class="form-group has-label col-sm-3 ">
-                        <label class="text  font-weight-bolder">
-                            {{ $t('AddFunds.CharityResource') }}:
-                        </label>
-                        <charityresources v-model="brand.charityResouceId" :values="brand.charityResouceId" />
-                    </div>
+                    
                     <div class="form-group has-label col-sm-3 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddFunds.TypeOfTransaction') }}:<span class="text-danger"> *</span>

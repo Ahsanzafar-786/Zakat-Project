@@ -92,9 +92,10 @@ namespace Focus.Business.Payments.Queries
                                     UgamaNo = x.Beneficiaries.UgamaNo,
                                     Gender = x.Beneficiaries.Gender,
                                     ContactNo = x.Beneficiaries.PhoneNo,
-                                    LastPaymentAmount = x.Beneficiaries.CharityTransactions.FirstOrDefault(charity => charity.DoucmentId == x.Id).Amount,
+                                    DurationType = x.Beneficiaries.DurationType,
+                                    LastPaymentAmount = x.Beneficiaries.CharityTransactions.Sum(x => x.Amount),
 
-                                    LastPaymentDate = x.Beneficiaries.CharityTransactions.FirstOrDefault(charity => charity.DoucmentId == x.Id).Month ,
+                                    LastPaymentDate = x.Beneficiaries.CharityTransactions.OrderBy(x=> x.DoucmentDate).LastOrDefault(charity => charity.DoucmentId == x.Id).Month ,
                                     ApprovalPersonId = x.Beneficiaries.ApprovedPaymentId,
                                     NextMonth=x.Beneficiaries.CurrentPaymentMonth.Value.AddMonths(1),
                                     EndMonth=x.Beneficiaries.EndDate,

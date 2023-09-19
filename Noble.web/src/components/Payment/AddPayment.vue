@@ -162,6 +162,7 @@
 
                     </div>
                     <p class="text-danger"
+                    
                         v-if="brand.currentPaymentMonth != undefined && brand.currentPaymentMonth != null">
                         <b> {{ $t('AddPayment.LastMonthPayment') }} {{ GetDate(brand.currentPaymentMonth) }}</b>
                     </p>

@@ -130,8 +130,8 @@ namespace Focus.Business.Benificary.Commands
                                     Name = request.benificiaries.Name,
                                     PaymentIntervalMonth = request.benificiaries.PaymentIntervalMonth,
                                     AmountPerMonth = request.benificiaries.AmountPerMonth,
-                                    LastPaymentAmount = request.benificiaries.AmountPerMonth,
-                                    CurrentPaymentMonth = DateTime.Now,
+                                    
+                                   
                                     RecurringAmount = request.benificiaries.RecurringAmount,
                                     UgamaNo = request.benificiaries.UgamaNo,
                                     PhoneNo = request.benificiaries.PhoneNo,
@@ -161,8 +161,13 @@ namespace Focus.Business.Benificary.Commands
                                         Date = DateTime.Now,
                                     }).ToList()
                                 };
+                                if (request.benificiaries.IsDailyPayment) {
 
 
+                                    benifiary.LastPaymentAmount = request.benificiaries.AmountPerMonth;
+                                    benifiary.CurrentPaymentMonth = DateTime.Now;
+                                }
+                               
 
                                 await Context.Beneficiaries.AddAsync(benifiary);
                                 if (request.benificiaries.DocumentType == "dailyPayment")

@@ -58,5 +58,6 @@ namespace Focus.Business.Benificary.Models
         public List<CharityTransactionLookupModel> CharityTransactions { get; set; }
 
         public bool IsDisable { get; set; }
+        public bool IsDailyPayment { get; set; }
     }
 }
