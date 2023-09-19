@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Focus.Domain.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace Focus.Business.Reports.Payments.Models
 {
@@ -16,9 +18,13 @@ namespace Focus.Business.Reports.Payments.Models
         public DateTime? Date { get; set; }
         public string Note { get; set; }
         public decimal Amount { get; set; }
-        public int PaymentIntervalMonth { get;  set; }
-       
-        public string IsRegistered { get;  set; }
-        public string PaymentMonth { get;  set; }
+        public int PaymentIntervalMonth { get; set; }
+
+        public string IsRegistered { get; set; }
+        public string PaymentMonth { get; set; }
+        public List<DateTime?> SelectedMonth { get; set; }
+
+        
     }
+       
 }

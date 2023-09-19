@@ -115,7 +115,6 @@ namespace Noble.Report.Reports.Invoice
                         var UserId = Request.QueryString["userId"] == "Invalid date" ? "" : Request.QueryString["userId"];
                         var fromDate = Request.QueryString["fromDate"];
                         var toDate = Request.QueryString["toDate"];
-
                         var PaymantWiseTransection = GetPaymentWiseTransection.GetPaymentWiseTransectionDtl(benificaryId, UserId, fromDate, toDate, token, serverAddress);
 
                         if (Print == "true")
@@ -171,8 +170,8 @@ namespace Noble.Report.Reports.Invoice
                             row["BeneficaryName"] = " - ";
                             row["CashierName"] = " - ";
                             row["PaymentType"] = " - ";
-                            row["PaymentDate"] = " - ";
-                            row["Amount"] = PaymantWiseTransection.OpeningBalance.ToString("N2");
+                            row["PaymentDate"] = PaymantWiseTransection.OpeningBalance.ToString("N2");
+                            row["Amount"] ="" ;
                             dt.Rows.Add(row);
                             foreach (var item in PaymantWiseTransection.PaymentList)
                             {
@@ -187,8 +186,6 @@ namespace Noble.Report.Reports.Invoice
                                 row["Amount"] = item.Amount.ToString("N2");
                                 dt.Rows.Add(row);
                             }
-
-
 
                             ASPxGridView1.DataSource = dt;
                             ASPxGridView1.DataBind();
@@ -209,6 +206,12 @@ namespace Noble.Report.Reports.Invoice
                             Amount.SummaryType = SummaryItemType.Sum;
                             Amount.ShowInColumn = "Amount";
                             ASPxGridView1.TotalSummary.Add(Amount);
+                            ASPxGridView1.TotalSummary.Clear();
+                            ASPxSummaryItem PaymentId = new ASPxSummaryItem();
+                            Amount.FieldName = "PaymentId";
+                            Amount.DisplayFormat = "Total";
+                            Amount.ShowInColumn = "PaymentId";
+                            ASPxGridView1.TotalSummary.Add(PaymentId);
 
 
                         }
