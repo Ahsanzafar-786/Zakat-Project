@@ -70,6 +70,13 @@ import printsetting from '../components/PrintSettings/ComingSoon.vue';
 import databackup from '../components/DataBackUp/ComingSoon.vue';
 import datarestore from '../components/DataRestore/ComingSoon.vue';
 
+//Expenses
+import expense from '../components/Expenses/Expense.vue';
+import expensecategory from '../components/Expenses/ExpenseCategory.vue';
+
+
+
+
 import benificaryreports from '../components/Benificary/BenificaryReports.vue';
 
 import Imports from '../components/Imports/ImportExportRecords.vue';
@@ -252,7 +259,18 @@ const routes = [
                             name:'benificaryreports',
                             component: benificaryreports
                         },
-
+                        {
+                            path:'/expense',
+                            name:'expense',
+                            component: expense
+                        },
+                        
+                        {
+                            path:'/expensecategory',
+                            name:'expensecategory',
+                            component: expensecategory
+                        },
+                        
                     ]
                 }
             ]

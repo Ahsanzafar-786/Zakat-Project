@@ -40,6 +40,9 @@ using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.InkML;
 using NPOI.SS.Formula.Functions;
 using DocumentFormat.OpenXml.Wordprocessing;
+using Focus.Business.ExpenseCategories.Commands;
+using Focus.Business.ExpenseCategories.Model;
+using Focus.Business.ExpenseCategories.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -880,6 +883,81 @@ namespace Noble.Api.Controllers
             return Ok(fund);
         }
 
+
+        #endregion
+
+
+        #region ExpenseCategory
+        [Route("api/Benificary/SaveExpenseCategory")]
+        [HttpPost("SaveExpenseCategory")]
+        public async Task<IActionResult> SaveExpenseCategory([FromBody] ExpenseCategoryLookupModel expenseCat)
+        {
+            var message = await Mediator.Send(new ExpenseCategoryAddUpdateCommand
+            {
+                expenseCategories = expenseCat
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetExpenseCategoryList")]
+        [HttpGet("GetExpenseCategoryList")]
+        public async Task<IActionResult> GetExpenseCategoryList(string searchTerm, int? pageNumber, bool isDropDown)
+        {
+            var authorziedPersons = await Mediator.Send(new GetExpenseCategoryListQuery
+            {
+                SearchTerm = searchTerm,
+                IsDropDown = isDropDown,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(authorziedPersons);
+        }
+
+        [Route("api/Benificary/GetExpenseCategoryDetail")]
+        [HttpGet("GetExpenseCategoryDetail")]
+        public async Task<IActionResult> GetExpenseCategoryDetail(Guid id)
+        {
+            var authorziedPersons = await Mediator.Send(new GetExpenseCategoryDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(authorziedPersons);
+        }
+
+        #endregion
+
+        #region Expense
+        //[Route("api/Benificary/SaveExpense")]
+        //[HttpPost("SaveExpense")]
+        //public async Task<IActionResult> SaveExpense([FromBody] AuthorizedPersonsLookupModel authorized)
+        //{
+        //    var message = await Mediator.Send(new ExpenseAddUpdateCommand
+        //    {
+        //        authorziedPersons = authorized
+        //    });
+        //    return Ok(message);
+        //}
+        //[Route("api/Benificary/GetExpenseList")]
+        //[HttpGet("GetExpenseList")]
+        //public async Task<IActionResult> GetExpenseList(string searchTerm, int? pageNumber, bool isDropDown)
+        //{
+        //    var authorziedPersons = await Mediator.Send(new ExpenseListQuery
+        //    {
+        //        SearchTerm = searchTerm,
+        //        IsDropDown = isDropDown,
+        //        PageNumber = pageNumber ?? 1
+        //    });
+        //    return Ok(authorziedPersons);
+        //}
+
+        //[Route("api/Benificary/GetExpenseDetail")]
+        //[HttpGet("GetExpenseDetail")]
+        //public async Task<IActionResult> GetExpenseDetail(Guid id)
+        //{
+        //    var authorziedPersons = await Mediator.Send(new ExpenseDetailsQuery
+        //    {
+        //        Id = id
+        //    });
+        //    return Ok(authorziedPersons);
+        //}
 
         #endregion
     }
