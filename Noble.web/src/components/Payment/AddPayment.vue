@@ -638,6 +638,7 @@ export default {
                         root.addPayment.amountPerMonth = response.data.amountPerMonth;
                         var paymentMonths = response.data.charityTransactions;
                         root.isTransaction = response.data.charityTransactions.length > 0 ? true : false;
+                       debugger;
                         if (response.data.durationType == 'Indefinite') {
 
                             if (paymentMonths.length > 0) {
@@ -753,7 +754,8 @@ export default {
 
                             if (paymentMonths.length > 0) {
                                 if (response.data.endMonth != null && response.data.endMonth != undefined && response.data.startDate != null && response.data.startDate != undefined) {
-
+debugger;
+                                    if(root.addPayment.id == null || root.addPayment.id == ''  ){
                                     if (response.data.isCustomize) {
                                         root.$swal({
                                             title: 'Error',
@@ -770,7 +772,7 @@ export default {
                                         }
 
                                         return;
-
+                                    }
                                     }
                                     if (response.data.currentPaymentMonth != null && response.data.currentPaymentMonth != undefined) {
                                         root.selectedMonth = [];
