@@ -129,6 +129,12 @@ Vue.component('funds-mod', require('./components/Funds/AddFunds.vue').default);
 Vue.component('charityfundsreports', require('./components/Funds/CharityFundsReports.vue').default);
 Vue.component('charityfundsresource', require('./components/Funds/CharityFundsResource.vue').default);
 
+//Expenses
+Vue.component('expensecategory-mod', require('./components/Expenses/AddExpenseCategory.vue').default);
+Vue.component('expense-mod', require('./components/Expenses/AddExpense.vue').default);
+
+
+
 //CompanyProfile
 Vue.component('companyprofile-mod' , require('./components/CompanyProfile/CompanyProfile.vue').default);
 Vue.component('companyinfo-mod', require('./components/CompanyProfile/CompanyInfo.vue').default);
