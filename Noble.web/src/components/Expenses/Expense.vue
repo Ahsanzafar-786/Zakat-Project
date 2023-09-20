@@ -61,6 +61,9 @@
                                     <th class="text-center">
                                         {{ $t('Expense.Date') }}
                                     </th>
+                                    <th class="text-center">
+                                        {{ $t('Expense.Action') }}
+                                    </th>
                                     
                                 </tr>
                             </thead>
@@ -92,7 +95,7 @@
                                     <td class="text-center">
                                         {{ brand.date }}
                                     </td>
-                                    <!-- <td class="text-center d-flex align-items-baseline justify-content-center"
+                                    <td class="text-center d-flex align-items-baseline justify-content-center"
                                         v-if="roleName != 'User'">
                                         <button type="button" class="btn btn-light dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -100,10 +103,9 @@
                                         <div class="dropdown-menu text-center">
                                             <a class="dropdown-item" href="javascript:void(0)"
                                                 v-on:click="PrintRdlc(brand.id,false)">{{ $t('Payment.Print') }}</a>
-                                            <a class="dropdown-item" href="javascript:void(0)"
-                                                v-on:click="PrintRdlc(brand.id,true)">{{ $t('Benificary.PDF') }}</a>
+                                           
                                         </div>
-                                    </td> -->
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
