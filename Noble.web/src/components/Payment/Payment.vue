@@ -281,12 +281,24 @@
                                     </td>
                                     <td class="text-center">
                                         <!-- {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }} -->
-                                        {{ parseFloat(Math.round(brand.lastPaymentAmount)).toFixed(3).slice(0,
+                                        {{ parseFloat(Math.round(brand.totalAmount)).toFixed(3).slice(0,
                                             -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }} - {{
         GetDate(brand.lastPaymentDate) }}
                                     </td>
+                                    <td class="text-center"  v-if="brand.paymentType =='daily payment' ">
+                                        <span>----</span>
+                                       
+                                    </td>
+                                    <td class="text-center"  v-else-if="brand.paymentType =='One Time' ">
+                                        <span>----</span>
+                                       
+                                    </td>
+                                     <td class="text-center"  v-else-if="brand.durationType =='Indefinite' ">
+                                        <span> {{ GetDate2(brand.lastPaymentDate) }}</span>
+                                       
+                                    </td>
                                    
-                                    <td class="text-center" v-if=" brand.nextMonth> brand.endMonth">
+                                    <td class="text-center" v-else-if=" brand.nextMonth> brand.endMonth ">
                                         <span>----</span>
                                        
                                     </td>
@@ -298,7 +310,7 @@
                                     <td class="text-center">{{ brand.note }}</td>
                                     <td class="text-center">{{ brand.cashier }}</td>
                                     <td class="text-center" v-if="brand.isVoid">--</td>
-                                    <td class="text-center" v-else>{{ parseFloat(brand.lastPaymentAmount).toFixed(3).slice(0,
+                                    <td class="text-center" v-else>{{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
                                         -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
 
                                     <td class="text-center d-flex align-items-baseline justify-content-center"

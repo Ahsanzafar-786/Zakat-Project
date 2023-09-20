@@ -12,6 +12,7 @@ using Focus.Domain.Entities;
 
 using System.Linq;
 using System.Collections.Generic;
+using NPOI.POIFS.Properties;
 
 namespace Focus.Business.Payments.Commands
 {
@@ -199,11 +200,12 @@ namespace Focus.Business.Payments.Commands
                     }
                     else
                     {
-                        var paymentDetails =  Context.Payments.AsNoTracking().FirstOrDefault(x => x.Id == request.Payment.Id);
+                        var paymentDetails =  Context.Payments.AsNoTracking().Include(x=> x.SelectedMonth).FirstOrDefault(x => x.Id == request.Payment.Id);
                         if (paymentDetails == null)
                             throw new NotFoundException("Payment Not Found","");
 
-                        //var charityTransaction = await Context.CharityTransaction.FindAsync(paymentDetails.Id);
+                        var charityTransactions =  Context.CharityTransaction.Where(x=> x.DoucmentId== request.Payment.Id).ToList();
+                        Context.CharityTransaction.RemoveRange(charityTransactions);
 
                         paymentDetails.BenificayId = request.Payment.BenificayId;
                         paymentDetails.Amount = request.Payment.Amount;
@@ -216,14 +218,38 @@ namespace Focus.Business.Payments.Commands
                         paymentDetails.UserId = request.Payment.UserId;
                         paymentDetails.Code = request.Payment.Code;
 
+                        Context.SelectedMonths.RemoveRange(paymentDetails.SelectedMonth);
+                        var selectedMonth = new List<SelectedMonth>();
+                        foreach (var item in request.Payment.SelectedMonth)
+                        {
+                            selectedMonth.Add(new SelectedMonth
+                            {
+                                PaymentId = request.Payment.Id,
+                                SelectMonth = item.SelectedMonth,
+                                Amount = request.Payment.Amount,
+                            });
+                        }
+
+                        Context.SelectedMonths.AddRange(selectedMonth);
+
                         Context.Payments.Update(paymentDetails);
 
-                        //if(charityTransaction != null)
-                        //{
-                        //    charityTransaction.DoucmentId = paymentDetails.Id;
-                        //    charityTransaction.DoucmentCode = paymentDetails.Code;
+                        foreach (var item in request.Payment.SelectedMonth)
+                        {
+                            var charityTransaction = new CharityTransaction
+                            {
+                                DoucmentId = request.Payment.Id,
+                                CharityTransactionDate = request.Payment.Date,
+                                DoucmentDate = DateTime.Now,
+                                DoucmentCode = request.Payment.PaymentCode,
+                                BenificayId = request.Payment.BenificayId,
+                                Month = item.SelectedMonth,
+                                Amount = request.Payment.Amount,
+                                Year = request.Payment.Year,
+                            };
 
-                        //}
+                            await Context.CharityTransaction.AddAsync(charityTransaction);
+                        }
 
                         await Context.SaveChangesAsync();
                         return new Message

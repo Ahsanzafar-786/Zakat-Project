@@ -25,7 +25,7 @@
                         <div class="col-lg-4">
                             <datepicker v-model="toDate"  :key="render" />
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-sm-3 col-md-8 mt-2" >
                             <button class="btn btn-outline-primary me-2" v-on:click="GetTransactions()">{{
                                 $t('LedgerReport.Filter') }}
                             </button>
@@ -94,9 +94,9 @@
                                     </tr>
                                     <tr v-for="(item,index) in transactions.paymentList" v-bind:key="index">
                                         <td > {{item.paymentDate}} </td>
-                                    <td ></td>
-                                    <td >{{item.cashierName}} </td>
-                                    <td >     </td>
+                                    <td >{{item.cashierName}}</td>
+                                    <td > {{item.description}}</td>
+                                    <td >   {{item.transactiontype}}  </td>
                                     <td >  </td>
                                     
                                     <td >  </td>

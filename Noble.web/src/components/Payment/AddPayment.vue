@@ -93,22 +93,11 @@
                                 <datepicker :type="'month'" v-model="addPayment.month" v-bind:key="randerDate"
                                     v-on:input="MonthSelection" />
                                 <div class="row mt-2" v-if="brand.paymentType != 0">
-                                    <div style="text-align: right !important;" v-if="selectedMonth.length > 0">
-                                        <button class="btn  btn-danger btn-round btn-sm btn-icon" @click="RemoveAll()"
-                                            style="font-size: .4rem;  padding: 0.2rem 0.35rem;">
-                                            Close All
-                                        </button>
-                                    </div>
+                                    
                                     <div class="badge bg-success col-sm-4 me-3 mt-2" v-for="(val) in selectedMonth"
                                         v-bind:key="val + 1" style="position: relative;font-size: 13px !important;">
                                         <span>{{ val.selectedMonth }}</span>
-                                        <span style="position:absolute; right: -12px; top: -8px;">
-                                            <button class="btn  btn-danger btn-round btn-sm btn-icon"
-                                                style="font-size: .4rem;  padding: 0.2rem 0.35rem;"
-                                                @click="RemoveEffect(val)">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </span>
+                                      
                                     </div>
 
                                 </div>
@@ -162,6 +151,7 @@
 
                     </div>
                     <p class="text-danger"
+                    
                         v-if="brand.currentPaymentMonth != undefined && brand.currentPaymentMonth != null">
                         <b> {{ $t('AddPayment.LastMonthPayment') }} {{ GetDate(brand.currentPaymentMonth) }}</b>
                     </p>
@@ -637,6 +627,7 @@ export default {
                         root.addPayment.amountPerMonth = response.data.amountPerMonth;
                         var paymentMonths = response.data.charityTransactions;
                         root.isTransaction = response.data.charityTransactions.length > 0 ? true : false;
+                       debugger;
                         if (response.data.durationType == 'Indefinite') {
 
                             if (paymentMonths.length > 0) {
@@ -752,7 +743,8 @@ export default {
 
                             if (paymentMonths.length > 0) {
                                 if (response.data.endMonth != null && response.data.endMonth != undefined && response.data.startDate != null && response.data.startDate != undefined) {
-
+debugger;
+                                    if(root.addPayment.id == null || root.addPayment.id == ''  ){
                                     if (response.data.isCustomize) {
                                         root.$swal({
                                             title: 'Error',
@@ -769,7 +761,7 @@ export default {
                                         }
 
                                         return;
-
+                                    }
                                     }
                                     if (response.data.currentPaymentMonth != null && response.data.currentPaymentMonth != undefined) {
                                         root.selectedMonth = [];

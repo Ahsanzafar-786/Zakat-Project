@@ -272,11 +272,11 @@
     "TransactionType":"نوع المعاملة"
   },
   "AddFunds":{
-    "AddFunds" : "إضافة الأموال",
+    "AddFunds" : "أضف الوارد شيكات ونقدي",
     "UpdateFunds" : "تحديث الأموال",
     "CharityResource":"الموارد الخيرية",
     "Amount":"المبلغ",
-    "Description":"وصف",
+    "Description":"ملاحظات",
     "TypeOfTransaction":"نوع المعاملة"
   },
   "Pagination": {

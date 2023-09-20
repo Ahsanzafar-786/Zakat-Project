@@ -45,6 +45,6 @@ namespace Focus.Business.Payments.Models
         public decimal TotalAmount { get;  set; }
         public DateTime? EndMonth { get;  set; }
         public DateTime? NextMonth { get;  set; }
-        
+        public string DurationType { get;  set; }
     }
 }
