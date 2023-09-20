@@ -186,7 +186,7 @@ namespace Noble.Report.Reports.Invoice
 
                                     foreach (var item1 in item.SelectedMonth)
                                     {
-                                        selectedDate = selectedDate + " , " + item.SelectedMonth.FirstOrDefault();
+                                        selectedDate = selectedDate + "  " + item.SelectedMonth.FirstOrDefault();
                                     }
                                 
                                 row["PaymentDate"] = selectedDate;
