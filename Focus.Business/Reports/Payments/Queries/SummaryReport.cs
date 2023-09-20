@@ -36,17 +36,12 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     var balance = fundsReceived - totalExpense;
 
-                    var charitydaily = await Transaction.Where(x =>  x.BenificayId != null &&  x.Beneficiaries.PaymentTypes.Code == 13).SumAsync(x => x.Amount);
+                    var charitydaily = await Transaction.Where(x =>  x.BenificayId != null && x.Beneficiaries.PaymentTypes.Code == 13).SumAsync(x => x.Amount);
                     var charitymonthly = await Transaction.Where(x =>  x.BenificayId != null && x.Beneficiaries.PaymentTypes.Code != 13).SumAsync(x => x.Amount);
 
                     var totalPayments = charitydaily + charitymonthly;
 
                     var cashInHand = balance - totalPayments;
-
-
-
-                
-
 
                     return new SummaryReportLookupModel
                     {

@@ -29,16 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo objectConstructorInfo1 = new DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo();
-            DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo objectConstructorInfo2 = new DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo();
             DevExpress.DataAccess.DataFederation.SelectNode selectNode1 = new DevExpress.DataAccess.DataFederation.SelectNode();
             DevExpress.DataAccess.DataFederation.SourceNode sourceNode1 = new DevExpress.DataAccess.DataFederation.SourceNode();
             DevExpress.DataAccess.DataFederation.Source source1 = new DevExpress.DataAccess.DataFederation.Source();
             DevExpress.DataAccess.DataFederation.SelectNode selectNode2 = new DevExpress.DataAccess.DataFederation.SelectNode();
             DevExpress.DataAccess.DataFederation.SourceNode sourceNode2 = new DevExpress.DataAccess.DataFederation.SourceNode();
             DevExpress.DataAccess.DataFederation.Source source2 = new DevExpress.DataAccess.DataFederation.Source();
-            this.CompanyDtl = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.PaymentDtl = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo objectConstructorInfo1 = new DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo();
+            DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo objectConstructorInfo2 = new DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -69,24 +67,14 @@
             this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.federationDataSource1 = new DevExpress.DataAccess.DataFederation.FederationDataSource();
-            ((System.ComponentModel.ISupportInitialize)(this.CompanyDtl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PaymentDtl)).BeginInit();
+            this.CompanyDtl = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.PaymentDtl = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.federationDataSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CompanyDtl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PaymentDtl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            // 
-            // CompanyDtl
-            // 
-            this.CompanyDtl.Constructor = objectConstructorInfo1;
-            this.CompanyDtl.DataSource = typeof(Noble.Report.Models.CompanyDto);
-            this.CompanyDtl.Name = "CompanyDtl";
-            // 
-            // PaymentDtl
-            // 
-            this.PaymentDtl.Constructor = objectConstructorInfo2;
-            this.PaymentDtl.DataSource = typeof(Noble.Report.Models.PaymentLookupModel);
-            this.PaymentDtl.Name = "PaymentDtl";
             // 
             // TopMargin
             // 
@@ -230,7 +218,7 @@
             // xrLabel9
             // 
             this.xrLabel9.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PaymentDtl].[Amount]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PaymentDtl].[TotalAmount]")});
             this.xrLabel9.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(567.4988F, 227.4375F);
             this.xrLabel9.Multiline = true;
@@ -247,12 +235,12 @@
             // 
             this.xrLabel15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PaymentDtl].[BenificaryName]")});
-            this.xrLabel15.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
-            this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(496.3809F, 181.4375F);
+            this.xrLabel15.Font = new DevExpress.Drawing.DXFont("Arial", 11F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Underline))));
+            this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(467.9617F, 181.4375F);
             this.xrLabel15.Multiline = true;
             this.xrLabel15.Name = "xrLabel15";
             this.xrLabel15.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel15.SizeF = new System.Drawing.SizeF(182.4028F, 23F);
+            this.xrLabel15.SizeF = new System.Drawing.SizeF(210.822F, 23F);
             this.xrLabel15.StylePriority.UseFont = false;
             this.xrLabel15.StylePriority.UseTextAlignment = false;
             this.xrLabel15.Text = "xrLabel15";
@@ -335,12 +323,12 @@
             // 
             // xrTableCell3
             // 
-            this.xrTableCell3.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell3.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Underline))));
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.StylePriority.UseFont = false;
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
-            this.xrTableCell3.Text = "التاريخ الدفع ";
+            this.xrTableCell3.Text = "تاريخ الدفع ";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             this.xrTableCell3.Weight = 0.63196857023715991D;
             // 
@@ -367,7 +355,7 @@
             this.xrLabel3.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrLabel3.Font = new DevExpress.Drawing.DXFont("Calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrLabel3.Font = new DevExpress.Drawing.DXFont("Calibri", 16F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Underline))));
             this.xrLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(50.71517F, 9.999982F);
             this.xrLabel3.Multiline = true;
@@ -395,11 +383,13 @@
             // 
             this.xrLabel8.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PaymentDtl].[AuthorizePerson]")});
+            this.xrLabel8.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Underline))));
             this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(440.4364F, 61.04274F);
             this.xrLabel8.Multiline = true;
             this.xrLabel8.Name = "xrLabel8";
             this.xrLabel8.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel8.SizeF = new System.Drawing.SizeF(239.5833F, 23F);
+            this.xrLabel8.StylePriority.UseFont = false;
             this.xrLabel8.StylePriority.UseTextAlignment = false;
             this.xrLabel8.Text = "xrLabel8";
             this.xrLabel8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
@@ -553,6 +543,13 @@
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Id", "Id"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "BenificayId", "BenificayId"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Amount", "Amount"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "AuthorizePersonName", "AuthorizePersonName"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "ApprovalPersonName", "ApprovalPersonName"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "LastPaymentAmount", "LastPaymentAmount"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "LastPaymentDate", "LastPaymentDate"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "NextPaymentMonth", "NextPaymentMonth"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "NextPaymentYear", "NextPaymentYear"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "PaymentType", "PaymentType"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "PaymentCode", "PaymentCode"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "BenificaryCode", "BenificaryCode"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "UserId", "UserId"),
@@ -560,7 +557,6 @@
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Date", "Date"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "PaymentMonth", "PaymentMonth"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Year", "Year"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "AuthorizePerson", "AuthorizePerson"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Note", "Note"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Code", "Code"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Period", "Period"),
@@ -570,12 +566,37 @@
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "HijriYear", "HijriYear"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "HijriMonth", "HijriMonth"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Cashier", "Cashier"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "AuthorizePerson", "AuthorizePerson"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Nationality", "Nationality"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "UgamaNo", "UgamaNo"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Gender", "Gender"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "ContactNo", "ContactNo"),
             new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "AllowVoid", "AllowVoid"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "SelectedMonth", "SelectedMonth")});
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsRegister", "IsRegister"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "ApprovalPersonId", "ApprovalPersonId"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "AuthorizePersonId", "AuthorizePersonId"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "SelectedMonth", "SelectedMonth"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "PaymentTypeAr", "PaymentTypeAr"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "TotalAmount", "TotalAmount"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "EndMonth", "EndMonth"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "NextMonth", "NextMonth"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "DurationType", "DurationType")});
             selectNode2.Root = sourceNode2;
             this.federationDataSource1.Queries.AddRange(new DevExpress.DataAccess.DataFederation.QueryNode[] {
             selectNode1,
             selectNode2});
+            // 
+            // CompanyDtl
+            // 
+            this.CompanyDtl.Constructor = objectConstructorInfo1;
+            this.CompanyDtl.DataSource = typeof(Noble.Report.Models.CompanyDto);
+            this.CompanyDtl.Name = "CompanyDtl";
+            // 
+            // PaymentDtl
+            // 
+            this.PaymentDtl.Constructor = objectConstructorInfo2;
+            this.PaymentDtl.DataSource = typeof(Noble.Report.Models.PaymentLookupModel);
+            this.PaymentDtl.Name = "PaymentDtl";
             // 
             // PaymentReport
             // 
@@ -597,11 +618,11 @@
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Version = "22.2";
-            ((System.ComponentModel.ISupportInitialize)(this.CompanyDtl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PaymentDtl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.federationDataSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CompanyDtl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PaymentDtl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -635,10 +656,10 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel15;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource PaymentDtl;
         private DevExpress.XtraReports.UI.XRLabel xrLabel8;
-        private DevExpress.DataAccess.DataFederation.FederationDataSource federationDataSource1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel9;
         private DevExpress.XtraReports.UI.XRLabel xrLabel12;
         private DevExpress.XtraReports.UI.XRLabel xrLabel11;
         private DevExpress.XtraReports.UI.XRLabel xrLabel13;
+        private DevExpress.DataAccess.DataFederation.FederationDataSource federationDataSource1;
     }
 }

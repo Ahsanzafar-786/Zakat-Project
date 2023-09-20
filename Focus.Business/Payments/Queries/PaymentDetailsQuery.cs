@@ -51,6 +51,7 @@ namespace Focus.Business.Payments.Queries
                             Period = x.Period,
                             UserId = x.UserId,
                             SelectedMonth= x.SelectedMonth,
+                            TotalAmount=x.TotalAmount,
                             Note = x.Note,
                             IsVoid = x.IsVoid,
                             AllowVoid = x.AllowVoid,
@@ -126,6 +127,7 @@ namespace Focus.Business.Payments.Queries
                             Amount = x.Amount,
                             Month = x.Month,
                             Date = x.Date,
+                            TotalAmount=x.TotalAmount,
                             PaymentCode = x.PaymentCode,
                             Year = x.Year,
                             Period = x.Period,
@@ -148,29 +150,30 @@ namespace Focus.Business.Payments.Queries
                     else
                     {
                         var query = await Context.Payments
-                            .Include(x=>x.SelectedMonth).Include(x => x.Beneficiaries)
-                            .ThenInclude(y=>y.BenificaryAuthorization).ThenInclude(z=>z.AuthorizedPerson).Select(x => new PaymentLookupModel
-                        {
-                            Id = x.Id,
-                            BenificayId = x.BenificayId,
-                            
-                            Date = x.Date,
-                            Amount = x.Amount,
-                            SelectedMonth = x.SelectedMonth.Select(y => new SelectedMonthLookupModel
+                            .Include(x => x.SelectedMonth).Include(x => x.Beneficiaries)
+                            .ThenInclude(y => y.BenificaryAuthorization).ThenInclude(z => z.AuthorizedPerson).Select(x => new PaymentLookupModel
                             {
-                                SelectedMonth = y.SelectMonth,
-                            }).ToList(),
-                            BenificaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
-                            Month = x.Month,
-                            AuthorizePerson = x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name,
-                            PaymentCode = x.Code.ToString(),
-                            Code = x.Beneficiaries.BeneficiaryId,
-                            Year = x.Year,
-                            Period = x.Period,
-                            Note = x.Note,
+                                Id = x.Id,
+                                BenificayId = x.BenificayId,
+
+                                Date = x.Date,
+                                Amount = x.Amount,
+                                SelectedMonth = x.SelectedMonth.Select(y => new SelectedMonthLookupModel
+                                {
+                                    SelectedMonth = y.SelectMonth,
+                                }).ToList(),
+                                BenificaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
+                                Month = x.Month,
+                                AuthorizePerson = x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name,
+                                PaymentCode = x.Code.ToString(),
+                                Code = x.Beneficiaries.BeneficiaryId,
+                                Year = x.Year,
+                                Period = x.Period,
+                                Note = x.Note,
+                                TotalAmount = x.TotalAmount,
                             IsVoid = x.IsVoid,
-                            AllowVoid = x.AllowVoid,
-                        }).FirstOrDefaultAsync(x => x.Id == request.Id);
+                                AllowVoid = x.AllowVoid,
+                            }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                         if (query == null)
                             throw new NotFoundException("Benificary Note Not Found", "");
