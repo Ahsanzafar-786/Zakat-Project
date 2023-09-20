@@ -22,20 +22,21 @@ namespace Noble.Report.Reports.Invoice
             var selectedDate = "";
             foreach (var item in paymentDtl.PaymentList)
             {
+                int i = 0;
                 foreach (var item1 in item.SelectedMonth)
                 {
-                    selectedDate = selectedDate + "  " + item.SelectedMonth.FirstOrDefault();
+                   selectedDate += Convert.ToDateTime(item.SelectedMonth[i++]).ToString("MMMM yyyy") + "  ,"; 
                 }
                 item.PaymentMonth = selectedDate;
             }
             PaymentTransection.DataSource = paymentDtl;
-            //if (companyDtl.Base64Logo != null && companyDtl.Base64Logo != "" && companyDtl.Base64Logo != string.Empty)
-            //{
-            //    byte[] footerData = Convert.FromBase64String(companyDtl.Base64Logo);
-            //    MemoryStream Footerms = new MemoryStream(footerData);
-            //    Bitmap FooterImg = new Bitmap(Footerms);
-            //    xrPictureBox1.Image = FooterImg;
-            //}
+            if (companyDtl.Base64Logo != null && companyDtl.Base64Logo != "" && companyDtl.Base64Logo != string.Empty)
+            {
+                byte[] footerData = Convert.FromBase64String(companyDtl.Base64Logo);
+                MemoryStream Footerms = new MemoryStream(footerData);
+                Bitmap FooterImg = new Bitmap(Footerms);
+                xrPictureBox1.Image = FooterImg;
+            }
         }
 
     }

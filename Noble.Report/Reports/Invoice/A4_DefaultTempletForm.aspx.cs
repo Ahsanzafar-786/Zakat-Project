@@ -183,10 +183,11 @@ namespace Noble.Report.Reports.Invoice
                                 row["CashierName"] = item.CashierName;
                                 row["PaymentType"] = item.PaymentType;
                                 var selectedDate = "";
-
+                                int j= 0;
                                     foreach (var item1 in item.SelectedMonth)
                                     {
-                                        selectedDate = selectedDate + "  " + item.SelectedMonth.FirstOrDefault();
+                                    
+                                        selectedDate +=  Convert.ToDateTime(item.SelectedMonth[j++]).ToString("MMMM yyyy")+"  ,";
                                     }
                                 
                                 row["PaymentDate"] = selectedDate;
@@ -283,7 +284,6 @@ namespace Noble.Report.Reports.Invoice
                                 dt.Columns.Add("Id");
                                 dt.Columns.Add("Name");
                                 dt.Columns.Add("Type");
-                                dt.Columns.Add("ApprovedBy");
                                 dt.Columns.Add("AutherizationPerson");
                                 dt.Columns.Add("AmountPerMonth");
                                 dt.Columns.Add("Reg/Un-Reg");
@@ -305,7 +305,6 @@ namespace Noble.Report.Reports.Invoice
                                     row["Id"] = item.BeneficiaryId;
                                     row["Name"] = item.Name;
                                     row["Type"] = item.DurationType;
-                                    row["ApprovedBy"] = item.ApprovalPersonName;
                                     row["AutherizationPerson"] = item.PassportNo;
                                     row["AmountPerMonth"] = item.AmountPerMonth.ToString("N2");
                                     row["Reg/Un-Reg"] = item.IsRegister == true ? "Register" : "Un-Register";

@@ -524,7 +524,7 @@
             this.xrTableCell21.StylePriority.UseTextAlignment = false;
             this.xrTableCell21.Text = "-";
             this.xrTableCell21.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
-            this.xrTableCell21.Weight = 1.0127722167968751D;
+            this.xrTableCell21.Weight = 0.91277038574218761D;
             // 
             // xrTableCell22
             // 
@@ -533,7 +533,7 @@
             this.xrTableCell22.StylePriority.UseTextAlignment = false;
             this.xrTableCell22.Text = "-";
             this.xrTableCell22.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
-            this.xrTableCell22.Weight = 1.3893084716796875D;
+            this.xrTableCell22.Weight = 1.7103631591796875D;
             // 
             // xrTableCell23
             // 
@@ -545,7 +545,7 @@
             this.xrTableCell23.Text = "xrTableCell23";
             this.xrTableCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             this.xrTableCell23.TextFormatString = "{0:#,#0.00}";
-            this.xrTableCell23.Weight = 1.0750006103515624D;
+            this.xrTableCell23.Weight = 0.85394775390624988D;
             // 
             // ReportFooter
             // 
@@ -797,14 +797,14 @@
             this.xrTableCell6.Multiline = true;
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.Text = "Payment Type ";
-            this.xrTableCell6.Weight = 1.0229705979502144D;
+            this.xrTableCell6.Weight = 0.92196731684455613D;
             // 
             // xrTableCell7
             // 
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
             this.xrTableCell7.Text = "Payment Date";
-            this.xrTableCell7.Weight = 1.4032991682026663D;
+            this.xrTableCell7.Weight = 1.7275849629963638D;
             // 
             // xrTableCell3
             // 
@@ -813,7 +813,7 @@
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "Amount ";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
-            this.xrTableCell3.Weight = 1.0858292982270459D;
+            this.xrTableCell3.Weight = 0.86254678453900679D;
             // 
             // federationDataSource1
             // 
