@@ -191,6 +191,9 @@
                             <li>
                                 <a v-on:click="GoTo('/transactionreport')" href="javascript:void(0);"> Transaction Report</a>
                             </li>
+                            <li>
+                                <a v-on:click="GoTo('/summaryreport')" href="javascript:void(0);"> Summary Report</a>
+                            </li>
                         </ul>
                     </li>
                     <li v-if="roleName != 'Noble Admin' && roleName != 'Cashier'">

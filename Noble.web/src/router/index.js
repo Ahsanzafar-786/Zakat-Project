@@ -75,7 +75,7 @@ import expense from '../components/Expenses/Expense.vue';
 import expensecategory from '../components/Expenses/ExpenseCategory.vue';
 import expensereport from '../components/Expenses/ExpenseReport.vue';
 
-
+import summaryreport from '../components/Reports/SummaryReport.vue';
 
 
 import benificaryreports from '../components/Benificary/BenificaryReports.vue';
@@ -276,6 +276,11 @@ const routes = [
                             path: '/expensereport',
                             name: 'expensereport',
                             component: expensereport
+                        },
+                        {
+                            path: '/summaryreport',
+                            name: 'summaryreport',
+                            component: summaryreport
                         },
                     ]
                 }
