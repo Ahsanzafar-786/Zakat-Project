@@ -99,7 +99,7 @@ namespace Focus.Business.Payments.Commands
                                 DoucmentId = payment.Id,
                                 CharityTransactionDate = payment.Date,
                                 DoucmentDate = DateTime.Now,
-                                DoucmentCode = payment.PaymentCode,
+                                DoucmentCode = payment.Code.ToString(),
                                 BenificayId = payment.BenificayId,
                                 Month = payment.Date,
                                 Amount = payment.Amount,
@@ -175,7 +175,7 @@ namespace Focus.Business.Payments.Commands
                                     DoucmentId = payment.Id,
                                     CharityTransactionDate = payment.Date,
                                     DoucmentDate = DateTime.Now,
-                                    DoucmentCode = payment.PaymentCode,
+                                    DoucmentCode = payment.Code.ToString(),
                                     BenificayId = payment.BenificayId,
                                     Month = item.SelectedMonth,
                                     Amount = payment.Amount,
@@ -200,7 +200,10 @@ namespace Focus.Business.Payments.Commands
                     }
                     else
                     {
-                        var paymentDetails =  Context.Payments.AsNoTracking().Include(x=> x.SelectedMonth).FirstOrDefault(x => x.Id == request.Payment.Id);
+                        var paymentlist = Context.Payments;
+                        var paymentDetails = paymentlist.AsNoTracking().Include(x=> x.SelectedMonth).FirstOrDefault(x => x.Id == request.Payment.Id);
+
+                   
                         if (paymentDetails == null)
                             throw new NotFoundException("Payment Not Found","");
 
@@ -217,7 +220,8 @@ namespace Focus.Business.Payments.Commands
                         paymentDetails.Note = request.Payment.Note;
                         paymentDetails.UserId = request.Payment.UserId;
                         paymentDetails.Code = request.Payment.Code;
-
+                        paymentDetails.TotalAmount = request.Payment.Amount * request.Payment.SelectedMonth.Count;
+                       
                         Context.SelectedMonths.RemoveRange(paymentDetails.SelectedMonth);
                         var selectedMonth = new List<SelectedMonth>();
                         foreach (var item in request.Payment.SelectedMonth)

@@ -162,14 +162,14 @@
                 <div class="col-lg-12 invoice-btn-fixed-bottom">
                     <div class="button-items">
                         <button v-on:click="SavePayment()" class="btn btn-outline-primary  mr-2"
-                            v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User' && !onlyOneTime">
+                            v-bind:disabled="$v.addPayment.$invalid" v-if="rollName != 'User' ">
                             <i class="far fa-save"></i>
                             <span>
                                 {{ $t('Save') }}
                             </span>
                         </button>
                         <button type="button" class="btn btn-outline-primary  mr-2" v-bind:disabled="$v.addPayment.$invalid"
-                            v-if="rollName != 'User' && !onlyOneTime"
+                            v-if="rollName != 'User'"
                             v-on:click="SavePayment(true) && PrintRdlc(addPayment.id)">
                             {{ $t('SaveasPrint') }}
                         </button>
@@ -797,7 +797,7 @@ debugger;
                                     } else {
                                         root.$swal({
                                             title: 'Error',
-                                            text: root.$i18n.locale == 'en' ? 'Not Select The Month Start Date and End Date' : 'لم تحدد الشهر تاريخ البدء وتاريخ الانتهاء',
+                                            text: root.$i18n.locale == 'en' ? 'This Beneficary has one daily Payment type' : 'هذا المستفيد لديه نوع واحد من المدفوعات اليومية',
                                             type: 'error',
                                             icon: 'error',
                                             showConfirmButton: false,

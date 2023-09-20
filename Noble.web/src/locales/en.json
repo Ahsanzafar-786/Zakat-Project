@@ -393,7 +393,7 @@
     "BenificaryName":"Beneficiary Name",
     "Amount":"Paid Amount",
     "ID":"Trns.ID",
-    "LastPayment":"Last Payment",
+    "LastPayment":"Last Payment Date",
     "NextPayment":"Next Payment",
     "Cashier":"Cashier",
     "Month":"Month",

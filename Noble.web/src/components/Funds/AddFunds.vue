@@ -26,7 +26,7 @@
                         </label>
                         <div class="col-sm-12">
                             <multiselect v-model="brand.typeOfTransaction"
-                            :options="['Cash', 'Check']" :show-labels="false"
+                            :options="['Cash', 'Cheque']" :show-labels="false"
                             :placeholder="$t('AddBenificary.SelectType')">
                         </multiselect>
                             </div>

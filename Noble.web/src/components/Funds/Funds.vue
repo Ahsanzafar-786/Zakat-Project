@@ -49,9 +49,7 @@
                                     <th class="text-center">
                                         {{ $t('Payment.Code') }}
                                     </th>
-                                    <th class="text-center">
-                                        {{ $t('Funds.CharityResource') }}
-                                    </th>
+                                    
                                     <th class="text-center">
                                         {{ $t('Funds.Amount') }}
                                     </th>
@@ -80,11 +78,7 @@
                                             <a href="javascript:void(0)" v-on:click="EditFunds(brand.id)">{{ brand.code }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditFunds(brand.id)">{{ brand.charityResouceName }}</a>
-                                        </strong>
-                                    </td>
+                                  
                                     <td class="text-center">
                                         {{ parseFloat(brand.amount).toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}
                                     </td>

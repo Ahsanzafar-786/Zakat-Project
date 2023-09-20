@@ -281,8 +281,7 @@
                                     </td>
                                     <td class="text-center">
                                         <!-- {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }} -->
-                                        {{ parseFloat(Math.round(brand.totalAmount)).toFixed(3).slice(0,
-                                            -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }} - {{
+                                         {{
         GetDate(brand.lastPaymentDate) }}
                                     </td>
                                     <td class="text-center"  v-if="brand.paymentType =='daily payment' ">

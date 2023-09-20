@@ -124,10 +124,7 @@
                             </li>
                         </ul>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li>
-                                <a v-on:click="GoTo('/charityfundsresource')" href="javascript:void(0);"> {{ $t('Funds.CharityFundsResource')
-                                }}</a>
-                            </li>
+                            
                         </ul>
                     </li>
                     <li v-if="roleName != 'Nobel Admin' && roleName != 'Cashier'">
