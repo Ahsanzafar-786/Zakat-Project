@@ -1,10 +1,7 @@
 ﻿using Focus.Business.Interface;
-using Focus.Business.Payments.Models;
-using Focus.Business.Transactions.Queries;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
@@ -12,9 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Focus.Business.Reports.Payments.Models;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
-using Focus.Domain.Entities;
-using Dapper;
-using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Focus.Business.Reports.Payments.Queries
 {

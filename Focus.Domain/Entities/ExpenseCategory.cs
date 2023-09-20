@@ -1,8 +1,5 @@
 ﻿using Focus.Domain.Interface;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Focus.Domain.Entities
 {
@@ -13,5 +10,6 @@ namespace Focus.Domain.Entities
         public string ExpenseCategoryName { get; set; }      
         public bool IsActive { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<Expense> Expenses { get; set; }
     }
 }

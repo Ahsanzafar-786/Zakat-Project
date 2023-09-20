@@ -19,7 +19,8 @@
     "SelectAuthorizePerson":"حدد تخويل الشخص",
     "SelectApprovalPerson":"حدد شخص الموافقة",
     "PaymentType":"الـنـوع الـدفـة ",
-    "SelectBenificary":"حدد المستفيد  /البحث بالاسم أو المعرف"
+    "SelectBenificary":"حدد المستفيد  /البحث بالاسم أو المعرف",
+    "SelectExpenseCategory": "Select Expense Category"
 
   },
  
@@ -506,6 +507,25 @@
     "colorNameEnglish":"اسم اللون انجليزي",
     "SelectType":"اختر صنف",
     "ChooseFile":"اختر ملف"
+  },
+  "Expense":{
+    "Expense":"Expense",
+    "ExpenseList":"ExpenseList",
+    "SearchByCategoryNameAndAmount":"SearchByCategoryNameAndAmount",
+    "Code":"Code",
+    "CategoryName":"CategoryName",
+    "Amount":"Amount",
+    "Discription":"Discription",
+    "Date":"Date"
+  },
+  "AddExpense":{
+    "AddExpense":"AddExpense",
+    "UpdateExpense":"UpdateExpense",
+    "Code":"Code",
+    "CategoryName":"Category Name",
+    "Amount":"Amount",
+    "Description":"Description"
+    
   }
 
 

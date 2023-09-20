@@ -43,6 +43,9 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using Focus.Business.ExpenseCategories.Commands;
 using Focus.Business.ExpenseCategories.Model;
 using Focus.Business.ExpenseCategories.Queries;
+using Focus.Business.Exepenses.Models;
+using Focus.Business.Exepenses.Commands;
+using Focus.Business.Exepenses.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -925,40 +928,48 @@ namespace Noble.Api.Controllers
         #endregion
 
         #region Expense
-        //[Route("api/Benificary/SaveExpense")]
-        //[HttpPost("SaveExpense")]
-        //public async Task<IActionResult> SaveExpense([FromBody] AuthorizedPersonsLookupModel authorized)
-        //{
-        //    var message = await Mediator.Send(new ExpenseAddUpdateCommand
-        //    {
-        //        authorziedPersons = authorized
-        //    });
-        //    return Ok(message);
-        //}
-        //[Route("api/Benificary/GetExpenseList")]
-        //[HttpGet("GetExpenseList")]
-        //public async Task<IActionResult> GetExpenseList(string searchTerm, int? pageNumber, bool isDropDown)
-        //{
-        //    var authorziedPersons = await Mediator.Send(new ExpenseListQuery
-        //    {
-        //        SearchTerm = searchTerm,
-        //        IsDropDown = isDropDown,
-        //        PageNumber = pageNumber ?? 1
-        //    });
-        //    return Ok(authorziedPersons);
-        //}
+        [Route("api/Benificary/SaveExpense")]
+        [HttpPost("SaveExpense")]
+        public async Task<IActionResult> SaveExpense([FromBody] ExpenseLookupModel expens)
+        {
+            var message = await Mediator.Send(new ExpenseAddUpdateCommand
+            {
+                expense = expens
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/GetExpenseList")]
+        [HttpGet("GetExpenseList")]
+        public async Task<IActionResult> GetExpenseList(string searchTerm, int? pageNumber, bool isDropDown)
+        {
+            var expense = await Mediator.Send(new ExpenseListQuery
+            {
+                SearchTerm = searchTerm,
+                IsDropDown = isDropDown,
+                PageNumber = pageNumber ?? 1
+            });
+            return Ok(expense);
+        }
 
-        //[Route("api/Benificary/GetExpenseDetail")]
-        //[HttpGet("GetExpenseDetail")]
-        //public async Task<IActionResult> GetExpenseDetail(Guid id)
-        //{
-        //    var authorziedPersons = await Mediator.Send(new ExpenseDetailsQuery
-        //    {
-        //        Id = id
-        //    });
-        //    return Ok(authorziedPersons);
-        //}
-
+        [Route("api/Benificary/GetExpenseDetail")]
+        [HttpGet("GetExpenseDetail")]
+        public async Task<IActionResult> GetExpenseDetail(Guid id)
+        {
+            var expense = await Mediator.Send(new ExpenseDetailsQuery
+            {
+                Id = id
+            });
+            return Ok(expense);
+        }
+        [Route("api/Benificary/GetExpenseReport")]
+        [HttpGet("GetExpenseReport")]
+        public async Task<IActionResult> GetExpenseReport()
+        {
+            var expense = await Mediator.Send(new ExpenseReportQuery
+            {
+            });
+            return Ok(expense);
+        }
         #endregion
     }
 }

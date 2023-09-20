@@ -93,10 +93,13 @@
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
+                                <a v-on:click="GoTo('/expense')" href="javascript:void(0);"> Expense</a>
+                            </li>
+                            <li>
                                 <a v-on:click="GoTo('/expensecategory')" href="javascript:void(0);"> Expense Category</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/expense')" href="javascript:void(0);"> Expense</a>
+                                <a v-on:click="GoTo('/expensereport')" href="javascript:void(0);"> Expense Report</a>
                             </li>
                             
                         </ul>

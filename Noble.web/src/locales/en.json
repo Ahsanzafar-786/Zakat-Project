@@ -18,7 +18,8 @@
     "SelectAuthorizePerson": "Select Authorize Person",
     "SelectApprovalPerson": "Select Approval Person",
     "PaymentType": "Select Payment Type",
-    "SelectBenificary": "Search By Beneficiary Name or ID"
+    "SelectBenificary": "Search By Beneficiary Name or ID",
+    "SelectExpenseCategory": "Select Expense Category"
   },
   "Benificary": {
     "Benificary": "Register a Beneficiary",
@@ -497,5 +498,25 @@
     "colorNameEnglish":"Color Name English",
     "SelectType":"Select Type",
     "ChooseFile":"Choose File"
+  },
+  "Expense":{
+    "Expense":"Expense",
+    "ExpenseList":"Expense List",
+    "SearchByCategoryNameAndAmount":"Search By Category Name And Amount",
+    "Code":"Code",
+    "CategoryName":"Category Name",
+    "Amount":"Amount",
+    "Discription":"Discription",
+    "Date":"Date"
+    
+  },
+  "AddExpense":{
+    "AddExpense":"Add Expense",
+    "UpdateExpense":"Update Expense",
+    "Code":"Code",
+    "CategoryName":"Category Name",
+    "Amount":"Amount",
+    "Description":"Description"
+    
   }
 }
