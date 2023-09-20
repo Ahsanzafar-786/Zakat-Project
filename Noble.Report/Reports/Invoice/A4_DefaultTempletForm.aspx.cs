@@ -197,16 +197,6 @@ namespace Noble.Report.Reports.Invoice
 
                             ASPxGridView1.DataSource = dt;
                             ASPxGridView1.DataBind();
-                            //for (int j = 0; j < ASPxGridView1.VisibleRowCount; j++)
-                            //{
-                            //    string paymentId = ASPxGridView1.GetRowValues(j, "PaymentId") as string;
-
-                            //    if (paymentId == "Opening Balance")
-                            //    {
-                            //        ASPxGridView1.Columns["Amount"].CellStyle.Font.Bold = true;
-                            //    }
-                               
-                            //}
                             ASPxGridView1.TotalSummary.Clear();
                             ASPxSummaryItem Amount = new ASPxSummaryItem();
                             Amount.FieldName = "Amount";
@@ -396,9 +386,9 @@ namespace Noble.Report.Reports.Invoice
         }
         protected void ASPxGridView1_HtmlRowPrepared(object sender, ASPxGridViewTableRowEventArgs e)
         {
-            if (flag == true)
+            if (flag)
             {
-                if (e.RowType == DevExpress.Web.GridViewRowType.Data)
+                if (e.RowType == GridViewRowType.Data)
                 {
                     string paymentId = e.GetValue("PaymentId") as string;
 
