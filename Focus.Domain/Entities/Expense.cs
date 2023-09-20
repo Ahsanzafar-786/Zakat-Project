@@ -1,8 +1,6 @@
-﻿using Focus.Domain.Entities;
+﻿
 using Focus.Domain.Interface;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Focus.Domain.Entities
 {
@@ -13,5 +11,7 @@ namespace Focus.Domain.Entities
         public decimal Amount { get; set; }
         public string Code { get; set; }
         public string CategoryName { get; set; }
+        public Guid? ExpenseCategoryId { get; set; }
+        public virtual ExpenseCategory ExpenseCategory { get; set; }
     }
 }

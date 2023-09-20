@@ -132,6 +132,7 @@ Vue.component('charityfundsresource', require('./components/Funds/CharityFundsRe
 //Expenses
 Vue.component('expensecategory-mod', require('./components/Expenses/AddExpenseCategory.vue').default);
 Vue.component('expense-mod', require('./components/Expenses/AddExpense.vue').default);
+Vue.component('expensecategory', require('./components/General/ExpenseCategoryDropdown.vue').default);
 
 
 

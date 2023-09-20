@@ -54,6 +54,10 @@ namespace Focus.Business.Payments.Queries
                     {
                         code = await AutoGenerateExpenseCategory();
                     }
+                    else if (request.Name == "Expense")
+                    {
+                        code = await AutoGenerateExpense();
+                    }
                     else
                     {
                         code = await AutoGenerateCashCustomer();
@@ -268,6 +272,38 @@ namespace Focus.Business.Payments.Queries
                 return newCode;
             }
 
+            //expese
+            public async Task<string> AutoGenerateExpense()
+            {
+                var expecat = await Context.Expenses
+                       .OrderBy(x => x.Code)
+                       .LastOrDefaultAsync();
+
+                if (expecat != null)
+                {
+                    if (string.IsNullOrEmpty(expecat.Code))
+                    {
+                        return GenerateCodeFirstTimeExpense();
+                    }
+
+                    return GenerateNewCodeExpense(expecat.Code);
+                }
+
+                return GenerateCodeFirstTimeExpense();
+            }
+            public string GenerateCodeFirstTimeExpense()
+            {
+                return "E-00001";
+            }
+            public string GenerateNewCodeExpense(string soNumber)
+            {
+                string fetchNo = soNumber.Substring(3);
+                Int32 autoNo = Convert.ToInt32((fetchNo));
+                var format = "00000";
+                autoNo++;
+                var newCode = "E-" + autoNo.ToString(format);
+                return newCode;
+            }
 
 
 

@@ -73,6 +73,7 @@ import datarestore from '../components/DataRestore/ComingSoon.vue';
 //Expenses
 import expense from '../components/Expenses/Expense.vue';
 import expensecategory from '../components/Expenses/ExpenseCategory.vue';
+import expensereport from '../components/Expenses/ExpenseReport.vue';
 
 
 
@@ -218,6 +219,7 @@ const routes = [
                             name: 'transactionreport',
                             component: transactionreport
                         },
+                        
                        
                         {
                             path:'/companyprofile',
@@ -270,7 +272,11 @@ const routes = [
                             name:'expensecategory',
                             component: expensecategory
                         },
-                        
+                        {
+                            path: '/expensereport',
+                            name: 'expensereport',
+                            component: expensereport
+                        },
                     ]
                 }
             ]

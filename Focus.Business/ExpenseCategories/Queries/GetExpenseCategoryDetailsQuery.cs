@@ -36,6 +36,7 @@ namespace Focus.Business.ExpenseCategories.Queries
                         Description = x.Description,
                         ExpenseCategoryCode = x.Code, 
                         IsActive = x.IsActive,
+                        
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                     if (query == null)
