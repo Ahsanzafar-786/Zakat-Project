@@ -507,7 +507,8 @@
     "CategoryName":"Category Name",
     "Amount":"Amount",
     "Discription":"Discription",
-    "Date":"Date"
+    "Date":"Date",
+    "Action":"Action"
     
   },
   "AddExpense":{
