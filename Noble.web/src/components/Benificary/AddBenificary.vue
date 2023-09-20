@@ -744,6 +744,7 @@ export default {
     },
     mounted: function () {
         this.roleName = localStorage.getItem('RoleName');
+        this.brand.durationType = 'Indefinite';
         if (this.type == 'Edit') {
             this.paymentType = this.brand.paymentType;
             this.advancePaymentvalue = `${this.brand.advancePayment} Months`;
