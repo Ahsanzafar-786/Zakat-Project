@@ -49,6 +49,29 @@ namespace Noble.Report.Reports.Invoice
                         XtraReport BalanceSheetReport = new Noble.Report.Reports.Invoice.PaymentReport(companyInfo, TrailBalanceAccount);
                         ASPxWebDocumentViewer1.OpenReport(BalanceSheetReport);
                     }
+                    if (formName == "Expense")
+                    {
+                        string Templet = Request.QueryString["Templet"] == null || Request.QueryString["Templet"] == "undefined" ? null : Request.QueryString["Templet"];
+                        if (Templet == "Templet1")
+                        {
+                            ASPxWebDocumentViewer1.Visible = true;
+                            ASPxGridView1.Visible = false;
+                            var TrailBalanceAccount = GetPayment.GetPaymentDtl(id, token, serverAddress);
+                            XtraReport ExpenseReport = new Noble.Report.Reports.Invoice.ExpenseReportTemp1(companyInfo);
+                            ASPxWebDocumentViewer1.OpenReport(ExpenseReport);
+                            ExpenseReport.DisplayName = "Expense Report"+DateTime.Now;
+                        }
+                        else if (Templet == "Templet2")
+                        {
+                            ASPxWebDocumentViewer1.Visible = true;
+                            ASPxGridView1.Visible = false;
+                            var TrailBalanceAccount = GetPayment.GetPaymentDtl(id, token, serverAddress);
+                            XtraReport ExpenseReport = new Noble.Report.Reports.Invoice.ExpenseReportTemp2();
+                            ASPxWebDocumentViewer1.OpenReport(ExpenseReport);
+                            ExpenseReport.DisplayName = "Expense Report" + DateTime.Now;
+                        }
+
+                    }
                     else if (formName == "LedgerReport")
                     {
                         var benificaryId = Request.QueryString["benificaryId"]==null?"": Request.QueryString["benificaryId"];
