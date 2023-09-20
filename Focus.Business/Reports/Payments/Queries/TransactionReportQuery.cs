@@ -57,7 +57,8 @@ namespace Focus.Business.Reports.Payments.Queries
                     .ToListAsync();
 
           
-                    var cashiers = await _userManager.Users.ToListAsync();    
+                    var cashiers = await _userManager.Users.ToListAsync();
+                    var fundsList = Context.Funds;
 
                     var fundslist = fundList.Select(x => new PaymentWiseListLookupModel
                     {
@@ -66,7 +67,9 @@ namespace Focus.Business.Reports.Payments.Queries
                         Date = Convert.ToDateTime(x.CharityTransactionDate),
                         PaymentDate = Convert.ToDateTime(x.CharityTransactionDate).ToString("dd/MM/yy"),
                         PaymentMonth = Convert.ToDateTime(x.Month).ToString("MMMM"),
-                        CashierName = cashiers.FirstOrDefault(c => c.Id == x.UserId)?.UserName ?? ""
+                        CashierName = cashiers.FirstOrDefault(c => c.Id == x.UserId)?.UserName ?? "",
+                        Description= fundsList.FirstOrDefault(j=> j.Id == x.DoucmentId).Description,
+                        Transactiontype= fundsList.FirstOrDefault(j=> j.Id == x.DoucmentId).TypeOfTransaction,
                     }).ToList();
 
 

@@ -45,10 +45,10 @@ namespace Focus.Business.Reports.Payments.Queries
                     //DateTime openingBalanceDate = request.SelectedDate?.AddDays(-1) ?? DateTime.Now.AddDays(-1);
 
 
-                    decimal openingBalance = await Context.Payments.Where(x => x.Date.Value.Date < request.ToDate).SumAsync(x => x.Amount);
+                    decimal openingBalance =  Context.Payments.Where(x => x.Date.Value.Date < request.ToDate).Sum(x => x.Amount);
 
-                    var query =await Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
-                         .Select(x => new PaymentWiseListLookupModel()
+                    var query = Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes).Include(x => x.SelectedMonth)
+                           .Select(x => new PaymentWiseListLookupModel()
                          {
                              Id = x.Id,
                              PaymentId = x.Code.ToString(),
@@ -57,12 +57,13 @@ namespace Focus.Business.Reports.Payments.Queries
                              BeneficaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
                              CashierName = x.UserId != null ? _userManager.Users.FirstOrDefault(ur => ur.Id == x.UserId).UserName: "",
                              UserId = x.UserId != null ? Guid.Parse(x.UserId) : Guid.Empty,
-                             Amount = x.Amount,
+                             Amount = x.TotalAmount,
                              Note = x.Note,
-                             PaymentType = x.Beneficiaries.PaymentTypes.Name,
+                               SelectedMonth = x.SelectedMonth.Select(y => y.SelectMonth).ToList(),
+                               PaymentType = x.Beneficiaries.PaymentTypes.Name,
                              Date = Convert.ToDateTime(x.Month),
                              PaymentDate = Convert.ToDateTime(x.Month).ToString("dd/MM/yy"),
-                         }).ToListAsync();
+                         }).ToList();
 
 
                     if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)

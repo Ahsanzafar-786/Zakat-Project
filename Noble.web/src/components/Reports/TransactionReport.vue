@@ -94,9 +94,9 @@
                                     </tr>
                                     <tr v-for="(item,index) in transactions.paymentList" v-bind:key="index">
                                         <td > {{item.paymentDate}} </td>
-                                    <td ></td>
-                                    <td >{{item.cashierName}} </td>
-                                    <td >     </td>
+                                    <td >{{item.cashierName}}</td>
+                                    <td > {{item.description}}</td>
+                                    <td >   {{item.transactiontype}}  </td>
                                     <td >  </td>
                                     
                                     <td >  </td>

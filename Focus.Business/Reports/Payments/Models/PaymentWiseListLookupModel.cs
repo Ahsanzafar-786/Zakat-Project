@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Focus.Business.Reports.Payments.Models
 {
@@ -20,5 +21,8 @@ namespace Focus.Business.Reports.Payments.Models
        
         public string IsRegistered { get;  set; }
         public string PaymentMonth { get;  set; }
+        public List<DateTime?> SelectedMonth { get; set; }
+        public string Description { get;  set; }
+        public string Transactiontype { get;  set; }
     }
 }
