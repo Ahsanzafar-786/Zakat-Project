@@ -6,6 +6,8 @@ using System.Drawing;
 using Noble.Report.Models;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using DevExpress.XtraReports.Wizards.Templates;
 
 namespace Noble.Report.Reports.Invoice
 {
@@ -15,7 +17,18 @@ namespace Noble.Report.Reports.Invoice
         {
             InitializeComponent();
             CompanyInfo.DataSource = companyDtl;
-            PaymentTransection.DataSource=paymentDtl;
+
+
+            var selectedDate = "";
+            foreach (var item in paymentDtl.PaymentList)
+            {
+                foreach (var item1 in item.SelectedMonth)
+                {
+                    selectedDate = selectedDate + " , " + item.SelectedMonth.FirstOrDefault();
+                }
+                item.PaymentMonth = selectedDate;
+            }
+            PaymentTransection.DataSource = paymentDtl;
             //if (companyDtl.Base64Logo != null && companyDtl.Base64Logo != "" && companyDtl.Base64Logo != string.Empty)
             //{
             //    byte[] footerData = Convert.FromBase64String(companyDtl.Base64Logo);

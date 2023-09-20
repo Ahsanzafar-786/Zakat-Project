@@ -23,5 +23,6 @@ namespace Noble.Report.Models
 
         public string IsRegistered { get; set; }
         public string PaymentMonth { get; set; }
+        public List<DateTime?> SelectedMonth { get; set; }
     }
 }

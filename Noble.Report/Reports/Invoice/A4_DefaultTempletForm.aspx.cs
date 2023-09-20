@@ -182,7 +182,14 @@ namespace Noble.Report.Reports.Invoice
                                 row["BeneficaryName"] = item.BeneficaryName;
                                 row["CashierName"] = item.CashierName;
                                 row["PaymentType"] = item.PaymentType;
-                                row["PaymentDate"] = item.PaymentDate;
+                                var selectedDate = "";
+
+                                    foreach (var item1 in item.SelectedMonth)
+                                    {
+                                        selectedDate = selectedDate + " , " + item.SelectedMonth.FirstOrDefault();
+                                    }
+                                
+                                row["PaymentDate"] = selectedDate;
                                 row["Amount"] = item.Amount.ToString("N2");
                                 dt.Rows.Add(row);
                             }
