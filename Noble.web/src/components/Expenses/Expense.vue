@@ -102,7 +102,7 @@
                                             {{ $t('Payment.Action') }} <i class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
                                             <a class="dropdown-item" href="javascript:void(0)"
-                                                v-on:click="PrintRdlc(brand.id,false)">{{ $t('Payment.Print') }}</a>
+                                                v-on:click="PrintRdlc()">{{ $t('Payment.Print') }}</a>
                                            
                                         </div>
                                     </td>
@@ -247,7 +247,7 @@ export default {
             }
 
            else{
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Funds'+ '&isDownload=' + isDownload
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Expense'+ '&isDownload=' + isDownload+ '&searchTerm=' + this.search+ '&pageNumber=' + this.currentPage
                 this.changereportt++;
                 this.show1 = !this.show1;
            }

@@ -970,6 +970,15 @@ namespace Noble.Api.Controllers
             });
             return Ok(expense);
         }
+        [Route("api/Benificary/GetExpenseSummery")]
+        [HttpGet("GetExpenseSummery")]
+        public async Task<IActionResult> GetExpenseSummery()
+        {
+            var Summery = await Mediator.Send(new SummaryReport
+            {
+            });
+            return Ok(Summery);
+        }
         #endregion
     }
 }

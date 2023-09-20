@@ -176,7 +176,7 @@ export default {
             if (this.$session.exists()) {
                 companyId = localStorage.getItem('CompanyID');
             }
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId +  '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=transactionreport' 
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId +'&formName=Expensereport' 
                 this.changereportt++;
                 this.show = !this.show;
                 this.loading = false
