@@ -24,6 +24,8 @@ namespace Focus.Business.Transactions.Queries
         public DateTime? Month { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+        public string PaymentType { get; set; }
+
 
         public class Handler : IRequestHandler<CharityTransactionListQuery, List<CharityTransactionLookupModel>>
         {
@@ -39,49 +41,52 @@ namespace Focus.Business.Transactions.Queries
             {
                 try
                 {
-                    var query = Context.CharityTransaction
-                         .Where(x => x.DocumentName == null && !x.IsVoid)
-                         .Select(x => new CharityTransactionLookupModel
-                         {
-                             Id = x.Id,
-                             DoucmentId = x.DoucmentId,
-                             DoucmentCode = x.DoucmentCode,
-                             Amount = x.Amount,
-                             CharityTransactionDate = x.CharityTransactionDate,
-                             DoucmentDate = x.DoucmentDate,
-                             Month = x.Month,
-                             BenificayId = x.BenificayId,
-                             Year = x.Year,
-                         });
-
+                    var query = Context.CharityTransaction.AsNoTracking().Include(x => x.Beneficiaries)
+                         .Where(x => x.DocumentName == null && !x.IsVoid);
+                       
                     if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
                     {
                         query = query.Where(x => x.BenificayId == request.BenificayId);
                     }
+                    if (request.PaymentType != null)
+                    {
+                        query = query.Where(x => x.Beneficiaries.PaymentTypes.Name == request.PaymentType);
+                    }
 
                     if (request.Month.HasValue)
                     {
-                        query = query.Where(x => x.Month.Value.Month == request.Month.Value.Month);
+                        query = query.Where(x => x.CharityTransactionDate.Value.Month == request.Month.Value.Month);
                     }
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        query = query.Where(x => x.Month.Value.Date >= request.FromDate.Value.Date && x.Month.Value.Date <= request.ToDate.Value.Date);
+                        query = query.Where(x => x.CharityTransactionDate.Value.Date >= request.FromDate.Value.Date && x.CharityTransactionDate.Value.Date <= request.ToDate.Value.Date);
                     }
 
-                    
 
-                    var charity = await query.ToListAsync();
 
-                    var benific = await Context.Beneficiaries
-                        .Where(b => charity.Select(c => c.BenificayId).Contains(b.Id))
-                        .ToListAsync();
-
-                    foreach (var transaction in charity)
+                    var charity = query.Select(x => new CharityTransactionLookupModel
                     {
-                        var benificiary = benific.FirstOrDefault(b => b.Id == transaction.BenificayId);
-                        transaction.benificaryName = (string.IsNullOrEmpty(benificiary?.Name) ? benificiary?.NameAr : benificiary?.Name);
-                    }
+                        Id = x.Id,
+                        DoucmentId = x.DoucmentId,
+                        DoucmentCode = x.DoucmentCode,
+                        Amount = x.Amount,
+                        CharityTransactionDate = x.CharityTransactionDate,
+                        DoucmentDate = x.DoucmentDate,
+                        Month = x.Month,
+                        BenificayId = x.BenificayId,
+                        Year = x.Year,
+                    }).ToList();
+
+                    //var benific = await Context.Beneficiaries
+                    //    .Where(b => charity.Select(c => c.BenificayId).Contains(b.Id))
+                    //    .ToListAsync();
+
+                    //foreach (var transaction in charity)
+                    //{
+                    //    var benificiary = benific.FirstOrDefault(b => b.Id == transaction.BenificayId);
+                    //    transaction.benificaryName = (string.IsNullOrEmpty(benificiary?.Name) ? benificiary?.NameAr : benificiary?.Name);
+                    //}
 
                     return charity;
                 }

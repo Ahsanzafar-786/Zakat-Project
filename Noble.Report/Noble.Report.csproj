@@ -193,6 +193,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Beneficiaries.cs" />
     <Compile Include="Models\BenificariesLookupModel.cs" />
     <Compile Include="Models\BenificaryAuthorizationLookupModel.cs" />
     <Compile Include="Models\CharityTransactionLookupModel.cs" />

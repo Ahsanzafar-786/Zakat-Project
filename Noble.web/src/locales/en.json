@@ -89,6 +89,8 @@
     "Nationality": "Nationality",
     "Gender": "Gender",
     "Male": "Male",
+    "DailyPayment": "Daily Payment",
+    "OneTimePayment": "One Time Payment",
     "Female": "Female",
     "ContactNo": "Contact No",
     "PaymentDetail": "Payment Detail",

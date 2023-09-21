@@ -284,7 +284,7 @@
                                          {{
         GetDate(brand.lastPaymentDate) }}
                                     </td>
-                                    <td class="text-center"  v-if="brand.paymentType =='daily payment' ">
+                                    <td class="text-center"  v-if="brand.paymentType =='Daily Payment' ">
                                         <span>----</span>
                                        
                                     </td>

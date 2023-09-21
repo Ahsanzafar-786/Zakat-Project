@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Focus.Domain.Entities;
+using System;
 
 namespace Focus.Business.Transactions.Models
 {
@@ -20,7 +21,5 @@ namespace Focus.Business.Transactions.Models
         public bool IsVoid { get; set; }
         public string HijriYear { get; set; }
         public string HijriMonth { get; set; }
-
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Noble.Report.Reports.Invoice;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,7 +24,6 @@ namespace Noble.Report.Models
         public bool IsVoid { get; set; }
         public string HijriYear { get; set; }
         public string HijriMonth { get; set; }
-
 
     }
 }

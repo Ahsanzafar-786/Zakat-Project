@@ -31,9 +31,13 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-sm-3">
-                            <benificary v-model="benificaryId" :key="render" />
-                        </div>
+                        <div class="col-md-3 form-group">
+                        
+                        <multiselect v-model="paymentType"
+                        :options="['Daily Payment', 'One Time']" :show-labels="false"
+                        :placeholder="$t('AddBenificary.PaymentType')">
+                    </multiselect>
+                </div>
                         <div class="col-sm-3">
                             <userdropdown v-model="userId" />
                         </div>
@@ -71,11 +75,14 @@
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import Loading from 'vue-loading-overlay';
+import Multiselect from 'vue-multiselect';
+import moment from "moment";
 
 export default {
     mixins: [clickMixin],
     components: {
-        Loading
+        Loading,
+        Multiselect
     },
     data: function () {
         return {
@@ -88,6 +95,7 @@ export default {
             changereportt: 0,
             benificaryId: '',
             userId:'',
+            paymentType:'',
             arabic: '',
             english: '',
             fromDate: '',
@@ -97,11 +105,8 @@ export default {
             render: 0
         }
     },
-    watch: {
-        benificaryId: function (val) {
-            this.GetTransactions(val, 1);
-        }
-    },
+   
+    
     methods: {
         IsSave: function () {
             this.show = !this.show;
@@ -114,11 +119,12 @@ export default {
             this.fromDate = '';
             this.toDate = '';
             this.userId = '';
+            this.paymentType='';
             this.render++
         },
         PrintRdlc: function (val) {
             debugger;
-            if(this.benificaryId == '' && this.fromDate == '' && this.toDate == '' && this.userId == '')
+            if( this.fromDate == '' && this.toDate == '' && this.userId == '' && this.paymentType =='')
             {
                 return this.$swal.fire({
                         icon: 'error',
@@ -137,14 +143,14 @@ export default {
             debugger;
 
             if (val) {
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&userId=' + this.userId + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=PaymentWiseReport' + "&Print=" + val
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&paymentType=' + this.paymentType +'&benificaryId=' + this.benificaryId + '&userId=' + this.userId + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=PaymentWiseReport' + "&Print=" + val
                 this.changereportt++;
                 this.show = !this.show;
                 this.loading = false
 
             }
             else {
-                this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&userId=' + this.userId + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=PaymentWiseReport' + "&Print=" + val
+                this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&paymentType=' + this.paymentType +'&benificaryId=' + this.benificaryId + '&userId=' + this.userId + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=PaymentWiseReport' + "&Print=" + val
                 this.changereport++;
             }
         }
@@ -153,11 +159,16 @@ export default {
     },
 
     created: function () {
+        this.fromDate = moment().subtract(1, 'months').format("DD MMM YYYY");
+        this.toDate = moment().format("DD MMM YYYY");
       
     },
     mounted: function () {
         this.english = localStorage.getItem('locals');
         this.arabic = localStorage.getItem('locals');
+
+        this.fromDate = moment().subtract(1, 'months').format("DD MMM YYYY");
+        this.toDate = moment().format("DD MMM YYYY");
     }
 }
 </script>

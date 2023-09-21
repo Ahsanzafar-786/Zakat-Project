@@ -95,6 +95,8 @@
     "Gender" : "جنس",
     "Male" : "ذكر",
     "Female" : "أنثى",
+    "DailyPayment": "الدفع اليومي",
+    "OneTimePayment": "دفعة لمرة واحدة",
     "ContactNo" : "رقم الاتصال",
     "PaymentDetail" : "تفاصيل الدفع",
     "PaymentType" : " الـنـوع الـدفـة",

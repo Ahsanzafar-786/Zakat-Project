@@ -34,6 +34,13 @@
                         <div class="col-sm-3">
                             <benificary v-model="benificaryId" :key="render" />
                         </div>
+                        <div class="col-md-3 form-group">
+                        
+                            <multiselect v-model="paymentType"
+                            :options="['Daily Payment', 'One Time']" :show-labels="false"
+                            :placeholder="$t('AddBenificary.PaymentType')">
+                        </multiselect>
+                    </div>
                         <div class="col-sm-2">
                             <datepicker :type="'month'" v-model="month" :key="render" />
                         </div>
@@ -68,12 +75,14 @@
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import Loading from 'vue-loading-overlay';
+import Multiselect from 'vue-multiselect';
 
 export default {
     mixins: [clickMixin],
     components: {
-        Loading
-    },
+    Loading,
+    Multiselect
+},
     data: function () {
         return {
             locals:'',
@@ -86,6 +95,7 @@ export default {
             benificaryId: '',
             arabic: '',
             english: '',
+            paymentType:'',
             fromDate: '',
             toDate: '',
             month: '',
@@ -93,11 +103,8 @@ export default {
             render: 0
         }
     },
-    watch: {
-        benificaryId: function (val) {
-            this.GetTransactions(val, 1);
-        }
-    },
+   
+    
     methods: {
         IsSave: function () {
             this.show = !this.show;
@@ -110,11 +117,12 @@ export default {
             this.fromDate = '';
             this.toDate = '';
             this.month = '';
+            this.paymentType='';
             this.render++
         },
         PrintRdlc: function (val) {
             debugger;
-            if(this.benificaryId == '' && this.fromDate == '' && this.toDate == '' && this.month == '')
+            if(this.benificaryId == '' && this.fromDate == '' && this.toDate == '' && this.month == '' && this.paymentType == '')
             {
                 return this.$swal.fire({
                         icon: 'error',
@@ -131,25 +139,25 @@ export default {
             }
             debugger;
             if (val) {
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val+ '&paymentType=' + this.paymentType ;
                 this.changereportt++;
                 this.show = !this.show;
                 this.loading = false
 
             }
             else {
-                this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val
+                this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=LedgerReport' + "&Print=" + val+ '&paymentType=' + this.paymentType ;
                 this.changereport++;
             }
         },
         GetTransactions: function () {
-
+            debugger;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + this.benificaryId + '&month=' + this.month + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate, {
+            root.$https.get('/Benificary/GetCharityTransactionList?benificaryId=' + this.benificaryId + '&month=' + this.month + '&paymentType=' + this.paymentType + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

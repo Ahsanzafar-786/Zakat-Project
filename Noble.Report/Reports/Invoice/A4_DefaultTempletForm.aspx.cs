@@ -76,9 +76,10 @@ namespace Noble.Report.Reports.Invoice
                         var benificaryId = Request.QueryString["benificaryId"]==null?"": Request.QueryString["benificaryId"];
                         var month = Request.QueryString["month"]== "Invalid date"?"": Request.QueryString["month"];
                         var fromDate = Request.QueryString["fromDate"] == "Invalid date" ? "" : Request.QueryString["fromDate"];
+                        var paymentType = Request.QueryString["paymentType"] == "Invalid date" ? "" : Request.QueryString["paymentType"];
                         var toDate = Request.QueryString["toDate"];
 
-                        var Charity = GetCharityLedger.GetCharityLedgerDtl(benificaryId,month,fromDate,toDate, token, serverAddress);
+                        var Charity = GetCharityLedger.GetCharityLedgerDtl(benificaryId,month,fromDate,toDate, paymentType, token, serverAddress);
 
                         if (Print == "true")
                         {
@@ -135,9 +136,10 @@ namespace Noble.Report.Reports.Invoice
                     {
                         var benificaryId = Request.QueryString["benificaryId"] == null|| Request.QueryString["benificaryId"] == "null" ? "" : Request.QueryString["benificaryId"];
                         var UserId = Request.QueryString["userId"] == "Invalid date" ? "" : Request.QueryString["userId"];
+                        var paymentType = Request.QueryString["paymentType"] == "Invalid date" ? "" : Request.QueryString["paymentType"];
                         var fromDate = Request.QueryString["fromDate"];
                         var toDate = Request.QueryString["toDate"];
-                        var PaymantWiseTransection = GetPaymentWiseTransection.GetPaymentWiseTransectionDtl(benificaryId, UserId, fromDate, toDate, token, serverAddress);
+                        var PaymantWiseTransection = GetPaymentWiseTransection.GetPaymentWiseTransectionDtl(benificaryId, UserId, fromDate, toDate, paymentType, token, serverAddress);
 
                         if (Print == "true")
                         {

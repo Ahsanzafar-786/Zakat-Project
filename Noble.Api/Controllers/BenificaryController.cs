@@ -456,14 +456,17 @@ namespace Noble.Api.Controllers
         #region CharityTransaction
         [Route("api/Benificary/GetCharityTransactionList")]
         [HttpGet("GetCharityTransactionList")]
-        public async Task<IActionResult> GetCharityTransactionList(Guid? benificaryId, DateTime? month, DateTime? fromDate, DateTime? toDate)
+        public async Task<IActionResult> GetCharityTransactionList(Guid? benificaryId, DateTime? month, DateTime? fromDate, DateTime? toDate , string paymentType)
         {
+           
+
             var charity = await Mediator.Send(new CharityTransactionListQuery
             {
                 BenificayId = benificaryId,
                 Month = month,
                 FromDate = fromDate,
                 ToDate = toDate,
+                PaymentType = paymentType,
             });
             return Ok(charity);
         }
@@ -471,7 +474,7 @@ namespace Noble.Api.Controllers
 
         [Route("api/Benificary/GetPaymentReportQuery")]
         [HttpGet("GetPaymentReportQuery")]
-        public async Task<IActionResult> GetPaymentReportQuery(Guid? benificaryId, Guid? userId, DateTime? fromDate, DateTime? toDate)
+        public async Task<IActionResult> GetPaymentReportQuery(Guid? benificaryId, Guid? userId, DateTime? fromDate, DateTime? toDate,string paymentType)
         {
             var charity = await Mediator.Send(new PaymentReportQuery
             {
@@ -479,6 +482,7 @@ namespace Noble.Api.Controllers
                 UserId = userId,
                 FromDate = fromDate,
                 ToDate = toDate,
+                PaymentType = paymentType,
             });
             return Ok(charity);
         }

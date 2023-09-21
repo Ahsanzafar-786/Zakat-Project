@@ -13,13 +13,13 @@ namespace Noble.Report.NobleDefaultServices
     public static class GetCharityLedger
     {
 
-        public static List<CharityTransactionLookupModel> GetCharityLedgerDtl(string id,string month,string fromDate,string toDate,string token,string serverName) {
+        public static List<CharityTransactionLookupModel> GetCharityLedgerDtl(string id,string month,string fromDate,string toDate,string paymentType,string token,string serverName) {
         
             string ipPath = ConfigurationManager.ConnectionStrings["ipAdress"].ConnectionString;
             RestClient client1 = new RestClient(serverName);
 
             // create a new RestRequest instance for the API endpoint
-            RestRequest request1 = new RestRequest("Benificary/GetCharityTransactionList?benificaryId="+id + "&month="+month +"&fromDate="+fromDate + "&toDate=" +toDate);
+            RestRequest request1 = new RestRequest("Benificary/GetCharityTransactionList?benificaryId="+id + "&month="+month +"&fromDate="+fromDate + "&toDate=" +toDate+ "&paymentType="+ paymentType);
 
             // add the token to the Authorization header of the request
             request1.AddHeader("Authorization", "Bearer " + token);
