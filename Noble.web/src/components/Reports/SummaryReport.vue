@@ -146,7 +146,7 @@
                 </div>
             </div>
         </div>
-        <print :show="show" v-if="show" :reportsrc="reportsrc1" :changereport="changereportt" @close="show = false"
+        <print :show="show" v-if="show1" :reportsrc="reportsrc1" :changereport="changereportt" @close="show1 = false"
             @IsSave="IsSave" />
     </div>
 </template>
@@ -168,6 +168,7 @@ export default {
             changereport: 0,
             reportsrc1: '',
             show: false,
+            show1: false,
             changereportt: 0,
            
 
@@ -227,8 +228,11 @@ export default {
                         console.log(error);
                     });
                 },
-             PrintRdlc: function (val,isDownload) {
-            
+                IsSaveRpt: function () {
+            this.show1 = !this.show1;
+        },
+                PrintRdlc: function (val,isDownload) {
+            debugger;
             var companyId = '';
             if (this.$session.exists()) {
                 companyId = localStorage.getItem('CompanyID');
@@ -238,6 +242,7 @@ export default {
                 this.loading=true;
                 this.$https.get(this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Funds'+ '&isDownload=' + isDownload
                 , {  responseType: 'blob' } ) .then(function (response) {
+                       debugger;
                         root.loading=false;
                         const url = window.URL.createObjectURL(new Blob([response.data]));
                         const link = document.createElement('a');
@@ -251,7 +256,7 @@ export default {
             }
 
            else{
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Funds'+ '&isDownload=' + isDownload
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' +val+'&CompanyID='+companyId+'&formName=Expense'+ '&isDownload=' + isDownload+ '&searchTerm=' + this.search+ '&pageNumber=' + this.currentPage
                 this.changereportt++;
                 this.show1 = !this.show1;
            }
