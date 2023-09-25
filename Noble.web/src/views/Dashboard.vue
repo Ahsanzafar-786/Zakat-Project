@@ -87,19 +87,23 @@
                     <li v-if="roleName != 'Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                Expenses
+                                {{ $t('Expense.Expenses')
+                                }}  
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/expense')" href="javascript:void(0);"> Expense</a>
+                                <a v-on:click="GoTo('/expense')" href="javascript:void(0);"> {{ $t('Expense.Expense')
+                                }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/expensecategory')" href="javascript:void(0);"> Expense Category</a>
+                                <a v-on:click="GoTo('/expensecategory')" href="javascript:void(0);"> {{ $t('Expense.ExpenseCategory')
+                                }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/expensereport')" href="javascript:void(0);"> Expense Report</a>
+                                <a v-on:click="GoTo('/expensereport')" href="javascript:void(0);"> {{ $t('Expense.Expensereport')
+                                }}</a>
                             </li>
                             
                         </ul>

@@ -503,6 +503,7 @@
   },
   "Expense":{
     "Expense":"Expense",
+    "Expenses":"Expenses",
     "ExpenseList":"Expense List",
     "SearchByCategoryNameAndAmount":"Search By Category Name And Amount",
     "Code":"Code",
@@ -510,7 +511,14 @@
     "Amount":"Amount",
     "Discription":"Discription",
     "Date":"Date",
-    "Action":"Action"
+    "ExpenseCategory":"Expense Category",
+    "Action":"Action",
+    "AddExpenseCategory":"Add Expense Category",
+    "Status":"Status"
+,
+    "Expensereport":"Expense report",
+    "Print":"Print"
+    
     
   },
   "AddExpense":{
@@ -519,7 +527,8 @@
     "Code":"Code",
     "CategoryName":"Category Name",
     "Amount":"Amount",
-    "Description":"Description"
+    "Description":"Description",
+    " Expensedescription":"Expense description"
     
   }
 }

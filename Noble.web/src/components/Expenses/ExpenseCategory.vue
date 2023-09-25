@@ -6,7 +6,7 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Expense Category</h4>
+                                <h4 class="page-title">    {{ $t('Expense.ExpenseCategory') }}</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
@@ -17,7 +17,7 @@
                                 <a v-on:click="openmodel" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1" >
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('AddNew') }}
+                                    {{ $t('Expense.AddExpenseCategory') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -47,13 +47,13 @@
                                 <tr>
                                     <th>#</th>
                                     <th class="text-center">
-                                      Code
+                                        {{ $t('Expense.Code') }}
                                     </th>
                                     <th class="text-start">
-                                        Category Name
+                                        {{ $t('Expense.CategoryName') }}
                                     </th>
                                     <th class="text-center">
-                                        Description
+                                        {{ $t('Expense.Discription') }}
                                     </th>
                                     <th class="text-center">
                                         {{ $t('AuthorizedPerson.Status') }}

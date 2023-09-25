@@ -6,14 +6,14 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Expense Report</h4>
+                                <h4 class="page-title">   {{ $t('Expense.Expensereport') }}</h4>
                                
                             </div>
                             <div class="col-auto align-self-center">
                                 
                                 <a v-on:click="PrintRdlc()" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary">
-                                    {{ $t('Print') }}
+                                    {{ $t('Expense.Print') }}
                                 </a>
                             </div>
                         </div>
@@ -44,16 +44,16 @@
                                         </th>
                                         
                                         <th >
-                                            DATE
+                                            {{ $t('Expense.Date') }}
                                         </th>
                                         <th  >
-                                            Expense Category
+                                            {{ $t('Expense.ExpenseCategory') }}
                                         </th>
                                         <th  >
-                                            Expense Description
+                                            {{ $t('Expense.Discription') }}
                                         </th>
                                         <th  >
-                                           Amount
+                                            {{ $t('Expense.Amount') }}
                                         </th>
                                     </tr>
                                 </thead>

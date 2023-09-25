@@ -511,22 +511,34 @@
     "ChooseFile":"اختر ملف"
   },
   "Expense":{
-    "Expense":"Expense",
+    "Expense":"مصروف",
+    "Expenses":" مصاريف",
     "ExpenseList":"ExpenseList",
     "SearchByCategoryNameAndAmount":"SearchByCategoryNameAndAmount",
-    "Code":"Code",
-    "CategoryName":"CategoryName",
-    "Amount":"Amount",
-    "Discription":"Discription",
-    "Date":"Date"
+    "Code":"رمز",
+    "CategoryName":"اسم التصنيف",
+    "Amount":"المبلغ",
+    "Discription":"الوصف",
+    "ExpenseCategory":"فئة النفقات",
+    "Date":"تاريخ",
+    "Status":"حالة",
+    "Expensereport":"تقرير المصاريف",
+    "Print":"مطبعة",
+      
+
+
+    "AddExpenseCategory":"  إضافة فئة النفقات"
+    
   },
   "AddExpense":{
-    "AddExpense":"AddExpense",
+    "AddExpense":"اضف جديد",
     "UpdateExpense":"UpdateExpense",
-    "Code":"Code",
-    "CategoryName":"Category Name",
-    "Amount":"Amount",
-    "Description":"Description"
+    "Code":"رمز",
+    "CategoryName":"اسم التصنيف",
+    "Amount":"المبلغ",
+    "Description":"الوصف",
+    " Expensedescription":"الوصف"
+
     
   }
 
