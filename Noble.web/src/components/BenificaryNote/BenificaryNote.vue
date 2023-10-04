@@ -123,8 +123,13 @@
                                     <td v-else>
                                         ---
                                     </td>
-
-                                    <td v-if="brand.benificaryName != null">
+                                    <td v-if="brand.benificaryName != null && roleName=='Cashier'">
+                                        <strong>
+                                            <a href="javascript:void(0)">{{
+                                                brand.benificaryName }}</a>
+                                        </strong>
+                                    </td>
+                                    <td v-else-if="brand.benificaryName != null">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)">{{
                                                 brand.benificaryName }}</a>
@@ -133,7 +138,13 @@
                                     <td v-else>
                                         ---
                                     </td>
-                                    <td class="text-start">
+                                    <td class="text-start" v-if="roleName=='Cashier'">
+                                        <strong>
+                                            <a href="javascript:void(0)" > {{
+                                                brand.note }}</a>
+                                        </strong>
+                                    </td>
+                                    <td class="text-start" v-else>
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditbenificaryNote(brand.id)"> {{
                                                 brand.note }}</a>

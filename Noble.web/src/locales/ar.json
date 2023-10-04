@@ -18,7 +18,7 @@
   "General":{
     "SelectAuthorizePerson":"حدد تخويل الشخص",
     "SelectApprovalPerson":"حدد شخص الموافقة",
-    "PaymentType":"الـنـوع الـدفـة ",
+    "PaymentType":"فترة الدفع بالأشهر",
     "SelectBenificary":"حدد المستفيد  /البحث بالاسم أو المعرف",
     "SelectExpenseCategory": "Select Expense Category"
 
@@ -74,7 +74,7 @@
     "Approved":"موافقة",
     "Date":"تاريخ التسجيل",
     "RecurringAmount":"المبلغ متكرر",
-    "PaymentType":"الـنـوع الـدفـة",
+    "PaymentType":"فترة الدفع بالأشهر",
     "ApprovedBy":"معـتمدة من",
     "Notes":"ملحوظات",
     "AccountStatus": "حالـة الحساب",
@@ -99,7 +99,7 @@
     "OneTimePayment": "دفعة لمرة واحدة",
     "ContactNo" : "رقم الاتصال",
     "PaymentDetail" : "تفاصيل الدفع",
-    "PaymentType" : " الـنـوع الـدفـة",
+    "PaymentType" : " فترة الدفع بالأشهر",
     "ApprovalPersons" : "الموافقة على الأشخاص",
     "AuthorizedPerson" : "الشخص المرخص",
     "RecurringAmount" : "المبلغ متكرر",
@@ -146,7 +146,7 @@
   },
 
   "BenificaryNote":{
-    "Code":" الـكـود",
+    "Code":" بطاقة تعريف",
     "BenificaryNote":"ملاحظات المستفيد",
     "BenificaryNoteList":"قائمة الملاحظات المفيدة",
     "BenificaryName":"أسم المستفيد",
@@ -173,7 +173,7 @@
   },
 
   "PaymentType":{
-    "PaymentType":"الـنـوع الـدفـة ",
+    "PaymentType":"فترة الدفع بالأشهر ",
     "PaymentTypeList":"قائمة نوع الدفع",
     "Name":"اسم",
     "SearchByName":"البحث عن طريق الإسم"
@@ -398,13 +398,13 @@
   },
 
   "Payment":{
-    "LastPayment":"الدفعة الأخيرة",
+    "LastPayment":"آخر شهر مدفوع",
     "NextPayment":" الدفعة التالية",
     "ID":" رقم المعاملة",
-    "Payment":" المستـفـيد المدفوعات",
+    "Payment":" اختر اسماء المستفيدين باالشهري",
     "Action":"فعل",
     "IsVoid":"هو الفراغ",
-    "BenificaryPayment":"أضف دفع",
+    "BenificaryPayment":"اسماء المستفيدين باالشهري",
     "BenificaryReports":" الـتـقـارير المستـفـيد",
     "AddPayment":"إضافة الدفع",
     "PaymentList":"قائمة الدفع",
@@ -413,7 +413,7 @@
     "Cashier":"أمين الصندوق",
     "Month":"الشهر",
     "Year":"السنة",
-    "Code":"الكود",
+    "Code":"بطاقة تعريف",
     "BeneficiaryCode":"رمز المستفيد",
     "Period":"فترة",
     "AllowVoid":"السماح باطل",
@@ -517,7 +517,7 @@
     "Expenses":" مصاريف",
     "ExpenseList":"ExpenseList",
     "SearchByCategoryNameAndAmount":"SearchByCategoryNameAndAmount",
-    "Code":"رمز",
+    "Code":"بطاقة تعريف",
     "CategoryName":"اسم التصنيف",
     "Amount":"المبلغ",
     "Discription":"الوصف",
@@ -535,7 +535,7 @@
   "AddExpense":{
     "AddExpense":"اضف جديد",
     "UpdateExpense":"UpdateExpense",
-    "Code":"رمز",
+    "Code":"بطاقة تعريف",
     "CategoryName":"اسم التصنيف",
     "Amount":"المبلغ",
     "Description":"الوصف",

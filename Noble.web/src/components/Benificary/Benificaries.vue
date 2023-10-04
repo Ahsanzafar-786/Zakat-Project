@@ -247,8 +247,13 @@
                                     <td class="text-center">
                                         {{ brand.beneficiaryId }}
                                     </td>
-
-                                    <td class="text-start">
+                                    <td class="text-start" v-if="roleName=='Cashier'">
+                                        <strong>
+                                            <a href="javascript:void(0)" > {{
+                                                brand.name == '' ? brand.nameAr : brand.name }}</a>
+                                        </strong>
+                                    </td>
+                                    <td class="text-start" v-else>
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditBenificary(brand.id, 'Edit')"> {{
                                                 brand.name == '' ? brand.nameAr : brand.name }}</a>
@@ -701,6 +706,7 @@ export default {
                 this.show1 = !this.show1;
             }
         },
+        
         EditBenificary: function (Id, type) {
 
             var root = this;
