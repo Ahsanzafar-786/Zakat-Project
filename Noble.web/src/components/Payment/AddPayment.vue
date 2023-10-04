@@ -302,7 +302,7 @@ export default {
             cashierName: '',
             openingBalance:0,
             addPayment: {
-                Id: '',
+                id: '',
                 benificayId: '',
                 paymentCode: '',
                 amount: '',
@@ -581,7 +581,7 @@ export default {
                 path: link
             });
         },
-        EditBenificary: function (Id, val) {
+        EditBenificary: function (id, val) {
 
             var root = this;
             var token = '';
@@ -589,7 +589,7 @@ export default {
                 token = localStorage.getItem('token');
             }
 
-            root.$https.get('/Benificary/GetBenificaryDetail?Id=' + Id + '&isPayment=' + val, {
+            root.$https.get('/Benificary/GetBenificaryDetail?id=' + id + '&isPayment=' + val, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -1053,7 +1053,14 @@ debugger;
         this.arabic = localStorage.getItem('Arabic');
         this.addPayment.userId = localStorage.getItem('UserId');
         this.cashierName = localStorage.getItem('UserName');
-        if (this.$route.query.data != undefined) {
+        if (this.$route.query.id != undefined) {
+            this.addPayment.id='';
+            this.addPayment.benificayId=this.$route.query.id ;
+
+           this.EditBenificary(this.$route.query.id,true);
+        }
+
+        else if (this.$route.query.data != undefined) {
             this.addPayment = this.$route.query.data;
             this.EditBenificary(this.addPayment.benificayId, true);
             this.rander++;

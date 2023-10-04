@@ -245,7 +245,10 @@
                                     </td>
 
                                     <td class="text-center">
-                                        {{ brand.beneficiaryId }}
+                                        <strong>
+                                            <a href="javascript:void(0)" v-on:click="GotoPayment(brand.id)">  {{ brand.beneficiaryId }}</a>
+                                        </strong>
+                                       
                                     </td>
                                     <td class="text-start" v-if="roleName=='Cashier'">
                                         <strong>
@@ -706,7 +709,16 @@ export default {
                 this.show1 = !this.show1;
             }
         },
-        
+        GotoPayment: function(id) {
+            debugger;
+
+            this.$router.push({
+                    path: '/addpayment',
+                    query: { id: id }
+                });
+           
+    
+},
         EditBenificary: function (Id, type) {
 
             var root = this;
