@@ -6,7 +6,7 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Summary Report</h4>
+                                <h4 class="page-title">{{ $t('Summary.SummaryReport') }}</h4>
                                
                             </div>
                             <div class="col-auto align-self-center">
@@ -39,7 +39,7 @@
                                             
                                         </th>
                                         <th >
-                                         <b>Summary Report</b>  
+                                         <b>{{ $t('Summary.SummaryReport') }} </b>  
                                         </th>
                                         <th  >
                                           
@@ -60,7 +60,7 @@
                                     
                                     <tr >
                                     <td >  </td>
-                                    <td > <b> Funds Received</b> </td>
+                                    <td > <b>{{ $t('Summary.FundsReceived') }} </b> </td>
                                          <td > </td>
                                          <td > </td>
                                     <td >  </td>
@@ -72,7 +72,7 @@
                                     <tr >
                                         
                                         <td >  </td>
-                                        <td > <b>Total Expense</b> </td>
+                                        <td > <b>{{ $t('Summary.TotalExpense') }}</b> </td>
                                              <td></td>
                                              <td >  </td>
                                              <td >  </td>
@@ -84,7 +84,7 @@
                                     <td >  </td>
                                     <td > </td>
                                          <td></td>
-                                         <td >  <b>Balance</b> </td>
+                                         <td >  <b>{{ $t('Summary.Balance') }}</b> </td>
                                          <td >  </td>
                                          <td >  {{SummaryReportLookupModel.balance}}  </td>
                                     </tr>
@@ -93,7 +93,7 @@
                                         <td >  </td>
                                          <td >  </td>
                                          <td >  </td>
-                                         <td ><b>Payment Details</b></td>
+                                         <td ><b>{{ $t('Summary.PaymentDetails') }}</b></td>
                                        <td >  </td>
                                         <td >   </td>
                         
@@ -103,7 +103,7 @@
                                         
                                         <td >  </td>
                                        
-                                             <td><b>Beneficiary Monthly</b></td>
+                                             <td><b>{{ $t('Summary.BeneficiaryMonthly') }}</b></td>
                                              <td >  </td>
                                              <td >  </td>
                                              <td >  </td> 
@@ -114,7 +114,7 @@
                                         
                                         <td >  </td>
                                     
-                                             <td><b>Beneficiary Daily</b></td>
+                                             <td><b>{{ $t('Summary.BeneficiaryDaily') }}</b></td>
                                              <td >  </td>
                                              <td >  </td>
                                              <td >  </td>
@@ -126,7 +126,7 @@
                                     <td >  </td>  
                                      <td >  </td> 
                                        <td >  </td>
-                                    <td ><b> TOTAL Payments</b></td>
+                                    <td ><b>{{ $t('Summary.TOTALPayments') }} </b></td>
                                     <td >   {{SummaryReportLookupModel.totalPayments}} </td>
                                   
                                     </tr>
@@ -135,7 +135,7 @@
                                     <td >  </td>  
                                      <td >  </td> 
                                        <td >  </td>
-                                    <td ><b> Cash In Hand</b></td>
+                                    <td ><b> {{ $t('Summary.CashInHand') }}</b></td>
                                     <td >  {{SummaryReportLookupModel.cashInHand}}  </td>
                                   
                                     </tr>

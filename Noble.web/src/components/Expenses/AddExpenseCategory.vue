@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-if="type == 'Edit'">
-                    Update Expense Category
+                    {{ $t('Expense.UpdateExpenseCategory') }}   
                 </h6>
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" v-else>
-                    Add Expense Category
+                    {{ $t('Expense.AddExpenseCategory') }}
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -14,20 +14,20 @@
                 <div class="row">
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Code
+                            {{ $t('Expense.Code') }}
                         </label>
                         <input class="form-control" v-model="brand.expenseCategoryCode" type="text" disabled :key="rendar"/>
                     </div>
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            CategoryName
+                            {{ $t('Expense.CategoryName') }}
                         </label>
                         <input class="form-control" v-model="brand.categoryName" type="text" />
                     </div>
                     
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
-                            Discription:
+                            {{ $t('Expense.Discription') }}:
                         </label>
                         <textarea class="form-control" v-model="brand.description" rows="3"></textarea>
                     </div>

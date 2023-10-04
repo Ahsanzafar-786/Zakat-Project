@@ -31,7 +31,7 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     var Transaction =  Context.CharityTransaction;
 
-                    var fundsReceived = await Transaction.Where(x =>  x.BenificayId == null).SumAsync(x => x.Amount);
+                    var fundsReceived = await Transaction.Where(x =>  x.BenificayId == null && x.DocumentName =="Funds" ).SumAsync(x => x.Amount);
                     var totalExpense= Context.Expenses.Sum(x => x.Amount);
 
                     var balance = fundsReceived - totalExpense;

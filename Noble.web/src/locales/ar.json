@@ -263,12 +263,14 @@
   },
 
   "Funds":{
-    "Funds":"أموال",
+    "Fund":" الوارد شيكات ونقدي",
+    "Funds":"اختر الوارد شيكات ونقدي",
     "AddFunds":"إضافة الأموال",
     "FundsList":"قائمة الصناديق",
     "CharityResource":"اسم المورد الخيرية ",
     "Amount":"المبلغ",
     "Date":"تاريخ",
+    "Comments": "ملاحظات",
     "CharityFundsReports":"تقارير الصناديق الخيرية",
     "CharityFundsResource":"موارد الصناديق الخيرية",
     "SearchByCharityResourceNameAndAmount":"البحث عن طريق اسم المورد الخيرية والمبلغ",
@@ -537,8 +539,53 @@
     "CategoryName":"اسم التصنيف",
     "Amount":"المبلغ",
     "Description":"الوصف",
+    "UpdateExpenseCategory":"تحديث فئة النفقات",
     " Expensedescription":"الوصف"
 
+    
+  }
+  ,
+  "Summary":{
+    "SummaryReport":" تقرير ملخص",
+    "FundsReceived":" الأموال المستلمة",
+    "TotalExpense":"المصاريف الكلية ",
+    "Balance":" رصيد حساب",
+    "PaymentDetails":"بيانات الدفع ",
+    "BeneficiaryMonthly":" المستفيد شهريا",
+    "BeneficiaryDaily":" المستفيد اليومي ",
+    "CashInHand":" التدفقات النقدية الداخلة  ",
+    "TOTALPayments":"مجموع المدفوعات "
+    
+  },
+  "Transaction":{
+    "TransactionReport":" تقرير المعاملات",
+    "DATE":" تاریخ",
+    "BENEFICIARYID":"معرف المستفيد",
+    "DESCRIPTION":" الوصف",
+    "STATUS":"حالة",
+    "PERIOD":"فترة",
+    "PAYMENTINTERVALINMONTHS":"فترة السداد في أشهر",
+    "DEBIT":" مدين",
+    "PAYMENTTYPE":" النوع الدقة",
+    "OPENINGBALANCE":"الرصيد",  
+    "TOTAL":"أجمالي الرصيد",
+    "TRANSACTIONTOTAL":"إجمالي الصفقة",
+    "CLOSINGBALANCE":"الرصيد الختامي",
+    "CREDIT":"دين "
+    
+  },
+  "Charity":{
+    "PaymentSummary":"ملخص الدفع",
+    "BENEFICIARYNAME":"  أسم المستفيد",
+    "BENEFICIARYID":"معرف المستفيد ",
+    "PAYMENT":" دفع",
+    "PAYMENTDATE":"تاريخ الدفع",
+    "STATUS":"حالة",
+    "PERIOD(MONTH)":" الفترة (الشهر)",
+    "PAYMENTPERIOD":" فترة السداد",
+    "OPENINGBALANCE":" الرصيد",
+    "TOTAL":"المجموع", 
+    "BALANCE":"رصيد حساب"
     
   }
 

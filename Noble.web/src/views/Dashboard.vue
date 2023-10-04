@@ -111,7 +111,7 @@
                     <li v-if="roleName != 'Noble Admin'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
-                                {{ $t('Funds.Funds') }}
+                                {{ $t('Funds.Fund') }}
                             </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                         </a>
 
@@ -123,7 +123,7 @@
                         </ul>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/charityfundsreports')" href="javascript:void(0);"> {{ $t('Funds.CharityFundsReports')
+                                <a v-on:click="GoTo('/charityfundsreports')" href="javascript:void(0);"> {{ $t('Charity.PaymentSummary')
                                 }}</a>
                             </li>
                         </ul>
@@ -190,10 +190,10 @@
                                 }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/transactionreport')" href="javascript:void(0);"> Transaction Report</a>
+                                <a v-on:click="GoTo('/transactionreport')" href="javascript:void(0);"> {{ $t('Transaction.TransactionReport') }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/summaryreport')" href="javascript:void(0);"> Summary Report</a>
+                                <a v-on:click="GoTo('/summaryreport')" href="javascript:void(0);">{{ $t('Summary.SummaryReport') }}</a>
                             </li>
                         </ul>
                     </li>

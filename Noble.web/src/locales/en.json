@@ -241,12 +241,14 @@
     "Address": "Address"
   },
   "Funds": {
+    "Fund": "Funds",
     "Funds": "Funds",
     "AddFunds":"Add Funds",
     "FundsList": "Funds List",
     "CharityResource": "Charity Resource Name",
     "Amount": "Amount",
     "Date": "Date",
+    "Comments": "Comments",
     "CharityFundsReports":"Charity Funds Reports",
     "CharityFundsResource":"Charity Funds Resource",
     "SearchByCharityResourceNameAndAmount":"Search By Charity Resource Name And Amount",
@@ -528,7 +530,51 @@
     "CategoryName":"Category Name",
     "Amount":"Amount",
     "Description":"Description",
+    "UpdateExpenseCategory":"Update Expense Category",
     " Expensedescription":"Expense description"
+    
+  },
+  "Summary":{
+    "SummaryReport":" SummaryReport",
+    "FundsReceived":" FundsReceived",
+    "TotalExpense":"Total Expense",
+    "Balance":" Balance",
+    "PaymentDetails":"Payment Details",
+    "BeneficiaryMonthly":"Beneficiary Monthly",
+    "BeneficiaryDaily":" Beneficiary Daily",
+    "CashInHand":" Cash In Hand",
+    "TOTALPayments":"TOTAL Payments "
+    
+  },
+  "Transaction":{
+    "TransactionReport":" Transaction Report",
+    "DATE":" DATE",
+    "BENEFICIARYID":"BENEFICIARY ID",
+    "DESCRIPTION":" DESCRIPTION",
+    "STATUS":"STATUS",
+    "PERIOD":"PERIOD",
+    "PAYMENTINTERVALINMONTHS":" PAYMENT INTERVAL IN MONTHS",
+    "DEBIT":" DEBIT",
+    "PAYMENTTYPE":" PAYMENT TYPE",
+    "OPENINGBALANCE":"OPENING BALANCE",  
+    "TOTAL":"TOTAL", 
+    "TRANSACTIONTOTAL":"TRANSACTION TOTAL",
+    "CLOSINGBALANCE":"CLOSING BALANCE",
+    "CREDIT":"CREDIT "
+    
+  },
+  "Charity":{
+    "PaymentSummary":"Payment Summary",
+    "BENEFICIARYNAME":"  BENEFICIARY NAME",
+    "BENEFICIARYID":"BENEFICIARY ID",
+    "PAYMENT":" PAYMENT",
+    "PAYMENTDATE":"PAYMENT DATE",
+    "STATUS":"STATUS",
+    "PERIOD(MONTH)":" PERIOD(MONTH)",
+    "PAYMENTPERIOD":" PAYMENT PERIOD",
+    "OPENINGBALANCE":" OPENING BALANCE",
+    "TOTAL":"TOTAL", 
+    "BALANCE":"BALANCE"
     
   }
 }

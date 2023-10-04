@@ -6,7 +6,7 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Transaction Report</h4>
+                                <h4 class="page-title">{{ $t('Transaction.TransactionReport') }}</h4>
                                
                             </div>
                             
@@ -46,33 +46,33 @@
                                  
                                         
                                         <th >
-                                            DATE
+                                            {{ $t('Transaction.DATE') }} 
                                         </th>
                                         <th width="100px" >
-                                            BENEFICIARY ID
+                                            {{ $t('Transaction.BENEFICIARYID') }}  
                                         </th>
                                         <th width="200px" >
-                                            DESCRIPTION
+                                            {{ $t('Transaction.DESCRIPTION') }}  
                                         </th>
                                         <th width="100px" >
-                                           STATUS
+                                            {{ $t('Transaction.STATUS') }}    
                                         </th>
                                         <th >
-                                            PERIOD
+                                            {{ $t('Transaction.PERIOD') }}    
                                         </th>
                                        
                                         <th width="200px"  >
-                                            PAYMENT INTERVAL IN MONTHS
+                                            {{ $t('Transaction.PAYMENTINTERVALINMONTHS') }}  
                                         </th>
                                         <th >
-                                            DEBIT
+                                            {{ $t('Transaction.DEBIT') }}    
                                         </th>
                                         <th >
-                                            CREDIT
+                                            {{ $t('Transaction.CREDIT') }}   
                                         </th>
 
                                         <th >
-                                           PAYMENT TYPE
+                                            {{ $t('Transaction.PAYMENTTYPE') }}   
                                         </th>
                                        
 
@@ -83,7 +83,7 @@
                                     <tr >
                                         <td >  </td>
                                     <td >  </td>
-                                    <td ><b>OPENING BALANCE</b></td>
+                                    <td ><b> {{ $t('Transaction.OPENINGBALANCE') }} </b></td>
                                     <td >  </td>
                                     <td >  </td>
                                     <td >  </td>
@@ -108,7 +108,7 @@
                                     <tr >
                                         <td >  </td>
                                     <td >  </td>
-                                    <td ><b>TOTAL</b></td>
+                                    <td ><b>{{ $t('Transaction.TOTAL') }}</b></td>
                                     <td >  </td>
                                     <td >  </td>
                                    
@@ -155,7 +155,7 @@
                                     <tr >
                                         <td >  </td>
                                     <td >  </td>
-                                    <td ><b>TRANSACTION TOTAL</b></td>
+                                    <td ><b>{{ $t('Transaction.TRANSACTIONTOTAL') }}</b></td>
                                     <td >  </td>
                                     <td >  </td>
                                    
@@ -168,7 +168,7 @@
                                     <tr >
                                         <td >  </td>
                                     <td >  </td>
-                                    <td ><b>CLOSING BALANCE</b></td>
+                                    <td ><b>{{ $t('Transaction.CLOSINGBALANCE') }}</b></td>
                                     <td >  </td>
                                     <td >  </td>
                                     <td >  </td>

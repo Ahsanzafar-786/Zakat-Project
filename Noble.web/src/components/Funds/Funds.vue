@@ -60,6 +60,9 @@
                                         {{ $t('Funds.Date') }}
                                     </th>
                                     <th class="text-center">
+                                        {{ $t('Funds.Comments') }}
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('Benificary.Action') }}
                                     </th>
                                 </tr>
@@ -87,6 +90,9 @@
                                     </td>
                                     <td class="text-center">
                                         {{ brand.date }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ brand.description }}
                                     </td>
                                     <td class="text-center d-flex align-items-baseline justify-content-center"
                                         v-if="roleName != 'User'">

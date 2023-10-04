@@ -6,7 +6,8 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Payment Summary</h4>
+                                <h4 class="page-title">{{ $t('Charity.PaymentSummary')
+                                }}</h4>
                                
                             </div>
                             
@@ -44,35 +45,43 @@
                                     <tr>
                                  
                                         <th width="200px" >
-                                            BENEFICIARY NAME
+                                            {{ $t('Charity.BENEFICIARYNAME')
+                                }}
                                         </th>
                                         <th width="100px" >
-                                            BENEFICIARY ID
+                                            {{ $t('Charity.BENEFICIARYID')
+                                }}  
                                         </th>
                                         <th >
-                                            PAYMENT
+                                            {{ $t('Charity.PAYMENT')
+                                }}    
                                         </th>
                                         <th >
-                                           PAYMENT DATE
+                                            {{ $t('Charity.PAYMENTDATE')
+                                }}      
                                         </th>
                                      
                                        
                                         <th width="100px" >
-                                          STATUS
+                                            {{ $t('Charity.STATUS')
+                                }}        
                                         </th>
                                         <th >
-                                            PERIOD(MONTH)
+                                            {{ $t('Charity.PERIOD(MONTH)')
+                                }}        
                                         </th>
                                        
                                         <th width="200px"  >
-                                            PAYMENT PERIOD
+                                            {{ $t('Charity.PAYMENTPERIOD')
+                                }}          
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     
                                     <tr >
-                                        <td ><b>OPENING BALANCE</b></td>
+                                        <td ><b>   {{ $t('Charity.OPENINGBALANCE')
+                                }}   </b></td>
                                         <td >  </td>
                                     <td >{{transactions.openingBalance}}  </td>
                                
@@ -120,7 +129,8 @@
                                        
                                     </tr>
                                     <tr >
-                                        <td ><b>TOTAL</b></td>
+                                        <td ><b> {{ $t('Charity.TOTAL')
+                                }}</b></td>
                                         <td >  </td>
                                     <td >{{transactions.transactionTotal}}   </td>
                                   
@@ -132,7 +142,8 @@
                                     </tr>
 
                                     <tr >
-                                        <td ><b> BALANCE</b></td>
+                                        <td ><b> {{ $t('Charity.BALANCE')
+                                }}</b></td>
                                         <td >  </td>
                                     <td >  {{transactions.closing}}</td>
                                  

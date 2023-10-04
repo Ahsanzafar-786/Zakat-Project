@@ -47,7 +47,7 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     var Transaction = Context.CharityTransaction;
 
-                    var funds = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId == null).SumAsync(x => x.Amount);
+                    var funds = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId == null && x.DocumentName == "Funds").SumAsync(x => x.Amount);
                     var charity = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId != null).SumAsync(x => x.Amount);
 
                     var openingBalance = funds - charity;
@@ -79,6 +79,17 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     var query= List.Select(x => new PaymentWiseListLookupModel()
                     {
+
+
+
+
+
+
+
+
+
+
+
                         Id = x.Id,
                         PaymentId = x.Code.ToString(),
                         Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
