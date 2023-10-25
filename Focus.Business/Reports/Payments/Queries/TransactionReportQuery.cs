@@ -46,7 +46,7 @@ namespace Focus.Business.Reports.Payments.Queries
                     var openingBalance = funds - charity;
 
                      var fundList = await Transaction
-                    .Where(j => j.BenificayId == null)
+                    .Where(j => j.BenificayId == null && j.DocumentName == "Funds")
                     .Include(x => x.Beneficiaries.PaymentTypes)
                     .ToListAsync();
 

@@ -108,7 +108,7 @@
                             {{ $t('AddBenificary.PaymentType') }}<span class="text-danger"> *</span>
                         </label>
                         <paymenttype v-model="brand.paymentTypeId" v-on:input="GetRecord" ref="ChlidDropdown"
-                            :values="brand.paymentTypeId" :isDisable="isDisableValue" />
+                            :values="brand.paymentTypeId" :isDisable="isDisableValue"  />
                     </div>
                     <div class="col-md-4 form-group"
                         v-if="brand.paymentTypeId != '' && brand.paymentTypeId != null && paymentType != 0">
@@ -412,7 +412,6 @@ export default {
             loading: false,
             roleName: '',
             isDisable: false,
-
         }
     },
     validations: {
@@ -463,12 +462,8 @@ export default {
 
             },
             startMonth: {
-                required: requiredIf((x) => {
-                    if (x.paymentTypeId == "42d23cb7-560f-4d30-18c4-08dbb5b41e3f") {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                required: requiredIf(function () {
+                    return this.checkPaymentType();
                 }),
 
             }
@@ -478,12 +473,19 @@ export default {
         GiveReason: function () {
             this.giveReason = true;
         },
+        checkPaymentType(){
+            if (this.paymentType == 0) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+        },
         GetRecord: function () {
             var root = this;
             debugger;
 
             if (root.$refs.ChlidDropdown != undefined) {
-
+   
                 var value = this.$refs.ChlidDropdown.GetSalaryOfSelected();
                 if (value == '' || value == null) {
                     this.paymentType = null;

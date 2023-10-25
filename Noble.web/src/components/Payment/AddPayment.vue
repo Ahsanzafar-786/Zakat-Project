@@ -611,7 +611,11 @@ export default {
 
                         } else if (root.brand.paymentType == 1) {
                             root.paymentType = 'Monthly';
-                        } else {
+                        } 
+                        else if (root.brand.paymentType == 13) {
+                            root.paymentType = 'Daily Payment';
+                        } 
+                        else {
                             root.paymentType = `${root.brand.paymentType} Months`;
                         }
 

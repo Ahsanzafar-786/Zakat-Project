@@ -54,6 +54,8 @@ namespace Focus.Business.Exepenses.Commands
                             DoucmentCode = expense.Code,
                             Amount = expense.Amount,
                             DocumentName="Expense",
+                            Month = expense.Date,
+                   
                         };
 
                         await Context.CharityTransaction.AddAsync(charityTransaction);

@@ -54,12 +54,17 @@ export default {
                 }
             }).then(function () {
                 if(root.dailyPayment)
-                { debugger;
+                { 
+                    debugger;
+                    console.log(root.options);
                     root.value = root.options.find(function (x) {
                      
                      return x.code == 13;
                     });
+                    console.log(root.value);
+
                     root.$emit('input',  root.value.id);
+                    
 
                 }
                 else
