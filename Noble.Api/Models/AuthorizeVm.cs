@@ -30,5 +30,6 @@
         public string Created_date { get; set; }
         public string Edited_date { get; set; }
         public string Sync_erp { get; set; }
+        public string Transection_Type { get; set; }
     }
 }

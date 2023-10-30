@@ -744,6 +744,7 @@ namespace Noble.Api.Controllers
                         Amount = Convert.ToDecimal(request.Amount),
                         Description = request.Check_No,
                         Code=autoNo12,
+                        TypeOfTransaction= request.Transection_Type,
                         UserId = request.Created_by_id,
 
 
@@ -789,7 +790,7 @@ namespace Noble.Api.Controllers
         [HttpPost("PaymentsBeneficry")]
         public async Task<IActionResult> PaymentsBeneficry([FromBody] List<AuthorizeVm> rows)
        {
-            var Beneficiaries = _Context.Beneficiaries.AsNoTracking().ToList();
+            var Beneficiaries = _Context.Beneficiaries.ToList();
             try
             {
 
@@ -851,12 +852,11 @@ namespace Noble.Api.Controllers
 
                     _Context.CharityTransaction.Add(charityTransaction);
 
-                    var query = _Context.Beneficiaries.AsNoTracking().FirstOrDefault(x => x.Id == payment.BenificayId);
+                    var query = _Context.Beneficiaries.FirstOrDefault(x => x.Id == payment.BenificayId);
                     if (query != null)
                     {
                         query.CurrentPaymentMonth = payment.Month;
                         query.LastPaymentAmount = payment.Amount;
-                        _Context.Beneficiaries.Update(query);
                         
                     }
 
