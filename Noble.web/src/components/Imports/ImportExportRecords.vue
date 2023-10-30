@@ -266,11 +266,12 @@ export default {
                                 sync_erp: data[4],
                                 created_date: data[5],
                                 edited_date: data[6],
-                                created_by_id: data[7],
-                                edited_by_id: data[8],
-                                Transection_Type: data[9],
-                                Amount: data[9],
-                                cheque_number: data[10]
+                                amount: data[7],
+                                created_by_id: '',
+                                edited_by_id: data[9],
+                                check_No: data[10],
+                                transection_Type: data[11],
+                              
 
                             })
 
@@ -382,9 +383,12 @@ export default {
                     name: "Sheet1",
                     data: [this.collection]
                 });
+
+                
+
             } else if (this.formName == 'funds') {
-                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date", "edited_date", "Amount", "Month", "Year", "Period", "beneficiary_id",
-                    "iqama_no", "authorized_person_id"
+                this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date", "edited_date", "Amount", "created_by_id", "edited_by_id",
+                    "cheque_number", "Transection_Type"
                 ];
                 this.sheets = [];
                 this.sheets.push({
