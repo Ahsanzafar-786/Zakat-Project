@@ -40,7 +40,7 @@
                 <div class="col-5">
                     <label class="col-form-label">{{ $t('Import.SelectImportType') }}: </label>
 
-                    <multiselect v-model="formName" v-on:input="ImportType" :options="['Authorized','Beneficries','Payment','funds','Payments_Beneficries']" :show-labels="false" :placeholder="$t('Import.SelectType')">
+                    <multiselect v-model="formName" v-on:input="ImportType" :options="['Authorized','Beneficries','Payment','funds','BeneficaryNote']" :show-labels="false" :placeholder="$t('Import.SelectType')">
                     </multiselect>
 
                 </div>
@@ -231,7 +231,7 @@ export default {
                         })
                         root.totalImportRecord = allRows.length;
                         root.isUploadDisabled = false;
-                    } else if ((root.formName == 'Payments_Beneficries')) {
+                    } else if ((root.formName == 'BeneficaryNote')) {
                         allRows.splice(0, 1)
                         allRows.forEach(function (data) {
 
@@ -282,6 +282,8 @@ export default {
                     else if ((root.formName == 'Payment')) {
 
                        
+
+
 
                         allRows.splice(0, 1)
                         allRows.forEach(function (data) {
@@ -362,7 +364,7 @@ export default {
                     name: "payment_beneficiary",
                     data: [this.collection]
                 });
-            } else if (this.formName == 'Payments_Beneficries') {
+            } else if (this.formName == 'BeneficaryNote') {
                 this.collection = ["id", "org_id", "isactive", "stamp_date", "sync_erp", "created_date", "edited_date", "note", "beneficiary_id", "Created_By", "Edit_By",
                     "iqama_no", "authorized_person_id"
                 ];
@@ -413,7 +415,7 @@ export default {
             } else if (root.formName == 'Authorized') {
                 rows = this.selectedFileData;
                 url = '/Benificary/UploadFilesForImportAuthorize'
-            } else if (root.formName == 'Payments_Beneficries') {
+            } else if (root.formName == 'BeneficaryNote') {
                 rows = this.selectedFileData;
                 url = '/Benificary/Payments_Beneficries'
             } else if (root.formName == 'funds') {
@@ -447,7 +449,7 @@ export default {
 
                                     root.errorCollection.push(errorData)
                                 })
-                            } else if (root.formName == 'Payments_Beneficries') {
+                            } else if (root.formName == 'BeneficaryNote') {
                                 response.data.forEach(function (x) {
                                     var errorData = {
                                         AuthorizedPersonCode: x.AuthorizedPersonCode,
