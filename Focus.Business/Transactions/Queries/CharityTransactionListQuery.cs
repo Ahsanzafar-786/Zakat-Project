@@ -55,7 +55,8 @@ namespace Focus.Business.Transactions.Queries
 
                     if (request.Month.HasValue)
                     {
-                        query = query.Where(x => x.CharityTransactionDate.Value.Month == request.Month.Value.Month);
+                        query = query.Where(x => x.CharityTransactionDate.Value.Month == request.Month.Value.Month &&
+                      x.CharityTransactionDate.Value.Year == request.Month.Value.Year);
                     }
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
