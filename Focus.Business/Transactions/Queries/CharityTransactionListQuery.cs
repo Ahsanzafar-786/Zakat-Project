@@ -70,6 +70,7 @@ namespace Focus.Business.Transactions.Queries
                     {
                         Id = x.Id,
                         DoucmentId = x.DoucmentId,
+                        benificaryName = x.Beneficiaries.Name,
                         DoucmentCode = x.DoucmentCode,
                         Amount = x.Amount,
                         CharityTransactionDate = x.CharityTransactionDate,
@@ -79,15 +80,7 @@ namespace Focus.Business.Transactions.Queries
                         Year = x.Year,
                     }).ToList();
 
-                    //var benific = await Context.Beneficiaries
-                    //    .Where(b => charity.Select(c => c.BenificayId).Contains(b.Id))
-                    //    .ToListAsync();
-
-                    //foreach (var transaction in charity)
-                    //{
-                    //    var benificiary = benific.FirstOrDefault(b => b.Id == transaction.BenificayId);
-                    //    transaction.benificaryName = (string.IsNullOrEmpty(benificiary?.Name) ? benificiary?.NameAr : benificiary?.Name);
-                    //}
+                  
 
                     return charity;
                 }
