@@ -81,15 +81,6 @@ namespace Focus.Business.Reports.Payments.Queries
                     {
 
 
-
-
-
-
-
-
-
-
-
                         Id = x.Id,
                         PaymentId = x.Code.ToString(),
                         Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
