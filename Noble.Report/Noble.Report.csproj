@@ -193,6 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SummaryReportLookupModel.cs" />
+    <Compile Include="Models\ExpenseLookupModel.cs" />
+    <Compile Include="Models\ExpenseReportModel.cs" />
     <Compile Include="Models\BenificariesLookupModel.cs" />
     <Compile Include="Models\BenificaryAuthorizationLookupModel.cs" />
     <Compile Include="Models\CharityTransactionLookupModel.cs" />
@@ -206,6 +209,8 @@
     <Compile Include="Models\PaymentLookupModel.cs" />
     <Compile Include="Models\ModuleWiseClaimsLookupModel.cs" />
     <Compile Include="Models\PrintSetting.cs" />
+    <Compile Include="NobleDefaultServices\GetExpensAtomic.cs" />
+    <Compile Include="NobleDefaultServices\GetExpense.cs" />
     <Compile Include="NobleDefaultServices\GetFunds.cs" />
     <Compile Include="NobleDefaultServices\GetBenificary.cs" />
     <Compile Include="NobleDefaultServices\GetBenificaryReport.cs" />
@@ -251,6 +256,18 @@
     </Compile>
     <Compile Include="Reports\Invoice\charityfundsreports.Designer.cs">
       <DependentUpon>charityfundsreports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Invoice\ExpenseReportTemp1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\ExpenseReportTemp1.Designer.cs">
+      <DependentUpon>ExpenseReportTemp1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Invoice\ExpenseReportTemp2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Invoice\ExpenseReportTemp2.Designer.cs">
+      <DependentUpon>ExpenseReportTemp2.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Invoice\Funds.cs">
       <SubType>Component</SubType>
@@ -308,6 +325,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\charityfundsreports.resx">
       <DependentUpon>charityfundsreports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Invoice\ExpenseReportTemp1.resx">
+      <DependentUpon>ExpenseReportTemp1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Invoice\ExpenseReportTemp2.resx">
+      <DependentUpon>ExpenseReportTemp2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Invoice\Funds.resx">
       <DependentUpon>Funds.cs</DependentUpon>
