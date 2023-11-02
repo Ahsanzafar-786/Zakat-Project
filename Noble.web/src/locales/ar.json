@@ -566,11 +566,11 @@
     "PERIOD":"فترة",
     "PAYMENTINTERVALINMONTHS":"فترة السداد في أشهر",
     "DEBIT":" مدين",
-    "PAYMENTTYPE":" النوع الدقة",
+    "PAYMENTTYPE":"نوع المدفوعات",
     "OPENINGBALANCE":"الرصيد",  
     "TOTAL":"أجمالي الرصيد",
-    "TRANSACTIONTOTAL":"إجمالي الصفقة",
-    "CLOSINGBALANCE":"الرصيد الختامي",
+    "TRANSACTIONTOTAL":"مجمع المدفوعات",
+    "CLOSINGBALANCE":"الرصيد",
     "CREDIT":"دين "
     
   },
