@@ -62,8 +62,8 @@ namespace Focus.Business.Reports.Payments.Queries
                         PaymentDate = Convert.ToDateTime(x.CharityTransactionDate).ToString("dd/MM/yy"),
                         PaymentMonth = Convert.ToDateTime(x.Month).ToString("MMMM"),
                         CashierName = cashiers.FirstOrDefault(c => c.Id == x.UserId)?.UserName ?? "",
-                        Description= fundsList.FirstOrDefault(j=> j.Id == x.DoucmentId).Description,
-                        Transactiontype= fundsList.FirstOrDefault(j=> j.Id == x.DoucmentId).TypeOfTransaction,
+                        Description= fundsList.FirstOrDefault(j=> j.Id == x.DoucmentId)?.Description,
+                        Transactiontype= fundsList.FirstOrDefault(j=> j.Id == x.DoucmentId)?.TypeOfTransaction,
                     }).ToList();
 
 
@@ -97,8 +97,8 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        charitylist = charitylist.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
-                        fundslist = fundslist.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
+                        charitylist = charitylist.Where(x => x.Date != null && x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
+                        fundslist = fundslist.Where(x => x.Date != null && x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
 
                     }
 

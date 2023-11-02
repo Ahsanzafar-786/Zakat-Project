@@ -790,9 +790,10 @@ namespace Noble.Api.Controllers
         [HttpPost("PaymentsBeneficry")]
         public async Task<IActionResult> PaymentsBeneficry([FromBody] List<AuthorizeVm> rows)
        {
-            var Beneficiaries = _Context.Beneficiaries.ToList();
             try
             {
+                var Beneficiaries = _Context.Beneficiaries.ToList();
+
 
                 var list = new List<Payment>();
 
