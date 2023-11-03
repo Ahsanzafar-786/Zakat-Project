@@ -100,6 +100,7 @@ namespace Focus.Business.Reports.Payments.Queries
                     }).ToList();
 
 
+                    
                     return new PaymentWiseOpeningClosingModel
                     {
                         OpeningBalance= openingBalance,

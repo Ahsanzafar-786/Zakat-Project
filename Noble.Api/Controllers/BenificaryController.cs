@@ -833,10 +833,25 @@ namespace Noble.Api.Controllers
                         Date = Convert.ToDateTime(request.Stamp_date),
                         Period = request.Period,
                         TotalAmount= Convert.ToDecimal(request.Amount)
+                        
 
                     };
 
                     _Context.Payments.Add(payment);
+
+                    var selectedMonth = new List<SelectedMonth>();
+
+                    selectedMonth.Add(new SelectedMonth
+                    {
+                        PaymentId = payment.Id,
+                        SelectMonth = payment.Month,
+                        Amount = payment.Amount
+
+
+                    });
+
+
+                    await _Context.SelectedMonths.AddRangeAsync(selectedMonth);
 
                     var charityTransaction = new CharityTransaction
                     {
