@@ -11,6 +11,7 @@ using Focus.Business.Reports.Payments.Models;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
 using Focus.Business.Reports.Payments.Models;
+using DocumentFormat.OpenXml.InkML;
 
 namespace Focus.Business.Reports.Payments.Queries
 {
@@ -50,6 +51,8 @@ namespace Focus.Business.Reports.Payments.Queries
                     var funds = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId == null && x.DocumentName == "Funds").SumAsync(x => x.Amount);
                     var charity = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId != null).SumAsync(x => x.Amount);
 
+
+                    
                     var openingBalance = funds - charity;
 
                     var List = Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes).Include(x => x.SelectedMonth)
