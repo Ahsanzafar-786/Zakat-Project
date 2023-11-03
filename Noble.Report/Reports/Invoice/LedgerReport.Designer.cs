@@ -454,7 +454,7 @@
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable1});
-            this.GroupHeader1.HeightF = 25F;
+            this.GroupHeader1.HeightF = 45.97098F;
             this.GroupHeader1.Name = "GroupHeader1";
             // 
             // xrTable1
@@ -468,7 +468,7 @@
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(790.9998F, 25F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(790.9998F, 45.97098F);
             this.xrTable1.StylePriority.UseBackColor = false;
             this.xrTable1.StylePriority.UseBorderColor = false;
             this.xrTable1.StylePriority.UseBorders = false;
@@ -498,42 +498,42 @@
             // 
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
-            this.xrTableCell2.Text = "Document Code";
+            this.xrTableCell2.Text = "رمز الوثيقة\r\nDocument Code";
             this.xrTableCell2.Weight = 1.1766193838396808D;
             // 
             // xrTableCell5
             // 
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
-            this.xrTableCell5.Text = "Charity Transaction Date";
+            this.xrTableCell5.Text = "تاريخ المعاملة الخيرية\r\nCharity Transaction Date";
             this.xrTableCell5.Weight = 1.5949282640150917D;
             // 
             // xrTableCell6
             // 
             this.xrTableCell6.Multiline = true;
             this.xrTableCell6.Name = "xrTableCell6";
-            this.xrTableCell6.Text = "Month";
+            this.xrTableCell6.Text = "شهر\r\nMonth";
             this.xrTableCell6.Weight = 1.0247884526114095D;
             // 
             // xrTableCell7
             // 
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
-            this.xrTableCell7.Text = "Year";
+            this.xrTableCell7.Text = "سنة\r\nYear";
             this.xrTableCell7.Weight = 0.72732486073798985D;
             // 
             // xrTableCell8
             // 
             this.xrTableCell8.Multiline = true;
             this.xrTableCell8.Name = "xrTableCell8";
-            this.xrTableCell8.Text = "BenificaryName";
+            this.xrTableCell8.Text = "اسم المستفيد\r\nBenificary Name";
             this.xrTableCell8.Weight = 1.136337878279077D;
             // 
             // xrTableCell3
             // 
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
-            this.xrTableCell3.Text = "Amount";
+            this.xrTableCell3.Text = "المنبع\r\nAmount";
             this.xrTableCell3.Weight = 0.86366212172092294D;
             // 
             // federationDataSource1

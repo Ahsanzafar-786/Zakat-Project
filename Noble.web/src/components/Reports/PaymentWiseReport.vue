@@ -143,14 +143,14 @@ export default {
             debugger;
 
             if (val) {
-                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&paymentType=' + this.paymentType +'&benificaryId=' + this.benificaryId + '&userId=' + this.userId + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=PaymentWiseReport' + "&Print=" + val
+                this.reportsrc1 = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId +'&Language='+this.$i18n.locale + '&paymentType=' + this.paymentType +'&benificaryId=' + this.benificaryId + '&userId=' + this.userId + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=PaymentWiseReport' + "&Print=" + val
                 this.changereportt++;
                 this.show = !this.show;
                 this.loading = false
 
             }
             else {
-                this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId + '&paymentType=' + this.paymentType +'&benificaryId=' + this.benificaryId + '&userId=' + this.userId + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=PaymentWiseReport' + "&Print=" + val
+                this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?companyId=' + companyId +'&Language='+this.$i18n.locale+ '&paymentType=' + this.paymentType +'&benificaryId=' + this.benificaryId + '&userId=' + this.userId + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&formName=PaymentWiseReport' + "&Print=" + val
                 this.changereport++;
             }
         }
