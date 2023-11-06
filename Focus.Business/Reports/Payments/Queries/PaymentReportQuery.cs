@@ -94,7 +94,7 @@ namespace Focus.Business.Reports.Payments.Queries
                         SelectedMonth = x.SelectedMonth.Select(y => y.SelectMonth).ToList(),
                         PaymentType = x.Beneficiaries.PaymentTypes?.Name,
                         Date = Convert.ToDateTime(x.Month),
-                        PaymentDate = Convert.ToDateTime(x.Month).ToString("dd/MM/yy"),
+                        PaymentDate = Convert.ToDateTime(x.Date).ToString("dd/MM/yy"),
                     }).ToList();
 
 
