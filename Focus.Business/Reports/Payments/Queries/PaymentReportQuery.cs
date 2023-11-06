@@ -52,7 +52,9 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     var openingBalance = funds - charity;
 
-                    var List = Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes).Include(x => x.SelectedMonth)
+                    var List = Context.Payments
+                        .Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
+                        .Include(x => x.SelectedMonth)
                            .ToList();
 
 
@@ -73,30 +75,17 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        List = List.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
+                        List = List.Where(x => x.Date != null && x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
 
                     }
 
                     var query= List.Select(x => new PaymentWiseListLookupModel()
                     {
-
-
-
-
-
-
-
-
-
-
-
                         Id = x.Id,
                         PaymentId = x.Code.ToString(),
                         Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
                         BeneficaryId = x.Beneficiaries != null ? x.Beneficiaries.BeneficiaryId.ToString() : "",
-                        BeneficaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
-                        CashierName = x.UserId != null ? _userManager.Users.FirstOrDefault(ur => ur.Id == x.UserId).UserName : "",
-                        UserId = x.UserId != null ? Guid.Parse(x.UserId) : Guid.Empty,
+                        BeneficaryName = x.Beneficiaries != null && string.IsNullOrEmpty(x.Beneficiaries.Name) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
                         Amount = x.TotalAmount,
                         Note = x.Note,
                         SelectedMonth = x.SelectedMonth.Select(y => y.SelectMonth).ToList(),
