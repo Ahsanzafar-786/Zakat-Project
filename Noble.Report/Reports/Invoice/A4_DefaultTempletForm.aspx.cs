@@ -386,6 +386,8 @@ namespace Noble.Report.Reports.Invoice
                             {
                                 ASPxWebDocumentViewer1.Visible = false;
                                 ASPxGridView1.Visible = true;
+                            if (Language == "en")
+                            {
                                 var dt = new DataTable();
                                 dt.Columns.Add("#");
                                 dt.Columns.Add("Id");
@@ -420,8 +422,45 @@ namespace Noble.Report.Reports.Invoice
                                 ASPxGridView1.DataSource = dt;
                                 ASPxGridView1.DataBind();
                             }
+                            else
+                            {
+                                var dt = new DataTable();
+                                dt.Columns.Add("#");
+                                dt.Columns.Add("بطاقة تعريف");
+                                dt.Columns.Add("اسم");
+                                dt.Columns.Add("يكتب");
+                                dt.Columns.Add("شخص التفويض");
+                                dt.Columns.Add("المبلغ لكل شهر");
+                                dt.Columns.Add("ريج/الامم المتحدة ريج");
+
+                                DataRow row;
+                                int i = 1;
+                                Charity.ForEach(x =>
+                                {
+                                    var authorizationPersonNames = x.BenificaryAuthorization
+                                        .Select(z => z.AuthorizationPersonName)
+                                        .Where(name => !string.IsNullOrEmpty(name));
+                                    x.PassportNo = string.Join(",", authorizationPersonNames);
+                                });
+
+                                foreach (var item in Charity)
+                                {
+                                    row = dt.NewRow();
+                                    row["#"] = i++;
+                                    row["بطاقة تعريف"] = item.BeneficiaryId;
+                                    row["اسم"] = item.Name;
+                                    row["يكتب"] = item.DurationType;
+                                    row["شخص التفويض"] = item.PassportNo;
+                                    row["المبلغ لكل شهر"] = item.AmountPerMonth.ToString("N2");
+                                    row["ريج/الامم المتحدة ريج"] = item.IsRegister == true ? "Register" : "Un-Register";
+                                    dt.Rows.Add(row);
+                                }
+                                ASPxGridView1.DataSource = dt;
+                                ASPxGridView1.DataBind();
+                            }
+                            }
                     }
-                   else if (formName == "benificary")
+                    else if (formName == "benificary")
                     {
                         var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"] == "null"|| Request.QueryString["AuthorizationPersonId"] == "00000000-0000-0000-0000-000000000000" ? "" : Request.QueryString["AuthorizationPersonId"];
                        
