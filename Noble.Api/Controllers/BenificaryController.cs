@@ -34,12 +34,6 @@ using Microsoft.EntityFrameworkCore;
 using Noble.Api.Models;
 using PaymentLookupModel = Focus.Business.Payments.Models.PaymentLookupModel;
 using Focus.Business.Reports.Payments.Queries;
-using Focus.Persistence.Migrations;
-using MailKit.Search;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.InkML;
-using NPOI.SS.Formula.Functions;
-using DocumentFormat.OpenXml.Wordprocessing;
 using Focus.Business.ExpenseCategories.Commands;
 using Focus.Business.ExpenseCategories.Model;
 using Focus.Business.ExpenseCategories.Queries;
@@ -792,10 +786,13 @@ namespace Noble.Api.Controllers
        {
             try
             {
-                var Beneficiaries = _Context.Beneficiaries.ToList();
+                var Beneficiaries = _Context.Beneficiaries.AsNoTracking()
+                    .Include(x=>x.PaymentTypes).ToList();
 
 
                 var list = new List<Payment>();
+                var selectedMonth = new List<SelectedMonth>();
+
 
                 foreach (var request in rows)
                 {
@@ -806,78 +803,107 @@ namespace Noble.Api.Controllers
 
                     }
 
-                    //list.Add(new Payment
-                    //{
-                    //    Code = Convert.ToInt32(request.Id),
-                    //    BenificayId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == beneficiary_id)?.Id,
-                    //    Month = Convert.ToDateTime(request.Month),
-                    //    MonthName = request.Month,
-                    //    Year = request.Year,
-                    //    HijriYear = request.Year,
-                    //    Amount = Convert.ToDecimal(request.Amount),
-                    //    Date = Convert.ToDateTime(request.Stamp_date),
-                    //    Period = request.Period,
 
+                    var beneficary = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == beneficiary_id);
 
-                    //});
-
-                    var payment = new Payment()
+                    if (beneficary != null)
                     {
-                        Code = Convert.ToInt32(request.Id),
-                        BenificayId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == beneficiary_id)?.Id,
-                        Month = Convert.ToDateTime(request.Stamp_date),
-                        MonthName = request.Month,
-                        Year = request.Year,
-                        HijriYear = request.Year,
-                        Amount = Convert.ToDecimal(request.Amount),
-                        Date = Convert.ToDateTime(request.Stamp_date),
-                        Period = request.Period,
-                        TotalAmount= Convert.ToDecimal(request.Amount)
+                        var payment = new Payment()
+                        {
+                            Code = Convert.ToInt32(request.Id),
+                            BenificayId = beneficary.Id,
+                            Month = Convert.ToDateTime(request.Stamp_date),
+                            MonthName = request.Month,
+                            Year = request.Year,
+                            HijriYear = request.Year,
+                            Amount = Convert.ToDecimal(request.Amount),
+                            Date = Convert.ToDateTime(request.Stamp_date),
+                            Period = request.Period,
+                            TotalAmount= Convert.ToDecimal(request.Amount)
                         
 
-                    };
+                        };
 
-                    _Context.Payments.Add(payment);
+                        _Context.Payments.Add(payment);
+                        if (beneficary.PaymentTypes != null)
+                        {
+                            if (beneficary.PaymentTypes.Code == 13 || beneficary.PaymentTypes.Code == 1 ||
+                                beneficary.PaymentTypes.Code == 0)
+                            {
+                                selectedMonth.Add(new SelectedMonth
+                                {
+                                    PaymentId = payment.Id,
+                                    SelectMonth = payment.Month,
+                                    Amount = payment.Amount
 
-                    var selectedMonth = new List<SelectedMonth>();
 
-                    selectedMonth.Add(new SelectedMonth
-                    {
-                        PaymentId = payment.Id,
-                        SelectMonth = payment.Month,
-                        Amount = payment.Amount
+                                });
+                                await _Context.SelectedMonths.AddRangeAsync(selectedMonth);
 
 
-                    });
+                            }
+                            else
+                            {
+                                int num = beneficary.PaymentTypes.Code - 1;
+                                DateTime date = payment.Month.Value.AddMonths(-num);
 
 
-                    await _Context.SelectedMonths.AddRangeAsync(selectedMonth);
 
-                    var charityTransaction = new CharityTransaction
-                    {
-                        DoucmentId = payment.Id,
-                        CharityTransactionDate = payment.Date,
-                        DoucmentDate = DateTime.Now,
-                        DoucmentCode = payment.Code.ToString(),
-                        BenificayId = payment.BenificayId,
-                        Month = payment.Date,
-                        Amount = payment.Amount,
-                        Year = payment.Year,
-                        HijriYear = payment.HijriYear,
-                    };
 
-                    _Context.CharityTransaction.Add(charityTransaction);
+                                for (int i = 1; i <= beneficary.PaymentTypes.Code; i++)
+                                {
+                                    selectedMonth.Add(new SelectedMonth
+                                    {
+                                        PaymentId = payment.Id,
+                                        SelectMonth = date,
+                                        Amount = payment.Amount
 
-                    var query = _Context.Beneficiaries.FirstOrDefault(x => x.Id == payment.BenificayId);
-                    if (query != null)
-                    {
-                        query.CurrentPaymentMonth = payment.Month;
-                        query.LastPaymentAmount = payment.Amount;
+
+                                    });
+
+
+                                    date = date.AddMonths(1);
+
+                                }
+                                await _Context.SelectedMonths.AddRangeAsync(selectedMonth);
+
+
+
+                            }
+
+
+                        }
+
+
+
+
+
+
+
+
+                        var charityTransaction = new CharityTransaction
+                        {
+                            DoucmentId = payment.Id,
+                            CharityTransactionDate = payment.Date,
+                            DoucmentDate = DateTime.Now,
+                            DoucmentCode = payment.Code.ToString(),
+                            BenificayId = payment.BenificayId,
+                            Month = payment.Date,
+                            Amount = payment.Amount,
+                            Year = payment.Year,
+                            HijriYear = payment.HijriYear,
+                        };
+
+                        _Context.CharityTransaction.Add(charityTransaction);
+
+                        var query = _Context.Beneficiaries.FirstOrDefault(x => x.Id == payment.BenificayId);
+                        if (query != null)
+                        {
+                            query.CurrentPaymentMonth = payment.Month;
+                            query.LastPaymentAmount = payment.Amount;
                         
+                        }
                     }
-
-
-
                 }
                 // await _Context.Payments.AddRangeAsync(list);
                 await _Context.SaveChangesAsync();

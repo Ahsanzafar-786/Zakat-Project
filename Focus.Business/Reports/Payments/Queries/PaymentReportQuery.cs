@@ -10,8 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Focus.Business.Reports.Payments.Models;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
-using Focus.Business.Reports.Payments.Models;
-using DocumentFormat.OpenXml.InkML;
 
 namespace Focus.Business.Reports.Payments.Queries
 {
@@ -55,7 +53,9 @@ namespace Focus.Business.Reports.Payments.Queries
                     
                     var openingBalance = funds - charity;
 
-                    var List = Context.Payments.Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes).Include(x => x.SelectedMonth)
+                    var List = Context.Payments
+                        .Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
+                        .Include(x => x.SelectedMonth)
                            .ToList();
 
 
@@ -76,7 +76,7 @@ namespace Focus.Business.Reports.Payments.Queries
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        List = List.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
+                        List = List.Where(x => x.Date != null && x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
 
                     }
 
