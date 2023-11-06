@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Focus.Business.Reports.Payments.Models;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
-using Focus.Business.Reports.Payments.Models;
 
 namespace Focus.Business.Reports.Payments.Queries
 {
