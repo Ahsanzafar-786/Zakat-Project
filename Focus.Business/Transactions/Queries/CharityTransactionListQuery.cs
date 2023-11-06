@@ -70,7 +70,8 @@ namespace Focus.Business.Transactions.Queries
                     {
                         Id = x.Id,
                         DoucmentId = x.DoucmentId,
-                        benificaryName = x.Beneficiaries.Name,
+                        benificaryName = x.Beneficiaries.NameAr==null || x.Beneficiaries.NameAr==""
+                        ?x.Beneficiaries.Name : x.Beneficiaries.NameAr,
                         DoucmentCode = x.DoucmentCode,
                         Amount = x.Amount,
                         CharityTransactionDate = x.CharityTransactionDate,

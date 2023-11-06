@@ -22,6 +22,7 @@ namespace Noble.Report.Reports.Invoice
     public partial class A4_DefaultTempletForm : System.Web.UI.Page
     {
         public bool flag = false;
+        public bool languageFlag=false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,6 +38,7 @@ namespace Noble.Report.Reports.Invoice
                     var companyInfo = GetCompanyInfo.GetCompanyInfodetials(CompanyId, token, serverAddress);
                     var formName = Request.QueryString["formName"];
                     var pageNumber = Request.QueryString["pageNumber"];
+                    var Language = Request.QueryString["Language"] == "null" ? "" : Request.QueryString["Language"];
                     var id = Request.QueryString["id"] == "00000000-0000-0000-0000-000000000000" || Request.QueryString["id"] == null?"": Request.QueryString["id"];
                     var searchTerm = Request.QueryString["searchTerm"];
                     string isDownload = Request.QueryString["isDownload"] == null || Request.QueryString["isDownload"] == "undefined" ? null : Request.QueryString["isDownload"];
@@ -93,6 +95,7 @@ namespace Noble.Report.Reports.Invoice
                         {
                             ASPxWebDocumentViewer1.Visible = false;
                             ASPxGridView1.Visible = true;
+                            if (Language == "en") { 
                             var dt = new DataTable();
                             dt.Columns.Add("#");
                             dt.Columns.Add("DocumentCode");
@@ -127,7 +130,44 @@ namespace Noble.Report.Reports.Invoice
                             Amount.SummaryType = SummaryItemType.Sum;
                             Amount.ShowInColumn = "Amount";
                             ASPxGridView1.TotalSummary.Add(Amount);
+                        }
+                            else
+                            {
+                                var dt = new DataTable();
+                                dt.Columns.Add("#");
+                                dt.Columns.Add("رمز الوثيقة");
+                                dt.Columns.Add("تاريخ الوثيقة");
+                                dt.Columns.Add("تاريخ المعاملة الخيرية");
+                                dt.Columns.Add("شهر");
+                                dt.Columns.Add("سنة");
+                                dt.Columns.Add("اسم المستفيد");
+                                dt.Columns.Add("المنبع");
 
+                                DataRow row;
+                                int i = 1;
+                                foreach (var item in Charity)
+                                {
+                                    row = dt.NewRow();
+                                    row["#"] = i++;
+                                    row["رمز الوثيقة"] = item.DoucmentCode;
+                                    row["تاريخ الوثيقة"] = item.DoucmentDate;
+                                    row["تاريخ المعاملة الخيرية"] = item.CharityTransactionDate;
+                                    row["شهر"] = Convert.ToDateTime(item.Month).ToString("MMMM");
+                                    row["سنة"] = item.Year;
+                                    row["اسم المستفيد"] = item.benificaryName;
+                                    row["المنبع"] = item.Amount.ToString("N2");
+                                    dt.Rows.Add(row);
+                                }
+                                ASPxGridView1.DataSource = dt;
+                                ASPxGridView1.DataBind();
+                                ASPxGridView1.TotalSummary.Clear();
+                                ASPxSummaryItem Amount = new ASPxSummaryItem();
+                                Amount.FieldName = "Amount";
+                                Amount.DisplayFormat = "{0:#,0.00}";
+                                Amount.SummaryType = SummaryItemType.Sum;
+                                Amount.ShowInColumn = "Amount";
+                                ASPxGridView1.TotalSummary.Add(Amount);
+                            }
 
                         }
 
@@ -145,9 +185,9 @@ namespace Noble.Report.Reports.Invoice
                         {
                             ASPxWebDocumentViewer1.Visible = true;
                             ASPxGridView1.Visible = false;
-                            XtraReport report = new Noble.Report.Reports.Invoice.PaymentWiseReport(companyInfo,PaymantWiseTransection);
+                            XtraReport report = new Noble.Report.Reports.Invoice.PaymentWiseReport(companyInfo, PaymantWiseTransection);
                             ASPxWebDocumentViewer1.OpenReport(report);
-                                
+
                         }
                         else
                         {
@@ -174,68 +214,121 @@ namespace Noble.Report.Reports.Invoice
 
                             ASPxWebDocumentViewer1.Visible = false;
                             ASPxGridView1.Visible = true;
-
-                            var dt = new DataTable();
-                            dt.Columns.Add("#");
-                            dt.Columns.Add("PaymentId");
-                            dt.Columns.Add("BeneficaryId");
-                            dt.Columns.Add("BeneficaryName");
-                            dt.Columns.Add("CashierName");
-                            dt.Columns.Add("PaymentType");
-                            dt.Columns.Add("PaymentDate");
-                            dt.Columns.Add("Amount");
-
-                            DataRow row;
-                            int i = 1;
-                            row = dt.NewRow();
-                            row["#"] = "";
-                            row["PaymentId"] = "Opening Balance";
-                            row["BeneficaryId"] = " - ";
-                            row["BeneficaryName"] = " - ";
-                            row["CashierName"] = " - ";
-                            row["PaymentType"] = " - ";
-                            row["PaymentDate"] = PaymantWiseTransection.OpeningBalance.ToString("N2");
-                            row["Amount"] ="" ;
-                            dt.Rows.Add(row);
-                            foreach (var item in PaymantWiseTransection.PaymentList)
+                            if (Language == "en")
                             {
+                                languageFlag = true;
+                                var dt = new DataTable();
+                                dt.Columns.Add("#");
+                                dt.Columns.Add("PaymentId");
+                                dt.Columns.Add("BeneficaryId");
+                                dt.Columns.Add("BeneficaryName");
+                                dt.Columns.Add("PaymentType");
+                                dt.Columns.Add("paymentPeriod");
+                                dt.Columns.Add("PaymentDate");
+                                dt.Columns.Add("Amount");
+
+                                DataRow row;
+                                int i = 1;
                                 row = dt.NewRow();
-                                row["#"] = i++;
-                                row["PaymentId"] = item.PaymentId;
-                                row["BeneficaryId"] = item.BeneficaryId;
-                                row["BeneficaryName"] = item.BeneficaryName;
-                                row["CashierName"] = item.CashierName;
-                                row["PaymentType"] = item.PaymentType;
-                                var selectedDate = "";
-                                int j= 0;
+                                row["#"] = "";
+                                row["PaymentId"] = "Opening Balance";
+                                row["BeneficaryId"] = " - ";
+                                row["BeneficaryName"] = " - ";
+                                row["PaymentType"] = " - ";
+                                row["paymentPeriod"] = " - ";
+                                row["PaymentDate"] = PaymantWiseTransection.OpeningBalance.ToString("N2");
+                                row["Amount"] = "";
+                                dt.Rows.Add(row);
+                                foreach (var item in PaymantWiseTransection.PaymentList)
+                                {
+                                    row = dt.NewRow();
+                                    row["#"] = i++;
+                                    row["PaymentId"] = item.PaymentId;
+                                    row["BeneficaryId"] = item.BeneficaryId;
+                                    row["BeneficaryName"] = item.BeneficaryName;
+                                    
+                                    row["PaymentType"] = item.PaymentType;
+                                    var selectedDate = "";
+                                    int j = 0;
                                     foreach (var item1 in item.SelectedMonth)
                                     {
-                                    
-                                        selectedDate +=  Convert.ToDateTime(item.SelectedMonth[j++]).ToString("MMMM yyyy")+"  ,";
+
+                                        selectedDate += Convert.ToDateTime(item.SelectedMonth[j++]).ToString("MMMM yyyy") + "  ,";
                                     }
-                                
-                                row["PaymentDate"] = selectedDate;
-                                row["Amount"] = item.Amount.ToString("N2");
-                                dt.Rows.Add(row);
+
+                                    row["paymentPeriod"] = selectedDate;
+                                    row["PaymentDate"] = item.PaymentMonth;
+                                    row["Amount"] = item.Amount.ToString("N2");
+                                    dt.Rows.Add(row);
+                                }
+
+                                ASPxGridView1.DataSource = dt;
+                                ASPxGridView1.DataBind();
+                                ASPxGridView1.TotalSummary.Clear();
+                                ASPxSummaryItem Amount = new ASPxSummaryItem();
+                                Amount.FieldName = "Amount";
+                                Amount.DisplayFormat = "{0:#,0.00}";
+                                Amount.SummaryType = SummaryItemType.Sum;
+                                Amount.ShowInColumn = "Amount";
+                                ASPxGridView1.TotalSummary.Add(Amount);
+                                ASPxGridView1.TotalSummary.Clear();
+                                ASPxSummaryItem PaymentId = new ASPxSummaryItem();
+                                Amount.FieldName = "PaymentId";
+                                Amount.DisplayFormat = "Total";
+                                Amount.ShowInColumn = "PaymentId";
+                                ASPxGridView1.TotalSummary.Add(PaymentId);
                             }
+                            else
+                            {
 
-                            ASPxGridView1.DataSource = dt;
-                            ASPxGridView1.DataBind();
-                            ASPxGridView1.TotalSummary.Clear();
-                            ASPxSummaryItem Amount = new ASPxSummaryItem();
-                            Amount.FieldName = "Amount";
-                            Amount.DisplayFormat = "{0:#,0.00}";
-                            Amount.SummaryType = SummaryItemType.Sum;
-                            Amount.ShowInColumn = "Amount";
-                            ASPxGridView1.TotalSummary.Add(Amount);
-                            ASPxGridView1.TotalSummary.Clear();
-                            ASPxSummaryItem PaymentId = new ASPxSummaryItem();
-                            Amount.FieldName = "PaymentId";
-                            Amount.DisplayFormat = "Total";
-                            Amount.ShowInColumn = "PaymentId";
-                            ASPxGridView1.TotalSummary.Add(PaymentId);
+                                var dt = new DataTable();
+                                dt.Columns.Add("#");
+                                dt.Columns.Add("رقم تعريف الدفع");
+                                dt.Columns.Add("رقم المستفيد");
+                                dt.Columns.Add("اسم المستفيد");
+                                dt.Columns.Add("مدةالفترة");
+                                dt.Columns.Add("نوع المساعدة");
+                                dt.Columns.Add("تاريخ الدفع");
+                                dt.Columns.Add("المبلع");
 
+                                DataRow row;
+                                int i = 1;
+                                row = dt.NewRow();
+                                row["#"] = "";
+                                row["رقم تعريف الدفع"] = "Opening Balance";
+                                row["رقم المستفيد"] = " - ";
+                                row["اسم المستفيد"] = " - ";
+                                row["مدةالفترة"] = " - ";
+                                row["نوع المساعدة"] = " - ";
+                                
+                                row["تاريخ الدفع"] = PaymantWiseTransection.OpeningBalance.ToString("N2");
+                                row["المبلع"] = "";
+                                dt.Rows.Add(row);
+                                foreach (var item in PaymantWiseTransection.PaymentList)
+                                {
+                                    row = dt.NewRow();
+                                    row["#"] = i++;
+                                    row["رقم تعريف الدفع"] = item.PaymentId;
+                                    row["رقم المستفيد"] = item.BeneficaryId;
+                                    row["اسم المستفيد"] = item.BeneficaryName;
+                                    row["مدةالفترة"] = item.PaymentType;
+                                    var selectedDate = "";
+                                    int j = 0;
+                                    foreach (var item1 in item.SelectedMonth)
+                                    {
 
+                                        selectedDate += Convert.ToDateTime(item.SelectedMonth[j++]).ToString("MMMM yyyy") + "  ,";
+                                    }
+                                    row["نوع المساعدة"] = selectedDate;
+                                    row["تاريخ الدفع"] = item.PaymentMonth;
+                                    row["المبلع"] = item.Amount.ToString("N2");
+                                    dt.Rows.Add(row);
+                                }
+
+                                ASPxGridView1.DataSource = dt;
+                                ASPxGridView1.DataBind();
+                            }
+                            
                         }
 
                     }
@@ -293,6 +386,8 @@ namespace Noble.Report.Reports.Invoice
                             {
                                 ASPxWebDocumentViewer1.Visible = false;
                                 ASPxGridView1.Visible = true;
+                            if (Language == "en")
+                            {
                                 var dt = new DataTable();
                                 dt.Columns.Add("#");
                                 dt.Columns.Add("Id");
@@ -327,11 +422,48 @@ namespace Noble.Report.Reports.Invoice
                                 ASPxGridView1.DataSource = dt;
                                 ASPxGridView1.DataBind();
                             }
+                            else
+                            {
+                                var dt = new DataTable();
+                                dt.Columns.Add("#");
+                                dt.Columns.Add("بطاقة تعريف");
+                                dt.Columns.Add("اسم");
+                                dt.Columns.Add("يكتب");
+                                dt.Columns.Add("شخص التفويض");
+                                dt.Columns.Add("المبلغ لكل شهر");
+                                dt.Columns.Add("ريج/الامم المتحدة ريج");
+
+                                DataRow row;
+                                int i = 1;
+                                Charity.ForEach(x =>
+                                {
+                                    var authorizationPersonNames = x.BenificaryAuthorization
+                                        .Select(z => z.AuthorizationPersonName)
+                                        .Where(name => !string.IsNullOrEmpty(name));
+                                    x.PassportNo = string.Join(",", authorizationPersonNames);
+                                });
+
+                                foreach (var item in Charity)
+                                {
+                                    row = dt.NewRow();
+                                    row["#"] = i++;
+                                    row["بطاقة تعريف"] = item.BeneficiaryId;
+                                    row["اسم"] = item.Name;
+                                    row["يكتب"] = item.DurationType;
+                                    row["شخص التفويض"] = item.PassportNo;
+                                    row["المبلغ لكل شهر"] = item.AmountPerMonth.ToString("N2");
+                                    row["ريج/الامم المتحدة ريج"] = item.IsRegister == true ? "Register" : "Un-Register";
+                                    dt.Rows.Add(row);
+                                }
+                                ASPxGridView1.DataSource = dt;
+                                ASPxGridView1.DataBind();
+                            }
+                            }
                     }
-                   else if (formName == "benificary")
+                    else if (formName == "benificary")
                     {
                         var AuthorizationPersonId = Request.QueryString["AuthorizationPersonId"] == "null"|| Request.QueryString["AuthorizationPersonId"] == "00000000-0000-0000-0000-000000000000" ? "" : Request.QueryString["AuthorizationPersonId"];
-                        var Language = Request.QueryString["Language"] == "null" ? "" : Request.QueryString["Language"];
+                       
                         var Charity = GetBenificary.GetBenificaryDtl(AuthorizationPersonId, token, serverAddress);
                         if (Convert.ToBoolean(isDownload))
                         {
@@ -410,7 +542,7 @@ namespace Noble.Report.Reports.Invoice
         }
         protected void ASPxGridView1_HtmlRowPrepared(object sender, ASPxGridViewTableRowEventArgs e)
         {
-            if (flag)
+            if (flag && languageFlag)
             {
                 if (e.RowType == GridViewRowType.Data)
                 {
