@@ -918,23 +918,23 @@ debugger;
             debugger;
 
             var root = this;
-            this.addPayment.openingBalance = this.brand.openingBalance;
+            // this.addPayment.openingBalance = this.brand.openingBalance;
        
        
 
-            if (this.addPayment.amount > this.addPayment.openingBalance) {
-                this.$swal({
-                    title: 'Error',
-                    text: root.$i18n.locale == 'en' ? 'Insufficient funds' : 'رصيد غير كاف',
-                    type: 'error',
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                })
-                .finally(() => root.loading = false);
-                return ;
-            }
+            // if (this.addPayment.amount > this.addPayment.openingBalance) {
+            //     this.$swal({
+            //         title: 'Error',
+            //         text: root.$i18n.locale == 'en' ? 'Insufficient funds' : 'رصيد غير كاف',
+            //         type: 'error',
+            //         icon: 'error',
+            //         showConfirmButton: false,
+            //         timer: 3000,
+            //         timerProgressBar: true,
+            //     })
+            //     .finally(() => root.loading = false);
+            //     return ;
+            // }
             this.loading = true;
             var token = '';
             var userId = localStorage.getItem('UserId');
