@@ -101,27 +101,27 @@ namespace Focus.Business.Benificary.Commands
                         {
 
 
-                            var charity = await Context.CharityTransaction.Select(x => new CharityTransactionLookupModel()
-                            {
+                            //var charity = await Context.CharityTransaction.Select(x => new CharityTransactionLookupModel()
+                            //{
 
-                                BenificayId = x.BenificayId,
-                                Amount = x.Amount,
+                            //    BenificayId = x.BenificayId,
+                            //    Amount = x.Amount,
 
-                            }).ToListAsync();
-                            var openingBalance = charity.Where(x => x.BenificayId == null).Sum(x => x.Amount) - charity.Where(x => x.BenificayId != null).Sum(x => x.Amount);
+                            //}).ToListAsync();
+                            //var openingBalance = charity.Where(x => x.BenificayId == null).Sum(x => x.Amount) - charity.Where(x => x.BenificayId != null).Sum(x => x.Amount);
 
-                            if (openingBalance < request.benificiaries.AmountPerMonth)
-                            {
-                                return new Message
-                                {
-                                    Id = Guid.Empty,
-                                    IsSuccess = false,
-                                    IsAddUpdate = "Insufficient funds"
-                                };
+                            //if (openingBalance < request.benificiaries.AmountPerMonth)
+                            //{
+                            //    return new Message
+                            //    {
+                            //        Id = Guid.Empty,
+                            //        IsSuccess = false,
+                            //        IsAddUpdate = "Insufficient funds"
+                            //    };
 
-                            }
+                            //}
 
-                            else
+                            //else
                             {
                                 var benifiary = new Beneficiaries
                                 {
