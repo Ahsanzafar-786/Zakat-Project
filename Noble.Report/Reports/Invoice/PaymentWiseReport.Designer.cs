@@ -287,7 +287,7 @@
             this.xrLabel2.SizeF = new System.Drawing.SizeF(156.3726F, 35.9706F);
             this.xrLabel2.StylePriority.UseFont = false;
             this.xrLabel2.StylePriority.UseForeColor = false;
-            this.xrLabel2.Text = "تقرير الدفع الحكيم";
+            this.xrLabel2.Text = "تقرير المدفوعات";
             // 
             // xrLabel1
             // 
