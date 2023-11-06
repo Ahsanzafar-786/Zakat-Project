@@ -19,13 +19,14 @@ namespace Noble.Report.Reports.Invoice
             CompanyInfo.DataSource = companyDtl;
 
 
-            var selectedDate = "";
+          
             foreach (var item in paymentDtl.PaymentList)
             {
                 int i = 0;
+                var selectedDate = "";
                 foreach (var item1 in item.SelectedMonth)
                 {
-                   selectedDate += Convert.ToDateTime(item.SelectedMonth[i++]).ToString("MMMM yyyy") + "  ,"; 
+                   selectedDate += Convert.ToDateTime(item.SelectedMonth[i++]).ToString("MMM yyyy") + "  "; 
                 }
                 item.PaymentMonth = selectedDate;
             }

@@ -88,13 +88,13 @@ namespace Focus.Business.Reports.Payments.Queries
                         PaymentId = x.Code.ToString(),
                         Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
                         BeneficaryId = x.Beneficiaries != null ? x.Beneficiaries.BeneficiaryId.ToString() : "",
-                        BeneficaryName = x.Beneficiaries != null && string.IsNullOrEmpty(x.Beneficiaries.Name) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
+                        BeneficaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
                         Amount = x.TotalAmount,
                         Note = x.Note,
                         SelectedMonth = x.SelectedMonth.Select(y => y.SelectMonth).ToList(),
-                        PaymentType = x.Beneficiaries.PaymentTypes.Name,
+                        PaymentType = x.Beneficiaries.PaymentTypes?.Name,
                         Date = Convert.ToDateTime(x.Month),
-                        PaymentDate = Convert.ToDateTime(x.Month).ToString("dd/MM/yy"),
+                        PaymentDate = Convert.ToDateTime(x.Date).ToString("dd/MM/yy"),
                     }).ToList();
 
 

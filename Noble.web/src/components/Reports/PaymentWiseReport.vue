@@ -32,14 +32,13 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-3 form-group">
-                        
                         <multiselect v-model="paymentType"
-                        :options="['Daily Payment', 'One Time']" :show-labels="false"
+                        :options="['Daily Payment']" :show-labels="false"
                         :placeholder="$t('AddBenificary.PaymentType')">
                     </multiselect>
                 </div>
                         <div class="col-sm-3">
-                            <userdropdown v-model="userId" />
+                            <userdropdown v-model="userId"  :key="render" :show-labels="false" />
                         </div>
                         <div class="col-sm-2">
                             <datepicker v-model="fromDate" :isDisabled="month == '' ? false : true" :key="render" />
@@ -159,7 +158,7 @@ export default {
     },
 
     created: function () {
-        this.fromDate = moment().subtract(1, 'months').format("DD MMM YYYY");
+        this.fromDate = new Date().toLocaleDateString();
         this.toDate = moment().format("DD MMM YYYY");
       
     },
@@ -167,7 +166,7 @@ export default {
         this.english = localStorage.getItem('locals');
         this.arabic = localStorage.getItem('locals');
 
-        this.fromDate = moment().subtract(1, 'months').format("DD MMM YYYY");
+        this.fromDate = new Date().toLocaleDateString();
         this.toDate = moment().format("DD MMM YYYY");
     }
 }
