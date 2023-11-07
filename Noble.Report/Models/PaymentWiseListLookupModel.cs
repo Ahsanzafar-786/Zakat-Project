@@ -15,7 +15,7 @@ namespace Noble.Report.Models
         public string BeneficaryName { get; set; }
         public string CashierName { get; set; }
         public string PaymentType { get; set; }
-        public string PaymentDate { get; set; }
+        public DateTime? PaymentDate { get; set; }
         public DateTime? Date { get; set; }
         public string Note { get; set; }
         public decimal Amount { get; set; }

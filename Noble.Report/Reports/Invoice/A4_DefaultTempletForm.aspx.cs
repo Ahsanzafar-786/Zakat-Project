@@ -113,8 +113,8 @@ namespace Noble.Report.Reports.Invoice
                                 row = dt.NewRow();
                                 row["#"] = i++;
                                 row["DocumentCode"] = item.DoucmentCode;
-                                row["DocumentDate"] = item.DoucmentDate;
-                                row["CharityTransactionDate"] = item.CharityTransactionDate;
+                                row["DocumentDate"] = Convert.ToDateTime(item.DoucmentDate).ToString("dd MMM yyyy");
+                                row["CharityTransactionDate"] = Convert.ToDateTime(item.CharityTransactionDate).ToString("dd MMM yyyy");
                                 row["Month"] = Convert.ToDateTime(item.Month).ToString("MMMM");
                                 row["Year"] = item.Year;
                                 row["BenificaryName"] = item.benificaryName;
@@ -253,11 +253,11 @@ namespace Noble.Report.Reports.Invoice
                                     foreach (var item1 in item.SelectedMonth)
                                     {
 
-                                        selectedDate += Convert.ToDateTime(item.SelectedMonth[j++]).ToString("MMMM yyyy") + "  ";
+                                        selectedDate += Convert.ToDateTime(item.SelectedMonth[j++]).ToString("MMM yyyy") + "  ";
                                     }
 
                                     row["paymentPeriod"] = selectedDate;
-                                    row["PaymentDate"] = item.PaymentMonth;
+                                    row["PaymentDate"] = Convert.ToDateTime(item.PaymentDate).ToString("MMM yyyy");
                                     row["Amount"] = item.Amount.ToString("N2");
                                     dt.Rows.Add(row);
                                 }

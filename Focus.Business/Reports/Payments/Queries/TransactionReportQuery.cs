@@ -59,7 +59,7 @@ namespace Focus.Business.Reports.Payments.Queries
                         Id = x.Id,
                         Amount = x.Amount,
                         Date = Convert.ToDateTime(x.CharityTransactionDate),
-                        PaymentDate = Convert.ToDateTime(x.CharityTransactionDate).ToString("dd/MM/yy"),
+                        PaymentDate = x.CharityTransactionDate,
                         PaymentMonth = Convert.ToDateTime(x.Month).ToString("MMMM"),
                         CashierName = cashiers.FirstOrDefault(c => c.Id == x.UserId)?.UserName ?? "",
                         Description= fundsList.FirstOrDefault(j=> j.Id == x.DoucmentId)?.Description,
@@ -80,7 +80,7 @@ namespace Focus.Business.Reports.Payments.Queries
                             Amount = x.Amount,
                             PaymentType = x.Beneficiaries.PaymentTypes.Name,
                             Date = Convert.ToDateTime(x.CharityTransactionDate),
-                            PaymentDate = Convert.ToDateTime(x.CharityTransactionDate).ToString("dd/MM/yy"),
+                            PaymentDate = x.CharityTransactionDate,
                             PaymentMonth = Convert.ToDateTime(x.Month).ToString("MMMM"),
 
                         }).ToListAsync();
