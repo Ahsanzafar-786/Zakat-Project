@@ -1060,6 +1060,8 @@ debugger;
         if (this.$route.query.id != undefined) {
             this.addPayment.id='';
             this.addPayment.benificayId=this.$route.query.id ;
+            this.GetAutoCode();
+
 
            this.EditBenificary(this.$route.query.id,true);
         }

@@ -107,7 +107,7 @@
                                         <td> {{item.amount}}
                                             </td>
                                         <td>
-                                            {{item.paymentDate}}
+                                            {{GetDate(item.paymentDate)}}
                                         </td>
                                         
                                         
@@ -165,6 +165,7 @@
 </template>
 <script>
 import clickMixin from '@/Mixins/clickMixin'
+import moment from 'moment'
 
 
 export default {
@@ -193,6 +194,16 @@ export default {
     },
    
     methods: {
+        GetDate: function (link) {
+            if (link != undefined) {
+
+                return moment(link).format('MMMM Do YYYY');
+
+            }
+            else {
+                return '';
+            }
+        },
         IsSave: function () {
             this.show = !this.show;
         },
