@@ -24,16 +24,7 @@ namespace Noble.Api.Middlewares
         {
             try
             {
-                if(httpContext.Request.Path.Value == "/api/Sale/SaveSaleInformation" || httpContext.Request.Path.Value == "/api/Purchase/SaveSaleOrderInformation")
-                {
-                    if (!Requests.IsDuplicateSale)
-                    {
-                        Requests.IsDuplicateSale = true;
-                        await _next(httpContext);
-                    }
-                   
-                }
-                else
+               
                 {
                     await _next(httpContext);
                 }

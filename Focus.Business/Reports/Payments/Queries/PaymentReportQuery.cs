@@ -1,5 +1,4 @@
 ﻿using Focus.Business.Interface;
-using Focus.Business.Payments.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
@@ -42,72 +41,79 @@ namespace Focus.Business.Reports.Payments.Queries
                     //DateTime openingBalanceDate = request.SelectedDate?.AddDays(-1) ?? DateTime.Now.AddDays(-1);
 
 
-                  
-
-                    var Transaction = Context.CharityTransaction;
-
-                    var funds = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId == null && x.DocumentName == "Funds").SumAsync(x => x.Amount);
-                    var charity = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId != null).SumAsync(x => x.Amount);
 
 
-                    
+                    var transaction = Context.CharityTransaction;
+                    var requestFromDate = request.FromDate.Value.Date;
+
+                    // Use a single LINQ query to calculate funds and charity, to minimize database calls
+                    var transactionSummary = await transaction
+                        .GroupBy(x => x.BenificayId == null && x.DocumentName == "Funds")
+                        .Select(group => new {
+                            IsFund = group.Key,
+                            Total = group.Where(x => x.CharityTransactionDate.Value.Date < requestFromDate).Sum(x => x.Amount)
+                        })
+                        .ToListAsync();
+
+                    var funds = transactionSummary.FirstOrDefault(x => x.IsFund)?.Total ?? 0;
+                    var charity = transactionSummary.FirstOrDefault(x => !x.IsFund)?.Total ?? 0;
+
                     var openingBalance = funds - charity;
 
-                    var List = Context.Payments
+                    // Filter the Payments context in a single query to improve performance
+                    var paymentsQuery = Context.Payments
                         .Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
                         .Include(x => x.SelectedMonth)
-                           .ToList();
-
+                        .AsQueryable();
 
                     if (request.BenificayId.HasValue && request.BenificayId != Guid.Empty)
                     {
-                        List = List.Where(x => x.BenificayId == request.BenificayId).ToList();
+                        paymentsQuery = paymentsQuery.Where(x => x.BenificayId == request.BenificayId);
                     }
-                    
+
                     if (request.UserId.HasValue && request.UserId != Guid.Empty)
                     {
-                        List = List.Where(x => x.UserId == request.UserId.ToString()).ToList();
+                        paymentsQuery = paymentsQuery.Where(x => x.UserId == request.UserId.ToString());
                     }
 
                     if (request.PaymentType != null)
                     {
-                        List = List.Where(x => x.Beneficiaries.PaymentTypes.Name == request.PaymentType).ToList();
+                        paymentsQuery = paymentsQuery.Where(x => x.Beneficiaries.PaymentTypes.Name == request.PaymentType);
                     }
 
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        List = List.Where(x => x.Date != null && x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
-
+                        var requestToDate = request.ToDate.Value.Date;
+                        paymentsQuery = paymentsQuery.Where(x => x.Date != null && x.Date.Value.Date >= requestFromDate && x.Date.Value.Date <= requestToDate);
                     }
 
-                    var query= List.Select(x => new PaymentWiseListLookupModel()
-                    {
+                    var paymentList = paymentsQuery
+                        .Select(x => new PaymentWiseListLookupModel
+                        {
+                            Id = x.Id,
+                            PaymentId = x.Code.ToString(),
+                            Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
+                            BeneficaryId = x.Beneficiaries != null ? x.Beneficiaries.BeneficiaryId.ToString() : "",
+                            BeneficaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
+                            Amount = x.TotalAmount,
+                            Note = x.Note,
+                            SelectedMonth = x.SelectedMonth.Select(y => y.SelectMonth).ToList(),
+                            PaymentType = x.Beneficiaries.PaymentTypes.Name,
+                            Date = Convert.ToDateTime(x.Month),
+                            PaymentDate = x.Date,
+                        })
+                        .ToList();
 
+                    var closingBalance = openingBalance - paymentList.Sum(x => x.Amount);
 
-                        Id = x.Id,
-                        PaymentId = x.Code.ToString(),
-                        Beneficary = x.Beneficiaries != null ? x.Beneficiaries.Id : Guid.Empty,
-                        BeneficaryId = x.Beneficiaries != null ? x.Beneficiaries.BeneficiaryId.ToString() : "",
-                        BeneficaryName = (x.Beneficiaries.Name == "" || x.Beneficiaries.Name == null) ? x.Beneficiaries.NameAr : x.Beneficiaries.Name,
-                        Amount = x.TotalAmount,
-                        Note = x.Note,
-                        SelectedMonth = x.SelectedMonth.Select(y => y.SelectMonth).ToList(),
-                        PaymentType = x.Beneficiaries.PaymentTypes?.Name,
-                        Date = Convert.ToDateTime(x.Month),
-                        PaymentDate = x.Date,
-                    }).ToList();
-
-
-                    
                     return new PaymentWiseOpeningClosingModel
                     {
-                        OpeningBalance= openingBalance,
-                        PaymentList = query.ToList(),
-                        ClosingBalance= openingBalance - query.Sum(x =>x.Amount)
-
+                        OpeningBalance = openingBalance,
+                        PaymentList = paymentList,
+                        ClosingBalance = closingBalance
                     };
 
-                    
+
                 }
                 catch (Exception exception)
                 {
