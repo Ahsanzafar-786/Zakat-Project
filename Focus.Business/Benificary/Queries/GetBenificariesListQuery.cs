@@ -108,7 +108,9 @@ namespace Focus.Business.Benificary.Queries
                                 AuthorizationPersonNameAr = y.AuthorizedPerson.AuthorizedPersonCode + " " +  y.AuthorizedPerson.NameAr,
 
                             }).ToList(),
-                        }).OrderByDescending(x => x.BeneficiaryId).AsQueryable();
+                        }).OrderBy(x => x.BeneficiaryId).AsQueryable();
+
+                       
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
                         {
@@ -180,7 +182,8 @@ namespace Focus.Business.Benificary.Queries
                             query = query.Where(x => x.PaymentTypeId== request.PaymentType);
                         }
 
-
+                        var pagesize = 100;
+                        request.PageSize= pagesize;
 
                         var count = await query.CountAsync();
                         query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);

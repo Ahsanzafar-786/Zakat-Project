@@ -48,7 +48,7 @@
                                 aria-describedby="button-addon1">
                         </div>
                         <div class="col-3 form-group">
-                            <label></label>
+                            <label>    {{ $t('Benificary.Amount') }}</label>
                             <input v-model="amount" type="text" class="form-control"
                                 :placeholder="$t('Benificary.SearchByAmount')" aria-label="Example text with button addon"
                                 aria-describedby="button-addon1">
@@ -241,7 +241,7 @@
                                         {{ index + 1 }}
                                     </td>
                                     <td v-else>
-                                        {{ ((currentPage * 10) - 10) + (index + 1) }}
+                                        {{ ((currentPage * 100) - 100) + (index + 1) }}
                                     </td>
 
                                     <td class="text-center">
@@ -369,30 +369,30 @@
                     <hr />
                     <div class="float-start">
                         <span v-if="currentPage === 1 && rowCount === 0"> {{ $t('Pagination.ShowingEntries') }}</span>
-                        <span v-else-if="currentPage === 1 && rowCount < 10">
+                        <span v-else-if="currentPage === 1 && rowCount < 100">
                             {{ $t('Pagination.Showing') }}
                             {{ currentPage }} {{ $t('Pagination.to') }} {{ rowCount }} {{ $t('Pagination.of') }}
                             {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
-                        <span v-else-if="currentPage === 1 && rowCount >= 11">
+                        <span v-else-if="currentPage === 1 && rowCount >= 101">
                             {{ $t('Pagination.Showing') }}
-                            {{ currentPage }} {{ $t('Pagination.to') }} {{ currentPage * 10 }} {{ $t('Pagination.of') }}
+                            {{ currentPage }} {{ $t('Pagination.to') }} {{ currentPage * 100 }} {{ $t('Pagination.of') }}
                             {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
                         <span v-else-if="currentPage === 1">
                             {{ $t('Pagination.Showing') }} {{ currentPage }} {{
                                 $t('Pagination.to')
-                            }} {{ currentPage * 10 }} of {{ rowCount }} {{ $t('Pagination.entries') }}
+                            }} {{ currentPage * 100 }} of {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
                         <span v-else-if="currentPage !== 1 && currentPage !== pageCount">
                             {{ $t('Pagination.Showing') }}
-                            {{ (currentPage * 10) - 9 }} {{ $t('Pagination.to') }} {{ currentPage * 10 }} {{
+                            {{ (currentPage * 100) - 99 }} {{ $t('Pagination.to') }} {{ currentPage * 100 }} {{
                                 $t('Pagination.of')
                             }} {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
                         <span v-else-if="currentPage === pageCount">
                             {{ $t('Pagination.Showing') }}
-                            {{ (currentPage * 10) - 9 }} {{ $t('Pagination.to') }} {{ rowCount }} {{
+                            {{ (currentPage * 100) - 99 }} {{ $t('Pagination.to') }} {{ rowCount }} {{
                                 $t('Pagination.of')
                             }}
                             {{ rowCount }} {{ $t('Pagination.entries') }}
@@ -400,7 +400,7 @@
                     </div>
                     <div class="float-end">
                         <div class="" v-on:click="GetBenificaryData()">
-                            <b-pagination pills size="sm" v-model="currentPage" :total-rows="rowCount" :per-page="10"
+                            <b-pagination pills size="sm" v-model="currentPage" :total-rows="rowCount" :per-page="100"
                                 :first-text="$t('Table.First')" :prev-text="$t('Table.Previous')"
                                 :next-text="$t('Table.Next')" :last-text="$t('Table.Last')"></b-pagination>
                         </div>
