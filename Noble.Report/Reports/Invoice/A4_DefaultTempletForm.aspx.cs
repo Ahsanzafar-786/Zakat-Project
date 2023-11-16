@@ -257,7 +257,7 @@ namespace Noble.Report.Reports.Invoice
                                     }
 
                                     row["paymentPeriod"] = selectedDate;
-                                    row["PaymentDate"] = Convert.ToDateTime(item.PaymentDate).ToString("MMM yyyy");
+                                    row["PaymentDate"] = Convert.ToDateTime(item.PaymentDate).ToString("dd MMM yyyy");
                                     row["Amount"] = item.Amount.ToString("N2");
                                     dt.Rows.Add(row);
                                 }
@@ -317,10 +317,10 @@ namespace Noble.Report.Reports.Invoice
                                     foreach (var item1 in item.SelectedMonth)
                                     {
 
-                                        selectedDate += Convert.ToDateTime(item.SelectedMonth[j++]).ToString("MMMM yyyy") + "  ";
+                                        selectedDate += Convert.ToDateTime(item.SelectedMonth[j++]).ToString("MMM yyyy") + "  ";
                                     }
                                     row["نوع المساعدة"] = selectedDate;
-                                    row["تاريخ الدفع"] = item.PaymentMonth;
+                                    row["تاريخ الدفع"] = Convert.ToDateTime(item.PaymentDate).ToString("dd MMM yyyy");
                                     row["المبلع"] = item.Amount.ToString("N2");
                                     dt.Rows.Add(row);
                                 }

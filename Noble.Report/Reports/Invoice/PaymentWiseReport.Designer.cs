@@ -209,7 +209,7 @@
             this.xrTableCell19.Multiline = true;
             this.xrTableCell19.Name = "xrTableCell19";
             this.xrTableCell19.Text = "xrTableCell19";
-            this.xrTableCell19.TextFormatString = "{0: MMM yyyy}";
+            this.xrTableCell19.TextFormatString = "{0:dd MMM yy}";
             this.xrTableCell19.Weight = 1.1523324795227436D;
             // 
             // xrTableCell16
@@ -230,7 +230,7 @@
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.StylePriority.UseTextAlignment = false;
             this.xrTableCell18.Text = "xrTableCell18";
-            this.xrTableCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            this.xrTableCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             this.xrTableCell18.TextFormatString = "{0:#,#0.00}";
             this.xrTableCell18.Weight = 1.2231398189721165D;
             // 
@@ -744,6 +744,8 @@
             this.xrTable1.StylePriority.UseBorderColor = false;
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseFont = false;
+            this.xrTable1.StylePriority.UseTextAlignment = false;
+            this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
             // xrTableRow1
             // 
@@ -805,7 +807,9 @@
             // 
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
+            this.xrTableCell7.StylePriority.UseTextAlignment = false;
             this.xrTableCell7.Text = "نوع المساعدة\r\nPayment Period";
+            this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             this.xrTableCell7.Weight = 1.5255802502780909D;
             // 
             // xrTableCell3

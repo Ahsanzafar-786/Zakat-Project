@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo objectConstructorInfo1 = new DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo();
             DevExpress.DataAccess.DataFederation.SelectNode selectNode1 = new DevExpress.DataAccess.DataFederation.SelectNode();
             DevExpress.DataAccess.DataFederation.SourceNode sourceNode1 = new DevExpress.DataAccess.DataFederation.SourceNode();
             DevExpress.DataAccess.DataFederation.Source source1 = new DevExpress.DataAccess.DataFederation.Source();
@@ -38,8 +37,7 @@
             DevExpress.DataAccess.DataFederation.Source source2 = new DevExpress.DataAccess.DataFederation.Source();
             DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
-            this.Company = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.Charity = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo objectConstructorInfo1 = new DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
@@ -87,24 +85,14 @@
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrLabel17 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.Company)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Charity)).BeginInit();
+            this.Company = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.Charity = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.federationDataSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Company)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Charity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            // 
-            // Company
-            // 
-            this.Company.Constructor = objectConstructorInfo1;
-            this.Company.DataSource = typeof(Noble.Report.Models.CompanyDto);
-            this.Company.Name = "Company";
-            // 
-            // Charity
-            // 
-            this.Charity.Constructor = objectConstructorInfo1;
-            this.Charity.DataSource = typeof(Noble.Report.Models.CharityTransactionLookupModel);
-            this.Charity.Name = "Charity";
             // 
             // TopMargin
             // 
@@ -473,6 +461,8 @@
             this.xrTable1.StylePriority.UseBorderColor = false;
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseFont = false;
+            this.xrTable1.StylePriority.UseTextAlignment = false;
+            this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
             // xrTableRow1
             // 
@@ -737,6 +727,18 @@
             this.xrLabel18.Text = "Total";
             this.xrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
+            // Company
+            // 
+            this.Company.Constructor = objectConstructorInfo1;
+            this.Company.DataSource = typeof(Noble.Report.Models.CompanyDto);
+            this.Company.Name = "Company";
+            // 
+            // Charity
+            // 
+            this.Charity.Constructor = objectConstructorInfo1;
+            this.Charity.DataSource = typeof(Noble.Report.Models.CharityTransactionLookupModel);
+            this.Charity.Name = "Charity";
+            // 
             // LedgerReport
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -759,11 +761,11 @@
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Version = "22.2";
-            ((System.ComponentModel.ISupportInitialize)(this.Company)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Charity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.federationDataSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Company)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Charity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
