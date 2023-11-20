@@ -318,21 +318,21 @@
                                             data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
                                                 class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
-                                            <div v-if="brand.allowVoid && !brand.isVoid && roleName == 'Cashier'">
+                                            <div v-if="!brand.isVoid && roleName == 'Cashier'  ">
                                                 <input type="checkbox" v-model="brand.isVoid"
                                                     v-on:change="EditPayment(brand.id, brand.isVoid)" />
                                                 <span class="mx-1"> {{
-                                                    $t('Payment.IsVoid') }}
+                                                    $t('Payment.IsVoid') }} 
                                                 </span>
                                             </div>
-                                            <div v-if="brand.allowVoid && brand.isVoid && roleName == 'Cashier'">
+                                            <!-- <div v-if="brand.allowVoid && brand.isVoid ">
                                                 <input type="checkbox" v-model="brand.isVoid"
-                                                    v-on:change="EditPayment(brand.id, brand.isVoid)" disabled />
+                                                    v-on:change="EditPayment(brand.id, brand.isVoid)"  />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.IsVoid') }}
                                                 </span>
-                                            </div>
-                                            <div v-if="roleName != 'Cashier' && roleName != 'User'">
+                                            </div> -->
+                                            <!-- <div v-if="roleName != 'Cashier' && roleName != 'User'">
                                                 <input type="checkbox" disabled v-model="brand.isVoid" />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.IsVoid') }}
@@ -344,7 +344,7 @@
                                                 <span class="mx-1"> {{
                                                     $t('Payment.AllowVoid') }}
                                                 </span>
-                                            </div>
+                                            </div> -->
                                             <strong>
                                                 <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
                                                     $t('Payment.Print') }}</a>

@@ -40,14 +40,12 @@ namespace Focus.Business.Payments.Queries
         public class Handler : IRequestHandler<PaymentListQuery, PagedResult<List<PaymentLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
-            private readonly UserManager<ApplicationUser> _userManager;
             private readonly ILogger _logger;
 
-            public Handler(IApplicationDbContext context, ILogger<PaymentListQuery> logger, UserManager<ApplicationUser> userManager)
+            public Handler(IApplicationDbContext context, ILogger<PaymentListQuery> logger)
             {
                 Context = context;
                 _logger = logger;
-                _userManager = userManager;
 
             }
             public async Task<PagedResult<List<PaymentLookupModel>>> Handle(PaymentListQuery request, CancellationToken cancellationToken)
@@ -69,6 +67,7 @@ namespace Focus.Business.Payments.Queries
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.BenificaryAuthorization).ThenInclude(x => x.AuthorizedPerson)
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.ApprovalPersons)
+
                                 .Select(x => new PaymentLookupModel
                                 {
                                     Id = x.Id,
@@ -106,7 +105,8 @@ namespace Focus.Business.Payments.Queries
                                     AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
                                  
                                     Cashier = x.ApplicationUser.UserName,
-                                }).OrderByDescending(x => x.Code).ToList();
+                                }).Where(x=>!x.IsVoid)
+                                .OrderByDescending(x => x.Code).ToList();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
                     //{
