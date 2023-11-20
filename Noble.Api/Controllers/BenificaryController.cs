@@ -403,6 +403,38 @@ namespace Noble.Api.Controllers
             });
             return Ok(message);
         }
+
+        [Route("api/Benificary/GetDailyPaymentsList")]
+        [HttpGet("GetDailyPaymentsList")]
+        public async Task<IActionResult> GetDailyPaymentsList(string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
+          , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender, string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId)
+        {
+            var payment = await Mediator.Send(new DailyPaymentListQuery
+            {
+                SearchTerm = searchTerm,
+                PageNumber = pageNumber ?? 1,
+                BeneficiaryName = beneficiaryName,
+                Code = code,
+                Amount = amount,
+                BenificaryCode = benificaryCode,
+                FromDate = fromDate,
+                ToDate = toDate,
+                Month = month,
+                Year = year,
+                Register = register,
+                Status = status,
+                Nationality = nationality,
+                UqamaNo = uqamaNo,
+                Gender = gender,
+                ContactNo = contactNo,
+                ApprovalPersonId = approvalPersonId,
+                AuthorizationPersonId = authorizationPersonId
+            });
+            return Ok(payment);
+        }
+
+
+
         [Route("api/Benificary/GetPaymentsList")]
         [HttpGet("GetPaymentsList")]
         public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
