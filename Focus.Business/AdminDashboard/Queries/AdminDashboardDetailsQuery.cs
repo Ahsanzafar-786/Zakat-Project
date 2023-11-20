@@ -41,7 +41,7 @@ namespace Focus.Business.AdminDashboard.Queries
                     var funds = await Context.Funds.AsNoTracking().ToListAsync();
                     var payments = await Context.Payments.ToListAsync();
                     var paymentTypeList = await Context.PaymentTypes.ToListAsync();
-                    var charitytransaction = await Context.CharityTransaction.AsNoTracking().ToListAsync();
+                    var charitytransaction = await Context.CharityTransaction.AsNoTracking().Where(x=>!x.IsVoid).ToListAsync();
                     var query = await Context.Beneficiaries.AsNoTracking().ToListAsync();
 
 

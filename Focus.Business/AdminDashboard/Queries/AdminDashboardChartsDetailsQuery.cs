@@ -43,7 +43,7 @@ namespace Focus.Business.AdminDashboard.Queries
                     int currentYear = DateTime.Now.Year;
 
                     var charityByMonth = await Context.CharityTransaction.AsNoTracking()
-                        .Where(x => x.CharityTransactionDate.HasValue && (selectedYear.Year == 0 || x.CharityTransactionDate.Value.Year == selectedYear.Year))
+                        .Where(x => x.CharityTransactionDate.HasValue && !x.IsVoid && (selectedYear.Year == 0 || x.CharityTransactionDate.Value.Year == selectedYear.Year))
                         .GroupBy(x => x.CharityTransactionDate.Value.Month)
                         .Select(g => new { Month = g.Key, TotalAmount = g.Sum(x => x.Amount) })
                         .ToListAsync();

@@ -29,7 +29,7 @@ namespace Focus.Business.Reports.Payments.Queries
                 try
                 {
 
-                    var Transaction =  Context.CharityTransaction;
+                    var Transaction =  Context.CharityTransaction.Where(x => !x.IsVoid);
 
                     var fundsReceived = await Transaction.Where(x =>  x.BenificayId == null && x.DocumentName =="Funds" ).SumAsync(x => x.Amount);
                     var totalExpense= Context.Expenses.Sum(x => x.Amount);

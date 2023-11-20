@@ -36,7 +36,7 @@ namespace Focus.Business.AdminDashboard.Queries
             {
                 try
                 {
-                    var charitytransaction = await Context.CharityTransaction.AsNoTracking().ToListAsync();
+                    var charitytransaction = await Context.CharityTransaction.Where(x=>!x.IsVoid).AsNoTracking().ToListAsync();
 
                     // Calculate totalFunds
                     decimal totalFunds = charitytransaction

@@ -35,7 +35,7 @@ namespace Focus.Business.Benificary.Queries
                     {
                         
 
-                        var charity = await Context.CharityTransaction.Select(x => new CharityTransactionLookupModel()
+                        var charity = await Context.CharityTransaction.Where(x=> !x.IsVoid) .Select(x => new CharityTransactionLookupModel()
                         {
                             Id = x.Id,
                             DoucmentId = x.DoucmentId,
@@ -155,7 +155,7 @@ namespace Focus.Business.Benificary.Queries
                     }
                     else
                     {
-                        var charityTransaction = await Context.CharityTransaction.Where(x => x.BenificayId == request.Id).ToListAsync();
+                        var charityTransaction = await Context.CharityTransaction.Where(x => x.BenificayId == request.Id && !x.IsVoid).ToListAsync();
 
                         bool isDisable = false;
 

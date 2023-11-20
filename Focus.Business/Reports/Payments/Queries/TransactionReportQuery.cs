@@ -38,7 +38,7 @@ namespace Focus.Business.Reports.Payments.Queries
                 {
 
                     //DateTime openingBalanceDate = request.SelectedDate?.AddDays(-1) ?? DateTime.Now.AddDays(-1);
-                    var Transaction =  Context.CharityTransaction;
+                    var Transaction =  Context.CharityTransaction.Where(x => !x.IsVoid);
 
                     var funds = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId == null && x.DocumentName == "Funds").SumAsync(x => x.Amount);
                     var charity = await Transaction.Where(x => x.CharityTransactionDate.Value.Date < request.FromDate.Value.Date && x.BenificayId != null).SumAsync(x => x.Amount);
