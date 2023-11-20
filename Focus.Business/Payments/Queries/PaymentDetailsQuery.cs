@@ -39,23 +39,7 @@ namespace Focus.Business.Payments.Queries
                 {
                     if (request.IsVoid)
                     {
-                        var query = await Context.Payments.Select(x => new Payment
-                        {
-                            
-                            Id = x.Id,
-                            BenificayId = x.BenificayId,
-                            Amount = x.Amount,
-                            Month = x.Month,
-                            Date = x.Date,
-                            Year = x.Year,
-                            Period = x.Period,
-                            UserId = x.UserId,
-                            SelectedMonth= x.SelectedMonth,
-                            TotalAmount=x.TotalAmount,
-                            Note = x.Note,
-                            IsVoid = x.IsVoid,
-                            AllowVoid = x.AllowVoid,
-                        }).FirstOrDefaultAsync(x => x.Id == request.Id);
+                        var query = await Context.Payments.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
 
                         if (query == null)
                             throw new NotFoundException("Benificary Note Not Found", "");
@@ -68,7 +52,7 @@ namespace Focus.Business.Payments.Queries
 
                         if(query.SelectedMonth.Count == 0 )
                         {
-                            var charity = await Context.CharityTransaction.Where(x => x.DoucmentId == request.Id).ToListAsync();
+                            var charity = await Context.CharityTransaction.Where(x => x.DoucmentId == request.Id).ToListAsync(cancellationToken: cancellationToken);
 
                             Context.CharityTransaction.RemoveRange(charity);
 
@@ -89,7 +73,7 @@ namespace Focus.Business.Payments.Queries
                         }
                         else
                         {
-                            var charity = await Context.CharityTransaction.Where(x => x.DoucmentId == request.Id).ToListAsync();
+                            var charity = await Context.CharityTransaction.Where(x => x.DoucmentId == request.Id).ToListAsync(cancellationToken: cancellationToken);
 
                             Context.CharityTransaction.RemoveRange(charity);
 
@@ -112,12 +96,24 @@ namespace Focus.Business.Payments.Queries
                             }
 
 
-                            await Context.CharityTransaction.AddRangeAsync(charitTransaction);
+                            await Context.CharityTransaction.AddRangeAsync(charitTransaction, cancellationToken);
                         }
-                        await Context.SaveChangesAsync();
+                        var lastMonth = Context.CharityTransaction.AsNoTracking().OrderBy(x=>x.DoucmentCode)
+                            .LastOrDefault(x => x.BenificayId == query.BenificayId && !x.IsVoid && x.DoucmentId != request.Id);
+
+                        if (lastMonth != null)
+                        {
+                            var beneficay = Context.Beneficiaries.FirstOrDefault(x => x.Id == query.BenificayId);
+                            beneficay.CurrentPaymentMonth = lastMonth?.Month;
+                        }
+                        
+
+                        await Context.SaveChangesAsync(cancellationToken);
+
+                        
 
                         return null;
-                    }
+                    };
                     if(request.AllowVoid)
                     {
                         var query = await Context.Payments.Select(x => new Payment
@@ -134,7 +130,7 @@ namespace Focus.Business.Payments.Queries
                             UserId = x.UserId,
                             Note = x.Note,
                             IsVoid = x.IsVoid,
-                        }).FirstOrDefaultAsync(x => x.Id == request.Id);
+                        }).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
 
                         if (query == null)
                             throw new NotFoundException("Benificary Note Not Found", "");
@@ -143,7 +139,7 @@ namespace Focus.Business.Payments.Queries
 
                         Context.Payments.Update(query);
 
-                        await Context.SaveChangesAsync();
+                        await Context.SaveChangesAsync(cancellationToken);
                         
                         return null;
                     }
@@ -173,7 +169,7 @@ namespace Focus.Business.Payments.Queries
                                 TotalAmount = x.TotalAmount,
                             IsVoid = x.IsVoid,
                                 AllowVoid = x.AllowVoid,
-                            }).FirstOrDefaultAsync(x => x.Id == request.Id);
+                            }).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
 
                         if (query == null)
                             throw new NotFoundException("Benificary Note Not Found", "");
