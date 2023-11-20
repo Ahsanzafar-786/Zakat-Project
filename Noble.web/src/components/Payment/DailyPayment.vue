@@ -401,7 +401,7 @@
                     {{ $t('SaveasPrint') }} 
                 </button>
                
-                <button type="button" class="btn btn-soft-secondary btn-sm"  v-on:click="GotoPage('/payment')">
+                <button type="button" class="btn btn-soft-secondary btn-sm"  v-on:click="GotoPage('/dailyPaymentList')">
                     {{ $t('Close') }}
                 </button>
             </div>
@@ -537,7 +537,7 @@ export default {
         IsSaveRpt: function () {
             this.show1 = !this.show1;
             this.$router.push({
-                path: '/payment',
+                path: '/dailyPaymentList',
                
             })
         },

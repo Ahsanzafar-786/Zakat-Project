@@ -428,6 +428,8 @@
     "PaymentWiseReport":"تقرير المدفوعات",
     "ApprovalType":"نوع الموافقة",
     "DailyPayments":"المدفوعات اليومية",
+    "AddDailyPayments":"إضافة المدفوعات اليومية",
+
     "AddDailyPayment":"أضف الدفع اليومي",
     "Note":"ملاحظة",
     "AuthorizedPerson":"اسم الوكيل",

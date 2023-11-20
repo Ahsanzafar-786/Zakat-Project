@@ -37,20 +37,20 @@ namespace Focus.Business.Payments.Queries
         public DateTime? Year { get; set; }
         public Guid? ApprovalPersonId { get; set; }
         public Guid? AuthorizationPersonId { get; set; }
-        public class Handler : IRequestHandler<PaymentListQuery, PagedResult<List<PaymentLookupModel>>>
+        public class Handler : IRequestHandler<DailyPaymentListQuery, PagedResult<List<PaymentLookupModel>>>
         {
             public readonly IApplicationDbContext Context;
             private readonly UserManager<ApplicationUser> _userManager;
             private readonly ILogger _logger;
 
-            public Handler(IApplicationDbContext context, ILogger<PaymentListQuery> logger, UserManager<ApplicationUser> userManager)
+            public Handler(IApplicationDbContext context, ILogger<DailyPaymentListQuery> logger, UserManager<ApplicationUser> userManager)
             {
                 Context = context;
                 _logger = logger;
                 _userManager = userManager;
 
             }
-            public async Task<PagedResult<List<PaymentLookupModel>>> Handle(PaymentListQuery request, CancellationToken cancellationToken)
+            public async Task<PagedResult<List<PaymentLookupModel>>> Handle(DailyPaymentListQuery request, CancellationToken cancellationToken)
             {
                 try
                 {
@@ -106,7 +106,7 @@ namespace Focus.Business.Payments.Queries
                                     AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
                                  
                                     Cashier = x.ApplicationUser.UserName,
-                                }).OrderByDescending(x => x.Code).ToList();
+                                }).OrderByDescending(x => x.Code).Where(x=>x.PaymentType== "Daily Payment").ToList();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
                     //{

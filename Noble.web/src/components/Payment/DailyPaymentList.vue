@@ -6,7 +6,7 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">{{ $t('Payment.Payment') }}</h4>
+                                <h4 class="page-title">{{ $t('Payment.DailyPayments')}}</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
@@ -14,10 +14,10 @@
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
-                                <a v-on:click="GotoPage('/addpayment')" href="javascript:void(0);"
+                                <a v-on:click="GotoPage('/dailyPayment')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1" v-if="roleName != 'User'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('AddPayment.AddPayment') }}
+                                    {{ $t('Payment.DailyPayments')}}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">

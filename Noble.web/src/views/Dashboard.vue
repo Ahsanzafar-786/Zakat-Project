@@ -56,7 +56,7 @@
                                 }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/dailyPayment')" href="javascript:void(0);"> {{ $t('Payment.DailyPayments')
+                                <a v-on:click="GoTo('/dailyPayment')" href="javascript:void(0);"> {{ $t('Payment.AddDailyPayments')
                                 }}</a>
                             </li>
                             <li>
