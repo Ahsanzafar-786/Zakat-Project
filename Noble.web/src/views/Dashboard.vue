@@ -59,7 +59,10 @@
                                 <a v-on:click="GoTo('/dailyPayment')" href="javascript:void(0);"> {{ $t('Payment.DailyPayments')
                                 }}</a>
                             </li>
-                            
+                            <li>
+                                <a v-on:click="GoTo('/dailyPaymentList')" href="javascript:void(0);"> {{ $t('Payment.DailyPayments')
+                                }}</a>
+                            </li>
                         </ul>
                     </li>
                     <li v-if="roleName != 'Noble Admin'">
