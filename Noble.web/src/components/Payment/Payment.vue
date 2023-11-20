@@ -318,7 +318,7 @@
                                             data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
                                                 class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
-                                            <div v-if="!brand.isVoid && roleName == 'Cashier'  ">
+                                            <div v-if="!brand.isVoid && (roleName == 'Admin' || roleName == 'Cashier')  ">
                                                 <input type="checkbox" v-model="brand.isVoid"
                                                     v-on:change="EditPayment(brand.id, brand.isVoid)" />
                                                 <span class="mx-1"> {{
