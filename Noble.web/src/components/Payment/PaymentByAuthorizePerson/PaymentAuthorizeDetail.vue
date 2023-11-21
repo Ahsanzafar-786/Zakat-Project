@@ -185,6 +185,8 @@
 
 
             </div>
+            <print :show="show1" v-if="show1" :reportsrc="reportsrc" :changereport="changereport" @close="show1 = false"
+                @IsSave="IsSave" />
             
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
@@ -213,6 +215,7 @@ export default {
             arabic: '',
             english: '',
             loading: false,
+            show1: false,
             roleName: '',
             isDisable: false,
         }
@@ -227,7 +230,7 @@ export default {
 
             this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' + Id + '&pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&CompanyID=' + companyId + '&formName=Payment'
             this.changereport++;
-            this.show = !this.show;
+            this.show1 = !this.show1;
         },
         EditPayment: function (Id, val, allowVoid) {
             debugger;

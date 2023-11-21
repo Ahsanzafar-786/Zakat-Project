@@ -85,6 +85,7 @@ namespace Focus.Business.Payments.Queries
                                     Note = x.Note,
                                     Code = x.Code,
                                     IsVoid = x.IsVoid,
+                                    PaymentByAuthorizePerson = x.PaymentByAuthorizePerson,
                                     TotalAmount=x.TotalAmount,
                                     AllowVoid = x.AllowVoid,
                                     IsRegister = x.Beneficiaries.IsRegister,
@@ -107,7 +108,7 @@ namespace Focus.Business.Payments.Queries
                                  
                                     Cashier = x.ApplicationUser.UserName,
                                 }).OrderByDescending(x => x.Code)
-                                .Where(x=>x.PaymentType== "Daily Payment" && !x.IsVoid)
+                                .Where(x=>x.PaymentType== "Daily Payment" && !x.IsVoid && !x.PaymentByAuthorizePerson)
                                 .ToList();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))

@@ -14,22 +14,7 @@ namespace Focus.Business.PaymentByAuthPerson.Queries
 {
     public class PaymentDetailQueryByAuth : PagedRequest, IRequest<PagedResult<List<PaymentLookupModel>>>
     {
-        public string Gender { get; set; }
-        public string ContactNo { get; set; }
-        public string Nationality { get; set; }
-        public string UqamaNo { get; set; }
-        public string Register { get; set; }
-        public string Status { get; set; }
-        public string SearchTerm { get; set; }
-        public string BeneficiaryName { get; set; }
-        public int? Code { get; set; }
-        public decimal? Amount { get; set; }
-        public int? BenificaryCode { get; set; }
-        public DateTime? FromDate { get; set; }
-        public DateTime? ToDate { get; set; }
-        public DateTime? Month { get; set; }
-        public DateTime? Year { get; set; }
-        public Guid? ApprovalPersonId { get; set; }
+        
         public Guid? AuthorizationPersonId { get; set; }
         public class Handler : IRequestHandler<PaymentDetailQueryByAuth, PagedResult<List<PaymentLookupModel>>>
         {

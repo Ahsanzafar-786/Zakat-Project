@@ -46,5 +46,6 @@ namespace Focus.Business.Payments.Models
         public DateTime? EndMonth { get;  set; }
         public DateTime? NextMonth { get;  set; }
         public string DurationType { get;  set; }
+        public bool PaymentByAuthorizePerson { get; internal set; }
     }
 }

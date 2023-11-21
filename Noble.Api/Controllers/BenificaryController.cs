@@ -648,6 +648,7 @@ namespace Noble.Api.Controllers
                         Gender = request.Gender,
                         IqamaNo = request.IqamaNo,
                         PassportNo = request.PassportNo,
+                        IsActive = true
                     });
 
                 }

@@ -64,6 +64,7 @@ namespace Focus.Business.Payments.Queries
               
 
                     var query = Context.Payments.AsNoTracking()
+                                 .Where(x => !x.IsVoid && !x.PaymentByAuthorizePerson)
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.BenificaryAuthorization).ThenInclude(x => x.AuthorizedPerson)
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
                                 .Include(x => x.Beneficiaries).ThenInclude(x => x.ApprovalPersons)
@@ -105,7 +106,7 @@ namespace Focus.Business.Payments.Queries
                                     AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
                                  
                                     Cashier = x.ApplicationUser.UserName,
-                                }).Where(x=>!x.IsVoid)
+                                })
                                 .OrderByDescending(x => x.Code).ToList();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
