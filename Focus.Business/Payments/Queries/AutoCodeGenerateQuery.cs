@@ -299,7 +299,7 @@ namespace Focus.Business.Payments.Queries
             }
             public string GenerateCodeFirstTimeAutoPaymentAuthorization()
             {
-                return "1";
+                return "AP-00001";
             }
             public string GenerateNewCodeAutoPaymentAuthorization(string soNumber)
             {
@@ -307,7 +307,7 @@ namespace Focus.Business.Payments.Queries
                 Int32 autoNo = Convert.ToInt32((fetchNo));
                 var format = "00000";
                 autoNo++;
-                var newCode =  autoNo.ToString(format);
+                var newCode = "AP-" + autoNo.ToString(format);
                 return newCode;
             }
 

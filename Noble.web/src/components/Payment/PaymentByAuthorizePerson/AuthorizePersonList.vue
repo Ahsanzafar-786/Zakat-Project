@@ -35,17 +35,17 @@
                         <div class="col-md-4">
                            
                             <label class="text  font-weight-bolder">
-                                {{ $t('Payment.BeneficiaryCode') }}
+                                Search By Code
                             </label>
                             <input v-model="code" type="text" class="form-control" :placeholder="$t('Payment.SearchByCode')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
                         </div>
                         <div class="col-md-4">
                             <label class="text  font-weight-bolder">
-                                {{ $t('Benificary.BeneficiaryName') }}
+                                {{ $t('Benificary.AuthorizedPerson') }}
                             </label>
-                            <input v-model="search" type="text" class="form-control" :placeholder="$t('Payment.Search')"
-                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <authorizedperson v-model="authorizationPersonId" ref="AuthorizedDropdown" />
+
                         </div>
                         <div class="col-md-4">
                             <label class="text  font-weight-bolder">
@@ -63,35 +63,9 @@
                         </div>
                     </div>
                     <div class="row" v-if="advanceFilters">
-                        <div class="col-xs-12  col-lg-3">
-                            <div class="form-group">
-                                <label class="text  font-weight-bolder">
-                                    {{ $t('Benificary.AuthorizedPerson') }}
-                                </label>
-                                <authorizedperson v-model="authorizationPersonId" ref="AuthorizedDropdown" />
-                            </div>
-                        </div>
-                        <!-- <div class="col-md-3 form-group">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('Benificary.ApprovalPerson') }}
-                            </label>
-                            <approvalperson v-model="approvalPersonId" ref="approvalPersonId" />
-                        </div> -->
-                        <div class="col-md-3 form-group">
-                            <label class="text  font-weight-bolder">
-                                {{ $t('Benificary.Register/Un-Register') }}
-                            </label>
-                            <multiselect v-model="registered" :options="['Register', 'Un-Register']" :show-labels="false"
-                                :placeholder="$t('AddBenificary.SelectType')">
-                            </multiselect>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            <label class="text  font-weight-bolder"> {{ $t('Benificary.Status') }}</label>
-                            <multiselect v-model="status" :options="['Active', 'De-Active']" :show-labels="false"
-                                :placeholder="$t('AddBenificary.SelectType')">
-                            </multiselect>
-
-                        </div>
+                       
+                       
+                        
                         <div class="col-md-3 form-group">
                             <label class="text  font-weight-bolder">{{ $t('Benificary.SelectMonth') }}</label>
                             <datepicker v-model="month" :type="'month'" :key="render" />
@@ -113,40 +87,9 @@
                             </label>
                             <datepicker v-model="toDate" :key="render" />
                         </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>{{ $t('Benificary.NationalID') }}</label>
-                                <input v-model="uqamaNo" type="text" class="form-control"
-                                    :placeholder="$t('Benificary.SearchByNationalId')"
-                                    aria-label="Example text with button addon" aria-describedby="button-addon1">
+                       
 
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>{{ $t('Benificary.Nationality') }}</label>
-                                <input v-model="nationality" type="text" class="form-control"
-                                    :placeholder="$t('Benificary.SearchByNationality')"
-                                    aria-label="Example text with button addon" aria-describedby="button-addon1">
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>{{ $t('Benificary.Gender') }}</label>
-                                <multiselect v-model="gender" :options="['Male', 'Female']" :show-labels="false"
-                                    :placeholder="$t('AddBenificary.SelectType')">
-                                </multiselect>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12  col-lg-3 ">
-                            <label class="text  font-weight-bolder"> {{ $t('Benificary.Contact') }}</label>
-                            <input v-model="contact" type="text" class="form-control"
-                                :placeholder="$t('Benificary.SearchByContact')" aria-label="Example text with button addon"
-                                aria-describedby="button-addon1">
-
-                        </div>
+                      
                     </div>
                     <div class="row">
                         <div class="col-sm-4 mt-2">
@@ -291,7 +234,6 @@
 <script>
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
-import Multiselect from 'vue-multiselect';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import moment from 'moment'
@@ -300,7 +242,6 @@ import moment from 'moment'
 export default {
     mixins: [clickMixin],
     components: {
-        Multiselect,
         Loading,
     },
     data: function () {
@@ -448,7 +389,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetAuthorizePaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender=' + this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetAuthorizePaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code  + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&authorizationPersonId=' + this.authorizationPersonId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;

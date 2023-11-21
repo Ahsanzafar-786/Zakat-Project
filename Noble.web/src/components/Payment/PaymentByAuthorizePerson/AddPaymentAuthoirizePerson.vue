@@ -201,7 +201,7 @@
                 </button>
                
 
-                <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="GotoPage('/dailyPaymentList')">
+                <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="GotoPage('/authorizepersonlist')">
                     {{ $t('Close') }}
                 </button>
             </div>
@@ -324,7 +324,7 @@ export default {
         
         close: function () {
             this.$router.push({
-                path: '/payment',
+                path: '/authorizepersonlist',
 
             })
         },
@@ -397,6 +397,10 @@ export default {
                                 timer: 1500,
                                 timerProgressBar: true,
                             });
+                            root.$router.push({
+                                    path: '/authorizepersonlist',
+
+                                })
                            
 
                         }

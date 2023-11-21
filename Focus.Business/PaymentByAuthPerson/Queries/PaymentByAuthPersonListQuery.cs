@@ -15,22 +15,13 @@ namespace Focus.Business.PaymentByAuthPerson.Queries
 {
     public class PaymentByAuthPersonListQuery : PagedRequest, IRequest<PagedResult<List<PaymentByAuthorizeLookUpModel>>>
     {
-        public string Gender { get; set; }
-        public string ContactNo { get; set; }
-        public string Nationality { get; set; }
-        public string UqamaNo { get; set; }
-        public string Register { get; set; }
-        public string Status { get; set; }
-        public string SearchTerm { get; set; }
         public string BeneficiaryName { get; set; }
-        public int? Code { get; set; }
+        public string Code { get; set; }
         public decimal? Amount { get; set; }
-        public int? BenificaryCode { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public DateTime? Month { get; set; }
         public DateTime? Year { get; set; }
-        public Guid? ApprovalPersonId { get; set; }
         public Guid? AuthorizationPersonId { get; set; }
         public class Handler : IRequestHandler<PaymentByAuthPersonListQuery, PagedResult<List<PaymentByAuthorizeLookUpModel>>>
         {
@@ -63,24 +54,48 @@ namespace Focus.Business.PaymentByAuthPerson.Queries
                                     Code = x.Code,
                                     Amount = x.Amount,
                                 })
-                                .OrderByDescending(x => x.Code).ToList();
+                                .OrderByDescending(x => x.Code).AsQueryable();
+                    if (request.Amount != null && request.Amount > 0)
+                    {
+                        query = query.Where(x => x.Amount == request.Amount);
+                    }
+                    if (request.Code != null )
+                    {
+                        query = query.Where(x => x.Code == request.Code);
+                    }
+                    if (request.AuthorizationPersonId != null)
+                    {
+                        query = query.Where(x => x.AuthorizationPersonId == request.AuthorizationPersonId);
+                    }
+                    if (request.FromDate.HasValue && request.ToDate.HasValue)
+                    {
+                        query = query.Where(x => x.DateTime.Value.Date >= request.FromDate.Value.Date && x.DateTime.Value.Date <= request.ToDate.Value.Date);
+                    }
+                    if (request.Month != null)
+                    {
+                        query = query.Where(x => x.DateTime.Value.Month == request.Month.Value.Month && x.DateTime.Value.Year == request.Month.Value.Year);
+                    }
+                    if (request.Year != null)
+                    {
+                        query = query.Where(x => x.DateTime.Value.Year == request.Year.Value.Year);
+                    }
 
-               
-                    
+
+
                     var pagesize = 100;
                     request.PageSize = pagesize;
 
-                    var count = query.Count();
-                    query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize).ToList();
+                    query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);
 
+                    var count = query.Count();
 
                     return new PagedResult<List<PaymentByAuthorizeLookUpModel>>
                     {
-                        Results = query,
+                        Results = query.ToList(),
                         RowCount = count,
                         PageSize = request.PageSize,
                         CurrentPage = request.PageNumber,
-                        PageCount = query.Count / request.PageSize
+                        PageCount = query.ToList().Count / request.PageSize
                     };
 
                 }
