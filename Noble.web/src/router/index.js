@@ -83,6 +83,8 @@ import summaryreport from '../components/Reports/SummaryReport.vue';
 import benificaryreports from '../components/Benificary/BenificaryReports.vue';
 
 import Imports from '../components/Imports/ImportExportRecords.vue';
+import addpaymentauthoirizeperson from '../components/Payment/PaymentByAuthorizePerson/AddPaymentAuthoirizePerson.vue';
+import authorizepersonlist from '../components/Payment/PaymentByAuthorizePerson/AuthorizePersonList.vue';
 
 import clickMixin from '@/Mixins/clickMixin'
 Vue.use(clickMixin);
@@ -159,6 +161,16 @@ const routes = [
                             path: '/dailyPaymentList',
                             name: 'dailyPaymentList',
                             component: dailyPaymentList
+                        },
+                        {
+                            path: '/addpaymentauthoirizeperson',
+                            name: 'addpaymentauthoirizeperson',
+                            component: addpaymentauthoirizeperson
+                        },
+                        {
+                            path: '/authorizepersonlist',
+                            name: 'authorizepersonlist',
+                            component: authorizepersonlist
                         },
                         {
                             path: '/Imports',

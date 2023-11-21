@@ -47,6 +47,7 @@ namespace Focus.Domain.Entities
         public virtual ICollection<BenificaryAuthorization> BenificaryAuthorization { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
         public virtual ICollection<CharityTransaction> CharityTransactions { get; set; }
+        public virtual ICollection<PaymentAuthorizePersonItem> PaymentAuthorizePersonItems { get; set; }
 
 
     }

@@ -1,6 +1,5 @@
 ﻿using Focus.Business.Users;
 using Focus.Domain.Interface;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +11,8 @@ namespace Focus.Domain.Entities
     {
         public Guid? BenificayId { get; set; }
         public virtual Beneficiaries Beneficiaries { get; set; }
+        public Guid? PaymentAuthorizePersonId { get; set; }
+        public virtual PaymentAuthorizePerson PaymentAuthorizePerson { get; set; }
 
         public int Code { get; set; }
         public string PaymentCode { get; set; }
@@ -32,8 +33,10 @@ namespace Focus.Domain.Entities
         public bool IsVoid { get; set; }
         public bool AllowVoid { get; set; }
         public bool IsActive { get; set; }
+        public bool PaymentByAuthorizePerson { get; set; }
 
         public virtual ICollection<SelectedMonth> SelectedMonth { get; set; }
+        public virtual ICollection<PaymentAuthorizePerson> PaymentAuthorizePersons { get; set; }
 
 
     }

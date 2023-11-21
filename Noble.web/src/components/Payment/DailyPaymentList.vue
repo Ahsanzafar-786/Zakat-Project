@@ -319,33 +319,15 @@
                                             data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
                                                 class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
-                                            <div v-if="brand.allowVoid && !brand.isVoid && roleName == 'Cashier'">
+                                            <div v-if="!brand.isVoid && roleName == 'Admin' ">
                                                 <input type="checkbox" v-model="brand.isVoid"
                                                     v-on:change="EditPayment(brand.id, brand.isVoid)" />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.IsVoid') }}
                                                 </span>
                                             </div>
-                                            <div v-if="brand.allowVoid && brand.isVoid && roleName == 'Cashier'">
-                                                <input type="checkbox" v-model="brand.isVoid"
-                                                    v-on:change="EditPayment(brand.id, brand.isVoid)" disabled />
-                                                <span class="mx-1"> {{
-                                                    $t('Payment.IsVoid') }}
-                                                </span>
-                                            </div>
-                                            <div v-if="roleName != 'Cashier' && roleName != 'User'">
-                                                <input type="checkbox" disabled v-model="brand.isVoid" />
-                                                <span class="mx-1"> {{
-                                                    $t('Payment.IsVoid') }}
-                                                </span>
-                                            </div>
-                                            <div v-if="roleName != 'Cashier' && roleName != 'User'">
-                                                <input type="checkbox" v-model="brand.allowVoid"
-                                                    v-on:change="EditPayment(brand.id, brand.isVoid, brand.allowVoid)" />
-                                                <span class="mx-1"> {{
-                                                    $t('Payment.AllowVoid') }}
-                                                </span>
-                                            </div>
+                                           
+                                            
                                             <strong>
                                                 <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
                                                     $t('Payment.Print') }}</a>
@@ -359,30 +341,30 @@
                     <hr />
                     <div class="float-start">
                         <span v-if="currentPage === 1 && rowCount === 0"> {{ $t('Pagination.ShowingEntries') }}</span>
-                        <span v-else-if="currentPage === 1 && rowCount < 10">
+                        <span v-else-if="currentPage === 1 && rowCount < 100">
                             {{ $t('Pagination.Showing') }}
                             {{ currentPage }} {{ $t('Pagination.to') }} {{ rowCount }} {{ $t('Pagination.of') }}
                             {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
-                        <span v-else-if="currentPage === 1 && rowCount >= 11">
+                        <span v-else-if="currentPage === 1 && rowCount >= 101">
                             {{ $t('Pagination.Showing') }}
-                            {{ currentPage }} {{ $t('Pagination.to') }} {{ currentPage * 10 }} {{ $t('Pagination.of') }}
+                            {{ currentPage }} {{ $t('Pagination.to') }} {{ currentPage * 100 }} {{ $t('Pagination.of') }}
                             {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
                         <span v-else-if="currentPage === 1">
                             {{ $t('Pagination.Showing') }} {{ currentPage }} {{
                                 $t('Pagination.to')
-                            }} {{ currentPage * 10 }} of {{ rowCount }} {{ $t('Pagination.entries') }}
+                            }} {{ currentPage * 100 }} of {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
                         <span v-else-if="currentPage !== 1 && currentPage !== pageCount">
                             {{ $t('Pagination.Showing') }}
-                            {{ (currentPage * 10) - 9 }} {{ $t('Pagination.to') }} {{ currentPage * 10 }} {{
+                            {{ (currentPage * 100) - 99 }} {{ $t('Pagination.to') }} {{ currentPage * 100 }} {{
                                 $t('Pagination.of')
                             }} {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
                         <span v-else-if="currentPage === pageCount">
                             {{ $t('Pagination.Showing') }}
-                            {{ (currentPage * 10) - 9 }} {{ $t('Pagination.to') }} {{ rowCount }} {{
+                            {{ (currentPage * 100) - 99 }} {{ $t('Pagination.to') }} {{ rowCount }} {{
                                 $t('Pagination.of')
                             }}
                             {{ rowCount }} {{ $t('Pagination.entries') }}
@@ -390,7 +372,7 @@
                     </div>
                     <div class="float-end">
                         <div class="" v-on:click="GetPayment()">
-                            <b-pagination pills size="sm" v-model="currentPage" :total-rows="rowCount" :per-page="10"
+                            <b-pagination pills size="sm" v-model="currentPage" :total-rows="rowCount" :per-page="100"
                                 :first-text="$t('Table.First')" :prev-text="$t('Table.Previous')"
                                 :next-text="$t('Table.Next')" :last-text="$t('Table.Last')"></b-pagination>
                         </div>

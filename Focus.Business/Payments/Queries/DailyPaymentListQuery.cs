@@ -106,7 +106,9 @@ namespace Focus.Business.Payments.Queries
                                     AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
                                  
                                     Cashier = x.ApplicationUser.UserName,
-                                }).OrderByDescending(x => x.Code).Where(x=>x.PaymentType== "Daily Payment").ToList();
+                                }).OrderByDescending(x => x.Code)
+                                .Where(x=>x.PaymentType== "Daily Payment" && !x.IsVoid)
+                                .ToList();
 
                     //if (!string.IsNullOrEmpty(request.SearchTerm))
                     //{
@@ -179,6 +181,8 @@ namespace Focus.Business.Payments.Queries
                         query = query.Where(x => x.AuthorizePersonId == request.AuthorizationPersonId).ToList();
                     }
 
+                    var pagesize = 100;
+                    request.PageSize = pagesize;
 
                     var count = query.Count();
                     query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize).ToList();

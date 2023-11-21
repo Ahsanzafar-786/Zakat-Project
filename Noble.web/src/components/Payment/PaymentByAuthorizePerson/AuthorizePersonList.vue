@@ -6,18 +6,18 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">{{ $t('Payment.Payment') }}</h4>
+                                <h4 class="page-title">Payment by Authorized Person</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ $t('Payment.PaymentList') }}</li>
+                                    <li class="breadcrumb-item active">Payment by Authorized Person</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
-                                <a v-on:click="GotoPage('/addpayment')" href="javascript:void(0);"
-                                    class="btn btn-sm btn-outline-primary mx-1" v-if="roleName != 'User'">
+                                <a v-on:click="GotoPage('/addpaymentauthoirizeperson')" href="javascript:void(0);"
+                                    class="btn btn-sm btn-outline-primary mx-1" >
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('AddPayment.AddPayment') }}
+                                    Add Payment
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -172,45 +172,18 @@
                                         ID
                                     </th> -->
                                     <th class="text-center">
-                                        {{ $t('Payment.ID') }}
+                                      Code
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Payment.Date') }}
+                                      Date
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Payment.Code') }}
-                                    </th>
-                                    <th class="text-start">
-                                        {{ $t('Payment.BenificaryName') }}
-                                    </th>
-                                    <th class="text-start">
-                                        {{ $t('Benificary.NationalID') }}
-                                    </th>
-                                    <th class="text-start">
-                                        {{ $t('Payment.AuthorizedPerson') }}
-                                    </th>
-                                    <!-- <th class="text-start">
-                                        {{ $t('AddBenificary.ApprovedBy') }}
-                                    </th> -->
-                                    <th class="text-start">
-                                        {{ $t('AddBenificary.PaymentType') }}
+                                        Authoirzed Person Name
                                     </th>
                                     <th class="text-center">
-                                        {{ $t('Payment.LastPayment') }}
+                                       Amount
                                     </th>
-                                    <th class="text-center">
-                                        {{ $t('Payment.NextPaymentDate') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Payment.Note') }}
-                                    </th>
-
-                                    <th class="text-center">
-                                        {{ $t('Payment.Cashier') }}
-                                    </th>
-                                    <th class="text-center">
-                                        {{ $t('Payment.Amount') }}
-                                    </th>
+                                   
                                     <th class="text-center">
                                         {{ $t('Payment.Action') }}
                                     </th>
@@ -222,95 +195,24 @@
                                         {{ index + 1 }}
                                     </td>
                                     <td v-else>
-                                        {{ ((currentPage * 100) - 100) + (index + 1) }}
+                                        {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
 
-                                    <td class="text-center " v-if="brand.isVoid && roleName == 'Admin'">
+                                    <td class="text-center " >
                                         <strong>
-                                            <a class="text-danger" href="javascript:void(0)"
-                                                v-on:click="EditPayment(brand.id)">{{
-                                                    brand.code }}</a>
+                                            <a class="text-danger" href="javascript:void(0)">{{brand.code }}</a>
                                         </strong>
                                     </td>
-                                    <td class="text-center" v-else-if="roleName != 'Cashier'">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">{{
-                                                brand.code }}</a>
-                                        </strong>
-                                    </td>
-                                    <td class="text-center text-danger" v-else-if="brand.isVoid">{{ brand.code }}</td>
-
-                                    <td class="text-center" v-else>{{ brand.code }}</td>
-                                    <td class="text-center">{{ GetDate(brand.date) }}</td>
-
-                                    <td class="text-center">{{ brand.benificaryCode }}</td>
-
-                                    <td class="text-center text-danger" v-if="brand.isVoid">Payment Voided</td>
-                                    <td class="text-start" v-else-if="roleName != 'Cashier'">
-                                        <strong>
-                                            <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">
-                                                {{ brand.benificaryNameAr ==
-                                                    '' ? brand.benificaryName : brand.benificaryNameAr }}</a>
-                                        </strong>
-                                    </td>
-                                    <td class="text-start" v-else>{{
-                                        brand.benificaryName == '' ? brand.benificaryNameAr : brand.benificaryName }}
-                                    </td>
-                                    <td class="text-center" v-if="brand.ugamaNo != null">
-                                        {{ brand.ugamaNo }}
-                                    </td>
-                                    <td class="text-center" v-else>
-                                        ---
-                                    </td>
-                                    <td class="text-center" v-if="brand.authorizePersonName != null">
-                                        {{ brand.authorizePersonName }}
-                                    </td>
-                                    <td class="text-center" v-else>
-                                        ---
-                                    </td>
-                                    <!-- <td class="text-center" v-if="brand.approvalPersonName != null">
-                                        {{ brand.approvalPersonName }}
-                                    </td>
-                                    <td class="text-center" v-else>
-                                        ---
-                                    </td> -->
-                                    <td class="text-center" v-if="brand.paymentType != null">
-                                        {{ $i18n.locale == 'en' ? brand.paymentType : brand.paymentTypeAr }}
-                                    </td>
-                                    <td v-else>
-                                        ---
-                                    </td>
-                                    <td class="text-center">
-                                        <!-- {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }} -->
-                                         {{
-        GetDate(brand.lastPaymentDate) }}
-                                    </td>
-                                    <td class="text-center"  v-if="brand.paymentType =='Daily Payment' ">
-                                        <span>----</span>
-                                       
-                                    </td>
-                                    <td class="text-center"  v-else-if="brand.paymentType =='One Time' ">
-                                        <span>----</span>
-                                       
-                                    </td>
-                                     <td class="text-center"  v-else-if="brand.durationType =='Indefinite' ">
-                                        <span> {{ GetDate2(brand.lastPaymentDate) }}</span>
-                                       
-                                    </td>
-                                   
-                                    <td class="text-center" v-else-if=" brand.nextMonth> brand.endMonth ">
-                                        <span>----</span>
-                                       
-                                    </td>
-                                    <td class="text-center" v-else>
                                     
-                                        {{ GetDate2(brand.lastPaymentDate) }}
-                                    </td>
 
-                                    <td class="text-center">{{ brand.note }}</td>
-                                    <td class="text-center">{{ brand.cashier }}</td>
-                                    <td class="text-center" v-if="brand.isVoid">--</td>
-                                    <td class="text-center" v-else>{{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
+                                    <td class="text-center">{{ GetDate(brand.dateTime) }}</td>
+
+                                    <td class="text-center">{{ brand.authorizePersonNameAr }}</td>
+
+                                  
+                                  
+                                  
+                                    <td class="text-center" >{{ parseFloat(brand.amount).toFixed(3).slice(0,
                                         -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
 
                                     <td class="text-center d-flex align-items-baseline justify-content-center"
@@ -319,33 +221,10 @@
                                             data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
                                                 class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
-                                            <div v-if="!brand.isVoid && roleName == 'Admin'  ">
-                                                <input type="checkbox" v-model="brand.isVoid"
-                                                    v-on:change="EditPayment(brand.id, brand.isVoid)" />
-                                                <span class="mx-1"> {{
-                                                    $t('Payment.IsVoid') }} 
-                                                </span>
-                                            </div>
-                                            <!-- <div v-if="brand.allowVoid && brand.isVoid ">
-                                                <input type="checkbox" v-model="brand.isVoid"
-                                                    v-on:change="EditPayment(brand.id, brand.isVoid)"  />
-                                                <span class="mx-1"> {{
-                                                    $t('Payment.IsVoid') }}
-                                                </span>
-                                            </div> -->
-                                            <!-- <div v-if="roleName != 'Cashier' && roleName != 'User'">
-                                                <input type="checkbox" disabled v-model="brand.isVoid" />
-                                                <span class="mx-1"> {{
-                                                    $t('Payment.IsVoid') }}
-                                                </span>
-                                            </div>
-                                            <div v-if="roleName != 'Cashier' && roleName != 'User'">
-                                                <input type="checkbox" v-model="brand.allowVoid"
-                                                    v-on:change="EditPayment(brand.id, brand.isVoid, brand.allowVoid)" />
-                                                <span class="mx-1"> {{
-                                                    $t('Payment.AllowVoid') }}
-                                                </span>
-                                            </div> -->
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                v-on:click="ViewPayment(brand.id)">View</a>
+                                           
+                                            
                                             <strong>
                                                 <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
                                                     $t('Payment.Print') }}</a>
@@ -400,6 +279,8 @@
 
             <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show = false"
                 @IsSave="IsSave" />
+            <paymentauthorizedetail :id="authorizeId" :show="show1" v-if="show1"  @close="show1= false"
+                @IsSave="IsSave" />
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
 
@@ -426,6 +307,7 @@ export default {
         return {
             advanceFilters: false,
             authorizationPersonId: '',
+            authorizeId: '',
             approvalPersonId: '',
             registered: '',
             fromDate: '',
@@ -442,6 +324,7 @@ export default {
             contact: '',
             uqamaNo: '',
             show: false,
+            show1: false,
             reportsrc: '',
             changereport: 0,
             paymentList: [],
@@ -524,15 +407,7 @@ export default {
         IsSave: function () {
             this.show = false;
         },
-        GetMonth: function (link) {
-            if (link != undefined) {
-                return moment(link).format('MMMM');
-
-            }
-            else {
-                return '';
-            }
-        },
+       
         GetDate: function (link) {
             if (link != undefined && link != null && link != '') {
 
@@ -545,18 +420,7 @@ export default {
                 return '';
             }
         },
-        GetDate2: function (link) {
-            if (link != undefined) {
-
-                const date = moment(link);
-                const arabicMonth = date.locale('ar').add(1, 'months').format('MMMM');
-                return `${arabicMonth} ${date.format('Do YYYY')}`;
-
-            }
-            else {
-                return '';
-            }
-        },
+       
         PrintRdlc: function (Id) {
             var companyId = '';
             if (this.$session.exists()) {
@@ -584,7 +448,7 @@ export default {
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender=' + this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetAuthorizePaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender=' + this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;
@@ -595,79 +459,12 @@ export default {
             });
         },
 
-        EditPayment: function (Id, val, allowVoid) {
+        ViewPayment: function (Id) {
             debugger;
-            var root = this;
-            var token = '';
-            if (this.$session.exists()) {
-                token = localStorage.getItem('token');
-            }
-            if (allowVoid) {
-                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id + '&allowVoid=' + allowVoid, { headers: { "Authorization": `Bearer ${token}` } })
-                    .then(function (response) {
-                        debugger;
+            this.authorizeId=Id;
+            this.show1= !this.show1;
 
-                        if (response.data == "") {
-                            root.$swal({
-                                title: 'Save Allow Void',
-                                text: 'Permission Allow to make payment void',
-                                type: 'success',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                            });
-                            root.GetPayment();
-                        } else {
-                            console.log("error: something wrong from db.");
-                        }
-                    },
-                        function (error) {
-                            this.loading = false;
-                            console.log(error);
-                        });
-            }
-            else if (val) {
-                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id + '&isVoid=' + val, { headers: { "Authorization": `Bearer ${token}` } })
-                    .then(function (response) {
-                        debugger;
-                        if (response.data == "") {
-                            root.$swal({
-                                title: 'Save Void',
-                                text: 'Successfully Payment Voided',
-                                type: 'success',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                            });
-                            root.GetPayment();
-                        } else {
-                            console.log("error: something wrong from db.");
-                        }
-                    },
-                        function (error) {
-                            this.loading = false;
-                            console.log(error);
-                        });
-            }
-            else {
-                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id, { headers: { "Authorization": `Bearer ${token}` } })
-                    .then(function (response) {
-                        if (response.data) {
-                            root.$router.push({
-                                path: '/addpayment',
-                                query: { data: response.data }
-                            });
-                        } else {
-                            console.log("error: something wrong from db.");
-                        }
-                    },
-                        function (error) {
-                            this.loading = false;
-                            console.log(error);
-                        });
-            }
+            
         }
     },
 

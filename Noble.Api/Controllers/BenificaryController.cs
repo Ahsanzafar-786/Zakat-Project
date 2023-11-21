@@ -40,6 +40,9 @@ using Focus.Business.ExpenseCategories.Queries;
 using Focus.Business.Exepenses.Models;
 using Focus.Business.Exepenses.Commands;
 using Focus.Business.Exepenses.Queries;
+using Focus.Business.PaymentByAuthPerson.Command;
+using Focus.Business.PaymentByAuthPerson;
+using Focus.Business.PaymentByAuthPerson.Queries;
 
 namespace Noble.Api.Controllers
 {
@@ -392,6 +395,75 @@ namespace Noble.Api.Controllers
 
         #endregion
 
+
+        #region PaymentByAuthorizePerson
+
+
+        [Route("api/Benificary/GetBeneficaryByAuthorizePerson")]
+        [HttpGet("GetBeneficaryByAuthorizePerson")]
+        public async Task<IActionResult> GetBeneficaryByAuthorizePerson(Guid? authorizationPersonId)
+        {
+            var message = await Mediator.Send(new GetBenificaryByAuthorizePerson
+            {
+                AuthorizedPersonId = authorizationPersonId
+            });
+            return Ok(message);
+        }
+
+        [Route("api/Benificary/SavePaymentsByAuthorizePerson")]
+        [HttpPost("SavePaymentsByAuthorizePerson")]
+        public async Task<IActionResult> SavePaymentsByAuthorizePerson([FromBody] PaymentByAuthorizeLookUpModel payment)
+        {
+            var message = await Mediator.Send(new PaymentByAuthoirzeCommand
+            {
+                Payment = payment
+            });
+            return Ok(message);
+        }
+        [Route("api/Benificary/PaymentDetailQueryByAuth")]
+        [HttpGet("PaymentDetailQueryByAuth")]
+        public async Task<IActionResult> PaymentDetailQueryByAuth(Guid? authorizationPersonId)
+        {
+            var message = await Mediator.Send(new PaymentDetailQueryByAuth
+            {
+                AuthorizationPersonId = authorizationPersonId
+            });
+            return Ok(message);
+        }
+
+        [Route("api/Benificary/GetAuthorizePaymentsList")]
+        [HttpGet("GetAuthorizePaymentsList")]
+        public async Task<IActionResult> GetAuthorizePaymentsList(string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
+            , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender, string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId)
+        {
+            var payment = await Mediator.Send(new PaymentByAuthPersonListQuery
+            {
+                SearchTerm = searchTerm,
+                PageNumber = pageNumber ?? 1,
+                BeneficiaryName = beneficiaryName,
+                Code = code,
+                Amount = amount,
+                BenificaryCode = benificaryCode,
+                FromDate = fromDate,
+                ToDate = toDate,
+                Month = month,
+                Year = year,
+                Register = register,
+                Status = status,
+                Nationality = nationality,
+                UqamaNo = uqamaNo,
+                Gender = gender,
+                ContactNo = contactNo,
+                ApprovalPersonId = approvalPersonId,
+                AuthorizationPersonId = authorizationPersonId
+            });
+            return Ok(payment);
+        }
+
+
+        #endregion
+
+
         #region Payments
         [Route("api/Benificary/SavePayments")]
         [HttpPost("SavePayments")]
@@ -403,6 +475,7 @@ namespace Noble.Api.Controllers
             });
             return Ok(message);
         }
+     
 
         [Route("api/Benificary/GetDailyPaymentsList")]
         [HttpGet("GetDailyPaymentsList")]

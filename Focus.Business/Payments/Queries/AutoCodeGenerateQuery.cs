@@ -58,6 +58,10 @@ namespace Focus.Business.Payments.Queries
                     {
                         code = await AutoGenerateExpense();
                     }
+                    else if (request.Name == "PaymentAuthorization")
+                    {
+                        code = await AutoPaymentAuthorization();
+                    }
                     else
                     {
                         code = await AutoGenerateCashCustomer();
@@ -271,6 +275,44 @@ namespace Focus.Business.Payments.Queries
                 var newCode = "EC-" + autoNo.ToString(format);
                 return newCode;
             }
+
+
+
+            //PaymentAuthorization
+            public async Task<string> AutoPaymentAuthorization()
+            {
+                var expecat = await Context.PaymentAuthorizePersons
+                    .OrderBy(x => x.Code)
+                    .LastOrDefaultAsync();
+
+                if (expecat != null)
+                {
+                    if (string.IsNullOrEmpty(expecat.Code))
+                    {
+                        return GenerateCodeFirstTimeAutoPaymentAuthorization();
+                    }
+
+                    return GenerateNewCodeAutoPaymentAuthorization(expecat.Code);
+                }
+
+                return GenerateCodeFirstTimeAutoPaymentAuthorization();
+            }
+            public string GenerateCodeFirstTimeAutoPaymentAuthorization()
+            {
+                return "1";
+            }
+            public string GenerateNewCodeAutoPaymentAuthorization(string soNumber)
+            {
+                string fetchNo = soNumber.Substring(3);
+                Int32 autoNo = Convert.ToInt32((fetchNo));
+                var format = "00000";
+                autoNo++;
+                var newCode =  autoNo.ToString(format);
+                return newCode;
+            }
+
+
+
 
             //expese
             public async Task<string> AutoGenerateExpense()

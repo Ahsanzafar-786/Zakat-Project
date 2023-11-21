@@ -56,8 +56,7 @@
                                 }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/dailyPayment')" href="javascript:void(0);"> {{ $t('Payment.AddDailyPayments')
-                                }}</a>
+                                <a v-on:click="GoTo('/authorizepersonlist')" href="javascript:void(0);">Payment By Authorized Person</a>
                             </li>
                             <li>
                                 <a v-on:click="GoTo('/dailyPaymentList')" href="javascript:void(0);"> {{ $t('Payment.DailyPayments')

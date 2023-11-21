@@ -18,7 +18,9 @@ namespace Focus.Domain.Entities
         public string HijriYear { get; set; }
         public string HijriMonth { get; set; }
         public string Year { get; set; }
-        
+        public bool PaymentByAuthorizePerson { get; set; }
+
+
         public string? UserId { get; set; }
         
 

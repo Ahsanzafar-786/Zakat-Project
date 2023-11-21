@@ -4,6 +4,7 @@ using Focus.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Focus.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231121104847_PaymentAuthorizePerson")]
+    partial class PaymentAuthorizePerson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -815,7 +817,7 @@ namespace Focus.Persistence.Migrations
                             Blocked = false,
                             CashVoucher = false,
                             CompanyRegNo = "56ty60",
-                            CreatedDate = new DateTime(2023, 11, 21, 11, 20, 26, 547, DateTimeKind.Utc).AddTicks(4302),
+                            CreatedDate = new DateTime(2023, 11, 21, 10, 48, 45, 550, DateTimeKind.Utc).AddTicks(370),
                             DayStart = false,
                             English = false,
                             ExpenseAccount = false,
@@ -1176,9 +1178,6 @@ namespace Focus.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid?>("AuthorizePersonId")
                         .HasColumnType("uniqueidentifier");

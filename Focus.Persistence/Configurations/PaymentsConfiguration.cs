@@ -17,6 +17,9 @@ namespace Focus.Persistence.Configurations
             builder.HasOne(x => x.ApplicationUser)
                  .WithMany(x => x.Payments)
                  .HasForeignKey(x => x.UserId);
+            builder.HasOne(x => x.PaymentAuthorizePerson)
+                .WithMany(x => x.Payments)
+                .HasForeignKey(x => x.PaymentAuthorizePersonId);
 
 
         }
