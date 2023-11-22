@@ -6,18 +6,18 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">Payment by Authorized Person</h4>
+                                <h4 class="page-title"> {{ $t('Payment.PaymentbyAuthorizedPerson') }}</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Payment by Authorized Person</li>
+                                    <li class="breadcrumb-item active">{{ $t('Payment.PaymentbyAuthorizedPerson') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
                                 <a v-on:click="GotoPage('/addpaymentauthoirizeperson')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1" >
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    Add Payment
+                                    {{ $t('Payment.AddPayment') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -35,7 +35,7 @@
                         <div class="col-md-4">
                            
                             <label class="text  font-weight-bolder">
-                                Search By Code
+                                {{ $t('Payment.SearchByCode') }}
                             </label>
                             <input v-model="code" type="text" class="form-control" :placeholder="$t('Payment.SearchByCode')"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
@@ -115,16 +115,17 @@
                                         ID
                                     </th> -->
                                     <th class="text-center">
-                                      Code
+                                        {{ $t('Payment.PaymentCode') }}
                                     </th>
                                     <th class="text-center">
-                                      Date
+                                        {{ $t('Payment.Date') }}
                                     </th>
                                     <th class="text-center">
-                                        Authoirzed Person Name
+                                        {{ $t('Payment.AuthoirzedPersonName') }}
+                                        
                                     </th>
                                     <th class="text-center">
-                                       Amount
+                                        {{ $t('AddPayment.Amount') }}
                                     </th>
                                    
                                     <th class="text-center">
@@ -143,7 +144,7 @@
 
                                     <td class="text-center " >
                                         <strong>
-                                            <a class="text-danger" href="javascript:void(0)">{{brand.code }}</a>
+                                            <a  href="javascript:void(0)">{{brand.code }}</a>
                                         </strong>
                                     </td>
                                     
@@ -165,7 +166,8 @@
                                                 class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
                                             <a class="dropdown-item" href="javascript:void(0)"
-                                                v-on:click="ViewPayment(brand.id)">View</a>
+                                                v-on:click="ViewPayment(brand.id)">{{
+                                                    $t('Payment.ViewDetail') }}</a>
                                            
                                             
                                             <strong>
@@ -222,7 +224,7 @@
 
             <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show = false"
                 @IsSave="IsSave" />
-            <paymentauthorizedetail :id="authorizeId" :show="show1" v-if="show1"  @close="show1= false"
+            <paymentauthorizedetail :id="authorizeId" :show="show1" v-if="show1"  @close="RefreshList"
                 @IsSave="IsSave" />
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
@@ -342,6 +344,11 @@ export default {
             // }
         },
 
+        RefreshList: function () {
+           this.show1=false;
+           this.GetPayment();
+
+        },
         SearchFilter: function () {
             this.GetPayment();
         },

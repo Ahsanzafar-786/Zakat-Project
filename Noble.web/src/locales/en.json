@@ -389,7 +389,10 @@
   },
 
   "Payment":{
+    "PaymentbyAuthorizedPerson":"Payment to Authorized Person",
+    "AddPaymentbyAuthorizedPerson":"Add Payment to Authorized Person",
     "Payment":"Beneficiary Payment",
+    "AuthorizePerson":"Authorize Person",
     "BenificaryPayment":"Beneficiary Payment",
     "BenificaryReports":"Beneficiary Reports",
     "AddPayment":"Add Payment",
@@ -403,6 +406,10 @@
     "Month":"Month",
     "Year":"Year",
     "Code":"ID",
+    "ViewDetail":"View Detail",
+    "PaymentCode":"Code",
+    "ViewPaymentDetail":"View Payment Detail",
+    "AuthoirzedPersonName":"Authoirzed Person Name",
     "BeneficiaryCode":"Beneficiary Code",
     "Action":"Action",
     "IsVoid":"Void",

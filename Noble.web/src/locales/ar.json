@@ -398,6 +398,15 @@
   },
 
   "Payment":{
+    "AddPaymentbyAuthorizedPerson":"إضافة الدفع إلى الشخص المعتمد",
+    "AuthorizePerson":"الشخص المفوض",
+    "ViewPaymentDetail":"عرض تفاصيل الدفع",
+
+    "PaymentbyAuthorizedPerson":"الدفع عن طريق الشخص المعتمد",
+    "PaymentCode":"شفرة",
+    "AuthoirzedPersonName":"اسم الشخص المعتمد",
+    "ViewDetail":"عرض التفاصيل",
+
     "LastPayment":"آخر شهر مدفوع",
     "NextPayment":" الدفعة التالية",
     "ID":" رقم المعاملة",

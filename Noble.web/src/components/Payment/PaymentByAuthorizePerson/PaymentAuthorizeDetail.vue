@@ -4,7 +4,7 @@
             <div class="modal-header">
                 
                 <h6 class="modal-title m-0" id="exampleModalDefaultLabel" >
-                    View Payment Detail
+                    {{ $t('Payment.ViewPaymentDetail') }}  
                 </h6>
                 <button type="button" class="btn-close" v-on:click="close()"></button>
             </div>
@@ -165,7 +165,7 @@
                                         <div class="dropdown-menu text-center">
                                             <div v-if="!brand.isVoid && roleName == 'Admin' ">
                                                 <input type="checkbox" v-model="brand.isVoid"
-                                                    v-on:change="EditPayment(brand.id, brand.isVoid)" />
+                                                    v-on:change="EditPayment(brand.id, true)" />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.IsVoid') }}
                                                 </span>
@@ -232,40 +232,16 @@ export default {
             this.changereport++;
             this.show1 = !this.show1;
         },
-        EditPayment: function (Id, val, allowVoid) {
+        EditPayment: function (Id, val) {
             debugger;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            if (allowVoid) {
-                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id + '&allowVoid=' + allowVoid, { headers: { "Authorization": `Bearer ${token}` } })
-                    .then(function (response) {
-                        debugger;
-
-                        if (response.data == "") {
-                            root.$swal({
-                                title: 'Save Allow Void',
-                                text: 'Permission Allow to make payment void',
-                                type: 'success',
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                            });
-                            root.GetPayment();
-                        } else {
-                            console.log("error: something wrong from db.");
-                        }
-                    },
-                        function (error) {
-                            this.loading = false;
-                            console.log(error);
-                        });
-            }
-            else if (val) {
-                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id + '&isVoid=' + val, { headers: { "Authorization": `Bearer ${token}` } })
+           
+             if (val) {
+                root.$https.get('/Benificary/GetPaymentsDetail?Id=' + Id + '&isVoid=' + val+ '&isAuthoirzeVoid=true', { headers: { "Authorization": `Bearer ${token}` } })
                     .then(function (response) {
                         debugger;
                         if (response.data == "") {

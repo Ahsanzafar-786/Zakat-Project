@@ -5,11 +5,11 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col">
-                            <h4 class="page-title">Payment To Authorize Person</h4>
+                            <h4 class="page-title">{{ $t('Payment.AddPaymentbyAuthorizedPerson') }}</h4>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item active">Payment To Authorize Person</li>
+                                <li class="breadcrumb-item active">{{ $t('Payment.AddPaymentbyAuthorizedPerson') }}</li>
                             </ol>
                         </div>
                     </div>
@@ -20,13 +20,13 @@
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
-                            Authorize Person:<span class="text-danger"> </span>
+                            {{ $t('Payment.AuthorizePerson') }}:<span class="text-danger"> </span>
                         </label>
                         <authorizedperson v-on:input="GetBeneficaryList(brand.authorizationPersonId)"
                             v-model="brand.authorizationPersonId" :values="brand.authorizationPersonId" />
                     </div>
                     <div class="col-md-6 form-group">
-                        <label class="text  font-weight-bolder">Code:<span class="text-danger"> </span>
+                        <label class="text  font-weight-bolder">{{ $t('Payment.PaymentCode') }}:<span class="text-danger"> </span>
                         </label>
                         <input class="form-control" v-model="brand.code" type="text" disabled />
                     </div>

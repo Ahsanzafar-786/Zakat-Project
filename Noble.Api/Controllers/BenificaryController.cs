@@ -43,6 +43,7 @@ using Focus.Business.Exepenses.Queries;
 using Focus.Business.PaymentByAuthPerson.Command;
 using Focus.Business.PaymentByAuthPerson;
 using Focus.Business.PaymentByAuthPerson.Queries;
+using Focus.Persistence.Migrations;
 
 namespace Noble.Api.Controllers
 {
@@ -529,13 +530,14 @@ namespace Noble.Api.Controllers
 
         [Route("api/Benificary/GetPaymentsDetail")]
         [HttpGet("GetPaymentsDetail")]
-        public async Task<IActionResult> GetPaymentsDetail(Guid id, bool isVoid, bool allowVoid)
+        public async Task<IActionResult> GetPaymentsDetail(Guid id, bool isVoid, bool allowVoid,bool isAuthoirzeVoid)
         {
             var fund = await Mediator.Send(new PaymentDetailsQuery
             {
                 Id = id,
                 IsVoid = isVoid,
-                AllowVoid = allowVoid
+                AllowVoid = allowVoid,
+                IsAuthoirzeVoid = isAuthoirzeVoid,
             });
             return Ok(fund);
         }
@@ -714,6 +716,26 @@ namespace Noble.Api.Controllers
 
 
 
+                    Guid? paymentId;
+
+                    if (paymentInterval == 1 && recurringAmount == 0)
+                    {
+                        paymentId = payment.FirstOrDefault(x => x.Code == 13)?.Id;
+                        paymentInterval = 1;
+                    }
+                    else if (paymentInterval == 1 && recurringAmount != 0)
+                    {
+                        paymentId = payment.FirstOrDefault(x => x.Code == paymentInterval)?.Id;
+                        paymentInterval = 1;
+
+                    }
+                    else
+                    {
+                        paymentId = payment.FirstOrDefault(x => x.Code == paymentInterval)?.Id;
+
+                    }
+
+
 
                     list.Add(new Beneficiaries
                     {
@@ -728,7 +750,7 @@ namespace Noble.Api.Controllers
                         IsActive = request.Isactive == "true" ? true : false,
                         ApprovalPersonId = null,
                         Address = request.Address,
-                        PaymentTypeId = payment.FirstOrDefault(x => x.Code == paymentInterval)?.Id,
+                        PaymentTypeId = paymentId,
                         NameAr = request.Name,
                         AdvancePayment = 0,
                         DurationType = "Indefinite",
@@ -912,7 +934,7 @@ namespace Noble.Api.Controllers
                             MonthName = request.Month,
                             Year = request.Year,
                             HijriYear = request.Year,
-                            Amount = Convert.ToDecimal(request.Amount),
+                            Amount = Convert.ToDecimal(beneficary.AmountPerMonth),
                             Date = Convert.ToDateTime(request.Stamp_date),
                             Period = request.Period,
                             TotalAmount= Convert.ToDecimal(request.Amount)

@@ -8,10 +8,8 @@ using System.Threading;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using NPOI.SS.Formula.Functions;
 using Focus.Domain.Entities;
 using System.Collections.Generic;
-using NPOI.POIFS.Properties;
 
 namespace Focus.Business.Payments.Queries
 {
@@ -20,6 +18,7 @@ namespace Focus.Business.Payments.Queries
         public Guid Id { get; set; }
         public bool IsVoid { get; set; }
         public bool AllowVoid { get; set; }
+        public bool IsAuthoirzeVoid { get; set; }
 
 
         public class Handler : IRequestHandler<PaymentDetailsQuery, PaymentLookupModel>
@@ -47,6 +46,16 @@ namespace Focus.Business.Payments.Queries
                         query.IsVoid = request.IsVoid;
 
                         Context.Payments.Update(query);
+                        if (request.IsAuthoirzeVoid)
+                        {
+                            var authorized =
+                                Context.PaymentAuthorizePersons.FirstOrDefault(x =>
+                                    x.Id == query.PaymentAuthorizePersonId);
+                            if (authorized != null)
+                            {
+                                authorized.Amount -= query.TotalAmount;
+                            }
+                        }
 
                         
 
