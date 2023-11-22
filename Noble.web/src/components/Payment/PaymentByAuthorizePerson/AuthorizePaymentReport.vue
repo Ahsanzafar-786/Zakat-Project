@@ -1,100 +1,124 @@
 <template>
     <div>
-        <div hidden id='inventoryDetailReport' class="col-md-12" style="background-color:white;padding-left:40px !important;padding-right:40px !important ">
+        <div hidden  id='inventoryDetailReport' class="col-md-12" style="background-color:white;padding-left:40px !important;padding-right:40px !important ">
             
             <div style="background-color:white" >
                 <!--HEADER-->
-                
-                <!-- <div class="col-md-12" style="height:45mm;border:2px solid #000000;background-color:white" >
-                    <div class="row" style="height:35mm;background-color:white">
-                        <div class="col-md-4 ">
-                            <table class="text-left">
-                                <tr>
-                                    <td>
-                                        <p>
-                                            <span style="font-size:25px;color:black !important;font-weight:bold;">{{headerFooters.company.nameEnglish}}</span><br />
-                                            <span style="font-size:17px;color:black !important;font-weight:bold;">{{headerFooters.company.categoryEnglish}}</span><br />
-                                            <span style="font-size:16px;color:black !important;font-weight:bold;">VAT No.: {{headerFooters.company.vatRegistrationNo}}</span><br />
-                                            <span style="font-size:16px;color:black !important;font-weight:bold;">Cr No.:{{headerFooters.company.companyRegNo}}</span><br />
-                                            <span style="font-size:15px;color:black !important;font-weight:bold;">
-                                                Tel: {{headerFooters.company.phoneNo}}
-                                            </span>
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-md-4 text-center my-5" style="padding:0px !important; margin:0 !important">
-                            <img :src="headerFooters.company.logoPath" style="width:auto;max-width:300px; max-height:100px; padding:5px !important; margin:0 !important">
-                        </div>
-                        <div class="col-md-4 ">
-                            <table class="text-right" v-if="arabic=='true'">
-                                <tr>
-                                    <td>
-                                        <p>
-                                            <span style="font-size:25px;color:black !important;font-weight:bold;">{{headerFooters.company.nameArabic}}.</span><br />
-                                            <span style="font-size:17px;color:black !important;font-weight:bold;">{{headerFooters.company.categoryArabic}}</span><br />
-                                            <span style="font-size:16px;color:black !important;font-weight:bold;">رقم ضريبة القيمة المضافة: {{headerFooters.company.vatRegistrationNo}}</span><br />
-                                            <span style="font-size:16px;color:black !important;font-weight:bold;">رقم السجل التجاري :{{headerFooters.company.companyRegNo}}</span><br />
-                                            <span style="font-size:15px;color:black !important;font-weight:bold;">
-                                                هاتف: {{headerFooters.company.phoneNo}}:
-                                            </span>
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row" style="background-color:white">
-                        <div class="col-md-12" style="margin-bottom:10px !important;height:10mm" v-if="($i18n.locale == 'en' ||isLeftToRight())">
-                            <p style="text-align: center; margin: 0px; padding: 0px; line-height: 1; ">
-                                <span style="font-size:25px;color:black !important;font-weight:bold;padding-bottom:5px !important">Account Ledger Report</span>
-                            </p>
-                        </div>
+                <div style="height:35mm;margin-top:1mm; border:2px solid #000000;">
+                <table class="table table-borderless">
+                    <tr>
+                            <td style="width:36%;" class="text-left pt-0 pb-0 pl-0 pr-0">
+                                <p class="mb-0">
+                                    <span style="font-size:23px;color:black !important;font-weight:bold;">{{headerFooters.company.companyNameEnglish}}</span><br />
+                                    <span style="font-size:14px;color:black !important;font-weight:bold;">VAT No.: {{headerFooters.company.vatRegistrationNo}}</span><br />
+                                    <span style="font-size:14px;color:black !important;font-weight:bold;">Cr No.:{{headerFooters.company.companyRegNo}}</span><br />
+                                    <span style="font-size:17px;color:black !important;font-weight:bold;">
+                                        Address: {{headerFooters.company.addressEnglish}}
+                                    </span>
+                                </p>
+                            </td>
+                            <td style="width:26%;" class="text-center pt-0 pb-0 pl-0 pr-0">
+                                <img :src="headerFooters.company.base64Logo" style="width:auto;max-width:300px; max-height:100px; padding:5px !important; margin:0 !important">
+                            </td>
+                            <td style="width:38%;" class="pt-0 pb-0 pl-0 pr-0">
+                                <p class=" mb-0" style="text-align: right;" >
+                                    <span style="font-size:23px;color:black !important;font-weight:bold;">{{headerFooters.company.companyNameArabic}}</span><br />
+                                    <span style="font-size:14px;color:black !important;font-weight:bold;">رقم ضريبة القيمة المضافة :&nbsp; &nbsp; {{headerFooters.company.vatRegistrationNo}}</span><br />
+                                    <span style="font-size:14px;color:black !important;font-weight:bold;">رقم السجل التجاري  :&nbsp; &nbsp;{{headerFooters.company.companyRegNo}}</span><br />
+                                    <span style="font-size:17px;color:black !important;font-weight:bold;">
+                                         عنوان:&nbsp; &nbsp; {{headerFooters.company.addressArabic}}
+                                    </span>
+                                </p>
+                            </td>
+                        </tr>
 
+
+                    </table>
                     </div>
-                </div> -->
+
+                    <div class="row mt-2" style="direction: rtl !important;" >
+                        <div class="col-md-12 ml-2 mr-2">
+                            <table class="table table-borderless">
+                                <!--Row 1-->
+                                <tr class="mt-2">
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; font-weight:bolder;text-align:right;color:black !important;font-size:18px !important;">:Code</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{brandObj.code}}</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:14%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >:شفرة </td>
+
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18% font-weight:bolder;text-align:right;color:black !important;font-size:18px !important;">:Date</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ GetDate(brandObj.dateTime) }}</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:14%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >  :تاريخ </td>
+                                </tr>
+                                <tr class="mt-2"> 
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; font-weight:bolder;text-align:right;color:black !important;font-size:18px !important;">:Authoirzed Person</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ brandObj.authorizePersonNameAr }}</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:14%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >:اسم الشخص المعتمد </td>
+
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18% font-weight:bolder;text-align:right;color:black !important;font-size:18px !important;">:Amount</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ parseFloat(brandObj.amount).toFixed(3).slice(0,-1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:14%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >  :كمية </td>
+                                </tr>
+
+
+
+
+                            </table>
+                        </div>
+                        <!--INFORMATION-->
                 
-                <!--INFORMATION-->
-                
-                <div class="col-md-12 " style="background-color:white;padding-left:40px !important;padding-right:40px !important">
-                    <div class="row p-1" style="background-color:white;height:310mm;">
+                <div class="col-md-12 " style="background-color:white;padding-left:5px !important;padding-right:5px !important">
+                    <div class="row p-1" style="background-color:white">
                         <div class="col-12">
-                            <table class="table col-md-12 ">
+                            <table class="table col-md-12 " >
                             <tr style="font-size:14px;color:black !important;color:black;border-top:0px !important">
-                                <th class="text-left" style="border-top:0px !important">#</th>
-                                <th class="text-left" style="border-top:0px !important">{{ $t('Payment.ID') }}</th>
-                                <th class="text-left" style="border-top:0px !important">{{ $t('Payment.Date') }}</th>
-                                <th class="text-left" style="border-top:0px !important"> {{ $t('Payment.Code') }}</th>
-                                <th class="text-left" style="border-top:0px !important"> {{ $t('Payment.BenificaryName') }}</th>
-                                <th class="text-left" style="border-top:0px !important">{{ $t('AddBenificary.PaymentType') }}</th>
-                                <th class="text-right" style="border-top:0px !important">{{ $t('Payment.LastPayment') }}</th>
-                                <th class="text-right" style="border-top:0px !important">{{ $t('Payment.NextPaymentDate') }}</th>
-                                <th class="text-right" style="border-top:0px !important;width:15%">{{ $t('Payment.Cashier') }}</th>
-                                <th class="text-right" style="border-top:0px !important;width:15%">{{ $t('Payment.Amount') }}</th>
+                                <th class="text-center" style="border-top:0px !important">#</th>
+                                <th class="text-center" style="border-top:0px !important">{{ $t('Payment.ID') }}</th>
+                                <th class="text-center" style="border-top:0px !important">{{ $t('Payment.Date') }}</th>
+                                <th class="text-center" style="border-top:0px !important"> {{ $t('Payment.Code') }}</th>
+                                <th class="text-center" style="border-top:0px !important"> {{ $t('Payment.BenificaryName') }}</th>
+                                <th class="text-center" style="border-top:0px !important">{{ $t('AddBenificary.PaymentType') }}</th>
+                                <th class="text-center" style="border-top:0px !important">{{ $t('Payment.LastPayment') }}</th>
+                                <th class="text-center" style="border-top:0px !important">Amount</th>
                             </tr>
-                            <tr style="font-size:13px; page-break-after: always;color:black" v-for="(brand, index) in transactionList" v-bind:key="brand.id">
-                                <td class="text-left">{{index+1}}</td>
-                                <td class="text-left">{{brand.code}}}</td>
-                                <td class="text-left">{{ GetDate(brand.date) }}</td>
-                                <td class="text-left">{{ brand.benificaryCode }}</td>
-                                <td class="text-left">{{brand.benificaryName == '' ? brand.benificaryNameAr : brand.benificaryName }}</td>
-                                <td class="text-left">{{brand.paymentTypeAr}}</td>
-                                <td class="text-left" v-if="brand.paymentType =='Daily Payment' ">
+                            <!-- <tr style="font-size:14px;color:black !important;color:black;border-top:0px !important">
+                                <th class="text-center" style="border-top:0px !important">#</th>
+                                <th class="text-center" style="border-top:0px !important">{{ $t('Payment.ID') }}</th>
+                                <th class="text-center" style="border-top:0px !important">{{ $t('Payment.Date') }}</th>
+                                <th class="text-center" style="border-top:0px !important"> {{ $t('Payment.Code') }}</th>
+                                <th class="text-center" style="border-top:0px !important"> أسم المستفيد</th>
+                                <th class="text-center" style="border-top:0px !important">نوع الدفع</th>
+                                <th class="text-center" style="border-top:0px !important">تاريخ الدفع الأخير</th>
+                                <th class="text-center" style="border-top:0px !important">كمية</th>
+                            </tr> -->
+                            <tr style="font-size:16px;color:black" v-for="(brand, index) in transactionList" v-bind:key="brand.id" st>
+                                <td class="text-center">{{index+1}}</td>
+                                <td class="text-center">{{brand.code}}</td>
+                                <td class="text-center">{{ GetDate(brand.date) }}</td>
+                                <td class="text-center">{{ brand.benificaryCode }}</td>
+                                <td class="text-center">{{brand.benificaryName == '' ? brand.benificaryNameAr : brand.benificaryName }}</td>
+                                <td class="text-center">{{brand.paymentTypeAr}}</td>
+                                <td class="text-center" v-if="brand.paymentType =='Daily Payment' ">
                                     ------</td>
-                                <td class="text-left" v-else-if="brand.paymentType =='One Time' ">
+                                <td class="text-center" v-else-if="brand.paymentType =='One Time' ">
                                     ------</td>
-                                <td class="text-left" v-else-if="brand.durationType =='Indefinite' ">
+                                <td class="text-center" v-else-if="brand.durationType =='Indefinite' ">
                                     {{ GetDate2(brand.lastPaymentDate) }}</td>
-                                <td class="text-right">
-                                    {{ brand.cashier }}
-                                </td>
-                                <td class="text-right">
+                                    
+                               
+                                <td class="text-center">
                                     {{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
                                         -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}
                                 </td>
-                               >
+                               
                             </tr>
+                            <!-- <tr style="font-size:16px;color:black"  >
+                                <td colspan="8">
+                                    {{ totalAmount }}
+
+                                </td>
+                                <td>Total</td>
+                               
+                            </tr> -->
 
                            
 
@@ -108,6 +132,12 @@
                     
 
                 </div>
+
+                    </div>
+
+
+                
+                
             </div>
 
 
@@ -121,7 +151,7 @@
     import moment from "moment";
 
     export default {
-        props: ['printDetails', 'isShown', 'formName', 'isPrint', 'dates', 'headerFooter'],
+        props: ['printDetails', 'headerFooter','brandObj'],
         data: function () {
             return {
                 transactionList: [],
@@ -143,13 +173,19 @@
                 listItemP3: [],
             }
         },
+        totalAmount: function () {
+               
+                 {
+                    return this.transactionList.reduce(function (a, c) { return a + Number(( c.totalAmount) || 0) }, 0)
+                }
+            },
         created: function (){
-            alert("Ok");
+
         },
     
         mounted: function () {
             debugger;
-            alert("Ok");
+            this.headerFooters = this.headerFooter
 
            
 
@@ -178,6 +214,8 @@
                 return '';
             }
         },
+       
+           
         GetDate2: function (link) {
             if (link != undefined) {
 

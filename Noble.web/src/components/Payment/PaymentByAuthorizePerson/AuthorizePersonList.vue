@@ -171,7 +171,7 @@
                                            
                                             
                                             <strong>
-                                                <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
+                                                <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id,brand)"> {{
                                                     $t('Payment.Print') }}</a>
                                             </strong>
                                         </div>
@@ -222,10 +222,10 @@
                 </div>
             </div>
 
-            <authorizepaymentreport :show="show" v-if="show" v-bind:key="changereport" :printDetails="paymentRecord"  />
+            <authorizepaymentreport :headerFooter="headerFooter" :show="show"  :brandObj="brandObj" v-if="show" v-bind:key="changereport" :printDetails="paymentRecord"  />
             <paymentauthorizedetail :id="authorizeId" :show="show1" v-if="show1"  @close="RefreshList"
                 @IsSave="IsSave" />
-            <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
+            <loading :active.sync="loading" :can-cancel="true" :is-full-page="true"></loading>
         </div>
 
     </div>
@@ -249,6 +249,7 @@ export default {
         return {
             advanceFilters: false,
             authorizationPersonId: '',
+            brandObj: '',
             authorizeId: '',
             approvalPersonId: '',
             registered: '',
@@ -286,6 +287,9 @@ export default {
             amount: '',
             benificaryCode: '',
             loading: false,
+            headerFooter: {
+                    company: ''
+                },
 
 
         }
@@ -377,12 +381,14 @@ export default {
         GotoPage: function (link) {
             this.$router.push({ path: link });
         },
-        PrintRdlc: function (id) {
+        PrintRdlc: function (id,brandObj) {
+            this.loading=true;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
+            this.brandObj=brandObj;
             root.$https.get('/Benificary/PaymentDetailQueryByAuth?authorizationPersonId=' + id, {
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -390,10 +396,18 @@ export default {
             })
                 .then(function (response) {
                     if (response.data != null) {
+
                                                 debugger;
                         root.paymentRecord = response.data.results;
-                        root.show = !root.show;
-                        root.changereport++;
+
+                       
+                        setTimeout(function () {
+
+                            root.show = true; 
+                            root.changereport++;
+                            root.loading = false; 
+
+               }, 125)
                     } else {
                         console.log("error: something wrong from db.");
                     }
@@ -424,16 +438,36 @@ export default {
             });
         },
 
+
+        
+
         ViewPayment: function (Id) {
             debugger;
             this.authorizeId=Id;
             this.show1= !this.show1;
 
             
-        }
+        },
+        GetHeaderDetail: function () {
+                var root = this;
+                var token = '';
+                if (this.$session.exists()) {
+                    token = localStorage.getItem('token');
+                }
+                root.$https.get("/Company/GetCompanyDetail?id=" + localStorage.getItem('CompanyID'), { headers: { Authorization: `Bearer ${token}` }, })
+                    .then(function (response) {
+                        if (response.data != null) {
+                            debugger;
+                            root.headerFooter.company = response.data;
+                            root.headerFooter.company.base64Logo = 'data:image/png;base64,' + response.data.base64Logo;
+
+                        }
+                    });
+            },
     },
 
     created: function () {
+        this.GetHeaderDetail();
         this.$emit('input', this.$route.name);
     },
     mounted: function () {
