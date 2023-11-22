@@ -253,8 +253,7 @@
                                     <th class="text-center">{{ $t('AddBenificary.AuthorizedPerson') }}</th>
                                     <!-- <th class="text-center">{{ $t('AddBenificary.ApprovedBy')
                                     }}</th> -->
-                                    <th class="text-center">{{ $t('AddBenificary.Date') }}
-                                    </th>
+                                   
 
                                     <th class="text-center">{{ $t('AddBenificary.Status') }}
                                     </th>
@@ -270,36 +269,16 @@
                                     <td class="border-top-0 text-center">
                                         {{ index + 1 }}
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable">
-                                        <authorizedperson v-model="person.authorizationPersonId"
-                                            :values="person.authorizationPersonId" :isDisable="'true'" />
-                                    </td>
-                                    <td class="border-top-0 text-center" v-else>
+                                    
+                                    <td class="border-top-0 text-center" >
                                         <authorizedperson v-model="person.authorizationPersonId"
                                             :values="person.authorizationPersonId" />
                                     </td>
-                                    <!-- <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
-                                        <approvalperson v-model="person.approvalPersonId"
-                                            :values="person.approvalPersonId" :isDisable="'true'"/>
-                                    </td> -->
-                                    <!-- <td class="border-top-0 text-center">
-                                        <approvalperson v-model="person.approvalPersonId"
-                                            :values="person.approvalPersonId" />
-
-                                    </td> -->
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable">
-                                        <datepicker v-model="person.date" :isDisable="true" />
-                                    </td>
-                                    <td class="border-top-0 text-center" v-else>
-                                        <datepicker v-model="person.date" />
-                                    </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable">
-                                        <div class="checkbox form-check-inline">
-                                            <input v-bind:id="index + 1" type="checkbox" disabled v-model="person.isActive">
-                                            <label v-bind:for="index + 1"></label>
-                                        </div>
-                                    </td>
-                                    <td class="border-top-0 text-center" v-else>
+                              
+                                  
+                                  
+                                   
+                                    <td class="border-top-0 text-center" >
                                         <div class="checkbox form-check-inline">
                                             <input v-bind:id="index + 1" type="checkbox" v-model="person.isActive"
                                                 v-on:input="GiveReason()">
@@ -311,13 +290,8 @@
                                             <textarea class="form-control" v-model="person.dec" rows="1"></textarea>
                                         </div>
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
-                                        <button title="Remove Item" id="bElim" type="button" disabled
-                                            class="btn btn-sm btn-soft-danger btn-circle" v-on:click="RemoveRow(index)">
-                                            <i class="dripicons-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    <td class="border-top-0 text-center" v-else>
+                                   
+                                    <td class="border-top-0 text-center" >
                                         <button title="Remove Item" id="bElim" type="button"
                                             class="btn btn-sm btn-soft-danger btn-circle" v-on:click="RemoveRow(index)">
                                             <i class="dripicons-trash" aria-hidden="true"></i>

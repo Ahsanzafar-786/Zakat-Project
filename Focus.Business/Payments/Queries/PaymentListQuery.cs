@@ -1,5 +1,4 @@
-﻿using Focus.Business.BenificiariesNotes.Model;
-using Focus.Business.BenificiariesNotes.Queries;
+﻿
 using Focus.Business.Common;
 using Focus.Business.Interface;
 using Focus.Business.Payments.Models;
@@ -11,10 +10,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Focus.Business.Users;
-using Microsoft.AspNetCore.Identity;
-using Focus.Domain.Entities;
-using Focus.Business.Transactions.Models;
+
 
 namespace Focus.Business.Payments.Queries
 {

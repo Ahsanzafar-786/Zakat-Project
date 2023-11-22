@@ -222,8 +222,7 @@
                 </div>
             </div>
 
-            <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show = false"
-                @IsSave="IsSave" />
+            <authorizepaymentreport :show="show" v-if="show" v-bind:key="changereport" :printDetails="paymentRecord"  />
             <paymentauthorizedetail :id="authorizeId" :show="show1" v-if="show1"  @close="RefreshList"
                 @IsSave="IsSave" />
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
@@ -270,9 +269,10 @@ export default {
             show1: false,
             reportsrc: '',
             changereport: 0,
-            paymentList: [],
             type: '',
             search: '',
+            paymentList: [],
+            paymentRecord: [],
             currentPage: 1,
             pageCount: '',
             rowCount: '0',
@@ -369,22 +369,39 @@ export default {
             }
         },
        
-        PrintRdlc: function (Id) {
-            var companyId = '';
-            if (this.$session.exists()) {
-                companyId = localStorage.getItem('CompanyID');
-            }
-
-            this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' + Id + '&pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&CompanyID=' + companyId + '&formName=Payment'
-            this.changereport++;
-            this.show = !this.show;
-        },
+       
         getPage: function () {
             this.GetPayment(this.currentPage);
         },
 
         GotoPage: function (link) {
             this.$router.push({ path: link });
+        },
+        PrintRdlc: function (id) {
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.$https.get('/Benificary/PaymentDetailQueryByAuth?authorizationPersonId=' + id, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(function (response) {
+                    if (response.data != null) {
+                                                debugger;
+                        root.paymentRecord = response.data.results;
+                        root.show = !root.show;
+                        root.changereport++;
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
         },
 
         GetPayment: function () {

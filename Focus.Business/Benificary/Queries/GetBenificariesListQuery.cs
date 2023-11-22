@@ -108,15 +108,14 @@ namespace Focus.Business.Benificary.Queries
                                 AuthorizationPersonNameAr = y.AuthorizedPerson.AuthorizedPersonCode + " " +  y.AuthorizedPerson.NameAr,
 
                             }).ToList(),
-                        }).OrderBy(x => x.BeneficiaryId).AsQueryable();
+                        }).OrderByDescending(x => x.Id).AsQueryable();
 
                        
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
                         {
                             var searchTerm = request.SearchTerm.ToLower();
-                            query = query.Where(x => x.Name.ToLower().Contains(searchTerm) 
-                                                  || x.NameAr.Contains(searchTerm) );
+                            query = query.Where(x =>  x.NameAr.Contains(searchTerm) );
                         }
                         if (request.UqamaNo != null )
                         {

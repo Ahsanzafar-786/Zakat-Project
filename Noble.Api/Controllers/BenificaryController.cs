@@ -43,6 +43,7 @@ using Focus.Business.Exepenses.Queries;
 using Focus.Business.PaymentByAuthPerson.Command;
 using Focus.Business.PaymentByAuthPerson;
 using Focus.Business.PaymentByAuthPerson.Queries;
+using Focus.Domain.Enum;
 using Focus.Persistence.Migrations;
 
 namespace Noble.Api.Controllers
@@ -748,6 +749,7 @@ namespace Noble.Api.Controllers
                         PhoneNo = request.Phone,
                         Note = "",
                         IsActive = request.Isactive == "true" ? true : false,
+                        ApprovalStatus =ApprovalStatus.Approved,
                         ApprovalPersonId = null,
                         Address = request.Address,
                         PaymentTypeId = paymentId,

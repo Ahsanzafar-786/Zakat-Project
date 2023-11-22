@@ -149,6 +149,7 @@ Vue.component('userdropdown', require('./components/General/UsersDropdown.vue').
 
 //userdropdwon
 Vue.component('paymentauthorizedetail', require('./components/Payment/PaymentByAuthorizePerson/PaymentAuthorizeDetail.vue').default);
+Vue.component('authorizepaymentreport', require('./components/Payment/PaymentByAuthorizePerson/AuthorizePaymentReport.vue').default);
 
 Vue.prototype.$https = axios;
 axios.defaults.baseURL = json.ServerIP;
