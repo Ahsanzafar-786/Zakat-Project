@@ -40,14 +40,14 @@
                         </label>
                         <input class="form-control" v-model="$v.brand.ugamaNo.$model" placeholder="XXXXXXXXXX"
                             maxlength="10" type="text" />
-                        <span v-if="$v.brand.ugamaNo.$error && english == 'en'" class="error text-danger">
+                        <!-- <span v-if="$v.brand.ugamaNo.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.ugamaNo.minLength">ID length should be 10 characters.</span>
                             <span v-if="!$v.brand.ugamaNo.maxLength">ID length should be 10 characters.</span>
                         </span>
                         <span v-else class="error text-danger">
                             <span v-if="!$v.brand.ugamaNo.minLength">يجب أن يكون طول الهوية 10 أحرف</span>
                             <span v-if="!$v.brand.ugamaNo.maxLength">يجب أن يكون طول الهوية 10 أحرف</span>
-                        </span>
+                        </span> -->
                     </div>
                     <!-- <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
@@ -355,7 +355,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import {
-    required, requiredIf, minLength, maxLength, numeric, decimal
+    required, requiredIf, decimal
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -410,23 +410,12 @@ export default {
                 }),
             },
             ugamaNo: {
-                required,
-                minLength: minLength(10),
-                maxLength: maxLength(10),
+                
             },
             phoneNo: {
-                numeric,
-                minLength: minLength(10),
-                maxLength: maxLength(10),
             },
             reason: {
-                required: requiredIf((x) => {
-                    if (x.type == 'Add') {
-                        return false;
-                    } else if (x.type == 'Edit') {
-                        return true;
-                    }
-                }),
+                
             },
             recurringAmount: {
                 decimal,

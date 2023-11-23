@@ -33,6 +33,16 @@ export default {
             this.value='';
 
         },
+        GetName: function () {
+            if(this.value!=undefined && this.value!=null && this.value!='')
+            {
+                return this.value.name;
+
+            }
+            else
+            return '';
+                
+            },
         getData: function () {
             var root = this;
             var token = '';

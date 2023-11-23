@@ -22,7 +22,8 @@
                         <label class="text  font-weight-bolder">
                             {{ $t('Payment.AuthorizePerson') }}:<span class="text-danger"> </span>
                         </label>
-                        <authorizedperson v-on:input="GetBeneficaryList(brand.authorizationPersonId)"
+                        <authorizedperson ref="AuthorizedDropdown"
+                            v-on:input="GetBeneficaryList(brand.authorizationPersonId)"
                             v-model="brand.authorizationPersonId" :values="brand.authorizationPersonId" />
                     </div>
                     <div class="col-md-6 form-group">
@@ -212,7 +213,7 @@
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
         <benificary-mod :brand="newBenificary" :show="show" v-if="show" @close="IsSave" :type="type" />
-        <authorizepaymentreport :headerFooter="headerFooter" :show="show2" :brandObj="brandObj" v-if="show"
+        <authorizepaymentreport :headerFooter="headerFooter" :show="show2" :brandObj="brandObj" v-if="show2"
             v-bind:key="changereport" :printDetails="paymentRecord" />
 
 
@@ -237,13 +238,18 @@ export default {
     data: function () {
         return {
             show1: false,
-            brandObj: '',
             brand: {
                 id: '00000000-0000-0000-0000-000000000000',
                 authorizationPersonId: '',
                 userId: localStorage.getItem('UserId'),
                 code: '',
                 benificarylist: [],
+            },
+            brandObj: {
+                code: '',
+                dateTime: '',
+                authorizePersonNameAr: '',
+                amount: [],
             },
             show: false,
             show2: false,
@@ -370,14 +376,30 @@ export default {
                     });
 
         },
-        PrintRdlc: function (id,brandObj) {
-            this.loading=true;
+        PrintRecord: function (id) {
+            debugger;
+            this.loading = true;
             var root = this;
             var token = '';
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            this.brandObj=brandObj;
+
+            if (this.$refs.AuthorizedDropdown != undefined) {
+
+                let name = this.$refs.AuthorizedDropdown.GetName();
+                if (name != undefined && name != null && name != '') {
+                    this.brandObj.authorizePersonNameAr = name;
+
+                }
+                this.brandObj.dateTime = moment().format('llll');
+                this.brandObj.code = this.brand.code;
+
+
+
+
+
+            }
             root.$https.get('/Benificary/PaymentDetailQueryByAuth?authorizationPersonId=' + id, {
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -386,17 +408,13 @@ export default {
                 .then(function (response) {
                     if (response.data != null) {
 
-                                                debugger;
+                        debugger;
                         root.paymentRecord = response.data.results;
 
-                       
-                        setTimeout(function () {
 
-                            root.show = true; 
-                            root.changereport++;
-                            root.loading = false; 
-
-               }, 125)
+                        root.show2 = true;
+                        root.changereport++;
+                        root.loading = false;
                     } else {
                         console.log("error: something wrong from db.");
                     }
@@ -417,6 +435,8 @@ export default {
                 token = localStorage.getItem('token');
             }
 
+
+
             this.brand.benificarylist = this.benificarylist;
 
 
@@ -430,10 +450,10 @@ export default {
                 .then(function (response) {
                     debugger;
 
-                    if (val)
-                    {
-                        if (response.data.paymentId!=null) {
-                            root.PrintRdlc(response.data.paymentId);
+                    if (val) {
+                        debugger;
+                        if (response.data.paymentId != null) {
+                            root.PrintRecord(response.data.paymentId);
                         }
 
                     }

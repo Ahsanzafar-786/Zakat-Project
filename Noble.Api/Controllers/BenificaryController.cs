@@ -503,7 +503,7 @@ namespace Noble.Api.Controllers
         [Route("api/Benificary/GetPaymentsList")]
         [HttpGet("GetPaymentsList")]
         public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
-            , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender, string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId)
+            , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender, string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId,bool isSearchFilter)
         {
             var payment = await Mediator.Send(new PaymentListQuery
             {
@@ -524,6 +524,7 @@ namespace Noble.Api.Controllers
                 Gender = gender,
                 ContactNo = contactNo,
                 ApprovalPersonId = approvalPersonId,
+                IsSearchFilter = isSearchFilter,
                 AuthorizationPersonId = authorizationPersonId
             });
             return Ok(payment);

@@ -51,7 +51,7 @@
                                     <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ brandObj.authorizePersonNameAr }}</td>
                                     <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >:اسم الشخص المعتمد </td>
 
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ parseFloat(brandObj.amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ parseFloat(totalAmount()).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
                                     <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >  :المبلغ الإجمالي </td>
                                 </tr>
 
@@ -111,7 +111,7 @@
                                
                                 <td colspan="7" style="text-align: left;">المبلغ الإجمالي</td>
                                 <td >
-                                    {{ parseFloat(brandObj.amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}
+                                    {{ parseFloat(totalAmount()).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}
 
                                 </td>
                                
@@ -177,7 +177,7 @@
     
         mounted: function () {
             debugger;
-            this.headerFooters = this.headerFooter
+            this.headerFooters.company = this.$store.state.companyList.company;
 
            
 

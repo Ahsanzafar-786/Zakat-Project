@@ -416,7 +416,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import {
-    required, requiredIf, minLength, maxLength,numeric,decimal
+    required, requiredIf,decimal
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -510,14 +510,10 @@ export default {
                 }),
             },
             ugamaNo: {
-                required,
-                minLength: minLength(10),
-                maxLength: maxLength(10),
+               
             },
             phoneNo: {
-                numeric,
-                minLength: minLength(10),
-                maxLength: maxLength(10),
+               
             },
             recurringAmount: {
                 decimal,

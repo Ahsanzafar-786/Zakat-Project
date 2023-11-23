@@ -103,6 +103,7 @@ namespace Focus.Business.PaymentByAuthPerson.Command
                             };
 
                             Context.Payments.Add(payment);
+                            code++;
                             request.PaymentId = payment.Id;
                             var selectedMonth = new List<SelectedMonth>();
                             if (beneficary.CurrentPaymentMonth != null)

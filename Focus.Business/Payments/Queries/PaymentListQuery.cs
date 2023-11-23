@@ -51,72 +51,7 @@ namespace Focus.Business.Payments.Queries
                 {
 
 
-                    //if (!request.IsSearchFilter)
-                    //{
-                    //    var query1 = Context.Payments.AsNoTracking()
-                    //                .Include(x => x.Beneficiaries).ThenInclude(x => x.BenificaryAuthorization).ThenInclude(x => x.AuthorizedPerson)
-                    //                .Include(x => x.Beneficiaries).ThenInclude(x => x.PaymentTypes)
-                    //                .Include(x => x.Beneficiaries).ThenInclude(x => x.ApprovalPersons)
-                    //                .Include(x => x.Beneficiaries).ThenInclude(x => x.CharityTransactions)
-                    //                .Include(x => x.ApplicationUser)
-                                     
-
-                    //                .Select(x => new PaymentLookupModel
-                    //                {
-                    //                    Id = x.Id,
-                    //                    BenificayId = x.BenificayId,
-                    //                    Amount = x.Amount,
-                    //                    Month = x.Month,
-                    //                    Year = x.Year,
-                    //                    Date = x.Date,
-                    //                    Period = x.Period,
-                    //                    PaymentCode = x.PaymentCode,
-                    //                    BenificaryName = x.Beneficiaries.Name,
-                    //                    BenificaryCode = x.Beneficiaries.BeneficiaryId,
-                    //                    BenificaryNameAr = x.Beneficiaries.NameAr,
-                    //                    Note = x.Note,
-                    //                    Code = x.Code,
-                    //                    IsVoid = x.IsVoid,
-                    //                    TotalAmount = x.TotalAmount,
-                    //                    AllowVoid = x.AllowVoid,
-                    //                    PaymentByAuthorizePerson = x.PaymentByAuthorizePerson,
-                    //                    IsRegister = x.Beneficiaries.IsRegister,
-                    //                    Nationality = x.Beneficiaries.Nationality,
-                    //                    UgamaNo = x.Beneficiaries.UgamaNo,
-                    //                    Gender = x.Beneficiaries.Gender,
-                    //                    ContactNo = x.Beneficiaries.PhoneNo,
-                    //                    DurationType = x.Beneficiaries.DurationType,
-                    //                    LastPaymentAmount = x.Beneficiaries.CharityTransactions.Sum(x => x.Amount),
-
-                    //                    LastPaymentDate = x.Beneficiaries.CharityTransactions.OrderBy(x => x.DoucmentDate).LastOrDefault(charity => charity.DoucmentId == x.Id).Month,
-                    //                    ApprovalPersonId = x.Beneficiaries.ApprovedPaymentId,
-                    //                    NextMonth = x.Beneficiaries.CurrentPaymentMonth.Value.AddMonths(1),
-                    //                    EndMonth = x.Beneficiaries.EndDate,
-                    //                    ApprovalPersonName = x.Beneficiaries.ApprovalPersons.Name,
-                    //                    PaymentType = x.Beneficiaries.PaymentTypes.Name,
-                    //                    PaymentTypeAr = x.Beneficiaries.PaymentTypes.NameAr,
-                    //                    AuthorizePersonId = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizationPersonId : null,
-                    //                    AuthorizePersonName = x.Beneficiaries.BenificaryAuthorization != null ? x.Beneficiaries.BenificaryAuthorization.FirstOrDefault().AuthorizedPerson.Name : null,
-
-                    //                    Cashier = x.ApplicationUser.UserName,
-                    //                })
-                    //                .Where(x => !x.IsVoid && !x.PaymentByAuthorizePerson && x.PaymentType!= "Daily Payment")
-
-                    //                .OrderByDescending(x => x.Code).Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize).ToList();
-
-                    //    var count1 = Context.Payments.AsNoTracking().Count();
-
-
-                    //    return new PagedResult<List<PaymentLookupModel>>
-                    //    {
-                    //        Results = query1,
-                    //        RowCount = count1,
-                    //        PageSize = request.PageSize,
-                    //        CurrentPage = request.PageNumber,
-                    //        PageCount = count1 / request.PageSize
-                    //    };
-
-                    //}
+                  
 
 
                     var query = Context.Payments.AsNoTracking()

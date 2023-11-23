@@ -171,7 +171,7 @@
                                            
                                             
                                             <strong>
-                                                <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id,brand)"> {{
+                                                <a href="javascript:void(0)" v-on:click="PrintRecord(brand.id,brand)"> {{
                                                     $t('Payment.Print') }}</a>
                                             </strong>
                                         </div>
@@ -381,7 +381,7 @@ export default {
         GotoPage: function (link) {
             this.$router.push({ path: link });
         },
-        PrintRdlc: function (id,brandObj) {
+        PrintRecord: function (id,brandObj) {
             this.loading=true;
             var root = this;
             var token = '';
@@ -399,15 +399,12 @@ export default {
 
                                                 debugger;
                         root.paymentRecord = response.data.results;
-
-                       
-                        setTimeout(function () {
-
-                            root.show = true; 
+                        root.show = true; 
                             root.changereport++;
                             root.loading = false; 
 
-               }, 125)
+                       
+                       
                     } else {
                         console.log("error: something wrong from db.");
                     }
@@ -423,7 +420,7 @@ export default {
 
             var root = this;
             var token = '';
-            this.loading = true;
+            // this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
@@ -460,6 +457,7 @@ export default {
                             debugger;
                             root.headerFooter.company = response.data;
                             root.headerFooter.company.base64Logo = 'data:image/png;base64,' + response.data.base64Logo;
+                            root.$store.dispatch('GetCompanyList',  root.headerFooter);
 
                         }
                     });
