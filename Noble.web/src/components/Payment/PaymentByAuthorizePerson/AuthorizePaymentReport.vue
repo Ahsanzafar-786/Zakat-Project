@@ -148,7 +148,7 @@
     import moment from "moment";
 
     export default {
-        props: ['printDetails', 'headerFooter','brandObj'],
+        props: ['printDetails', 'headerFooter','brandObj','documentName'],
         data: function () {
             return {
                 transactionList: [],
@@ -190,10 +190,15 @@
 
                 setTimeout(function () {
                     root.printInvoice();
-                    root.$router.push({
+                    if(root.documentName=='Add')
+                    {
+                        root.$router.push({
                                     path: '/authorizepersonlist',
 
                                 })
+                    }
+
+                    
                 }, 125)
             }
         },

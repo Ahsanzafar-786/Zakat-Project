@@ -222,7 +222,7 @@
                 </div>
             </div>
 
-            <authorizepaymentreport :headerFooter="headerFooter" :show="show"  :brandObj="brandObj" v-if="show" v-bind:key="changereport" :printDetails="paymentRecord"  />
+            <authorizepaymentreport :documentName="'List'"  :headerFooter="headerFooter" :show="show"  :brandObj="brandObj" v-if="show" v-bind:key="changereport" :printDetails="paymentRecord"  />
             <paymentauthorizedetail :id="authorizeId" :show="show1" v-if="show1"  @close="RefreshList"
                 @IsSave="IsSave" />
             <loading :active.sync="loading" :can-cancel="true" :is-full-page="true"></loading>
