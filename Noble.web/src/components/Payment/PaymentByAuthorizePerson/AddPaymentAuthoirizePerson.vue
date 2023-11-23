@@ -26,7 +26,8 @@
                             v-model="brand.authorizationPersonId" :values="brand.authorizationPersonId" />
                     </div>
                     <div class="col-md-6 form-group">
-                        <label class="text  font-weight-bolder">{{ $t('Payment.PaymentCode') }}:<span class="text-danger"> </span>
+                        <label class="text  font-weight-bolder">{{ $t('Payment.PaymentCode') }}:<span class="text-danger">
+                            </span>
                         </label>
                         <input class="form-control" v-model="brand.code" type="text" disabled />
                     </div>
@@ -179,7 +180,7 @@
                                             <a href="javascript:void(0)" v-on:click="DeleteBenficay(brand.id)"><i
                                                     class="las la-trash-alt text-secondary font-16"></i></a>
                                         </td>
-                                        
+
 
 
                                     </tr>
@@ -195,20 +196,25 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary('Draft')"
-                    >
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary(false)">
                     {{ $t('Save') }}
                 </button>
-               
+                <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary(true)">
+                    Save As Print
+                </button>
+
 
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="GotoPage('/authorizepersonlist')">
                     {{ $t('Close') }}
                 </button>
             </div>
-          
+
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
         <benificary-mod :brand="newBenificary" :show="show" v-if="show" @close="IsSave" :type="type" />
+        <authorizepaymentreport :headerFooter="headerFooter" :show="show2" :brandObj="brandObj" v-if="show"
+            v-bind:key="changereport" :printDetails="paymentRecord" />
+
 
     </div>
 </template>
@@ -231,6 +237,7 @@ export default {
     data: function () {
         return {
             show1: false,
+            brandObj: '',
             brand: {
                 id: '00000000-0000-0000-0000-000000000000',
                 authorizationPersonId: '',
@@ -239,6 +246,7 @@ export default {
                 benificarylist: [],
             },
             show: false,
+            show2: false,
 
             newBenificary: {
                 id: '00000000-0000-0000-0000-000000000000',
@@ -296,7 +304,7 @@ export default {
             roleName: ''
         }
     },
-    
+
     methods: {
         IsSave: function () {
             this.show = false;
@@ -314,21 +322,21 @@ export default {
                 return '';
             }
         },
-        
+
         GotoPage: function (link) {
             this.$router.push({
                 path: link
             });
         },
-       
-        
+
+
         close: function () {
             this.$router.push({
                 path: '/authorizepersonlist',
 
             })
         },
-       
+
         DeleteBenficay: function (Id) {
             const index = this.benificarylist.findIndex(x => x.id === Id);
             if (index !== -1) {
@@ -362,7 +370,44 @@ export default {
                     });
 
         },
-        SaveBenificary: function () {
+        PrintRdlc: function (id,brandObj) {
+            this.loading=true;
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            this.brandObj=brandObj;
+            root.$https.get('/Benificary/PaymentDetailQueryByAuth?authorizationPersonId=' + id, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(function (response) {
+                    if (response.data != null) {
+
+                                                debugger;
+                        root.paymentRecord = response.data.results;
+
+                       
+                        setTimeout(function () {
+
+                            root.show = true; 
+                            root.changereport++;
+                            root.loading = false; 
+
+               }, 125)
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
+        },
+
+        SaveBenificary: function (val) {
             debugger;
             var root = this;
             this.loading = true;
@@ -372,10 +417,10 @@ export default {
                 token = localStorage.getItem('token');
             }
 
-            this.brand.benificarylist= this.benificarylist;
+            this.brand.benificarylist = this.benificarylist;
 
-            
-            
+
+
 
             this.$https.post('/Benificary/SavePaymentsByAuthorizePerson', this.brand, {
                 headers: {
@@ -385,36 +430,47 @@ export default {
                 .then(function (response) {
                     debugger;
 
-                    if (response.data.isSuccess == true) {
+                    if (val)
+                    {
+                        if (response.data.paymentId!=null) {
+                            root.PrintRdlc(response.data.paymentId);
+                        }
 
-                        {
+                    }
+                    else {
+                        if (response.data.isSuccess == true) {
+
+                            {
+                                root.$swal({
+                                    title: 'Save',
+                                    text: response.data.isAddUpdate,
+                                    type: 'success',
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: true,
+                                });
+                                root.$router.push({
+                                    path: '/authorizepersonlist',
+
+                                })
+
+
+                            }
+                        } else {
                             root.$swal({
-                                title: 'Save',
+                                title: 'Error',
                                 text: response.data.isAddUpdate,
-                                type: 'success',
-                                icon: 'success',
+                                type: 'error',
+                                icon: 'error',
                                 showConfirmButton: false,
                                 timer: 1500,
                                 timerProgressBar: true,
                             });
-                            root.$router.push({
-                                    path: '/authorizepersonlist',
-
-                                })
-                           
-
                         }
-                    } else {
-                        root.$swal({
-                            title: 'Error',
-                            text: response.data.isAddUpdate,
-                            type: 'error',
-                            icon: 'error',
-                            showConfirmButton: false,
-                            timer: 1500,
-                            timerProgressBar: true,
-                        });
+
                     }
+
                 })
                 .catch(error => {
                     console.log(error)

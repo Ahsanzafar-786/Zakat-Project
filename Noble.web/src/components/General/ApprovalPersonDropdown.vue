@@ -3,7 +3,7 @@
         <multiselect v-model="DisplayValue" v-if="isDisable == 'true'"  disabled :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectApprovalPerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
 
         </multiselect>      
-        <multiselect v-model="DisplayValue" v-else :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectApprovalPerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
+        <multiselect v-model="DisplayValue" v-else :options="options"  :multiple="false" :placeholder="$t('General.SelectApprovalPerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
 
         </multiselect>      
     </div>
