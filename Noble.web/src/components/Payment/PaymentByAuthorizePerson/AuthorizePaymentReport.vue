@@ -148,7 +148,7 @@
     import moment from "moment";
 
     export default {
-        props: ['printDetails', 'headerFooter','brandObj','documentName'],
+        props: ['printDetails','brandObj','documentName'],
         data: function () {
             return {
                 transactionList: [],

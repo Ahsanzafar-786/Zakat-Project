@@ -101,7 +101,7 @@ namespace Focus.Business.Payments.Queries
                                  
                                     Cashier = x.ApplicationUser.UserName,
                                 }).OrderByDescending(x => x.Code)
-                                .Where(x=>x.PaymentType== "Daily Payment" && !x.IsVoid && !x.PaymentByAuthorizePerson)
+                                .Where(x=>x.PaymentType== "Daily Payment" && !x.IsVoid)
                                 .AsQueryable();
 
                    

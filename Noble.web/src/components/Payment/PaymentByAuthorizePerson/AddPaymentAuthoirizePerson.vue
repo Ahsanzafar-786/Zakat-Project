@@ -213,7 +213,7 @@
             <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
         </div>
         <benificary-mod :brand="newBenificary" :show="show" v-if="show" @close="IsSave" :type="type" />
-        <authorizepaymentreport :headerFooter="headerFooter" :documentName="'Add'" :show="show2" :brandObj="brandObj" v-if="show2"
+        <authorizepaymentreport  :documentName="'Add'" :show="show2" :brandObj="brandObj" v-if="show2"
             v-bind:key="changereport" :printDetails="paymentRecord" />
 
 

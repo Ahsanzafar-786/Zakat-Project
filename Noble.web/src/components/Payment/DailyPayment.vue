@@ -81,14 +81,14 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.Ids') }}:<span class="text-danger"> *</span>
+                            {{ $t('AddBenificary.Ids') }}:
                         </label>
                         <input class="form-control" v-model="$v.brand.ugamaNo.$model" placeholder="XXXXXXXXXX"
                             maxlength="10" type="text" />
-                        <span v-if="$v.brand.ugamaNo.$error" class="error text-danger">
+                        <!-- <span v-if="$v.brand.ugamaNo.$error" class="error text-danger">
                             <span v-if="!$v.brand.ugamaNo.minLength">ID length should be 10 characters.</span>
                             <span v-if="!$v.brand.ugamaNo.maxLength">ID length should be 10 characters.</span>
-                        </span>
+                        </span> -->
                        
                     </div>
                     <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
@@ -96,7 +96,7 @@
                             {{ $t('AddBenificary.ContactNo') }}:
                         </label>
                         <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" maxlength="10" type="text" />
-                        <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
+                        <!-- <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.phoneNo.minLength ">Contact Number length should be 10 characters.</span>
                             <span v-if="!$v.brand.phoneNo.maxLength ">Contact Number length should be 10 characters.</span>
                             <span v-if="!$v.brand.phoneNo.numeric ">Only use numbers</span>
@@ -105,7 +105,7 @@
                             <span v-if="!$v.brand.phoneNo.minLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
                             <span v-if="!$v.brand.phoneNo.maxLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
                             <span v-if="!$v.brand.phoneNo.numeric ">فقط استخدم الأرقام</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-6 form-group" v-else>
                         
@@ -113,7 +113,7 @@
                             {{ $t('AddBenificary.ContactNo') }}:
                         </label>
                         <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" maxlength="10" type="text" />
-                        <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
+                        <!-- <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.phoneNo.minLength ">Contact Number length should be 10 characters.</span>
                             <span v-if="!$v.brand.phoneNo.maxLength ">Contact Number length should be 10 characters.</span>
                             <span v-if="!$v.brand.phoneNo.numeric ">Only use numbers</span>
@@ -122,7 +122,7 @@
                             <span v-if="!$v.brand.phoneNo.minLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
                             <span v-if="!$v.brand.phoneNo.maxLength ">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
                             <span v-if="!$v.brand.phoneNo.numeric ">فقط استخدم الأرقام</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-6 form-group" v-if="brand.documentType!='dailyPayment'">
                         <label class="text  font-weight-bolder">
@@ -635,7 +635,7 @@ export default {
         },
         close: function () {
             this.$router.push({
-                                    path: '/payment',
+                                    path: '/dailyPaymentList',
                                 
                                 })
         },
@@ -725,7 +725,7 @@ export default {
                             else
                             {
                                 root.$router.push({
-                                    path: '/payment',
+                                    path: '/dailyPaymentList',
                                 
                                 })
                             }
