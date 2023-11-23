@@ -190,6 +190,10 @@
 
                 setTimeout(function () {
                     root.printInvoice();
+                    root.$router.push({
+                                    path: '/authorizepersonlist',
+
+                                })
                 }, 125)
             }
         },

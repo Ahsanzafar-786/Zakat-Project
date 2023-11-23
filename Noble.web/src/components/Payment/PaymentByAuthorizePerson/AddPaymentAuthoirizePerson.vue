@@ -415,6 +415,7 @@ export default {
                         root.show2 = true;
                         root.changereport++;
                         root.loading = false;
+                       
                     } else {
                         console.log("error: something wrong from db.");
                     }
