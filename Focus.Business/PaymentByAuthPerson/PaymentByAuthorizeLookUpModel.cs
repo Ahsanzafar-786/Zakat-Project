@@ -16,5 +16,6 @@ namespace Focus.Business.PaymentByAuthPerson
         public Guid? AuthorizationPersonId { get; set; }
         public ICollection<BenificariesLookupModel> Benificarylist { get; set; }
         public decimal Amount { get;  set; }
+        public int AuthorizedPersonCode { get;  set; }
     }
 }
