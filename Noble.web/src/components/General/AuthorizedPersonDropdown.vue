@@ -36,7 +36,7 @@ export default {
         GetName: function () {
             if(this.value!=undefined && this.value!=null && this.value!='')
             {
-                return this.value.name;
+                return this.value;
 
             }
             else
@@ -55,6 +55,9 @@ export default {
                     response.data.results.forEach(function (cat) {
                         root.options.push({
                             id: cat.id,
+                            authorizedPersonCode: cat.authorizedPersonCode,
+                            nameAr:  cat.name,
+                            onlyName:  cat.onlyName,
                             name: cat.name == '' ? cat.nameAr : cat.name || root.$i18n.locale == 'en'? cat.name:cat.nameAr,
                            // name: root.$i18n.locale == 'en'? cat.name:cat.nameAr
                            // name: cat.name == '' ? cat.nameAr : cat.name

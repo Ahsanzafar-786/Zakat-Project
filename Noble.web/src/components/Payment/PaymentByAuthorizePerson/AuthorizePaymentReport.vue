@@ -1,15 +1,14 @@
 <template>
-    <div>
-        <div hidden id='inventoryDetailReport' class="col-md-12"
-            style="background-color:white;padding-left:40px !important;padding-right:40px !important ">
-
-            <div style="background-color:white">
+     <div>
+        <div hidden id='inventoryDetailReport' class="col-md-12">
+            <!--page1-->
+            <div>
                 <!--HEADER-->
-                <div style="height:35mm;margin-top:1mm; border:2px solid #000000;">
-                    <table class="table table-borderless">
+                <div style="height:55mm; border:2px solid #000000;padding-top: 5px !important;padding-bottom: 5px !important;">
+                    <table class="table "  style="width: 100%;">
                         <tr>
-                            <td style="width:36%;" class="text-left pt-0 pb-0 pl-0 pr-0">
-                                <p class="mb-0">
+                            <td style="width:42%;" >
+                                <p >
                                     <span style="font-size:23px;color:black !important;font-weight:bold;">{{
                                         headerFooters.company.companyNameEnglish }}</span><br />
                                     <span style="font-size:14px;color:black !important;font-weight:bold;">VAT No.:
@@ -21,12 +20,12 @@
                                     </span>
                                 </p>
                             </td>
-                            <td style="width:26%;" class="text-center pt-0 pb-0 pl-0 pr-0">
+                            <td style="width:24%;" >
                                 <img :src="headerFooters.company.base64Logo"
                                     style="width:auto;max-width:300px; max-height:100px; padding:5px !important; margin:0 !important">
                             </td>
-                            <td style="width:38%;" class="pt-0 pb-0 pl-0 pr-0">
-                                <p class=" mb-0" style="text-align: right;">
+                            <td style="width:34%;" >
+                                <p  style="text-align: right;">
                                     <span style="font-size:23px;color:black !important;font-weight:bold;">{{
                                         headerFooters.company.companyNameArabic }}</span><br />
                                     <span style="font-size:14px;color:black !important;font-weight:bold;">رقم ضريبة القيمة
@@ -39,74 +38,76 @@
                                 </p>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="7" style="text-align: center;width:100%;font-size:20px;color:black !important;font-weight:bold;"  >الدفع عن طريق الشخص المعتم4د</td>
+                        </tr>
 
 
                     </table>
                 </div>
-
-                <div class="row mt-2">
+                <div class="row " style="margin-top:10px !important">
                     <div class="col-md-12 ml-2 mr-2">
                         <table class="table " style="border: none !important;">
                             <!--Row 1-->
                             <tr class="mt-2" style="border: none !important;">
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
                                     {{ brandObj.code }}</td>
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
                                     :رقم المعاملة </td>
 
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
                                     {{ GetDate(brandObj.dateTime) }}</td>
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
                                     :تاريخ الدفع </td>
                             </tr>
                             <tr class="mt-2" style="border: none !important;">
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
                                 </td>
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
                                 </td>
 
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
                                     {{ GetTime(brandObj.dateTime) }}</td>
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
                                     : وقت </td>
                             </tr>
                             <tr class="mt-2" style="border: none !important;">
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
                                     {{ brandObj.authorizedPersonCode }}</td>
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
                                     : الكود الوكيل</td>
 
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
                                     {{ brandObj.authorizePersonNameAr }}</td>
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
                                     :اسم الوكيل</td>
                             </tr>
                             <tr class="mt-2" style="border: none !important;">
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
                                     {{ count() }}</td>
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
                                     : إجمالي المستفيدين</td>
 
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
                                     {{ parseFloat(totalAmount()).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
                                     }}</td>
                                 <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
                                     :المبلغ الإجمالي </td>
                             </tr>
 
@@ -175,20 +176,20 @@
                                     <!--Row 1-->
                                     <tr class="mt-2" style="border: none !important;">
                                         <td class="pl-0 pr-0 pt-0 pb-0"
-                                            style="width:80%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                            style="width:85%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
                                             {{ brandObj.authorizePersonNameAr }}</td>
                                         <td class="pr-3 pr-0 pt-0 pb-0 "
-                                            style="width:20%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                            style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
                                            :اسم الوكيل  </td>
 
                                         
                                     </tr>
                                     <tr class="mt-2" style="border: none !important;">
                                         <td class="pl-0 pr-0 pt-0 pb-0"
-                                            style="width:80%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
+                                            style="width:85%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;padding-top: 50px !important;">
                                             </td>
                                         <td class="pr-3 pr-0 pt-0 pb-0 "
-                                            style="width:20%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;border: none !important;">
+                                            style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;;padding-top: 50px !important;">
                                            :توقيع الوكيل   </td>
 
                                         
@@ -218,9 +219,6 @@
 
 
             </div>
-
-
-
         </div>
     </div>
 </template>
@@ -345,12 +343,5 @@ export default {
 
 
 <style scoped>
-#font11 {
-    font-size: 11px;
-    line-height: 0;
-}
 
-#font16 {
-    font-size: 16px;
-}
 </style>

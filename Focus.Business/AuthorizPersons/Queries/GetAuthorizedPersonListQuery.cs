@@ -37,7 +37,10 @@ namespace Focus.Business.AuthorizPersons.Queries
                         {
                             Id = x.Id,
                             Name = x.AuthorizedPersonCode + " - " + x.Name,
-                            NameAr = x.AuthorizedPersonCode + " - " + x.NameAr,
+                            NameAr = x.AuthorizedPersonCode + " - " + x.NameAr, 
+                            OnlyName =  x.Name, 
+                            AuthorizedPersonCode = x.AuthorizedPersonCode,
+
                         }).ToListAsync();
 
                         return new PagedResult<List<AuthorizedPersonsLookupModel>>

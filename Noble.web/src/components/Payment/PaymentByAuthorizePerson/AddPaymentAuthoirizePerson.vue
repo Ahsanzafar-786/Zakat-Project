@@ -201,7 +201,7 @@
                     {{ $t('Save') }}
                 </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveBenificary(true)">
-                    Save As Print
+                    {{ $t('SaveasPrint') }}
                 </button>
 
 
@@ -388,8 +388,10 @@ export default {
             if (this.$refs.AuthorizedDropdown != undefined) {
 
                 let name = this.$refs.AuthorizedDropdown.GetName();
+                debugger;
                 if (name != undefined && name != null && name != '') {
-                    this.brandObj.authorizePersonNameAr = name;
+                    this.brandObj.authorizePersonNameAr = name.onlyName;
+                    this.brandObj.authorizedPersonCode = name.authorizedPersonCode;
 
                 }
                 this.brandObj.dateTime = moment().format('llll');
