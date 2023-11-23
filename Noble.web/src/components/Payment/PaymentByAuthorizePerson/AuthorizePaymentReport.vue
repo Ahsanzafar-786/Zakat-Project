@@ -36,27 +36,23 @@
                     </table>
                     </div>
 
-                    <div class="row mt-2" style="direction: rtl !important;" >
+                    <div class="row mt-2"  >
                         <div class="col-md-12 ml-2 mr-2">
                             <table class="table table-borderless">
                                 <!--Row 1-->
                                 <tr class="mt-2">
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; font-weight:bolder;text-align:right;color:black !important;font-size:18px !important;">:Code</td>
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{brandObj.code}}</td>
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:14%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >:شفرة </td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{brandObj.code}}</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >:شفرة </td>
 
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18% font-weight:bolder;text-align:right;color:black !important;font-size:18px !important;">:Date</td>
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ GetDate(brandObj.dateTime) }}</td>
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:14%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >  :تاريخ </td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ GetDate(brandObj.dateTime) }}</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >  :تاريخ </td>
                                 </tr>
                                 <tr class="mt-2"> 
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; font-weight:bolder;text-align:right;color:black !important;font-size:18px !important;">:Authoirzed Person</td>
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ brandObj.authorizePersonNameAr }}</td>
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:14%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >:اسم الشخص المعتمد </td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ brandObj.authorizePersonNameAr }}</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >:اسم الشخص المعتمد </td>
 
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18% font-weight:bolder;text-align:right;color:black !important;font-size:18px !important;">:Amount</td>
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:18%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ parseFloat(brandObj.amount).toFixed(3).slice(0,-1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
-                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:14%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >  :كمية </td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%; text-align:center;color:black !important;font-weight:bold;font-size:18px !important;">{{ parseFloat(brandObj.amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
+                                    <td class="pl-0 pr-0 pt-0 pb-0" style="width:25%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: right;" >  :المبلغ الإجمالي </td>
                                 </tr>
 
 
@@ -69,16 +65,16 @@
                 <div class="col-md-12 " style="background-color:white;padding-left:5px !important;padding-right:5px !important">
                     <div class="row p-1" style="background-color:white">
                         <div class="col-12">
-                            <table class="table col-md-12 " >
-                            <tr style="font-size:14px;color:black !important;color:black;border-top:0px !important">
+                            <table class="table col-md-12 "  style="direction: rtl !important;">
+                            <tr style="font-size:18px;color:black !important;color:black;border-top:0px !important">
                                 <th class="text-center" style="border-top:0px !important">#</th>
-                                <th class="text-center" style="border-top:0px !important">{{ $t('Payment.ID') }}</th>
-                                <th class="text-center" style="border-top:0px !important">{{ $t('Payment.Date') }}</th>
-                                <th class="text-center" style="border-top:0px !important"> {{ $t('Payment.Code') }}</th>
-                                <th class="text-center" style="border-top:0px !important"> {{ $t('Payment.BenificaryName') }}</th>
-                                <th class="text-center" style="border-top:0px !important">{{ $t('AddBenificary.PaymentType') }}</th>
-                                <th class="text-center" style="border-top:0px !important">{{ $t('Payment.LastPayment') }}</th>
-                                <th class="text-center" style="border-top:0px !important">Amount</th>
+                                <th class="text-center" style="border-top:0px !important">رقم المعاملة</th>
+                                <th class="text-center" style="border-top:0px !important">التاريخ</th>
+                                <th class="text-center" style="border-top:0px !important"> بطاقة تعريف</th>
+                                <th class="text-center" style="border-top:0px !important"> أسم المستفيد</th>
+                                <th class="text-center" style="border-top:0px !important">فترة الدفع بالأشهر</th>
+                                <th class="text-center" style="border-top:0px !important">آخر شهر مدفوع</th>
+                                <th class="text-center" style="border-top:0px !important">كمية</th>
                             </tr>
                             <!-- <tr style="font-size:14px;color:black !important;color:black;border-top:0px !important">
                                 <th class="text-center" style="border-top:0px !important">#</th>
@@ -105,20 +101,21 @@
                                     {{ GetDate2(brand.lastPaymentDate) }}</td>
                                     
                                
-                                <td class="text-center">
+                                <td class="text-center" style="font-weight: bold;">
                                     {{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
                                         -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}
                                 </td>
                                
                             </tr>
-                            <!-- <tr style="font-size:16px;color:black"  >
-                                <td colspan="8">
-                                    {{ totalAmount }}
+                            <tr style="font-size:18px;color:black;font-weight: bold;"  >
+                               
+                                <td colspan="7" style="text-align: left;">المبلغ الإجمالي</td>
+                                <td >
+                                    {{ parseFloat(brandObj.amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}
 
                                 </td>
-                                <td>Total</td>
                                
-                            </tr> -->
+                            </tr>
 
                            
 
@@ -173,12 +170,7 @@
                 listItemP3: [],
             }
         },
-        totalAmount: function () {
-               
-                 {
-                    return this.transactionList.reduce(function (a, c) { return a + Number(( c.totalAmount) || 0) }, 0)
-                }
-            },
+       
         created: function (){
 
         },
@@ -202,6 +194,12 @@
             }
         },
         methods: {
+            totalAmount: function () {
+               
+               {
+                  return this.transactionList.reduce(function (a, c) { return a + Number(( c.totalAmount) || 0) }, 0)
+              }
+          },
             GetDate: function (link) {
             if (link != undefined && link != null && link != '') {
 

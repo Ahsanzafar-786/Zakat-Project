@@ -181,7 +181,7 @@ namespace Focus.Business.PaymentByAuthPerson.Command
                         {
                             Id = Guid.Empty,
                             IsSuccess = true,
-                            PaymentId = request.PaymentId == null ? Guid.Empty : request.PaymentId.Value,
+                            PaymentId = paymentAuthorize.Id,
                             IsAddUpdate = "Data has been Added successfully"
                         };
                     }

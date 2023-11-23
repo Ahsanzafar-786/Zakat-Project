@@ -562,7 +562,7 @@ export default {
 
             var root = this;
             var token = '';
-            this.loading = true;
+            // this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
