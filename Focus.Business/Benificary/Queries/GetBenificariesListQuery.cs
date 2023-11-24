@@ -59,7 +59,7 @@ namespace Focus.Business.Benificary.Queries
                             PhoneNo = x.PhoneNo,
                             ApprovalStatus = x.ApprovalStatus,
                             BeneficiaryId = x.BeneficiaryId
-                        }).ToListAsync();
+                        }).OrderBy(x=>x.BeneficiaryId).ToListAsync();
 
                         return new PagedResult<List<BenificariesLookupModel>>
                         {

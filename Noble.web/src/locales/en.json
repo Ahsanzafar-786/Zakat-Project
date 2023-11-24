@@ -399,6 +399,8 @@
     "PaymentList":"Payment List",
     "BenificaryName":"Beneficiary Name",
     "Amount":"Paid Amount",
+    "VoidPayment":"Void Payment",
+    "PrintReport":"Print Report",
     "ID":"Trns.ID",
     "LastPayment":"Last Payment Date",
     "NextPayment":"Next Payment",

@@ -39,7 +39,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="7" style="text-align: center;width:100%;font-size:20px;color:black !important;font-weight:bold;"  >Void Payment Report</td>
+                            <td colspan="7" style="text-align: center;width:100%;font-size:20px;color:black !important;font-weight:bold;"  >تقرير الدفع الفارغ</td>
                         </tr>
 
 
@@ -60,6 +60,7 @@
                                         <th class="text-center" style="border-top:0px !important">التاريخ</th>
                                         <th class="text-center" style="border-top:0px !important">ID</th>
                                         <th class="text-center" style="border-top:0px !important"> أسم المستفيد</th>
+                                        <th class="text-center" style="border-top:0px !important">الشخص المرخص</th>
                                         <th class="text-center" style="border-top:0px !important">فترة الدفع بالأشهر</th>
                                         <th class="text-center" style="border-top:0px !important">آخر شهر مدفوع</th>
                                         <th class="text-center" style="border-top:0px !important">المبلغ </th>
@@ -73,6 +74,8 @@
                                         <td class="text-center">{{ brand.benificaryCode }}</td>
                                         <td class="text-center">{{ brand.benificaryName == '' ? brand.benificaryNameAr :
                                             brand.benificaryName }}</td>
+                                        <td class="text-center" v-if="brand.authorizePersonName != null">{{ brand.authorizePersonName }}</td>
+                                        <td class="text-center" v-else>--</td>
                                         <td class="text-center">{{ brand.paymentTypeAr }}</td>
                                         <td class="text-center" v-if="brand.paymentType == 'Daily Payment'">
                                             ------</td>
@@ -90,7 +93,7 @@
                                     </tr>
                                     <tr style="font-size:18px;color:black;font-weight: bold;">
 
-                                        <td colspan="7" style="text-align: left;">المبلغ الإجمالي</td>
+                                        <td colspan="8" style="text-align: left;">المبلغ الإجمالي</td>
                                         <td>
                                             {{ parseFloat(totalAmount()).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,
                                                 "$1,") }}

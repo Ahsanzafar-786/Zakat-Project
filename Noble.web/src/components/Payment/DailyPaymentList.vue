@@ -6,12 +6,12 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title" v-if="formName == 'voidPayment'">Void Payment</h4>
+                                <h4 class="page-title" v-if="formName == 'voidPayment'">{{ $t('Payment.VoidPayment') }}</h4>
                                 <h4 class="page-title" v-else>{{ $t('Payment.DailyPayments') }}</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active" v-if="formName == 'voidPayment'">Void Payment</li>
+                                    <li class="breadcrumb-item active" v-if="formName == 'voidPayment'">{{ $t('Payment.VoidPayment') }}</li>
                                     <li class="breadcrumb-item active" v-else>{{ $t('Payment.PaymentList') }}</li>
                                 </ol>
                             </div>
@@ -19,7 +19,7 @@
                                 <a v-on:click="PrintRecord()" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1"
                                     v-if=" formName == 'voidPayment'">
-                                    Print Report
+                                    {{ $t('Payment.PrintReport') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dailyPayment')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-primary mx-1"
@@ -323,7 +323,10 @@
 
                                     <td class="text-center">{{ brand.note }}</td>
                                     <td class="text-center">{{ brand.cashier }}</td>
-                                    <td class="text-center" v-if="brand.isVoid">--</td>
+                                    <td class="text-center" v-if="formName == 'voidPayment'">
+                                    {{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
+                                        -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
+                                    <td class="text-center" v-else-if="brand.isVoid">--</td>
                                     <td class="text-center" v-else>{{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
                                         -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
 
@@ -593,7 +596,7 @@ export default {
 
             var root = this;
             var token = '';
-            // this.loading = true;
+             this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }

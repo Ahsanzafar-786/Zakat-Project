@@ -66,8 +66,7 @@
                                 }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/dailyPaymentList', 'voidPayment')" href="javascript:void(0);">Void
-                                    Payments</a>
+                                <a v-on:click="GoTo('/dailyPaymentList', 'voidPayment')" href="javascript:void(0);">{{ $t('Payment.VoidPayment') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -89,11 +88,11 @@
                                     $t('BenificaryNote.BenificaryNote')
                                 }}</a>
                             </li>
-                            <li v-if="roleName != 'Cashier'">
+                            <!-- <li v-if="roleName != 'Cashier'">
                                 <a v-on:click="GoTo('/benificaryreports')" href="javascript:void(0);"> {{
                                     $t('Payment.BenificaryReports')
                                 }}</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                     <li v-if="roleName != 'Noble Admin'">
@@ -135,7 +134,7 @@
                                 }}</a>
                             </li>
                         </ul>
-                        <ul class="nav-second-level" aria-expanded="false">
+                        <!-- <ul class="nav-second-level" aria-expanded="false">
                             <li>
                                 <a v-on:click="GoTo('/charityfundsreports')" href="javascript:void(0);"> {{
                                     $t('Charity.PaymentSummary')
@@ -144,7 +143,7 @@
                         </ul>
                         <ul class="nav-second-level" aria-expanded="false">
 
-                        </ul>
+                        </ul> -->
                     </li>
                     <li v-if="roleName != 'Nobel Admin' && roleName != 'Cashier'">
                         <a href="javascript:void(0);">
