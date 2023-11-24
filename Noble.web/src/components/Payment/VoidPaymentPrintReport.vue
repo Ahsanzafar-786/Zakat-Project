@@ -39,83 +39,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="7" style="text-align: center;width:100%;font-size:20px;color:black !important;font-weight:bold;"  >الدفع عن طريق الشخص المعتمد</td>
+                            <td colspan="7" style="text-align: center;width:100%;font-size:20px;color:black !important;font-weight:bold;"  >Void Payment Report</td>
                         </tr>
 
 
                     </table>
                 </div>
                 <div class="row " style="margin-top:10px !important">
-                    <div class="col-md-12 ml-2 mr-2">
-                        <table class="table " style="border: none !important;">
-                            <!--Row 1-->
-                            <tr class="mt-2" style="border: none !important;">
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
-                                    {{ brandObj.code }}</td>
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
-                                    :رقم المعاملة </td>
-
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
-                                    {{ GetDate(brandObj.dateTime) }}</td>
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
-                                    :تاريخ الدفع </td>
-                            </tr>
-                            <tr class="mt-2" style="border: none !important;">
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
-                                </td>
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
-                                </td>
-
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
-                                    {{ GetTime(brandObj.dateTime) }}</td>
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
-                                    : وقت </td>
-                            </tr>
-                            <tr class="mt-2" style="border: none !important;">
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
-                                    {{ brandObj.authorizedPersonCode }}</td>
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
-                                    : الكود الوكيل</td>
-
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
-                                    {{ brandObj.authorizePersonNameAr }}</td>
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
-                                    :اسم الوكيل</td>
-                            </tr>
-                            <tr class="mt-2" style="border: none !important;">
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
-                                    {{ count() }}</td>
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
-                                    : إجمالي المستفيدين</td>
-
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:35%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
-                                    {{ parseFloat(totalAmount()).toFixed(2).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
-                                    }}</td>
-                                <td class="pl-0 pr-0 pt-0 pb-0"
-                                    style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
-                                    :المبلغ الإجمالي </td>
-                            </tr>
-
-
-
-
-                        </table>
-                    </div>
+                  
                     <!--INFORMATION-->
 
                     <div class="col-md-12 "
@@ -125,7 +56,7 @@
                                 <table class="table col-md-12 " style="direction: rtl !important;">
                                     <tr style="font-size:18px;color:black !important;color:black;border-top:0px !important">
                                         <th class="text-center" style="border-top:0px !important">#</th>
-                                        <th class="text-center" style="border-top:0px !important">رقم المعاملة</th>
+                                        <th class="text-center" style="border-top:0px !important"> المعاملة</th>
                                         <th class="text-center" style="border-top:0px !important">التاريخ</th>
                                         <th class="text-center" style="border-top:0px !important">ID</th>
                                         <th class="text-center" style="border-top:0px !important"> أسم المستفيد</th>
@@ -135,7 +66,7 @@
                                     </tr>
 
                                     <tr style="font-size:16px;color:black" v-for="(brand, index) in transactionList"
-                                        v-bind:key="brand.id" st>
+                                        v-bind:key="brand.id" >
                                         <td class="text-center">{{ index + 1 }}</td>
                                         <td class="text-center">{{ brand.code }}</td>
                                         <td class="text-center">{{ GetDate(brand.date) }}</td>
@@ -172,35 +103,7 @@
 
                                 </table>
 
-                                <table class="table " style="border: none !important;">
-                                    <!--Row 1-->
-                                    <tr class="mt-2" style="border: none !important;">
-                                        <td class="pl-0 pr-0 pt-0 pb-0"
-                                            style="width:85%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;">
-                                            {{ brandObj.authorizePersonNameAr }}</td>
-                                        <td class="pr-3 pr-0 pt-0 pb-0 "
-                                            style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;">
-                                           :اسم الوكيل  </td>
-
-                                        
-                                    </tr>
-                                    <tr class="mt-2" style="border: none !important;">
-                                        <td class="pl-0 pr-0 pt-0 pb-0"
-                                            style="width:85%; text-align:right;color:black !important;font-weight:bold;font-size:18px !important;border: none !important;padding-top: 50px !important;">
-                                            </td>
-                                        <td class="pr-3 pr-0 pt-0 pb-0 "
-                                            style="width:15%;font-weight:bolder;font-size:18px !important;color:black !important;text-align: center;border: none !important;;padding-top: 50px !important;">
-                                           :توقيع الوكيل   </td>
-
-                                        
-                                    </tr>
-
-
-
-
-
-                                </table>
-
+                                
 
 
                             </div>
@@ -227,7 +130,7 @@
 import moment from "moment";
 
 export default {
-    props: ['printDetails', 'brandObj', 'documentName'],
+    props: ['printDetails', 'headerFooter', 'documentName'],
     data: function () {
         return {
             transactionList: [],

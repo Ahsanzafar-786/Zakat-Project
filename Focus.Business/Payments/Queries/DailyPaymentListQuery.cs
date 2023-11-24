@@ -13,13 +13,12 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
-using Focus.Domain.Entities;
-using Focus.Business.Transactions.Models;
 
 namespace Focus.Business.Payments.Queries
 {
     public class DailyPaymentListQuery : PagedRequest, IRequest<PagedResult<List<PaymentLookupModel>>>
     {
+        public string FormName { get; set; }
         public string Gender { get; set; }
         public string ContactNo { get; set; }
         public string Nationality { get; set; }
@@ -29,6 +28,8 @@ namespace Focus.Business.Payments.Queries
         public string SearchTerm { get; set; }
         public string BeneficiaryName { get; set; }
         public int? Code { get; set; }
+        public bool IsVoid { get; set; }
+        public string PaymentType { get; set; }
         public decimal? Amount { get; set; }
         public int? BenificaryCode { get; set; }
         public DateTime? FromDate { get; set; }
@@ -54,6 +55,19 @@ namespace Focus.Business.Payments.Queries
             {
                 try
                 {
+                    if (request.FormName == "voidPayment")
+                    {
+                        request.IsVoid=true;
+                        request.PaymentType = "";
+
+
+                    }
+                    else
+                    {
+                        request.IsVoid = false;
+                        request.PaymentType = "Daily Payment";
+
+                    }
              
 
               
@@ -101,10 +115,16 @@ namespace Focus.Business.Payments.Queries
                                  
                                     Cashier = x.ApplicationUser.UserName,
                                 }).OrderByDescending(x => x.Code)
-                                .Where(x=>x.PaymentType== "Daily Payment" && !x.IsVoid)
+                                .Where(x=> x.IsVoid==request.IsVoid)
                                 .AsQueryable();
+                    if (request.PaymentType == "Daily Payment")
+                    {
+                        query = query.Where(x => x.PaymentType == request.PaymentType);
 
-                   
+
+                    }
+
+
                     if (!string.IsNullOrEmpty(request.SearchTerm))
                     {
                         var searchTerm = request.SearchTerm.ToLower();

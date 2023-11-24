@@ -471,7 +471,7 @@ namespace Noble.Api.Controllers
 
         [Route("api/Benificary/GetDailyPaymentsList")]
         [HttpGet("GetDailyPaymentsList")]
-        public async Task<IActionResult> GetDailyPaymentsList(string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
+        public async Task<IActionResult> GetDailyPaymentsList(string formName, string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
           , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender, string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId)
         {
             var payment = await Mediator.Send(new DailyPaymentListQuery
@@ -493,6 +493,7 @@ namespace Noble.Api.Controllers
                 Gender = gender,
                 ContactNo = contactNo,
                 ApprovalPersonId = approvalPersonId,
+                FormName = formName,
                 AuthorizationPersonId = authorizationPersonId
             });
             return Ok(payment);

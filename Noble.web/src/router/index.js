@@ -160,7 +160,10 @@ const routes = [
                         {
                             path: '/dailyPaymentList',
                             name: 'dailyPaymentList',
-                            component: dailyPaymentList
+                            component: dailyPaymentList,
+                            props(route) {
+                                return { formName: route.query.formName };
+                            },
                         },
                         {
                             path: '/addpaymentauthoirizeperson',
