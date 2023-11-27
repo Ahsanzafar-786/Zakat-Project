@@ -108,7 +108,7 @@ namespace Focus.Business.PaymentByAuthPerson.Command
                             var selectedMonth = new List<SelectedMonth>();
                             if (beneficary.CurrentPaymentMonth != null)
                             {
-                                var date= beneficary.CurrentPaymentMonth.Value;
+                                var date= beneficary.CurrentPaymentMonth.Value.AddMonths(1);
 
                                 for (int i = 0; i < paymentType; i++)
                                 {
@@ -119,7 +119,7 @@ namespace Focus.Business.PaymentByAuthPerson.Command
                                         SelectMonth = date,
                                         Amount = beneficary.AmountPerMonth,
                                     });
-                                    date = date.AddDays(1);
+                                    date = date.AddMonths(1);
 
                                 }
                             }
@@ -142,6 +142,8 @@ namespace Focus.Business.PaymentByAuthPerson.Command
                               
                                 {
                                     beneficary.CurrentPaymentMonth = selectedMonth.LastOrDefault()?.SelectMonth;
+                                    beneficary.LastPaymentAmount = beneficary.AmountPerMonth * selectedMonth.Count;
+
                                     Context.Beneficiaries.Update(beneficary);
 
                                 }
