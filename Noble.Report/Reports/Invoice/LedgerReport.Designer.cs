@@ -29,17 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo objectConstructorInfo1 = new DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo();
+            DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.DataAccess.DataFederation.SelectNode selectNode1 = new DevExpress.DataAccess.DataFederation.SelectNode();
             DevExpress.DataAccess.DataFederation.SourceNode sourceNode1 = new DevExpress.DataAccess.DataFederation.SourceNode();
             DevExpress.DataAccess.DataFederation.Source source1 = new DevExpress.DataAccess.DataFederation.Source();
             DevExpress.DataAccess.DataFederation.SelectNode selectNode2 = new DevExpress.DataAccess.DataFederation.SelectNode();
             DevExpress.DataAccess.DataFederation.SourceNode sourceNode2 = new DevExpress.DataAccess.DataFederation.SourceNode();
             DevExpress.DataAccess.DataFederation.Source source2 = new DevExpress.DataAccess.DataFederation.Source();
-            DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
-            DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
-            this.Company = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.Charity = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo objectConstructorInfo1 = new DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
@@ -47,6 +45,7 @@
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -73,38 +72,29 @@
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrTable3 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell17 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell18 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell20 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell21 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.federationDataSource1 = new DevExpress.DataAccess.DataFederation.FederationDataSource();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrLabel17 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.Company)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Charity)).BeginInit();
+            this.federationDataSource1 = new DevExpress.DataAccess.DataFederation.FederationDataSource();
+            this.xrTableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell13 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.Charity = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.Company = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.federationDataSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Charity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Company)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            // 
-            // Company
-            // 
-            this.Company.Constructor = objectConstructorInfo1;
-            this.Company.DataSource = typeof(Noble.Report.Models.CompanyDto);
-            this.Company.Name = "Company";
-            // 
-            // Charity
-            // 
-            this.Charity.Constructor = objectConstructorInfo1;
-            this.Charity.DataSource = typeof(Noble.Report.Models.CharityTransactionLookupModel);
-            this.Charity.Name = "Charity";
             // 
             // TopMargin
             // 
@@ -115,7 +105,7 @@
             // 
             this.BottomMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPageInfo1});
-            this.BottomMargin.HeightF = 23F;
+            this.BottomMargin.HeightF = 25.95831F;
             this.BottomMargin.Name = "BottomMargin";
             // 
             // xrPageInfo1
@@ -138,12 +128,12 @@
             // 
             // xrTable1
             // 
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0.0001831055F, 0F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(790.9998F, 25F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(791F, 25F);
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
@@ -151,6 +141,7 @@
             // 
             this.xrTableRow1.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
             this.xrTableCell1,
+            this.xrTableCell10,
             this.xrTableCell2,
             this.xrTableCell3,
             this.xrTableCell5,
@@ -163,51 +154,74 @@
             // xrTableCell1
             // 
             this.xrTableCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Amount]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Year]")});
             this.xrTableCell1.Multiline = true;
             this.xrTableCell1.Name = "xrTableCell1";
+            this.xrTableCell1.StylePriority.UseTextAlignment = false;
             this.xrTableCell1.Text = "#";
+            this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell1.TextFormatString = "{0:#,#0.00}";
-            this.xrTableCell1.Weight = 0.70753486958467082D;
+            this.xrTableCell1.Weight = 0.82654613278024847D;
+            // 
+            // xrTableCell10
+            // 
+            this.xrTableCell10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Month]")});
+            this.xrTableCell10.Multiline = true;
+            this.xrTableCell10.Name = "xrTableCell10";
+            this.xrTableCell10.StylePriority.UseTextAlignment = false;
+            this.xrTableCell10.Text = "xrTableCell10";
+            this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell10.TextFormatString = "{0:MM/dd/yy}";
+            this.xrTableCell10.Weight = 1.1051049878373111D;
             // 
             // xrTableCell2
             // 
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[benificaryName]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[CharityTransactionDate]")});
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
+            this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "xrTableCell2";
-            this.xrTableCell2.Weight = 1.5470210472589279D;
+            this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell2.TextFormatString = "{0:dd/MMM/yyyy}";
+            this.xrTableCell2.Weight = 1.0819584366025303D;
             // 
             // xrTableCell3
             // 
             this.xrTableCell3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Year]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Amount]")});
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
+            this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "xrTableCell5";
-            this.xrTableCell3.TextFormatString = "{0:MM/dd/yy}";
-            this.xrTableCell3.Weight = 0.73614852917014961D;
+            this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell3.TextFormatString = "{0:#.00}";
+            this.xrTableCell3.Weight = 1.1035611188251631D;
             // 
             // xrTableCell5
             // 
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Month]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[benificaryName]")});
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
+            this.xrTableCell5.StylePriority.UseTextAlignment = false;
             this.xrTableCell5.Text = "xrTableCell6";
+            this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell5.TextFormatString = "{0:MM/dd/yyyy}";
-            this.xrTableCell5.Weight = 0.88222573842636931D;
+            this.xrTableCell5.Weight = 2.25032522978445D;
             // 
             // xrTableCell6
             // 
             this.xrTableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[CharityTransactionDate]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[HijriYear]")});
             this.xrTableCell6.Multiline = true;
             this.xrTableCell6.Name = "xrTableCell6";
+            this.xrTableCell6.StylePriority.UseTextAlignment = false;
             this.xrTableCell6.Text = "xrTableCell7";
+            this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell6.TextFormatString = "{0:dd MMM yy}";
-            this.xrTableCell6.Weight = 1.2872293456266968D;
+            this.xrTableCell6.Weight = 0.92474749544969181D;
             // 
             // xrTableCell7
             // 
@@ -215,7 +229,9 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DoucmentCode]")});
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
-            this.xrTableCell7.Weight = 1.091940011478282D;
+            this.xrTableCell7.StylePriority.UseTextAlignment = false;
+            this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell7.Weight = 1.18718880782449D;
             // 
             // xrTableCell8
             // 
@@ -223,8 +239,10 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DataSource.CurrentRowIndex]+1")});
             this.xrTableCell8.Multiline = true;
             this.xrTableCell8.Name = "xrTableCell8";
+            this.xrTableCell8.StylePriority.UseTextAlignment = false;
             this.xrTableCell8.Text = "xrTableCell3";
-            this.xrTableCell8.Weight = 0.49071806349401531D;
+            this.xrTableCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell8.Weight = 0.53352289225997684D;
             // 
             // ReportHeader
             // 
@@ -466,7 +484,7 @@
             this.xrTable3.BorderColor = System.Drawing.Color.Silver;
             this.xrTable3.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Top | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable3.Font = new DevExpress.Drawing.DXFont("Calibri", 9F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0.0001831055F, 0F);
+            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0.0001716614F, 0F);
             this.xrTable3.Name = "xrTable3";
             this.xrTable3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -482,187 +500,61 @@
             // xrTableRow3
             // 
             this.xrTableRow3.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell4,
-            this.xrTableCell11,
             this.xrTableCell17,
             this.xrTableCell18,
             this.xrTableCell19,
+            this.xrTableCell14,
+            this.xrTableCell13,
+            this.xrTableCell12,
             this.xrTableCell20,
             this.xrTableCell21});
             this.xrTableRow3.Name = "xrTableRow3";
             this.xrTableRow3.Weight = 1D;
             // 
-            // xrTableCell4
-            // 
-            this.xrTableCell4.Multiline = true;
-            this.xrTableCell4.Name = "xrTableCell4";
-            this.xrTableCell4.Text = "المنبع\r\nAmount";
-            this.xrTableCell4.Weight = 0.70753499965705435D;
-            // 
-            // xrTableCell11
-            // 
-            this.xrTableCell11.Multiline = true;
-            this.xrTableCell11.Name = "xrTableCell11";
-            this.xrTableCell11.Text = "اسم المستفيد\r\nBenificary Name";
-            this.xrTableCell11.Weight = 1.5470207871141608D;
-            // 
             // xrTableCell17
             // 
             this.xrTableCell17.Multiline = true;
             this.xrTableCell17.Name = "xrTableCell17";
+            this.xrTableCell17.StylePriority.UseTextAlignment = false;
             this.xrTableCell17.Text = "سنة\r\nYear";
-            this.xrTableCell17.Weight = 0.73614850491849715D;
+            this.xrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell17.Weight = 1.060642736806181D;
             // 
             // xrTableCell18
             // 
             this.xrTableCell18.Multiline = true;
             this.xrTableCell18.Name = "xrTableCell18";
+            this.xrTableCell18.StylePriority.UseTextAlignment = false;
             this.xrTableCell18.Text = "شهر\r\nMonth";
-            this.xrTableCell18.Weight = 0.88222476288349294D;
+            this.xrTableCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell18.Weight = 1.4180992016809433D;
             // 
             // xrTableCell19
             // 
             this.xrTableCell19.Multiline = true;
             this.xrTableCell19.Name = "xrTableCell19";
+            this.xrTableCell19.StylePriority.UseTextAlignment = false;
             this.xrTableCell19.Text = "تاريخ المعاملة الخيرية\r\nCharity Transaction Date";
-            this.xrTableCell19.Weight = 1.287230475493609D;
+            this.xrTableCell19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell19.Weight = 1.3883969648343513D;
             // 
             // xrTableCell20
             // 
             this.xrTableCell20.Multiline = true;
             this.xrTableCell20.Name = "xrTableCell20";
+            this.xrTableCell20.StylePriority.UseTextAlignment = false;
             this.xrTableCell20.Text = "رمز الوثيقة\r\nDocument Code";
-            this.xrTableCell20.Weight = 1.091940011478282D;
+            this.xrTableCell20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell20.Weight = 1.523431655576339D;
             // 
             // xrTableCell21
             // 
             this.xrTableCell21.Multiline = true;
             this.xrTableCell21.Name = "xrTableCell21";
+            this.xrTableCell21.StylePriority.UseTextAlignment = false;
             this.xrTableCell21.Text = "#";
-            this.xrTableCell21.Weight = 0.49071806349401548D;
-            // 
-            // federationDataSource1
-            // 
-            this.federationDataSource1.Name = "federationDataSource1";
-            selectNode1.Alias = "Company";
-            sourceNode1.Alias = null;
-            source1.DataMember = "";
-            source1.DataSource = this.Company;
-            source1.Name = "Company";
-            sourceNode1.Source = source1;
-            selectNode1.Expressions.AddRange(new DevExpress.DataAccess.DataFederation.ISelectExpression[] {
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Id", "Id"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "NameEnglish", "NameEnglish"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "NameArabic", "NameArabic"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CompanyNameEnglish", "CompanyNameEnglish"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CompanyNameArabic", "CompanyNameArabic"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "VatRegistrationNo", "VatRegistrationNo"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CompanyEmail", "CompanyEmail"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CityEnglish", "CityEnglish"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CityArabic", "CityArabic"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CountryEnglish", "CountryEnglish"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Base64Logo", "Base64Logo"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CountryArabic", "CountryArabic"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CategoryEnglish", "CategoryEnglish"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CategoryArabic", "CategoryArabic"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "PhoneNo", "PhoneNo"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Website", "Website"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "AddressEnglish", "AddressEnglish"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "AddressArabic", "AddressArabic"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "DfeNumber", "DfeNumber"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CreatedDate", "CreatedDate"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "LogoPath", "LogoPath"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CompanyRegNo", "CompanyRegNo"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "HouseNumber", "HouseNumber"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Postcode", "Postcode"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Town", "Town"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "LandLine", "LandLine"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "ParentId", "ParentId"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "ClientParentId", "ClientParentId"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "BusinessId", "BusinessId"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "ClientNo", "ClientNo"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "FromDate", "FromDate"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "ToDate", "ToDate"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsBlock", "IsBlock"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsActive", "IsActive"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "NumberOfUsers", "NumberOfUsers"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CompanyType", "CompanyType"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "NoOfTransactionsAllow", "NoOfTransactionsAllow"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CompanyLicenceId", "CompanyLicenceId"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CompanyLicences", "CompanyLicences"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Currency", "Currency"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsMultiUnit", "IsMultiUnit"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsProduction", "IsProduction"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsMulti", "IsMulti"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "InvoiceWoInventory", "InvoiceWoInventory"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsArea", "IsArea"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsProceed", "IsProceed"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "English", "English"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Arabic", "Arabic"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Terminal", "Terminal"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "DayStart", "DayStart"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsDayStart", "IsDayStart"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CashVoucher", "CashVoucher"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsCashVoucher", "IsCashVoucher"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsOpenDay", "IsOpenDay"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "OpenDay", "OpenDay"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsDailyExpense", "IsDailyExpense"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "DailyExpense", "DailyExpense"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsTransferAllow", "IsTransferAllow"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "TransferAllow", "TransferAllow"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "MasterProduct", "MasterProduct"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsMasterProduct", "IsMasterProduct"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Step1", "Step1"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Step2", "Step2"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Step3", "Step3"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Step4", "Step4"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Step5", "Step5"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "SimpleInvoice", "SimpleInvoice"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "SoInventoryReserve", "SoInventoryReserve"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsSaleOrder", "IsSaleOrder"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "SaleOrder", "SaleOrder"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "PurchaseOrder", "PurchaseOrder"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "InternationalPurchase", "InternationalPurchase"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "PartiallyPurchase", "PartiallyPurchase"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "VersionAllow", "VersionAllow"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "ExpenseToGst", "ExpenseToGst"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsInternationalPurchase", "IsInternationalPurchase"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "AutoPurchaseVoucher", "AutoPurchaseVoucher"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsForMedical", "IsForMedical"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "SuperAdminDayStart", "SuperAdminDayStart"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "BankDetail", "BankDetail"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "TaxInvoiceLabel", "TaxInvoiceLabel"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsTaxLabel", "IsTaxLabel"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "TaxInvoiceLabelAr", "TaxInvoiceLabelAr"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsTaxInvoiceLabelAr", "IsTaxInvoiceLabelAr"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "SimplifyTaxInvoiceLabel", "SimplifyTaxInvoiceLabel"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsSimplifyTaxInvoiceLabel", "IsSimplifyTaxInvoiceLabel"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "SimplifyTaxInvoiceLabelAr", "SimplifyTaxInvoiceLabelAr"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsSimplifyTaxInvoiceLabelAr", "IsSimplifyTaxInvoiceLabelAr"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CompanyPermissionType", "CompanyPermissionType")});
-            selectNode1.Root = sourceNode1;
-            selectNode2.Alias = "Charity";
-            sourceNode2.Alias = null;
-            source2.DataMember = "";
-            source2.DataSource = this.Charity;
-            source2.Name = "Charity";
-            sourceNode2.Source = source2;
-            selectNode2.Expressions.AddRange(new DevExpress.DataAccess.DataFederation.ISelectExpression[] {
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Id", "Id"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "DoucmentId", "DoucmentId"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "BenificayId", "BenificayId"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "DoucmentCode", "DoucmentCode"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "benificaryName", "benificaryName"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Amount", "Amount"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "DoucmentDate", "DoucmentDate"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Month", "Month"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "PaymentMonths", "PaymentMonths"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CharityTransactionDate", "CharityTransactionDate"),
-            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Year", "Year")});
-            selectNode2.Root = sourceNode2;
-            this.federationDataSource1.Queries.AddRange(new DevExpress.DataAccess.DataFederation.QueryNode[] {
-            selectNode1,
-            selectNode2});
+            this.xrTableCell21.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell21.Weight = 0.68463049517840213D;
             // 
             // ReportFooter
             // 
@@ -742,6 +634,172 @@
             this.xrLabel18.Text = "Total";
             this.xrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
+            // federationDataSource1
+            // 
+            this.federationDataSource1.Name = "federationDataSource1";
+            selectNode1.Alias = "Charity";
+            sourceNode1.Alias = null;
+            source1.DataMember = "";
+            source1.DataSource = this.Charity;
+            source1.Name = "Charity";
+            sourceNode1.Source = source1;
+            selectNode1.Expressions.AddRange(new DevExpress.DataAccess.DataFederation.ISelectExpression[] {
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Id", "Id"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "DoucmentId", "DoucmentId"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "BenificayId", "BenificayId"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "DoucmentCode", "DoucmentCode"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "benificaryName", "benificaryName"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Amount", "Amount"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "DoucmentDate", "DoucmentDate"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Month", "Month"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "PaymentMonths", "PaymentMonths"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "CharityTransactionDate", "CharityTransactionDate"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Year", "Year"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "Years", "Years"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "IsVoid", "IsVoid"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "HijriYear", "HijriYear"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode1, "HijriMonth", "HijriMonth")});
+            selectNode1.Root = sourceNode1;
+            selectNode2.Alias = "Company";
+            sourceNode2.Alias = null;
+            source2.DataMember = "";
+            source2.DataSource = this.Company;
+            source2.Name = "Company";
+            sourceNode2.Source = source2;
+            selectNode2.Expressions.AddRange(new DevExpress.DataAccess.DataFederation.ISelectExpression[] {
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Id", "Id"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "NameEnglish", "NameEnglish"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "NameArabic", "NameArabic"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CompanyNameEnglish", "CompanyNameEnglish"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CompanyNameArabic", "CompanyNameArabic"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "VatRegistrationNo", "VatRegistrationNo"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CompanyEmail", "CompanyEmail"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CityEnglish", "CityEnglish"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CityArabic", "CityArabic"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CountryEnglish", "CountryEnglish"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Base64Logo", "Base64Logo"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CountryArabic", "CountryArabic"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CategoryEnglish", "CategoryEnglish"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CategoryArabic", "CategoryArabic"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "PhoneNo", "PhoneNo"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Website", "Website"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "AddressEnglish", "AddressEnglish"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "AddressArabic", "AddressArabic"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "DfeNumber", "DfeNumber"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CreatedDate", "CreatedDate"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "LogoPath", "LogoPath"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CompanyRegNo", "CompanyRegNo"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "HouseNumber", "HouseNumber"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Postcode", "Postcode"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Town", "Town"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "LandLine", "LandLine"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "ParentId", "ParentId"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "ClientParentId", "ClientParentId"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "BusinessId", "BusinessId"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "ClientNo", "ClientNo"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "FromDate", "FromDate"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "ToDate", "ToDate"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsBlock", "IsBlock"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsActive", "IsActive"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "NumberOfUsers", "NumberOfUsers"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CompanyType", "CompanyType"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "NoOfTransactionsAllow", "NoOfTransactionsAllow"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CompanyLicenceId", "CompanyLicenceId"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CompanyLicences", "CompanyLicences"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Currency", "Currency"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsMultiUnit", "IsMultiUnit"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsProduction", "IsProduction"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsMulti", "IsMulti"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "InvoiceWoInventory", "InvoiceWoInventory"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsArea", "IsArea"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsProceed", "IsProceed"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "English", "English"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Arabic", "Arabic"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Terminal", "Terminal"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "DayStart", "DayStart"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsDayStart", "IsDayStart"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CashVoucher", "CashVoucher"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsCashVoucher", "IsCashVoucher"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsOpenDay", "IsOpenDay"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "OpenDay", "OpenDay"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsDailyExpense", "IsDailyExpense"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "DailyExpense", "DailyExpense"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsTransferAllow", "IsTransferAllow"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "TransferAllow", "TransferAllow"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "MasterProduct", "MasterProduct"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsMasterProduct", "IsMasterProduct"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Step1", "Step1"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Step2", "Step2"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Step3", "Step3"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Step4", "Step4"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "Step5", "Step5"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "SimpleInvoice", "SimpleInvoice"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "SoInventoryReserve", "SoInventoryReserve"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsSaleOrder", "IsSaleOrder"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "SaleOrder", "SaleOrder"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "PurchaseOrder", "PurchaseOrder"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "InternationalPurchase", "InternationalPurchase"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "PartiallyPurchase", "PartiallyPurchase"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "VersionAllow", "VersionAllow"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "ExpenseToGst", "ExpenseToGst"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsInternationalPurchase", "IsInternationalPurchase"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "AutoPurchaseVoucher", "AutoPurchaseVoucher"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsForMedical", "IsForMedical"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "SuperAdminDayStart", "SuperAdminDayStart"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "BankDetail", "BankDetail"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "TaxInvoiceLabel", "TaxInvoiceLabel"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsTaxLabel", "IsTaxLabel"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "TaxInvoiceLabelAr", "TaxInvoiceLabelAr"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsTaxInvoiceLabelAr", "IsTaxInvoiceLabelAr"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "SimplifyTaxInvoiceLabel", "SimplifyTaxInvoiceLabel"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsSimplifyTaxInvoiceLabel", "IsSimplifyTaxInvoiceLabel"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "SimplifyTaxInvoiceLabelAr", "SimplifyTaxInvoiceLabelAr"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "IsSimplifyTaxInvoiceLabelAr", "IsSimplifyTaxInvoiceLabelAr"),
+            new DevExpress.DataAccess.DataFederation.SelectColumnExpression(sourceNode2, "CompanyPermissionType", "CompanyPermissionType")});
+            selectNode2.Root = sourceNode2;
+            this.federationDataSource1.Queries.AddRange(new DevExpress.DataAccess.DataFederation.QueryNode[] {
+            selectNode1,
+            selectNode2});
+            // 
+            // xrTableCell12
+            // 
+            this.xrTableCell12.Multiline = true;
+            this.xrTableCell12.Name = "xrTableCell12";
+            this.xrTableCell12.StylePriority.UseTextAlignment = false;
+            this.xrTableCell12.Text = "ID";
+            this.xrTableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell12.Weight = 1.1866599085259426D;
+            // 
+            // xrTableCell13
+            // 
+            this.xrTableCell13.Multiline = true;
+            this.xrTableCell13.Name = "xrTableCell13";
+            this.xrTableCell13.StylePriority.UseTextAlignment = false;
+            this.xrTableCell13.Text = "اسم المستفيد\r\nBenificary Name";
+            this.xrTableCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell13.Weight = 2.8876758779390257D;
+            // 
+            // xrTableCell14
+            // 
+            this.xrTableCell14.Multiline = true;
+            this.xrTableCell14.Name = "xrTableCell14";
+            this.xrTableCell14.StylePriority.UseTextAlignment = false;
+            this.xrTableCell14.Text = "المنبع\r\nAmount";
+            this.xrTableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell14.Weight = 1.4161177838350238D;
+            // 
+            // Charity
+            // 
+            this.Charity.Constructor = objectConstructorInfo1;
+            this.Charity.DataSource = typeof(Noble.Report.Models.CharityTransactionLookupModel);
+            this.Charity.Name = "Charity";
+            // 
+            // Company
+            // 
+            this.Company.Constructor = objectConstructorInfo1;
+            this.Company.DataSource = typeof(Noble.Report.Models.CompanyDto);
+            this.Company.Name = "Company";
+            // 
             // LedgerReport
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -753,22 +811,22 @@
             this.ReportFooter,
             this.PageFooter});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
-            this.Company,
             this.Charity,
+            this.Company,
             this.federationDataSource1});
             this.DataMember = "Charity";
             this.DataSource = this.federationDataSource1;
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
-            this.Margins = new DevExpress.Drawing.DXMargins(18F, 18F, 18F, 23F);
+            this.Margins = new DevExpress.Drawing.DXMargins(18F, 18F, 18F, 25.95831F);
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Version = "22.2";
-            ((System.ComponentModel.ISupportInitialize)(this.Company)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Charity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.federationDataSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Charity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Company)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -780,9 +838,6 @@
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
-        private DevExpress.DataAccess.ObjectBinding.ObjectDataSource Company;
-        private DevExpress.DataAccess.ObjectBinding.ObjectDataSource Charity;
-        private DevExpress.DataAccess.DataFederation.FederationDataSource federationDataSource1;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo1;
         private DevExpress.XtraReports.UI.XRPanel xrPanel1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel13;
@@ -808,8 +863,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel18;
         private DevExpress.XtraReports.UI.XRTable xrTable3;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell17;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell18;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell19;
@@ -824,5 +877,12 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell8;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
+        private DevExpress.DataAccess.ObjectBinding.ObjectDataSource Charity;
+        private DevExpress.DataAccess.ObjectBinding.ObjectDataSource Company;
+        private DevExpress.DataAccess.DataFederation.FederationDataSource federationDataSource1;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell14;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell13;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
     }
 }

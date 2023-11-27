@@ -73,6 +73,7 @@ namespace Focus.Business.Transactions.Queries
                         benificaryName = x.Beneficiaries.NameAr==null || x.Beneficiaries.NameAr==""
                         ?x.Beneficiaries.Name : x.Beneficiaries.NameAr,
                         DoucmentCode = x.DoucmentCode,
+                        HijriYear = x.Beneficiaries.BeneficiaryId.ToString(),
                         Amount = x.Amount,
                         CharityTransactionDate = x.CharityTransactionDate,
                         DoucmentDate = x.DoucmentDate,

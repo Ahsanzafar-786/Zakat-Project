@@ -26,7 +26,7 @@ namespace Noble.Report.Reports.Invoice
                 var selectedDate = "";
                 foreach (var item1 in item.SelectedMonth)
                 {
-                   selectedDate += Convert.ToDateTime(item.SelectedMonth[i++]).ToString("MMM yyyy") + "  "; 
+                   selectedDate += Convert.ToDateTime(item.SelectedMonth[i++]).ToString("MMM yyyy") + ",  "; 
                 }
                 item.PaymentMonth = selectedDate;
             }
