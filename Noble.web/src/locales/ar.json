@@ -19,13 +19,15 @@
     "SelectAuthorizePerson":"حدد تخويل الشخص",
     "SelectApprovalPerson":"حدد شخص الموافقة",
     "PaymentType":"فترة الدفع بالأشهر",
-    "SelectBenificary":"حدد المستفيد  /البحث بالاسم أو المعرف",
+    "SelectBenificary":"البحث حسب اسم المستفيد",
+    "SelectBenificary1": "البحث عن طريق الهوية",
+
     "SelectExpenseCategory": "Select Expense Category"
 
   },
  
   "Benificary":{
-    "Benificary" : "سجل المستـفـيد",
+    "Benificary" : "اسماء المستفيدين",
     "BenificaryList" : "قائمة المستفيدين",
     "Name" : "أسم المستـفـيد",
     "PayementIntervalMonths" : "الأشهر الفاصلة بين السداد",
@@ -49,7 +51,7 @@
     "ID":" الـكـود",
     "ApprovalPerson":"شخص الموافقة",
     "BeneficaryReport":"الـتـقـارير المستفيد",
-    "AuthorizedPerson":"الشخص المرخص",
+    "AuthorizedPerson":"الوكيل ",
     "Register/Un-Register":"مسجل /  غير مسجل",
     "FromDate":"من التاريخ",
     "ToDate":"تاريخ ",
@@ -87,7 +89,7 @@
     "AddBenificary" : "سجل المستـفـيد ",
     "UpdateBenificary" : "تحديث المستفيد",
     "NameArabic" : "الاسم عربي",
-    "AuthorizedPersonId": "هوية الشخص المرخص له",
+    "AuthorizedPersonId": "الوكيل",
     "Name" : "اسم",
     "PaymentDate" : "تاريخ الدفع",
     "PassportNo" : "رقم جواز السفر",
@@ -101,7 +103,7 @@
     "PaymentDetail" : "تفاصيل الدفع",
     "PaymentType" : " فترة الدفع بالأشهر",
     "ApprovalPersons" : "الموافقة على الأشخاص",
-    "AuthorizedPerson" : "الشخص المرخص",
+    "AuthorizedPerson" : "الوكيل",
     "RecurringAmount" : "المبلغ متكرر",
     "PaymentIntervalMonths" : "أشهر الفاصل الزمني للدفع",
     "AmountPerMonth" : " المبلغ الشهري ",
@@ -233,7 +235,7 @@
     "Id":"بطاقة تعريف"
   },
   "AuthorizedPerson":{
-    "AuthorizedPerson" :"الشخص المرخص",
+    "AuthorizedPerson" :"الوكيل",
     "AuthorizedPersonList": "قائمة المفوضين",
     "Name":"اسم",
     "Gender":"جنس",
@@ -247,7 +249,7 @@
   },
 
   "AddAuthorizedPerson":{
-    "AddAuthorizedPerson":"إضافة شخص مفوض",
+    "AddAuthorizedPerson":"إضافة  الوكيل",
     "UpdateAuthorizedPerson":"تحديث الشخص المخول",
     "Name":"اسم",
     "NameArabic":"الاسم عربي",
@@ -255,7 +257,7 @@
     "Nationality":"جنسية",
     "ID":"بطاقة تعريف",
     "Male" : "ذكر",
-    "AuthorizedPersonId":"معرف الشخص المُفوّض",
+    "AuthorizedPersonId":"  الوكيل",
     "Female" : "أنثى",
     "PassportNo":"رقم جواز السفر",
     "ContactNo":"رقم الاتصال",
@@ -321,8 +323,8 @@
     "AddApprovalPerson":"إضافة شخص الموافقة",
     "AddPaymentType":"إضافة نوع الدفع",
     "AddCharityFundsResources":"أضف موارد الصناديق الخيرية",
-    "Benificary":"المستفيد",
-    "BenificaryRegistration":"تسجيل المستـفـيد"
+    "Benificary":"اسماء المستفيدين",
+    "BenificaryRegistration":"المستفيدين"
   },
 
   "Company":{
@@ -398,15 +400,15 @@
   },
 
   "Payment":{
-    "AddPaymentbyAuthorizedPerson":"إضافة الدفع إلى الشخص المعتمد",
+    "AddPaymentbyAuthorizedPerson":"إضافة الدفع إلى الشخص الوكيل",
     "AuthorizePerson":"الشخص المفوض",
     "ViewPaymentDetail":"عرض تفاصيل الدفع",
     "VoidPayment":"الدفع باطل",
     "PrintReport":"اطبع تقرير",
 
-    "PaymentbyAuthorizedPerson":"الدفع عن طريق الشخص المعتمد",
+    "PaymentbyAuthorizedPerson":"الدفع عن طريق الشخص الوكيل",
     "PaymentCode":"شفرة",
-    "AuthoirzedPersonName":"اسم الشخص المعتمد",
+    "AuthoirzedPersonName":"اسم الشخص الوكيل",
     "ViewDetail":"عرض التفاصيل",
 
     "LastPayment":"آخر شهر مدفوع",

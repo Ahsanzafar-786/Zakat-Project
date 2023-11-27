@@ -1,7 +1,7 @@
 ﻿<template>
     <div>
         <multiselect  v-model="DisplayValue" :options="options" :multiple="false"
-            :placeholder="$t('General.SelectBenificary')" track-by="name" :clear-on-select="false" :show-labels="false"
+            :placeholder="$t('General.SelectBenificary1')" track-by="name" :clear-on-select="false" :show-labels="false"
             label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
 
         </multiselect>
@@ -48,14 +48,12 @@ export default {
                 token = localStorage.getItem('token');
             }
             root.options = [];
-            this.$https.get('/Benificary/GetBenificaryList?isDropDown=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            this.$https.get('/Benificary/GetBenificaryList?isDropDown=true'+ '&isCode=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     response.data.results.forEach(function (cat) {
-                        var name = cat.name == '' ? cat.nameAr : cat.name;
                         root.options.push({
                             id: cat.id,
-                            beneficiaryId: cat.beneficiaryId,
-                            name: name,
+                            name: cat.beneficiaryId,
                         })
                     })
                 }

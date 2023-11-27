@@ -151,6 +151,7 @@ Vue.component('userdropdown', require('./components/General/UsersDropdown.vue').
 Vue.component('paymentauthorizedetail', require('./components/Payment/PaymentByAuthorizePerson/PaymentAuthorizeDetail.vue').default);
 Vue.component('authorizepaymentreport', require('./components/Payment/PaymentByAuthorizePerson/AuthorizePaymentReport.vue').default);
 Vue.component('VoidPaymentPrintReport', require('./components/Payment/VoidPaymentPrintReport.vue').default);
+Vue.component('BenificaryCodeDropdown', require('./components/General/BenificaryCodeDropdown.vue').default);
 
 Vue.prototype.$https = axios;
 axios.defaults.baseURL = json.ServerIP;

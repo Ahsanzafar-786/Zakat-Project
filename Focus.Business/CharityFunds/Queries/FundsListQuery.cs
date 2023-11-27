@@ -52,6 +52,8 @@ namespace Focus.Business.CharityFunds.Queries
                     }
 
                     var count = await query.CountAsync();
+                    var pagesize = 100;
+                    request.PageSize = pagesize;
                     query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);
 
                     var queryList = await query.ToListAsync();

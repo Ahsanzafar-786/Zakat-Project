@@ -38,7 +38,7 @@ namespace Focus.Business.Benificary.Queries
                             .Include(x => x.AuthorizedPersons)
                             .Include(x => x.PaymentTypes)
                             .Include(x => x.ApprovalPersons)
-                            .Where(x => x.BenificaryAuthorization.Any(y => y.AuthorizationPersonId == request.AuthorizedPersonId))
+                            .Where(x => x.IsActive && x.BenificaryAuthorization.Any(y => y.AuthorizationPersonId == request.AuthorizedPersonId))
                             .Select(x => new BenificariesLookupModel
                             {
                                 Id = x.Id,

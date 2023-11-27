@@ -16,6 +16,7 @@ namespace Focus.Business.Benificary.Queries
     {
         public string SearchTerm { get; set; }
         public string NationalId { get; set; }
+        public bool IsCode { get; set; }
         public bool IsDropDown { get; set; }
         public string BeneficiaryName { get; set; }
         public string UqamaNo { get; set; }
@@ -50,26 +51,51 @@ namespace Focus.Business.Benificary.Queries
                 {
                     if(request.IsDropDown)
                     {
-                        var query = await Context.Beneficiaries.AsNoTracking().Where(x=>x.IsActive).Select(x => new BenificariesLookupModel
+                        if (request.IsCode)
                         {
-                            Id= x.Id,
-                            Name = x.Name,
-                            NameAr =x.NameAr,
-                            UgamaNo = x.UgamaNo,
-                            PhoneNo = x.PhoneNo,
-                            ApprovalStatus = x.ApprovalStatus,
-                            BeneficiaryId = x.BeneficiaryId
-                        }).OrderBy(x=>x.BeneficiaryId).ToListAsync();
+                            var query = await Context.Beneficiaries.AsNoTracking().Where(x => x.IsActive).Select(x => new BenificariesLookupModel
+                            {
+                                Id = x.Id,
+                                Name = x.Name,
+                                NameAr = x.NameAr,
+                                UgamaNo = x.UgamaNo,
+                                PhoneNo = x.PhoneNo,
+                                ApprovalStatus = x.ApprovalStatus,
+                                BeneficiaryId = x.BeneficiaryId
+                            }).OrderBy(x => x.BeneficiaryId).ToListAsync();
 
-                        return new PagedResult<List<BenificariesLookupModel>>
+                            return new PagedResult<List<BenificariesLookupModel>>
+                            {
+                                Results = query
+                            };
+
+                        }
+                        else
                         {
-                            Results = query
-                        };
+                            var query = await Context.Beneficiaries.AsNoTracking().Where(x => x.IsActive).Select(x => new BenificariesLookupModel
+                            {
+                                Id = x.Id,
+                                Name = x.Name,
+                                NameAr = x.NameAr,
+                                UgamaNo = x.UgamaNo,
+                                PhoneNo = x.PhoneNo,
+                                ApprovalStatus = x.ApprovalStatus,
+                                BeneficiaryId = x.BeneficiaryId
+                            }).ToListAsync();
+
+                            return new PagedResult<List<BenificariesLookupModel>>
+                            {
+                                Results = query
+                            };
+
+                        }
+                       
                     }
                     else
                     {
                         var query = Context.Beneficiaries.AsNoTracking()
                             .Include(x => x.AuthorizedPersons)
+                            .Include(x=>x.BenificaryNotes)
                             .Include(x=>x.PaymentTypes)
                             .Include(x=>x.ApprovalPersons)
                             .Select(x => new BenificariesLookupModel
@@ -88,6 +114,7 @@ namespace Focus.Business.Benificary.Queries
                             IsActive = x.IsActive,
                             IsRegister = x.IsRegister,
                             AuthorizationPersonName = x.AuthorizedPersons.Name,
+                            //BeneifcaryNotes = x.BenificaryNotes.,
                             AuthorizedPersonId = x.AuthorizedPersonId,
                             Address = x.Address,
                             ApprovalPersonId = x.ApprovalPersonId,

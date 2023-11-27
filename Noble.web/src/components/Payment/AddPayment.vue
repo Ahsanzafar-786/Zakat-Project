@@ -41,6 +41,25 @@
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  font-weight-bolder">
+                                    Benificary Code:<span class="text-danger"> *</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-7">
+                                <BenificaryCodeDropdown v-model="addPayment.benificayId" :values="addPayment.benificayId"
+                                    v-on:input="EditBenificary(addPayment.benificayId, true)" />
+                                <a v-if="addPayment.benificayId == '' || addPayment.benificayId == null"
+                                    href="javascript:void()" class="text-secondary">{{
+                                        $t('AddPayment.BenificaryDetails') }}</a>
+                                <a v-else href="javascript:void()" class="text-primary" data-bs-toggle="offcanvas"
+                                    ref="offcanvasRight" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">{{
+                                        $t('AddPayment.BenificaryDetails') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-label col-sm-12 ">
+                        <div class="row">
+                            <div class="col-sm-5 text-md-end align-middle">
+                                <label class="text  font-weight-bolder">
                                     {{ $t('AddPayment.Benificary') }}:<span class="text-danger"> *</span>
                                 </label>
                             </div>
