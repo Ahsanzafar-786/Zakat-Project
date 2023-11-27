@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-sm-5 text-md-end align-middle">
                                 <label class="text  font-weight-bolder">
-                                    Benificary Code:<span class="text-danger"> *</span>
+                                    ID:<span class="text-danger"> *</span>
                                 </label>
                             </div>
                             <div class="col-sm-7">

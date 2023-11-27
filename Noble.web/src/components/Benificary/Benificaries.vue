@@ -315,8 +315,8 @@
                                         <span class="badge badge-boxed  badge-outline-success"
                                             v-if="brand.approvalStatus == '3'">{{ $t('Benificary.Approved') }}</span>
                                     </td>
-                                    <td v-if="brand.note != null">
-                                        {{ brand.note }}
+                                    <td v-if="brand.beneifcaryNotes != null">
+                                        {{ brand.beneifcaryNotes }}
                                     </td>
                                     <td v-else>
                                         ---

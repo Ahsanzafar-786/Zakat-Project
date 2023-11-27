@@ -114,7 +114,7 @@ namespace Focus.Business.Benificary.Queries
                             IsActive = x.IsActive,
                             IsRegister = x.IsRegister,
                             AuthorizationPersonName = x.AuthorizedPersons.Name,
-                            //BeneifcaryNotes = x.BenificaryNotes.,
+                            BeneifcaryNotes = x.BenificaryNotes.FirstOrDefault().Note,
                             AuthorizedPersonId = x.AuthorizedPersonId,
                             Address = x.Address,
                             ApprovalPersonId = x.ApprovalPersonId,
@@ -135,7 +135,7 @@ namespace Focus.Business.Benificary.Queries
                                 AuthorizationPersonNameAr = y.AuthorizedPerson.AuthorizedPersonCode + " " +  y.AuthorizedPerson.NameAr,
 
                             }).ToList(),
-                        }).OrderByDescending(x => x.Id).AsQueryable();
+                        }).AsQueryable();
 
                        
 
