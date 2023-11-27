@@ -50,7 +50,7 @@ namespace Focus.Business.Benificary.Queries
                 {
                     if(request.IsDropDown)
                     {
-                        var query = await Context.Beneficiaries.AsNoTracking().Select(x => new BenificariesLookupModel
+                        var query = await Context.Beneficiaries.AsNoTracking().Where(x=>x.IsActive).Select(x => new BenificariesLookupModel
                         {
                             Id= x.Id,
                             Name = x.Name,
