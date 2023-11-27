@@ -13,13 +13,12 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Focus.Business.Users;
 using Microsoft.AspNetCore.Identity;
-using Focus.Domain.Entities;
-using Focus.Business.Transactions.Models;
 
 namespace Focus.Business.Payments.Queries
 {
     public class DailyPaymentListQuery : PagedRequest, IRequest<PagedResult<List<PaymentLookupModel>>>
     {
+        public string FormName { get; set; }
         public string Gender { get; set; }
         public string ContactNo { get; set; }
         public string Nationality { get; set; }
@@ -29,6 +28,8 @@ namespace Focus.Business.Payments.Queries
         public string SearchTerm { get; set; }
         public string BeneficiaryName { get; set; }
         public int? Code { get; set; }
+        public bool IsVoid { get; set; }
+        public string PaymentType { get; set; }
         public decimal? Amount { get; set; }
         public int? BenificaryCode { get; set; }
         public DateTime? FromDate { get; set; }
@@ -54,14 +55,20 @@ namespace Focus.Business.Payments.Queries
             {
                 try
                 {
-                //    var charityTransaction = Context.CharityTransaction.AsNoTracking().Select(x => new CharityTransactionLookupModel
-                //    {
-                //        Id = x.Id,
-                //        DoucmentId = x.DoucmentId,
-                //        Amount = x.Amount,
-                //        CharityTransactionDate = x.CharityTransactionDate,
+                    if (request.FormName == "voidPayment")
+                    {
+                        request.IsVoid=true;
+                        request.PaymentType = "";
 
-                //    }).AsQueryable();
+
+                    }
+                    else
+                    {
+                        request.IsVoid = false;
+                        request.PaymentType = "Daily Payment";
+
+                    }
+             
 
               
 
@@ -108,94 +115,94 @@ namespace Focus.Business.Payments.Queries
                                  
                                     Cashier = x.ApplicationUser.UserName,
                                 }).OrderByDescending(x => x.Code)
-                                .Where(x=>x.PaymentType== "Daily Payment" && !x.IsVoid && !x.PaymentByAuthorizePerson)
-                                .ToList();
+                                .Where(x=> x.IsVoid==request.IsVoid)
+                                .AsQueryable();
+                    if (request.PaymentType == "Daily Payment")
+                    {
+                        query = query.Where(x => x.PaymentType == request.PaymentType);
 
-                    //if (!string.IsNullOrEmpty(request.SearchTerm))
-                    //{
-                    //    var searchTerm = request.SearchTerm.ToLower();
-                    //    query = query.Where(x => x.Amount.ToString().Contains(searchTerm) || x.BenificaryNameAr.Contains(searchTerm) 
-                    //                          || x.BenificaryName.Contains(searchTerm) || x.BenificayId.ToString().Contains(searchTerm) || x.Code.ToString().Contains(searchTerm));
 
-                    //}
+                    }
+
+
                     if (!string.IsNullOrEmpty(request.SearchTerm))
                     {
                         var searchTerm = request.SearchTerm.ToLower();
-                        query = query.Where(x => x.BenificaryNameAr.Contains(searchTerm)
-                                              || x.BenificaryName.Contains(searchTerm)).ToList();
+                        query = query.Where(x => x.BenificaryNameAr.Contains(searchTerm) );
 
                     }
                     if (request.Amount != null && request.Amount > 0)
                     {
-                        query = query.Where(x => x.TotalAmount == request.Amount).ToList();
+                        query = query.Where(x => x.TotalAmount == request.Amount);
                     }
                     if (request.Code != null && request.Code > 0)
                     {
-                        query = query.Where(x => x.BenificaryCode == request.Code).ToList();
+                        query = query.Where(x => x.BenificaryCode == request.Code);
                     }
                     if (request.BenificaryCode != null && request.BenificaryCode > 0)
                     {
-                        query = query.Where(x => x.BenificaryCode == request.BenificaryCode).ToList();
+                        query = query.Where(x => x.BenificaryCode == request.BenificaryCode);
                     }
                     if (request.FromDate.HasValue && request.ToDate.HasValue)
                     {
-                        query = query.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date).ToList();
+                        query = query.Where(x => x.Date.Value.Date >= request.FromDate.Value.Date && x.Date.Value.Date <= request.ToDate.Value.Date);
                     }
                     if (request.Month != null)
                     {
-                        query = query.Where(x => x.Date.Value.Month == request.Month.Value.Month && x.Date.Value.Year == request.Month.Value.Year).ToList();
+                        query = query.Where(x => x.Date.Value.Month == request.Month.Value.Month && x.Date.Value.Year == request.Month.Value.Year);
                     }
                     if (request.Year != null)
                     {
-                        query = query.Where(x => x.Date.Value.Year == request.Year.Value.Year).ToList();
+                        query = query.Where(x => x.Date.Value.Year == request.Year.Value.Year);
                     }
                     if (request.Register == "Register")
                     {
-                        query = query.Where(x => x.IsRegister).ToList();
+                        query = query.Where(x => x.IsRegister);
                     }
                     if (request.Register == "Un-Register")
                     {
-                        query = query.Where(x => !x.IsRegister).ToList();
+                        query = query.Where(x => !x.IsRegister);
                     }
                     if (request.UqamaNo != null)
                     {
-                        query = query.Where(x => x.UgamaNo == request.UqamaNo).ToList();
+                        query = query.Where(x => x.UgamaNo == request.UqamaNo);
                     }
                     if (request.Nationality != null)
                     {
-                        query = query.Where(x => x.Nationality == request.Nationality).ToList();
+                        query = query.Where(x => x.Nationality == request.Nationality);
                     }
                     if (request.Gender != null)
                     {
-                        query = query.Where(x => x.Gender == request.Gender).ToList();
+                        query = query.Where(x => x.Gender == request.Gender);
                     }
                     if (request.ContactNo != null)
                     {
-                        query = query.Where(x => x.ContactNo == request.ContactNo).ToList();
+                        query = query.Where(x => x.ContactNo == request.ContactNo);
                     }
                     if (request.ApprovalPersonId != null)
                     {
-                        query = query.Where(x => x.ApprovalPersonId == request.ApprovalPersonId).ToList();
+                        query = query.Where(x => x.ApprovalPersonId == request.ApprovalPersonId);
                     }
                     if (request.AuthorizationPersonId != null)
                     {
-                        query = query.Where(x => x.AuthorizePersonId == request.AuthorizationPersonId).ToList();
+                        query = query.Where(x => x.AuthorizePersonId == request.AuthorizationPersonId);
                     }
 
                     var pagesize = 100;
                     request.PageSize = pagesize;
 
                     var count = query.Count();
-                    query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize).ToList();
+                    query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);
+                    var result = query.ToList();
 
 
                     return new PagedResult<List<PaymentLookupModel>>
                     {
-                        Results = query,
+                        Results = result,
                         RowCount = count,
                         PageSize = request.PageSize,
                         CurrentPage = request.PageNumber,
-                        PageCount = query.Count / request.PageSize
+                        PageCount = count / request.PageSize
                     };
 
                 }

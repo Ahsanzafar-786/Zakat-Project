@@ -150,11 +150,11 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4 mt-2">
-                            <a v-on:click="SearchFilter" href="javascript:void(0);"
+                            <a v-on:click="SearchFilter(true)" href="javascript:void(0);"
                                 class="btn btn-sm btn-outline-primary mx-1">
                                 {{ $t('Benificary.SearchFilter') }}
                             </a>
-                            <a @click="ClearFilter" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">
+                            <a @click="ClearFilter(false)" href="javascript:void(0);" class="btn btn-sm btn-outline-danger">
                                 {{ $t('Benificary.ClearFilter') }}
                             </a>
 
@@ -460,6 +460,7 @@ export default {
             amount: '',
             benificaryCode: '',
             loading: false,
+            isSearchFilter: false,
 
 
         }
@@ -506,6 +507,7 @@ export default {
             if (this.$refs.PaymentType != undefined)
                 this.$refs.PaymentType.Remove();
 
+                this.isSearchFilter=false;
 
             // Trigger the search or data refresh
             this.GetPayment(this.currentPage);
@@ -519,6 +521,7 @@ export default {
         },
 
         SearchFilter: function () {
+            this.isSearchFilter=true;
             this.GetPayment();
         },
         IsSave: function () {
@@ -568,7 +571,10 @@ export default {
             this.show = !this.show;
         },
         getPage: function () {
+            this.isSearchFilter=false;
+
             this.GetPayment(this.currentPage);
+
         },
 
         GotoPage: function (link) {
@@ -580,11 +586,11 @@ export default {
 
             var root = this;
             var token = '';
-            this.loading = true;
+            // this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender=' + this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender=' + this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId + '&isSearchFilter=' + this.isSearchFilter, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;
@@ -617,7 +623,11 @@ export default {
                                 timer: 3000,
                                 timerProgressBar: true,
                             });
+                            root.isSearchFilter=false;
+
                             root.GetPayment();
+
+                            
                         } else {
                             console.log("error: something wrong from db.");
                         }
@@ -641,6 +651,8 @@ export default {
                                 timer: 3000,
                                 timerProgressBar: true,
                             });
+                            root.isSearchFilter=false;
+
                             root.GetPayment();
                         } else {
                             console.log("error: something wrong from db.");
@@ -677,6 +689,8 @@ export default {
     mounted: function () {
         this.english = localStorage.getItem('English');
         this.arabic = localStorage.getItem('Arabic');
+        this.isSearchFilter=false;
+
         this.GetPayment(this.currentPage);
         this.roleName = localStorage.getItem('RoleName');
        

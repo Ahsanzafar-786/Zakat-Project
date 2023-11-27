@@ -51,6 +51,7 @@ namespace Focus.Business.PaymentByAuthPerson.Queries
                                     DateTime = x.Date,
                                     AuthorizationPersonId = x.AuthorizePersonId,
                                     AuthorizePersonNameAr = x.AuthorizedPerson.Name,
+                                    AuthorizedPersonCode = x.AuthorizedPerson.AuthorizedPersonCode,
                                     Code = x.Code,
                                     Amount = x.Amount,
                                 })

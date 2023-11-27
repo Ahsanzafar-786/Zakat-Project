@@ -14,8 +14,8 @@ export const store= new Vuex.Store({
   },
     actions: {
         
-        GetCustomerList: function (commit, customerList) {
-            store.state.customerList = customerList;
+        GetCompanyList: function (commit, companyList) {
+            store.state.companyList = companyList;
         },
   },
   modules: {

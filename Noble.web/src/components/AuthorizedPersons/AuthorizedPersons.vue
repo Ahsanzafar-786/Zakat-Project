@@ -53,6 +53,9 @@
                                         {{ $t('AuthorizedPerson.Name') }}
                                     </th>
                                     <th class="text-center">
+                                        Total Beneficiaries
+                                    </th>
+                                    <th class="text-center">
                                         {{ $t('AuthorizedPerson.Status') }}
                                     </th>
                                     <!-- <th class="text-center">
@@ -82,6 +85,9 @@
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditauthorizedPerson(brand.id)"> {{ brand.name }}</a>
                                         </strong>
+                                    </td>
+                                    <td class="text-center">
+                                            {{ brand.totalBeneficiaries }}         
                                     </td>
                                     <td class="text-center">
                                         <span v-if="brand.isActive" class="badge badge-boxed  badge-outline-success">

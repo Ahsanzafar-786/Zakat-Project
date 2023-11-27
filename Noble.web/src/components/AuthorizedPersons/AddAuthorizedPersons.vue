@@ -24,12 +24,12 @@
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
                     </div>
-                    <div class="form-group has-label col-sm-12 ">
+                    <!-- <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddAuthorizedPerson.NameArabic') }}:<span class="text-danger"> *</span>
                         </label>
                         <input class="form-control" v-model="$v.brand.nameAr.$model" type="text" />
-                    </div>
+                    </div> -->
                     <div class="form-group has-label col-sm-12 ">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddAuthorizedPerson.Gender') }}:

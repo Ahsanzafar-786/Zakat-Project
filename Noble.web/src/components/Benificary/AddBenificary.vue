@@ -36,18 +36,18 @@
 
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
-                            {{ $t('AddBenificary.Ids') }}:<span class="text-danger"> *</span>
+                            {{ $t('AddBenificary.Ids') }}:
                         </label>
                         <input class="form-control" v-model="$v.brand.ugamaNo.$model" placeholder="XXXXXXXXXX"
                             maxlength="10" type="text" />
-                        <span v-if="$v.brand.ugamaNo.$error && english == 'en'" class="error text-danger">
+                        <!-- <span v-if="$v.brand.ugamaNo.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.ugamaNo.minLength">ID length should be 10 characters.</span>
                             <span v-if="!$v.brand.ugamaNo.maxLength">ID length should be 10 characters.</span>
                         </span>
                         <span v-else class="error text-danger">
                             <span v-if="!$v.brand.ugamaNo.minLength">يجب أن يكون طول الهوية 10 أحرف</span>
                             <span v-if="!$v.brand.ugamaNo.maxLength">يجب أن يكون طول الهوية 10 أحرف</span>
-                        </span>
+                        </span> -->
                     </div>
                     <!-- <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
@@ -78,7 +78,7 @@
                         </label>
                         <input class="form-control" v-model="$v.brand.phoneNo.$model" placeholder="05xxxxxxxx" type="text"
                             maxlength="10" />
-                        <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
+                        <!-- <span v-if="$v.brand.phoneNo.$error && english == 'en'" class="error text-danger">
                             <span v-if="!$v.brand.phoneNo.minLength">Contact Number length should be 10 characters.</span>
                             <span v-if="!$v.brand.phoneNo.maxLength">Contact Number length should be 10 characters.</span>
                             <span v-if="!$v.brand.phoneNo.numeric">Only use numbers</span>
@@ -87,7 +87,7 @@
                             <span v-if="!$v.brand.phoneNo.minLength">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
                             <span v-if="!$v.brand.phoneNo.maxLength">طول رقم الاتصال يجب أن يكون 10 أحرف</span>
                             <span v-if="!$v.brand.phoneNo.numeric">فقط استخدم الأرقام</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
@@ -253,8 +253,7 @@
                                     <th class="text-center">{{ $t('AddBenificary.AuthorizedPerson') }}</th>
                                     <!-- <th class="text-center">{{ $t('AddBenificary.ApprovedBy')
                                     }}</th> -->
-                                    <th class="text-center">{{ $t('AddBenificary.Date') }}
-                                    </th>
+                                   
 
                                     <th class="text-center">{{ $t('AddBenificary.Status') }}
                                     </th>
@@ -270,36 +269,16 @@
                                     <td class="border-top-0 text-center">
                                         {{ index + 1 }}
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable">
-                                        <authorizedperson v-model="person.authorizationPersonId"
-                                            :values="person.authorizationPersonId" :isDisable="'true'" />
-                                    </td>
-                                    <td class="border-top-0 text-center" v-else>
+                                    
+                                    <td class="border-top-0 text-center" >
                                         <authorizedperson v-model="person.authorizationPersonId"
                                             :values="person.authorizationPersonId" />
                                     </td>
-                                    <!-- <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
-                                        <approvalperson v-model="person.approvalPersonId"
-                                            :values="person.approvalPersonId" :isDisable="'true'"/>
-                                    </td> -->
-                                    <!-- <td class="border-top-0 text-center">
-                                        <approvalperson v-model="person.approvalPersonId"
-                                            :values="person.approvalPersonId" />
-
-                                    </td> -->
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable">
-                                        <datepicker v-model="person.date" :isDisable="true" />
-                                    </td>
-                                    <td class="border-top-0 text-center" v-else>
-                                        <datepicker v-model="person.date" />
-                                    </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable">
-                                        <div class="checkbox form-check-inline">
-                                            <input v-bind:id="index + 1" type="checkbox" disabled v-model="person.isActive">
-                                            <label v-bind:for="index + 1"></label>
-                                        </div>
-                                    </td>
-                                    <td class="border-top-0 text-center" v-else>
+                              
+                                  
+                                  
+                                   
+                                    <td class="border-top-0 text-center" >
                                         <div class="checkbox form-check-inline">
                                             <input v-bind:id="index + 1" type="checkbox" v-model="person.isActive"
                                                 v-on:input="GiveReason()">
@@ -311,13 +290,8 @@
                                             <textarea class="form-control" v-model="person.dec" rows="1"></textarea>
                                         </div>
                                     </td>
-                                    <td class="border-top-0 text-center" v-if="brand.isDisable && roleName != 'Admin'">
-                                        <button title="Remove Item" id="bElim" type="button" disabled
-                                            class="btn btn-sm btn-soft-danger btn-circle" v-on:click="RemoveRow(index)">
-                                            <i class="dripicons-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    <td class="border-top-0 text-center" v-else>
+                                   
+                                    <td class="border-top-0 text-center" >
                                         <button title="Remove Item" id="bElim" type="button"
                                             class="btn btn-sm btn-soft-danger btn-circle" v-on:click="RemoveRow(index)">
                                             <i class="dripicons-trash" aria-hidden="true"></i>
@@ -381,7 +355,7 @@
 import clickMixin from '@/Mixins/clickMixin'
 import 'vue-loading-overlay/dist/vue-loading.css';
 import {
-    required, requiredIf, minLength, maxLength, numeric, decimal
+    required, requiredIf, decimal
 } from "vuelidate/lib/validators"
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -436,23 +410,12 @@ export default {
                 }),
             },
             ugamaNo: {
-                required,
-                minLength: minLength(10),
-                maxLength: maxLength(10),
+                
             },
             phoneNo: {
-                numeric,
-                minLength: minLength(10),
-                maxLength: maxLength(10),
             },
             reason: {
-                required: requiredIf((x) => {
-                    if (x.type == 'Add') {
-                        return false;
-                    } else if (x.type == 'Edit') {
-                        return true;
-                    }
-                }),
+                
             },
             recurringAmount: {
                 decimal,

@@ -171,7 +171,7 @@
                                            
                                             
                                             <strong>
-                                                <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
+                                                <a href="javascript:void(0)" v-on:click="PrintRecord(brand.id,brand)"> {{
                                                     $t('Payment.Print') }}</a>
                                             </strong>
                                         </div>
@@ -222,11 +222,10 @@
                 </div>
             </div>
 
-            <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show = false"
-                @IsSave="IsSave" />
+            <authorizepaymentreport :documentName="'List'"  :headerFooter="headerFooter" :show="show"  :brandObj="brandObj" v-if="show" v-bind:key="changereport" :printDetails="paymentRecord"  />
             <paymentauthorizedetail :id="authorizeId" :show="show1" v-if="show1"  @close="RefreshList"
                 @IsSave="IsSave" />
-            <loading :active.sync="loading" :can-cancel="false" :is-full-page="true"></loading>
+            <loading :active.sync="loading" :can-cancel="true" :is-full-page="true"></loading>
         </div>
 
     </div>
@@ -250,6 +249,7 @@ export default {
         return {
             advanceFilters: false,
             authorizationPersonId: '',
+            brandObj: '',
             authorizeId: '',
             approvalPersonId: '',
             registered: '',
@@ -270,9 +270,10 @@ export default {
             show1: false,
             reportsrc: '',
             changereport: 0,
-            paymentList: [],
             type: '',
             search: '',
+            paymentList: [],
+            paymentRecord: [],
             currentPage: 1,
             pageCount: '',
             rowCount: '0',
@@ -286,6 +287,9 @@ export default {
             amount: '',
             benificaryCode: '',
             loading: false,
+            headerFooter: {
+                    company: ''
+                },
 
 
         }
@@ -369,16 +373,7 @@ export default {
             }
         },
        
-        PrintRdlc: function (Id) {
-            var companyId = '';
-            if (this.$session.exists()) {
-                companyId = localStorage.getItem('CompanyID');
-            }
-
-            this.reportsrc = this.$ReportServer + '/Invoice/A4_DefaultTempletForm.aspx?id=' + Id + '&pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&CompanyID=' + companyId + '&formName=Payment'
-            this.changereport++;
-            this.show = !this.show;
-        },
+       
         getPage: function () {
             this.GetPayment(this.currentPage);
         },
@@ -386,13 +381,46 @@ export default {
         GotoPage: function (link) {
             this.$router.push({ path: link });
         },
+        PrintRecord: function (id,brandObj) {
+            this.loading=true;
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            this.brandObj=brandObj;
+            root.$https.get('/Benificary/PaymentDetailQueryByAuth?authorizationPersonId=' + id, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(function (response) {
+                    if (response.data != null) {
+
+                                                debugger;
+                        root.paymentRecord = response.data.results;
+                        root.show = true; 
+                            root.changereport++;
+                            root.loading = false; 
+
+                       
+                       
+                    } else {
+                        console.log("error: something wrong from db.");
+                    }
+                },
+                    function (error) {
+                        this.loading = false;
+                        console.log(error);
+                    });
+        },
 
         GetPayment: function () {
             debugger;
 
             var root = this;
             var token = '';
-            this.loading = true;
+            // this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
@@ -407,16 +435,37 @@ export default {
             });
         },
 
+
+        
+
         ViewPayment: function (Id) {
             debugger;
             this.authorizeId=Id;
             this.show1= !this.show1;
 
             
-        }
+        },
+        GetHeaderDetail: function () {
+                var root = this;
+                var token = '';
+                if (this.$session.exists()) {
+                    token = localStorage.getItem('token');
+                }
+                root.$https.get("/Company/GetCompanyDetail?id=" + localStorage.getItem('CompanyID'), { headers: { Authorization: `Bearer ${token}` }, })
+                    .then(function (response) {
+                        if (response.data != null) {
+                            debugger;
+                            root.headerFooter.company = response.data;
+                            root.headerFooter.company.base64Logo = 'data:image/png;base64,' + response.data.base64Logo;
+                            root.$store.dispatch('GetCompanyList',  root.headerFooter);
+
+                        }
+                    });
+            },
     },
 
     created: function () {
+        this.GetHeaderDetail();
         this.$emit('input', this.$route.name);
     },
     mounted: function () {

@@ -1,8 +1,10 @@
 ﻿<template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options"  :multiple="false" :placeholder="$t('General.SelectBenificary')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
+        <multiselect  v-model="DisplayValue" :options="options" :multiple="false"
+            :placeholder="$t('General.SelectBenificary')" track-by="name" :clear-on-select="false" :show-labels="false"
+            label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
 
-        </multiselect>      
+        </multiselect>
     </div>
 </template>
 <script>
@@ -27,6 +29,18 @@ export default {
         }
     },
     methods: {
+        // asyncFind: function (query) {
+        //     debugger;
+        //   let  filteredOptions=   this.options.filter(option =>
+        //         option.name.toLowerCase().includes(query.toLowerCase()));
+
+        //     // Sort the filtered options by beneficiaryId in ascending order
+        //     filteredOptions.sort((a, b) => a.beneficiaryId - b.beneficiaryId);
+
+        //     // Update the options data property with the sorted results
+        //     this.options = filteredOptions;
+        // },
+       
         getData: function () {
             var root = this;
             var token = '';
@@ -38,10 +52,11 @@ export default {
                 if (response.data != null) {
                     response.data.results.forEach(function (cat) {
                         var name = cat.name == '' ? cat.nameAr : cat.name;
-                        var benficaryId =  cat.beneficiaryId;
+                        var benficaryId = cat.beneficiaryId;
                         root.options.push({
                             id: cat.id,
-                            name:  benficaryId + ' ' +  '-' + ' ' + name,
+                            beneficiaryId: cat.beneficiaryId,
+                            name: benficaryId + ' ' + '-' + ' ' + name,
                         })
                     })
                 }

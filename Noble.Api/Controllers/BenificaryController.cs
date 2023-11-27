@@ -43,6 +43,7 @@ using Focus.Business.Exepenses.Queries;
 using Focus.Business.PaymentByAuthPerson.Command;
 using Focus.Business.PaymentByAuthPerson;
 using Focus.Business.PaymentByAuthPerson.Queries;
+using Focus.Domain.Enum;
 using Focus.Persistence.Migrations;
 
 namespace Noble.Api.Controllers
@@ -470,7 +471,7 @@ namespace Noble.Api.Controllers
 
         [Route("api/Benificary/GetDailyPaymentsList")]
         [HttpGet("GetDailyPaymentsList")]
-        public async Task<IActionResult> GetDailyPaymentsList(string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
+        public async Task<IActionResult> GetDailyPaymentsList(string formName, string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
           , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender, string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId)
         {
             var payment = await Mediator.Send(new DailyPaymentListQuery
@@ -492,6 +493,7 @@ namespace Noble.Api.Controllers
                 Gender = gender,
                 ContactNo = contactNo,
                 ApprovalPersonId = approvalPersonId,
+                FormName = formName,
                 AuthorizationPersonId = authorizationPersonId
             });
             return Ok(payment);
@@ -502,7 +504,7 @@ namespace Noble.Api.Controllers
         [Route("api/Benificary/GetPaymentsList")]
         [HttpGet("GetPaymentsList")]
         public async Task<IActionResult> GetPaymentsList(string searchTerm, int? pageNumber, string beneficiaryName, int? code, decimal? amount, int? benificaryCode, DateTime? fromDate, DateTime? toDate, DateTime? month
-            , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender, string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId)
+            , DateTime? year, string register, string status, string nationality, string uqamaNo, string gender, string contactNo, Guid? approvalPersonId, Guid? authorizationPersonId,bool isSearchFilter)
         {
             var payment = await Mediator.Send(new PaymentListQuery
             {
@@ -523,6 +525,7 @@ namespace Noble.Api.Controllers
                 Gender = gender,
                 ContactNo = contactNo,
                 ApprovalPersonId = approvalPersonId,
+                IsSearchFilter = isSearchFilter,
                 AuthorizationPersonId = authorizationPersonId
             });
             return Ok(payment);
@@ -748,6 +751,7 @@ namespace Noble.Api.Controllers
                         PhoneNo = request.Phone,
                         Note = "",
                         IsActive = request.Isactive == "true" ? true : false,
+                        ApprovalStatus =ApprovalStatus.Approved,
                         ApprovalPersonId = null,
                         Address = request.Address,
                         PaymentTypeId = paymentId,

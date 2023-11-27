@@ -6,18 +6,26 @@
                     <div class="page-title-box">
                         <div class="row">
                             <div class="col">
-                                <h4 class="page-title">{{ $t('Payment.DailyPayments')}}</h4>
+                                <h4 class="page-title" v-if="formName == 'voidPayment'">{{ $t('Payment.VoidPayment') }}</h4>
+                                <h4 class="page-title" v-else>{{ $t('Payment.DailyPayments') }}</h4>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="javascript:void(0);">{{ $t('Home') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ $t('Payment.PaymentList') }}</li>
+                                    <li class="breadcrumb-item active" v-if="formName == 'voidPayment'">{{ $t('Payment.VoidPayment') }}</li>
+                                    <li class="breadcrumb-item active" v-else>{{ $t('Payment.PaymentList') }}</li>
                                 </ol>
                             </div>
                             <div class="col-auto align-self-center">
+                                <a v-on:click="PrintRecord()" href="javascript:void(0);"
+                                    class="btn btn-sm btn-outline-primary mx-1"
+                                    v-if=" formName == 'voidPayment'">
+                                    {{ $t('Payment.PrintReport') }}
+                                </a>
                                 <a v-on:click="GotoPage('/dailyPayment')" href="javascript:void(0);"
-                                    class="btn btn-sm btn-outline-primary mx-1" v-if="roleName != 'User'">
+                                    class="btn btn-sm btn-outline-primary mx-1"
+                                    v-if="roleName != 'User' && formName != 'voidPayment'">
                                     <i class="align-self-center icon-xs ti-plus"></i>
-                                    {{ $t('Payment.DailyPayments')}}
+                                    {{ $t('Payment.DailyPayments') }}
                                 </a>
                                 <a v-on:click="GotoPage('/dashboard')" href="javascript:void(0);"
                                     class="btn btn-sm btn-outline-danger">
@@ -33,7 +41,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-4">
-                           
+
                             <label class="text  font-weight-bolder">
                                 {{ $t('Payment.BeneficiaryCode') }}
                             </label>
@@ -224,8 +232,11 @@
                                     <td v-else>
                                         {{ ((currentPage * 10) - 10) + (index + 1) }}
                                     </td>
+                                    <td class="text-center " v-if="formName == 'voidPayment'">
+                                        {{ brand.code }}
+                                    </td>
 
-                                    <td class="text-center " v-if="brand.isVoid && roleName == 'Admin'">
+                                    <td class="text-center " v-else-if="brand.isVoid && roleName == 'Admin'">
                                         <strong>
                                             <a class="text-danger" href="javascript:void(0)"
                                                 v-on:click="EditPayment(brand.id)">{{
@@ -245,7 +256,10 @@
 
                                     <td class="text-center">{{ brand.benificaryCode }}</td>
 
-                                    <td class="text-center text-danger" v-if="brand.isVoid">Payment Voided</td>
+                                    <td class="text-center " v-if="formName == 'voidPayment'">
+                                        {{ brand.benificaryNameAr ==
+                                            '' ? brand.benificaryName : brand.benificaryNameAr }}</td>
+                                    <td class="text-center text-danger" v-else-if="brand.isVoid">Payment Voided</td>
                                     <td class="text-start" v-else-if="roleName != 'Cashier'">
                                         <strong>
                                             <a href="javascript:void(0)" v-on:click="EditPayment(brand.id)">
@@ -282,34 +296,37 @@
                                     </td>
                                     <td class="text-center">
                                         <!-- {{ brand.lastPaymentAmount.toFixed(2) }} - {{ GetDate(brand.lastPaymentDate) }} -->
-                                         {{
-        GetDate(brand.lastPaymentDate) }}
+                                        {{
+                                            GetDate(brand.lastPaymentDate) }}
                                     </td>
-                                    <td class="text-center"  v-if="brand.paymentType =='Daily Payment' ">
+                                    <td class="text-center" v-if="brand.paymentType == 'Daily Payment'">
                                         <span>----</span>
-                                       
+
                                     </td>
-                                    <td class="text-center"  v-else-if="brand.paymentType =='One Time' ">
+                                    <td class="text-center" v-else-if="brand.paymentType == 'One Time'">
                                         <span>----</span>
-                                       
+
                                     </td>
-                                     <td class="text-center"  v-else-if="brand.durationType =='Indefinite' ">
+                                    <td class="text-center" v-else-if="brand.durationType == 'Indefinite'">
                                         <span> {{ GetDate2(brand.lastPaymentDate) }}</span>
-                                       
+
                                     </td>
-                                   
-                                    <td class="text-center" v-else-if=" brand.nextMonth> brand.endMonth ">
+
+                                    <td class="text-center" v-else-if="brand.nextMonth > brand.endMonth">
                                         <span>----</span>
-                                       
+
                                     </td>
                                     <td class="text-center" v-else>
-                                    
+
                                         {{ GetDate2(brand.lastPaymentDate) }}
                                     </td>
 
                                     <td class="text-center">{{ brand.note }}</td>
                                     <td class="text-center">{{ brand.cashier }}</td>
-                                    <td class="text-center" v-if="brand.isVoid">--</td>
+                                    <td class="text-center" v-if="formName == 'voidPayment'">
+                                    {{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
+                                        -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
+                                    <td class="text-center" v-else-if="brand.isVoid">--</td>
                                     <td class="text-center" v-else>{{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
                                         -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}</td>
 
@@ -319,15 +336,16 @@
                                             data-bs-toggle="dropdown" aria-expanded="false"> {{ $t('Payment.Action') }} <i
                                                 class="mdi mdi-chevron-down"></i></button>
                                         <div class="dropdown-menu text-center">
-                                            <div v-if="!brand.isVoid && roleName == 'Admin' ">
+
+                                            <div v-if="!brand.isVoid && roleName == 'Admin' && formName != 'voidPayment'">
                                                 <input type="checkbox" v-model="brand.isVoid"
                                                     v-on:change="EditPayment(brand.id, brand.isVoid)" />
                                                 <span class="mx-1"> {{
                                                     $t('Payment.IsVoid') }}
                                                 </span>
                                             </div>
-                                           
-                                            
+
+
                                             <strong>
                                                 <a href="javascript:void(0)" v-on:click="PrintRdlc(brand.id)"> {{
                                                     $t('Payment.Print') }}</a>
@@ -379,6 +397,7 @@
                     </div>
                 </div>
             </div>
+            <VoidPaymentPrintReport :documentName="'List'"  :headerFooter="headerFooter" :show="show12"  v-if="show12" v-bind:key="changereport" :printDetails="paymentRecord"  />
 
             <print :show="show" v-if="show" :reportsrc="reportsrc" :changereport="changereport" @close="show = false"
                 @IsSave="IsSave" />
@@ -398,7 +417,10 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import moment from 'moment'
 // import 'moment/locale/ar'; // Import Arabic locale
 
+
 export default {
+    props: ["formName"],
+
     mixins: [clickMixin],
     components: {
         Multiselect,
@@ -420,7 +442,7 @@ export default {
             nationality: '',
             gender: '',
             status: '',
-            language:'',
+            language: '',
             contact: '',
             uqamaNo: '',
             show: false,
@@ -442,18 +464,30 @@ export default {
             amount: '',
             benificaryCode: '',
             loading: false,
+            show12: false,
+            headerFooter: {
+                    company: ''
+                },
 
 
         }
     },
-    // watch: {
+    watch: {
 
-    //     search: function (val) {
-    //         debugger; //eslint-disable-line
-    //         this.GetPayment(val, 1, '', 0, 0);
-    //     }
-    // },
+        formName: function () {
+            this.GetPayment(this.currentPage);
+        }
+    },
     methods: {
+        PrintRecord: function () {
+            var root = this;
+            
+            root.paymentRecord = root.paymentList;
+                        root.show12 = true; 
+                            root.changereport++;
+                            root.loading = false;
+            
+        },
         ClearFilter() {
             // Reset the filter conditions here
             this.code = '';
@@ -562,11 +596,11 @@ export default {
 
             var root = this;
             var token = '';
-            this.loading = true;
+             this.loading = true;
             if (this.$session.exists()) {
                 token = localStorage.getItem('token');
             }
-            root.$https.get('Benificary/GetDailyPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender=' + this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            root.$https.get('Benificary/GetDailyPaymentsList?pageNumber=' + this.currentPage + '&searchTerm=' + this.search + '&amount=' + this.amount + '&code=' + this.code + '&benificaryCode=' + this.benificaryCode + '&fromDate=' + this.fromDate + '&toDate=' + this.toDate + '&month=' + this.month + '&year=' + this.year + '&register=' + this.registered + '&status=' + this.status + '&contactNo=' + this.contact + '&gender=' + this.gender + '&nationality=' + this.nationality + '&uqamaNo=' + this.uqamaNo + '&approvalPersonId=' + this.approvalPersonId + '&authorizationPersonId=' + this.authorizationPersonId + '&formName=' + this.formName, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     root.paymentList = response.data.results;
                     root.pageCount = response.data.pageCount;
@@ -650,10 +684,34 @@ export default {
                             console.log(error);
                         });
             }
-        }
+        },
+        GetHeaderDetail: function () {
+                var root = this;
+                var token = '';
+                if (this.$session.exists()) {
+                    token = localStorage.getItem('token');
+                }
+                root.$https.get("/Company/GetCompanyDetail?id=" + localStorage.getItem('CompanyID'), { headers: { Authorization: `Bearer ${token}` }, })
+                    .then(function (response) {
+                        if (response.data != null) {
+                            debugger;
+                            root.headerFooter.company = response.data;
+                            root.headerFooter.company.base64Logo = 'data:image/png;base64,' + response.data.base64Logo;
+                            root.$store.dispatch('GetCompanyList',  root.headerFooter);
+
+                        }
+                    });
+            },
     },
 
     created: function () {
+        debugger;
+        if(this.formName == 'voidPayment')
+        {
+            this.GetHeaderDetail();
+
+        }
+
         this.$emit('input', this.$route.name);
     },
     mounted: function () {
@@ -661,7 +719,7 @@ export default {
         this.arabic = localStorage.getItem('Arabic');
         this.GetPayment(this.currentPage);
         this.roleName = localStorage.getItem('RoleName');
-       
+
 
 
     }

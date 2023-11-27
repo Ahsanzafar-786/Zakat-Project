@@ -50,7 +50,7 @@ namespace Focus.Business.Benificary.Queries
                 {
                     if(request.IsDropDown)
                     {
-                        var query = await Context.Beneficiaries.AsNoTracking().Select(x => new BenificariesLookupModel
+                        var query = await Context.Beneficiaries.AsNoTracking().Where(x=>x.IsActive).Select(x => new BenificariesLookupModel
                         {
                             Id= x.Id,
                             Name = x.Name,
@@ -59,7 +59,7 @@ namespace Focus.Business.Benificary.Queries
                             PhoneNo = x.PhoneNo,
                             ApprovalStatus = x.ApprovalStatus,
                             BeneficiaryId = x.BeneficiaryId
-                        }).ToListAsync();
+                        }).OrderBy(x=>x.BeneficiaryId).ToListAsync();
 
                         return new PagedResult<List<BenificariesLookupModel>>
                         {
@@ -108,15 +108,14 @@ namespace Focus.Business.Benificary.Queries
                                 AuthorizationPersonNameAr = y.AuthorizedPerson.AuthorizedPersonCode + " " +  y.AuthorizedPerson.NameAr,
 
                             }).ToList(),
-                        }).OrderBy(x => x.BeneficiaryId).AsQueryable();
+                        }).OrderByDescending(x => x.Id).AsQueryable();
 
                        
 
                         if (!string.IsNullOrEmpty(request.SearchTerm))
                         {
                             var searchTerm = request.SearchTerm.ToLower();
-                            query = query.Where(x => x.Name.ToLower().Contains(searchTerm) 
-                                                  || x.NameAr.Contains(searchTerm) );
+                            query = query.Where(x =>  x.NameAr.Contains(searchTerm) );
                         }
                         if (request.UqamaNo != null )
                         {

@@ -3,7 +3,7 @@
         <multiselect v-model="DisplayValue" v-if="isDisable == 'true'"  disabled :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectAuthorizePerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
 
         </multiselect>      
-        <multiselect v-model="DisplayValue" v-else :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.SelectAuthorizePerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
+        <multiselect v-model="DisplayValue" v-else :options="options"  :multiple="false" :placeholder="$t('General.SelectAuthorizePerson')" track-by="name" :clear-on-select="false" :show-labels="false" label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
         </multiselect>      
     </div>
 </template>
@@ -33,6 +33,16 @@ export default {
             this.value='';
 
         },
+        GetName: function () {
+            if(this.value!=undefined && this.value!=null && this.value!='')
+            {
+                return this.value;
+
+            }
+            else
+            return '';
+                
+            },
         getData: function () {
             var root = this;
             var token = '';
@@ -45,6 +55,9 @@ export default {
                     response.data.results.forEach(function (cat) {
                         root.options.push({
                             id: cat.id,
+                            authorizedPersonCode: cat.authorizedPersonCode,
+                            nameAr:  cat.name,
+                            onlyName:  cat.onlyName,
                             name: cat.name == '' ? cat.nameAr : cat.name || root.$i18n.locale == 'en'? cat.name:cat.nameAr,
                            // name: root.$i18n.locale == 'en'? cat.name:cat.nameAr
                            // name: cat.name == '' ? cat.nameAr : cat.name

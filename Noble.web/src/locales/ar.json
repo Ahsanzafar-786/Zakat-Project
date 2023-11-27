@@ -401,6 +401,8 @@
     "AddPaymentbyAuthorizedPerson":"إضافة الدفع إلى الشخص المعتمد",
     "AuthorizePerson":"الشخص المفوض",
     "ViewPaymentDetail":"عرض تفاصيل الدفع",
+    "VoidPayment":"الدفع باطل",
+    "PrintReport":"اطبع تقرير",
 
     "PaymentbyAuthorizedPerson":"الدفع عن طريق الشخص المعتمد",
     "PaymentCode":"شفرة",

@@ -37,7 +37,10 @@ namespace Focus.Business.AuthorizPersons.Queries
                         {
                             Id = x.Id,
                             Name = x.AuthorizedPersonCode + " - " + x.Name,
-                            NameAr = x.AuthorizedPersonCode + " - " + x.NameAr,
+                            NameAr = x.AuthorizedPersonCode + " - " + x.NameAr, 
+                            OnlyName =  x.Name, 
+                            AuthorizedPersonCode = x.AuthorizedPersonCode,
+
                         }).ToListAsync();
 
                         return new PagedResult<List<AuthorizedPersonsLookupModel>>
@@ -47,7 +50,7 @@ namespace Focus.Business.AuthorizPersons.Queries
                     }
                     else
                     {
-                        var query = Context.AuthorizedPersons.AsNoTracking().Select(x => new AuthorizedPersonsLookupModel
+                        var query = Context.AuthorizedPersons.Include(x=>x.BenificaryAuthorization).Select(x => new AuthorizedPersonsLookupModel
                         {
                             Id = x.Id,
                             Name = x.Name,
@@ -55,6 +58,8 @@ namespace Focus.Business.AuthorizPersons.Queries
                             AuthorizedPersonCode = x.AuthorizedPersonCode,
                             PhoneNo = x.PhoneNo,
                             Address = x.Address,
+                            TotalBeneficiaries = x.BenificaryAuthorization
+                                .Count(),
                             Nationality = x.Nationality,
                             PassportNo = x.PassportNo,
                             Gender = x.Gender,

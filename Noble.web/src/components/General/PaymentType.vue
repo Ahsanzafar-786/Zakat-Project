@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <multiselect v-bind:disabled="isDisable" v-model="DisplayValue" :options="options" :searchable="false" :multiple="false" :placeholder="$t('General.PaymentType')" track-by="name" :clear-on-select="false" :show-labels="false" label="name"   v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'" >
+        <multiselect v-bind:disabled="isDisable" v-model="DisplayValue" :options="options" :multiple="false" :placeholder="$t('General.PaymentType')" track-by="name" :clear-on-select="false" :show-labels="false" label="name"   v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'" >
 
         </multiselect>      
     </div>

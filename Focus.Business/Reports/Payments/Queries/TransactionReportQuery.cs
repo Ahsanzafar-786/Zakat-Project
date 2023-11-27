@@ -78,7 +78,7 @@ namespace Focus.Business.Reports.Payments.Queries
                             PaymentIntervalMonth = x.Beneficiaries.PaymentIntervalMonth,
                             IsRegistered = x.Beneficiaries.IsRegister ? "Registered" : "Not Registered",
                             Amount = x.Amount,
-                            PaymentType = x.Beneficiaries.PaymentTypes.Name,
+                            PaymentType = x.Beneficiaries.PaymentTypes.NameAr,
                             Date = Convert.ToDateTime(x.CharityTransactionDate),
                             PaymentDate = x.CharityTransactionDate,
                             PaymentMonth = Convert.ToDateTime(x.Month).ToString("MMMM"),
