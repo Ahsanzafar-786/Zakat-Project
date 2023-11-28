@@ -39,7 +39,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="7" style="text-align: center;width:100%;font-size:20px;color:black !important;font-weight:bold;"  >الدفع عن طريق الشخص المعتمد</td>
+                            <td colspan="7" style="text-align: center;width:100%;font-size:20px;color:black !important;font-weight:bold;"  >الدفع عن طريق الوكيل </td>
                         </tr>
 
 
@@ -131,6 +131,7 @@
                                         <th class="text-center" style="border-top:0px !important"> أسم المستفيد</th>
                                         <th class="text-center" style="border-top:0px !important">فترة الدفع بالأشهر</th>
                                         <th class="text-center" style="border-top:0px !important">آخر شهر مدفوع</th>
+                                        <th class="text-center" style="border-top:0px !important">شهر الدفع التالي</th>
                                         <th class="text-center" style="border-top:0px !important">المبلغ </th>
                                     </tr>
 
@@ -143,12 +144,23 @@
                                         <td class="text-center">{{ brand.benificaryName == '' ? brand.benificaryNameAr :
                                             brand.benificaryName }}</td>
                                         <td class="text-center">{{ brand.paymentTypeAr }}</td>
+                                        <td class="text-center">
+                                         {{GetDate(brand.lastPaymentDate) }}</td>
+
                                         <td class="text-center" v-if="brand.paymentType == 'Daily Payment'">
                                             ------</td>
                                         <td class="text-center" v-else-if="brand.paymentType == 'One Time'">
                                             ------</td>
                                         <td class="text-center" v-else-if="brand.durationType == 'Indefinite'">
                                             {{ GetDate2(brand.lastPaymentDate) }}</td>
+                                            <td class="text-center" v-else-if=" brand.nextMonth> brand.endMonth ">
+                                        <span>----</span>
+                                       
+                                    </td>
+                                    <td class="text-center" v-else>
+                                    
+                                        {{ GetDate2(brand.lastPaymentDate) }}
+                                    </td>
 
 
                                         <td class="text-center" style="font-weight: bold;">
@@ -309,7 +321,7 @@ export default {
 
                 const date = moment(link);
                 const arabicMonth = date.locale('ar').format('MMMM');
-                return `${arabicMonth} ${date.format('Do YYYY')}`;
+                return `${arabicMonth} ${date.format('Do / YYYY')}`;
 
             }
             else {
@@ -323,7 +335,7 @@ export default {
 
                 const date = moment(link);
                 const arabicMonth = date.locale('ar').add(1, 'months').format('MMMM');
-                return `${arabicMonth} ${date.format('Do YYYY')}`;
+                return `${arabicMonth} ${date.format('Do / YYYY')}`;
 
             }
             else {

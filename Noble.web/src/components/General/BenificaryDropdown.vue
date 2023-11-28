@@ -52,10 +52,11 @@ export default {
                 if (response.data != null) {
                     response.data.results.forEach(function (cat) {
                         var name = cat.name == '' ? cat.nameAr : cat.name;
+                        var benficaryId = cat.beneficiaryId;
                         root.options.push({
                             id: cat.id,
                             beneficiaryId: cat.beneficiaryId,
-                            name: name,
+                            name: benficaryId + ' ' + '-' + ' ' + name,
                         })
                     })
                 }

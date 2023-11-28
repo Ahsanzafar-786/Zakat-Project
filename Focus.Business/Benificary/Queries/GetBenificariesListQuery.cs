@@ -51,26 +51,7 @@ namespace Focus.Business.Benificary.Queries
                 {
                     if(request.IsDropDown)
                     {
-                        if (request.IsCode)
-                        {
-                            var query = await Context.Beneficiaries.AsNoTracking().Where(x => x.IsActive).Select(x => new BenificariesLookupModel
-                            {
-                                Id = x.Id,
-                                Name = x.Name,
-                                NameAr = x.NameAr,
-                                UgamaNo = x.UgamaNo,
-                                PhoneNo = x.PhoneNo,
-                                ApprovalStatus = x.ApprovalStatus,
-                                BeneficiaryId = x.BeneficiaryId
-                            }).OrderBy(x => x.BeneficiaryId).ToListAsync();
-
-                            return new PagedResult<List<BenificariesLookupModel>>
-                            {
-                                Results = query
-                            };
-
-                        }
-                        else
+                        
                         {
                             var query = await Context.Beneficiaries.AsNoTracking().Where(x => x.IsActive).Select(x => new BenificariesLookupModel
                             {
