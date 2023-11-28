@@ -68,7 +68,7 @@ const options = {
         'https://unpkg.com/kidlat-css/css/kidlat.css',
     ],
     timeout: 1000,
-    autoClose: true,
+    autoClose: false,
     windowTitle: window.document.title
 }
 Vue.use(VueHtmlToPaper, options);

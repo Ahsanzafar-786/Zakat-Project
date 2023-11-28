@@ -19,8 +19,8 @@
     "SelectAuthorizePerson":"حدد تخويل الشخص",
     "SelectApprovalPerson":"حدد شخص الموافقة",
     "PaymentType":"فترة الدفع بالأشهر",
-    "SelectBenificary":"البحث حسب اسم المستفيد",
-    "SelectBenificary1": "البحث عن طريق الهوية",
+    "SelectBenificary":"يبحث حسب اسم المستفيد",
+    "SelectBenificary1": "يبحث عن طريق الهوية",
 
     "SelectExpenseCategory": "Select Expense Category"
 
@@ -42,12 +42,12 @@
     "UnRegister" : "غير مسجل ",
     "BenificaryStatus" : "حالـة المستـفـيد ",
     "Note": "ملحوظة",
-    "Search":"البحث عن طريق اسم المستفيد",
-    "SearchByUqamaNo":"البحث برقم الإقامة",
-    "SearchByCode":"البحث عن طريق كود مفيد",
+    "Search":"يبحث عن طريق اسم المستفيد",
+    "SearchByUqamaNo":"يبحث برقم الإقامة",
+    "SearchByCode":"يبحث عن طريق كود مفيد",
     "SearchFilter":" الـبحث ",
     "ClearFilter":"إلـغـاء",
-    "SearchByID":"البحث بالمعرف",
+    "SearchByID":"يبحث بالمعرف",
     "ID":" الـكـود",
     "ApprovalPerson":"شخص الموافقة",
     "BeneficaryReport":"الـتـقـارير المستفيد",
@@ -62,10 +62,10 @@
     "Nationality":"جنسية",
     "Gender":"جنس",
     "Contact":"رقم الاتصال",
-    "SearchByAmount":"البحث بالمبلغ",
-    "SearchByNationality":"البحث بالجنسية",
-    "SearchByGender":"البحث حسب الجنس",
-    "SearchByContact":"البحث عن طريق رقم الاتصال",
+    "SearchByAmount":"يبحث بالمبلغ",
+    "SearchByNationality":"يبحث بالجنسية",
+    "SearchByGender":"يبحث حسب الجنس",
+    "SearchByContact":"يبحث عن طريق رقم الاتصال",
     "AdvanceFilter":"تصفية متقدم",
     "Action":"فعل",
     "View":"منظر",
@@ -81,7 +81,7 @@
     "Notes":"ملحوظات",
     "AccountStatus": "حالـة الحساب",
     "NationalID":"الهوية الوطنية",
-    "SearchByNationalId":"البحث عن طريق الرقم القومي"
+    "SearchByNationalId":"يبحث عن طريق الرقم القومي"
 
   },
 
@@ -154,15 +154,15 @@
     "BenificaryName":"أسم المستفيد",
     "BenificiaryNotes":"ملاحظات المستفيد",
     "Date":"تاريخ",
-    "Search":"البحث عن طريق اسم المستفيد",
-    "SearchByID":"البحث بالمعرف",
-    "SearchByBeneficiaryNote":"البحث عن طريق ملاحظة المستفيد",
-    "SearchFilter":" البحث",
+    "Search":"يبحث عن طريق اسم المستفيد",
+    "SearchByID":"يبحث بالمعرف",
+    "SearchByBeneficiaryNote":"يبحث عن طريق ملاحظة المستفيد",
+    "SearchFilter":" يبحث",
     "ClearFilter":"إلـغـاء ",
     "Delete":"يمسح",
     "Actions":"فعل",
-    "SearchByNationalID":"البحث عن طريق الرقم القومي",
-    "SearchByContactNo":"البحث عن طريق رقم الاتصال",
+    "SearchByNationalID":"يبحث عن طريق الرقم القومي",
+    "SearchByContactNo":"يبحث عن طريق رقم الاتصال",
     "NationalID":"الهوية الوطنية",
     "Nationality":"جنسية",
     "ContactNo":"رقم الاتصال"
@@ -178,7 +178,7 @@
     "PaymentType":"فترة الدفع بالأشهر ",
     "PaymentTypeList":"قائمة نوع الدفع",
     "Name":"اسم",
-    "SearchByName":"البحث عن طريق الإسم"
+    "SearchByName":"يبحث عن طريق الإسم"
   },
   "AddPaymentType":{
     "AddPaymentType":"إضافة نوع الدفع",
@@ -193,7 +193,7 @@
     "ApprovalPersonList":"قائمة أفراد الموافقة",
     "ApprovalPersonId":"هوية شخص الموافقة",
     "Name":"اسم",
-    "SearchByNameAndId":"البحث بالاسم والموافقة الشخصية",
+    "SearchByNameAndId":"يبحث بالاسم والموافقة الشخصية",
     "Status":"حالة"
   },
   "AddApprovalPerson":{
@@ -218,7 +218,7 @@
     "DeActive" : "معطل",
     "Status":"حالة",
     "FundsSource":"مصدر الأموال",
-    "SearchByNameAndCharityResourcesId":"البحث بالاسم ومعرف الموارد الخيرية"
+    "SearchByNameAndCharityResourcesId":"يبحث بالاسم ومعرف الموارد الخيرية"
   },
   "AddCharityResources":{
     "AddCharityResources":"أضف الموارد الخيرية",
@@ -244,7 +244,7 @@
     "ID":"بطاقة تعريف",
     "Nationality":"جنسية",
     "PassportNo":"رقم جواز السفر",
-    "SearchByNameAndID":"البحث بالاسم والمعرف",
+    "SearchByNameAndID":"يبحث بالاسم والمعرف",
     "Status":"حالة"
   },
 
@@ -275,7 +275,7 @@
     "Comments": "ملاحظات",
     "CharityFundsReports":"تقارير الصناديق الخيرية",
     "CharityFundsResource":"موارد الصناديق الخيرية",
-    "SearchByCharityResourceNameAndAmount":"البحث عن طريق اسم المورد الخيرية والمبلغ",
+    "SearchByCharityResourceNameAndAmount":"يبحث عن طريق اسم المورد الخيرية والمبلغ",
     "TransactionType":"نوع المعاملة"
   },
   "AddFunds":{
@@ -376,7 +376,7 @@
   "SignUp":{
     "SignUp":"الاشتراك",
     "SignUpDetails":"تفاصيل الاشتراك",
-    "SearchBYNameAndEmail":"البحث بالاسم والبريد الإلكتروني",
+    "SearchBYNameAndEmail":"يبحث بالاسم والبريد الإلكتروني",
     "USERNAME":"اسم المستخدم",
     "EMAILID":"عنوان الايميل",
     "Location":"الموقع",
@@ -432,11 +432,11 @@
     "AllowVoid":"السماح باطل",
     "Print":"مطبعة",
     "Date":"التاريخ",
-    "Search":"البحث عن طريق اسم المستفيد",
-    "SearchByCode":" البحث عن طريق الكود",
-    "SearchByID":"البحث بالمعرف",
-    "SearchByAmount":"البحث بالمبلغ",
-    "SearchFilter":" البحث",
+    "Search":"يبحث عن طريق اسم المستفيد",
+    "SearchByCode":" يبحث عن طريق الكود",
+    "SearchByID":"يبحث بالمعرف",
+    "SearchByAmount":"يبحث بالمبلغ",
+    "SearchFilter":" يبحث",
     "ClearFilter":"إلـغـاء ",
     "PaymentWiseReport":"تقرير المدفوعات",
     "ApprovalType":"نوع الموافقة",
