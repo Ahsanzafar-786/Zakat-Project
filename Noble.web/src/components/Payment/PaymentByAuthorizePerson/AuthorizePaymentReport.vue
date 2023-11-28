@@ -129,10 +129,11 @@
                                         <th class="text-center" style="border-top:0px !important">التاريخ</th>
                                         <th class="text-center" style="border-top:0px !important">ID</th>
                                         <th class="text-center" style="border-top:0px !important"> أسم المستفيد</th>
+                                        <th class="text-center" style="border-top:0px !important">المبلغ </th>
+
                                         <th class="text-center" style="border-top:0px !important">فترة الدفع بالأشهر</th>
                                         <th class="text-center" style="border-top:0px !important">آخر شهر مدفوع</th>
                                         <th class="text-center" style="border-top:0px !important">شهر الدفع التالي</th>
-                                        <th class="text-center" style="border-top:0px !important">المبلغ </th>
                                     </tr>
 
                                     <tr style="font-size:16px;color:black" v-for="(brand, index) in transactionList"
@@ -143,6 +144,10 @@
                                         <td class="text-center">{{ brand.benificaryCode }}</td>
                                         <td class="text-center">{{ brand.benificaryName == '' ? brand.benificaryNameAr :
                                             brand.benificaryName }}</td>
+                                              <td class="text-center" style="font-weight: bold;">
+                                            {{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
+                                                -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}
+                                        </td>
                                         <td class="text-center">{{ brand.paymentTypeAr }}</td>
                                         <td class="text-center">
                                          {{GetDate(brand.lastPaymentDate) }}</td>
@@ -163,10 +168,7 @@
                                     </td>
 
 
-                                        <td class="text-center" style="font-weight: bold;">
-                                            {{ parseFloat(brand.totalAmount).toFixed(3).slice(0,
-                                                -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,") }}
-                                        </td>
+                                      
 
                                     </tr>
                                     <tr style="font-size:18px;color:black;font-weight: bold;">
