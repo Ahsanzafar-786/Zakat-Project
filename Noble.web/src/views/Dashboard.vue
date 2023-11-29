@@ -497,6 +497,10 @@ export default {
         if (!this.$session.exists()) {
             this.$router.push('/')
         }
+        else
+        {
+            this.$router.push('/dashboard');
+        }
 
     }
 }

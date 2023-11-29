@@ -14,7 +14,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import { BootstrapVue, BPagination } from 'bootstrap-vue'
 Vue.use(BootstrapVue, BPagination);
 import VueSession from 'vue-session';
-Vue.use(VueSession)
+Vue.use(VueSession);
 import ElementUI from 'element-ui'
 import { DatePicker } from 'element-ui';
 import ar from 'element-ui/lib/locale/lang/ar'

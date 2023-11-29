@@ -215,7 +215,8 @@ export default {
                     localStorage.setItem('RoleName', response.data.roleName);
                     localStorage.setItem('UserId', response.data.userId);
                     localStorage.setItem('UserName', response.data.userName);
-                    localStorage.setItem('Email', response.data.emailConfirmed);
+                    localStorage.setItem('Email', response.data.emailConfirmed);                           
+                    localStorage.setItem('isAuthenticate', true);                           
                     root.ReportServerLog();
 
                     root.$router.push('/dashboard');
