@@ -606,7 +606,7 @@
 
                                     <tr style="font-size:16px;color:black" v-for="(brand, index) in listItemP2"
                                         v-bind:key="brand.id" st>
-                                        <td class="text-center">{{ index + 18 }}</td>
+                                        <td class="text-center">{{ index + 19 }}</td>
                                         <td class="text-center">{{ brand.code }}</td>
                                         <td class="text-center">{{ GetDate(brand.date) }}</td>
                                         <td class="text-center">{{ brand.benificaryCode }}</td>
@@ -719,7 +719,6 @@ const options = {
     ],
     timeout: 1000,
     autoClose: false,
-    title : 'الدفع عن طريق الوكيل ',
     windowTitle: 'الدفع عن طريق الوكيل '
 }
 import moment from "moment";
