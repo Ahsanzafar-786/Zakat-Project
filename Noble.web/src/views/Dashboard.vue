@@ -139,7 +139,7 @@
                         <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.Fund') }}</a>
 
                     </li>
-                    <li v-if="roleName != 'Noble Admin'">
+                    <!-- <li v-if="roleName != 'Noble Admin'">
 
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
@@ -152,7 +152,7 @@
                                 <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.Fund') }}</a>
                             </li>
                         </ul>
-                        <!-- <ul class="nav-second-level" aria-expanded="false">
+                        <ul class="nav-second-level" aria-expanded="false">
                             <li>
                                 <a v-on:click="GoTo('/charityfundsreports')" href="javascript:void(0);"> {{
                                     $t('Charity.PaymentSummary')
@@ -161,8 +161,8 @@
                         </ul>
                         <ul class="nav-second-level" aria-expanded="false">
 
-                        </ul> -->
-                    </li>
+                        </ul>
+                    </li> -->
                     <li v-if="roleName != 'Nobel Admin' && roleName != 'Cashier'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
