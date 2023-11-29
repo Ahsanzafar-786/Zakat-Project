@@ -16,6 +16,7 @@ namespace Focus.Business.Benificary.Queries
     {
         public string SearchTerm { get; set; }
         public string NationalId { get; set; }
+        public bool IsCode { get; set; }
         public bool IsDropDown { get; set; }
         public string BeneficiaryName { get; set; }
         public string UqamaNo { get; set; }
@@ -39,6 +40,7 @@ namespace Focus.Business.Benificary.Queries
             public readonly IApplicationDbContext Context;
             private readonly ILogger _logger;
 
+
             public Handler(IApplicationDbContext context, ILogger<GetBenificariesListQuery> logger)
             {
                 Context = context;
@@ -50,26 +52,49 @@ namespace Focus.Business.Benificary.Queries
                 {
                     if(request.IsDropDown)
                     {
-                        var query = await Context.Beneficiaries.AsNoTracking().Where(x=>x.IsActive).Select(x => new BenificariesLookupModel
+                        
                         {
-                            Id= x.Id,
-                            Name = x.Name,
-                            NameAr =x.NameAr,
-                            UgamaNo = x.UgamaNo,
-                            PhoneNo = x.PhoneNo,
-                            ApprovalStatus = x.ApprovalStatus,
-                            BeneficiaryId = x.BeneficiaryId
-                        }).OrderBy(x=>x.BeneficiaryId).ToListAsync();
+                            var query =  Context.Beneficiaries.AsNoTracking().Where(x => x.IsActive).Select(x => new BenificariesLookupModel
+                            {
+                                Id = x.Id,
+                                Name = x.Name,
+                                NameAr = x.NameAr,
+                                UgamaNo = x.UgamaNo,
+                                PhoneNo = x.PhoneNo,
+                                ApprovalStatus = x.ApprovalStatus,
+                                BeneficiaryId = x.BeneficiaryId
+                            }).AsQueryable();
+                            if (!string.IsNullOrEmpty(request.SearchTerm))
+                            {
+                                var searchTerm = request.SearchTerm.ToLower();
 
-                        return new PagedResult<List<BenificariesLookupModel>>
-                        {
-                            Results = query
-                        };
+                                if (int.TryParse(request.SearchTerm, out _)) // Check if the search term is a number
+                                {
+                                    query = query
+                                        .Where(x => x.BeneficiaryId.ToString().Contains(searchTerm))
+                                        .OrderBy(x => x.BeneficiaryId)
+                                        ;
+                                }
+                                else
+                                {
+                                    query = query
+                                        .Where(x => x.NameAr.ToLower().Contains(searchTerm));
+                                }
+                            }
+
+                            return new PagedResult<List<BenificariesLookupModel>>
+                            {
+                                Results = query.ToList()
+                            };
+
+                        }
+                       
                     }
                     else
                     {
                         var query = Context.Beneficiaries.AsNoTracking()
                             .Include(x => x.AuthorizedPersons)
+                            .Include(x=>x.BenificaryNotes)
                             .Include(x=>x.PaymentTypes)
                             .Include(x=>x.ApprovalPersons)
                             .Select(x => new BenificariesLookupModel
@@ -88,6 +113,7 @@ namespace Focus.Business.Benificary.Queries
                             IsActive = x.IsActive,
                             IsRegister = x.IsRegister,
                             AuthorizationPersonName = x.AuthorizedPersons.Name,
+                            BeneifcaryNotes = x.BenificaryNotes.FirstOrDefault().Note,
                             AuthorizedPersonId = x.AuthorizedPersonId,
                             Address = x.Address,
                             ApprovalPersonId = x.ApprovalPersonId,
@@ -108,7 +134,7 @@ namespace Focus.Business.Benificary.Queries
                                 AuthorizationPersonNameAr = y.AuthorizedPerson.AuthorizedPersonCode + " " +  y.AuthorizedPerson.NameAr,
 
                             }).ToList(),
-                        }).OrderByDescending(x => x.Id).AsQueryable();
+                        }).OrderBy(x=>x.BeneficiaryId).AsQueryable();
 
                        
 

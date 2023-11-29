@@ -104,6 +104,7 @@ namespace Noble.Report.Reports.Invoice
                             dt.Columns.Add("Month");
                             dt.Columns.Add("Year");
                             dt.Columns.Add("BenificaryName");
+                            dt.Columns.Add("ID");
                             dt.Columns.Add("Amount");
 
                             DataRow row;
@@ -118,6 +119,7 @@ namespace Noble.Report.Reports.Invoice
                                 row["Month"] = Convert.ToDateTime(item.Month).ToString("MMMM");
                                 row["Year"] = item.Year;
                                 row["BenificaryName"] = item.benificaryName;
+                                row["ID"] = item.HijriYear;
                                 row["Amount"] = item.Amount.ToString("N2");
                                 dt.Rows.Add(row);
                             }
@@ -141,6 +143,7 @@ namespace Noble.Report.Reports.Invoice
                                 dt.Columns.Add("شهر");
                                 dt.Columns.Add("سنة");
                                 dt.Columns.Add("اسم المستفيد");
+                                dt.Columns.Add("بطاقة تعريف");
                                 dt.Columns.Add("المنبع");
 
                                 DataRow row;
@@ -155,6 +158,7 @@ namespace Noble.Report.Reports.Invoice
                                     row["شهر"] = Convert.ToDateTime(item.Month).ToString("MMMM");
                                     row["سنة"] = item.Year;
                                     row["اسم المستفيد"] = item.benificaryName;
+                                    row["بطاقة تعريف"] = item.HijriYear;
                                     row["المنبع"] = item.Amount.ToString("N2");
                                     dt.Rows.Add(row);
                                 }

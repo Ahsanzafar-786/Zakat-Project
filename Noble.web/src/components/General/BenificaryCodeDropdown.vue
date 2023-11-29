@@ -1,7 +1,7 @@
 ﻿<template>
     <div>
-        <multiselect v-model="DisplayValue" :options="options" :multiple="false" @search-change="asyncFind"
-            :placeholder="$t('General.SelectBenificary')" track-by="name" :clear-on-select="false" :show-labels="false"
+        <multiselect  v-model="DisplayValue" :options="options" :multiple="false"
+            :placeholder="$t('General.SelectBenificary1')" track-by="name" :clear-on-select="false" :show-labels="false"
             label="name" v-bind:class="$i18n.locale == 'en' ? 'text-left ' : 'multiselect__placeholder12'">
 
         </multiselect>
@@ -22,7 +22,6 @@ export default {
             arabic: '',
             english: '',
             options: [],
-            searchOptions: [],
             value: '',
             show: false,
             loading: false,
@@ -30,38 +29,18 @@ export default {
         }
     },
     methods: {
-        asyncFind: function (searchQuery) {
-            if(searchQuery==undefined || searchQuery=='' || searchQuery==null )
-            {
-                return 0;
-            }
-            
-            var root = this;
-            var token = '';
-            if (this.$session.exists()) {
-                token = localStorage.getItem('token');
-            }
-            root.options = [];
-            this.$https.get('/Benificary/GetBenificaryList?isDropDown=true'+ '&searchTerm=' + searchQuery, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
-                if (response.data != null) {
-                    response.data.results.forEach(function (cat) {
-                        var name = cat.name == '' ? cat.nameAr : cat.name;
-                        var benficaryId = cat.beneficiaryId;
-                        root.options.push({
-                            id: cat.id,
-                            beneficiaryId: cat.beneficiaryId,
-                            name: benficaryId + ' ' + '-' + ' ' + name,
-                        })
-                    })
-                }
-            }).then(function () {
-                root.value = root.options.find(function (x) {
-                    return x.id == root.values;
-                })
-            });
+        // asyncFind: function (query) {
+        //     debugger;
+        //   let  filteredOptions=   this.options.filter(option =>
+        //         option.name.toLowerCase().includes(query.toLowerCase()));
 
-        },
+        //     // Sort the filtered options by beneficiaryId in ascending order
+        //     filteredOptions.sort((a, b) => a.beneficiaryId - b.beneficiaryId);
 
+        //     // Update the options data property with the sorted results
+        //     this.options = filteredOptions;
+        // },
+       
         getData: function () {
             var root = this;
             var token = '';
@@ -69,15 +48,12 @@ export default {
                 token = localStorage.getItem('token');
             }
             root.options = [];
-            this.$https.get('/Benificary/GetBenificaryList?isDropDown=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+            this.$https.get('/Benificary/GetBenificaryList?isDropDown=true'+ '&isCode=true', { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
                 if (response.data != null) {
                     response.data.results.forEach(function (cat) {
-                        var name = cat.name == '' ? cat.nameAr : cat.name;
-                        var benficaryId = cat.beneficiaryId;
                         root.options.push({
                             id: cat.id,
-                            beneficiaryId: cat.beneficiaryId,
-                            name: benficaryId + ' ' + '-' + ' ' + name,
+                            name: cat.beneficiaryId,
                         })
                     })
                 }

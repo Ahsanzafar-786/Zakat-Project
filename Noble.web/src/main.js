@@ -13,6 +13,8 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { BootstrapVue, BPagination } from 'bootstrap-vue'
 Vue.use(BootstrapVue, BPagination);
+import VueSession from 'vue-session';
+Vue.use(VueSession);
 import ElementUI from 'element-ui'
 import { DatePicker } from 'element-ui';
 import ar from 'element-ui/lib/locale/lang/ar'
@@ -68,7 +70,7 @@ const options = {
         'https://unpkg.com/kidlat-css/css/kidlat.css',
     ],
     timeout: 1000,
-    autoClose: true,
+    autoClose: false,
     windowTitle: window.document.title
 }
 Vue.use(VueHtmlToPaper, options);
@@ -151,6 +153,7 @@ Vue.component('userdropdown', require('./components/General/UsersDropdown.vue').
 Vue.component('paymentauthorizedetail', require('./components/Payment/PaymentByAuthorizePerson/PaymentAuthorizeDetail.vue').default);
 Vue.component('authorizepaymentreport', require('./components/Payment/PaymentByAuthorizePerson/AuthorizePaymentReport.vue').default);
 Vue.component('VoidPaymentPrintReport', require('./components/Payment/VoidPaymentPrintReport.vue').default);
+Vue.component('BenificaryCodeDropdown', require('./components/General/BenificaryCodeDropdown.vue').default);
 
 Vue.prototype.$https = axios;
 axios.defaults.baseURL = json.ServerIP;

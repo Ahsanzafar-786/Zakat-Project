@@ -49,7 +49,7 @@ namespace Focus.Business.CharityFunds.Queries
                         
                     }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
-                    query.Cashier =  usersList.FirstOrDefault(y => y.Id == query.UserId).UserName;
+                    query.Cashier =  usersList.FirstOrDefault(y => y.Id == query.UserId)?.UserName;
 
                     if (query == null)
                         throw new NotFoundException("Funds Not Found", "");

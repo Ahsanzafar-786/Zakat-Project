@@ -44,6 +44,19 @@
                         </ul>
                     </li>
                     <li v-if="roleName != 'Noble Admin'">
+
+                        <a v-on:click="GoTo('/addpayment')" href="javascript:void(0);">{{ $t('Payment.AddPayment') }}
+                        </a>
+                        <a v-on:click="GoTo('/dailyPayment')" href="javascript:void(0);"> {{
+                            $t('Payment.DailyPayments')
+                        }}</a>
+                        <a v-on:click="GoTo('/addpaymentauthoirizeperson')" href="javascript:void(0);">{{
+                            $t('Payment.PaymentbyAuthorizedPerson') }}</a>
+
+                    </li>
+                    <li v-if="roleName != 'Noble Admin'">
+
+
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Payment.Payment') }}
@@ -61,12 +74,13 @@
                                     $t('Payment.PaymentbyAuthorizedPerson') }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/dailyPaymentList','dailyPayment')" href="javascript:void(0);"> {{
+                                <a v-on:click="GoTo('/dailyPaymentList', 'dailyPayment')" href="javascript:void(0);"> {{
                                     $t('Payment.DailyPayments')
                                 }}</a>
                             </li>
                             <li>
-                                <a v-on:click="GoTo('/dailyPaymentList', 'voidPayment')" href="javascript:void(0);">{{ $t('Payment.VoidPayment') }}</a>
+                                <a v-on:click="GoTo('/dailyPaymentList', 'voidPayment')" href="javascript:void(0);">{{
+                                    $t('Payment.VoidPayment') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -122,6 +136,11 @@
                         </ul>
                     </li>
                     <li v-if="roleName != 'Noble Admin'">
+                        <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.Fund') }}</a>
+
+                    </li>
+                    <!-- <li v-if="roleName != 'Noble Admin'">
+
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
                                 {{ $t('Funds.Fund') }}
@@ -130,11 +149,10 @@
 
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.AddFunds')
-                                }}</a>
+                                <a v-on:click="GoTo('/funds')" href="javascript:void(0);"> {{ $t('Funds.Fund') }}</a>
                             </li>
                         </ul>
-                        <!-- <ul class="nav-second-level" aria-expanded="false">
+                        <ul class="nav-second-level" aria-expanded="false">
                             <li>
                                 <a v-on:click="GoTo('/charityfundsreports')" href="javascript:void(0);"> {{
                                     $t('Charity.PaymentSummary')
@@ -143,8 +161,8 @@
                         </ul>
                         <ul class="nav-second-level" aria-expanded="false">
 
-                        </ul> -->
-                    </li>
+                        </ul>
+                    </li> -->
                     <li v-if="roleName != 'Nobel Admin' && roleName != 'Cashier'">
                         <a href="javascript:void(0);">
                             <i data-feather="user" class="align-self-center menu-icon"></i><span>
@@ -478,6 +496,10 @@ export default {
 
         if (!this.$session.exists()) {
             this.$router.push('/')
+        }
+        else
+        {
+            this.$router.push('/dashboard');
         }
 
     }

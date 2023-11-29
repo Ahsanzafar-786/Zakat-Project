@@ -320,6 +320,29 @@ export default router
 
 router.beforeEach((to, from, next) => {
     
+    debugger;
+
+    const isAuthenticated = localStorage.getItem('isAuthenticate') === 'true';
+
+    if (to.name === "Login") {
+        if (isAuthenticated) {
+            // If the user is already logged in, redirect to a different page instead of Login
+            // Replace 'Dashboard' with the name of the route where you want to redirect
+            next('/dashboard');
+                } else {
+            // If not authenticated, allow to proceed to Login
+            next();
+        }
+    } else {
+        if (isAuthenticated) {
+            // If authenticated, allow to proceed to any route
+            next();
+        } else {
+            // If not authenticated, redirect to Login
+            next({ name: 'Login' });
+        }
+    }
+
     // redirect to login page if not logged in and trying to access a restricted page
 
     let recaptchaScript = document.createElement('script')

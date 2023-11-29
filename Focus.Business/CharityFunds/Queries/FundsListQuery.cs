@@ -42,7 +42,7 @@ namespace Focus.Business.CharityFunds.Queries
                         CharityResouceName = x.CharityResources.Name,
                         Date = x.Date.ToString("dd/MM/yyyy"),
                         TypeOfTransaction = x.TypeOfTransaction,
-                    }).AsQueryable();
+                    }).OrderByDescending(x=>x.Code).AsQueryable();
 
                     if (!string.IsNullOrEmpty(request.SearchTerm))
                     {
@@ -52,6 +52,8 @@ namespace Focus.Business.CharityFunds.Queries
                     }
 
                     var count = await query.CountAsync();
+                    var pagesize = 100;
+                    request.PageSize = pagesize;
                     query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);
 
                     var queryList = await query.ToListAsync();

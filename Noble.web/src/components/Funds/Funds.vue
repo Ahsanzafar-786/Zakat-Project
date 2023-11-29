@@ -113,30 +113,30 @@
                     <hr />
                     <div class="float-start">
                         <span v-if="currentPage === 1 && rowCount === 0"> {{ $t('Pagination.ShowingEntries') }}</span>
-                        <span v-else-if="currentPage === 1 && rowCount < 10">
+                        <span v-else-if="currentPage === 1 && rowCount < 100">
                             {{ $t('Pagination.Showing') }}
                             {{ currentPage }} {{ $t('Pagination.to') }} {{ rowCount }} {{ $t('Pagination.of') }}
                             {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
-                        <span v-else-if="currentPage === 1 && rowCount >= 11">
+                        <span v-else-if="currentPage === 1 && rowCount >= 101">
                             {{ $t('Pagination.Showing') }}
-                            {{ currentPage }} {{ $t('Pagination.to') }} {{ currentPage * 10 }} {{ $t('Pagination.of') }}
+                            {{ currentPage }} {{ $t('Pagination.to') }} {{ currentPage * 100 }} {{ $t('Pagination.of') }}
                             {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
                         <span v-else-if="currentPage === 1">
                             {{ $t('Pagination.Showing') }} {{ currentPage }} {{
                                 $t('Pagination.to')
-                            }} {{ currentPage * 10 }} of {{ rowCount }} {{ $t('Pagination.entries') }}
+                            }} {{ currentPage * 100 }} of {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
                         <span v-else-if="currentPage !== 1 && currentPage !== pageCount">
                             {{ $t('Pagination.Showing') }}
-                            {{ (currentPage * 10) - 9 }} {{ $t('Pagination.to') }} {{ currentPage * 10 }} {{
+                            {{ (currentPage * 100) - 99 }} {{ $t('Pagination.to') }} {{ currentPage * 100 }} {{
                                 $t('Pagination.of')
                             }} {{ rowCount }} {{ $t('Pagination.entries') }}
                         </span>
                         <span v-else-if="currentPage === pageCount">
                             {{ $t('Pagination.Showing') }}
-                            {{ (currentPage * 10) - 9 }} {{ $t('Pagination.to') }} {{ rowCount }} {{
+                            {{ (currentPage * 100) - 99 }} {{ $t('Pagination.to') }} {{ rowCount }} {{
                                 $t('Pagination.of')
                             }}
                             {{ rowCount }} {{ $t('Pagination.entries') }}
@@ -144,7 +144,7 @@
                     </div>
                     <div class="float-end">
                         <div class="" v-on:click="GetFunds()">
-                            <b-pagination pills size="sm" v-model="currentPage" :total-rows="rowCount" :per-page="10"
+                            <b-pagination pills size="sm" v-model="currentPage" :total-rows="rowCount" :per-page="100"
                                 :first-text="$t('Table.First')" :prev-text="$t('Table.Previous')"
                                 :next-text="$t('Table.Next')" :last-text="$t('Table.Last')"></b-pagination>
                         </div>

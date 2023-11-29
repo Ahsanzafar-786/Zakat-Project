@@ -37,7 +37,7 @@
                         <div class="col-md-3 form-group">
                         
                             <multiselect v-model="paymentType"
-                            :options="['Daily Payment', 'One Time']" :show-labels="false"
+                            :options="['Daily Payment']" :show-labels="false"
                             :placeholder="$t('AddBenificary.PaymentType')">
                         </multiselect>
                     </div>

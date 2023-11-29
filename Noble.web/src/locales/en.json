@@ -18,7 +18,8 @@
     "SelectAuthorizePerson": "Select Authorize Person",
     "SelectApprovalPerson": "Select Approval Person",
     "PaymentType": "Select Payment Type",
-    "SelectBenificary": "Search By Beneficiary Name or ID",
+    "SelectBenificary": "Search By Beneficiary Name",
+    "SelectBenificary1": "Search By  ID",
     "SelectExpenseCategory": "Select Expense Category"
   },
   "Benificary": {
