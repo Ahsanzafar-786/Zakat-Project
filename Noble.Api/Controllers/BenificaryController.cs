@@ -799,6 +799,7 @@ namespace Noble.Api.Controllers
                     list.Add(new BenificaryNote
                     {
                         Note = request.Note,
+                        IsActive = true,
                         Date = Convert.ToDateTime(request.Stamp_date),
                         BenificaryId = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == Convert.ToInt32(request.Beneficiary_id))?.Id,
 

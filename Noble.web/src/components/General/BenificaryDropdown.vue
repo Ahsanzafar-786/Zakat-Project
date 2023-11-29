@@ -31,51 +31,34 @@ export default {
     },
     methods: {
         asyncFind: function (searchQuery) {
-            debugger;
-            if (searchQuery == null || searchQuery == '') return this.options;
-
-            let isNumericQuery = !isNaN(searchQuery) && !isNaN(parseFloat(searchQuery));
-
-            let filtered = this.options.filter(option => {
-                if (isNumericQuery) {
-                    debugger;
-                    let rec = option.beneficiaryId.toString() === searchQuery;
-                    return rec;
-                } else {
-                    return option.name.toLowerCase().includes(searchQuery.toLowerCase());
+            if(searchQuery==undefined || searchQuery=='' || searchQuery==null )
+            {
+                return 0;
+            }
+            
+            var root = this;
+            var token = '';
+            if (this.$session.exists()) {
+                token = localStorage.getItem('token');
+            }
+            root.options = [];
+            this.$https.get('/Benificary/GetBenificaryList?isDropDown=true'+ '&searchTerm=' + searchQuery, { headers: { "Authorization": `Bearer ${token}` } }).then(function (response) {
+                if (response.data != null) {
+                    response.data.results.forEach(function (cat) {
+                        var name = cat.name == '' ? cat.nameAr : cat.name;
+                        var benficaryId = cat.beneficiaryId;
+                        root.options.push({
+                            id: cat.id,
+                            beneficiaryId: cat.beneficiaryId,
+                            name: benficaryId + ' ' + '-' + ' ' + name,
+                        })
+                    })
                 }
+            }).then(function () {
+                root.value = root.options.find(function (x) {
+                    return x.id == root.values;
+                })
             });
-            if (isNumericQuery) {
-    // Convert searchQuery to a number for accurate comparisons
-    let numericQuery = parseInt(searchQuery, 10);
-
-    return filtered.sort((a, b) => {
-        let aId = parseInt(a.beneficiaryId, 10);
-        let bId = parseInt(b.beneficiaryId, 10);
-
-        // Check for exact match
-        let aMatch = aId === numericQuery;
-        let bMatch = bId === numericQuery;
-
-        if (aMatch && bMatch) {
-            // Both are exact matches, so order doesn't matter
-            return 0;
-        } else if (aMatch) {
-            // 'a' is an exact match, prioritize it
-            return -1;
-        } else if (bMatch) {
-            // 'b' is an exact match, prioritize it
-            return 1;
-        } else {
-            // Neither are exact matches, sort by ascending beneficiaryId
-            return aId - bId;
-        }
-    });
-} else {
-    // For name search, return filtered results as is
-    return filtered;
-}
-
 
         },
 
