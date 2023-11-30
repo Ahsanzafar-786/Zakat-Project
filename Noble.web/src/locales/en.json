@@ -397,6 +397,7 @@
     "BenificaryPayment":"Beneficiary Payment",
     "BenificaryReports":"Beneficiary Reports",
     "AddPayment":"Add Payment",
+    "PaymentTitle":"Beneficiary Payment",
     "PaymentList":"Payment List",
     "BenificaryName":"Beneficiary Name",
     "Amount":"Paid Amount",

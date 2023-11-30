@@ -324,7 +324,7 @@
     "AddPaymentType":"إضافة نوع الدفع",
     "AddCharityFundsResources":"أضف موارد الصناديق الخيرية",
     "Benificary":"اسماء المستفيدين",
-    "BenificaryRegistration":"المستفيدين"
+    "BenificaryRegistration":"اسماء المستفيدين باالشهري "
   },
 
   "Company":{
@@ -400,13 +400,15 @@
   },
 
   "Payment":{
-    "AddPaymentbyAuthorizedPerson":"إضافة الدفع إلى الشخص الوكيل",
+    "PaymentTitle":"اختر دفع",
+
+    "AddPaymentbyAuthorizedPerson":"أضف الدفع الوكيل",
     "AuthorizePerson":"الشخص المفوض",
     "ViewPaymentDetail":"عرض تفاصيل الدفع",
     "VoidPayment":"الدفع باطل",
     "PrintReport":"اطبع تقرير",
 
-    "PaymentbyAuthorizedPerson":"الدفع عن طريق الشخص الوكيل",
+    "PaymentbyAuthorizedPerson":"تقرير المدفوعات الوكيل",
     "PaymentCode":"شفرة",
     "AuthoirzedPersonName":"اسم الشخص الوكيل",
     "ViewDetail":"عرض التفاصيل",
@@ -414,7 +416,7 @@
     "LastPayment":"آخر شهر مدفوع",
     "NextPayment":" الدفعة التالية",
     "ID":" رقم المعاملة",
-    "Payment":" اختر اسماء المستفيدين باالشهري",
+    "Payment":"المدفوعات الشهري",
     "Action":"فعل",
     "IsVoid":"هو الفراغ",
     "BenificaryPayment":"اسماء المستفيدين باالشهري",
