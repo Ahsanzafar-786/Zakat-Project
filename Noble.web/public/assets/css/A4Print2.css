@@ -1,0 +1,43 @@
+/* Styles go here */
+
+.page-header, .page-header-space {
+  height: 350px !important; /* Remove fixed height */
+}
+
+.page-footer, .page-footer-space {
+  height: 100px !important; /* Remove fixed height */
+}
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid black; /* for demo */
+}
+
+.page-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid black; /* for demo */
+}
+  .page {
+    page-break-after: always; /* Ensure page breaks */
+  }
+  
+  
+@page {
+  background-color: blue !important;
+  margin-top: 5mm; /* Adjust top margin */
+  margin-bottom: 5mm; /* Adjust bottom margin */
+  margin-left: 15px; /* 25mm converted to pixels */
+  margin-right: 15px; /* 25mm converted to pixels */
+}
+
+@media print {
+   thead { display: table-header-group; } 
+   tfoot { display: table-footer-group; }
+   
+   button { display: none; }
+   
+   body { margin: 0; }
+}

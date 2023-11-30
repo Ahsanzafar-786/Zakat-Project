@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id='inventoryDetailReport' style="width: 100% !important;">
+        <div hidden id='inventoryDetailReport' style="width: 100% !important;">
             <!--page1-->
             <div class="page-header" style="text-align: center">
                 <table class="table " style="width: 100%;">
