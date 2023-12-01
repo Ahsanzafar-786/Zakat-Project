@@ -408,7 +408,7 @@
     "VoidPayment":"الدفع باطل",
     "PrintReport":"اطبع تقرير",
 
-    "PaymentbyAuthorizedPerson":"تقرير المدفوعات الوكيل",
+    "PaymentbyAuthorizedPerson":"الدفع عن طريخ الوكيل",
     "PaymentCode":"شفرة",
     "AuthoirzedPersonName":"اسم الشخص الوكيل",
     "ViewDetail":"عرض التفاصيل",
@@ -419,7 +419,7 @@
     "Payment":"المدفوعات الشهري",
     "Action":"فعل",
     "IsVoid":"هو الفراغ",
-    "BenificaryPayment":"اسماء المستفيدين باالشهري",
+    "BenificaryPayment":"اختر المستفيد لتغييره",
     "BenificaryReports":" الـتـقـارير المستـفـيد",
     "AddPayment":"إضافة الدفع",
     "PaymentList":"قائمة الدفع",
