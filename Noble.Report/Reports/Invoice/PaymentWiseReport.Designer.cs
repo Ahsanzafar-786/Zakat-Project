@@ -35,6 +35,7 @@
             DevExpress.DataAccess.DataFederation.SelectNode selectNode2 = new DevExpress.DataAccess.DataFederation.SelectNode();
             DevExpress.DataAccess.DataFederation.SourceNode sourceNode2 = new DevExpress.DataAccess.DataFederation.SourceNode();
             DevExpress.DataAccess.DataFederation.Source source2 = new DevExpress.DataAccess.DataFederation.Source();
+            DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo objectConstructorInfo1 = new DevExpress.DataAccess.ObjectBinding.ObjectConstructorInfo();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
@@ -500,9 +501,9 @@
             this.xrTableCell30.Name = "xrTableCell30";
             this.xrTableCell30.StylePriority.UseTextAlignment = false;
             this.xrTableCell30.Text = "الرصيد";
-            this.xrTableCell30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell30.TextFormatString = "{0:#,#0.00}";
-            this.xrTableCell30.Weight = 3.4302292090818156D;
+            this.xrTableCell30.Weight = 3.5269246139825245D;
             // 
             // GroupHeader2
             // 
@@ -818,7 +819,7 @@
             this.xrTableCell24.Text = "Closing Balance";
             this.xrTableCell24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell24.TextFormatString = "{0:#,#0.00}";
-            this.xrTableCell24.Weight = 4.8563023408921637D;
+            this.xrTableCell24.Weight = 4.7596069359914548D;
             // 
             // xrTableRow2
             // 
@@ -839,9 +840,12 @@
             this.xrTableCell13.Padding = new DevExpress.XtraPrinting.PaddingInfo(20, 2, 0, 0, 100F);
             this.xrTableCell13.StylePriority.UsePadding = false;
             this.xrTableCell13.StylePriority.UseTextAlignment = false;
+            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            this.xrTableCell13.Summary = xrSummary1;
             this.xrTableCell13.Text = "xrTableCell13";
             this.xrTableCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell13.Weight = 4.8563023408921637D;
+            this.xrTableCell13.TextFormatString = "{0:#,#0.00}";
+            this.xrTableCell13.Weight = 4.7596069359914548D;
             // 
             // xrTableCell14
             // 
@@ -850,7 +854,7 @@
             this.xrTableCell14.StylePriority.UseTextAlignment = false;
             this.xrTableCell14.Text = "مجموع المدفوعات";
             this.xrTableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell14.Weight = 3.4302292090818156D;
+            this.xrTableCell14.Weight = 3.5269246139825245D;
             // 
             // CompanyInfo
             // 
