@@ -245,9 +245,20 @@ export default {
 
         },
     },
-    created: function () {
+    beforeCreate: function () {
+        debugger;
+    if (this.$session.exists()) {
+      this.$router.push('/dashboard')
+    }
+    else
+    {
+        this.$router.push('/')
 
-    },
+
+    }
+    
+  },
+    
     mounted() {},
 }
 </script>

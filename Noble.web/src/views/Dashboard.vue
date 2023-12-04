@@ -482,6 +482,7 @@ export default {
 
     },
     mounted: function () {
+        debugger;
 
 
         if (this.$session.exists()) {
