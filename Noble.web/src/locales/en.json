@@ -391,8 +391,10 @@
 
   "Payment":{
     "PaymentbyAuthorizedPerson":"Payment to Authorized Person",
+    "AddPaymentbyAuthorizedPersonList":"Payment to Authorized Person",
     "AddPaymentbyAuthorizedPerson":"Add Payment to Authorized Person",
     "Payment":"Beneficiary Payment",
+    "PaymentbyAuthorizedPersonList":"Payment to Authorized Person",
     "AuthorizePerson":"Authorize Person",
     "BenificaryPayment":"Beneficiary Payment",
     "BenificaryReports":"Beneficiary Reports",

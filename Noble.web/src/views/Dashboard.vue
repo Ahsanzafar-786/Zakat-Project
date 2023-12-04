@@ -71,7 +71,7 @@
                             </li>
                             <li>
                                 <a v-on:click="GoTo('/authorizepersonlist')" href="javascript:void(0);">{{
-                                    $t('Payment.PaymentbyAuthorizedPerson') }}</a>
+                                    $t('Payment.PaymentbyAuthorizedPersonList') }}</a>
                             </li>
                             <li>
                                 <a v-on:click="GoTo('/dailyPaymentList', 'dailyPayment')" href="javascript:void(0);"> {{

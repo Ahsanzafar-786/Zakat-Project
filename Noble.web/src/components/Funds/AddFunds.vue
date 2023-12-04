@@ -64,7 +64,7 @@
                             {{ $t('SaveasPrint') }}
                         </button>
                 <button type="button" class="btn btn-soft-primary btn-sm" v-on:click="SaveFunds"
-                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName != 'User'">
+                    v-bind:disabled="$v.brand.$invalid" v-if="type == 'Edit' && roleName != 'User' && roleName != 'Cashier'  ">
                     {{ $t('Update') }}
                 </button>
                 <button type="button" class="btn btn-soft-secondary btn-sm" v-on:click="close()">

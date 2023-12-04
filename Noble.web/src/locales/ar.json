@@ -401,13 +401,14 @@
 
   "Payment":{
     "PaymentTitle":"اختر دفع",
+    "AddPaymentbyAuthorizedPersonList":"المدفوعات الوكيل",
 
     "AddPaymentbyAuthorizedPerson":"أضف الدفع الوكيل",
     "AuthorizePerson":"الشخص المفوض",
     "ViewPaymentDetail":"عرض تفاصيل الدفع",
     "VoidPayment":"الدفع باطل",
     "PrintReport":"اطبع تقرير",
-
+    "PaymentbyAuthorizedPersonList":"تقرير المدفوعات الوكيل",
     "PaymentbyAuthorizedPerson":"الدفع عن طريخ الوكيل",
     "PaymentCode":"شفرة",
     "AuthoirzedPersonName":"اسم الشخص الوكيل",
