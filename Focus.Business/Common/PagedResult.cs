@@ -11,5 +11,7 @@ namespace Focus.Business.Common
         public int PageSize { get; set; }
         public int RowCount { get; set; }
         public int ActiveBundle { get; set; }
+        public decimal Total { get; set; }
+        public decimal GrandTotal { get; set; }
     }
 }

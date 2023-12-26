@@ -11,6 +11,7 @@ using System;
 using Focus.Business.CharityFunds.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Focus.Business.CharityFunds.Queries
 {
@@ -33,6 +34,8 @@ namespace Focus.Business.CharityFunds.Queries
             {
                 try
                 {
+                    var GrandTotal = Context.Funds.AsNoTracking().Sum(x => x.Amount);
+
                     var query = Context.Funds.AsNoTracking().Include(x => x.CharityResources).Select(x => new FundsLookupModel
                     {
                         Id = x.Id,
@@ -43,7 +46,6 @@ namespace Focus.Business.CharityFunds.Queries
                         Date = x.Date.ToString("dd/MM/yyyy"),
                         TypeOfTransaction = x.TypeOfTransaction,
                     }).OrderByDescending(x=>x.Code).AsQueryable();
-
                     if (!string.IsNullOrEmpty(request.SearchTerm))
                     {
                         var searchTerm = request.SearchTerm.ToLower();
@@ -55,16 +57,19 @@ namespace Focus.Business.CharityFunds.Queries
                     var pagesize = 100;
                     request.PageSize = pagesize;
                     query = query.Skip(((request.PageNumber) - 1) * request.PageSize).Take(request.PageSize);
+                    
 
                     var queryList = await query.ToListAsync();
-
+                    var Total = query.Sum(x => x.Amount);
                     return new PagedResult<List<FundsLookupModel>>
                     {
                         Results = queryList,
                         RowCount = count,
+                        Total= Total,
+                        GrandTotal= GrandTotal,
                         PageSize = request.PageSize,
                         CurrentPage = request.PageNumber,
-                        PageCount = queryList.Count / request.PageSize
+                        PageCount = (int)Math.Ceiling((double)count / request.PageSize)
                     };
 
                 }

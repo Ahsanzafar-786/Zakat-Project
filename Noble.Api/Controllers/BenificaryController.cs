@@ -380,7 +380,8 @@ namespace Noble.Api.Controllers
             {
                 SearchTerm = searchTerm,
                 IsDropDown = isDropDown,
-                PageNumber = pageNumber ?? 1
+                PageNumber = pageNumber ?? 1,
+                PageSize=100
             });
             return Ok(fund);
         }

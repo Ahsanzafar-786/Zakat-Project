@@ -73,7 +73,7 @@
                                         {{ index + 1 }}
                                     </td>
                                     <td v-else>
-                                        {{ ((currentPage * 10) - 10) + (index + 1) }}
+                                        {{ ((currentPage * 100) - 100) + (index + 1) }}
                                     </td>
 
                                     <td class="text-center">
@@ -106,6 +106,18 @@
                                                 v-on:click="PrintRdlc(brand.id,true)">{{ $t('Benificary.PDF') }}</a>
                                         </div>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td class="text-center">
+                                    <strong>Total: {{ total.toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}</strong>
+                                 </td>
+                                </tr>
+                                <tr v-if="currentPage == pageCount">
+                                    <td colspan="2"></td>
+                                    <td class="text-center">
+                                    <strong>GrandTotal: {{ grandTotal.toFixed(3).slice(0, -1).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g,"$1,") }}</strong>
+                                 </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -143,7 +155,7 @@
                         </span>
                     </div>
                     <div class="float-end">
-                        <div class="" v-on:click="GetFunds()">
+                        <div class="" v-on:click="getPage()">
                             <b-pagination pills size="sm" v-model="currentPage" :total-rows="rowCount" :per-page="100"
                                 :first-text="$t('Table.First')" :prev-text="$t('Table.Previous')"
                                 :next-text="$t('Table.Next')" :last-text="$t('Table.Last')"></b-pagination>
@@ -190,6 +202,8 @@ export default {
             arabic: '',
             english: '',
             roleName: '',
+            grandTotal: '',
+            total:'',
         }
     },
     watch: {
@@ -268,6 +282,8 @@ export default {
                     root.fundslist = response.data.results;
                     root.pageCount = response.data.pageCount;
                     root.rowCount = response.data.rowCount;
+                    root.total = response.data.total;
+                    root.grandTotal = response.data.grandTotal;
                     root.loading = false;
                 }
                 root.loading = false;

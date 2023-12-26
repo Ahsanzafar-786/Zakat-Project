@@ -21,12 +21,12 @@
                         </label>
                         <input class="form-control" v-model="brand.beneficiaryId" type="text" disabled />
                     </div>
-                    <div class="col-md-6 form-group">
+                    <!-- <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.Name') }}:<span class="text-danger"> </span>
                         </label>
                         <input class="form-control" v-model="$v.brand.name.$model" type="text" />
-                    </div>
+                    </div> -->
                     <div class="col-md-6 form-group">
                         <label class="text  font-weight-bolder">
                             {{ $t('AddBenificary.NameArabic') }}:<span class="text-danger"> *</span>

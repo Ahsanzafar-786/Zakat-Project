@@ -1,20 +1,12 @@
-﻿using DevExpress.XtraPrinting;
-using DevExpress.XtraReports.UI;
+﻿using DevExpress.XtraReports.UI;
 using Noble.Report.NobleDefaultServices;
 using System;
 using System.Data;
 using System.Linq;
 using DevExpress.Web;
-using System.Web.UI.WebControls;
-using System.Collections.Generic;
-using System.Web.UI;
 using System.Web;
-using System.Globalization;
-using DevExpress.Office.NumberConverters;
 using System.IO;
 using DevExpress.Data;
-using static iTextSharp.text.pdf.AcroFields;
-using DevExpress.XtraRichEdit.Import.Doc;
 
 namespace Noble.Report.Reports.Invoice
 {
