@@ -928,6 +928,7 @@ namespace Noble.Api.Controllers
 
                     }
 
+                   
 
                     var beneficary = Beneficiaries.FirstOrDefault(x => x.BeneficiaryId == beneficiary_id);
 
@@ -941,11 +942,11 @@ namespace Noble.Api.Controllers
                             MonthName = request.Month,
                             Year = request.Year,
                             HijriYear = request.Year,
-                            Amount = Convert.ToDecimal(beneficary.AmountPerMonth),
+                            Amount = Convert.ToDecimal(request.Amount),
                             Date = Convert.ToDateTime(request.Stamp_date),
                             Period = request.Period,
-                            TotalAmount= Convert.ToDecimal(request.Amount)
-                        
+                            TotalAmount= 0,
+
 
                         };
 
@@ -964,7 +965,7 @@ namespace Noble.Api.Controllers
 
                                 });
                                 await _Context.SelectedMonths.AddRangeAsync(selectedMonth);
-
+                                payment.TotalAmount= payment.Amount;
 
                             }
                             else
@@ -992,7 +993,7 @@ namespace Noble.Api.Controllers
                                 }
                                 await _Context.SelectedMonths.AddRangeAsync(selectedMonth);
 
-
+                                payment.TotalAmount += payment.Amount;
 
                             }
 
@@ -1014,7 +1015,7 @@ namespace Noble.Api.Controllers
                             DoucmentCode = payment.Code.ToString(),
                             BenificayId = payment.BenificayId,
                             Month = payment.Date,
-                            Amount = payment.Amount,
+                            Amount = Convert.ToDecimal(beneficary.AmountPerMonth),
                             Year = payment.Year,
                             HijriYear = payment.HijriYear,
                         };
